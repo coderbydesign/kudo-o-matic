@@ -1,4 +1,13 @@
+@import url(https://fonts.googleapis.com/css?family=Oxygen:300,700&subset=latin,latin-ext);
+
 body, html {
     background-color: #4073F3;
     color: #ffffff;
+    font-family: 'Oxygen', sans-serif;
+    font-weight: 100;
+    font-size: 1.3em;
+}
+
+strong {
+    font-weight: 700;
 }

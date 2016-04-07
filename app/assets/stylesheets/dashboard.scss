@@ -1,0 +1,56 @@
+#header {
+    margin-top: 3em;
+    margin-bottom: 5em;
+    
+    h1 {
+        font-size: 1.6em;
+    }
+}
+
+#most-recent {
+    margin-bottom: 5em;
+
+    .small_title {
+        text-align: center;
+        font-size: 0.8em;
+        text-transform: uppercase;
+        margin-bottom: 1em;
+    }
+
+    .transaction {
+        text-align: center;
+        font-size: 1.3em;
+    }
+}
+
+#previous-goal,
+#next-goal {
+    text-align: center;
+    margin-bottom: 1em;
+
+    .balance {
+        font-size: 0.8em;
+    }
+}
+
+.progress {
+    background: #fff;
+    border: 6px solid #fff;
+    border-radius: 8px;
+    height: 32px;
+
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.progress-bar-kudos {
+   background: #4073F3;
+
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#progress-label {
+    text-align: center;
+    font-size: 0.8em;
+}
