@@ -1,16 +1,26 @@
 .container
   .row
     .col-md-12
-      #most-recent
-        = @last_transaction
+      #header
+        %h1 
+          = image_tag 'kabisa_white.svg', height: 124
 
   .row
-    .col-md-6
+    .col-md-12
+      #most-recent
+        .small_title Last transaction
+        .transaction= @last_transaction
+
+  .row
+    .col-md-2
       #previous-goal
         .title= @previous.name
         .balance= @previous.kudos
 
-    .col-md-6
+    .col-md-8
+      &nbsp;
+
+    .col-md-2
       #next-goal
         .title= @next.name
         .balance= @next.kudos
@@ -18,7 +28,7 @@
   .row
     .col-md-12
       .progress
-        .progress-bar.progress-bar-info{ role: 'progressbar', style: "width: #{@balance.percentage}%",
+        .progress-bar.progress-bar-kudos{ role: 'progressbar', style: "width: #{@balance.percentage}%",
           aria: { valuenow: @balance.amount, valuemin: @previous.amount, valuemax: @next.amount } }
           %span.sr-only= @balance.kudos
 
