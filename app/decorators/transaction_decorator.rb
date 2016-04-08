@@ -2,6 +2,8 @@ class TransactionDecorator < Draper::Decorator
   delegate_all
 
   def to_s
+    return "No transaction available" if object.nil?
+
     [
       h.number_to_kudos(object.amount),
       "from",

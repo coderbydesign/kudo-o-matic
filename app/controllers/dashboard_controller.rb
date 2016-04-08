@@ -5,6 +5,6 @@ class DashboardController < ApplicationController
 
     @balance  = Balance.current.decorate
 
-    @last_transaction = @balance.last_transaction.decorate
+    @last_transaction = TransactionDecorator.decorate(@balance.last_transaction)
   end
 end
