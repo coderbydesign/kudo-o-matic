@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require bootstrap-sprockets
-//= require bootstrap3-typeahead.min
-//= require bootstrap3-autocomplete-input.min
+//= require bootstrap3-typeahead
+//= require bootstrap3-autocomplete-input
 //= require jquery_ujs
 //= require_tree .
