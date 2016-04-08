@@ -10,4 +10,12 @@ class GoalTest < ActiveSupport::TestCase
     assert_equal goals(:karten), Goal.next
   end
 
+  def test_achieve
+    goal = goals(:karten)
+
+    refute goal.achieved?
+    goal.achieve!
+    assert goal.achieved?
+  end
+
 end

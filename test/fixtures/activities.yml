@@ -1,16 +1,16 @@
 blogpost:
   name: writing a blog post
-  amount: 40
+  suggested_amount: 40
 
 conference:
   name: presenting at a conference
-  amount: 150
+  suggested_amount: 150
 
 revenue:
   name: reaching the monthly revenue goal of 200k
-  amount: 500
+  suggested_amount: 500
 
 helping:
   name: helping me out
-  amount: 1
+  suggested_amount: 1
 

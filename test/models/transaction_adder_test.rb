@@ -34,4 +34,8 @@ class TransactionAdderTest < ActiveSupport::TestCase
     assert_equal 1342 + 42, Balance.current.amount
   end
 
+  def test_goal_reacher
+    GoalReacher.expects(:check!).once
+    TransactionAdder.create(params)
+  end
 end
