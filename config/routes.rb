@@ -20,5 +20,9 @@ Rails.application.routes.draw do
     get :autocomplete_user_name, on: :collection
   end
 
+  resources :activities, only: [] do
+    get :autocomplete_activity_name, on: :collection
+  end
+
   root 'dashboard#index'
 end
