@@ -11,7 +11,7 @@ class ActivityDashboard < Administrate::BaseDashboard
     transactions: Field::HasMany,
     id: Field::Number,
     name: Field::String,
-    amount: Field::Number,
+    suggested_amount: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }
@@ -22,36 +22,33 @@ class ActivityDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :transactions,
     :id,
     :name,
-    :amount,
+    :suggested_amount,
+    :transactions,
   ]
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :transactions,
     :id,
     :name,
-    :amount,
-    :created_at,
-    :updated_at,
+    :suggested_amount,
+    :transactions,
   ]
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :transactions,
     :name,
-    :amount,
+    :suggested_amount,
   ]
 
   # Overwrite this method to customize how activities are displayed
   # across all pages of the admin dashboard.
-  #
-  # def display_resource(activity)
-  #   "Activity ##{activity.id}"
-  # end
+
+  def display_resource(activity)
+    activity.name
+  end
 end
