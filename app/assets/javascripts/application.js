@@ -12,5 +12,8 @@
 //
 //= require jquery
 //= require bootstrap-sprockets
+//= require bootstrap3-typeahead
+//= require bootstrap3-autocomplete-input
 //= require jquery_ujs
+//= require later
 //= require_tree .

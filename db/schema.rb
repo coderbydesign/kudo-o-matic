@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330093426) do
+ActiveRecord::Schema.define(version: 20160408122850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.string   "name",       limit: 60
-    t.integer  "amount"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "name",             limit: 60
+    t.integer  "suggested_amount"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "balances", force: :cascade do |t|
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160330093426) do
     t.date     "achieved_on"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "balance_id"
   end
 
   create_table "transactions", force: :cascade do |t|

@@ -5,3 +5,7 @@
 Kudo-o-Matic is a web service for tracking Kudo achievements in a team. 
 
 This is very much a work-in-progress. Things will break. More later.
+
+## Notes
+
+ * To secure your installation, specify a `HTTP_AUTH` env variable in the format `username:password` to enable http basic authentication.

@@ -10,8 +10,12 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
+*.log
 /tmp
 .byebug_history
 
 # Configuration
 config/database.yml
+
+*.swp
+.ruby-version

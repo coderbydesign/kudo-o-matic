@@ -14,6 +14,7 @@ class GoalDashboard < Administrate::BaseDashboard
     achieved_on: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    balance: Field::BelongsTo,
   }
 
   # COLLECTION_ATTRIBUTES
@@ -25,6 +26,7 @@ class GoalDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :amount,
+    :balance,
     :achieved_on,
   ]
 
@@ -34,6 +36,7 @@ class GoalDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :amount,
+    :balance,
     :achieved_on,
     :created_at,
     :updated_at,
@@ -44,6 +47,7 @@ class GoalDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
+    :balance,
     :amount,
     :achieved_on,
   ]
@@ -51,7 +55,7 @@ class GoalDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how goals are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(goal)
-  #   "Goal ##{goal.id}"
-  # end
+  def display_resource(goal)
+    goal.name
+  end
 end

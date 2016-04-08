@@ -6,8 +6,9 @@ class Balance < ActiveRecord::Base
     where(current: true).order("created_at DESC").first
   end
 
-  def self.current_amount
-    current.amount
+  def add(amount)
+    amount = amount.to_i unless amount.is_a?(Integer)
+    increment!(:amount, amount)
   end
 
   def last_transaction
