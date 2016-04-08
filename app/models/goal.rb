@@ -10,4 +10,12 @@ class Goal < ActiveRecord::Base
     where(achieved_on: nil).order("amount ASC").first
   end
 
+  def achieved?
+    achieved_on.present?
+  end
+
+  def achieve!
+    touch(:achieved_on)
+  end
+
 end
