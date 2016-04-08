@@ -1,8 +1,8 @@
 %h1 Give some kudos!
 
 = simple_form_for @transaction do |f|
-  = f.input :sender
-  = f.input :receiver
+  = f.input :sender, as: :autocomplete, source_query: users_autocomplete_user_name_url, field_id: false
+  = f.input :receiver, as: :autocomplete, source_query: users_autocomplete_user_name_url, field_id: false
   = f.input :activity
   = f.input :amount
 

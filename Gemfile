@@ -27,6 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'draper'
 gem "administrate"
 gem 'simple_form'
+gem 'bootstrap3_autocomplete_input'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

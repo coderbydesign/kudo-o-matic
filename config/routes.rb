@@ -16,5 +16,9 @@ Rails.application.routes.draw do
   resources :transactions,
     only: [:new, :create]
 
+  resources :users, only: [] do
+    get :autocomplete_user_name, on: :collection
+  end
+
   root 'dashboard#index'
 end
