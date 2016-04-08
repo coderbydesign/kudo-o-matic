@@ -10,7 +10,7 @@ class AddTransactionTest < Capybara::Rails::TestCase
     fill_in 'transaction_amount', with: '99'
     click_button 'Give kudos'
 
-    assert_equal dashboard_path, current_location
+    assert_equal root_path, current_path
 
     within '#most-recent' do
       assert_content page, "99 ₭ from WILLIAM to HARRY for HELPING ME OUT"
