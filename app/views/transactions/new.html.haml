@@ -1,10 +1,27 @@
-%h1 Give some kudos!
+.container
+  .row
+    .col-md-12
+      %h1 Give some kudos!
 
-= simple_form_for @transaction do |f|
-  = f.input :sender, as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false
-  = f.input :receiver, as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false
-  = f.input :activity, as: :autocomplete, source_query: autocomplete_activity_name_activities_url, field_id: false
-  = f.input :amount
+      = simple_form_for @transaction do |f|
 
-  = f.submit 'Give kudos'
+        = f.input_field :sender, as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false, placeholder: 'your name'
+        gives
+        = f.input_field :receiver, as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false, placeholder: 'receiver'
 
+        %br
+        %br
+
+        = f.input_field :amount, placeholder: 'amount'
+        kudos
+
+        %br
+        %br
+
+        for
+        = f.input_field :activity, as: :autocomplete, source_query: autocomplete_activity_name_activities_url, field_id: false, placeholder: 'activity'
+
+        %br
+        %br
+
+        = f.submit 'Give kudos'
