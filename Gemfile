@@ -28,6 +28,7 @@ gem 'draper'
 gem "administrate"
 gem 'simple_form'
 gem 'bootstrap3_autocomplete_input'
+gem "font-awesome-rails"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -90,6 +90,8 @@ GEM
     erubis (2.7.0)
     execjs (2.6.0)
     ffi (1.9.10)
+    font-awesome-rails (4.6.1.0)
+      railties (>= 3.2, < 5.1)
     formatador (0.2.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -272,6 +274,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   draper
+  font-awesome-rails
   guard
   guard-minitest
   haml-rails
@@ -290,3 +293,6 @@ DEPENDENCIES
   spring
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+
+BUNDLED WITH
+   1.10.6
