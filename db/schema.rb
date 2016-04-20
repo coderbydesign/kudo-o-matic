@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408122850) do
+ActiveRecord::Schema.define(version: 20160420093514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 20160408122850) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer  "from_id"
-    t.integer  "to_id"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
     t.integer  "activity_id"
     t.integer  "balance_id"
     t.integer  "amount"
