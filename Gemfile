@@ -57,3 +57,6 @@ group :development do
   gem 'guard-minitest'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
