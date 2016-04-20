@@ -2,11 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#transaction_sender, #transaction_receiver {
-  width: 200px;
+.new_transaction {
+  input[type=text], input[type=number] {
+    border: none;
+    background: none;
+    width: 200px;
+
+    &:focus {
+      border: none;
+    }
+  }
+
+  input[type=submit] {
+    background: white;
+    color: #4073F3;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 0.7em;
+  }
 }
+
 #transaction_amount {
-  width: 110px;
+  width: 60px;
 }
 #transaction_activity {
   width: 400px;
