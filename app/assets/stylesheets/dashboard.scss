@@ -54,3 +54,17 @@
     text-align: center;
     font-size: 0.8em;
 }
+
+#add-transaction-link {
+    float: right;
+    margin: 1em;
+
+    a {
+        color: lighten(#4073F3, 10%);
+        text-decoration: none;
+    }
+    a:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+}

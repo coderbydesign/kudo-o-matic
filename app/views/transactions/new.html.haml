@@ -8,7 +8,7 @@
 
       = simple_form_for @transaction do |f|
 
-        = f.input_field :sender, as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false, placeholder: 'your name'
+        = f.input_field :sender, as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false, placeholder: 'your name', autofocus: true
         gives &nbsp;
         = f.input_field :receiver, as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false, placeholder: 'receiver'
 

@@ -7,9 +7,12 @@
     border: none;
     background: none;
     width: 200px;
+    padding-bottom: 3px;
 
     &:focus {
-      border: none;
+      border-bottom: 3px solid lighten(#4073F3, 10%);
+      padding-bottom: 0;
+      outline: none;
     }
   }
 
@@ -28,4 +31,20 @@
 }
 #transaction_activity {
   width: 400px;
+}
+
+::-webkit-input-placeholder {
+   color: lighten(#4073F3, 10%);
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: lighten(#4073F3, 10%);
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: lighten(#4073F3, 10%);
+}
+
+:-ms-input-placeholder {  
+   color: red;  
 }
