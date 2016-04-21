@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   end
 
   resources :transactions,
-    only: [:new, :create]
+    only: [:new, :create] do
+      get :guidelines, on: :collection
+  end
 
   resources :users, only: [] do
     get :autocomplete_user_name, on: :collection

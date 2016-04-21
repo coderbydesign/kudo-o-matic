@@ -1,0 +1,9 @@
+.container.center
+  .row
+    .col-md-12
+      %h1 Kudo Guidelines
+      %table.guidelines
+        - Transaction::GUIDELINES.each do |name, value|
+          %tr
+            %td= name
+            %td= value
