@@ -4,7 +4,7 @@ class DashboardTest < Capybara::Rails::TestCase
   test "shows relevant information" do
     visit root_path
 
-    within 'last-transactions' do
+    within '.last-transactions' do
       assert_content page, "1.342 ₭ from HARRY to WILLIAM for WRITING A BLOG POST"
     end
 
@@ -18,7 +18,7 @@ class DashboardTest < Capybara::Rails::TestCase
       assert_content page, "1.500 ₭"
     end
 
-    within '#progress-label' do
+    within '.progress-label' do
       assert_content page, "1.342 ₭"
     end
   end
