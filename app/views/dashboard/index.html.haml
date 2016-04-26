@@ -35,12 +35,12 @@
   .progress-label
     .balance.small-title= @balance.kudos
 
--# :javascript
--#     var schedule = later.parse.text('every 10 sec');
--#     var timer = later.setInterval(refreshDashboard, schedule);
+:javascript
+    var schedule = later.parse.text('every 10 sec');
+    var timer = later.setInterval(refreshDashboard, schedule);
 
--#     function refreshDashboard() {
--#         console.log('Triggering page refresh');
--#         location.reload();
--#     }
+    function refreshDashboard() {
+        console.log('Triggering page refresh');
+        location.reload();
+    }
 
