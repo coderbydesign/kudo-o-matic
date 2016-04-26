@@ -1,50 +1,46 @@
-#add-transaction-link
+
+
+%header
+  = image_tag 'kabisa_white.svg'
+  %strong
+    Kud
+    %span> -
+    O
+    %span> -
+    Meter
+
+.add-transaction-link
   = link_to new_transaction_path do
     = fa_icon "plus", text: "Give kudos!"
 
-.container
-  .row
-    .col-md-12
-      #header
-        %h1 
-          = image_tag 'kabisa_white.svg', height: 124
+.last-transactions
+  .small-title Last transaction
+  .transaction= @last_transaction
 
-  .row
-    .col-md-12
-      #most-recent
-        .small_title Last transaction
-        .transaction= @last_transaction
 
-  .row
-    .col-md-2
-      #previous-goal
-        .title= @previous.name
-        .balance= @previous.kudos
+.current-goal
+  .previous-goal
+    .title= @previous.name
+    .balance.small-title= @previous.kudos
 
-    .col-md-8
-      &nbsp;
+  .next-goal
+    .title= @next.name
+    .balance.small-title= @next.kudos
 
-    .col-md-2
-      #next-goal
-        .title= @next.name
-        .balance= @next.kudos
+  .progress
+    .progress-bar.progress-bar-kudos{ role: 'progressbar', style: "width: #{@balance.percentage}%",
+      aria: { valuenow: @balance.amount, valuemin: @previous.amount, valuemax: @next.amount } }
+      %span.sr-only= @balance.kudos
 
-  .row
-    .col-md-12
-      .progress
-        .progress-bar.progress-bar-kudos{ role: 'progressbar', style: "width: #{@balance.percentage}%",
-          aria: { valuenow: @balance.amount, valuemin: @previous.amount, valuemax: @next.amount } }
-          %span.sr-only= @balance.kudos
+  .progress-label
+    .balance.small-title= @balance.kudos
 
-      #progress-label
-        .balance= @balance.kudos
+-# :javascript
+-#     var schedule = later.parse.text('every 10 sec');
+-#     var timer = later.setInterval(refreshDashboard, schedule);
 
-:javascript
-    var schedule = later.parse.text('every 10 sec');
-    var timer = later.setInterval(refreshDashboard, schedule);
-
-    function refreshDashboard() {
-        console.log('Triggering page refresh');
-        location.reload();
-    }
+-#     function refreshDashboard() {
+-#         console.log('Triggering page refresh');
+-#         location.reload();
+-#     }
 
