@@ -12,11 +12,11 @@ class AddTransactionTest < Capybara::Rails::TestCase
 
     assert_equal root_path, current_path
 
-    within '#most-recent' do
+    within '.last-transactions' do
       assert_content page, "99 ₭ from WILLIAM to HARRY for HELPING ME OUT"
     end
 
-    within '#progress-label' do
+    within '.progress-label' do
       # 1342 + 99 = 1441
       assert_content page, "1.441 ₭"
     end
