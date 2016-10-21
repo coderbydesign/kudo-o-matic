@@ -1,13 +1,27 @@
 @import url(https://fonts.googleapis.com/css?family=Oxygen:300,700&subset=latin,latin-ext);
 
 body, html {
-    background-color: #4073F3;
+    background: linear-gradient(steelblue, beige);
     color: #ffffff;
     font-family: 'Myriad Pro', 'Oxygen', sans-serif;
     font-weight: 300;
     font-size: 1.3em;
     min-width: 440px;
 }
+
+* { box-sizing: border-box; }
+html { height: 100%; }
+body {
+    position: relative;
+    margin: 0;
+    height: 100%;
+
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    text-align: center;
+}
+
+
 
 strong {
     font-weight: 700;
