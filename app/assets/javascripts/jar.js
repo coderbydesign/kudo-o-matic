@@ -1,45 +1,24 @@
 var worker = null;
-var coinstatus = 0
-var loaded = 0;
-var bp = $(".next.amount").val();
-
-$( document ).ready(function() {
-    $(".dynamic").hide();
-
-});
+var loadedPercentage = 0;
 
 function increment() {
-    $('#counter').html(coinstatus+' Coins');
-    $('#drink').css('top', (100-loaded*.9)+'%');
-    for (i = 0; i < 20; i++) {
-      if(loaded == i * 5 && loaded < bp) $('#cubes div:nth-child(' + i +')').fadeIn(100);
+    $('#counter').html(loader.balanceCoins + ' Coins');
+    $('#drink').css('top', (100-loadedPercentage*.9)+'%');
+
+    if(loadedPercentage % 5 == 0){
+        slice = loadedPercentage / 5
+        $('#cubes div:nth-child(' + slice +')').fadeIn(100)
     }
-    if(loaded == bp) {
-        loaded = 0;
-        coinstatus = 0;
-        stopLoading();
+
+    if(loadedPercentage == loader.balancePercentage) {
+        loadedPercentage = 0;
+        stopLoading(loader.balancePercentage);
         $(".dynamic").fadeIn(1000);
         $(".loadingmessage").hide();
     }
-    else loaded = loaded + 1
-    console.log(loaded);
-
-    // if (loaded == 10){
-    //   $(".dynamicmessage").html("1st message ");
-    // }
-    // if (loaded == 25){
-    //   $(".dynamicmessage").html("2nd message ");
-    // }
-    // if (loaded == 400){
-    //   console.log("50test");
-    //   $(".dynamicmessage").html("3rd message ");
-    // }
-    // if (loaded == 900){
-    //   $(".dynamicmessage").html("4th message ");
-    // }
-    // if (loaded == 900){
-    //   $(".dynamicmessage").html("5th message ");
-    // }
+    else{
+        loadedPercentage = loadedPercentage + 1
+    }
 }
 
 function startLoading(bp) {
@@ -53,23 +32,23 @@ function stopLoading(bp) {
 }
 
 function setText(bp){
-  console.log("calling settext", bp)
-    if (bp == 10){
-      $(".dynamicmessage").html("1 ");
-    }
-     if (bp == 25){
-      $(".dynamicmessage").html("2 ");
-    }
-     if (bp == 400){
-      console.log("50test");
-      $(".dynamicmessage").html("3 ");
-    }
-     if (bp == 900){
-      $(".dynamicmessage").html("4 ");
-    }
-    if (bp == 900){
+    if (bp >= 100){
       $(".dynamicmessage").html("5 ");
+    }else if (bp > 80){
+      $(".dynamicmessage").html("4 ");
+    }else if (bp > 60){
+      $(".dynamicmessage").html("3 ");
+    }else if (bp > 40){
+      $(".dynamicmessage").html("2 ");
+    }else if (bp > 20){
+      $(".dynamicmessage").html("1 ");
     }
 };
 
-startLoading(bp);
+$(document).ready(function(){
+    $(".dynamic").hide();
+    window.loader = $('#loader').data()
+    startLoading();
+})
+
+

@@ -6,17 +6,13 @@
     Jar
 
   //
-
-:javascript
-  bp = #{@balance.percentage}
-  coinstatus = #{@balance.amount}
 .topouterwrapper
   .topinnerwrapper
     .story
       %p
         Check out the Kudo stories. Get inspired to give kudos!
     .jarwrapper
-      #loader
+      #loader{data: {balance_percentage: @balance.percentage, balance_coins: @balance.amount }}
         = link_to new_transaction_path do
           #lid
           #toppart
