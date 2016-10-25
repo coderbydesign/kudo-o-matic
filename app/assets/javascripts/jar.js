@@ -1,50 +1,75 @@
 var worker = null;
+var coinstatus = 0
 var loaded = 0;
-//var message = document.getElementsByClassName('dynamicmessage');
+var bp = $(".next.amount").val();
+
 $( document ).ready(function() {
     $(".dynamic").hide();
 
 });
 
 function increment() {
-    $('#counter').html(loaded+' Coins');
+    $('#counter').html(coinstatus+' Coins');
     $('#drink').css('top', (100-loaded*.9)+'%');
-  //  console.log("test", loaded, max, (loaded==5 && loaded < max) );
-
     for (i = 0; i < 20; i++) {
-      if(loaded == i * 5 && loaded < max) $('#cubes div:nth-child(' + i +')').fadeIn(100);
+      if(loaded == i * 5 && loaded < bp) $('#cubes div:nth-child(' + i +')').fadeIn(100);
     }
-    if(loaded == max) {
+    if(loaded == bp) {
         loaded = 0;
+        coinstatus = 0;
         stopLoading();
         $(".dynamic").fadeIn(1000);
         $(".loadingmessage").hide();
-
-    // setTimeout(startLoading, 1000);
     }
     else loaded = loaded + 1
+    console.log(loaded);
 
-    if(loaded == 25)
-      $(".dynamicmessage").html("not even close to anywhere. What are you guys? Lazy?!");
-
-    if(loaded == 50)
-      $(".dynamicmessage").html("over the half full mark. Nice, but we're not there yet ");
-
-    if(loaded == 75)
-        $(".dynamicmessage").html("is not full yet. Why is this not full yet? ");
-
-    if(loaded == 90)
-        $(".dynamicmessage").html("almost full. Can it be true? Are we almost there? Soooo close, we got this! ");
-
+    // if (loaded == 10){
+    //   $(".dynamicmessage").html("1st message ");
+    // }
+    // if (loaded == 25){
+    //   $(".dynamicmessage").html("2nd message ");
+    // }
+    // if (loaded == 400){
+    //   console.log("50test");
+    //   $(".dynamicmessage").html("3rd message ");
+    // }
+    // if (loaded == 900){
+    //   $(".dynamicmessage").html("4th message ");
+    // }
+    // if (loaded == 900){
+    //   $(".dynamicmessage").html("5th message ");
+    // }
 }
 
-function startLoading() {
+function startLoading(bp) {
     $('#cubes div').hide();
-    worker = setInterval(increment , 40);
+    worker = setInterval(increment , 60);
 }
-function stopLoading() {
+function stopLoading(bp) {
+    console.log("stoploading")
     clearInterval(worker);
+    setText(bp)
 }
 
-max = $(".next.amount").val();
-startLoading();
+function setText(bp){
+  console.log("calling settext", bp)
+    if (bp == 10){
+      $(".dynamicmessage").html("1 ");
+    }
+     if (bp == 25){
+      $(".dynamicmessage").html("2 ");
+    }
+     if (bp == 400){
+      console.log("50test");
+      $(".dynamicmessage").html("3 ");
+    }
+     if (bp == 900){
+      $(".dynamicmessage").html("4 ");
+    }
+    if (bp == 900){
+      $(".dynamicmessage").html("5 ");
+    }
+};
+
+startLoading(bp);

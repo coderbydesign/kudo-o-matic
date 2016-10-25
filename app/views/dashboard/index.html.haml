@@ -1,46 +1,69 @@
-
-
 %header
   = image_tag 'kabisa_white.svg'
   %strong
-    Kud
+    Kudo
     %span> -
-    O
-    %span> -
-    Meter
+    Jar
 
-.add-transaction-link
-  = link_to new_transaction_path do
-    = fa_icon "plus", text: "Give kudos!"
-
-.last-transactions
-  .small-title Last transaction
-  .transaction= @last_transaction
-
-
-.current-goal
-  .previous-goal
-    .title= @previous.name
-    .balance.small-title= @previous.kudos
-
-  .next-goal
-    .title= @next.name
-    .balance.small-title= @next.kudos
-
-  .progress
-    .progress-bar.progress-bar-kudos{ role: 'progressbar', style: "width: #{@balance.percentage}%",
-      aria: { valuenow: @balance.amount, valuemin: @previous.amount, valuemax: @next.amount } }
-      %span.sr-only= @balance.kudos
-
-  .progress-label
-    .balance.small-title= @balance.kudos
+  //
 
 :javascript
-    var schedule = later.parse.text('every 10 sec');
-    var timer = later.setInterval(refreshDashboard, schedule);
-
-    function refreshDashboard() {
-        console.log('Triggering page refresh');
-        location.reload();
-    }
-
+  bp = #{@balance.percentage}
+  coinstatus = #{@balance.amount}
+.topouterwrapper
+  .topinnerwrapper
+    .story
+      %p
+        Check out the Kudo stories. Get inspired to give kudos!
+    .jarwrapper
+      #loader
+        = link_to new_transaction_path do
+          #lid
+          #toppart
+          #glass{:valuemax => "#{@next.amount}", :valuemin => "#{@previous.amount}", :valuenow => "#{@balance.amount}"}
+            .next-goal
+              .balance.small-title
+                = @next.kudos
+                \-
+            #textonjar
+            #cubes
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+              %div
+            #drink
+              %span#counter
+          #coaster
+    .message
+      .loadingmessage
+        Counting the coins in the jar!
+      .dynamic
+        The jar is
+        .dynamicmessage
+        If the jar is full with Kudo Coins, then we will celebrate with
+        .title
+          = @next.name
+    .calltoact
+      %p
+        Click the jarlid to give kudos!
+.bottomouterwrapper
+  .last-transactions
+    .small-title Kudo Story Feed
+    .transaction= @last_transaction

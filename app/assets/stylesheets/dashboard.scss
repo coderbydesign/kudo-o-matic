@@ -20,147 +20,161 @@ header {
     }
 }
 
+.jarwrapper{
+  float: left;
+}
+
 .title{
-  
+
 }
 
 .small-title {
-    font-size: 1em;
-    float:right;
-    color:rgba(255, 255, 255, 0.7)
+  font-size: 1em;
+  color:rgba(255, 255, 255, 0.7)
 }
 
 .last-transactions {
-    margin: 2em;
-    text-align: center;
+  margin: 2em;
+  text-align: center;
 }
 
 .jarlid {
-    margin-right: auto;
-    margin-left: auto;
-    position: relative;
-    height: 50px;
-    width: 200px;
-    background: rgba(227, 131, 15, 0.59);
-    border-radius: 20% 20% 0% 0%;
-    border: 1px solid;
-    border-bottom: 0;
-    border-right: 3px solid;
-    border-top: 3px solid;
-    border-left: 3px solid;
-    border-color: rgba(255,255,255,1);
-    top: -5px;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
+  height: 50px;
+  width: 200px;
+  background: rgba(227, 131, 15, 0.59);
+  border-radius: 20% 20% 0% 0%;
+  border: 1px solid;
+  border-bottom: 0;
+  border-right: 3px solid;
+  border-top: 3px solid;
+  border-left: 3px solid;
+  border-color: rgba(255,255,255,1);
+  top: -5px;
 }
 
 .progress {
-      clear: both;
-      background: rgba(255,255,255,.1);
-      border: 6px solid #fff;
-      border-radius: 8px;
-      height: 270px;
-      width: 320px;
-      -webkit-box-shadow: none;
-      box-shadow: none;
-      position: relative;
-      margin-left: auto;
-      margin-right: auto;
-      border-radius: 10% 15% 15% 10%;
-      border: 3px solid;
-      border-left: 15px solid;
-      border-color: rgba(255,255,255,.7);
-      overflow: hidden;
-
+  clear: both;
+  background: rgba(255,255,255,.1);
+  border: 6px solid #fff;
+  border-radius: 8px;
+  height: 270px;
+  width: 320px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10% 15% 15% 10%;
+  border: 3px solid;
+  border-left: 15px solid;
+  border-color: rgba(255,255,255,.7);
+  overflow: hidden;
 }
 
 
 /* De flip, wejooow */
 .progress {
-    -webkit-transform: rotate(270deg);
-    -moz-transform: rotate(270deg);
-    -o-transform: rotate(270deg);
-    -ms-transform: rotate(270deg);
-    transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
 }
 .progress-bar-kudos {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    float: left;
-    width: 0%;
-    height: 100%;
-    font-size: 12px;
-    line-height: 20px;
-    color: #fff;
-    text-align: center;
-    background-color: rgba(217, 61, 61, 0.74);
-    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
-    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
-    -webkit-transition: width 0.6s ease;
-    -o-transition: width 0.6s ease;
-    transition: width 0.6s cubic-bezier(0, 0, 0.32, 1.47);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  float: left;
+  width: 0%;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: rgba(217, 61, 61, 0.74);
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
+  transition: width 0.6s cubic-bezier(0, 0, 0.32, 1.47);
 }
 
 .progress-label {
-    text-align: inherit;
-    float:right;
-    font-size: 3em;
-    margin-top: 220px;
-    position: relative;
-    margin-right: -15px;
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
+  text-align: inherit;
+  float:right;
+  font-size: 3em;
+  margin-top: 220px;
+  position: relative;
+  margin-right: -15px;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
+.topouterwrapper{
+  width:100vw;
+}
+
+.topinnerwrapper{
+  width: 42vw;
+  margin: auto;
+
+}
+
+.bottomouterwrapper{
+  margin-top:22%;
+}
+
+.bottominnerwrapper{
+
+}
+
+
+
 .message{
-  z-index: 55;
-  width: 375px;
-  float:right;
-  margin-right:2%;
+  width: 250px;
+  float: left;
+  margin-left: 30px;
+  }
+
+
+.story{
+  width: 300px;
+  float: left;
+  position: relative;
 }
 
 .message > .title{
-  margin: auto !important;
-  text-align: center !important;
-  width: 100% !important;
-  float:inherit !important;;
+
 }
 
-/*
+.calltoact{
+  font-size: 15px;
+  position: relative;
+  top: 6em;
+  left: 30px;
+  float: left;
+}
+
 .add-transaction-link {
-    margin: 2em;
-    text-align: center;
-
-    a {
-        display: inline-block;
-        padding: 0.5em 1em;
-        border-radius: 9999px;
-        text-decoration: none;
-        color: #fff;
-        border-width: 0.25em;
-        border-style: solid;
-        opacity: 0.4;
-    }
-    a:hover {
-        opacity: 1;
-    }
-    i {
-        vertical-align: middle;
-    }
+  height:100%;
 }
-*/
+
 .current-goal {
-    margin: 2em 3em;
+  margin: 2em 3em;
 }
 .previous-goal {
-    float: left;
+  float: left;
 }
 .next-goal {
-    float: right;
-    text-align: right;
-    z-index: 50;
-    position: relative;
+  float: right;
+  text-align: right;
+  z-index: 50;
+  position: relative;
 }
 
 
@@ -168,13 +182,9 @@ header {
 
 
 #loader {
-  position: absolute;
-top: 30%;
-left: 50%;
-height: 300px;
-width: 250px;
-margin-top: -100px;
-margin-left: -50px;
+  height: 300px;
+  width: 250px;
+  margin: auto;
 }
 
 #lid{
@@ -192,109 +202,117 @@ margin-left: -50px;
   border-color: rgba(255,255,255,1);
   overflow: hidden;
   top: 5px;
+  transition: top 1s;
+  -webkit-transition: top 1s;
+  -moz-transition: top 1s;
+  -o-transition: top 1s;
+
 }
 
+#lid:hover{
+  top:-10px;
+}
+
+
+
 #toppart{
-    position: relative;
-    height: 30px;
-    background: rgba(255,255,255,.1);
-    border-radius: 50% 50% 0% 0%;
-    border-bottom: 0;
-    border-right: 3px solid;
-    border-top: 4px solid;
-    border-left: 3px solid;
-    border-color: rgba(255,255,255,.7);
-    overflow: hidden;
+  position: relative;
+  height: 30px;
+  background: rgba(255,255,255,.1);
+  border-radius: 50% 50% 0% 0%;
+  border-bottom: 0;
+  border-right: 3px solid;
+  border-top: 4px solid;
+  border-left: 3px solid;
+  border-color: rgba(255,255,255,.7);
+  overflow: hidden;
 
 }
 
 
 #glass {
-    position: relative;
-    height: 100%;
-    background: rgba(255,255,255,.1);
-    border-radius: 0% 0% 15% 15%;
-    border: 3px solid;
-    border-top: 0;
-    border-bottom: 20px solid;
-    border-color: rgba(255,255,255,.7);
-    overflow: hidden;
+  position: relative;
+  height: 100%;
+  background: rgba(255,255,255,.1);
+  border-radius: 0% 0% 15% 15%;
+  border: 3px solid;
+  border-top: 0;
+  border-bottom: 20px solid;
+  border-color: rgba(255,255,255,.7);
+  overflow: hidden;
 }
 #textonjar {
-    top: 61px;
-    z-index: 35;
-    float: left;
-    position: relative;
-    text-align: left;
-    margin-left: 5px;
-    font-weight: bold;
-    font-size: 2em;
-    color: rgba(255,255,255,0.7);
+  top: 61px;
+  z-index: 35;
+  float: left;
+  position: relative;
+  text-align: left;
+  margin-left: 5px;
+  font-weight: bold;
+  font-size: 2em;
+  color: rgba(255,255,255,0.7);
 }
 
 #drink {
-    position: absolute;
-    top:100%; right:0; bottom:0; left:0;
-  /*  background: linear-gradient(to bottom, orange, orangered);
-    box-shadow: inset 0 2px 1px rgba(255,69,0,.2); */
-    opacity: .7;
+  position: absolute;
+  top:100%; right:0; bottom:0; left:0;
+  opacity: .7;
 }
 
 
 #counter {
-      position: relative;
-      top: -30px;
-      font-size: 1em;
-      color: rgba(255,255,255,1);
-      /* width: 110px; */
-      float: left;
+  position: relative;
+  top: -30px;
+  font-size: 1em;
+  color: rgba(255,255,255,1);
+  float: left;
 }
 
 
 
 #cubes {
-    position: absolute;
-    top:0; right:0; bottom:0; left:0;
+  position: absolute;
+  top:0; right:0; bottom:0; left:0;
 
 }
 #cubes div {
-    display: none;
-    position: absolute;
-    width: 100%;
-    height: 58px;
-    background-image: url("kudocoins.png");
-    background-position: center;
-    background-size:cover;
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 58px;
+  background-image: url("kudocoins.png");
+  background-position: center;
+  background-size:cover;
 
 }
 #cubes div:nth-child(1) {
-    bottom:0;
+  bottom:0;
 }
 #cubes div:nth-child(2) {
-    bottom: 23px;
-    left: -4px;
+  bottom: 23px;
+  left: -4px;
 }
 #cubes div:nth-child(3) {
-    bottom: 33px;
-    left: 1px;
+  bottom: 33px;
+  left: 1px;
 }
 #cubes div:nth-child(4) {
-    bottom:49px; left:2px;
+  bottom:49px; left:2px;
 }
 
 #cubes div:nth-child(5) {
   bottom:51px; left:-10px;
 }
 #cubes div:nth-child(6) {
-    bottom: 63px;
-    left: -14px;
+  bottom: 63px;
+  left: -14px;
 }
 #cubes div:nth-child(7) {
-    bottom: 77px;
-    left: 13px;
+  bottom: 77px;
+  left: 13px;
 }
 #cubes div:nth-child(8) {
-    bottom:84px; left:20px;
+  bottom:84px; left:20px;
 }
 
 #cubes div:nth-child(9) {
@@ -302,53 +320,53 @@ margin-left: -50px;
 }
 
 #cubes div:nth-child(10) {
-    bottom: 111px;
-    left: 6px;
+  bottom: 111px;
+  left: 6px;
 }
 #cubes div:nth-child(11) {
-    bottom: 125px;
-    left: 2px;
+  bottom: 125px;
+  left: 2px;
 }
 #cubes div:nth-child(12) {
-    bottom:131px;
+  bottom:131px;
 }
 
 #cubes div:nth-child(13) {
-    bottom: 144px;
-    left: -3px;
+  bottom: 144px;
+  left: -3px;
 }
 #cubes div:nth-child(14) {
-    bottom: 156px;
-    left: 16px;
+  bottom: 156px;
+  left: 16px;
 }
 #cubes div:nth-child(15) {
-    bottom:175px; left:15px;
+  bottom:175px; left:15px;
 }
 
 #cubes div:nth-child(16) {
-    bottom: 180px;
-    left: -8px;
+  bottom: 180px;
+  left: -8px;
 }
 #cubes div:nth-child(17) {
-    bottom: 205px;
-    left: -3px;
+  bottom: 205px;
+  left: -3px;
 }
 #cubes div:nth-child(18) {
-    bottom:210px; left:15px;
+  bottom:210px; left:15px;
 }
 
 #cubes div:nth-child(19) {
-    bottom: 220px;
-    left: -13px;
+  bottom: 220px;
+  left: -13px;
 }
 #cubes div:nth-child(20) {
-    bottom:220px; left:-20px;
+  bottom:220px; left:-20px;
 }
 
 
 #coaster {
-    width: 130%; height: 4px;
-    margin-left: -15%;
-    background: steelblue;
-    border-radius: 2px;
+  width: 130%; height: 4px;
+  margin-left: -15%;
+  background: steelblue;
+  border-radius: 2px;
 }
