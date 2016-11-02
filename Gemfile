@@ -5,6 +5,8 @@ ruby '2.3.1'
 # Rails
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
+gem 'dotenv-rails', group: [:development, :test]
+
 # Database
 gem 'pg', '~> 0.18'
 
@@ -27,6 +29,9 @@ gem 'bootstrap3_autocomplete_input'
 gem "font-awesome-rails"
 gem 'haml-rails'
 
+gem 'devise'
+gem "omniauth-google-oauth2"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -36,6 +41,7 @@ group :development, :test do
   gem 'capybara'
 
   gem 'factory_girl_rails'
+  gem 'launchy'
 end
 
 group :development do
