@@ -17,6 +17,11 @@ RSpec.feature "Dashboard", type: :feature do
       receiver: receiver
   }
 
+  before do
+    visit '/sign_in'
+    click_link 'Sign in with Google Apps'
+  end
+
   it "shows relevant information" do
     visit '/'
 

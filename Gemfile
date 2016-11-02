@@ -41,7 +41,7 @@ group :development, :test do
   gem 'capybara'
 
   gem 'factory_girl_rails'
-
+  gem 'launchy'
 end
 
 group :development do

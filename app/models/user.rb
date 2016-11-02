@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth(access_token)
     data = access_token.info
 
-    user = User.where(:email => data["email"]).first_or_create!
+    user = User.where(provider: access_token.provider, uid: access_token.uid).first_or_create!
 
     user.update(
       name: data["name"],
