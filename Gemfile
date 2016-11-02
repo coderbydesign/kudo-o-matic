@@ -5,6 +5,8 @@ ruby '2.3.1'
 # Rails
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
+gem 'dotenv-rails', group: [:development, :test]
+
 # Database
 gem 'pg', '~> 0.18'
 
@@ -39,6 +41,7 @@ group :development, :test do
   gem 'capybara'
 
   gem 'factory_girl_rails'
+
 end
 
 group :development do
