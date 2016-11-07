@@ -1,30 +1,35 @@
 @import url(https://fonts.googleapis.com/css?family=Oxygen:300,700&subset=latin,latin-ext);
 
 body, html {
-    background: linear-gradient(steelblue, beige);
-    color: #ffffff;
-    font-family: 'Myriad Pro', 'Oxygen', sans-serif;
-    font-weight: 300;
-    font-size: 1.3em;
-    min-width: 440px;
+  background-image:
+  -webkit-radial-gradient(80% 10%, circle, #679ebf, transparent),
+  -webkit-radial-gradient(80% 50%, circle, #EFDDB7, transparent),
+  -webkit-radial-gradient(20% 80%, 40em 40em, #c5b3a3, transparent),
+  -webkit-radial-gradient(10% 10%, circle, #E1C3B9, transparent);
+  background-attachment: fixed;
+  color: #ffffff;
+  font-family: 'Myriad Pro', 'Oxygen', sans-serif;
+
+  font-size: 1.3em;
+  min-width: 440px;;
 }
 
 * { box-sizing: border-box; }
 html { height: 100%; }
 body {
-    position: relative;
-    margin: 0;
-    height: 100%;
+  position: relative;
+  margin: 0;
+  height: 100%;
 
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    text-align: center;
+  font-family: 'Lato', sans-serif;
+  overflow:auto;
+
 }
 
 
 
 strong {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 a.reference {

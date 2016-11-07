@@ -33,11 +33,6 @@ header {
   color:rgba(255, 255, 255, 0.7)
 }
 
-.last-transactions {
-  margin: 2em;
-  text-align: center;
-}
-
 .jarlid {
   margin-right: auto;
   margin-left: auto;
@@ -91,7 +86,7 @@ header {
   height: 100%;
   font-size: 12px;
   line-height: 20px;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.7);
   text-align: center;
   background-color: rgba(217, 61, 61, 0.74);
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
@@ -127,13 +122,88 @@ header {
 
 .bottomouterwrapper{
   margin-top:22%;
+  width:100vw;
 }
 
 .bottominnerwrapper{
+  width: 55vw;
+  margin:auto;
+}
 
+.poll{
+  width: 355px;
+  height: 300px;
+  float: left;
+  margin-left: 40px;
+  margin-top: 25px;
+
+}
+.poll-title{
+  border-bottom: solid 1px #ffffff;
+}
+
+.last-transactions {
+  float:left;
+  width: 750px;
+}
+
+.post-container{
+  margin:25px;
+  border-bottom: solid #fff 0.01px;
+}
+.post-container > div {
+  display: inline;
 }
 
 
+.sendername{
+  color:rgb(9, 67, 119);
+}
+
+.receivername{
+  color: rgb(9, 67, 119);
+}
+
+.amountofkudos{
+
+}
+
+.activityname{
+
+}
+
+.post-time-stamp{
+  font-size:15px;
+}
+
+.btn-info {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0);
+  border-color: #ffffff;
+}
+
+.btn-info .badge {
+  color:#fff;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.poll button.btn.btn-info {
+  float: right;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.poll a{
+  color: rgba(255, 255, 255, 0.7);
+  width:100px;
+  transition: left 1s;
+  -webkit-transition: left 1s;
+  -moz-transition: left 1s;
+  -o-transition: left 1s;
+}
+
+.poll a:hover{
+  left:5px;
+}
 
 .message{
   width: 250px;
@@ -146,10 +216,11 @@ header {
   width: 300px;
   float: left;
   position: relative;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.message > .title{
-
+.message{
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .calltoact{
@@ -177,15 +248,19 @@ header {
   position: relative;
 }
 
-
-
-
-
-#loader {
+.loader {
   height: 300px;
   width: 250px;
   margin: auto;
+  .fix-loader &{
+    position:fixed;
+    input {
+
+    }
+  }
 }
+
+
 
 #lid{
   position: relative;
@@ -370,3 +445,6 @@ header {
   background: steelblue;
   border-radius: 2px;
 }
+
+
+/* scroll animation ---------- */

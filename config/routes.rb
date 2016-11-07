@@ -24,7 +24,16 @@ Rails.application.routes.draw do
 
   resources :activities, only: [] do
     get :autocomplete_activity_name, on: :collection
+
   end
 
+  post 'like/:id', to: "transactions#upvote", as: :like
+
+  resources :goals do
+    get :pollvote
+    post 'poll-like/:id', to: "goal#pollvote", as: :polllike
+  end
   root 'dashboard#index'
 end
+
+

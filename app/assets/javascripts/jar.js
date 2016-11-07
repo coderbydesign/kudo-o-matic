@@ -33,21 +33,21 @@ function stopLoading(bp) {
 
 function setText(bp){
     if (bp >= 100){
-      $(".dynamicmessage").html("5 ");
+      $(".dynamicmessage").html("5th message ");
     }else if (bp > 80){
-      $(".dynamicmessage").html("4 ");
+      $(".dynamicmessage").html("4th message ");
     }else if (bp > 60){
-      $(".dynamicmessage").html("3 ");
+      $(".dynamicmessage").html("3rd message");
     }else if (bp > 40){
-      $(".dynamicmessage").html("2 ");
+      $(".dynamicmessage").html("2nd message ");
     }else if (bp > 20){
-      $(".dynamicmessage").html("1 ");
+      $(".dynamicmessage").html("1st message ");
     }
 };
 
 $(document).ready(function(){
     $(".dynamic").hide();
-    window.loader = $('#loader').data()
+    window.loader = $('.loader').data()
     startLoading();
 })
 

@@ -1,5 +1,5 @@
 class Transaction < ActiveRecord::Base
-
+  acts_as_votable
   belongs_to :balance
   belongs_to :activity
   belongs_to :sender,   class_name: "User"
