@@ -1,8 +1,8 @@
 var worker = null;
 var loadedPercentage = 0;
 
-function increment() {
-    $('#counter').html(loader.balanceCoins + ' Coins');
+function increment(jar) {
+    $('#counter').html(jar.balanceCoins + ' Coins');
     $('#drink').css('top', (100-loadedPercentage*.9)+'%');
 
     if(loadedPercentage % 5 == 0){
@@ -10,9 +10,9 @@ function increment() {
         $('#cubes div:nth-child(' + slice +')').fadeIn(100)
     }
 
-    if(loadedPercentage == loader.balancePercentage) {
+    if(loadedPercentage == jar.balancePercentage) {
         loadedPercentage = 0;
-        stopLoading(loader.balancePercentage);
+        stopLoading(jar.balancePercentage);
         $(".dynamic").fadeIn(1000);
         $(".loadingmessage").hide();
     }
@@ -47,8 +47,7 @@ function setText(bp){
 
 $(document).ready(function(){
     $(".dynamic").hide();
-    window.loader = $('.loader').data()
-    startLoading();
+    startLoading($('#loader').data())
 })
 
 
