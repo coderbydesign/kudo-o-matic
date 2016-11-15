@@ -1,4 +1,6 @@
 class DashboardController < ApplicationController
+  layout 'dashboard'
+
   def index
     @previous = Goal.previous.decorate
     @next     = Goal.next.decorate
