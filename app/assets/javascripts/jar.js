@@ -23,10 +23,10 @@ function increment() {
 
 function startLoading(bp) {
     $('#cubes div').hide();
-    worker = setInterval(increment , 60);
+
+    worker = setInterval(function(){increment(bp)} , 60);
 }
 function stopLoading(bp) {
-    console.log("stoploading")
     clearInterval(worker);
     setText(bp)
 }
