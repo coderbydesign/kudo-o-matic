@@ -26,21 +26,17 @@ RSpec.feature "Dashboard", type: :feature do
     visit '/'
 
     within('.last-transactions') do
-      expect(page).to have_content("42 ₭ from HARRY to WILLIAM for WRITING A BLOG POST")
-    end
-
-    within('.previous-goal') do
-      expect(page).to have_content("PAINTING LESSONS")
-      expect(page).to have_content("500 ₭")
+      expect(page).to have_content("Harry gave William 42 ₭udos, for writing a blog post")
     end
 
     within('.next-goal') do
-      expect(page).to have_content("PAINTBALL")
+      #expect(page).to have_content("PAINTBALL")
       expect(page).to have_content("1.500 ₭")
     end
 
-    within('.progress-label') do
-      expect(page).to have_content("1.000 ₭")
+    within('.jarwrapper') do
+      bp = find(".loader")["data-balance-coins"]
+      expect(bp).to eq('1000')
     end
   end
 end
