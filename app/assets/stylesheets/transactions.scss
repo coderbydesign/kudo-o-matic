@@ -8,15 +8,16 @@
     background: none;
     width: 200px;
     padding-bottom: 3px;
+    border-bottom: 1px solid white;
 
     &:focus {
-      border-bottom: 3px solid lighten(#4073F3, 10%);
-      padding-bottom: 0;
       outline: none;
+      border-bottom: 1px solid white;
     }
   }
 
   input[type=submit] {
+    margin-top: 2em;
     background: white;
     color: #4073F3;
     border: none;
@@ -34,7 +35,9 @@
 }
 
 ::-webkit-input-placeholder {
-   color: lighten(#4073F3, 10%);
+   color: #ddd;
+   font-size: smaller;
+   opacity: 0.5
 }
 
 :-moz-placeholder { /* Firefox 18- */

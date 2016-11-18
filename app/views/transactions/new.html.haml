@@ -4,26 +4,24 @@
       %br
       %br
       %br
-      %h1 Give some kudos!
+      %h1
+        = t('dashboard.title')
 
       = simple_form_for @transaction do |f|
-
-        = f.input_field :sender, as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false, placeholder: 'your name', autofocus: true
-        gives &nbsp;
-
-        = f.collection_select :receiver, User.all, :id, :name, as: :autocomplete,  placeholder: 'receiver'
+        = t('dashboard.i_give');
+        = f.input_field :receiver,  as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false,  placeholder: 'receiver'
         = f.input_field :amount, placeholder: '#'
-        kudos
+        = t('kudos')
 
         %br
 
-        for &nbsp;
+        =t('dashboard.for')
         = f.input_field :activity, as: :autocomplete, source_query: autocomplete_activity_name_activities_url, field_id: false, placeholder: 'activity'
 
         %br
 
-        = f.submit 'Give kudos'
+        = f.submit t('dashboard.submit_kudos')
   .row
     .col-md-12
       %br
-      = link_to 'Guidelines', :guidelines_transactions, class: 'reference'
+      = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference'
