@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = TransactionAdder.create(params[:transaction])
+    @transaction = TransactionAdder.create(params[:transaction], current_user)
     redirect_to root_path
   end
 
