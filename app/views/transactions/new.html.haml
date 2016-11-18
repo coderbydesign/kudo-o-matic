@@ -10,8 +10,8 @@
 
         = f.input_field :sender, as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false, placeholder: 'your name', autofocus: true
         gives &nbsp;
-        = f.input_field :receiver, as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false, placeholder: 'receiver'
 
+        = f.collection_select :receiver, User.all, :id, :name, as: :autocomplete,  placeholder: 'receiver'
         = f.input_field :amount, placeholder: '#'
         kudos
 

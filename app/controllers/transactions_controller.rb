@@ -1,13 +1,14 @@
 class TransactionsController < ApplicationController
-  before_action :upvote
   def new
+    # TODO implement session authentication
     @transaction = Transaction.new
-        end
+  end
 
-    def create
-      @transaction = TransactionAdder.create(params[:transaction])
-      redirect_to root_path
-    end
+  def create
+    @transaction = TransactionAdder.create(params[:transaction])
+    redirect_to root_path
+  end
+
   def upvote
     # TODO implement session authentication
     @transaction = Transaction.find(params[:id])
