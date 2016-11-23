@@ -11,10 +11,17 @@
     .story
       %p
         Check out the ₭udo stories. Get inspired to give ₭udos!
+      %p
+      -# The current amount of ₭udo Coins is:
+        = @balance.amount
+        out of
+        = @next.amount
     .jarwrapper
-      .loader{data: {balance_percentage: @balance.percentage, balance_coins: @balance.amount }}
-        = link_to new_transaction_path do
+      = link_to new_transaction_path do
+        .loader{data: {balance_percentage: @balance.percentage, balance_coins: @balance.amount }}
           #lid
+            %p
+              OPEN TO ADD KUDOS
           #toppart
           #glass{:valuemax => "#{@next.amount}", :valuemin => "#{@previous.amount}", :valuenow => "#{@balance.amount}"}
             .next-goal
@@ -51,12 +58,16 @@
       .loadingmessage
         Counting the coins in the jar!
       .dynamic
-        The jar is
+        The jar has
+        %span#kudoamount
+          =@balance.amount
+
+        ₭udo Coins in it. Which means that it's
         .dynamicmessage
-        If the jar is full with ₭udo Coins, then we will celebrate with
+        If the jar is full of ₭udo Coins, then we will celebrate with
         .title
           = @next.name
-    .calltoact
+    -#.calltoact
       %p
         Click the jarlid to give kudos!
 .bottomouterwrapper
@@ -83,22 +94,6 @@
                     %span.badge{"aria-hidden" => "true"}= transaction.get_upvotes.size
               %p.post-time-stamp
                 = transaction.created_at
-
-
-      -#.small-title Kudo Story Feed
-      -#.transaction= @last_transaction
-
-  .poll
-
-    %p.poll-title
-      What should be the next goal?
-    - @goals.each do |goal|
-      %p
-        = link_to(goal.name, like_path(goal), class: 'like', method: :post)
-        %button.btn.btn-info{'aria-label' => 'Left Align', type: 'button' }
-          %span{ 'aria-hidden' => 'true' }
-          %span.badge{ 'aria-hidden' => 'true' }
-            = goal.get_upvotes.size
 
 
 

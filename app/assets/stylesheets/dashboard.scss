@@ -22,10 +22,16 @@ header {
 
 .jarwrapper{
   float: left;
+  position:relative;
+  transition: transform 1s ease-in-out;
+  -webkit-transition: transform 1s ease-in-out;
+  -moz-transition: transform 1s ease-in-out;
+  -o-transition: transform 1s ease-in-out;
 }
 
 .title{
-
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
 .small-title {
@@ -69,15 +75,6 @@ header {
   overflow: hidden;
 }
 
-
-/* De flip, wejooow */
-.progress {
-  -webkit-transform: rotate(270deg);
-  -moz-transform: rotate(270deg);
-  -o-transform: rotate(270deg);
-  -ms-transform: rotate(270deg);
-  transform: rotate(270deg);
-}
 .progress-bar-kudos {
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -96,28 +93,13 @@ header {
   transition: width 0.6s cubic-bezier(0, 0, 0.32, 1.47);
 }
 
-.progress-label {
-  text-align: inherit;
-  float:right;
-  font-size: 3em;
-  margin-top: 220px;
-  position: relative;
-  margin-right: -15px;
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
-
 .topouterwrapper{
   width:100vw;
 }
 
 .topinnerwrapper{
-  width: 42vw;
   margin: auto;
-
+  width: 1000px;
 }
 
 .bottomouterwrapper{
@@ -144,7 +126,9 @@ header {
 
 .last-transactions {
   float:left;
-  width: 750px;
+  width: 50vw;
+  top: 45%;
+  position: absolute;
 }
 
 .post-container{
@@ -206,12 +190,19 @@ header {
 }
 
 .message{
-  width: 250px;
+  width: 400px;
   float: left;
   margin-left: 30px;
   }
 
+.dynamicmessage{
+  font-weight: bold;
+  font-size: 1.5em;
+}
 
+#kudoamount{
+  font-size:1.5em;
+}
 .story{
   width: 300px;
   float: left;
@@ -223,12 +214,45 @@ header {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.calltoact{
-  font-size: 15px;
+#call-to-action {
+  top: 45px;
   position: relative;
-  top: 6em;
-  left: 30px;
-  float: left;
+  font-size: 1em;
+}
+
+.cta-label{
+  z-index: 1;
+  text-align: center;
+  background-color: rgba(243, 205, 157, 0.6);
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 210px;
+  max-height: 135px;
+  border-radius: 10%;
+  border: 1px solid;
+  border-color: rgba(255,255,255,1);
+
+}
+
+.cta-label p{
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 10px;
+  color: rgba(72, 31, 31, 0.7);
+  font-size:30px;
+
+}
+
+.cta-label p:nth-child(1){
+
+}
+
+.cta-label p:nth-child(2){
+
 }
 
 .add-transaction-link {
@@ -252,15 +276,25 @@ header {
   height: 300px;
   width: 250px;
   margin: auto;
+  position:relative;
   .fix-loader &{
     position:fixed;
     input {
-
     }
   }
 }
 
+.jarwrapper .movement{
+  transform: translateY(-3px);
+}
 
+.jarwrapper:hover{
+  transform: translateY(3px);
+  #lid{
+    top:-6px;
+    text-decoration:none!important;
+  }
+}
 
 #lid{
   position: relative;
@@ -281,14 +315,22 @@ header {
   -webkit-transition: top 1s;
   -moz-transition: top 1s;
   -o-transition: top 1s;
-
-}
-
-#lid:hover{
-  top:-10px;
 }
 
 
+
+#lid p {
+  text-decoration: none !Important;
+  font-size: 0.6em;
+  margin-top: 10px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: inherit !important;
+}
+
+#lid p:hover{
+  text-decoration:none;
+}
 
 #toppart{
   position: relative;
@@ -338,7 +380,7 @@ header {
 #counter {
   position: relative;
   top: -30px;
-  font-size: 1em;
+  font-size: 2.2em;
   color: rgba(255,255,255,1);
   float: left;
 }
