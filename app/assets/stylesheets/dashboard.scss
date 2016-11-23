@@ -1,36 +1,36 @@
 header {
-    text-align: center;
-    min-height: 3.5em;
-    margin: 1em;
+  text-align: center;
+  min-height: 3.5em;
+  margin: 1em;
 
-    strong {
-        font-size: 2.5em;
-        white-space: nowrap;
+  strong {
+    font-size: 2.5em;
+    white-space: nowrap;
 
-        span {
-            opacity: 0.4;
-        }
+    span {
+      opacity: 0.4;
     }
+  }
 
-    img {
-        vertical-align: baseline;
-        margin: 0 0.5em;
-        height: 3.5em;
-        display: inline-block;
-    }
+  img {
+    vertical-align: baseline;
+    margin: 0 0.5em;
+    height: 3.5em;
+    display: inline-block;
+  }
 }
 
-.jarwrapper{
+.jarwrapper {
   float: left;
 }
 
-.title{
+.title {
 
 }
 
 .small-title {
   font-size: 1em;
-  color:rgba(255, 255, 255, 0.7)
+  color: rgba(255, 255, 255, 0.7)
 }
 
 .jarlid {
@@ -46,13 +46,13 @@ header {
   border-right: 3px solid;
   border-top: 3px solid;
   border-left: 3px solid;
-  border-color: rgba(255,255,255,1);
+  border-color: rgba(255, 255, 255, 1);
   top: -5px;
 }
 
 .progress {
   clear: both;
-  background: rgba(255,255,255,.1);
+  background: rgba(255, 255, 255, .1);
   border: 6px solid #fff;
   border-radius: 8px;
   height: 270px;
@@ -65,10 +65,9 @@ header {
   border-radius: 10% 15% 15% 10%;
   border: 3px solid;
   border-left: 15px solid;
-  border-color: rgba(255,255,255,.7);
+  border-color: rgba(255, 255, 255, .7);
   overflow: hidden;
 }
-
 
 /* De flip, wejooow */
 .progress {
@@ -78,6 +77,7 @@ header {
   -ms-transform: rotate(270deg);
   transform: rotate(270deg);
 }
+
 .progress-bar-kudos {
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -98,7 +98,7 @@ header {
 
 .progress-label {
   text-align: inherit;
-  float:right;
+  float: right;
   font-size: 3em;
   margin-top: 220px;
   position: relative;
@@ -110,27 +110,27 @@ header {
   transform: rotate(90deg);
 }
 
-.topouterwrapper{
-  width:100vw;
+.topouterwrapper {
+  width: 100vw;
 }
 
-.topinnerwrapper{
+.topinnerwrapper {
   width: 42vw;
   margin: auto;
 
 }
 
-.bottomouterwrapper{
-  margin-top:22%;
-  width:100vw;
+.bottomouterwrapper {
+  margin-top: 22%;
+  width: 100vw;
 }
 
-.bottominnerwrapper{
+.bottominnerwrapper {
   width: 55vw;
-  margin:auto;
+  margin: auto;
 }
 
-.poll{
+.poll {
   width: 355px;
   height: 300px;
   float: left;
@@ -138,42 +138,43 @@ header {
   margin-top: 25px;
 
 }
-.poll-title{
+
+.poll-title {
   border-bottom: solid 1px #ffffff;
 }
 
 .last-transactions {
-  float:left;
+  float: left;
   width: 750px;
 }
 
-.post-container{
-  margin:25px;
+.post-container {
+  margin: 25px;
   border-bottom: solid #fff 0.01px;
 }
+
 .post-container > div {
   display: inline;
 }
 
-
-.sendername{
-  color:rgb(9, 67, 119);
-}
-
-.receivername{
+.sendername {
   color: rgb(9, 67, 119);
 }
 
-.amountofkudos{
+.receivername {
+  color: rgb(9, 67, 119);
+}
+
+.amountofkudos {
 
 }
 
-.activityname{
+.activityname {
 
 }
 
-.post-time-stamp{
-  font-size:15px;
+.post-time-stamp {
+  font-size: 15px;
 }
 
 .btn-info {
@@ -183,7 +184,7 @@ header {
 }
 
 .btn-info .badge {
-  color:#fff;
+  color: #fff;
   background-color: rgba(255, 255, 255, 0);
 }
 
@@ -192,38 +193,37 @@ header {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.poll a{
+.poll a {
   color: rgba(255, 255, 255, 0.7);
-  width:100px;
+  width: 100px;
   transition: left 1s;
   -webkit-transition: left 1s;
   -moz-transition: left 1s;
   -o-transition: left 1s;
 }
 
-.poll a:hover{
-  left:5px;
+.poll a:hover {
+  left: 5px;
 }
 
-.message{
+.message {
   width: 250px;
   float: left;
   margin-left: 30px;
-  }
+}
 
-
-.story{
+.story {
   width: 300px;
   float: left;
   position: relative;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.message{
+.message {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.calltoact{
+.calltoact {
   font-size: 15px;
   position: relative;
   top: 6em;
@@ -232,15 +232,17 @@ header {
 }
 
 .add-transaction-link {
-  height:100%;
+  height: 100%;
 }
 
 .current-goal {
   margin: 2em 3em;
 }
+
 .previous-goal {
   float: left;
 }
+
 .next-goal {
   float: right;
   text-align: right;
@@ -252,17 +254,15 @@ header {
   height: 300px;
   width: 250px;
   margin: auto;
-  .fix-loader &{
-    position:fixed;
+  .fix-loader & {
+    position: fixed;
     input {
 
     }
   }
 }
 
-
-
-#lid{
+#lid {
   position: relative;
   height: 50px;
   width: 200px;
@@ -274,7 +274,7 @@ header {
   border-right: 3px solid;
   border-top: 3px solid;
   border-left: 3px solid;
-  border-color: rgba(255,255,255,1);
+  border-color: rgba(255, 255, 255, 1);
   overflow: hidden;
   top: 5px;
   transition: top 1s;
@@ -284,38 +284,36 @@ header {
 
 }
 
-#lid:hover{
-  top:-10px;
+#lid:hover {
+  top: -10px;
 }
 
-
-
-#toppart{
+#toppart {
   position: relative;
   height: 30px;
-  background: rgba(255,255,255,.1);
+  background: rgba(255, 255, 255, .1);
   border-radius: 50% 50% 0% 0%;
   border-bottom: 0;
   border-right: 3px solid;
   border-top: 4px solid;
   border-left: 3px solid;
-  border-color: rgba(255,255,255,.7);
+  border-color: rgba(255, 255, 255, .7);
   overflow: hidden;
 
 }
-
 
 #glass {
   position: relative;
   height: 100%;
-  background: rgba(255,255,255,.1);
+  background: rgba(255, 255, 255, .1);
   border-radius: 0% 0% 15% 15%;
   border: 3px solid;
   border-top: 0;
   border-bottom: 20px solid;
-  border-color: rgba(255,255,255,.7);
+  border-color: rgba(255, 255, 255, .7);
   overflow: hidden;
 }
+
 #textonjar {
   top: 61px;
   z-index: 35;
@@ -325,31 +323,35 @@ header {
   margin-left: 5px;
   font-weight: bold;
   font-size: 2em;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 #drink {
   position: absolute;
-  top:100%; right:0; bottom:0; left:0;
+  top: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;
   opacity: .7;
 }
-
 
 #counter {
   position: relative;
   top: -30px;
   font-size: 1em;
-  color: rgba(255,255,255,1);
+  color: rgba(255, 255, 255, 1);
   float: left;
 }
 
-
-
 #cubes {
   position: absolute;
-  top:0; right:0; bottom:0; left:0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
 }
+
 #cubes div {
   display: none;
   position: absolute;
@@ -357,90 +359,111 @@ header {
   height: 58px;
   background-image: url("kudocoins.png");
   background-position: center;
-  background-size:cover;
+  background-size: cover;
 
 }
+
 #cubes div:nth-child(1) {
-  bottom:0;
+  bottom: 0;
 }
+
 #cubes div:nth-child(2) {
   bottom: 23px;
   left: -4px;
 }
+
 #cubes div:nth-child(3) {
   bottom: 33px;
   left: 1px;
 }
+
 #cubes div:nth-child(4) {
-  bottom:49px; left:2px;
+  bottom: 49px;
+  left: 2px;
 }
 
 #cubes div:nth-child(5) {
-  bottom:51px; left:-10px;
+  bottom: 51px;
+  left: -10px;
 }
+
 #cubes div:nth-child(6) {
   bottom: 63px;
   left: -14px;
 }
+
 #cubes div:nth-child(7) {
   bottom: 77px;
   left: 13px;
 }
+
 #cubes div:nth-child(8) {
-  bottom:84px; left:20px;
+  bottom: 84px;
+  left: 20px;
 }
 
 #cubes div:nth-child(9) {
-  bottom:90px; left:-20px;
+  bottom: 90px;
+  left: -20px;
 }
 
 #cubes div:nth-child(10) {
   bottom: 111px;
   left: 6px;
 }
+
 #cubes div:nth-child(11) {
   bottom: 125px;
   left: 2px;
 }
+
 #cubes div:nth-child(12) {
-  bottom:131px;
+  bottom: 131px;
 }
 
 #cubes div:nth-child(13) {
   bottom: 144px;
   left: -3px;
 }
+
 #cubes div:nth-child(14) {
   bottom: 156px;
   left: 16px;
 }
+
 #cubes div:nth-child(15) {
-  bottom:175px; left:15px;
+  bottom: 175px;
+  left: 15px;
 }
 
 #cubes div:nth-child(16) {
   bottom: 180px;
   left: -8px;
 }
+
 #cubes div:nth-child(17) {
   bottom: 205px;
   left: -3px;
 }
+
 #cubes div:nth-child(18) {
-  bottom:210px; left:15px;
+  bottom: 210px;
+  left: 15px;
 }
 
 #cubes div:nth-child(19) {
   bottom: 220px;
   left: -13px;
 }
+
 #cubes div:nth-child(20) {
-  bottom:220px; left:-20px;
+  bottom: 220px;
+  left: -20px;
 }
 
-
 #coaster {
-  width: 130%; height: 4px;
+  width: 130%;
+  height: 4px;
   margin-left: -15%;
   background: steelblue;
   border-radius: 2px;
