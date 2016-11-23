@@ -11,12 +11,12 @@ acts_as_voter
 
   def self.from_omniauth(access_token)
     data = access_token.info
-
-    user = User.where(provider: access_token.provider, uid: access_token.uid).first_or_create!
+    user = User.where(email: data['email']).first_or_create!
 
     user.update(
+      provider: access_token.provider,
+      uid: access_token.uid,
       name: data["name"],
-      email: data["email"],
       avatar_url: data["image"]
     )
 
