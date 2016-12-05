@@ -32,6 +32,7 @@ gem 'haml-rails'
 
 gem 'devise'
 gem "omniauth-google-oauth2"
+gem 'pry'
 
 
 group :development, :test do
