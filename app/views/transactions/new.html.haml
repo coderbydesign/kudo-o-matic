@@ -1,27 +1,32 @@
 .container.center
-  .row
-    .col-md-12
+  .col-md-5
+    %h1
+      = t('dashboard.title')
+
+    = simple_form_for @transaction do |f|
+      = t('dashboard.i_give');
+      = f.input_field :receiver,  as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false,  placeholder: 'receiver'
+      = f.input_field :amount, placeholder: '#'
+      = t('kudos')
+
       %br
+
+      =t('dashboard.for')
+      = f.input_field :activity, as: :autocomplete, source_query: autocomplete_activity_name_activities_url, field_id: false, placeholder: 'activity'
+
       %br
-      %br
-      %h1
-        = t('dashboard.title')
 
-      = simple_form_for @transaction do |f|
-        = t('dashboard.i_give');
-        = f.input_field :receiver,  as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false,  placeholder: 'receiver'
-        = f.input_field :amount, placeholder: '#'
-        = t('kudos')
+      = f.submit t('dashboard.submit_kudos')
+  .col-md-7
+    %br
+      %p
+        These are the
+        = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference'
+        that are around
+        %span#amount_of_kudo_clone
+        Kudos
+      .guidelines_container
+        %ul
 
-        %br
 
-        =t('dashboard.for')
-        = f.input_field :activity, as: :autocomplete, source_query: autocomplete_activity_name_activities_url, field_id: false, placeholder: 'activity'
 
-        %br
-
-        = f.submit t('dashboard.submit_kudos')
-  .row
-    .col-md-12
-      %br
-      = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference'

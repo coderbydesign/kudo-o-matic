@@ -103,8 +103,9 @@ header {
 }
 
 .bottomouterwrapper{
-  margin-top:22%;
+  margin-top: 400px;
   width:100vw;
+  potion:relative;
 }
 
 .bottominnerwrapper{
@@ -127,8 +128,6 @@ header {
 .last-transactions {
   float:left;
   width: 50vw;
-  top: 45%;
-  position: absolute;
 }
 
 .post-container{
@@ -493,4 +492,12 @@ header {
 input, button, select, textarea {
   background: none;
   border: none;
+}
+
+a.reference{
+  font-size:1.5em;
+}
+
+.col-md-5,.col-md-7 {
+  top: 20vh;
 }

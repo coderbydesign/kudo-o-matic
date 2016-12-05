@@ -35,4 +35,13 @@ class Transaction < ActiveRecord::Base
     ['Get a client quote for the website', 100],
     ['Organize event for external relations (workshop, coderetreat)', 50]]
 
+  def self.guidelines_between(from, to)
+    gl = []
+    GUIDELINES.each do |g|
+      gl.push g[0] if g[1] >=from and g[1] <=to
+
+    end
+    gl
+  end
+
 end

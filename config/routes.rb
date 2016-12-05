@@ -20,9 +20,12 @@ Rails.application.routes.draw do
     root to: "balances#index"
   end
 
+  get :kudo_guidelines, to: 'transactions#kudo_guidelines'
+
   resources :transactions,
     only: [:new, :create] do
       get :guidelines, on: :collection
+
   end
 
   resources :users, only: [] do

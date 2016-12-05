@@ -63,7 +63,9 @@ function stuff(){
 $(document).ready(function(){
     $(".dynamic").hide();
     window.loader = $('.loader').data()
-    startLoading();
+    if(window.location.pathname == '/'){
+        startLoading();
+    }
 })
 
 $(window).load(function(){
