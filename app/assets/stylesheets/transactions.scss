@@ -6,7 +6,7 @@
   input[type=text], input[type=number] {
     border: none;
     background: none;
-    width: 200px;
+    width: 150px;
     padding-bottom: 3px;
     border-bottom: 1px solid white;
 
@@ -17,21 +17,20 @@
   }
 
   input[type=submit] {
-    margin-top: 2em;
-    background: white;
-    color: #4073F3;
+    margin-top: 1em;
+    background: #b58342;
+    color: rgba(255,255,255,0.7);
     border: none;
-    font-weight: bold;
-    border-radius: 5px;
-    font-size: 0.7em;
+    border-radius: 10px;
+    font-size: 4em;
   }
 }
 
 #transaction_amount {
-  width: 60px;
+  width: 40px;
 }
 #transaction_activity {
-  width: 400px;
+  width: 250px;
 }
 
 ::-webkit-input-placeholder {

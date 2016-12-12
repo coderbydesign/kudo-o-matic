@@ -60,6 +60,15 @@ function stuff(){
 
 }
 
+$('.input_field').focus(
+    function(){
+        $(this).parent('div').css('background-color','black');
+    }).blur(
+    function(){
+        $(this).parent('div').css('border-style','dashed');
+    });
+
+
 $(document).ready(function(){
     $(".dynamic").hide();
     window.loader = $('.loader').data()
