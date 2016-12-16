@@ -1,13 +1,3 @@
-// window.onload = function(){
-//     console.log('test');
-//
-//     $.get("/kudo_guidelines", function(data){
-//         console.log("getting guidelines", data);
-//     })
-//
-//
-// };
-
 $(document).ready(function(){
     $('.col-md-7').hide();
     $('#transaction_amount').on('keyup', function(){
@@ -26,7 +16,7 @@ $(document).ready(function(){
                 $this.html($('<ul>').html(data));
             });
         })
-    })
+    });
     function wrap_activity_in_li(activity){
        return activity = '<li>' + activity + '</li>';
     }
@@ -38,20 +28,41 @@ $(document).ready(function(){
     });
 
     $("input").focus(function() {
-
         console.log("focus test ")
-        $()
+        $("header, .bottomouterwrapper").css({
+            filter: "blur(5px)",
+            transition: "100ms -webkit-filter linear"
+        });
+        $(".col-md-5").css({
 
-        // $('div.example').show();
-        // $(document).bind('focusin.example click.example',function(e) {
-        //     if ($(e.target).closest('.example, #example').length) return;
-        //     $(document).unbind('.example');
-        //     $('div.example').fadeOut('medium');
-        // });
+        });
+
+        $(".topinnerwrapper").css({height:"400px;"});
+
+        $("input").focusout(function() {
+            console.log("focus out test")
+           // $("header, .bottomouterwrapper").end()
+                cancelBlur();
+            });
+        });
+
+    $(window).scroll(function() {
+        if ($(this).scrollTop()>10)
+        {
+            cancelBlur();
+        }
     });
 
+    function focusOut(){
+    }
 
-})
+    function cancelBlur() {
+        $("header, .bottomouterwrapper").css({
+            filter: "",
+            transition: "100ms -webkit-filter linear"
+        });
+    }
+});
 
 
 

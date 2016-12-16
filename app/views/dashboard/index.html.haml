@@ -10,43 +10,43 @@
   .topinnerwrapper
     .flex_dummy_div
     .jarwrapper
-      = link_to new_transaction_path do
-        .loader{data: {balance_percentage: @balance.percentage, balance_coins: @balance.amount }}
-          #lid
+      .loader{data: {balance_percentage: @balance.percentage, balance_coins: @balance.amount }}
+        #lid
+          = link_to new_transaction_path do
             %p
               OPEN TO ADD KUDOS
-          #toppart
-          #glass{:valuemax => "#{@next.amount}", :valuemin => "#{@previous.amount}", :valuenow => "#{@balance.amount}"}
-            .next-goal
-              .balance.small-title
-                = @next.kudos
-                \-
-            #textonjar
-            #cubes
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-              %div
-            #drink
-              %span#counter
-          #coaster
+        #toppart
+        #glass{:valuemax => "#{@next.amount}", :valuemin => "#{@previous.amount}", :valuenow => "#{@balance.amount}"}
+          .next-goal
+            .balance.small-title
+              = @next.kudos
+              \-
+          #textonjar
+          #cubes
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+          #drink
+            %span#counter
+        #coaster
     .container.center
       .col-md-5
         %h1
