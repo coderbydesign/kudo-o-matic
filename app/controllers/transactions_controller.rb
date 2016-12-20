@@ -1,5 +1,4 @@
 class TransactionsController < ApplicationController
-  require 'chronic'
   def new
     # TODO implement session authentication
     @transaction = Transaction.new

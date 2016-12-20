@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $('.col-md-7').hide();
     $('#transaction_amount').on('keyup', function(){
+        $('#guidelines_static').hide();
         $('.col-md-7').fadeIn(1000);
         console.log('test', this.value);
         $('#amount_of_kudo_clone').html(this.value);
@@ -24,6 +25,7 @@ $(document).ready(function(){
     $('#transaction_amount').keyup(function(){
         if (!this.value) {
             $('.col-md-7').fadeOut(1000);
+            $('#guidelines_static').show(1000);
         }
     });
 

@@ -54,7 +54,7 @@
 
         = simple_form_for @transaction do |f|
           = t('dashboard.i_give');
-          = f.input_field :receiver,  as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false,  placeholder: 'receiver'
+          = f.input_field :receiver,  as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false,  placeholder: 'receiver', :autofocus => true
           = f.input_field :amount, placeholder: '#'
           = t('kudos')
 
@@ -67,16 +67,19 @@
 
           = f.submit t('dashboard.submit_kudos')
       .col-md-7
-        %br
-          %p
-            These are the
-            = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference'
-            that are around
-            %span#amount_of_kudo_clone
-            Kudos
-          .guidelines_container
-            %ul
+        %p#guidelines_dynamic
+          These are the
+          = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference'
+          that are around
+          %span#amount_of_kudo_clone
+          Kudos
+        .guidelines_container
+          %ul
+      %p#guidelines_static
+        Check out the
+        = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference'
     .flex_dummy_div
+
 .bottomouterwrapper
   .bottominnerwrapper
     .small-title
@@ -99,13 +102,17 @@
             .activityname
             %span
               = transaction.activity.name
+              ="."
+            %span.post-time-stamp
+              = distance_of_time_in_words(DateTime.now, transaction.created_at)
+              ago
+
             .like-btn
               = link_to like_path(transaction), class: "like", method: :post do
                 %button.btn.btn-info{"aria-label" => "Left Align", :type => "button"}
                   %span.glyphicon.glyphicon-thumbs-up.glyphicon-aligncenter{"aria-hidden" => "true"}
                   %span.badge{"aria-hidden" => "true"}= transaction.get_upvotes.size
-            %p.post-time-stamp
-              = transaction.created_at
+
 
 
 
