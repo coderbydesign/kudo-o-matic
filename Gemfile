@@ -22,6 +22,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'railties', '~> 5.0', '>= 5.0.0.1'
+gem 'chronic', '~> 0.10.2'
 
 gem 'draper', '= 3.0.0.pre1'
 gem "administrate", github: "pablo-co/administrate", branch: "rails5"

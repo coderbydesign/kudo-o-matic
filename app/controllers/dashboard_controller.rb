@@ -9,6 +9,7 @@ class DashboardController < ApplicationController
     @balance  = Balance.current.decorate
 
     @transactions = Transaction.all.reverse
+    @transaction = Transaction.new
 
   end
 end

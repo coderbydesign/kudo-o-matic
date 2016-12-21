@@ -1,5 +1,4 @@
 class TransactionAdder
-
   def self.create(params, current_user)
     receiver = User.find_or_create_by(name: params[:receiver])
     activity = Activity.find_or_create_by(name: params[:activity].to_s.downcase)

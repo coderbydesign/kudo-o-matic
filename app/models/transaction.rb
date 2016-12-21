@@ -1,4 +1,6 @@
 class Transaction < ActiveRecord::Base
+  require 'chronic'
+
   acts_as_votable
   belongs_to :balance
   belongs_to :activity
