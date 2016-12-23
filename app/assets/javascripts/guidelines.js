@@ -29,41 +29,75 @@ $(document).ready(function(){
         }
     });
 
-    $("input").focus(function() {
-        console.log("focus test ")
-        $("header, .bottomouterwrapper").css({
-            filter: "blur(5px)",
-            transition: "100ms -webkit-filter linear"
-        });
-        $(".col-md-5").css({
-
-        });
-
-        $(".topinnerwrapper").css({height:"400px;"});
-
-        $("input").focusout(function() {
-            console.log("focus out test")
-           // $("header, .bottomouterwrapper").end()
-                cancelBlur();
-            });
-        });
-
-    $(window).scroll(function() {
-        if ($(this).scrollTop()>10)
-        {
-            cancelBlur();
-        }
-    });
-
-    function focusOut(){
-    }
-
-    function cancelBlur() {
-        $("header, .bottomouterwrapper").css({
-            filter: "",
-            transition: "100ms -webkit-filter linear"
-        });
-    }
+    // $("input").focus(function() {    // $("input").focus(function() {
+    //     console.log("focus test ")
+    //     $("header, .bottomouterwrapper").css({
+    //         filter: "blur(5px)",
+    //         transition: "100ms -webkit-filter linear"
+    //     });
+    //     $(".col-md-5").css({
+    //
+    //     });
+    //
+    //     $(".topinnerwrapper").css({height:"400px;"});
+    //
+    //     $("input").focusout(function() {
+    //         console.log("focus out test")
+    //        // $("header, .bottomouterwrapper").end()
+    //             cancelBlur();
+    //         });
+    //     });
+    //
+    // $(window).scroll(function() {
+    //     if ($(this).scrollTop()>10)
+    //     {
+    //         cancelBlur();
+    //     }
+    // });
+    //
+    // function focusOut(){
+    // }
+    //
+    // function cancelBlur() {
+    //     $("header, .bottomouterwrapper").css({
+    //         filter: "",
+    //         transition: "100ms -webkit-filter linear"
+    //     });
+    // }
+    //     console.log("focus test ")
+    //     $("header, .bottomouterwrapper").css({
+    //         filter: "blur(5px)",
+    //         transition: "100ms -webkit-filter linear"
+    //     });
+    //     $(".col-md-5").css({
+    //
+    //     });
+    //
+    //     $(".topinnerwrapper").css({height:"400px;"});
+    //
+    //     $("input").focusout(function() {
+    //         console.log("focus out test")
+    //        // $("header, .bottomouterwrapper").end()
+    //             cancelBlur();
+    //         });
+    //     });
+    //
+    // $(window).scroll(function() {
+    //     if ($(this).scrollTop()>10)
+    //     {
+    //         cancelBlur();
+    //     }
+    // });
+    //
+    // function focusOut(){
+    // }
+    //
+    // function cancelBlur() {
+    //     $("header, .bottomouterwrapper").css({
+    //         filter: "",
+    //         transition: "100ms -webkit-filter linear"
+    //     });
+    // }
 });
 
 
