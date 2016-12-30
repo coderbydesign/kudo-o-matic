@@ -23,7 +23,7 @@ header {
 .flex_dummy_div{
 }
 .container.center{
-  flex:4;
+  flex:6;
   font-size:1.5em !important;
 }
 .jarwrapper{
@@ -125,16 +125,18 @@ header {
 .bottominnerwrapper{
 }
 
-.poll{
-  width: 355px;
-  height: 300px;
-
-  margin-left: 40px;
-  margin-top: 25px;
-
+.guidelines_container{
+  overflow-y: scroll;
+  height: 290px;
 }
-.poll-title{
-  border-bottom: solid 1px #ffffff;
+
+span.guidelines_static{
+  margin-top:16px !important;
+  display: block;
+}
+span.guidelines_dynamic{
+  margin-top:16px !important;
+  display: block;
 }
 
 .last-transactions {
@@ -509,6 +511,6 @@ a.reference{
   font-size:1.5em;
 }
 
-.col-md-5,.col-md-7 {
+.col-md-7 > span {
 
 }

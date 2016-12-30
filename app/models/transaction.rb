@@ -1,5 +1,5 @@
 class Transaction < ActiveRecord::Base
-  validates :amount, numericality: { greater_than_or_equal_to: 1 }
+  #validates :amount, numericality: { greater_than_or_equal_to: 1 }
   acts_as_votable
   belongs_to :balance
   belongs_to :activity
@@ -40,6 +40,7 @@ class Transaction < ActiveRecord::Base
     gl = []
     GUIDELINES.each do |g|
       gl.push g[0] if g[1] >=from and g[1] <=to
+      gl.push g[1] if g[1] >=from and g[1] <=to
 
     end
     gl
