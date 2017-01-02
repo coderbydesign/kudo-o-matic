@@ -85,35 +85,35 @@
 .bottomouterwrapper
   .bottominnerwrapper
     .small-title
-      .last-transactions
-        - @transactions.each do |transaction|
-          .post-container
-            .amountofkudos
-              = transaction.amount
-            -#
-            %span
-              ₭
-            .sendername
-              = transaction.sender.name
-            %span
-              to
-            .receivername
-              = transaction.receiver.name
-            %span
-              =":"
-            .activityname
-            %span
-              = transaction.activity.name
-              ="."
-            %span.post-time-stamp
-              = distance_of_time_in_words(DateTime.now, transaction.created_at)
-              ago
+    .last-transactions
+      - @transactions.each do |transaction|
+        .post-container
+          .amountofkudos
+            = transaction.amount
+          -#
+          %span
+            ₭
+          .sendername
+            = transaction.sender.name
+          %span
+            to
+          .receivername
+            = transaction.receiver.name
+          %span
+            =":"
+          .activityname
+          %span
+            = transaction.activity.name
+            =":"
+          %span.post-time-stamp
+            = distance_of_time_in_words(DateTime.now, transaction.created_at)
+            ago
 
-            .like-btn
-              = link_to like_path(transaction), class: "like", method: :post do
-                %button.btn.btn-info{"aria-label" => "Left Align", :type => "button"}
-                  %span.glyphicon.glyphicon-thumbs-up.glyphicon-aligncenter{"aria-hidden" => "true"}
-                  %span.badge{"aria-hidden" => "true"}= transaction.get_upvotes.size
+          .like-btn
+            = link_to like_path(transaction), class: "like", method: :post do
+              %button.btn.btn-info{"aria-label" => "Left Align", :type => "button"}
+                %span.glyphicon.glyphicon-thumbs-up.glyphicon-aligncenter{"aria-hidden" => "true"}
+                %span.badge{"aria-hidden" => "true"}= transaction.get_upvotes.size
 
 
 
