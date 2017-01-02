@@ -526,21 +526,43 @@ a.reference {
 /*All MOBILE DEVICES*/
 @media only screen and (min-device-width: 20em) and (max-device-width: 30em) {
   .loader {
-    height: 300px;
-    width: 250px;
     top: 10%;
   }
 
   .topinnerwrapper {
-    display: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 190vh;
+
+
   }
-  .topinnerwrapper {
-    display: inherit;
+
+  .topinnerwrapper > * {
+    flex: 0 !important;
+    justify-content: center;
   }
+
 
 
   .jarwrapper{
-    height:90vw;
+    height: 90vh;
+    flex:1!important;
+  }
+
+  .container.center {
+    flex: 1 !important
+  }
+
+  .container.center{
+    font-size:1em !important;
+  }
+
+  #transaction_amount {
+    width: 40px !important;
+  }
+
+  .col-md-7{
+    width: 300px!important;
   }
 
 }
@@ -604,10 +626,10 @@ and (min-resolution: 192dpi) {
   }
 
   .new_transaction input[type=text], .new_transaction input[type=number] {
-    width: 135px;
+    width: 135px!important;
   }
 
   #transaction_amount {
-    width: 45px;
+    width: 45px!important;
   }
 }
