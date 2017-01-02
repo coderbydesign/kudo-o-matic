@@ -57,7 +57,7 @@
         = simple_form_for @transaction do |f|
           = t('dashboard.i_give');
           = f.input_field :receiver,  as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false,  placeholder: 'receiver', :autofocus => true
-          = f.input_field :amount , placeholder: '#'
+          = f.input_field :amount, input_html:{ min: '0', step: 'any'} , placeholder: '#'
           = t('kudos')
 
           %br
