@@ -27,8 +27,8 @@ $(document).ready(function(){
 
     $('#transaction_amount').keyup(function(){
         if (!this.value) {
-            $('.col-md-7').fadeOut(1000);
-            $('.guidelines_static').show(1000);
+            $('.col-md-7').hide();
+            $('.guidelines_static').show();
         }
     });
 

@@ -123,6 +123,7 @@ header {
 }
 
 .bottominnerwrapper{
+  display:flex;
 }
 
 .guidelines_container{
@@ -177,7 +178,7 @@ span.guidelines_dynamic{
   font-size:15px;
 }
 .like-btn{
-  float: right;
+
   top: 30px;
   position: relative;
 }
