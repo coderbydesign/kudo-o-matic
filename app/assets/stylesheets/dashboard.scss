@@ -19,6 +19,9 @@ header {
         display: inline-block;
     }
 }
+li {
+  list-style-type: none;
+}
 
 .flex_dummy_div{
 }
@@ -134,6 +137,8 @@ header {
 span.guidelines_static{
   margin-top:16px !important;
   display: block;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 span.guidelines_dynamic{
   margin-top:16px !important;
