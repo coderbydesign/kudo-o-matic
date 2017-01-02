@@ -23,8 +23,6 @@ $(document).ready(function(){
 
     }
 
-
-
     $('#transaction_amount').keyup(function(){
         if (!this.value) {
             $('.col-md-7').hide();

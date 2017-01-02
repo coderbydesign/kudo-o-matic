@@ -513,10 +513,102 @@ input, button, select, textarea {
   border: none;
 }
 
-a.reference{
-  font-size:1.5em;
+a.reference {
+  font-size: 1em;
+  text-decoration:underline;
 }
 
+
 .col-md-7 > span {
+
+}
+/* RESPONSIVE ---------------------------------------------------------------------------------------------*/
+/*All MOBILE DEVICES*/
+@media only screen and (min-device-width: 20em) and (max-device-width: 30em) {
+  .loader {
+    height: 700px;
+    width: 550px;
+    top: 10%;
+  }
+
+  .topinnerwrapper {
+    display: inherit;
+
+  .topinnerwrapper {
+    display: inherit;
+  }
+
+
+  .jarwrapper{
+    height:90vw;
+  }
+
+}
+
+
+/*Laptops*/
+@media screen
+and (min-device-width: 1200px)
+and (max-device-width: 1600px)
+and (-webkit-min-device-pixel-ratio: 1) {
+
+}
+
+/*Retina Screens*/
+@media screen
+and (min-device-width: 1200px)
+and (max-device-width: 1600px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (min-resolution: 192dpi) {
+  h1 {
+    font-size: 30px !important;
+  }
+  .container.center {
+    font-size: 1.2em !important;
+  }
+
+  .new_transaction input[type=submit] {
+    font-size: 1.5em !important;
+  }
+
+  #counter{
+    font-size:2em;
+  }
+
+  .small-title{
+    font-size:0.8em;
+  }
+
+  .title{
+    font-size: 0.5em;
+    margin-top: 5px;
+  }
+
+  #lid p{
+    font-size:0.5em;
+  }
+
+  .last-transactions {
+    width: 1000px;
+
+  }
+
+  .post-time-stamp {
+    font-size: 14px;
+  }
+
+  .post-container {
+    margin: 25px;
+    font-size: 1.3em;
+  }
+
+  .new_transaction input[type=text], .new_transaction input[type=number] {
+    width: 135px;
+  }
+
+  #transaction_amount {
+    width: 45px;
+  }
+
 
 }
