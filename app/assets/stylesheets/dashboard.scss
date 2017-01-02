@@ -533,7 +533,7 @@ a.reference {
 
   .topinnerwrapper {
     display: inherit;
-
+  }
   .topinnerwrapper {
     display: inherit;
   }
@@ -544,6 +544,7 @@ a.reference {
   }
 
 }
+
 
 
 /*Laptops*/
@@ -571,21 +572,21 @@ and (min-resolution: 192dpi) {
     font-size: 1.5em !important;
   }
 
-  #counter{
-    font-size:2em;
+  #counter {
+    font-size: 2em;
   }
 
-  .small-title{
-    font-size:0.8em;
+  .small-title {
+    font-size: 0.8em;
   }
 
-  .title{
+  .title {
     font-size: 0.5em;
     margin-top: 5px;
   }
 
-  #lid p{
-    font-size:0.5em;
+  #lid p {
+    font-size: 0.5em;
   }
 
   .last-transactions {
@@ -609,6 +610,4 @@ and (min-resolution: 192dpi) {
   #transaction_amount {
     width: 45px;
   }
-
-
 }
