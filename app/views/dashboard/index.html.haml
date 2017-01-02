@@ -57,7 +57,7 @@
         = simple_form_for @transaction do |f|
           = t('dashboard.i_give');
           = f.input_field :receiver,  as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false,  placeholder: 'receiver', :autofocus => true
-          = f.input_field :amount, input_html:{ min: '0', step: 'any'} , placeholder: '#'
+          = f.input_field :amount , placeholder: '#'
           = t('kudos')
 
           %br
@@ -69,7 +69,7 @@
 
           = f.submit t('dashboard.submit_kudos')
       .col-md-7
-        %p#guidelines_dynamic
+        %span.guidelines_dynamic
           These are the
           = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference'
           that are around
@@ -77,7 +77,7 @@
           Kudos
         .guidelines_container
           %ul
-      %p#guidelines_static
+      %span.guidelines_static
         Check out the
         = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference'
     .flex_dummy_div
