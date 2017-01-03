@@ -525,6 +525,18 @@ a.reference {
 /* RESPONSIVE ---------------------------------------------------------------------------------------------*/
 /*All MOBILE DEVICES*/
 @media only screen and (min-device-width: 20em) and (max-device-width: 30em) {
+  h1, .h1 {
+    font-size: 2.3em;
+  }
+
+  header img {
+    height: 2.5em;
+
+  }
+  header strong {
+
+  font-size: 2.1em;
+}
   .loader {
     top: 10%;
   }
@@ -533,6 +545,7 @@ a.reference {
     display: flex;
     flex-direction: column;
     height: 190vh;
+
 
 
   }
@@ -561,8 +574,22 @@ a.reference {
     width: 40px !important;
   }
 
+  #transaction_activity {
+    width: 230px;
+  }
+
+  .new_transaction input[type=text], .new_transaction input[type=number] {
+    width: 130px;
+  }
   .col-md-7{
     width: 300px!important;
+  }
+  .post-container {
+
+    font-size: 1em;
+  }
+  .post-time-stamp {
+    font-size: 0.7em;
   }
 
 }
