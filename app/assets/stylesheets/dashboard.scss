@@ -542,7 +542,7 @@ a.reference {
   }
 
   .guidelines_container {
-    height: 100px;
+    height: 150px;
   }
   .topinnerwrapper {
     display: flex;
@@ -578,16 +578,16 @@ a.reference {
   }
 
   #transaction_amount {
-    width: 40px !important;
+    width: 45px!important;
   }
 
   #transaction_activity {
-    width: 230px !important;
+    width: 170px !important;
+  }
+  input#transaction_receiver {
+    width:153px !important;
   }
 
-  .new_transaction input[type=text], .new_transaction input[type=number] {
-    width: 130px !important;
-  }
   .col-md-7{
     width: 300px!important;
   }
@@ -599,21 +599,88 @@ a.reference {
     font-size: 0.7em !important;
   }
 
+  #orientation_message_overlay{
+    height:100%;
+    width: 100%;
+    position:absolute;
+    z-index:999;
+    background-color:red;
+}
+  #orientation_message_overlay p {
+    color:white;
+    margin:auto;
+    text-align:center;
+    font-size: 1em;
+  }
+
 }
 
 
 
 /*Laptops*/
 @media screen
-and (min-device-width: 1200px)
+and (min-device-width: 1100px)
 and (max-device-width: 1600px)
-and (-webkit-min-device-pixel-ratio: 1) {
+ {
+  h1 {
+    font-size: 30px !important;
+  }
+  .container.center {
+    font-size: 1.2em !important;
+  }
+
+  .new_transaction input[type=submit] {
+    font-size: 1.5em !important;
+  }
+
+  #counter {
+    font-size: 2em;
+  }
+
+  .small-title {
+    font-size: 0.8em;
+  }
+
+  .title {
+    font-size: 0.5em;
+    margin-top: 5px;
+  }
+
+  #lid p {
+    font-size: 0.5em;
+  }
+
+  .last-transactions {
+    width: 1000px;
+
+  }
+
+  .post-time-stamp {
+    font-size: 14px;
+  }
+
+  .post-container {
+    margin: 25px;
+    font-size: 1.3em;
+  }
+
+
+  #transaction_amount {
+    width: 45px!important;
+  }
+
+  #transaction_activity {
+    width: 170px !important;
+  }
+  input#transaction_receiver {
+    width:153px !important;
+  }
 
 }
 
 /*Retina Screens*/
 @media screen
-and (min-device-width: 1200px)
+and (min-device-width: 1100px)
 and (max-device-width: 1600px)
 and (-webkit-min-device-pixel-ratio: 2)
 and (min-resolution: 192dpi) {
@@ -659,11 +726,15 @@ and (min-resolution: 192dpi) {
     font-size: 1.3em;
   }
 
-  .new_transaction input[type=text], .new_transaction input[type=number] {
-    width: 135px!important;
-  }
 
   #transaction_amount {
     width: 45px!important;
+  }
+
+  #transaction_activity {
+    width: 170px !important;
+  }
+  input#transaction_receiver {
+    width:153px !important;
   }
 }
