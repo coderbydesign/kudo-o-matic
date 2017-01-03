@@ -55,13 +55,13 @@
           = t('dashboard.title')
 
         = simple_form_for @transaction do |f|
-          = t('dashboard.i_give');
-          = f.input_field :receiver,  as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false,  placeholder: 'receiver',required: true , :autofocus => true
-          = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: '#',required: true
-          = t('kudos')
-
-          %br
-
+          .span
+            = t('dashboard.i_give');
+            = f.input_field :receiver,  as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false,  placeholder: 'receiver',required: true , :autofocus => true
+          .span
+            = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: '#',required: true
+            = t('kudos')
+          .span
           =t('dashboard.for')
           = f.input_field :activity, as: :autocomplete, source_query: autocomplete_activity_name_activities_url, field_id: false, placeholder: 'activity',required: true
 
@@ -115,6 +115,7 @@
                 %span.glyphicon.glyphicon-thumbs-up.glyphicon-aligncenter{"aria-hidden" => "true"}
                 %span.badge{"aria-hidden" => "true"}= transaction.get_upvotes.size
 
-
-
-
+-#orientation_message_overlay
+  %p
+    This app works optimal in Portrait mode, please use Portrait mode :)
+    (Nobody uses landscape anymore anyway)
