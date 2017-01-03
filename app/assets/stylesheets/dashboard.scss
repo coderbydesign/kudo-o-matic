@@ -526,30 +526,37 @@ a.reference {
 /*All MOBILE DEVICES*/
 @media only screen and (min-device-width: 20em) and (max-device-width: 30em) {
   h1, .h1 {
-    font-size: 2.3em;
+    font-size: 2.3em !important;
   }
 
   header img {
-    height: 2.5em;
+    height: 2.5em !important;
 
   }
   header strong {
 
-  font-size: 2.1em;
+  font-size: 2.1em!important;
 }
   .loader {
-    top: 10%;
+    top: 10%!important;
   }
 
+  .guidelines_container {
+    height: 100px;
+  }
   .topinnerwrapper {
     display: flex;
     flex-direction: column;
-    height: 190vh;
-
-
+    height: 190vh!important;
 
   }
 
+  span.post-time-stamp {
+    display: block;
+  }
+  .activityname {
+    display: block !important;
+  }
   .topinnerwrapper > * {
     flex: 0 !important;
     justify-content: center;
@@ -575,21 +582,21 @@ a.reference {
   }
 
   #transaction_activity {
-    width: 230px;
+    width: 230px !important;
   }
 
   .new_transaction input[type=text], .new_transaction input[type=number] {
-    width: 130px;
+    width: 130px !important;
   }
   .col-md-7{
     width: 300px!important;
   }
   .post-container {
 
-    font-size: 1em;
+    font-size: 1em !important;
   }
   .post-time-stamp {
-    font-size: 0.7em;
+    font-size: 0.7em !important;
   }
 
 }
