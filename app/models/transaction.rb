@@ -40,9 +40,7 @@ class Transaction < ActiveRecord::Base
   def self.guidelines_between(from, to)
     gl = []
     GUIDELINES.each do |g|
-      gl.push g[0] if g[1] >=from and g[1] <=to
-      gl.push g[1] if g[1] >=from and g[1] <=to
-
+      gl.push g if g[1] >=from and g[1] <=to
     end
     gl
   end

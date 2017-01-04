@@ -22,6 +22,9 @@ header {
 li {
   list-style-type: none;
 }
+.glyphicon {
+  font-size: 13px;
+}
 
 .flex_dummy_div{
 }
@@ -111,7 +114,7 @@ li {
 
 .topinnerwrapper{
   display:flex;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   justify-content: center;
   height: 381px;
   > * {
@@ -130,7 +133,7 @@ li {
 }
 
 .guidelines_container{
-  overflow-y: scroll;
+  /*overflow-y: scroll; */
   height: 290px;
 }
 
@@ -145,14 +148,17 @@ span.guidelines_dynamic{
   display: block;
 }
 
+.col-md-7 li span {
+  float: right;
+}
+
 .last-transactions {
-  width: 1300px;
   margin:auto;
 }
 
 .post-container{
-  margin:25px;
-  font-size:20px;
+  margin:20px;
+  font-size:1.5em;
 
 }
 .post-container > div {
@@ -176,7 +182,7 @@ span.guidelines_dynamic{
 }
 
 .activityname{
-
+  display:block!important;
 }
 
 .post-time-stamp{
@@ -184,7 +190,6 @@ span.guidelines_dynamic{
 }
 .like-btn{
   float:right;
-
   position: relative;
 }
 .btn-info {
@@ -517,6 +522,7 @@ a.reference {
   font-size: 1em;
   text-decoration:underline;
 }
+
 
 
 .col-md-7 > span {

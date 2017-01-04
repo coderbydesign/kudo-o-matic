@@ -12,6 +12,7 @@ $(document).ready(function(){
                // debugger
                 var $this = $(this);
                 for (var i = 0; i < data.length; i++) {
+                    console.log("datarow", data[i][0], data[i][1])
                     data[i] = wrap_activity_in_li(data[i])
                 }
                 $this.html($('<ul>').html(data));
@@ -19,7 +20,7 @@ $(document).ready(function(){
         })
     });
     function wrap_activity_in_li(activity){
-       return activity = '<li>' + activity + '</li>';
+       return activity = '<li>' + activity[0] + '<span>' +  activity[1] + '</span>' +'</li>';
 
     }
 

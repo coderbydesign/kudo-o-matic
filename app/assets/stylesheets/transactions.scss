@@ -9,7 +9,7 @@
     width: 150px;
     padding-bottom: 3px;
     border-bottom: 1px solid white;
-    color: #094377 ;
+
 
     &:focus {
       outline: none;
@@ -28,14 +28,14 @@
 }
 
 #transaction_amount {
-  width: 55px!important;
+  width: 350px;
 }
 
 #transaction_activity {
-  width: 218px !important;
+  width: 350px;
 }
 input#transaction_receiver {
-  width:200px !important;
+  width: 350px;
 }
 
 ::-webkit-input-placeholder {
