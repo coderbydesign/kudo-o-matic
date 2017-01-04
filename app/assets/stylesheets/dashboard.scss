@@ -23,6 +23,31 @@ li {
   list-style-type: none;
 }
 
+span.glyphicon-down {
+  flex: 0;
+  position: absolute;
+  bottom: 1em;
+  display:none;
+}
+
+#sign_in_container {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  width: 300px;
+  height: 200px;
+  padding-top: 40px;
+  margin: auto;
+  margin-top: 5%;
+}
+#sign_in_container h1{
+  font-size:3em;
+}
+
+#sign_in_container a{
+  color:#7dabde;
+  font-size:1.5em;
+}
+
 .glyphicon {
   font-size: 13px;
 }
@@ -171,11 +196,11 @@ span.guidelines_dynamic{
 
 }
 .sendername{
-  color:rgb(9, 67, 119);
+  color:#c7af61;
 }
 
 .receivername{
-  color: rgb(9, 67, 119);
+  color:#c7af61;
 }
 
 .amountofkudos{
@@ -532,6 +557,15 @@ a.reference {
 /* RESPONSIVE ---------------------------------------------------------------------------------------------*/
 /*All MOBILE DEVICES*/
 @media only screen and (min-device-width: 20em) and (max-device-width: 30em) {
+  span.glyphicon-down {
+    flex: 0;
+    position: absolute;
+    bottom: 1em;
+    display: inherit !important;
+    margin: auto;
+    width: 100%;
+  }
+
   h1, .h1 {
     font-size: 2.3em !important;
   }
@@ -542,10 +576,10 @@ a.reference {
   }
   header strong {
 
-  font-size: 2.1em!important;
-}
+    font-size: 2.1em !important;
+  }
   .loader {
-    top: 10%!important;
+    top: 10% !important;
   }
 
   .guidelines_container {
@@ -554,7 +588,7 @@ a.reference {
   .topinnerwrapper {
     display: flex;
     flex-direction: column;
-    height: 190vh!important;
+    height: 190vh !important;
 
   }
 
@@ -569,34 +603,32 @@ a.reference {
     justify-content: center;
   }
 
-
-
-  .jarwrapper{
+  .jarwrapper {
     height: 90vh;
-    flex:1!important;
+    flex: 1 !important;
   }
 
   .container.center {
     flex: 1 !important
   }
 
-  .container.center{
-    font-size:1em !important;
+  .container.center {
+    font-size: 1em !important;
   }
 
   #transaction_amount {
-    width: 200px!important;
+    width: 200px !important;
   }
 
   #transaction_activity {
     width: 200px !important;
   }
   input#transaction_receiver {
-    width:200px !important;
+    width: 200px !important;
   }
 
-  .col-md-7{
-    width: 300px!important;
+  .col-md-7 {
+    width: 300px !important;
   }
   .post-container {
 
@@ -606,21 +638,19 @@ a.reference {
     font-size: 0.7em !important;
   }
 
-  #orientation_message_overlay{
-    height:100%;
+  #orientation_message_overlay {
+    height: 100%;
     width: 100%;
-    position:absolute;
-    z-index:999;
-    background-color:red;
-}
+    position: absolute;
+    z-index: 999;
+    background-color: red;
+  }
   #orientation_message_overlay p {
-    color:white;
-    margin:auto;
-    text-align:center;
+    color: white;
+    margin: auto;
+    text-align: center;
     font-size: 1em;
   }
-
-
 
 }
 
@@ -693,6 +723,7 @@ and (min-device-width: 1100px)
 and (max-device-width: 1600px)
 and (-webkit-min-device-pixel-ratio: 2)
 and (min-resolution: 192dpi) {
+
   h1 {
     font-size: 30px !important;
   }
@@ -746,4 +777,158 @@ and (min-resolution: 192dpi) {
   input#transaction_receiver {
     width:153px !important;
   }
+}
+/*Tablets Portrait*/
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait) {
+  span.glyphicon-down {
+    flex: 0;
+    position: absolute;
+    bottom: 1em;
+    display:inherit !important;
+    margin: auto;
+    width: 100%;
+  }
+
+  .loader {
+    top: 10% !important;
+  }
+
+  .guidelines_container {
+    height: 150px;
+  }
+  .topinnerwrapper {
+    display: flex;
+    flex-direction: column;
+    height: 90vh !important;
+
+  }
+
+  span.post-time-stamp {
+    display: block;
+  }
+  .activityname {
+    display: block !important;
+  }
+  .topinnerwrapper > * {
+    flex: 0 !important;
+    justify-content: center;
+  }
+
+  span.guidelines_static {
+    width: 350px;
+  }
+  .col-md-7 {
+    width: 350px !important;
+  }
+
+  .jarwrapper {
+    height: 90vh;
+    flex: 1 !important;
+  }
+
+  .container.center {
+    flex: 1 !important
+  }
+
+  .container.center {
+    font-size: 1em !important;
+    flex: 1 !important;
+    display: flex;
+
+  }
+
+  #transaction_amount {
+    width: 200px !important;
+  }
+
+  #transaction_activity {
+    width: 200px !important;
+  }
+  input#transaction_receiver {
+    width: 200px !important;
+  }
+  .new_transaction input[type=submit] {
+    display: block;
+  }
+}
+  /*Tablets Landscape*/
+  @media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px)
+  and (orientation : landscape) {
+    span.glyphicon-down {
+      flex: 0;
+      position: absolute;
+      bottom: 1em;
+      display:inherit !important;
+      margin: auto;
+      width: 100%;
+    }
+
+    .loader {
+      top: 2%!important;
+    }
+
+    .guidelines_container {
+      height: 150px;
+    }
+    .topinnerwrapper {
+      display: flex;
+      flex-direction: column;
+      height: 90vh!important;
+
+    }
+
+    span.post-time-stamp {
+      display: block;
+    }
+    .activityname {
+      display: block !important;
+    }
+    .topinnerwrapper > * {
+      flex: 0 !important;
+      justify-content: center;
+    }
+
+    span.guidelines_static {
+      width: 350px;
+    }
+    .col-md-7 {
+      width: 350px !important;
+    }
+
+    .jarwrapper{
+      height: 90vh;
+      flex:1!important;
+    }
+
+    .container.center {
+      flex: 1 !important
+    }
+
+    .container.center{
+      font-size:1em !important;
+      flex: 0.7!important;
+      display: flex;
+
+
+    }
+
+    #transaction_amount {
+      width: 200px!important;
+    }
+
+    #transaction_activity {
+      width: 200px !important;
+    }
+    input#transaction_receiver {
+      width:200px !important;
+    }
+    .new_transaction input[type=submit] {
+      display: block;
+    }
+
 }
