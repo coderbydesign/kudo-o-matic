@@ -8,8 +8,9 @@ class DashboardController < ApplicationController
 
     @balance  = Balance.current.decorate
 
-    @transactions = Transaction.all.reverse
+    @transactions = Transaction.order('created_at desc').paginate(page: params[:page], per_page: 20)
     @transaction = Transaction.new
+
 
   end
 end
