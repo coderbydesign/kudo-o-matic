@@ -5,8 +5,6 @@
     %span> -
     Jar
 
-#myNav.overlay
-  %a.closebtn{:href => "javascript:void(0)", :onclick => "closeNav()"} ×
 .topouterwrapper
   .topinnerwrapper
     .flex_dummy_div
@@ -63,8 +61,6 @@
           .span
           = f.input_field :activity, as: :autocomplete, source_query: autocomplete_activity_name_activities_url, field_id: false, placeholder: 'For',required: true
 
-          %br
-
           = f.submit t('dashboard.submit_kudos')
       .col-md-7
         %span.guidelines_dynamic
@@ -79,6 +75,8 @@
         Check out the
         = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference'
     .flex_dummy_div
+    %span.glyphicon-down
+      .glyphicon.glyphicon-chevron-down{"aria-hidden" => "true"}
 
 .bottomouterwrapper
   .bottominnerwrapper

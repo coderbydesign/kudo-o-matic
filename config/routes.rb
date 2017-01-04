@@ -43,6 +43,10 @@ Rails.application.routes.draw do
     get :pollvote
     post 'poll-like/:id', to: "goal#pollvote", as: :polllike
   end
+
+
+#  get '/minigames/kudoclicker#kudoclicker' => 'minigames/kudoclicker#kudoclicker'
+
   root 'dashboard#index'
 end
 
