@@ -22,6 +22,7 @@ header {
 li {
   list-style-type: none;
 }
+
 .glyphicon {
   font-size: 13px;
 }
@@ -584,14 +585,14 @@ a.reference {
   }
 
   #transaction_amount {
-    width: 45px!important;
+    width: 200px!important;
   }
 
   #transaction_activity {
-    width: 170px !important;
+    width: 200px !important;
   }
   input#transaction_receiver {
-    width:153px !important;
+    width:200px !important;
   }
 
   .col-md-7{
@@ -618,6 +619,8 @@ a.reference {
     text-align:center;
     font-size: 1em;
   }
+
+
 
 }
 
