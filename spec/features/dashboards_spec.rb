@@ -26,7 +26,7 @@ RSpec.feature "Dashboard", type: :feature do
     visit '/'
 
     within('.last-transactions') do
-      expect(page).to have_content("42 ₭ Harry to William : writing a blog post")
+      expect(page).to have_content("42 ₭ Harry William writing a blog post")
     end
 
     within('.next-goal') do
