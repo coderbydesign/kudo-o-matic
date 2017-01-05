@@ -86,8 +86,8 @@
       - @transactions.each do |transaction|
         .post-container
           .avatar
-            = image_tag User.find(transaction.sender_id).avatar_url
-            = image_tag User.find(transaction.receiver_id).avatar_url
+            = image_tag User.find(transaction.sender_id).picture_url
+            = image_tag User.find(transaction.receiver_id).picture_url
           .s_and_r_container
             .amountofkudos
             = transaction.amount
