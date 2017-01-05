@@ -85,27 +85,26 @@
     .last-transactions
       - @transactions.each do |transaction|
         .post-container
-          .amountofkudos
+          .avatar
+            = image_tag User.find(transaction.sender_id).avatar_url
+            = image_tag User.find(transaction.receiver_id).avatar_url
+          .s_and_r_container
+            .amountofkudos
             = transaction.amount
-          -#
-          %span
-            ₭
-          .sendername
-            = transaction.sender.name
-          %span
-
-            %span.glyphicon.glyphicon-menu-right{"aria-hidden" => "true"}
-          .receivername
-            = transaction.receiver.name
-          %span.post-time-stamp
-            = distance_of_time_in_words(DateTime.now, transaction.created_at)
-            ago
-          .activityname
-          %span
-            = transaction.activity.name
-
-
-
+            %span
+              ₭
+            .sendername
+              = transaction.sender.name
+            %span
+              %span.glyphicon.glyphicon-menu-right{"aria-hidden" => "true"}
+            .receivername
+              = transaction.receiver.name
+            %span.post-time-stamp
+              = distance_of_time_in_words(DateTime.now, transaction.created_at)
+              ago
+            .activityname
+              %span
+                = transaction.activity.name
           -#.like-btn
             = link_to like_path(transaction), class: "like", method: :post do
               %button.btn.btn-info{"aria-label" => "Left Align", :type => "button"}

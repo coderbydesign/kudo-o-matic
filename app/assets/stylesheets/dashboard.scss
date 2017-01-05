@@ -23,6 +23,9 @@ li {
   list-style-type: none;
 }
 
+img{
+  width:40px;
+}
 span.glyphicon-down {
   flex: 0;
   position: absolute;
@@ -188,6 +191,12 @@ span.guidelines_dynamic{
 
 }
 .post-container > div {
+  display:inline-block;
+  vertical-align: top;
+
+}
+
+.s_and_r_container > div {
   display: inline-block;
 
 }
@@ -207,13 +216,22 @@ span.guidelines_dynamic{
 
 }
 
-.activityname{
-  display:block!important;
+.activityname {
+  display: block !important;
 }
 
 .post-time-stamp{
   font-size:16px;
 }
+
+.avatar img:nth-child(1) {
+  margin-right: -4px;
+}
+
+.avatar {
+  border: solid 1px #c7af61;
+}
+
 .like-btn{
   float:right;
   position: relative;
@@ -593,7 +611,7 @@ a.reference {
   }
 
   span.post-time-stamp {
-    display: block;
+
   }
   .activityname {
     display: block !important;
@@ -705,14 +723,14 @@ and (max-device-width: 1600px)
 
 
   #transaction_amount {
-    width: 45px!important;
+    width: 200px !important;
   }
 
   #transaction_activity {
-    width: 170px !important;
+    width: 200px !important;
   }
   input#transaction_receiver {
-    width:153px !important;
+    width: 200px !important;
   }
 
 }
@@ -768,14 +786,14 @@ and (min-resolution: 192dpi) {
 
 
   #transaction_amount {
-    width: 45px!important;
+    width: 200px !important;
   }
 
   #transaction_activity {
-    width: 170px !important;
+    width: 200px !important;
   }
   input#transaction_receiver {
-    width:153px !important;
+    width: 200px !important;
   }
 }
 /*Tablets Portrait*/
@@ -807,7 +825,7 @@ and (orientation : portrait) {
   }
 
   span.post-time-stamp {
-    display: block;
+
   }
   .activityname {
     display: block !important;
@@ -883,7 +901,7 @@ and (orientation : portrait) {
     }
 
     span.post-time-stamp {
-      display: block;
+
     }
     .activityname {
       display: block !important;
