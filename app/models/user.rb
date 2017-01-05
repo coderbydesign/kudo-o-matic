@@ -28,4 +28,8 @@ acts_as_voter
     name
   end
 
+  def picture_url
+    avatar_url || '/assets/no-picture-icon'
+  end
+
 end
