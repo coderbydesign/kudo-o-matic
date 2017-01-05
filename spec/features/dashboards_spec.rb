@@ -5,8 +5,8 @@ RSpec.feature "Dashboard", type: :feature do
   let!(:next_goal) { create :goal, name: "Paintball", amount: 1500 }
 
   let(:balance) { create :balance, :current, amount: 1000 }
-  let(:sender) { create :sender, name: "Harry" }
-  let(:receiver) { create :sender, name: "William" }
+  let(:sender) { create :sender, name: "Harry", avatar_url: "http://someimage" }
+  let(:receiver) { create :sender, name: "William", avatar_url: "http://someimage"}
   let(:activity) { create :activity, name: "writing a blog post" }
 
   let!(:transaction) {
