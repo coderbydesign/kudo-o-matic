@@ -29,7 +29,7 @@ acts_as_voter
   end
 
   def picture_url
-    avatar_url || '/assets/no-picture-icon'
+    avatar_url || '/no-picture-icon.png'
   end
 
 end
