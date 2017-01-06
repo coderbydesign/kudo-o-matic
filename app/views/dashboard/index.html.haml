@@ -110,7 +110,7 @@
               %button.btn.btn-info{"aria-label" => "Left Align", :type => "button"}
                 %span.glyphicon.glyphicon-thumbs-up.glyphicon-aligncenter{"aria-hidden" => "true"}
                 %span.badge{"aria-hidden" => "true"}= transaction.get_upvotes.size
-      = will_paginate @transactions
+      = paginate @transactions
     .flex_dummy_div
 -#orientation_message_overlay
   %p
