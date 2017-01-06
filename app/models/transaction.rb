@@ -45,4 +45,16 @@ class Transaction < ActiveRecord::Base
     gl
   end
 
+  def receiver_name
+    receiver.nil? ? activity.name.split('for:')[0] : receiver.name
+  end
+
+  def activity_name
+    receiver.nil? ? activity.name.split('for:')[1] : activity.name
+  end
+
+  def receiver_image
+    receiver_id.nil? ? '/kabisa_lizard.png' : receiver.picture_url
+  end
+
 end

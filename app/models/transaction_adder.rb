@@ -1,7 +1,9 @@
 class TransactionAdder
   def self.create(params, current_user)
-    receiver = User.find_or_create_by(name: params[:receiver])
-    activity = Activity.find_or_create_by(name: params[:activity].to_s.downcase)
+    receiver = User.where(name: params[:receiver]).first
+    name  = params[:activity].to_s.downcase
+    name = "#{params[:receiver]} for: #{name}" if receiver.nil?
+    activity = Activity.find_or_create_by(name: name)
 
     transaction = Transaction.new(
         sender: current_user,

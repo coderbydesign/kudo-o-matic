@@ -87,7 +87,7 @@
         .post-container
           .avatar
             = image_tag User.find(transaction.sender_id).picture_url
-            = image_tag User.find(transaction.receiver_id).picture_url
+            = image_tag transaction.receiver_image
           .s_and_r_container
             .amountofkudos
             = transaction.amount
@@ -98,13 +98,13 @@
             %span
               %span.glyphicon.glyphicon-menu-right{"aria-hidden" => "true"}
             .receivername
-              = transaction.receiver.name
+              = transaction.receiver_name
             %span.post-time-stamp
               = distance_of_time_in_words(DateTime.now, transaction.created_at)
               ago
             .activityname
               %span
-                = transaction.activity.name
+                = transaction.activity_name
           -#.like-btn
             = link_to like_path(transaction), class: "like", method: :post do
               %button.btn.btn-info{"aria-label" => "Left Align", :type => "button"}
