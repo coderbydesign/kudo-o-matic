@@ -14,7 +14,7 @@ class TransactionAdder
       )
 
     Transaction.transaction do
-      transaction.save!
+      transaction.save
       Balance.current.add(params[:amount])
       GoalReacher.check!
     end

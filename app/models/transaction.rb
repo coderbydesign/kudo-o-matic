@@ -1,6 +1,7 @@
 class Transaction < ActiveRecord::Base
-  validates :amount, numericality: { greater_than_or_equal_to: 1 }
-  validates :amount, numericality: { less_than_or_equal_to: 999 }
+  validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 999, message: 'is not correct. You cannot give negative ₭udos, or exceed over 1000' }
+  validates :receiver, :activity,  presence: true
+
   acts_as_votable
   belongs_to :balance
   belongs_to :activity

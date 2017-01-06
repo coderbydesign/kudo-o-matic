@@ -6,6 +6,7 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = TransactionAdder.create(params[:transaction], current_user)
+    flash[:error] = @transaction.errors.full_messages.to_sentence
     redirect_to root_path
   end
 
