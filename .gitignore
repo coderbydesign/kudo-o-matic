@@ -13,8 +13,10 @@
 *.log
 /tmp
 .byebug_history
+.idea
 
 # Configuration
 config/database.yml
 
 *.swp
+.env

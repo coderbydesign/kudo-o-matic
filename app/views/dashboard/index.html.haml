@@ -1,46 +1,120 @@
-
-
 %header
   = image_tag 'kabisa_white.svg'
   %strong
-    Kud
+    ₭udo
     %span> -
-    O
-    %span> -
-    Meter
+    Jar
 
-.add-transaction-link
-  = link_to new_transaction_path do
-    = fa_icon "plus", text: "Give kudos!"
+.topouterwrapper
+  .topinnerwrapper
+    .flex_dummy_div
+    .jarwrapper
+      .loader{data: {balance_percentage: @balance.percentage, balance_coins: @balance.amount }}
+        #lid
+          = link_to new_transaction_path do
+            %p
+              OPEN TO ADD KUDOS
+        #toppart
+        #glass{:valuemax => "#{@next.amount}", :valuemin => "#{@previous.amount}", :valuenow => "#{@balance.amount}"}
+          .title
+            = @next.name
+          .next-goal
+            .balance.small-title
+              = @next.kudos
+              \-
+          #textonjar
+          #cubes
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+            %div
+          #drink
+            %span#counter
+        #coaster
+    .container.center
+      .col-md-5
+        %h1
+          = t('dashboard.title')
 
-.last-transactions
-  .small-title Last transaction
-  .transaction= @last_transaction
+        = simple_form_for @transaction do |f|
+          .span
+            = f.input_field :receiver,  as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false,  placeholder: 'To',required: true , :autofocus => true
+          .span
+            = f.input_field :amount, placeholder: 'Amount',required: true
+          .span
+          = f.input_field :activity, as: :autocomplete, source_query: autocomplete_activity_name_activities_url, field_id: false, placeholder: 'For',required: true
 
+          = f.submit t('dashboard.submit_kudos')
+          %span#errors
+            = flash[:error]
+      .col-md-7
+        %span.guidelines_dynamic
+          These are the
+          = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference', target: "_blank"
+          that are around
+          %span#amount_of_kudo_clone
+          Kudos
+        .guidelines_container
+          %ul
+      %span.guidelines_static
+        Check out the
+        = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference', target: "_blank"
+    .flex_dummy_div
+    %span.glyphicon-down
+      .glyphicon.glyphicon-chevron-down{"aria-hidden" => "true"}
 
-.current-goal
-  .previous-goal
-    .title= @previous.name
-    .balance.small-title= @previous.kudos
-
-  .next-goal
-    .title= @next.name
-    .balance.small-title= @next.kudos
-
-  .progress
-    .progress-bar.progress-bar-kudos{ role: 'progressbar', style: "width: #{@balance.percentage}%",
-      aria: { valuenow: @balance.amount, valuemin: @previous.amount, valuemax: @next.amount } }
-      %span.sr-only= @balance.kudos
-
-  .progress-label
-    .balance.small-title= @balance.kudos
-
-:javascript
-    var schedule = later.parse.text('every 10 sec');
-    var timer = later.setInterval(refreshDashboard, schedule);
-
-    function refreshDashboard() {
-        console.log('Triggering page refresh');
-        location.reload();
-    }
-
+.bottomouterwrapper
+  .bottominnerwrapper
+    .flex_dummy_div
+    .small-title
+    .last-transactions
+      - @transactions.each do |transaction|
+        .post-container
+          .avatar
+            = image_tag User.find(transaction.sender_id).picture_url
+            = image_tag transaction.receiver_image
+          .s_and_r_container
+            .amountofkudos
+            = transaction.amount
+            %span
+              ₭
+            .sendername
+              = transaction.sender.name
+            %span
+              %span.glyphicon.glyphicon-menu-right{"aria-hidden" => "true"}
+            .receivername
+              = transaction.receiver_name
+            %span.post-time-stamp
+              = distance_of_time_in_words(DateTime.now, transaction.created_at)
+              ago
+            .activityname
+              %span
+                = transaction.activity_name
+          -#.like-btn
+            = link_to like_path(transaction), class: "like", method: :post do
+              %button.btn.btn-info{"aria-label" => "Left Align", :type => "button"}
+                %span.glyphicon.glyphicon-thumbs-up.glyphicon-aligncenter{"aria-hidden" => "true"}
+                %span.badge{"aria-hidden" => "true"}= transaction.get_upvotes.size
+      = paginate @transactions
+    .flex_dummy_div
+-#orientation_message_overlay
+  %p
+    This app works optimal in Portrait mode, please use Portrait mode :)
+    (Nobody uses landscape anymore anyway)

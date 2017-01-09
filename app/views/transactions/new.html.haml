@@ -1,29 +1,28 @@
 .container.center
-  .row
-    .col-md-12
-      %br
-      %br
-      %br
-      %h1 Give some kudos!
+  .col-md-5
+    %h1
+      = t('dashboard.title')
 
-      = simple_form_for @transaction do |f|
+    = simple_form_for @transaction do |f|
+      .span
+        = f.input_field :receiver,  as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false,  placeholder: 'To',required: true , :autofocus => true
+      .span
+        = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: 'Amount',required: true
+      .span
+      = f.input_field :activity, as: :autocomplete, source_query: autocomplete_activity_name_activities_url, field_id: false, placeholder: 'For',required: true
 
-        = f.input_field :sender, as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false, placeholder: 'your name', autofocus: true
-        gives &nbsp;
-        = f.input_field :receiver, as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false, placeholder: 'receiver'
+      = f.submit t('dashboard.submit_kudos')
 
-        = f.input_field :amount, placeholder: '#'
-        kudos
+  .col-md-7
+    %br
+      %p
+        These are the
+        = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference'
+        that are around
+        %span#amount_of_kudo_clone
+        Kudos
+      .guidelines_container
+        %ul
 
-        %br
 
-        for &nbsp;
-        = f.input_field :activity, as: :autocomplete, source_query: autocomplete_activity_name_activities_url, field_id: false, placeholder: 'activity'
 
-        %br
-
-        = f.submit 'Give kudos'
-  .row
-    .col-md-12
-      %br
-      = link_to 'Guidelines', :guidelines_transactions, class: 'reference'

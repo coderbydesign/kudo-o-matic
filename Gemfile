@@ -5,6 +5,8 @@ ruby '2.3.1'
 # Rails
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
+gem 'dotenv-rails', group: [:development, :test]
+
 # Database
 gem 'pg', '~> 0.18'
 
@@ -18,7 +20,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
-
+gem 'acts_as_votable', '~> 0.10.0'
+gem 'railties', '~> 5.0', '>= 5.0.0.1'
+gem 'chronic', '~> 0.10.2'
 
 gem 'draper', '= 3.0.0.pre1'
 gem "administrate", github: "pablo-co/administrate", branch: "rails5"
@@ -26,6 +30,11 @@ gem 'simple_form'
 gem 'bootstrap3_autocomplete_input'
 gem "font-awesome-rails"
 gem 'haml-rails'
+
+gem 'devise'
+gem "omniauth-google-oauth2"
+gem 'pry'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -36,6 +45,7 @@ group :development, :test do
   gem 'capybara'
 
   gem 'factory_girl_rails'
+  gem 'launchy'
 end
 
 group :development do

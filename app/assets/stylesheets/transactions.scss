@@ -6,35 +6,42 @@
   input[type=text], input[type=number] {
     border: none;
     background: none;
-    width: 200px;
+    width: 150px;
     padding-bottom: 3px;
+    border-bottom: 1px solid white;
+
 
     &:focus {
-      border-bottom: 3px solid lighten(#4073F3, 10%);
-      padding-bottom: 0;
       outline: none;
+      border-bottom: 1px solid white;
     }
   }
 
   input[type=submit] {
-    background: white;
-    color: #4073F3;
+    margin-top: 1em;
+    background: #b58342;
+    color: rgba(255,255,255,0.7);
     border: none;
-    font-weight: bold;
-    border-radius: 5px;
-    font-size: 0.7em;
+    border-radius: 10px;
+    font-size: 2em;
   }
 }
 
 #transaction_amount {
-  width: 60px;
+  width: 350px;
 }
+
 #transaction_activity {
-  width: 400px;
+  width: 350px;
+}
+input#transaction_receiver {
+  width: 350px;
 }
 
 ::-webkit-input-placeholder {
-   color: lighten(#4073F3, 10%);
+   color: #ddd;
+   font-size: smaller;
+   opacity: 0.5
 }
 
 :-moz-placeholder { /* Firefox 18- */

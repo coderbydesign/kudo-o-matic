@@ -12,6 +12,7 @@ class UserDashboard < Administrate::BaseDashboard
     received_transactions: Field::HasMany.with_options(class_name: "Transaction"),
     id: Field::Number,
     name: Field::String,
+    email: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }
@@ -44,6 +45,7 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
+    :email,
   ]
 
   # Overwrite this method to customize how users are displayed
