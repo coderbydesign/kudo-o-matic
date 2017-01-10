@@ -100,6 +100,11 @@ $(document).ready(function(){
     //         transition: "100ms -webkit-filter linear"
     //     });
     // }
+
+ $('.close-new-visitor-show').click(function(){
+        $('.new-visitor-show').fadeOut(500);
+    });
+
 });
 
 
