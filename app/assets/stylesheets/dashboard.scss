@@ -23,6 +23,40 @@ li {
   list-style-type: none;
 }
 
+.new-visitor-show p {
+  font-size: 1.6em;
+}
+.new-visitor-show a {
+  color: #ffffff;
+  text-decoration: underline;
+  font-size: 1.6em;
+}
+
+.new-visitor-show h1{
+    font-size: 4em;
+}
+.new-visitor-show-text-container {
+  width:50%;
+  margin: auto;
+  margin-top: 7em;
+  font-size: 1.5em;
+}
+
+.new-visitor-show-text-container li {
+  list-style-type:inherit;
+}
+
+.new-visitor-show-text span p {
+  font-size: 1em !important;
+}
+
+.new-visitor-show{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 999;
+  background-color: rgba(33, 44, 51, 0.9);
+}
 
 #errors{
   display: block;
@@ -453,9 +487,10 @@ span.guidelines_dynamic{
 
 #counter {
   position: relative;
-  top: -30px;
+  top: 45px;
   font-size: 2.2em;
-  color: rgba(255,255,255,1);
+  color: white;
+  left: 45px;
 }
 
 
@@ -581,6 +616,10 @@ a.reference {
 /* RESPONSIVE ---------------------------------------------------------------------------------------------*/
 /*All MOBILE DEVICES*/
 @media only screen and (min-device-width: 20em) and (max-device-width: 30em) {
+  .new-visitor-show-text-container {
+    font-size: 0.7em;
+  }
+
   span.glyphicon-down {
     flex: 0;
     position: absolute;
