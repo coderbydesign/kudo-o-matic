@@ -22,10 +22,12 @@
 %header
   = image_tag 'kabisa_white.svg'
   %strong
-    ₭udo
+    ₭udos
     %span> -
     Jar
-
+  %span#link_to_git
+    Please report bugs or issues
+    %a{:href  => "https://github.com/kabisa/kudo-o-matic/issues", target: '_blank' } here!
 .topouterwrapper
   .topinnerwrapper
     .flex_dummy_div
@@ -88,7 +90,7 @@
       .col-md-7
         %span.guidelines_dynamic
           These are the
-          = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference'
+          = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference', target: '_blank'
           that are around
           %span#amount_of_kudo_clone
           Kudos
@@ -96,7 +98,7 @@
           %ul
       %span.guidelines_static
         Check out the
-        = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference'
+        = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference', target: '_blank'
     .flex_dummy_div
     %span.glyphicon-down
       .glyphicon.glyphicon-chevron-down{"aria-hidden" => "true"}
