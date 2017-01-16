@@ -22,6 +22,15 @@ header {
 li {
   list-style-type: none;
 }
+#link_to_git{
+  position:absolute;
+  right:5%;
+
+}
+#link_to_git a{
+  color:blue;
+  text-decoration:underline;
+}
 
 .new-visitor-show p {
   font-size: 1.6em;
