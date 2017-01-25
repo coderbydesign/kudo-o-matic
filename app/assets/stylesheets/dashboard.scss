@@ -26,6 +26,7 @@ li {
   position:absolute;
   right:5%;
 
+
 }
 #link_to_git a{
   color:blue;
@@ -629,6 +630,15 @@ a.reference {
     font-size: 0.7em;
   }
 
+  #link_to_git{
+    top:6.5%;
+  }
+  .new-visitor-show-text-container {
+    width:90%;
+    margin: auto;
+    margin-top: 7em;
+    font-size: 1.5em;
+  }
   span.glyphicon-down {
     flex: 0;
     position: absolute;
@@ -863,7 +873,9 @@ and (orientation : portrait) {
     margin: auto;
     width: 100%;
   }
-
+  #link_to_git{
+    top:5%;
+  }
   .loader {
     top: 10% !important;
   }

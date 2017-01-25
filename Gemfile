@@ -27,6 +27,7 @@ gem 'chronic', '~> 0.10.2'
 gem 'draper', '= 3.0.0.pre1'
 gem "administrate", github: "pablo-co/administrate", branch: "rails5"
 gem 'simple_form'
+gem 'simple_form_autocomplete'
 gem 'bootstrap3_autocomplete_input'
 gem "font-awesome-rails"
 gem 'haml-rails'
@@ -34,6 +35,8 @@ gem 'haml-rails'
 gem 'devise'
 gem "omniauth-google-oauth2"
 gem 'pry'
+
+gem "autoprefixer-rails"
 
 
 group :development, :test do
