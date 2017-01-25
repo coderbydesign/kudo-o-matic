@@ -45,7 +45,12 @@ Rails.application.routes.draw do
   end
 
 
-#  get '/minigames/kudoclicker#kudoclicker' => 'minigames/kudoclicker#kudoclicker'
+#  get '/minigames/kudosclicker#kudosclicker' => 'minigames/kudosclicker#kudosclicker'
+
+ # get "/path/to/your/mission/page", to: "static_pages#mission", as: "kudosclicker"
+
+  get "minigames" => "minigames#index"
+  get "minigames/kudosclicker" => "kudosclicker#index"
 
   root 'dashboard#index'
 end
