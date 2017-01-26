@@ -4,7 +4,7 @@ class Goal < ActiveRecord::Base
   belongs_to :balance
 
   def self.previous
-    where.not(achieved_on: nil).order("amount DESC").first || Goal.new(name: "N/A", amount: 0)
+    where(balance: Balance.current).where.not(achieved_on: nil).order("amount DESC").first || Goal.new(name: "N/A", amount: 0)
   end
 
   def self.next
