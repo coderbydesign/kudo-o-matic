@@ -16,4 +16,8 @@
 //= require bootstrap3-autocomplete-input
 //= require jquery_ujs
 //= require later
+//= require kudosclicker
+//= require simple_form_autocomplete
 //= require_tree .
+
+
