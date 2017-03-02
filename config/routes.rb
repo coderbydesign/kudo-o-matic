@@ -51,6 +51,7 @@ Rails.application.routes.draw do
 
   get "minigames" => "minigames#index"
   get "minigames/kudosclicker" => "kudosclicker#index"
+  get "/feed", to: "feed#index"
 
   root 'dashboard#index'
 end
