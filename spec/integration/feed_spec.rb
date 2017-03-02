@@ -10,14 +10,13 @@ describe "/feed", type: :request do
 
   context "given many transactions" do
     before do
-      @transactions = create_list(:transaction, 26)
+      # create 26 transactions, each 1 minute apart, newest first
+      @transactions = 26.times.map{|i| create(:transaction, updated_at: Date.yesterday.to_time + i.minute)}.sort_by(&:updated_at).reverse
     end
 
     it "includes last 25 entries" do
       entries = parse_feed
-
-      expect(entries.size).to eq(25)
-      expect(entries.none?{|e| e.id.content.split("Transaction/")[1].to_i == @transactions.last.id}).to be true
+      expect(extract_ids(entries)).to eq(@transactions.first(25).map(&:id))
     end
 
     it "includes basic info in entries" do
@@ -27,6 +26,10 @@ describe "/feed", type: :request do
       expect(entry.title.content).to include("New transaction")
       expect(entry.summary.content).to eq("#{transaction.sender.name} awarded #{transaction.receiver_name} #{transaction.amount} ₭ for #{transaction.activity_name}")
     end
+  end
+
+  def extract_ids(entries)
+    entries.map {|e| e.id.content.split("Transaction/")[1].to_i }
   end
 
   def parse_feed
