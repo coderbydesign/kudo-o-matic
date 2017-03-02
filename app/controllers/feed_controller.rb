@@ -3,7 +3,7 @@ class FeedController < ApplicationController
 
   def index
     request.format = :atom
-    @transactions = Transaction.order(updated_at: :desc).first(25)
+    @transactions = Transaction.last(25)
 
     respond_to do |format|
       format.atom

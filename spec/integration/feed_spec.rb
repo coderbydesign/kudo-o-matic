@@ -10,13 +10,12 @@ describe "/feed", type: :request do
 
   context "given many transactions" do
     before do
-      # create 26 transactions, each 1 minute apart, newest first
-      @transactions = 26.times.map{|i| create(:transaction, updated_at: Date.yesterday.to_time + i.minute)}.sort_by(&:updated_at).reverse
+      @transactions = create_list(:transaction, 26, created_at: Date.yesterday.to_time)
     end
 
     it "includes last 25 entries" do
       entries = parse_feed
-      expect(extract_ids(entries)).to eq(@transactions.first(25).map(&:id))
+      expect(extract_ids(entries)).to eq(@transactions.last(25).map(&:id))
     end
 
     it "includes basic info in entries" do
@@ -25,6 +24,13 @@ describe "/feed", type: :request do
 
       expect(entry.title.content).to include("New transaction")
       expect(entry.summary.content).to eq("#{transaction.sender.name} awarded #{transaction.receiver_name} #{transaction.amount} ₭ for #{transaction.activity_name}")
+    end
+
+    it "overrides updated timestamps so updates dont (re)appear in the feed" do
+      @transactions.first.touch
+      entries = parse_feed
+
+      expect(entries.first.updated.content).to eq(@transactions.first.created_at)
     end
   end
 
