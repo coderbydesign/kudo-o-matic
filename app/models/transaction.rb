@@ -1,5 +1,4 @@
 require 'slack-notifier'
-require 'date'
 
 class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 999, message: 'is not correct. You cannot give negative ₭udos, or exceed over 1000' }
@@ -67,49 +66,42 @@ class Transaction < ActiveRecord::Base
     notifier = Slack::Notifier.new ENV['WEBHOOK_URL']
 
     notifier.ping(
-        channel: '#kudo',
-        attachments: [
+        :channel => '@egonm',
+        :attachments => [
             {
-                fallback: 'New transaction',
-                color: '#B58342',
-                pretext: '<!channel> A new kudo transaction has been made! <https://kudos.kabisa.io/|Click here> for more details',
-                fields: [
+                :fallback => 'New transaction',
+                :color => '#B58342',
+                :pretext => '<!channel> A new kudo transaction has been made! <https://kudos.kabisa.io/|Click here> for more details.',
+                :fields => [
                     {
-                        title: 'Kudos given by',
-                        value: self.sender.name,
-                        short: true
+                        :title => 'Kudos given by',
+                        :value => self.sender.name,
+                        :short => true
                     },
                     {
-                        title: 'Kudos given to',
-                        value: self.receiver_name,
-                        short: true
+                        :title => 'Kudos given to',
+                        :value => self.receiver_name,
+                        :short => true
                     },
                     {
-                        title: 'Kudos given for',
-                        value: self.activity.name.capitalize,
-                        short: true
+                        :title => 'Kudos given for',
+                        :value => self.activity.name.capitalize,
+                        :short => true
                     },
                     {
-                        title: 'Amount of Kudos',
-                        value: '₭ ' + self.amount.to_s,
-                        short: true
+                        :title => 'Amount of Kudos',
+                        :value => '₭ ' + self.amount.to_s,
+                        :short => true
                     }
                 ],
-                footer: 'Kabisa | ₭udos Platform | ' + self.created_at.to_s,
-                footer_icon: 'https://pbs.twimg.com/profile_images/2203769368/kabisa_lizard_400x400.png',
-
-
+                :footer => 'Kabisa | ₭udos Platform | ' + self.created_at.to_s,
+                :footer_icon => 'https://pbs.twimg.com/profile_images/2203769368/kabisa_lizard_400x400.png',
 
             }
         ]
 
     )
 
-  end
-
-  def dateTimeNow
-    d = Date.parse(Time.to_s)
-    (d >> 1).strftime('%d/%m/%Y %H:%M')
   end
 
 end
