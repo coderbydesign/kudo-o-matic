@@ -1,5 +1,5 @@
-# require 'rubygems'
 require 'slack-notifier'
+require 'date'
 
 class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 999, message: 'is not correct. You cannot give negative ₭udos, or exceed over 1000' }
@@ -64,13 +64,10 @@ class Transaction < ActiveRecord::Base
   end
 
   def send_slack_notification
-    # binding.pry
-
     notifier = Slack::Notifier.new ENV['WEBHOOK_URL']
 
-    puts "Hello World! #{activity.inspect}"
     notifier.ping(
-        channel: '#general',
+        channel: '#kudo',
         attachments: [
             {
                 fallback: 'New transaction',
@@ -89,7 +86,7 @@ class Transaction < ActiveRecord::Base
                     },
                     {
                         title: 'Kudos given for',
-                        value: self.activity.name,
+                        value: self.activity.name.capitalize,
                         short: true
                     },
                     {
@@ -98,9 +95,9 @@ class Transaction < ActiveRecord::Base
                         short: true
                     }
                 ],
-                footer: 'Kabisa | Kudos Platform',
-                footer_icon: 'https://photos-3.dropbox.com/t/2/AAD3sWb0ll55oVhXXfSbJ9SnyBxlQ_IjOyXfk9r6FaLhTQ/12/184449953/png/32x32/3/1487948400/0/2/Screenshot%202017-02-24%2011.39.01.png/EKWxh4wBGKSMBiAHKAc/DmTqNb9yqF7N7YMUBiSYhLHMpX24p5RmZeiuzRibDls?dl=0&size=1280x960&size_mode=3',
-                ts: '1358878755.000001',
+                footer: 'Kabisa | ₭udos Platform | ' + self.created_at.to_s,
+                footer_icon: 'https://pbs.twimg.com/profile_images/2203769368/kabisa_lizard_400x400.png',
+
 
 
             }
@@ -108,6 +105,11 @@ class Transaction < ActiveRecord::Base
 
     )
 
+  end
+
+  def dateTimeNow
+    d = Date.parse(Time.to_s)
+    (d >> 1).strftime('%d/%m/%Y %H:%M')
   end
 
 end

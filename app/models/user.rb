@@ -26,6 +26,7 @@ acts_as_voter
 
   def to_s
     name
+    slack_name
   end
 
   def picture_url
