@@ -66,7 +66,7 @@ class Transaction < ActiveRecord::Base
     notifier = Slack::Notifier.new ENV['WEBHOOK_URL']
 
     notifier.ping(
-        :channel => '@egonm',
+        :channel => '#kudo',
         :attachments => [
             {
                 :fallback => 'New transaction',
