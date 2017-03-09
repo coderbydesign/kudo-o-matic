@@ -1,16 +1,14 @@
-require 'slack-notifier'
-
 class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 999, message: 'is not correct. You cannot give negative ₭udos, or exceed over 1000' }
-  validates :activity,  presence: true
+  validates :activity, presence: true
 
   after_save :send_slack_notification
 
   acts_as_votable
   belongs_to :balance
   belongs_to :activity
-  belongs_to :sender,   class_name: "User"
-  belongs_to :receiver, class_name: "User"
+  belongs_to :sender,   class_name: 'User'
+  belongs_to :receiver, class_name: 'User'
 
   delegate :name, to: :sender,   prefix: true
   delegate :name, to: :receiver, prefix: true
@@ -45,7 +43,7 @@ class Transaction < ActiveRecord::Base
   def self.guidelines_between(from, to)
     gl = []
     GUIDELINES.each do |g|
-      gl.push g if g[1] >=from and g[1] <=to
+      gl.push g if g[1] >= from && g[1] <= to
     end
     gl
   end
@@ -63,45 +61,6 @@ class Transaction < ActiveRecord::Base
   end
 
   def send_slack_notification
-    notifier = Slack::Notifier.new ENV['WEBHOOK_URL']
-
-    notifier.ping(
-        :channel => '#kudo',
-        :attachments => [
-            {
-                :fallback => 'New transaction',
-                :color => '#B58342',
-                :pretext => '<!channel> A new kudo transaction has been made! <https://kudos.kabisa.io/|Click here> for more details.',
-                :fields => [
-                    {
-                        :title => 'Kudos given by',
-                        :value => self.sender.name,
-                        :short => true
-                    },
-                    {
-                        :title => 'Kudos given to',
-                        :value => self.receiver_name,
-                        :short => true
-                    },
-                    {
-                        :title => 'Kudos given for',
-                        :value => self.activity.name.capitalize,
-                        :short => true
-                    },
-                    {
-                        :title => 'Amount of Kudos',
-                        :value => '₭ ' + self.amount.to_s,
-                        :short => true
-                    }
-                ],
-                :footer => 'Kabisa | ₭udos Platform | ' + self.created_at.to_s,
-                :footer_icon => 'https://pbs.twimg.com/profile_images/2203769368/kabisa_lizard_400x400.png',
-
-            }
-        ]
-
-    )
-
+    SlackNotifications.send_kudo_transaction(self)
   end
-
 end

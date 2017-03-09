@@ -17,7 +17,6 @@ class Goal < ActiveRecord::Base
 
   def achieve!
     touch(:achieved_on)
-
   end
 
 end

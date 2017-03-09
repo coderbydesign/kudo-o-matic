@@ -7,7 +7,9 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
 gem 'dotenv-rails', group: [:development, :test]
 
-gem 'slack-notifier'
+gem 'slack-notifier', '~> 2.1.0'
+
+gem 'rubocop', '~> 0.47.1', require: false
 
 # Database
 gem 'pg', '~> 0.18'
