@@ -61,7 +61,6 @@ class Transaction < ActiveRecord::Base
   end
 
   def send_slack_notification
-    SlackNotifications.send_kudo_transaction_to_channel(self)
-    SlackNotifications.send_kudo_transaction_to_user(self)
+    SlackNotifications.new(self).notify_slack!
   end
 end

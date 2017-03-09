@@ -1,18 +1,30 @@
 require 'slack-notifier'
 
 class SlackNotifications
+   include Rails.application.routes.url_helpers
 
-  def self.send_kudo_transaction_to_channel(transaction)
-    return unless Rails.env == 'development'
+   attr_reader :transaction
+
+   def initialize(transaction)
+     @transaction = transaction
+   end
+
+   def notify_slack!
+     send_to_channel
+     send_to_user
+   end
+
+  def send_to_channel
+    return unless Rails.env == 'production'
     notifier = Slack::Notifier.new ENV.fetch('SLACK_WEBHOOK_URL')
 
     notifier.ping(
-        channel: '#testkudo',
+        channel: '#kudo',
         attachments: [
             {
                 fallback: 'New transaction',
                 color: '#B58342',
-                pretext: "<!channel> A new kudo transaction has been made! <#{ENV['ROOT_URL']}|Click here> for more details.",
+                pretext: "<!channel> A new kudo transaction has been made! <#{root_url}|Click here> for more details.",
                 fields: [
                     {
                         title: 'Kudos given by',
@@ -31,7 +43,7 @@ class SlackNotifications
                     },
                     {
                         title: 'Amount of Kudos',
-                        value: '₭ ' + transaction.amount.to_s,
+                        value: transaction.amount.to_s + ' ₭',
                         short: true
                     }
                 ],
@@ -42,7 +54,7 @@ class SlackNotifications
     )
   end
 
-  def self.send_kudo_transaction_to_user(transaction)
+  def send_to_user
     return unless Rails.env == 'development'
     notifier = Slack::Notifier.new ENV.fetch('SLACK_WEBHOOK_URL')
 
@@ -52,7 +64,8 @@ class SlackNotifications
             {
                 fallback: 'New transaction',
                 color: '#B58342',
-                pretext: "#{transaction.sender.name} (<@#{transaction.sender.slack_name}>) awarded you ₭ #{transaction.amount.to_s} for #{transaction.activity_name.capitalize}! <#{ENV['ROOT_URL']}|Click here> for more details.",
+                pretext: "Awesome! #{transaction.sender.name} (<@#{transaction.sender.slack_name}>) awarded you #{transaction.amount.to_s} ₭ for #{transaction.activity_name.capitalize}.",
+                text: "<#{root_url}|Click here> for more details.",
                 footer: 'Kabisa | ₭udos Platform | ' + transaction.created_at.to_s,
                 footer_icon: 'https://pbs.twimg.com/profile_images/2203769368/kabisa_lizard_400x400.png'
             }
