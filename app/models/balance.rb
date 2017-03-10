@@ -1,5 +1,4 @@
 class Balance < ActiveRecord::Base
-
   has_many :transactions
 
   def self.current
@@ -14,5 +13,4 @@ class Balance < ActiveRecord::Base
   def last_transaction
     transactions.order("created_at DESC").first
   end
-
 end

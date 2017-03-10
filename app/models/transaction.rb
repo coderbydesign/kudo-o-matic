@@ -1,8 +1,9 @@
 class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 999, message: 'is not correct. You cannot give negative ₭udos, or exceed over 1000' }
-  validates :activity, presence: true
 
   after_save :send_slack_notification
+  after_destroy :subtract_from_balance
+
 
   acts_as_votable
   belongs_to :balance
@@ -62,5 +63,9 @@ class Transaction < ActiveRecord::Base
 
   def send_slack_notification
     SlackNotifications.new(self).notify_slack!
+  end
+
+  def subtract_from_balance
+    balance.update_attribute :amount, (balance.amount - amount)
   end
 end

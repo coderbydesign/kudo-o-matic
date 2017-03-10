@@ -55,7 +55,7 @@ class SlackNotifications
   end
 
   def send_to_user
-    return unless Rails.env == 'development'
+    return unless Rails.env == 'production'
     notifier = Slack::Notifier.new ENV.fetch('SLACK_WEBHOOK_URL')
 
     notifier.ping(
