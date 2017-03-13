@@ -47,8 +47,8 @@ class SlackNotifications
                         short: true
                     }
                 ],
-                footer: 'Kabisa | ₭udos Platform | ' + transaction.created_at.to_s,
-                footer_icon: 'https://pbs.twimg.com/profile_images/2203769368/kabisa_lizard_400x400.png'
+                footer: "#{Settings.company.footer_name} | #{Settings.project.footer_name} | #{transaction.created_at}",
+                footer_icon: Settings.company.footer_icon
             }
         ]
     )
@@ -66,8 +66,8 @@ class SlackNotifications
                 color: '#B58342',
                 pretext: "Awesome! #{transaction.sender.name} (<@#{transaction.sender.slack_name}>) awarded you #{transaction.amount.to_s} ₭ for #{transaction.activity_name.capitalize}.",
                 text: "<#{root_url}|Click here> for more details.",
-                footer: 'Kabisa | ₭udos Platform | ' + transaction.created_at.to_s,
-                footer_icon: 'https://pbs.twimg.com/profile_images/2203769368/kabisa_lizard_400x400.png'
+                footer: "#{Settings.company.footer_name} | #{Settings.project.footer_name} | #{transaction.created_at}",
+                footer_icon: Settings.company.footer_icon
             }
         ]
     )
