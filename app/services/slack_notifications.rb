@@ -55,7 +55,7 @@ class SlackNotifications
   end
 
   def send_to_user
-    return unless Rails.env == 'production'
+    return unless Rails.env == 'development'
     notifier = Slack::Notifier.new ENV.fetch('SLACK_WEBHOOK_URL')
 
     notifier.ping(
@@ -66,8 +66,8 @@ class SlackNotifications
                 color: '#B58342',
                 pretext: "Awesome! #{transaction.sender.name} (<@#{transaction.sender.slack_name}>) awarded you #{transaction.amount.to_s} ₭ for #{transaction.activity_name.capitalize}.",
                 text: "<#{root_url}|Click here> for more details.",
-                footer: "#{Settings.company.footer_name} | #{Settings.project.footer_name} | #{transaction.created_at}",
-                footer_icon: Settings.company.footer_icon
+                footer: "#{Settings.slack.company_name} | #{Settings.slack.company_project} | #{transaction.created_at}",
+                footer_icon: Settings.slack.company_icon
             }
         ]
     )
