@@ -15,11 +15,11 @@ class SlackNotifications
    end
 
   def send_to_channel
-    return unless Rails.env == 'production'
+    return unless Rails.env == 'development'
     notifier = Slack::Notifier.new ENV.fetch('SLACK_WEBHOOK_URL')
 
     notifier.ping(
-        channel: '#kudo',
+        channel: '#testkudo',
         attachments: [
             {
                 fallback: 'New transaction',
@@ -47,8 +47,8 @@ class SlackNotifications
                         short: true
                     }
                 ],
-                footer: "#{Settings.company.footer_name} | #{Settings.project.footer_name} | #{transaction.created_at}",
-                footer_icon: Settings.company.footer_icon
+                footer: "#{Settings.slack.company_name} | #{Settings.slack.company_project} | #{transaction.created_at}",
+                footer_icon: Settings.slack.company_icon
             }
         ]
     )
