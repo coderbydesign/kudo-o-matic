@@ -26,7 +26,7 @@ function startLoading(bp) {
     worker = setInterval(increment , 60);
 }
 function stopLoading(bp) {
-    console.log("stoploading")
+    console.log("stoploading");
     clearInterval(worker);
     setText(bp)
 }

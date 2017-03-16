@@ -46,16 +46,32 @@ class Transaction < ActiveRecord::Base
     gl
   end
 
-  def receiver_name
+  def receiver_name_feed
     receiver.nil? ? activity.name.split('for:')[0] : receiver.name
   end
 
-  def activity_name
+  def activity_name_feed
     receiver.nil? ? activity.name.split('for:')[1] : activity.name
   end
 
   def receiver_image
     receiver_id.nil? ? '/kabisa_lizard.png' : receiver.picture_url
+  end
+
+  def activity_name
+    activity.try(:name)
+  end
+
+  def activity_name=(name)
+    self.activity = Activity.find_or_create_by(name: name) if name.present?
+  end
+
+  def receiver_name
+    receiver.try(:name)
+  end
+
+  def receiver_name=(name)
+    self.receiver = User.find_by(name: name) if name.present?
   end
 
 end

@@ -23,7 +23,7 @@ describe "/feed", type: :request do
       transaction = @transactions.first
 
       expect(entry.title.content).to include("New transaction")
-      expect(entry.summary.content).to eq("#{transaction.sender.name} awarded #{transaction.receiver_name} #{transaction.amount} ₭ for #{transaction.activity_name}")
+      expect(entry.summary.content).to eq("#{transaction.sender.name} awarded #{transaction.receiver_name_feed} #{transaction.amount} ₭ for #{transaction.activity_name_feed}")
     end
 
     it "overrides updated timestamps so updates dont (re)appear in the feed" do
