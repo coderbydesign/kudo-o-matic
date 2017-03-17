@@ -55,7 +55,9 @@ class SlackNotifications
   end
 
   def receiver_slack_mention
-    if not (transaction.receiver_id.present? || transaction.receiver.slack_name.present?)
+    if not transaction.receiver_id.present?
+      ''
+    elsif not transaction.receiver.slack_name.present?
       ''
     else
       " (<@#{transaction.receiver.slack_name}>)"
