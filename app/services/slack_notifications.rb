@@ -11,7 +11,7 @@ class SlackNotifications
 
    def notify_slack!
      send_to_channel
-     send_to_user
+     # send_to_user
    end
 
   def send_to_channel
@@ -24,7 +24,7 @@ class SlackNotifications
             {
                 fallback: 'New transaction',
                 color: '#B58342',
-                pretext: "<!channel> A new kudo transaction has been made! <#{root_url}|Click here> for more details.",
+                pretext: "Awesome, a new kudo transaction! Only #{kudos_until_goal} ₭ left until the next goal has been reached! <#{root_url}|Click here> for more details.",
                 fields: [
                     {
                         title: 'Kudos given by',
@@ -33,7 +33,7 @@ class SlackNotifications
                     },
                     {
                         title: 'Kudos given to',
-                        value: transaction.receiver_name,
+                        value: transaction.receiver_name + receiver_slack_mention,
                         short: true
                     },
                     {
@@ -43,7 +43,7 @@ class SlackNotifications
                     },
                     {
                         title: 'Amount of Kudos',
-                        value: transaction.amount.to_s + ' ₭',
+                        value: ApplicationController.helpers.number_to_kudos(transaction.amount),
                         short: true
                     }
                 ],
@@ -54,22 +54,15 @@ class SlackNotifications
     )
   end
 
-  def send_to_user
-    return unless Rails.env == 'development'
-    notifier = Slack::Notifier.new ENV.fetch('SLACK_WEBHOOK_URL')
+  def receiver_slack_mention
+    if not (transaction.receiver_id.present? || transaction.receiver.slack_name.present?)
+      ''
+    else
+      " (<@#{transaction.receiver.slack_name}>)"
+    end
+  end
 
-    notifier.ping(
-        channel: '@' + transaction.receiver.slack_name,
-        attachments: [
-            {
-                fallback: 'New transaction',
-                color: '#B58342',
-                pretext: "Awesome! #{transaction.sender.name} (<@#{transaction.sender.slack_name}>) awarded you #{transaction.amount.to_s} ₭ for #{transaction.activity_name.capitalize}.",
-                text: "<#{root_url}|Click here> for more details.",
-                footer: "#{Settings.slack.company_name} | #{Settings.slack.company_project} | #{transaction.created_at}",
-                footer_icon: Settings.slack.company_icon
-            }
-        ]
-    )
+  def kudos_until_goal
+    Goal.next.amount - (Balance.current.amount + transaction.amount)
   end
 end
