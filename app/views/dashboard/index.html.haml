@@ -78,11 +78,11 @@
 
         = simple_form_for @transaction do |f|
           .span
-            = f.text_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false,  placeholder: 'To',required: true , :autofocus => true
+            = f.text_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false,  placeholder: 'To (max. 25 characters)',required: true , :autofocus => true, maxlength: '25'
           .span
             = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: 'Amount',required: true
           .span
-            = f.input_field :activity_name, data: { autocomplete_source: activities_autocomplete_path}, field_id: false,  placeholder: 'For',required: true
+            = f.input_field :activity_name, data: { autocomplete_source: activities_autocomplete_path}, field_id: false,  placeholder: 'For (min. 4, max. 60 characters',required: true, maxlength: '60'
 
           = f.submit t('dashboard.submit_kudos')
           %span#errors
