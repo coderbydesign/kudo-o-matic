@@ -123,13 +123,13 @@
             %span
               %span.glyphicon.glyphicon-menu-right{"aria-hidden" => "true"}
             .receivername
-              = transaction.receiver_name
+              = transaction.receiver_name_feed
             %span.post-time-stamp
               = distance_of_time_in_words(DateTime.now, transaction.created_at)
               ago
             .activityname
               %span
-                = transaction.activity_name
+                = transaction.activity_name_feed
           -#.like-btn
             = link_to like_path(transaction), class: "like", method: :post do
               %button.btn.btn-info{"aria-label" => "Left Align", :type => "button"}
