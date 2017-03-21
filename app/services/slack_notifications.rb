@@ -11,15 +11,14 @@ class SlackNotifications
 
    def notify_slack!
      send_to_channel
-     # send_to_user
    end
 
   def send_to_channel
-    return unless Rails.env == 'development'
+    return unless Rails.env == 'production'
     notifier = Slack::Notifier.new ENV.fetch('SLACK_WEBHOOK_URL')
 
     notifier.ping(
-        channel: '#testkudo',
+        channel: Settings.slack.channel_name,
         attachments: [
             {
                 fallback: 'New transaction',
