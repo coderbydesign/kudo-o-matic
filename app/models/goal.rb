@@ -8,7 +8,7 @@ class Goal < ActiveRecord::Base
   end
 
   def self.next
-    where(achieved_on: nil).order("amount ASC").first || Goal.new(name: "N/A", amount: 0)
+    where(achieved_on: nil).order("amount ASC").first || Goal.create(name: 'TBD', amount: Goal.previous.amount + 1000, balance: Balance.current, achieved_on: nil)
   end
 
   def achieved?
