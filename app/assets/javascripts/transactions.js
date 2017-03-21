@@ -4,7 +4,6 @@ jQuery(function() {
         autoFocus: true,
         maxShowItems: 5
     });
-    
 });
 
 jQuery(function() {
