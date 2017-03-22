@@ -62,7 +62,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def send_slack_notification
-    SlackNotifications.new(self).notify_slack!
+    SlackNotifications.new(self).send_new_transaction
   end
 
   def subtract_from_balance

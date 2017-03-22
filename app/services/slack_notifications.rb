@@ -9,11 +9,7 @@ class SlackNotifications
      @transaction = transaction
    end
 
-   def notify_slack!
-     send_to_channel
-   end
-
-  def send_to_channel
+  def send_new_transaction
     return unless Rails.env == 'production'
     notifier = Slack::Notifier.new ENV.fetch('SLACK_WEBHOOK_URL')
 
@@ -23,7 +19,7 @@ class SlackNotifications
             {
                 fallback: 'New transaction',
                 color: '#B58342',
-                pretext: "Awesome, a new kudo transaction! Only #{kudos_until_goal} ₭ left until the next goal has been reached! <#{root_url}|Click here> for more details.",
+                pretext: "Awesome, a new kudo transaction! #{kudos_until_goal}<#{root_url}|Click here> for more details.",
                 fields: [
                     {
                         title: 'Kudos given by',
@@ -46,11 +42,28 @@ class SlackNotifications
                         short: true
                     }
                 ],
-                footer: "#{Settings.slack.company_name} | #{Settings.slack.company_project} | #{transaction.created_at}",
+                footer: "#{Settings.slack.company_name} | #{Settings.slack.company_project} | Created at: #{transaction.created_at}",
                 footer_icon: Settings.slack.company_icon
             }
         ]
     )
+  end
+
+  def send_goal_achieved
+   return unless Rails.env == 'production'
+   notifier = Slack::Notifier.new ENV.fetch('SLACK_WEBHOOK_URL')
+   notifier.ping(
+       channel: Settings.slack.channel_name,
+       attachments: [
+           {
+               fallback: 'New goal achieved!',
+               color: '#B58342',
+               pretext: "<!channel> Yess!! You and your colleagues just achieved a new goal so don't forget to pick a date!\nThe achieved goal is: #{Goal.previous.name}! <#{root_url}|Click here> for more details.",
+               footer: "#{Settings.slack.company_name} | #{Settings.slack.company_project} | Achieved on: #{Goal.previous.achieved_on}",
+               footer_icon: Settings.slack.company_icon
+           }
+       ]
+   )
   end
 
   def receiver_slack_mention
@@ -64,6 +77,11 @@ class SlackNotifications
   end
 
   def kudos_until_goal
-    Goal.next.amount - (Balance.current.amount + transaction.amount)
+    kudos_left = Goal.next.amount - (Balance.current.amount + transaction.amount)
+    if kudos_left > 0
+      "Only #{kudos_left} ₭ left until the next goal has been reached! "
+    else
+      ''
+    end
   end
 end
