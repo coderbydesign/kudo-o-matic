@@ -1,7 +1,8 @@
 class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 999, message: 'is not correct. You cannot give negative ₭udos, or exceed over 1000' }
 
-  after_save :send_slack_notification
+
+  after_commit :send_slack_notification, unless: :skip_callbacks
   after_destroy :subtract_from_balance
 
 
@@ -50,11 +51,11 @@ class Transaction < ActiveRecord::Base
   end
 
   def receiver_name
-    receiver.nil? ? activity.name.split('for:')[0] : receiver.name
+    receiver.nil? ? activity.name.split('for:')[0].strip : receiver.name
   end
 
   def activity_name
-    receiver.nil? ? activity.name.split('for:')[1] : activity.name
+    receiver.nil? ? activity.name.split('for:')[1].strip : activity.name
   end
 
   def receiver_image
