@@ -3,15 +3,16 @@ require 'slack-notifier'
 class SlackNotifications
    include Rails.application.routes.url_helpers
 
-   attr_reader :transaction
+   attr_reader :transaction, :enabled
 
-   def initialize(transaction)
+   def initialize(transaction, enabled: !Rails.env.test?)
      @transaction = transaction
+     @enabled = enabled
    end
 
   def send_new_transaction
     slack_webhook_url = ENV['SLACK_WEBHOOK_URL']
-    return if slack_webhook_url.nil?
+    return if slack_webhook_url.nil? || !enabled
     notifier = Slack::Notifier.new slack_webhook_url
 
     notifier.ping(
@@ -52,7 +53,7 @@ class SlackNotifications
 
   def send_goal_achieved
     slack_webhook_url = ENV['SLACK_WEBHOOK_URL']
-    return if slack_webhook_url.nil?
+    return if slack_webhook_url.nil? || !enabled
     notifier = Slack::Notifier.new slack_webhook_url
 
    notifier.ping(
