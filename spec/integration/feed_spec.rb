@@ -10,7 +10,8 @@ describe "/feed", type: :request do
 
   context "given many transactions" do
     before do
-      @transactions = create_list(:transaction, 26, created_at: Date.yesterday.to_time)
+      balance = create :balance, :current, amount: 1000
+      @transactions = create_list(:transaction, 26, balance: balance, created_at: Date.yesterday.to_time)
     end
 
     it "includes last 25 entries" do

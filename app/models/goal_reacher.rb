@@ -1,5 +1,7 @@
 class GoalReacher
   def self.check!
-    Goal.next.achieve! if Balance.current.amount >= Goal.next.amount
+    if Balance.current.amount >= Goal.next.amount
+      Goal.next.achieve! && SlackNotifications.new(self).send_goal_achieved
+    end
   end
 end

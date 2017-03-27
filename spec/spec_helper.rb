@@ -96,4 +96,14 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  config.formatter = :documentation
+
+  config.before(:all, callbacks: true) do
+    ActiveRecord::Base.skip_callbacks = false
+  end
+
+  config.after(:all, callbacks: true) do
+    ActiveRecord::Base.skip_callbacks = true
+  end
 end
