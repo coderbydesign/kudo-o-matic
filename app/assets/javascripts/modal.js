@@ -5,8 +5,6 @@ $(document).ready(function() {
         if(!currCookie || currCookie != currentRelease) {
             $("#myModal").modal('show');
             Cookies.set('modalShown', currentRelease);
-        } else {
-            alert('You already saw the modal')
         }
     }, 1000);
 });
