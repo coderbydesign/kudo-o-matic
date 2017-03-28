@@ -9,6 +9,12 @@ gem 'dotenv-rails', group: [:development, :test]
 
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 
+gem 'slack-notifier', '~> 2.1.0'
+
+gem 'settingslogic', '~> 2.0', '>= 2.0.9'
+
+gem 'rubocop', '~> 0.47.1', require: false
+
 # Database
 gem 'pg', '~> 0.18'
 

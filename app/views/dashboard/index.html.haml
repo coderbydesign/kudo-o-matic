@@ -129,7 +129,8 @@
               ago
             .activityname
               %span
-                = transaction.activity_name_feed
+                = transaction.activity_name_feed.capitalize
+
           -#.like-btn
             = link_to like_path(transaction), class: "like", method: :post do
               %button.btn.btn-info{"aria-label" => "Left Align", :type => "button"}
