@@ -1,31 +1,32 @@
-- if @first_visit
-  .modal.fade#myModal{tabindex:'-1', role:'dialog', 'aria-labelledby':'myModalLabel', 'data-target':'#myModal'}
-    .modal-dialog{role:'document'}
-      .modal-content
-        .modal-header
-          %h1.modal-title#myModalLabel
-            The ₭udo Jar
-        .modal-body
-          %h4
-            What's new?
-          %span
-            %ul
-              %li
-                Slack Notifications are send when someone gives kudo's and when a goal is achieved
-              %li
-                Autocomplete username is working also on Safari and Firefox
-              %li
-                Other minor bug fixes
-          %h4
-            How does it work
+%script{src:'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.js'}
+.modal.fade#myModal{tabindex:'-1', role:'dialog', 'aria-labelledby':'myModalLabel', 'data-target':'#myModal'}
+  .modal-dialog{role:'document'}
+    .modal-content
+      .modal-header
+        %h1.modal-title#myModalLabel
+          The ₭udo Jar
+      .modal-body
+        %p#version Version 0.0.0
+        %h4
+          What's new?
+        %span
           %ul
-            %li To give ₭udos all you have to do is fill in 3 fields: 'To', 'Amount' and 'For'.
-            %li Click the 'Give Kudos' button and that's it!
-            %li Check out the timeline for your kudo-transaction! And those of your colleagues
-            %li Need help with deciding how many ₭udos you want to give someone? Read the guidelines!
-        .modal-footer
-          %button.btn.btn-primary{type:'button', 'data-dismiss':'modal'}
-            Close
+            %li
+              Slack Notifications are send when someone gives kudo's and when a goal is achieved
+            %li
+              Autocomplete username is working also on Safari and Firefox
+            %li
+              Other minor bug fixes
+        %h4
+          How does it work
+        %ul
+          %li To give ₭udos all you have to do is fill in 3 fields: 'To', 'Amount' and 'For'.
+          %li Click the 'Give Kudos' button and that's it!
+          %li Check out the timeline for your kudo-transaction! And those of your colleagues
+          %li Need help with deciding how many ₭udos you want to give someone? Read the guidelines!
+      .modal-footer
+        %button.btn.btn-primary{type:'button', 'data-dismiss':'modal'}
+          Close
             
 %header
   = image_tag 'kabisa_white.svg'
