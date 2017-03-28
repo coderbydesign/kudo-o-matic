@@ -28,14 +28,18 @@ Rails.application.routes.draw do
 
   end
 
-  resources :users, only: [] do
-    get :autocomplete_user_name, on: :collection
-  end
+  # resources :users
+  # # , only: [] do
+  # #   get :autocomplete_user_name, on: :collection
+  # # end
 
-  resources :activities, only: [] do
-    get :autocomplete_activity_name, on: :collection
+  get :users, to: 'users#autocomplete_search', as: :users_autocomplete
 
-  end
+  # resources :activities, only: [] do
+  #   get :autocomplete_activity_name, on: :collection
+  # end
+
+  get :activities, to: 'activities#autocomplete_search', as: :activities_autocomplete
 
   post 'like/:id', to: "transactions#upvote", as: :like
 

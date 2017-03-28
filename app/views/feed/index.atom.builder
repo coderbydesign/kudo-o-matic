@@ -8,7 +8,7 @@ atom_feed do |feed|
   @transactions.each do |transaction|
     feed.entry(transaction, url: root_url, updated: transaction.created_at) do |entry|
       entry.title("New transaction on #{request.host}")
-      entry.summary("#{transaction.sender.name} awarded #{transaction.receiver_name} #{number_to_kudos(transaction.amount)} for #{transaction.activity_name}")
+      entry.summary("#{transaction.sender.name} awarded #{transaction.receiver_name_feed} #{number_to_kudos(transaction.amount)} for #{transaction.activity_name_feed}")
     end
   end
 end

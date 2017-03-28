@@ -18,7 +18,7 @@
           %p
             Need help with deciding how many ₭udos you want to give someone? Read the guidelines!
       %a.close-new-visitor-show{:href => "#"} Close
-
+git s
 %header
   = image_tag 'kabisa_white.svg'
   %strong
@@ -72,17 +72,17 @@
           %span#counter
         #coaster
     .container.center
-      .col-md-5
+      .col-md-5.new_transaction_container
         %h1
           = t('dashboard.title')
 
         = simple_form_for @transaction do |f|
           .span
-            = f.input_field :receiver,  as: :autocomplete, source_query: autocomplete_user_name_users_url, field_id: false,  placeholder: 'To',required: true , :autofocus => true
+            = f.text_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false,  placeholder: 'To (max. 35 characters)',required: true , :autofocus => true, maxlength: '35'
           .span
-            = f.input_field :amount, placeholder: 'Amount',required: true
+            = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: 'Amount',required: true
           .span
-          = f.input_field :activity, as: :autocomplete, source_query: autocomplete_activity_name_activities_url, field_id: false, placeholder: 'For',required: true
+            = f.input_field :activity_name, data: { autocomplete_source: activities_autocomplete_path}, field_id: false,  placeholder: 'For (min. 4, max. 60 characters',required: true, maxlength: '60'
 
           = f.submit t('dashboard.submit_kudos')
           %span#errors
@@ -123,13 +123,14 @@
             %span
               %span.glyphicon.glyphicon-menu-right{"aria-hidden" => "true"}
             .receivername
-              = transaction.receiver_name
+              = transaction.receiver_name_feed
             %span.post-time-stamp
               = distance_of_time_in_words(DateTime.now, transaction.created_at)
               ago
             .activityname
               %span
-                = transaction.activity_name.capitalize
+                = transaction.activity_name_feed.capitalize
+
           -#.like-btn
             = link_to like_path(transaction), class: "like", method: :post do
               %button.btn.btn-info{"aria-label" => "Left Align", :type => "button"}
