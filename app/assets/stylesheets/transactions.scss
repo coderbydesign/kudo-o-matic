@@ -2,11 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.new_transaction_container {
+  min-width: 320px;
+}
+
 .new_transaction {
   input[type=text], input[type=number] {
     border: none;
     background: none;
-    width: 150px;
+    width: 100%;
     padding-bottom: 3px;
     border-bottom: 1px solid white;
 
@@ -27,17 +31,6 @@
   }
 }
 
-#transaction_amount {
-  width: 350px;
-}
-
-#transaction_activity {
-  width: 350px;
-}
-input#transaction_receiver {
-  width: 350px;
-}
-
 ::-webkit-input-placeholder {
    color: #ddd;
    font-size: smaller;
@@ -52,8 +45,8 @@ input#transaction_receiver {
    color: lighten(#4073F3, 10%);
 }
 
-:-ms-input-placeholder {  
-   color: red;  
+:-ms-input-placeholder {
+   color: red;
 }
 
 .guidelines {

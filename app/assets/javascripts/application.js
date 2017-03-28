@@ -11,13 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui
 //= require bootstrap-sprockets
-//= require bootstrap3-typeahead
-//= require bootstrap3-autocomplete-input
 //= require jquery_ujs
 //= require later
 //= require kudosclicker
-//= require simple_form_autocomplete
 //= require_tree .
 
 
