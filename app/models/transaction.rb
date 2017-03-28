@@ -50,11 +50,11 @@ class Transaction < ActiveRecord::Base
   end
 
   def receiver_name_feed
-    receiver.nil? ? activity.name.split('for:')[0] : receiver.name
+    receiver.nil? ? activity.name.split('for:')[0].strip : receiver.name
   end
 
   def activity_name_feed
-    receiver.nil? ? activity.name.split('for:')[1] : activity.name
+    receiver.nil? ? activity.name.split('for:')[1].strip : activity.name
   end
 
   def receiver_image

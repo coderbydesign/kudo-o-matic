@@ -30,12 +30,12 @@ class SlackNotifications
                     },
                     {
                         title: 'Kudos given to',
-                        value: transaction.receiver_name + receiver_slack_mention,
+                        value: transaction.receiver_name_feed + receiver_slack_mention,
                         short: true
                     },
                     {
                         title: 'Kudos given for',
-                        value: transaction.activity_name.capitalize,
+                        value: transaction.activity_name_feed.capitalize,
                         short: true
                     },
                     {
