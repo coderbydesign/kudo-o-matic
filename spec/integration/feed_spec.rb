@@ -10,7 +10,8 @@ describe "/feed", type: :request do
 
   context "given many transactions" do
     before do
-      @transactions = create_list(:transaction, 26, created_at: Date.yesterday.to_time)
+      balance = create :balance, :current, amount: 1000
+      @transactions = create_list(:transaction, 26, balance: balance, created_at: Date.yesterday.to_time)
     end
 
     it "includes last 25 entries" do
@@ -23,7 +24,7 @@ describe "/feed", type: :request do
       transaction = @transactions.first
 
       expect(entry.title.content).to include("New transaction")
-      expect(entry.summary.content).to eq("#{transaction.sender.name} awarded #{transaction.receiver_name} #{transaction.amount} ₭ for #{transaction.activity_name}")
+      expect(entry.summary.content).to eq("#{transaction.sender.name} awarded #{transaction.receiver_name_feed} #{transaction.amount} ₭ for #{transaction.activity_name_feed}")
     end
 
     it "overrides updated timestamps so updates dont (re)appear in the feed" do

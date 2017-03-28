@@ -7,6 +7,14 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
 gem 'dotenv-rails', group: [:development, :test]
 
+gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+
+gem 'slack-notifier', '~> 2.1.0'
+
+gem 'settingslogic', '~> 2.0', '>= 2.0.9'
+
+gem 'rubocop', '~> 0.47.1', require: false
+
 # Database
 gem 'pg', '~> 0.18'
 
@@ -27,8 +35,6 @@ gem 'chronic', '~> 0.10.2'
 gem 'draper', '= 3.0.0.pre1'
 gem "administrate", github: "pablo-co/administrate", branch: "rails5"
 gem 'simple_form'
-gem 'simple_form_autocomplete'
-gem 'bootstrap3_autocomplete_input'
 gem "font-awesome-rails"
 gem 'haml-rails'
 

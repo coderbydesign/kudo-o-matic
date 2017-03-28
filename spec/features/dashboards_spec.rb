@@ -26,7 +26,7 @@ RSpec.feature "Dashboard", type: :feature do
     visit '/'
 
     within('.last-transactions') do
-      expect(page).to have_content("42 ₭ Harry William less than a minute ago writing a blog post")
+      expect(page).to have_content("42 ₭ Harry William less than a minute ago Writing a blog post")
     end
 
     within('.next-goal') do
@@ -44,13 +44,13 @@ RSpec.feature "Dashboard", type: :feature do
     it('displays the group but does not create an new user') do
       @users_before = User.count
       visit '/'
-      fill_in 'transaction_receiver', with: 'My awsome colleagues'
-      fill_in 'transaction_activity', with: 'Helping me solve this puzzle'
+      fill_in 'transaction_receiver_name', with: 'My awsome colleagues'
+      fill_in 'transaction_activity_name', with: 'Helping me solve this puzzle'
       fill_in 'transaction_amount', with: '20'
       click_button 'Give ₭udos'
       expect(User.count).to eq(@users_before)
       expect(page).to have_css('.receivername', text: 'My awsome colleagues')
-      expect(page).to have_css('.activityname', text: 'helping me solve this puzzle')
+      expect(page).to have_css('.activityname', text: 'Helping me solve this puzzle')
     end
   end
 end

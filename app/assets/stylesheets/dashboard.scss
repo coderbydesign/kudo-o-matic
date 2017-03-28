@@ -25,9 +25,21 @@ header {
 #link_to_git{
   position:absolute;
   right:5%;
-
-
 }
+
+#button_logout {
+  background-color: #C7AD65;
+  position: absolute;
+  left:5%;
+  border-radius: 10%;
+}
+
+#link_button_text {
+  text-decoration: none;
+  font-size: 150%;
+  color: #F2F2F2;
+}
+
 #link_to_git a{
   color:blue;
   text-decoration:underline;
@@ -45,6 +57,7 @@ header {
 .new-visitor-show h1{
     font-size: 4em;
 }
+
 .new-visitor-show-text-container {
   width:50%;
   margin: auto;
@@ -62,8 +75,8 @@ header {
 
 .new-visitor-show{
   width: 100vw;
-  height: 100vh;
-  position: fixed;
+  height: 170vh;
+  position: absolute;
   z-index: 999;
   background-color: rgba(33, 44, 51, 0.9);
 }
@@ -698,17 +711,6 @@ a.reference {
     font-size: 1em !important;
   }
 
-  #transaction_amount {
-    width: 200px !important;
-  }
-
-  #transaction_activity {
-    width: 200px !important;
-  }
-  input#transaction_receiver {
-    width: 200px !important;
-  }
-
   .col-md-7 {
     width: 300px !important;
   }
@@ -785,18 +787,6 @@ and (max-device-width: 1600px)
     font-size: 1.3em;
   }
 
-
-  #transaction_amount {
-    width: 200px !important;
-  }
-
-  #transaction_activity {
-    width: 200px !important;
-  }
-  input#transaction_receiver {
-    width: 200px !important;
-  }
-
 }
 
 /*Retina Screens*/
@@ -848,17 +838,6 @@ and (min-resolution: 192dpi) {
     font-size: 1.3em;
   }
 
-
-  #transaction_amount {
-    width: 200px !important;
-  }
-
-  #transaction_activity {
-    width: 200px !important;
-  }
-  input#transaction_receiver {
-    width: 200px !important;
-  }
 }
 /*Tablets Portrait*/
 @media only screen

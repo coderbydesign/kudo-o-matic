@@ -12,6 +12,7 @@ class UserDashboard < Administrate::BaseDashboard
     received_transactions: Field::HasMany.with_options(class_name: "Transaction"),
     id: Field::Number,
     name: Field::String,
+    slack_name: Field::String,
     email: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -25,6 +26,7 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
+    :slack_name,
     :sent_transactions,
     :received_transactions,
   ]
@@ -34,6 +36,7 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :name,
+    :slack_name,
     :created_at,
     :updated_at,
     :sent_transactions,
@@ -46,6 +49,7 @@ class UserDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :name,
     :email,
+    :slack_name
   ]
 
   # Overwrite this method to customize how users are displayed
