@@ -18,7 +18,7 @@
           %p
             Need help with deciding how many ₭udos you want to give someone? Read the guidelines!
       %a.close-new-visitor-show{:href => "#"} Close
-
+git s
 %header
   = image_tag 'kabisa_white.svg'
   %strong
@@ -78,7 +78,7 @@
 
         = simple_form_for @transaction do |f|
           .span
-            = f.text_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false,  placeholder: 'To (max. 25 characters)',required: true , :autofocus => true, maxlength: '25'
+            = f.text_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false,  placeholder: 'To (max. 35 characters)',required: true , :autofocus => true, maxlength: '35'
           .span
             = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: 'Amount',required: true
           .span
