@@ -6,7 +6,7 @@
         %h1.modal-title#myModalLabel
           The ₭udo Jar
       .modal-body
-        %p Version 0.0.0
+        %p Version 1.1.0
         %h4
           What's new?
         %span
@@ -14,16 +14,18 @@
             %li
               Slack Notifications are send when someone gives kudo's and when a goal is achieved
             %li
-              Autocomplete username is working also on Safari and Firefox
+              Autocomplete receiver name is fixed on Safari and Firefox
+            %li
+              Guidelines are now better arranged in a modal
             %li
               Other minor bug fixes
         %h4
-          How does it work
+          How does it work?
         %ul
           %li To give ₭udos all you have to do is fill in 3 fields: 'To', 'Amount' and 'For'.
           %li Click the 'Give Kudos' button and that's it!
           %li Check out the timeline for your kudo-transaction! And those of your colleagues
-          %li Need help with deciding how many ₭udos you want to give someone? Read the guidelines!!
+          %li Need help with deciding how many ₭udos you want to give someone? Read the guidelines!
       .modal-footer
         %button.btn.btn-primary{type:'button', 'data-dismiss':'modal'}
           Close
@@ -122,14 +124,16 @@
       .col-md-7
         %span.guidelines_dynamic
           These are the
-          = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference', target: "_blank"
+          %span{'data-toggle':'modal', 'data-target':'#guidelineModal', style:'text-decoration:underline;cursor:pointer'}
+            Guidelines
           that are around
           %span#amount_of_kudo_clone
           ₭udos
         .guidelines_container
           %ul
       %span.guidelines_static{'data-toggle':'modal', 'data-target':'#guidelineModal'}
-        Check out the Guidelines
+        Check out the
+        %span{style:'text-decoration:underline;cursor:pointer'}Guidelines
     .flex_dummy_div
     %span.glyphicon-down
       .glyphicon.glyphicon-chevron-down{"aria-hidden" => "true"}
