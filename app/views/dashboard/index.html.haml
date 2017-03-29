@@ -1,23 +1,58 @@
-- if @first_visit
-  .new-visitor-show
-    .new-visitor-show-text-container.col-md-6
-      %h1.new-visitor-show-title
-        The ₭udo Jar
-      .new-visitor-show-text
-        %p
+%script{src:'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.js'}
+.modal.fade#myModal{tabindex:'-1', role:'dialog', 'aria-labelledby':'myModalLabel', 'data-target':'#myModal'}
+  .modal-dialog{role:'document'}
+    .modal-content#version
+      .modal-header
+        %h1.modal-title#myModalLabel
+          The ₭udo Jar
+      .modal-body
+        %p Version 1.1.0
+        %h4
           What's new?
         %span
-          The ₭udo-o-Matic has been changed into The ₭udo Jar
-        %p
+          %ul
+            %li
+              Slack Notifications are send when someone gives kudo's and when a goal is achieved
+            %li
+              Autocomplete receiver name is fixed on Safari and Firefox
+            %li
+              Guidelines are now better arranged in a modal
+            %li
+              Other minor bug fixes
+        %h4
           How does it work?
-        %span
-          %p
-            To give ₭udos all you have to do is fill in to who you want to give ₭udos to, the amount and for what kind of activity you are giving ₭udos for. The last step is to immortalise the transaction by clicking on 'Give ₭udos'
-          %p
-            Check out the newsfeed for your story! And those of your collegues
-          %p
-            Need help with deciding how many ₭udos you want to give someone? Read the guidelines!
-      %a.close-new-visitor-show{:href => "#"} Close
+        %ul
+          %li To give ₭udos all you have to do is fill in 3 fields: 'To', 'Amount' and 'For'.
+          %li Click the 'Give Kudos' button and that's it!
+          %li Check out the timeline for your kudo-transaction! And those of your colleagues
+          %li Need help with deciding how many ₭udos you want to give someone? Read the guidelines!
+      .modal-footer
+        %button.btn.btn-primary{type:'button', 'data-dismiss':'modal'}
+          Close
+
+.modal.fade#guidelineModal{tabindex:'-1', role:'dialog', 'aria-labelledby':'guidelineModalLabel', 'aria-hidden':'true'}
+  .modal-dialog{role:'document'}
+    .modal-content
+      .modal-header
+        %h1.modal-title#guidelineModalLabel
+          Guidelines
+      .modal-body
+        %table.guidelines
+          %colgroup
+            %col{span:'2'}
+              %tr.guidelines-header
+                %td
+                  Category
+                %td
+                  Suggested amount
+              - Transaction::GUIDELINES.each do |name, value|
+                %tr
+                  %td= name
+                  %td= value
+      .modal-footer
+        %button.btn.btn-primary{type:'button', 'data-dismiss':'modal'}
+          Close
+
 %header
   = image_tag 'kabisa_white.svg'
   %strong
@@ -89,15 +124,16 @@
       .col-md-7
         %span.guidelines_dynamic
           These are the
-          = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference', target: "_blank"
+          %span{'data-toggle':'modal', 'data-target':'#guidelineModal', style:'text-decoration:underline;cursor:pointer'}
+            Guidelines
           that are around
           %span#amount_of_kudo_clone
           ₭udos
         .guidelines_container
           %ul
-      %span.guidelines_static
+      %span.guidelines_static{'data-toggle':'modal', 'data-target':'#guidelineModal'}
         Check out the
-        = link_to t('dashboard.guidelines'), :guidelines_transactions, class: 'reference', target: "_blank"
+        %span{style:'text-decoration:underline;cursor:pointer'}Guidelines
     .flex_dummy_div
     %span.glyphicon-down
       .glyphicon.glyphicon-chevron-down{"aria-hidden" => "true"}
