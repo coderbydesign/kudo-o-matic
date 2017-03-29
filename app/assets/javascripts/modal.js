@@ -1,10 +1,10 @@
 $(document).ready(function() {
     var currentRelease = document.getElementById("version").innerHTML;
-    var currCookie = Cookies.get('modalShown');
+    var currCookie = localStorage.getItem('modalShown');
     setTimeout(function () {
         if(!currCookie || currCookie != currentRelease) {
             $("#myModal").modal('show');
-            Cookies.set('modalShown', currentRelease);
+            localStorage.setItem('modalShown', currentRelease);
         }
     }, 1000);
 });
