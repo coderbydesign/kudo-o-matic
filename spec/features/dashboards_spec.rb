@@ -44,8 +44,8 @@ RSpec.feature "Dashboard", type: :feature do
     it('displays the group but does not create an new user') do
       @users_before = User.count
       visit '/'
-      fill_in 'transaction_receiver', with: 'My awsome colleagues'
-      fill_in 'transaction_activity', with: 'Helping me solve this puzzle'
+      fill_in 'transaction_receiver_name', with: 'My awsome colleagues'
+      fill_in 'transaction_activity_name', with: 'Helping me solve this puzzle'
       fill_in 'transaction_amount', with: '20'
       click_button 'Give ₭udos'
       expect(User.count).to eq(@users_before)

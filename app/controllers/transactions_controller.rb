@@ -5,16 +5,8 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    if params[:transaction][:activity].empty? && params[:transaction][:receiver].empty?
-      flash[:error] = "Activity and Receiver can't be empty, please retry"
-    elsif params[:transaction][:receiver].empty?
-      flash[:error] = "Receiver can't be empty, please retry"
-    elsif params[:transaction][:activity].empty?
-      flash[:error] = "Activity can't be empty, please retry"
-    else
-      @transaction = TransactionAdder.create(params[:transaction], current_user)
-      flash[:error] = @transaction.errors.full_messages.to_sentence
-    end
+    @transaction = TransactionAdder.create(params[:transaction], current_user)
+    flash[:error] = @transaction.errors.full_messages.to_sentence
     redirect_to root_path
   end
 

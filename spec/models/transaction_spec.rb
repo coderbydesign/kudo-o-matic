@@ -14,11 +14,11 @@ describe Transaction do
     let(:transaction) { Transaction.create activity: activity, amount: 5 }
 
     it 'extracts the receiver name from the activity', callbacks: false do
-      expect(transaction.receiver_name).to eq('Pascal')
+      expect(transaction.receiver_name_feed).to eq('Pascal')
     end
 
     it 'returns the activity name from the receiver', callbacks: false do
-      expect(transaction.activity_name).to eq('Helping with RSpec')
+      expect(transaction.activity_name_feed).to eq('Helping with RSpec')
     end
 
     it 'returns the standard no-receiver image', callbacks: false do
@@ -32,11 +32,11 @@ describe Transaction do
     let(:transaction) { Transaction.create receiver: user, activity: activity, amount: 5 }
 
     it 'returns the receiver name', callbacks: false do
-      expect(transaction.receiver_name).to eq(user.name)
+      expect(transaction.receiver_name_feed).to eq(user.name)
     end
 
     it 'returns the activity name', callbacks: false do
-      expect(transaction.activity_name).to eq(transaction.activity.name)
+      expect(transaction.activity_name_feed).to eq(transaction.activity.name)
     end
 
     it 'returns the receiver image', callbacks: false do

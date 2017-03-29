@@ -1,10 +1,9 @@
 class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 999, message: 'is not correct. You cannot give negative ₭udos, or exceed over 1000' }
-
-
+  validates :activity_name, presence: true, length: {minimum: 4}
+  
   after_commit :send_slack_notification, unless: :skip_callbacks
   after_destroy :subtract_from_balance
-
 
   acts_as_votable
   belongs_to :balance
@@ -50,16 +49,32 @@ class Transaction < ActiveRecord::Base
     gl
   end
 
-  def receiver_name
+  def receiver_name_feed
     receiver.nil? ? activity.name.split('for:')[0].strip : receiver.name
   end
 
-  def activity_name
+  def activity_name_feed
     receiver.nil? ? activity.name.split('for:')[1].strip : activity.name
   end
 
   def receiver_image
     receiver_id.nil? ? '/kabisa_lizard.png' : receiver.picture_url
+  end
+
+  def activity_name
+    activity.try(:name)
+  end
+
+  def activity_name=(name)
+    self.activity = Activity.find_or_create_by(name: name) if name.present?
+  end
+
+  def receiver_name
+    receiver.try(:name)
+  end
+
+  def receiver_name=(name)
+    self.receiver = User.find_by(name: name) if name.present?
   end
 
   def send_slack_notification
