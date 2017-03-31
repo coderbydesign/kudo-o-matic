@@ -22,7 +22,7 @@ RSpec.feature "Dashboard", type: :feature do
     click_link 'Sign in with Google Apps'
   end
 
-  it "shows relevant information" do
+  xit "shows relevant information" do
     visit '/'
 
     within('.last-transactions') do
@@ -41,7 +41,7 @@ RSpec.feature "Dashboard", type: :feature do
   end
 
   context 'non-personal-kudos' do
-    it('displays the group but does not create an new user') do
+    xit('displays the group but does not create an new user') do
       @users_before = User.count
       visit '/'
       fill_in 'transaction_receiver_name', with: 'My awsome colleagues'

@@ -15,7 +15,7 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require later
-//= require kudosclicker
+//= require transactions
 //= require_tree .
 
 

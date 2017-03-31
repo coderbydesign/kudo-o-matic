@@ -2,61 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.new_transaction_container {
-  min-width: 320px;
-}
-
-.new_transaction {
-  input[type=text], input[type=number] {
-    border: none;
-    background: none;
-    width: 100%;
-    padding-bottom: 3px;
-    border-bottom: 1px solid white;
-
-
-    &:focus {
-      outline: none;
-      border-bottom: 1px solid white;
-    }
-  }
-
-  input[type=submit] {
-    margin-top: 1em;
-    background: #b58342;
-    color: rgba(255,255,255,0.7);
-    border: none;
-    border-radius: 10px;
-    font-size: 2em;
-  }
-}
-
-::-webkit-input-placeholder {
-   color: #ddd;
-   font-size: smaller;
-   opacity: 0.5
-}
 
 :-moz-placeholder { /* Firefox 18- */
-   color: lighten(#4073F3, 10%);
+   color: lighten(black, 10%);
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: lighten(#4073F3, 10%);
+   color: lighten(black, 10%);
 }
 
 :-ms-input-placeholder {
    color: red;
-}
-
-.guidelines {
-  td {
-    padding: 4px 10px;
-  }
-}
-
-.guidelines-header {
-  td {
-    border-bottom: 1px solid white;
-  }
 }

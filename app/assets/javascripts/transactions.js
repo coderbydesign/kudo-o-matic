@@ -13,3 +13,13 @@ jQuery(function() {
         maxShowItems: 5
     });
 });
+
+function showDiv() {
+    $('#create-transaction-container').fadeIn(750)
+}
+
+$('text').keydown(function(e) {
+    if (e.keyCode == 13 && !e.shiftKey) {
+        e.preventDefault();
+    }
+});

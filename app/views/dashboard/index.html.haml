@@ -12,11 +12,11 @@
         %span
           %ul
             %li
-              Slack Notifications are send when someone gives kudo's and when a goal is achieved
+              Slack Notifications are send when someone gives kudo's and when a goal is achievedd
             %li
               Autocomplete receiver name is fixed on Safari and Firefox
             %li
-              Guidelines are now better arranged in a modal
+              Guidelines are now better arranged in a modall
             %li
               Other minor bug fixes
         %h4
@@ -53,127 +53,87 @@
         %button.btn.btn-primary{type:'button', 'data-dismiss':'modal'}
           Close
 
-%header
-  = image_tag 'kabisa_white.svg'
-  %strong
-    ₭udos
-    %span> -
-    Jar
-  %span#link_to_git
-    Please report bugs or issues
-    %a{:href  => "https://github.com/kabisa/kudo-o-matic/issues", target: '_blank' } here!
-.topouterwrapper
-  .topinnerwrapper
-    .flex_dummy_div
-    .jarwrapper
-      .loader{data: {balance_percentage: @balance.percentage, balance_coins: @balance.amount }}
-        #lid
-          = link_to new_transaction_path do
-            %p
-              OPEN TO ADD ₭UDOS
-        #toppart
-        #glass{:valuemax => "#{@next.amount}", :valuemin => "#{@previous.amount}", :valuenow => "#{@balance.amount}"}
-          .title
-            = @next.name
-          .next-goal
-            .balance.small-title
-              = @next.kudos
-              \-
-          #textonjar
-          #cubes
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-            %div
-          #drink
-          %span#counter
-        #coaster
-    .container.center
-      .col-md-5.new_transaction_container
-        %h1
-          = t('dashboard.title')
+-#%div
+-#  %h1{style:'margin:5px 10px'}
+-#    = t('dashboard.title')
+-#
+-#  = simple_form_for @transaction do |f|
+-#    .span{style:'margin:5px 10px'}
+-#      = f.text_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false,  placeholder: 'To (max. 35 characters)',required: true , :autofocus => true, maxlength: '35'
+-#    .span{style:'margin:5px 10px'}
+-#      = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: 'Amount',required: true
+-#    .span{style:'margin:5px 10px'}
+-#      = f.input_field :activity_name, data: { autocomplete_source: activities_autocomplete_path}, field_id: false,  placeholder: 'For (min. 4, max. 60 characters',required: true, maxlength: '60'
+-#    .span{style:'margin:5px 10px'}
+-#      = f.submit t('dashboard.submit_kudos')
+-#    %span#errors
+-#      = flash[:error]
+-#
+-#  .span{style:'margin:5px 10px'}
+-#    Total Kudo's:
+-#    = Balance.current.amount
+-#  .span{style:'margin:5px 10px'}
+-#    Next Goal:
+-#    = Goal.next.amount
 
-        = simple_form_for @transaction do |f|
-          .span
-            = f.text_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false,  placeholder: 'To (max. 35 characters)',required: true , :autofocus => true, maxlength: '35'
-          .span
-            = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: 'Amount',required: true
-          .span
-            = f.input_field :activity_name, data: { autocomplete_source: activities_autocomplete_path}, field_id: false,  placeholder: 'For (min. 4, max. 60 characters',required: true, maxlength: '60'
+%body
+  .page
+    .header
+      .container-logo
+        %img.logo{src: 'https://www.kabisa.nl/images/kabisa-logo-contact-658ee9c2.png'}
+    .body
+      .container-left
+        %div#new-transaction
+          %button.transaction-button{onclick:'showDiv()'}
+            New Transaction
+            %i.fa.fa-pencil-square.hvr-icon-fade
 
-          = f.submit t('dashboard.submit_kudos')
-          %span#errors
-            = flash[:error]
-      .col-md-7
-        %span.guidelines_dynamic
-          These are the
-          %span{'data-toggle':'modal', 'data-target':'#guidelineModal', style:'text-decoration:underline;cursor:pointer'}
-            Guidelines
-          that are around
-          %span#amount_of_kudo_clone
-          ₭udos
-        .guidelines_container
-          %ul
-      %span.guidelines_static{'data-toggle':'modal', 'data-target':'#guidelineModal'}
-        Check out the
-        %span{style:'text-decoration:underline;cursor:pointer'}Guidelines
-    .flex_dummy_div
-    %span.glyphicon-down
-      .glyphicon.glyphicon-chevron-down{"aria-hidden" => "true"}
-
-.bottomouterwrapper
-  .bottominnerwrapper
-    .flex_dummy_div
-    .small-title
-    .last-transactions
-      - @transactions.each do |transaction|
-        .post-container
-          .avatar
-            = image_tag User.find(transaction.sender_id).picture_url
-            = image_tag transaction.receiver_image
-          .s_and_r_container
-            .amountofkudos
-            = transaction.amount
-            %span
-              ₭
-            .sendername
-              = transaction.sender.name
-            %span
-              %span.glyphicon.glyphicon-menu-right{"aria-hidden" => "true"}
-            .receivername
-              = transaction.receiver_name_feed
-            %span.post-time-stamp
-              = distance_of_time_in_words(DateTime.now, transaction.created_at)
-              ago
-            .activityname
-              %span
-                = transaction.activity_name_feed.capitalize
-
-          -#.like-btn
-            = link_to like_path(transaction), class: "like", method: :post do
-              %button.btn.btn-info{"aria-label" => "Left Align", :type => "button"}
-                %span.glyphicon.glyphicon-thumbs-up.glyphicon-aligncenter{"aria-hidden" => "true"}
-                %span.badge{"aria-hidden" => "true"}= transaction.get_upvotes.size
-      = paginate @transactions
-    .flex_dummy_div
--#orientation_message_overlay
-  %p
-    This app works optimal in Portrait mode, please use Portrait mode :)
-    (Nobody uses landscape anymore anyway)
+      .container-center
+        %div#create-transaction-container
+          %div
+            %h1.transaction-container-title
+              Give ₭udo's!
+          = simple_form_for @transaction do |f|
+            .receiver
+              = f.text_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false,  placeholder: 'To (max. 35 characters)', required: true , maxlength: '35'
+            .amount
+              = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: 'Amount',required: true
+              %span.currency
+                ₭
+            .activity
+              = f.input_field :activity_name, as: :text, data: { autocomplete_source: activities_autocomplete_path}, field_id: false,  placeholder: 'For (min. 4, max. 70 characters)', required: true, maxlength: '70'
+            .span
+              = f.submit t('dashboard.submit_kudos'), class: 'fa fa-paper-plane', id: 'send-kudos-button'
+        .timeline-container
+          - @transactions.each do |transaction|
+            .transaction-container
+              .kudos-amount-large
+                %div#kudos-container
+                  = "+#{transaction.amount}"
+                  %span.currency
+                    ₭
+                .avatar-receiver
+                  %div
+                    = image_tag transaction.receiver_image, id:'avatar'
+              .transaction-content
+                .transaction
+                  %span.sender
+                    = "#{transaction.sender.name}:"
+                  %span.amount
+                    = "+#{transaction.amount} ₭"
+                  %span
+                    to
+                  %span.receiver
+                    = transaction.receiver_name_feed
+                  %span
+                    for
+                  %span.activity
+                    = transaction.activity_name_feed
+                  -#= "#{transaction.sender.name}: +#{transaction.amount} ₭ to #{transaction.receiver_name_feed} for #{transaction.activity_name_feed}"
+              %div
+                %button#like-button
+                  Like
+                %span.post-time-stamp
+                  = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
+          = paginate @transactions
+      .container-right
