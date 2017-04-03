@@ -1,0 +1,79 @@
+.transaction-button {
+  padding: $padding;
+  font-size: 120%;
+  text-align: center;
+  width: 100%;
+  border-radius: $border-radius-small;
+  color: $transaction-button-text;
+  background: linear-gradient($transaction-button-background);
+  border: none;
+  margin-bottom: $margin-bottom;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-property: color;
+  transition-property: color;
+}
+
+.transaction-button:hover {
+  color: $transaction-button-text-hover;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-property: color;
+  transition-property: color;
+}
+
+.fa-paper-plane {
+  color: rgba($white-color, 1.0);
+}
+
+.simple_form {
+  #send-kudos-button {
+    margin-top: $margin-top;
+    border-radius: $border-radius-small;
+    color: rgba($primary-button-text, 1.0);
+    background-color: rgba($primary-button-background,1.0);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-property: color;
+    transition-property: color;
+  }
+
+  #send-kudos-button:hover {
+    color: $primary-button-text-hover;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-property: color;
+    transition-property: color;
+  }
+}
+
+#like-button {
+  color: rgba($primary-button-text, 1.0);
+  margin-top: 5px;
+  border-radius: 4px;
+  background-color: rgba(234,234,234,1.0);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-property: color;
+  transition-property: color;
+}
+
+#like-button:hover {
+  color: $primary-button-text-hover;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-property: color;
+  transition-property: color;
+}

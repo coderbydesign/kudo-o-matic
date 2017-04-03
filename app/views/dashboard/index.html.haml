@@ -1,85 +1,62 @@
-%script{src:'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.js'}
-.modal.fade#myModal{tabindex:'-1', role:'dialog', 'aria-labelledby':'myModalLabel', 'data-target':'#myModal'}
-  .modal-dialog{role:'document'}
-    .modal-content#version
-      .modal-header
-        %h1.modal-title#myModalLabel
-          The ₭udo Jar
-      .modal-body
-        %p Version 1.1.0
-        %h4
-          What's new?
-        %span
-          %ul
-            %li
-              Slack Notifications are send when someone gives kudo's and when a goal is achievedd
-            %li
-              Autocomplete receiver name is fixed on Safari and Firefox
-            %li
-              Guidelines are now better arranged in a modall
-            %li
-              Other minor bug fixes
-        %h4
-          How does it work?
-        %ul
-          %li To give ₭udos all you have to do is fill in 3 fields: 'To', 'Amount' and 'For'.
-          %li Click the 'Give Kudos' button and that's it!
-          %li Check out the timeline for your kudo-transaction! And those of your colleagues
-          %li Need help with deciding how many ₭udos you want to give someone? Read the guidelines!
-      .modal-footer
-        %button.btn.btn-primary{type:'button', 'data-dismiss':'modal'}
-          Close
-
-.modal.fade#guidelineModal{tabindex:'-1', role:'dialog', 'aria-labelledby':'guidelineModalLabel', 'aria-hidden':'true'}
-  .modal-dialog{role:'document'}
-    .modal-content
-      .modal-header
-        %h1.modal-title#guidelineModalLabel
-          Guidelines
-      .modal-body
-        %table.guidelines
-          %colgroup
-            %col{span:'2'}
-              %tr.guidelines-header
-                %td
-                  Category
-                %td
-                  Suggested amount
-              - Transaction::GUIDELINES.each do |name, value|
-                %tr
-                  %td= name
-                  %td= value
-      .modal-footer
-        %button.btn.btn-primary{type:'button', 'data-dismiss':'modal'}
-          Close
-
--#%div
--#  %h1{style:'margin:5px 10px'}
--#    = t('dashboard.title')
+-#%script{src:'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.js'}
+-#.modal.fade#myModal{tabindex:'-1', role:'dialog', 'aria-labelledby':'myModalLabel', 'data-target':'#myModal'}
+-#  .modal-dialog{role:'document'}
+-#    .modal-content#version
+-#      .modal-header
+-#        %h1.modal-title#myModalLabel
+-#          The ₭udo Jar
+-#      .modal-body
+-#        %p Version 1.1.0
+-#        %h4
+-#          What's new?
+-#        %span
+-#          %ul
+-#            %li
+-#              Slack Notifications are send when someone gives kudo's and when a goal is achieved
+-#            %li
+-#              Autocomplete receiver name is fixed on Safari and Firefox
+-#            %li
+-#              Guidelines are now better arranged in a modall
+-#            %li
+-#              Other minor bug fixes
+-#        %h4
+-#          How does it work?
+-#        %ul
+-#          %li To give ₭udos all you have to do is fill in 3 fields: 'To', 'Amount' and 'For'.
+-#          %li Click the 'Give Kudos' button and that's it!
+-#          %li Check out the timeline for your kudo-transaction! And those of your colleagues
+-#          %li Need help with deciding how many ₭udos you want to give someone? Read the guidelines!
+-#      .modal-footer
+-#        %button.btn.btn-primary{type:'button', 'data-dismiss':'modal'}
+-#          Close
 -#
--#  = simple_form_for @transaction do |f|
--#    .span{style:'margin:5px 10px'}
--#      = f.text_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false,  placeholder: 'To (max. 35 characters)',required: true , :autofocus => true, maxlength: '35'
--#    .span{style:'margin:5px 10px'}
--#      = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: 'Amount',required: true
--#    .span{style:'margin:5px 10px'}
--#      = f.input_field :activity_name, data: { autocomplete_source: activities_autocomplete_path}, field_id: false,  placeholder: 'For (min. 4, max. 60 characters',required: true, maxlength: '60'
--#    .span{style:'margin:5px 10px'}
--#      = f.submit t('dashboard.submit_kudos')
--#    %span#errors
--#      = flash[:error]
--#
--#  .span{style:'margin:5px 10px'}
--#    Total Kudo's:
--#    = Balance.current.amount
--#  .span{style:'margin:5px 10px'}
--#    Next Goal:
--#    = Goal.next.amount
+-#.modal.fade#guidelineModal{tabindex:'-1', role:'dialog', 'aria-labelledby':'guidelineModalLabel', 'aria-hidden':'true'}
+-#  .modal-dialog{role:'document'}
+-#    .modal-content
+-#      .modal-header
+-#        %h1.modal-title#guidelineModalLabel
+-#          Guidelines
+-#      .modal-body
+-#        %table.guidelines
+-#          %colgroup
+-#            %col{span:'2'}
+-#              %tr.guidelines-header
+-#                %td
+-#                  Category
+-#                %td
+-#                  Suggested amount
+-#              - Transaction::GUIDELINES.each do |name, value|
+-#                %tr
+-#                  %td= name
+-#                  %td= value
+-#      .modal-footer
+-#        %button.btn.btn-primary{type:'button', 'data-dismiss':'modal'}
+-#          Close
 
 %body
   .page
     .header
-      .container-logo
+      .container-header
         %img.logo{src: 'https://www.kabisa.nl/images/kabisa-logo-contact-658ee9c2.png'}
     .body
       .container-left
@@ -87,49 +64,65 @@
           %button.transaction-button{onclick:'showDiv()'}
             New Transaction
             %i.fa.fa-pencil-square.hvr-icon-fade
-
+        .statistics
+          %h1
+            Transactions
+          .all
+            .value
+              = Transaction.all.count(:id)
+            .label
+              total
+          .month
+            .value
+              = Transaction.where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).count(:id)
+            .label
+              monthly
+          .weekly
+            .value
+              = Transaction.where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week())).count(:id)
+            .label
+              weekly
       .container-center
         %div#create-transaction-container
           %div
             %h1.transaction-container-title
               Give ₭udo's!
-          = simple_form_for @transaction do |f|
-            .receiver
-              = f.text_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false,  placeholder: 'To (max. 35 characters)', required: true , maxlength: '35'
-            .amount
-              = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: 'Amount',required: true
-              %span.currency
-                ₭
-            .activity
-              = f.input_field :activity_name, as: :text, data: { autocomplete_source: activities_autocomplete_path}, field_id: false,  placeholder: 'For (min. 4, max. 70 characters)', required: true, maxlength: '70'
-            .span
-              = f.submit t('dashboard.submit_kudos'), class: 'fa fa-paper-plane', id: 'send-kudos-button'
+            = simple_form_for @transaction do |f|
+              .receiver
+                = f.input_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false,  placeholder: 'Receiver', required: true , maxlength: '35'
+              .amount
+                = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: '₭',required: true
+                %span.currency
+                  ₭
+              .activity
+                = f.input_field :activity_name, as: :text, data: { autocomplete_source: activities_autocomplete_path}, field_id: false,  placeholder: "Write here the reason why you are giving ₭udo's", required: true, maxlength: '70'
+              .submit
+                = f.submit t('dashboard.submit_kudos'), class: 'fa fa-paper-plane', id: 'send-kudos-button'
         .timeline-container
           - @transactions.each do |transaction|
             .transaction-container
-              .kudos-amount-large
-                %div#kudos-container
+              .transaction-header-container
+                .transaction-kudos-container
                   = "+#{transaction.amount}"
                   %span.currency
                     ₭
-                .avatar-receiver
+                .transaction-avatar-container
                   %div
-                    = image_tag transaction.receiver_image, id:'avatar'
-              .transaction-content
-                .transaction
-                  %span.sender
+                    = image_tag transaction.receiver_image, class:'avatar'
+              .transaction-body-container
+                .transaction-content
+                  %span
                     = "#{transaction.sender.name}:"
-                  %span.amount
+                  %span.highlighted
                     = "+#{transaction.amount} ₭"
                   %span
                     to
-                  %span.receiver
+                  %span.highlighted
                     = transaction.receiver_name_feed
                   %span
                     for
-                  %span.activity
+                  %span.highlighted
                     = transaction.activity_name_feed
-                  -#= "#{transaction.sender.name}: +#{transaction.amount} ₭ to #{transaction.receiver_name_feed} for #{transaction.activity_name_feed}"
               %div
                 %button#like-button
                   Like
@@ -137,3 +130,7 @@
                   = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
           = paginate @transactions
       .container-right
+        .kudo-jar-container
+          .kudo-jar
+            .kudo-jar-amount
+

@@ -1,14 +1,104 @@
-$brand-black:                       #000000;
-$brand-dark-blue:                   #00264C;
-$brand-dark-grey:                   #666666;
-$brand-light-grey:                  #EAEAEA;
-$brand-white:                       #FFFFFF;
+///////////////////////////////////////////////////////////
+//
+// Base colors
+//
+///////////////////////////////////////////////////////////
+$black-color:                             #000000;
+$dark-blue-color:                         #00264C;
+$light-blue-color:                        #679EBF;
+$dark-grey-color:                         #666666;
+$light-grey-color:                        #EAEAEA;
+$white-color:                             #FFFFFF;
 
-$brand-dark-blue-rgb:              0,38,76;
-$brand-dark-grey-rgb:              102, 102, 102;
-$brand-light-grey-rgb:             234,234,234;
-$brand-white-rgb:                  255,255,255;
+///////////////////////////////////////////////////////////
+//
+// General colors
+//
+///////////////////////////////////////////////////////////
+$text-color: $white-color;
+$text-color-dark: $black-color;
+$text-color-header: $white-color;
+$text-color-highlight: $light-blue-color;
+$text-color-medium: $dark-grey-color;
 
-$background-header:                 linear-gradient($brand-black, $brand-dark-blue);
-//$background-transaction-button:     linear-gradient(rgba($brand-dark-blue-rgb,0.95),($brand-dark-blue,0.7));
+///////////////////////////////////////////////////////////
+//
+// Button colors
+//
+///////////////////////////////////////////////////////////
+$transaction-button-background: rgba($dark-blue-color, 0.95), rgba($dark-blue-color, 0.7);
+$transaction-button-text: $white-color;
+$transaction-button-text-hover: $text-color-highlight;
+
+$primary-button-background: rgba($light-grey-color, 1.0);
+$primary-button-text: rgba($dark-grey-color, 1.0);
+$primary-button-text-hover: $text-color-dark;
+
+///////////////////////////////////////////////////////////
+//
+// Header
+//
+///////////////////////////////////////////////////////////
+$header-text: $text-color;
+$header-background: $black-color, $dark-blue-color;
+
+///////////////////////////////////////////////////////////
+//
+// Statistics
+//
+///////////////////////////////////////////////////////////
+$statistics-background: rgba($dark-blue-color, 0.95), rgba($dark-blue-color, 0.7);
+$statistics-text-header: $text-color;
+$statistics-text-label: $text-color;
+$statistics-text-value: $text-color-highlight;
+
+///////////////////////////////////////////////////////////
+//
+// New Transaction
+//
+///////////////////////////////////////////////////////////
+$new-transaction-background: rgba($dark-blue-color, 0.95), rgba($dark-blue-color, 0.7);
+
+///////////////////////////////////////////////////////////
+//
+// Simple form
+//
+///////////////////////////////////////////////////////////
+$simple-form-label-text: $text-color;
+$simple-form-input-background: rgba($light-grey-color, 1.0);
+$simple-form-input-text: $text-color-dark;
+
+///////////////////////////////////////////////////////////
+//
+// Transaction
+//
+///////////////////////////////////////////////////////////
+$transaction-background: rgba($dark-blue-color, 0.7);
+$transaction-text: $white-color;
+$transaction-text-highlight: $text-color-highlight;
+
+$transaction-kudos-background: rgba($dark-blue-color, 0.7);
+$transaction-kudos-text: $white-color;
+
+$transaction-timestamp-text: $white-color;
+
+///////////////////////////////////////////////////////////
+//
+// Icons
+//
+///////////////////////////////////////////////////////////
+$icon-color: $white-color;
+
+
+
+
+
+
+
+
+
+
+
+
+
 

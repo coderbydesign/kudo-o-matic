@@ -1,0 +1,47 @@
+.simple_form {
+  label {
+    margin-right: $whitespace;
+    color: $simple-form-label-text;
+    font-size: 0.95rem;
+  }
+  input {
+    margin-right: $whitespace;
+    border: none;
+    border-radius: $border-radius-small;
+    background-color: $simple-form-input-background;
+    color: $simple-form-input-text;
+    font-size: 0.95rem;
+  }
+  textarea {
+    border: none;
+    border-radius: $border-radius-small;
+    background-color: $simple-form-input-background;
+    color: $simple-form-input-text;
+    font-size: 0.95rem;
+    width: 100%;
+    resize: none;
+  }
+  .receiver {
+    label {
+      float: left;
+    }
+    input {
+      float: left;
+      width: 50%;
+    }
+  }
+  .amount {
+    label {
+      float: left;
+    }
+    input {
+      float: left;
+      width: 15%;
+    }
+  }
+  .activity {
+    textarea {
+      margin-top: $whitespace;
+    }
+  }
+}

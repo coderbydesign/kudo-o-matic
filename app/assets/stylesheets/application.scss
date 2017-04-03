@@ -1,18 +1,65 @@
+///////////////////////////////////////////////////////////
+//
+// Global settings for the project
+//
+///////////////////////////////////////////////////////////
+@import 'settings/colors';
+@import 'settings/general';
+@import 'settings/typography';
+
+///////////////////////////////////////////////////////////
+//
+// Globally available tooling
+//
+///////////////////////////////////////////////////////////
+@import 'tools/mixins';
+
+///////////////////////////////////////////////////////////
+//
+// High-level styles
+//
+///////////////////////////////////////////////////////////
+@import 'generic/reset';
+@import 'generic/box-sizing';
+
+///////////////////////////////////////////////////////////
+//
+// Bare, unclassed Elements
+//
+///////////////////////////////////////////////////////////
+@import 'elements/base';
+
+///////////////////////////////////////////////////////////
+//
+// Basic UI building blocks
+//
+///////////////////////////////////////////////////////////
+@import 'objects/media-object';
+
+///////////////////////////////////////////////////////////
+//
+// Specific UI components
+//
+///////////////////////////////////////////////////////////
+@import 'components/layout';
+@import 'components/header';
+@import 'components/buttons';
+@import 'components/link-list';
+@import 'components/image-header';
+@import 'components/content';
+@import 'components/forms';
+@import 'components/modal';
+
+//////////////////////////////
 @import "bourbon";
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
+//@import "bootstrap-sprockets";
+//@import "bootstrap";
 @import "font-awesome";
 
-@import "reset";
+
 @import "dashboard";
 @import "transactions";
-@import "bootstrap-modal";
-@import "responsive";
+//@import "bootstrap-modal";
 
 @import "jquery-ui";
-
-@import "settings/colors";
-
-@import url('https://fonts.googleapis.com/css?family=PT+Sans');
-@import url('https://fonts.googleapis.com/css?family=Roboto');
