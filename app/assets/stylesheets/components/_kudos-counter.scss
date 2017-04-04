@@ -1,0 +1,161 @@
+// Variables
+
+// Colors
+$color-yellow: #fffe99;
+$color-green: #b6feb7;
+$color-gray: #4d4d4d;
+$color-gray-light: #999;
+$color-black: #070807;
+$color-blue: #b1fff8;
+$color-red: #fec6a8;
+$color-purple: #b584ff;
+
+// Fonts
+$font-primary: 'proxima-nova-soft', sans-serif;
+
+// CSS
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+
+.kudo-counter {
+  background: linear-gradient(rgba($dark-blue-color,0.95), rgba($dark-blue-color,0.7));
+  animation: load 1s ease-out forwards;
+  border-radius: $border-radius;
+  color: #fff;
+  height: 100%;
+  //font-family: $defa;
+  font-weight: 500;
+  padding: $padding;
+  padding-bottom: 0;
+  text-align: center;
+  width: 100%;
+  float: left;
+
+
+  &__title {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }// .kudo-counter__title
+
+  &__date {
+    font-size: 22px;
+    margin-bottom: 50px;
+  }// .kudo-counter__title
+
+}// .kudo-counter
+
+.chart {
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }// svg
+
+  &__background {
+    fill: none;
+    height: 100%;
+    position: relative;
+    stroke: $dark-blue-color;
+    stroke-width: 20px;
+    width: 100%;
+  }// .kudo-chart__background
+
+  &__foreground {
+    transform: rotate(180deg);
+    transition: stroke-dashoffset 1s ease-in;
+    fill: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    stroke-dasharray: 630px;
+    stroke-dashoffset: 630px;
+    stroke-linecap: round;
+    stroke-width: 20px;
+    stroke: $light-blue-color;
+    top: 0;
+    width: 100%;
+  }// .kudo-chart__foreground
+
+  &__count {
+    color: $color-gray-light;
+    font-size: 16px;
+    position: relative;
+
+    div {
+      color: #fff;
+      font-size: 22px;
+    }// .kudo-chart__count:after
+
+  }// .kudo-chart__count
+
+  .chart__container {
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    width: 100%;
+  }// .chart__container
+
+  &--kudo {
+    .chart__container {
+      height: 220px;
+      width: 220px;
+    }// .chart__container
+
+    .chart__count {
+      top: -135px;
+    }// .chart__count
+
+  }// .chart__container
+
+  &--second-goal {
+    display: none;
+    float: left;
+    margin-bottom: 50px;
+    text-align: left;
+    width: 40%;
+    margin-left: 5%;
+    margin-right: 5%;
+
+    .chart__container {
+      height: 30px;
+      width: 30px;
+    }// .chart__container
+
+    .chart__foreground {
+      stroke: $light-grey-color;
+    }// .chart__count
+
+    .chart__count {
+      color: $color-gray-light;
+      display: inline-block;
+      font-size: 14px;
+      padding-left: 10px;
+      position: relative;
+      text-align: left;
+      overflow: hidden;
+      height: 30px;
+
+      div {
+        color: #fff;
+        font-size: 14px;
+      }// div
+    }// .chart__count
+
+  }// .chart__container
+
+}// .chart
+
+@keyframes load {
+  from {
+    //transform: translate3d(-50%, -40%, 0);
+    opacity: 0;
+  }
+  to {
+    //transform: translate3d(-50%, -50%, 0);
+    opacity: 1;
+  }
+}

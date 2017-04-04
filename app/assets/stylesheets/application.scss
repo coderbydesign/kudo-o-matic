@@ -49,9 +49,16 @@
 @import 'components/content';
 @import 'components/forms';
 @import 'components/modal';
+@import 'components/sign-in';
+@import 'components/footer';
+@import 'components/create-transaction';
+@import 'components/timeline';
+@import 'components/statistics';
+@import 'components/kudos-counter';
 
 //////////////////////////////
-@import "bourbon";
+
+//@import "responsive";
 
 //@import "bootstrap-sprockets";
 //@import "bootstrap";

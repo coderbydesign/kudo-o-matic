@@ -1,0 +1,9 @@
+.sign-in-container {
+  position: absolute;
+  padding: $padding;
+  width: 50%;
+  margin: auto;
+  max-height: 100%;
+  background: linear-gradient(rgba($dark-blue-color, 0.95), rgba($dark-blue-color, 0.7));
+  border-radius: $border-radius;
+}

@@ -8,112 +8,6 @@
   width: 93.75%;
 }
 
-.statistics {
-  border-radius: $border-radius;
-  background: linear-gradient(rgba($dark-blue-color,0.95), rgba($dark-blue-color,0.7));
-  padding: $padding;
-  max-height: 100%;
-  margin-bottom: $margin-bottom;
-  flex-direction: column;
-  max-width: none;
-
-  h1 {
-    color: $text-color;
-    font-size: $font-size-large
-  }
-
-  .all {
-    margin-top: $margin-top;
-  }
-
-  .value {
-    color: $text-color-highlight;
-    font-size: $font-size-huge;
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  .label {
-    color: $text-color;
-    font-size: $font-size-regular;
-    display: inline-block;
-    vertical-align: middle;
-  }
-}
-
-#create-transaction-container {
-  padding: $padding;
-  max-height: 100%;
-  background: linear-gradient(rgba($dark-blue-color,0.95), rgba($dark-blue-color,0.7));
-  border-radius: $border-radius;
-  display: none;
-  margin-bottom: $margin-bottom;
-
-  h1 {
-    font-weight: 300;
-    font-size: 150%;
-    color: $white-color;
-    margin-bottom: $margin-bottom;
-  }
-}
-
-.timeline-container {
-  height: 78%;
-
-  .transaction-container {
-    padding: $padding;
-    background-color: rgba($dark-blue-color,0.7);
-    max-height: 100%;
-    border-radius: $border-radius;
-    margin-bottom: $margin-bottom;
-
-    .transaction-header-container {
-       max-height: 10%;
-
-      .transaction-kudos-container {
-        background-color: rgba($dark-blue-color,0.7);
-        height: 100%;
-        max-width: 100%;
-        font-size: 140%;
-        text-align: center;
-        float: left;
-        padding: $padding-small;
-        border-radius: $border-radius-small;
-
-        .currency {
-          margin-left: -0.3em;
-          font-size: 60%;
-        }
-      }
-      .transaction-avatar-container {
-        max-width: 2.5rem;
-        min-height: 100%;
-        max-height: 100%;
-        display: inline-block;
-
-        .avatar {
-          margin-left: $whitespace;
-          max-width: 100%;
-          max-height: 100%;
-          border-radius: $border-radius-small;
-        }
-      }
-    }
-    .transaction-body-container {
-      color: rgba($white-color, 1.0);
-      margin-top: $margin-top * 0.5;
-      border-radius: $border-radius-small;
-      height: 100%;
-    }
-    .post-time-stamp {
-      text-align: right;
-      padding-top: $padding;
-      float: right;
-      color: rgba($white-color, 1.0);
-    }
-  }
-}
-
 @media screen and (min-width: 1200px) {
   .container-right {
     float: left;
@@ -181,6 +75,14 @@
   .transaction-container {
     margin-bottom: 0;
     margin-top: 2%;
+  }
+
+  #create-transaction-container {
+    .simple_form {
+      textarea {
+        rows: 10;
+      }
+    }
   }
 }
 

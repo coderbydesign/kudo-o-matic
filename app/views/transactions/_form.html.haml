@@ -3,7 +3,7 @@
   .calorie-counter__date
     Wednesday Jan 27, 2016
 
-  .chart.chart--calorie.js-chart{'data-goal':'1700', 'data-count':'550'}
+  .chart.chart--calorie.js-chart{'data-goal':Goal.next.amount, 'data-count':Balance.current.amount}
     .chart__container
 
       %svg.chart__background{x:'0px', y:'0px', height:'220px', viewBox:'0 0 220 220'}
@@ -15,14 +15,14 @@
 
     .chart__count
       %div
-        %span.js-count{'data-count':'525'}
+        %span.js-count{'data-count':Balance.current.amount}
           0
-        /
-        %span.js-count{'data-count':'1700'}
+          /
+        %span.js-count{'data-count':Goal.next.amount}
           0
-      Your goal
+      = Goal.next.name
 
-  .chart.chart--protein.js-chart{'data-goal':'37', 'data-count':'30'}
+  .chart.chart--protein.js-chart{'data-goal':Goal.next.amount, 'data-count':Balance.current.amount}
     .chart__container
 
       %svg.chart__background{x:'0px', y:'0px', height:'220px', viewBox:'0 0 220 220'}
@@ -34,12 +34,13 @@
 
     .chart__count.chart__count--protein
       %div
-        %span.js-count{'data-count':'30'}
+        %span.js-count{'data-count':Balance.current.amount}
           0g
-        /
-        %span.js-count{'data-count':'45'}
+        %span
+          /
+        %span.js-count{'data-count':Goal.next.amount}
           0g
-      Protein
+      Next Goal
 
   .chart.chart--carbs.js-chart{'data-goal':'120', 'data-count':'35'}
     .chart__container

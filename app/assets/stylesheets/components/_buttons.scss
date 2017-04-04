@@ -57,8 +57,8 @@
 
 #like-button {
   color: rgba($primary-button-text, 1.0);
-  margin-top: 5px;
-  border-radius: 4px;
+  margin-top: $margin-top;
+  border-radius: $border-radius-small;
   background-color: rgba(234,234,234,1.0);
   -webkit-transform: translateZ(0);
   transform: translateZ(0);

@@ -1,0 +1,32 @@
+.statistics {
+  border-radius: $border-radius;
+  background: linear-gradient(rgba($dark-blue-color,0.95), rgba($dark-blue-color,0.7));
+  padding: $padding;
+  max-height: 100%;
+  margin-bottom: $margin-bottom;
+  flex-direction: column;
+  max-width: none;
+
+  h1 {
+    color: $text-color;
+    font-size: $font-size-large
+  }
+
+  .all {
+    margin-top: $margin-top;
+  }
+
+  .value {
+    color: $text-color-highlight;
+    font-size: $font-size-huge;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .label {
+    color: $text-color;
+    font-size: $font-size-regular;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
