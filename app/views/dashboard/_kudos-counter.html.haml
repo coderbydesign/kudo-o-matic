@@ -1,5 +1,6 @@
 .kudo-counter
   .kudo-counter__title
+    ₭udometer
   .kudo-counter__date
     = Date.today.strftime('%B %d, %Y')
 
@@ -16,11 +17,14 @@
     .chart__count
       %div
         %span.js-count{'data-count':Balance.current.amount}
-          0
-        %span.js-count
+          = Balance.current.amount
+        %span.kudo-currency
+          ₭
           = '/'
         %span.js-count{'data-count':Goal.next.amount}
-          0
+          = Goal.next.amount
+        %span.kudo-currency
+          ₭
       = Goal.next.name
 
   - @iterate_goals.each do |goal|
@@ -36,52 +40,8 @@
 
       .chart__count.chart__count--second-goal
         %div
-          -#%span.js-count{'data-count':Balance.current.amount}
-          -#  0g
-          %span
-            /
           %span.js-count{'data-count': goal.amount}
-            0
+            = goal.amount
         = goal.name
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  -#.chart.chart--third-goal.js-chart{'data-goal':Goal.next.amount, 'data-count':Balance.current.amount}
-  -#  .chart__container
-  -#
-  -#    %svg.chart__background{x:'0px', y:'0px', height:'220px', viewBox:'0 0 220 220'}
-  -#      %g
-  -#        %path{d:'M110,210c-55.1,0-100-44.9-100-100C10,54.9,54.9,10,110,10s100,44.9,100,100C210,165.1,165.1,210,110,210z'}
-  -#    %svg.chart__foreground{x:'0px', y:'0px', height:'220px', viewBox:'0 0 220 220'}
-  -#      %g
-  -#        %path{d:'M110,210c-55.1,0-100-44.9-100-100C10,54.9,54.9,10,110,10s100,44.9,100,100C210,165.1,165.1,210,110,210z'}
-  -#
-  -#  .chart__count.chart__count--third-goal
-  -#    %div
-  -#      %span.js-count{'data-count':Balance.current.amount}
-  -#        0g
-  -#      /
-  -#      %span.js-count{'data-count':Goal.next.amount}
-  -#        0g
-  -#    = Goal.next.name
+  %span.expand-collapse
+    %i.fa.fa-chevron-down{onclick:'showGoals()', 'aria-hidden':true}

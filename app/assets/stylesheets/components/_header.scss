@@ -5,13 +5,35 @@
   background: linear-gradient($black-color, $dark-blue-color);
   border-radius: $border-radius;
   opacity: 0.85;
+  padding: $padding;
+  overflow: hidden;
 }
 
 .container-header {
   padding: $padding;
 
-  .logo {
-    max-height: 4.6875rem;
-    max-width: 4.6875rem;
+  .header-logo {
+    max-height: 4rem;
+
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container-header {
+    text-align: inherit;
+  }
+
+  .header-logo {
+    padding-left: $padding-small''
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container-header {
+    text-align: center;
+  }
+
+  .header-logo {
+    padding-left: 0;
   }
 }

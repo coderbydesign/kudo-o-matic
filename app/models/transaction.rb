@@ -84,4 +84,8 @@ class Transaction < ActiveRecord::Base
   def subtract_from_balance
     balance.update_attribute :amount, (balance.amount - amount)
   end
+
+  def self.all_for_user(user)
+    Transaction.where(sender: user).or(Transaction.where(receiver: user)).order('created_at desc').page.per(20)
+  end
 end

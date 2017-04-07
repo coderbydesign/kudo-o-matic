@@ -7,6 +7,7 @@ $black-color:                             #000000;
 $dark-blue-color:                         #00264C;
 $light-blue-color:                        #679EBF;
 $dark-grey-color:                         #666666;
+$medium-grey-color:                       #B2ACAB;
 $light-grey-color:                        #EAEAEA;
 $white-color:                             #FFFFFF;
 
@@ -18,7 +19,8 @@ $white-color:                             #FFFFFF;
 $text-color: $white-color;
 $text-color-dark: $black-color;
 $text-color-header: $white-color;
-$text-color-highlight: $light-blue-color;
+$text-color-highlight: $dark-blue-color;
+$text-color-mark: $light-blue-color;
 $text-color-medium: $dark-grey-color;
 
 ///////////////////////////////////////////////////////////
@@ -30,9 +32,10 @@ $transaction-button-background: rgba($dark-blue-color, 0.95), rgba($dark-blue-co
 $transaction-button-text: $white-color;
 $transaction-button-text-hover: $text-color-highlight;
 
-$primary-button-background: rgba($light-grey-color, 1.0);
-$primary-button-text: rgba($dark-grey-color, 1.0);
-$primary-button-text-hover: $text-color-dark;
+$primary-button-background: $dark-blue-color;
+$primary-button-text: rgba($text-color, 1.0);
+$primary-button-text-hover: rgba($text-color-highlight, 1.0);
+$primary-button-background-hover: rgba($white-color, 1.0);
 
 ///////////////////////////////////////////////////////////
 //

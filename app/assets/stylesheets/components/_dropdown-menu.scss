@@ -1,0 +1,82 @@
+#result {
+
+}
+
+.dropdown {
+  width: 100%;
+}
+
+.dropdown-content {
+  display: none;
+  width: 100%;
+  font-size: $font-size-regular;
+  font-weight: 300;
+}
+
+.dropdown-content .menu-option {
+  border-top: 1px solid $dark-blue-color;
+  margin-top: $margin-top;
+  padding: $padding-small;
+  width: 100%;
+}
+
+.dropdown-content .menu-option:hover {
+  transform: translateZ(0);
+  transition-duration: 0.5s;
+  transition-property: color;
+  background: $dark-blue-color;
+  color: $text-color;
+  border-top: 1px solid $white-color;
+}
+
+.transaction-filters{
+  display: none;
+}
+
+.filter-option {
+  border-top: 1px solid $dark-blue-color;
+  margin-top: $margin-top;
+  padding: $padding-small;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  color: $dark-blue-color;
+  font-size: 80%;
+}
+
+.filter-option:hover {
+  transform: translateZ(0);
+  transition-duration: 0.5s;
+  transition-property: color;
+  background: $dark-blue-color;
+  color: $text-color !important;
+  border-top: 1px solid $white-color;
+}
+
+.fa-sign-out {
+  float: right;
+}
+
+.fa-history {
+  float: right;
+}
+
+.fa-paper-plane {
+  float: right;
+}
+
+.fa-square-o {
+  float: right;
+}
+
+.fa-check-square-o {
+  float: right;
+}
+
+@media screen and (min-width: 1200px) {
+
+}
+
+@media screen and (max-width: 1200px) {
+
+}

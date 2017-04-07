@@ -9,9 +9,21 @@ class DashboardController < ApplicationController
     @iterate_goals  = Goal.goals
     @goals    = Goal.all.order(:cached_votes_up => :desc)
     @balance  = Balance.current.decorate
-    @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
+    # @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
     @transaction = Transaction.new
+
+    if params['filter'] == 'mine'
+      @transactions = Transaction.all_for_user(current_user)
+    else
+      @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
+
+
 
 
 end

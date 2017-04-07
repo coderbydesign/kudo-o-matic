@@ -11,22 +11,22 @@ RSpec.feature "Add a transaction", type: :feature do
     click_link 'Sign in with Google Apps'
   end
 
-  xit 'creates and shows the new transaction' do
+  it 'creates and shows the new transaction' do
     visit new_transaction_path
 
-    fill_in 'transaction_sender', with: 'William'
-    fill_in 'transaction_receiver', with: 'Harry'
-    fill_in 'transaction_activity', with: 'helping me out'
+    # fill_in 'transaction_sender', with: 'William'
+    fill_in 'transaction_receiver_name', with: 'Harry'
+    fill_in 'transaction_activity_name', with: 'helping me out'
     fill_in 'transaction_amount', with: '99'
-    click_button 'Give kudos'
+    click_button 'send-kudos-button'
 
     expect(current_path).to eql('/')
 
-    within '.last-transactions' do
-      expect(page).to have_content("99 ₭ from WILLIAM to HARRY for HELPING ME OUT")
+    within '.timeline-container' do
+      expect(page).to have_content("+99 ₭ to Harry for helping me out")
     end
 
-    within '.progress-label' do
+    within '.chart.chart--kudo.js-chart' do
       # 1342 + 99 = 1441
       expect(page).to have_content("1.441 ₭")
     end

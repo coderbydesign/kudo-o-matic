@@ -1,0 +1,24 @@
+%button.dropdown-button
+  .current-user{onclick:'showMenu()'}
+    %img.current-user-image{src:current_user.picture_url}
+    = current_user
+    %i.fa.fa-bars{'aria-hidden':true}
+  .dropdown-content
+    .menu-option{onclick: 'showFilters()'}
+      Filter Transactions
+      %i.fa.fa-paper-plane{'aria-hidden':true}
+    .transaction-filters
+      .filter-option
+        My Transactions
+        %i.fa.fa-square-o
+      -#.filter-option.received
+      -#  My received transactions
+        %i.fa.fa-square-o
+    %a{href:'#'}
+      .menu-option
+        Balance History
+        %i.fa.fa-history{'aria-hidden':true}
+    %a{href:destroy_user_session_path}
+      .menu-option
+        Sign Out
+        %i.fa.fa-sign-out{'aria-hidden':true}

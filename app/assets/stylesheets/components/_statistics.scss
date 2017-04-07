@@ -6,10 +6,12 @@
   margin-bottom: $margin-bottom;
   flex-direction: column;
   max-width: none;
+  margin-top: $margin-top;
 
   h1 {
     color: $text-color;
-    font-size: $font-size-large
+    font-size: $font-size-medium;
+    font-weight: 300;
   }
 
   .all {
@@ -17,16 +19,19 @@
   }
 
   .value {
-    color: $text-color-highlight;
+    color: $text-color-mark;
     font-size: $font-size-huge;
     display: inline-block;
     vertical-align: middle;
+    font-weight: 300;
   }
 
   .label {
     color: $text-color;
-    font-size: $font-size-regular;
+    font-size: $font-size-medium;
     display: inline-block;
     vertical-align: middle;
+    margin-left: $whitespace * 0.5;
+    font-weight: 300;
   }
 }

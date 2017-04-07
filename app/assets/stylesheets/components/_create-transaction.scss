@@ -5,11 +5,90 @@
   border-radius: $border-radius;
   display: none;
   margin-bottom: $margin-bottom;
+  overflow: hidden;
 
   h1 {
-    font-weight: 300;
     font-size: 150%;
     color: $white-color;
     margin-bottom: $margin-bottom;
+  }
+
+  .fa-times {
+    float: right;
+    font-size: 80%;
+    cursor: pointer;
+  }
+
+  .simple_form {
+    label {
+      margin-right: $whitespace;
+      color: $simple-form-label-text;
+      font-size: 0.95rem;
+    }
+    input {
+      margin-right: $whitespace;
+      border: none;
+      border-radius: $border-radius-small;
+      background-color: $simple-form-input-background;
+      color: $simple-form-input-text;
+      font-size: 0.95rem;
+    }
+    textarea {
+      border: none;
+      border-radius: $border-radius-small;
+      background-color: $simple-form-input-background;
+      color: $simple-form-input-text;
+      font-size: 0.95rem;
+      width: 100%;
+      resize: none;
+    }
+    .receiver {
+      label {
+        float: left;
+      }
+      input {
+        float: left;
+        width: 50%;
+      }
+    }
+    .amount {
+      label {
+        float: left;
+      }
+      input {
+        float: left;
+      }
+    }
+    .activity {
+      textarea {
+        margin-top: $whitespace;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .amount {
+    input {
+      width: 15%;
+    }
+  }
+
+  .activity {
+    textarea {
+      height: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .amount {
+    input {
+      width: 30%;
+    }
+  }
+
+  textarea {
+    height: 3.5rem;
   }
 }

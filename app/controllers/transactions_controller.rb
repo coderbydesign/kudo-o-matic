@@ -1,13 +1,36 @@
 class TransactionsController < ApplicationController
+  def index
+
+  end
+
   def new
     # TODO implement session authentication
     @transaction = Transaction.new
+
+    if params['filter'] == 'mine'
+      @transactions = Transaction.all_for_user(current_user)
+    else
+      @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
   end
 
   def create
     @transaction = TransactionAdder.create(params[:transaction], current_user)
-    flash[:error] = @transaction.errors.full_messages.to_sentence
-    redirect_to root_path
+
+    if @transaction.save
+      redirect_to root_path
+    # flash[:error] = @transaction.errors.full_messages
+    else
+      # render 'dashboard/index'
+      redirect_to root_path
+    end
+
   end
 
   def upvote
@@ -23,4 +46,12 @@ class TransactionsController < ApplicationController
     render json: guidelines
   end
 
+  def filter
+    @filtered_transactions = Transactions.where(type: params[:type] ).order('created_at DESC')
+
+    respond_to do |format|
+      format.html
+      format.js { render :action => 'filter.js.erb', :layout => false}
+    end
+  end
 end

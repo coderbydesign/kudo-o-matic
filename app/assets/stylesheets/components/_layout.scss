@@ -1,6 +1,7 @@
 .page {
   margin: 2.25rem auto;
   width: 90%;
+  padding: $padding;
 }
 
 .body {
@@ -28,6 +29,10 @@
     width: 24%;
     height: 700px;
   }
+
+  .expand-collapse {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -40,12 +45,9 @@
   }
 
   .container-right {
-    float: none;
-  }
-
-  .statistics {
-    margin-bottom: $margin-bottom;
     display: flex;
+    flex-direction: column;
+    order: 1;
   }
 
   .value {

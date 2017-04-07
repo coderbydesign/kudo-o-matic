@@ -7,6 +7,7 @@
     max-height: 100%;
     border-radius: $border-radius;
     margin-bottom: $margin-bottom;
+    overflow: hidden;
 
     .transaction-header-container {
       max-height: 10%;
@@ -45,12 +46,16 @@
       margin-top: $margin-top * 0.5;
       border-radius: $border-radius-small;
       height: 100%;
+      font-size: 110%;
+      font-weight: 300;
     }
     .post-time-stamp {
       text-align: right;
       padding-top: $padding;
+      font-size: 90%;
+      font-weight: 300;
       float: right;
-      color: rgba($white-color, 1.0);
+      color: rgba($medium-grey-color, 1.0);
     }
   }
 }

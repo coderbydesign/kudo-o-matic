@@ -4,7 +4,7 @@
 //
 ///////////////////////////////////////////////////////////
 html {
-  background: url('https://wallpaperscraft.com/image/spot_sky_lines_85072_1920x1080.jpg') no-repeat center center fixed;
+  background: url('https://photos-1.dropbox.com/t/2/AABL62_oIxAgGETK83sTFAZ_IYa7ipYnh66RIguxeiRHow/12/184449953/jpeg/32x32/1/_/1/2/luca-zanon-26595.jpg/EKWxh4wBGNSMBiAHKAc/UUBzN3aemwPqFwblMqoLSjkC-TjfvgyjZ2GzDfutBYE%2CHSZgne7l8epYSu8z3tnHgQpjarGSOE9jMDHMCIQm_Uw%2CA4AWukYwARqMS0UgiYo_PrNJaFJo8fQA0Pe9b7XxY3A?size=2048x1536&size_mode=3') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -40,6 +40,10 @@ a:visited {
 
 strong {
   font-weight: $font-weight-bold;
+}
+
+textarea {
+  font-family: $default-font-stack;
 }
 
 h1,

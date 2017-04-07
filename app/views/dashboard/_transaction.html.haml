@@ -1,0 +1,18 @@
+%div#create-transaction-container
+  %div
+    %h1.transaction-container-title
+      Give ₭udo's!
+      %i.fa.fa-times{onclick: 'hideDiv()'}
+    = simple_form_for @transaction do |f|
+      .receiver
+        = f.input_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false, placeholder: 'Receiver', required: true , maxlength: '35'
+      .amount
+        = f.input_field :amount, input_html:{ min: '0', max: '999', step: 'any'} , placeholder: 'Amount',required: true
+        %span.currency
+          -#₭
+      .activity
+        = f.input_field :activity_name, as: :text, data: { autocomplete_source: activities_autocomplete_path}, field_id: false,  placeholder: "Write here the reason why you are giving ₭udo's", required: true, maxlength: '60'
+      .submit
+        = f.submit t('dashboard.submit_kudos'), class: 'fa fa-paper-plane', id: 'send-kudos-button'
+      -#%span.error
+      -#  = flash[:error]
