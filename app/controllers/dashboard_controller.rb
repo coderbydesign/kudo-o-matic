@@ -4,16 +4,19 @@ class DashboardController < ApplicationController
   protect_from_forgery with: :exception
 
   def index
-    @previous = Goal.previous.decorate
-    @next     = Goal.next.decorate
+    @previous       = Goal.previous.decorate
+    @next           = Goal.next.decorate
     @iterate_goals  = Goal.goals
-    @goals    = Goal.all.order(:cached_votes_up => :desc)
-    @balance  = Balance.current.decorate
-    # @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
-    @transaction = Transaction.new
+    @goals          = Goal.all.order(:cached_votes_up => :desc)
+    @balance        = Balance.current.decorate
+    @transaction    = Transaction.new
 
     if params['filter'] == 'mine'
       @transactions = Transaction.all_for_user(current_user)
+    elsif params['filter'] == 'send'
+      @transactions = Transaction.send_by_user(current_user)
+    elsif params['filter'] == 'received'
+      @transactions = Transaction.received_by_user(current_user)
     else
       @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
     end

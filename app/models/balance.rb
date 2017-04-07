@@ -1,6 +1,8 @@
 class Balance < ActiveRecord::Base
   has_many :transactions
 
+  scope :balances, -> { where(current: false).order("created_at DESC") }
+
   def self.current
     where(current: true).order("created_at DESC").first
   end

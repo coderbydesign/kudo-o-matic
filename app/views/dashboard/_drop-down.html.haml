@@ -7,17 +7,25 @@
     .menu-option{onclick: 'showFilters()'}
       Filter Transactions
       %i.fa.fa-paper-plane{'aria-hidden':true}
-    .transaction-filters
-      .filter-option
-        My Transactions
+    .hidden-menu
+      .filter-option.send
+        My Send Transactions
         %i.fa.fa-square-o
-      -#.filter-option.received
-      -#  My received transactions
+      .filter-option.received
+        My Received Transactions
         %i.fa.fa-square-o
     %a{href:'#'}
       .menu-option
         Balance History
         %i.fa.fa-history{'aria-hidden':true}
+        -#.history.hidden-menu
+        -#  .balance-option.current
+        -#    Balance: Current
+        -#    %i.fa.fa-check-square-o
+        -#  - Balance.balances.each do |balance|
+        -#    .balance-option.other
+        -#      Balance:
+        -#      = balance.name
     %a{href:destroy_user_session_path}
       .menu-option
         Sign Out

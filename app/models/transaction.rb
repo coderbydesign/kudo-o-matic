@@ -88,4 +88,12 @@ class Transaction < ActiveRecord::Base
   def self.all_for_user(user)
     Transaction.where(sender: user).or(Transaction.where(receiver: user)).order('created_at desc').page.per(20)
   end
+
+  def self.send_by_user(user)
+    Transaction.where(sender: user).order('created_at desc').page.per(20)
+  end
+
+  def self.received_by_user(user)
+    Transaction.where(receiver: user).order('created_at desc').page.per(20)
+  end
 end
