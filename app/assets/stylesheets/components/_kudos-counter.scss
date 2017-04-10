@@ -25,7 +25,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
   animation: load 1s ease-out forwards;
   border-radius: $border-radius;
   color: #fff;
-  height: 100%;
+  max-height: 100%;
   //font-family: $defa;
   font-weight: 300;
   padding: $padding;

@@ -14,49 +14,54 @@ jQuery(function() {
 //     });
 // });
 
-function showDiv() {
-    $('#create-transaction-container').slideDown(750);
-}
+$(document).ready(function() {
+    $('.menu-option.filter').click(function () {
+        $('.hidden-menu.filter').slideToggle("slow");
+    });
 
-function hideDiv() {
-    $('#create-transaction-container').slideUp(750);
-}
+    // Transaction container show
+    $('button.transaction-button').click(function () {
+        $('#create-transaction-container').slideDown(750);
+    });
 
-function showGoals() {
-    $('.chart--second-goal').slideToggle("slow");
-}
+    // Transaction container hide
+    $('#create-transaction-container i.fa.fa-times').click(function () {
+        $('#create-transaction-container').slideUp(750);
+    });
 
-function showMenu() {
-    $('.dropdown-content').slideToggle("slow");
-}
+    // Error container hide
+    $('.message-container .fa-times').click(function () {
+        $('.message-container').fadeOut(750);
+    });
 
-function showFilters() {
-    $('.hidden-menu').slideToggle("slow");
-}
+    // Goals container toggle show/hide
+    $('.expand-collapse i.fa.fa-chevron-down').click(function () {
+        $('.chart--second-goal').slideToggle("slow");
+    });
 
-$(function () {
-    $('span').click(function () {
-        $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
+    // Dropdown menu toggle show/hide
+    $('button.dropdown-button .current-user').click(function () {
+        $('.dropdown-content').slideToggle("slow");
+    });
+
+    // Kudometer icons toggle on max width 1200px
+    $(function () {
+        $('span').click(function () {
+            $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
+        });
+    });
+
+    // Menu icons toggle
+    $(function () {
+        $('.current-user').click(function () {
+            $(this).find('i').toggleClass('fa-bars fa-chevron-up')
+        })
+    });
+
+    // Checkbox icons toggle
+    $(function () {
+        $('.filter-option').click(function () {
+            $(this).find('i').toggleClass('fa-square-o fa-check-square-o')
+        })
     });
 });
-
-$(function () {
-    $('.current-user').click(function () {
-        $(this).find('i').toggleClass('fa-bars fa-chevron-up')
-    })
-});
-
-$(function () {
-    $('.filter-option').click(function () {
-        $(this).find('i').toggleClass('fa-square-o fa-check-square-o')
-    })
-});
-
-function showError() {
-    $('#info').fadeIn(750)
-}
-
-if ($('.error').length) {  // return's true if element is present
-    // show or hide another div
-    $('#create-transaction-container').show();
-}

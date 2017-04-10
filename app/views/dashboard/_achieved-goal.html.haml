@@ -1,0 +1,10 @@
+- if !Goal.achieved.blank?
+  .achieved-goal
+    %h2.achieved-goal__title
+      Last achieved goal
+    %h1.achieved-goal__name
+      = Goal.achieved.last.name
+    %h2.achieved-goal__amount
+      Amount of ₭
+      %br
+      = Goal.achieved.last.amount

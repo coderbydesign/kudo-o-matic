@@ -1,0 +1,28 @@
+.message-container {
+  margin: 1em auto;
+  width: 93.75%;
+
+  .fa-times {
+    float: right;
+    cursor: pointer;
+  }
+}
+
+.error-message {
+  padding: $padding;
+  background: $white-color;
+  color: $dark-blue-color;
+  border-radius: $border-radius;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.notice-message {
+  padding: $padding;
+  background: $dark-blue-color;
+  color: $white-color;
+  border-radius: $border-radius-small;
+  text-align: center;
+  opacity: 0.85;
+}
+

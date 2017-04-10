@@ -3,28 +3,16 @@
     .header
       .container-header
         %img.header-logo{src:'https://www.kabisa.nl/images/kabisa-logo-d9ace243.png'}
+    = render 'error'
     .body
       .container-left
-        %div#new-transaction
-          = render 'new-transaction'
-        .dropdown
-          = render 'drop-down'
-        .statistics
-          = render 'statistics'
+        = render 'new-transaction'
+        = render 'drop-down'
+        = render 'achieved-goal'
+        = render 'statistics'
       .container-center
         = render 'transaction'
-        .error-container
-          - if @transaction.errors.any?
-            %h2.error-title
-              = pluralize(@transaction.errors.count, 'error')
-              prohibited this transaction from being created:
-            .error-body
-              %ul
-                = @transaction.errors.full_messages.each do |msg|
-                  %li
-                    = msg
         #results
           = render 'timeline'
       .container-right
-        .kudo-clicker
-          = render 'kudos-counter'
+        = render 'kudos-counter'

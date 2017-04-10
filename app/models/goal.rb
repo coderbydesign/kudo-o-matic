@@ -4,6 +4,7 @@ class Goal < ActiveRecord::Base
   belongs_to :balance
 
   scope :goals, -> { where(balance: Balance.current).where(achieved_on: nil).order("amount ASC") }
+  scope :achieved, -> { where(balance: Balance.current).where.not(achieved_on: nil).order("amount ASC") }
 
   def self.previous
     where(balance: Balance.current).where.not(achieved_on: nil).order("amount DESC").first || Goal.new(name: "N/A", amount: 0)

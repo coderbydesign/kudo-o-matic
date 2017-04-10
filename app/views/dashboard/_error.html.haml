@@ -1,0 +1,9 @@
+.message-container
+  - if !flash[:error].blank?
+    .error-message
+      = flash[:error]
+      %i.fa.fa-times
+  - if !flash[:notice].blank?
+    .notice-message
+      = flash[:notice]
+      %i.fa.fa-times

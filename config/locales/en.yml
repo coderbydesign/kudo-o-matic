@@ -7,4 +7,12 @@ en:
     submit_kudos: Give ₭udos
     for: for
 
+  activerecord:
+      models:
+        transaction:
+      attributes:
+        transaction:
+          activity_name_feed: "activity"
+        # will translate transaction attribute "activity_name_feed" as "activity"
+
 

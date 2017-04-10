@@ -24,10 +24,10 @@ class TransactionsController < ApplicationController
     @transaction = TransactionAdder.create(params[:transaction], current_user)
 
     if @transaction.save
+      flash[:notice] = 'Transaction was successfully created!'
       redirect_to root_path
-    # flash[:error] = @transaction.errors.full_messages
     else
-      # render 'dashboard/index'
+      flash[:error] = @transaction.errors.full_messages.to_sentence.capitalize
       redirect_to root_path
     end
 

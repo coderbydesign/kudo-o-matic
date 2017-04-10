@@ -16,6 +16,7 @@
 //= require jquery_ujs
 //= require later
 //= require transactions
+//= require filter
 //= require_tree .
 
 

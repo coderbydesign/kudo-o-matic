@@ -7,9 +7,9 @@ class Balance < ActiveRecord::Base
     where(current: true).order("created_at DESC").first
   end
 
-  def add(amount)
-    amount = amount.to_i unless amount.is_a?(Integer)
-    increment!(:amount, amount)
+  def add(number_of_kudos)
+    number_of_kudos = number_of_kudos.to_i unless number_of_kudos.is_a?(Integer)
+    update(amount: amount + number_of_kudos)
   end
 
   def last_transaction

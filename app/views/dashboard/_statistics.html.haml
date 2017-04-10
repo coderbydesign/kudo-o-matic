@@ -1,17 +1,18 @@
-%h1
-  Transactions
-  .all
-    .value
-      = Transaction.all.count(:id)
-    .label
-      total
-  .month
-    .value
-      = Transaction.where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).count(:id)
-    .label
-      monthly
-  .weekly
-    .value
-      = Transaction.where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week())).count(:id)
-    .label
-      weekly
+.statistics
+  %h1
+    Transactions
+    .all
+      .value
+        = Transaction.all.count(:id)
+      .label
+        total
+    .month
+      .value
+        = Transaction.where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).count(:id)
+      .label
+        monthly
+    .weekly
+      .value
+        = Transaction.where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week())).count(:id)
+      .label
+        weekly
