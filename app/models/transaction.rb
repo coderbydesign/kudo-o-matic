@@ -3,7 +3,6 @@ class Transaction < ActiveRecord::Base
   validates :activity_name_feed, presence: true, length: {minimum: 4}
 
   after_commit :send_slack_notification, on: :create, unless: :skip_callbacks
-  after_destroy :subtract_from_balance
 
   acts_as_votable
   belongs_to :balance
@@ -79,10 +78,6 @@ class Transaction < ActiveRecord::Base
 
   def send_slack_notification
     SlackNotifications.new(self).send_new_transaction
-  end
-
-  def subtract_from_balance
-    balance.update_attribute :amount, (balance.amount - amount)
   end
 
   def self.all_for_user(user)

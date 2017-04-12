@@ -1,9 +1,11 @@
 .message-container
   - if !flash[:error].blank?
     .error-message
+      .fa.fa-exclamation-circle
       = flash[:error]
       %i.fa.fa-times
   - if !flash[:notice].blank?
     .notice-message
+      .fa.fa-info-circle
       = flash[:notice]
       %i.fa.fa-times

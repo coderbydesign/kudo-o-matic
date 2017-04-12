@@ -25,8 +25,4 @@ class DashboardController < ApplicationController
       format.js
     end
   end
-
-
-
-
 end

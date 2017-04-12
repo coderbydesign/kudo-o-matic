@@ -21,27 +21,27 @@ $(document).ready(function() {
 
     // Transaction container show
     $('button.transaction-button').click(function () {
-        $('#create-transaction-container').slideDown(750);
+        $('#create-transaction-container').slideDown(325);
     });
 
     // Transaction container hide
     $('#create-transaction-container i.fa.fa-times').click(function () {
-        $('#create-transaction-container').slideUp(750);
+        $('#create-transaction-container').slideUp(325);
     });
 
     // Error container hide
     $('.message-container .fa-times').click(function () {
-        $('.message-container').fadeOut(750);
+        $('.message-container').fadeOut(325);
     });
 
     // Goals container toggle show/hide
     $('.expand-collapse i.fa.fa-chevron-down').click(function () {
-        $('.chart--second-goal').slideToggle("slow");
+        $('.chart--second-goal').slideToggle(325);
     });
 
     // Dropdown menu toggle show/hide
     $('button.dropdown-button .current-user').click(function () {
-        $('.dropdown-content').slideToggle("slow");
+        $('.dropdown-content').slideToggle(325);
     });
 
     // Kudometer icons toggle on max width 1200px
@@ -51,17 +51,23 @@ $(document).ready(function() {
         });
     });
 
-    // Menu icons toggle
-    $(function () {
-        $('.current-user').click(function () {
-            $(this).find('i').toggleClass('fa-bars fa-chevron-up')
-        })
+    // Checkbox icons toggle
+    $('.filter-option').click(function () {
+        $(this).find('i').toggleClass('fa-square-o fa-check-square-o')
     });
 
-    // Checkbox icons toggle
-    $(function () {
-        $('.filter-option').click(function () {
-            $(this).find('i').toggleClass('fa-square-o fa-check-square-o')
-        })
+    // Menu icons toggle
+    $('.current-user').click(function () {
+        $(this).find('i').toggleClass('fa-bars fa-chevron-up')
+    });
+
+    $('#send-kudos-button').click(function () {
+        console.log('yes');
+        if ($('#transaction_receiver_name') == '') {
+            console.log('test');
+            alert("Receiver name can't be empty")
+        }
+        else
+            console.log('txt')
     });
 });

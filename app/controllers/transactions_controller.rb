@@ -9,6 +9,10 @@ class TransactionsController < ApplicationController
 
     if params['filter'] == 'mine'
       @transactions = Transaction.all_for_user(current_user)
+    elsif params['filter'] == 'send'
+      @transactions = Transaction.send_by_user(current_user)
+    elsif params['filter'] == 'send'
+      @transactions = Transaction.received_by_user(current_user)
     else
       @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
     end
@@ -30,7 +34,6 @@ class TransactionsController < ApplicationController
       flash[:error] = @transaction.errors.full_messages.to_sentence.capitalize
       redirect_to root_path
     end
-
   end
 
   def upvote
@@ -44,14 +47,5 @@ class TransactionsController < ApplicationController
     kudos = params[:kudo_amount].to_i
     guidelines = Transaction.guidelines_between [(kudos - 10), 0].max, kudos + 10
     render json: guidelines
-  end
-
-  def filter
-    @filtered_transactions = Transactions.where(type: params[:type] ).order('created_at DESC')
-
-    respond_to do |format|
-      format.html
-      format.js { render :action => 'filter.js.erb', :layout => false}
-    end
   end
 end

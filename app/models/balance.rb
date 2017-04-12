@@ -15,4 +15,8 @@ class Balance < ActiveRecord::Base
   def last_transaction
     transactions.order("created_at DESC").first
   end
+
+  def amount
+    Transaction.where(balance: self).sum(:amount)
+  end
 end

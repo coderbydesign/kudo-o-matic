@@ -28,7 +28,7 @@ RSpec.feature "Add a transaction", type: :feature do
 
     within '.chart.chart--kudo.js-chart' do
       # 1342 + 99 = 1441
-      expect(page).to have_content("1.441 ₭")
+      expect(page).to have_content("1441 ₭")
     end
   end
 end

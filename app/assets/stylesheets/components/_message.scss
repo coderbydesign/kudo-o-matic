@@ -6,6 +6,14 @@
     float: right;
     cursor: pointer;
   }
+
+  .fa-exclamation-circle {
+    margin-right: $whitespace;
+  }
+
+  .fa-info-circle {
+    margin-right: $whitespace;
+  }
 }
 
 .error-message {

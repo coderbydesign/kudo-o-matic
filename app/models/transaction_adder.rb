@@ -4,7 +4,6 @@ class TransactionAdder
     name  = params[:activity_name].to_s.downcase
     name = "#{params[:receiver_name]} for: #{name}" if receiver.nil?
     activity = Activity.find_or_create_by(name: name)
-
     transaction = Transaction.new(
         sender: current_user,
         receiver: receiver,
@@ -15,7 +14,6 @@ class TransactionAdder
 
     Transaction.transaction do
       transaction.save!
-      Balance.current.add(params[:amount])
       GoalReacher.check!
     end
 
