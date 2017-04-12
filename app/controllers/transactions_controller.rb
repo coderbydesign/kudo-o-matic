@@ -7,20 +7,11 @@ class TransactionsController < ApplicationController
     # TODO implement session authentication
     @transaction = Transaction.new
 
-    if params['filter'] == 'mine'
-      @transactions = Transaction.all_for_user(current_user)
-    elsif params['filter'] == 'send'
-      @transactions = Transaction.send_by_user(current_user)
-    elsif params['filter'] == 'send'
-      @transactions = Transaction.received_by_user(current_user)
-    else
-      @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
-    end
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    # if @transaction.save
+    #   redirect_to root_path
+    # else
+    #   render 'new'
+    # end
 
   end
 

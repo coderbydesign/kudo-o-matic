@@ -63,7 +63,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     height: 100%;
     position: relative;
     stroke: $dark-blue-color;
-    stroke-width: 1.25rem;
+    stroke-width: 20px;
     width: 100%;
   }// .kudo-chart__background
 
@@ -77,7 +77,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     stroke-dasharray: 630px;
     stroke-dashoffset: 630px;
     stroke-linecap: round;
-    stroke-width: 1.25rem;
+    stroke-width: 20px;
     stroke: $light-blue-color;
     top: 0;
     width: 100%;

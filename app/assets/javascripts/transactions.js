@@ -60,14 +60,4 @@ $(document).ready(function() {
     $('.current-user').click(function () {
         $(this).find('i').toggleClass('fa-bars fa-chevron-up')
     });
-
-    $('#send-kudos-button').click(function () {
-        console.log('yes');
-        if ($('#transaction_receiver_name') == '') {
-            console.log('test');
-            alert("Receiver name can't be empty")
-        }
-        else
-            console.log('txt')
-    });
 });
