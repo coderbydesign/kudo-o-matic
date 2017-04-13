@@ -1,16 +1,25 @@
 .statistics {
   border-radius: $border-radius;
-  background: linear-gradient(rgba($dark-blue-color,0.95), rgba($dark-blue-color,0.7));
+  background: linear-gradient(rgba($dark-blue-color,0.7), rgba($dark-blue-color,0.7));
   padding: $padding;
   max-height: 100%;
   margin-bottom: $margin-bottom;
-  flex-direction: column;
   max-width: none;
+  overflow: hidden;
 
   h1 {
     color: $text-color;
-    font-size: $font-size-medium;
+    font-size: $font-size-large;
     font-weight: 300;
+  }
+
+  .kudos {
+    border-top: solid 1px $white-color;
+    padding-top: $padding;
+
+    .month {
+      margin-top: $margin-top;
+    }
   }
 
   .all {
@@ -23,6 +32,7 @@
     display: inline-block;
     vertical-align: middle;
     font-weight: 300;
+    //max-width: 50%;
   }
 
   .label {
@@ -32,5 +42,6 @@
     vertical-align: middle;
     margin-left: $whitespace * 0.5;
     font-weight: 300;
+    width: 40%;
   }
 }

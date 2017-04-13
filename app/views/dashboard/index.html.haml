@@ -2,7 +2,9 @@
   .page
     .header
       .container-header
-        %img.header-logo{src:'https://www.kabisa.nl/images/kabisa-logo-d9ace243.png'}
+        -#%img.header-logo{src:'https://www.kabisa.nl/images/kabisa-logo-d9ace243.png'}
+        %h1.title
+          Kudo-o-Matic
     = render 'message'
     .body
       .container-left
@@ -10,6 +12,7 @@
         = render 'drop-down'
         = render 'achieved-goal'
         = render 'statistics'
+
       .container-center
         = render 'transaction'
         #results

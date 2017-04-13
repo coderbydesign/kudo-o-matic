@@ -14,7 +14,17 @@
 
   .header-logo {
     max-height: 4rem;
+    position: relative;
+    float: left;
+    margin-bottom: $margin-bottom;
+  }
 
+  .title {
+    font-family: Orbitron;
+    text-align: center;
+    vertical-align: middle;
+    //display: inline-block;
+    margin-top: $margin-top;
   }
 }
 
@@ -30,10 +40,16 @@
 
 @media screen and (max-width: 1200px) {
   .container-header {
-    text-align: center;
+
   }
 
   .header-logo {
     padding-left: 0;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .title {
+    font-size: 150%;
   }
 }
