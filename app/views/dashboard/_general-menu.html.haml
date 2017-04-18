@@ -1,8 +1,7 @@
 .dropdown
   %button.dropdown-button
-    .current-user
-      %img.current-user-image{src:current_user.picture_url}
-      = current_user
+    .general-menu
+      Menu
       %i.fa.fa-bars{'aria-hidden':true}
     .dropdown-content
       .menu-option.filter
@@ -15,10 +14,9 @@
         .filter-option.received
           My Received Transactions
           %i.fa.fa-square-o
+      .menu-option.guidelines
+        Guidelines
+        %i.fa.fa-list-ul{'aria-hidden':true}
       .menu-option.balance
         Balance History
         %i.fa.fa-history{'aria-hidden':true}
-      %a{href:destroy_user_session_path}
-        .menu-option
-          Sign Out
-          %i.fa.fa-sign-out{'aria-hidden':true}

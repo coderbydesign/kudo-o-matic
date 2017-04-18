@@ -1,0 +1,26 @@
+.profile-content {
+  display: none;
+  width: 100%;
+  font-size: $font-size-regular;
+  font-weight: 300;
+}
+
+.profile-content .menu-option {
+  border-top: 1px solid $dark-blue-color;
+  margin-top: $margin-top;
+  padding: $padding-small;
+  width: 100%;
+}
+
+.profile-content .menu-option:hover {
+  transform: translateZ(0);
+  transition-duration: 0.5s;
+  transition-property: color;
+  background: $dark-blue-color;
+  color: $text-color;
+  border-top: 1px solid $white-color;
+}
+
+.fa-sign-out {
+  float: right;
+}

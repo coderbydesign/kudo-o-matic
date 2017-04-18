@@ -21,17 +21,22 @@ $(document).ready(function() {
 
     // Error container hide
     $('.message-container .fa-times').click(function () {
-        $('.message-container').fadeOut(325);
+        $('.message-container').fadeOut(250);
     });
 
     // Goals container toggle show/hide
     $('.expand-collapse i.fa.fa-chevron-down').click(function () {
-        $('.chart--second-goal').slideToggle(325);
+        $('.chart--second-goal').slideToggle(250);
     });
 
     // Dropdown menu toggle show/hide
     $('button.dropdown-button .current-user').click(function () {
-        $('.dropdown-content').slideToggle(325);
+        $('.profile-content').slideToggle(250);
+    });
+
+    // Dropdown profile toggle show/hide
+    $('button.dropdown-button .general-menu').click(function () {
+        $('.dropdown-content').slideToggle(250);
     });
 
     // Kudometer icons toggle on max width 1200px
@@ -47,7 +52,7 @@ $(document).ready(function() {
     });
 
     // Menu icons toggle
-    $('.current-user').click(function () {
+    $('.general-menu').click(function () {
         $(this).find('i').toggleClass('fa-bars fa-chevron-up')
     });
 });

@@ -2,35 +2,6 @@ button {
   cursor: pointer;
 }
 
-.transaction-button {
-  padding: $padding;
-  font-size: 120%;
-  text-align: left;
-  width: 100%;
-  font-weight: 300;
-  border-radius: $border-radius;
-  color: $transaction-button-text;
-  background: linear-gradient($transaction-button-background);
-  border: none;
-  margin-bottom: $margin-bottom;
-  transform: translateZ(0);
-  transition-duration: 0.5s;
-  transition-property: color;
-}
-
-.transaction-button:hover {
-  transform: translateZ(0);
-  transition-duration: 0.5s;
-  transition-property: color;
-  background: $light-grey-color;
-  color: $dark-blue-color;
-  font-weight: 500;
-}
-
-.fa-pencil-square {
-  float: right;
-}
-
 #send-kudos-button {
   margin-top: $margin-top;
   border-radius: $border-radius-small;
@@ -86,9 +57,12 @@ button {
   transition-property: color;
 
   .current-user-image {
-    vertical-align: middle;
     max-width: 2rem;
-    margin-right: $whitespace;
+    float: right;
+  }
+
+  .username {
+    vertical-align: middle;
   }
 
   .filter-option {
@@ -97,13 +71,11 @@ button {
 
   .fa-bars {
     vertical-align: middle;
-    margin-top: $margin-top * 0.5;
     float: right;
   }
 
   .fa-chevron-up {
     vertical-align: middle;
-    margin-top: $margin-top * 0.5;
     float: right;
   }
 }
