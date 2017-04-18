@@ -1,4 +1,12 @@
 .timeline-container
+  -#- @achieved_goal.each do |goal|
+  -#  .transaction-container
+  -#    .transaction-header-container
+  -#    .transaction-body-container
+  -#      Achieved goal:
+  -#      = goal.name
+  -#      %span.post-time-stamp
+  -#        = "#{distance_of_time_in_words(DateTime.now, goal.updated_at)} ago"
   - @transactions.each do |transaction|
     .transaction-container
       .transaction-header-container

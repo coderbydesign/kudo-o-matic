@@ -2,7 +2,6 @@
   %div
     %h1.transaction-container-title
       Give ₭udo's!
-      %i.fa.fa-times
     = simple_form_for @transaction do |f|
       .receiver
         = f.input_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false, placeholder: 'Receiver', required: true , maxlength: '35'

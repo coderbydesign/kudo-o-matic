@@ -19,16 +19,6 @@ $(document).ready(function() {
         $('.hidden-menu.filter').slideToggle("slow");
     });
 
-    // Transaction container show
-    $('button.transaction-button').click(function () {
-        $('#create-transaction-container').slideDown(325);
-    });
-
-    // Transaction container hide
-    $('#create-transaction-container i.fa.fa-times').click(function () {
-        $('#create-transaction-container').slideUp(325);
-    });
-
     // Error container hide
     $('.message-container .fa-times').click(function () {
         $('.message-container').fadeOut(325);

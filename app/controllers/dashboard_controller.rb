@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
     @goals          = Goal.all.order(:cached_votes_up => :desc)
     @balance        = Balance.current.decorate
     @transaction    = Transaction.new
+    @achieved_goal  = Goal.where(balance: Balance.current).where.not(achieved_on: nil).order('achieved_on desc')
 
     if params['filter'] == 'mine'
       @transactions = Transaction.all_for_user(current_user)
@@ -20,7 +21,7 @@ class DashboardController < ApplicationController
     else
       @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
     end
-    respond_to do |format|
+    respond_to do |format|Goal.where(balance: Balance.current).where.not(achieved_on: nil).order('achieved_on desc')
       format.html
       format.js
     end
