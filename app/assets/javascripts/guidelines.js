@@ -16,13 +16,13 @@ $(document).ready(function() {
                 for (var i = 0; i < data.length; i++) {
                     data[i] = wrap_activity_in_li(data[i])
                 }
-                $this.html($('<ul>').html(data));
+                $this.html($('<table>').html(data));
             });
         })
     });
 
     function wrap_activity_in_li(activity){
-        return activity = '<li>' + activity[0] + '<span class="highlighted"> ' +  activity[1] + '</span>' +'</li>';
+        return activity = '<tr><th>' + activity[0] + '<th class="highlighted"> ' +  activity[1] + '</th>' +'</th></tr>';
     }
 
     $('#transaction_amount').keyup(function(){

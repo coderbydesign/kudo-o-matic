@@ -6,8 +6,13 @@
 
 
   .suggested-guidelines {
-    li {
+    th {
       line-height: 1.5rem;
+      text-align: left;
+    }
+
+    th.highlighted {
+      padding-left: $padding-small;
     }
   }
 }
