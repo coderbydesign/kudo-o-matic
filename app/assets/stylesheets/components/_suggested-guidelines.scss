@@ -4,15 +4,25 @@
   border-radius: $border-radius;
   margin-bottom: $margin-bottom;
 
+  .suggested--guidelines-header {
+    font-size: $font-size-medium;
+  }
 
   .suggested-guidelines {
     th {
       line-height: 1.5rem;
+      border-top: solid 1px $dark-blue-color;
+      padding: $padding-small 0;
+    }
+
+    th.guideline {
       text-align: left;
+      width: 100%;
     }
 
     th.highlighted {
-      padding-left: $padding-small;
+      text-align: right;
+      width: 100%;
     }
   }
 }

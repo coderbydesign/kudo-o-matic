@@ -22,7 +22,7 @@ $(document).ready(function() {
     });
 
     function wrap_activity_in_li(activity){
-        return activity = '<tr><th>' + activity[0] + '<th class="highlighted"> ' +  activity[1] + '</th>' +'</th></tr>';
+        return activity = '<tr><th class="guideline">' + activity[0] + '<th class="highlighted">' +  activity[1] + '</th>' +'</th></tr>';
     }
 
     $('#transaction_amount').keyup(function(){
