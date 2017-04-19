@@ -1,11 +1,8 @@
 .dropdown
-  %button.dropdown-button
-    .current-user
-      %span.username
-        = current_user
-      %img.current-user-image{src:current_user.picture_url}
-    .profile-content
-      %a{href:destroy_user_session_path}
-        .menu-option
-          Sign Out
-          %i.fa.fa-sign-out{'aria-hidden':true}
+  %button.dropdown-button.current-user{type:'button'}
+    = current_user
+    %img{src:current_user.picture_url}
+  %a.profile-content{href:destroy_user_session_path}
+    -#.menu-option
+    Sign Out
+    %i.fa.fa-sign-out{'aria-hidden':true}

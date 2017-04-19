@@ -29,21 +29,19 @@ $(document).ready(function() {
         $('.chart--second-goal').slideToggle(250);
     });
 
-    // Dropdown menu toggle show/hide
-    $('button.dropdown-button .current-user').click(function () {
+    // Dropdown profile toggle show/hide
+    $('.current-user').click(function () {
         $('.profile-content').slideToggle(250);
     });
 
-    // Dropdown profile toggle show/hide
+    // Dropdown meny toggle show/hide
     $('button.dropdown-button .general-menu').click(function () {
         $('.dropdown-content').slideToggle(250);
     });
 
     // Kudometer icons toggle on max width 1200px
-    $(function () {
-        $('span').click(function () {
-            $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
-        });
+    $('span').click(function () {
+        $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
     });
 
     // Checkbox icons toggle

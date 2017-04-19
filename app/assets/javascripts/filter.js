@@ -26,4 +26,9 @@ $(document).ready(function() {
             });
         }
     });
+
+    $('.filter-btn').click(function () {
+        // $(this).find('filter-option').slideToggle();
+        $(this).find('i').toggleClass('fa-chevron-right fa-chevron-left')
+    });
 });

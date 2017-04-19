@@ -1,6 +1,11 @@
 .dropdown {
   width: 100%;
   margin-bottom: $margin-bottom;
+  background: linear-gradient(rgba($dark-blue-color,0.95), rgba($dark-blue-color,0.7));
+  color: $text-color;
+  font-size: $font-size-medium;
+  border-radius: $border-radius;
+  font-weight: 300;
 }
 
 .dropdown-content {
@@ -17,41 +22,25 @@
   width: 100%;
 }
 
-.dropdown-content .menu-option:hover {
-  transform: translateZ(0);
-  transition-duration: 0.5s;
-  transition-property: color;
-  background: $dark-blue-color;
-  color: $text-color;
-  border-top: 1px solid $white-color;
-}
+//.dropdown-content .menu-option:hover {
+//  transform: translateZ(0);
+//  transition-duration: 0.5s;
+//  transition-property: color;
+//  background: $dark-blue-color;
+//  color: $text-color;
+//  border-top: 1px solid $white-color;
+//}
 
-.hidden-menu {
-  display: none;
-}
 
-.filter-option {
-  transform: translateZ(0);
-  transition-duration: 0.5s;
-  transition-property: color;
-  border-top: 1px solid $dark-blue-color;
-  margin-top: $margin-top;
-  padding: $padding-small;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  color: $dark-blue-color;
-  font-size: 80%;
-}
 
-.filter-option:hover {
-  transform: translateZ(0);
-  transition-duration: 0.5s;
-  transition-property: color;
-  background: $dark-blue-color;
-  color: $text-color !important;
-  border-top: 1px solid $white-color;
-}
+//.filter-option:hover {
+//  transform: translateZ(0);
+//  transition-duration: 0.5s;
+//  transition-property: color;
+//  background: $dark-blue-color;
+//  color: $text-color !important;
+//  border-top: 1px solid $white-color;
+//}
 
 .fa-history {
   float: right;
@@ -65,13 +54,7 @@
   float: right;
 }
 
-.fa-square-o {
-  float: right;
-}
 
-.fa-check-square-o {
-  float: right;
-}
 
 @media screen and (min-width: 1200px) {
 

@@ -1,5 +1,11 @@
 button {
+  background: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
   cursor: pointer;
+  font-size: inherit;
 }
 
 #send-kudos-button {
@@ -43,55 +49,62 @@ button {
 }
 
 .dropdown-button {
-  background: linear-gradient(rgba($dark-blue-color,0.95), rgba($dark-blue-color,0.7));
-  color: $text-color;
-  padding: $padding;
-  font-size: $font-size-medium;
-  border: none;
-  border-radius: $border-radius;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   width: 100%;
+  position: relative;
+  padding: $padding-small;
+  padding-right: $dropdown-button-size;
   text-align: left;
-  font-weight: 300;
-  transform: translateZ(0);
-  transition-duration: 0.5s;
-  transition-property: color;
+  color: $text-color;
+  min-height: $dropdown-button-size;
 
-  .current-user-image {
-    max-width: 2rem;
-    float: right;
+
+  img, i {
+    position: absolute;
+    right: $padding-small;
+    top: 50%;
+    width: $dropdown-button-size - ($padding-small * 2);
+    height: $dropdown-button-size - ($padding-small * 2);
+    transform: translateY(-50%);
   }
 
-  .username {
-    vertical-align: middle;
+  i::before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
   }
 
-  .filter-option {
-    color: $white-color
-  }
 
-  .fa-bars {
-    vertical-align: middle;
-    float: right;
-  }
-
-  .fa-chevron-up {
-    vertical-align: middle;
-    float: right;
-  }
+  //.filter-option {
+  //  color: $white-color
+  //}
+  //
+  //.fa-bars {
+  //  vertical-align: middle;
+  //  float: right;
+  //}
+  //
+  //.fa-chevron-up {
+  //  vertical-align: middle;
+  //  float: right;
+  //}
 }
 
-.dropdown-button:hover {
-  transform: translateZ(0);
-  transition-duration: 0.5s;
-  transition-property: color;
-  background: $light-grey-color;
-  color: $dark-blue-color;
-  font-weight: 500;
-
-  .filter-option {
-    color: $dark-blue-color
-  }
-}
+//.dropdown-button:hover {
+//  transform: translateZ(0);
+//  transition-duration: 0.5s;
+//  transition-property: color;
+//  background: $light-grey-color;
+//  color: $dark-blue-color;
+//  font-weight: 500;
+//
+//  .filter-option {
+//    color: $dark-blue-color
+//  }
+//}
 
 @media screen and (min-width: 1200px) {
 
