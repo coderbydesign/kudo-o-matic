@@ -71,7 +71,7 @@ class SlackNotifications
   end
 
   def receiver_slack_mention
-    if transaction.receiver.try(:slack_name)
+    if transaction.receiver && !transaction.receiver.slack_name.empty?
       " (<@#{transaction.receiver.slack_name}>)"
     else
       ''
