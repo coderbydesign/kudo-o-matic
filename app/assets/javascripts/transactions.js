@@ -44,10 +44,7 @@ $(document).ready(function() {
         $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
     });
 
-    // Checkbox icons toggle
-    $('.filter-option').click(function () {
-        $(this).find('i').toggleClass('fa-square-o fa-check-square-o')
-    });
+
 
     // Menu icons toggle
     $('.general-menu').click(function () {

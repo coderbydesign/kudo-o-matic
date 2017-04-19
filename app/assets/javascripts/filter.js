@@ -1,4 +1,20 @@
 $(document).ready(function() {
+    // Checkbox icons toggle
+    $('.filter-option').click(function () {
+        $(this).find('i').toggleClass('fa-square-o fa-check-square-o')
+    });
+
+    $('.filter-btn.click').click(function () {
+        // $(this).find('filter-option').slideToggle();
+        $(this).find('i').toggleClass('fa-chevron-right fa-chevron-left')
+    });
+
+    $('.filter-btn.click').click(function () {
+        $('.filter-option').toggle()
+    });
+
+
+
     $('.filter-option').click(function () {
         if ($('.filter-option.send i').hasClass('fa-check-square-o') && $('.filter-option.received i').hasClass('fa-check-square-o')) {
             $.ajax({
@@ -25,10 +41,5 @@ $(document).ready(function() {
                 }
             });
         }
-    });
-
-    $('.filter-btn').click(function () {
-        // $(this).find('filter-option').slideToggle();
-        $(this).find('i').toggleClass('fa-chevron-right fa-chevron-left')
     });
 });
