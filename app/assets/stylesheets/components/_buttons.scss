@@ -9,23 +9,13 @@ button {
 }
 
 #send-kudos-button {
-  margin-top: $margin-top;
+  margin-top: $whitespace;
   border-radius: $border-radius-small;
   color: $primary-button-text;
-  background: $primary-button-background;
-  transform: translateZ(0);
-  transition-duration: 0.5s;
-  transition-property: color;
   float: left;
   cursor: pointer;
-}
-
-#send-kudos-button:hover {
-  transform: translateZ(0);
-  transition-duration: 0.5s;
-  transition-property: color;
-  color: $primary-button-text-hover;
-  background: $primary-button-background-hover;
+  height: 1.5rem;
+  font-weight: 400;
 }
 
 #like-button {

@@ -42,18 +42,12 @@
       resize: none;
     }
     .receiver {
-      label {
-        float: left;
-      }
       input {
         float: left;
         width: 50%;
       }
     }
     .amount {
-      label {
-        float: left;
-      }
       input {
         float: left;
       }
@@ -63,6 +57,7 @@
         margin-top: $whitespace;
       }
     }
+
   }
 }
 

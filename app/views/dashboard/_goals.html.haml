@@ -1,0 +1,38 @@
+.goal-container
+  %ul.progress-tracker.progress-tracker--left.progress-tracker--vertical
+    - Goal.all.where(balance: Balance.current).order('amount asc').each do |goal|
+      - if goal.achieved_on != nil
+        %li.progress-step.is-complete
+          %span.progress-marker
+            %i.fa.fa-unlock
+          %span.progress-text
+            %h3.progress-title.highlighted
+              = goal.name
+              |
+              = goal.amount
+              ₭
+            = goal.achieved_on
+      - elsif Goal.next == goal
+        %li.progress-step.is-active
+          %span.progress-marker{style:"box-shadow: 0 0 8px #fff;"}
+            %i.fa.fa-dot-circle-o
+          %span.progress-text
+            %h3.progress-title.highlighted
+              = goal.name
+              |
+              = goal.amount
+              ₭
+            = (goal.amount - Balance.current.amount)
+            ₭ left
+      - else
+        %li.progress-step
+          %span.progress-marker
+            %i.fa.fa-lock
+          %span.progress-text
+            %h3.progress-title.highlighted
+              = goal.name
+              |
+              = goal.amount
+              ₭
+            = (goal.amount - Balance.current.amount)
+            ₭ left

@@ -35,7 +35,7 @@ $(document).ready(function() {
     });
 
     // Dropdown meny toggle show/hide
-    $('button.dropdown-button .general-menu').click(function () {
+    $('.general-menu').click(function () {
         $('.dropdown-content').slideToggle(250);
     });
 

@@ -12,6 +12,6 @@
       .activity
         = f.input_field :activity_name, as: :text, data: { autocomplete_source: activities_autocomplete_path}, field_id: false,  placeholder: "Write here the reason why you are giving ₭udo's", required: true, maxlength: '60'
       .submit
-        = f.submit t('dashboard.submit_kudos'), class: 'fa fa-paper-plane', id: 'send-kudos-button'
+        = f.submit t('dashboard.submit_kudos'), id: 'send-kudos-button'
     -#%span
       %i.fa.fa-chevron-down

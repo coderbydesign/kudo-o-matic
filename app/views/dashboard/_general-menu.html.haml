@@ -1,21 +1,10 @@
 .dropdown
-  %button.dropdown-button.general-menu
+  %button.dropdown-button.general-menu{type:'button'}
     Menu
     %i.fa.fa-bars{'aria-hidden':true}
-  .dropdown-content
-    .menu-option.filter
-      Filter Transactions
-      %i.fa.fa-paper-plane{'aria-hidden':true}
-    .hidden-menu.filter
-      .filter-option.send
-        My Send Transactions
-        %i.fa.fa-square-o
-      .filter-option.received
-        My Received Transactions
-        %i.fa.fa-square-o
-    .menu-option.guidelines
-      Guidelines
-      %i.fa.fa-list-ul{'aria-hidden':true}
-    .menu-option.balance
-      Balance History
-      %i.fa.fa-history{'aria-hidden':true}
+  %button.dropdown-content{type:'button'}
+    Guidelines
+    %i.fa.fa-list-ul{'aria-hidden':true}
+  %a.dropdown-content{href:'#'}
+    Balance History
+    %i.fa.fa-history{'aria-hidden':true}

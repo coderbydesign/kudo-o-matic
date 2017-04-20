@@ -6,12 +6,14 @@
         %h1.title
           Kudo-o-Matic
     = render 'message'
+
     .body
       .container-left
         = render 'profile-menu'
         = render 'general-menu'
         = render 'achieved-goal'
         = render 'statistics'
+        -#= render 'goals'
       .container-center
         = render 'transaction'
         = render 'filter'
