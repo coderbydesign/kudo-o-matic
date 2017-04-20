@@ -80,6 +80,6 @@ class SlackNotifications
 
   def kudos_until_goal
     kudos_left = Goal.next.amount - Balance.current.amount
-    "Only #{kudos_left} ₭ left until the next goal has been reached! "
+    "Only #{kudos_left} ₭ left until the next goal is reached! "
   end
 end

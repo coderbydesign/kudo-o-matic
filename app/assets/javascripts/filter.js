@@ -4,9 +4,14 @@ $(document).ready(function() {
         $(this).find('i').toggleClass('fa-square-o fa-check-square-o')
     });
 
+    // $('.filter-btn.click').click(function () {
+    //     // $(this).find('filter-option').slideToggle();
+    //     $(this).find('i').toggleClass('fa-chevron-right fa-chevron-left')
+    // });
+
     $('.filter-btn.click').click(function () {
         // $(this).find('filter-option').slideToggle();
-        $(this).find('i').toggleClass('fa-chevron-right fa-chevron-left')
+        $(this).find('i').toggleClass('fa-minus fa-plus')
     });
 
     $('.filter-btn.click').click(function () {

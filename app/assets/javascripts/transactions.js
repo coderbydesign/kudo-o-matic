@@ -26,7 +26,7 @@ $(document).ready(function() {
 
     // Goals container toggle show/hide
     $('.expand-collapse i.fa.fa-chevron-down').click(function () {
-        $('.chart--second-goal').slideToggle(250);
+        $('.goal-container').slideToggle(250);
     });
 
     // Dropdown profile toggle show/hide
@@ -43,8 +43,6 @@ $(document).ready(function() {
     $('span').click(function () {
         $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
     });
-
-
 
     // Menu icons toggle
     $('.general-menu').click(function () {

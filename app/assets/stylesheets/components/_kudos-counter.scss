@@ -172,19 +172,12 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 }
 
 @media screen and (min-width: 1200px) {
-  .chart--second-goal {
-    display: block !important;
-  }
 }
 
 @media screen and (max-width: 1200px) {
 
   .kudo-counter {
     margin-top: $margin-top;
-  }
-
-  .chart--second-goal {
-    display: none;
   }
 
   .expand-collapse {

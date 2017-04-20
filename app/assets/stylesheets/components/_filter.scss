@@ -20,13 +20,22 @@
   display: inline-block;
 }
 
-.fa-square-o {
+.fa-minus {
+  padding-left: $whitespace * 0.5;
+}
+
+.fa-plus {
+  padding-left: $whitespace * 0.5;
+}
+
+@media screen and (min-width: 535px) {
 
 }
 
-.fa-check-square-o {
-
+@media screen and (max-width: 535px) {
+  .filter-btn {
+    width: 100%;
+  }
 }
-
 
 
