@@ -1,0 +1,78 @@
+///////////////////////////////////////////////////////////
+//
+// Base dropdown
+//
+///////////////////////////////////////////////////////////
+
+.dropdown {
+  margin-bottom: $margin-bottom;
+  background: linear-gradient(rgba($dark-blue-color,0.95), rgba($dark-blue-color,0.7));
+  color: $text-color;
+  font-size: $font-size-medium;
+  border-radius: $border-radius;
+  font-weight: 300;
+
+  a {
+    display: flex;
+    padding: $padding-small;
+  }
+
+  .flex-item {
+    flex: 1;
+  }
+}
+
+.dropdown-container {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $text-color;
+  min-height: $dropdown-button-size;
+  align-items: center;
+}
+
+.dropdown-content {
+  display: none;
+}
+
+.menu-content {
+  width: 100%;
+  font-weight: 300;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: $dropdown-button-size;
+  border-top: 1px solid white;
+  align-items: center;
+}
+
+
+///////////////////////////////////////////////////////////
+//
+// General dropdown
+//
+///////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////
+//
+// Profile dropdown
+//
+///////////////////////////////////////////////////////////
+
+.current-user {
+  img, i {
+    width: $dropdown-button-size - ($padding-small * 2);
+    height: $dropdown-button-size - ($padding-small * 2);
+  }
+}
+
+
+@media screen and (min-width: 1200px) {
+
+}
+
+@media screen and (max-width: 1200px) {
+
+}

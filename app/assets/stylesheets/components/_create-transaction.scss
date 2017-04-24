@@ -19,11 +19,6 @@
   }
 
   .simple_form {
-    label {
-      margin-right: $whitespace;
-      color: $simple-form-label-text;
-      font-size: 0.95rem;
-    }
     input {
       margin-right: $whitespace;
       border: none;
@@ -41,23 +36,23 @@
       width: 100%;
       resize: none;
     }
-    .receiver {
-      input {
-        float: left;
-        width: 50%;
-      }
-    }
-    .amount {
-      input {
-        float: left;
-      }
-    }
-    .activity {
-      textarea {
-        margin-top: $whitespace;
-      }
-    }
+  }
+}
 
+.receiver {
+  input {
+    float: left;
+    width: 50%;
+  }
+}
+.amount {
+  input {
+    float: left;
+  }
+}
+.activity {
+  textarea {
+    margin-top: $whitespace;
   }
 }
 

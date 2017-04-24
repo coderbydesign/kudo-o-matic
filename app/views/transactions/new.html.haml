@@ -5,35 +5,7 @@
         %img.header-logo{src:'https://www.kabisa.nl/images/kabisa-logo-d9ace243.png'}
     .body
       .container-left
-
-        .counter
-          %ul.progress-tracker
-            - Goal.all.where(balance: Balance.current).order('amount asc').each do |goal|
-              - if goal.achieved_on != nil
-                %li.progress-step.is-complete
-                  %span.progress-marker
-                    -#Achieved Goals
-              - elsif Goal.next == goal
-                %li.progress-step.is-active
-                  %span.progress-marker
-                    -#Next goal
-              - else
-                %li.progress-step
-                  %span.progress-marker
-                    -#Not achieved
-
-          -#.counter-chart.counter-chart-kudo.js-counter-chart{'data-goals':200, 'data-counts':50}
-          -#  .counter-chart-container
-          -#    %svg.counter-chart-background{x:'0px', y:'0px', height: '220'}
-          -#      %g
-          -#        %path{d:'M30 0 v600 400'}
-          -#    %svg.counter-chart-foreground{x:'0px', y:'0px', height: '220'}
-          -#      %g
-          -#        %path{d:'M30 0 v600 400'}
-
-
-
-
+        -#= render 'dashboard/guideline-modal'
 
       .container-center
         -#= render 'dashboard/transaction'

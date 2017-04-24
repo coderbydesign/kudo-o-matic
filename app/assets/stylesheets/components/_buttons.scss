@@ -38,64 +38,6 @@ button {
   transition-property: color;
 }
 
-.dropdown-button {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  position: relative;
-  padding: $padding-small;
-  padding-right: $dropdown-button-size;
-  text-align: left;
-  color: $text-color;
-  min-height: $dropdown-button-size;
-
-
-  img, i {
-    position: absolute;
-    right: $padding-small;
-    top: 50%;
-    width: $dropdown-button-size - ($padding-small * 2);
-    height: $dropdown-button-size - ($padding-small * 2);
-    transform: translateY(-50%);
-  }
-
-  i::before {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-  }
-
-
-  //.filter-option {
-  //  color: $white-color
-  //}
-  //
-  //.fa-bars {
-  //  vertical-align: middle;
-  //  float: right;
-  //}
-  //
-  //.fa-chevron-up {
-  //  vertical-align: middle;
-  //  float: right;
-  //}
-}
-
-//.dropdown-button:hover {
-//  transform: translateZ(0);
-//  transition-duration: 0.5s;
-//  transition-property: color;
-//  background: $light-grey-color;
-//  color: $dark-blue-color;
-//  font-weight: 500;
-//
-//  .filter-option {
-//    color: $dark-blue-color
-//  }
-//}
-
 @media screen and (min-width: 1200px) {
 
 }

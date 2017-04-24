@@ -14,9 +14,12 @@
           = "+#{transaction.amount}"
           %span.currency
             ₭
+        -#.transaction-avatar-container
+        -#  %div
+        -#    = image_tag User.find(transaction.sender_id).picture_url, class:'sender'
         .transaction-avatar-container
           %div
-            = image_tag transaction.receiver_image, class:'avatar'
+            = image_tag transaction.receiver_image, class:'sender'
       .transaction-body-container
         .transaction-content
           %span

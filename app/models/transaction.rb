@@ -15,16 +15,16 @@ class Transaction < ActiveRecord::Base
   delegate :name, to: :activity, prefix: true
 
   GUIDELINES =
-      [['Margin / month super (>=12% ROS)', 500],
-       ['Turnover / month super (>= 220k)', 500],
+      [['Margin / month super (>=15% ROS)', 500],
+       ['Turnover / month super (>= 350k)', 500],
        ['Score a project of >50 hours', 250],
-       ['Margin / month fine (>= 8% ROS <=12%)', 200],
-       ['Turnover / month fine (>= 200k; <= 220k)', 200],
+       ['Margin / month fine (>= 10% ROS <=15%)', 200],
+       ['Turnover / month fine (>= 300k; <= 350k)', 200],
        ['Get a client quote for the website', 100],
-       ['Margin / month reasonable (>= 4% ROS <=8%)', 100],
+       ['Margin / month reasonable (>= 5% ROS <= 10%)', 100],
        ['New colleague', 100],
        ['Speak at a conference', 100],
-       ['Turnover / month reasonable (>= 180k <= 200k)', 100],
+       ['Turnover / month reasonable (>= 280k <= 300k)', 100],
        ['Get a great client satisfaction score', 80],
        ['Organize event for external relations (workshop, coderetreat)', 50],
        ['Score consultancy project', 50],

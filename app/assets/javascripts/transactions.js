@@ -31,21 +31,21 @@ $(document).ready(function() {
 
     // Dropdown profile toggle show/hide
     $('.current-user').click(function () {
-        $('.profile-content').slideToggle(250);
+        $('.profile.dropdown-content').slideToggle(250);
     });
 
     // Dropdown meny toggle show/hide
     $('.general-menu').click(function () {
-        $('.dropdown-content').slideToggle(250);
-    });
-
-    // Kudometer icons toggle on max width 1200px
-    $('span').click(function () {
-        $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
+        $('.general.dropdown-content').slideToggle(250);
     });
 
     // Menu icons toggle
     $('.general-menu').click(function () {
         $(this).find('i').toggleClass('fa-bars fa-chevron-up')
+    });
+
+    // Kudometer icons toggle on max width 1200px
+    $('span.expand-collapse').click(function () {
+        $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
     });
 });

@@ -62,7 +62,7 @@ class SlackNotifications
            {
                fallback: 'New goal achieved!',
                color: '#B58342',
-               pretext: "<!channel> Great!! You and your colleagues just achieved a goal so don't forget to pick a date!\nThe achieved goal is: #{Goal.previous.name}! <#{root_url}|Click here> for more details.",
+               pretext: "<!channel> Great !! You and your colleagues just achieved a goal so don't forget to pick a date!\nThe achieved goal is: #{Goal.previous.name} :grinning::confetti_ball::sparkles:! <#{root_url}|Click here> for more details.",
                footer: "#{Settings.slack.company_name} | #{Settings.slack.company_project} | Achieved on: #{Goal.previous.achieved_on}",
                footer_icon: Settings.slack.company_icon
            }

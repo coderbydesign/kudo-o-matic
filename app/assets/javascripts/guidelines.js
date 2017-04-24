@@ -9,21 +9,19 @@ $(document).ready(function() {
         $('.amount-of-kudos').html(this.value);
 
         $.get("/kudo_guidelines?kudo_amount=" + this.value, function (data) {
-            $(".suggested-guidelines").html(data);
-            $('.suggested-guidelines').each(function () {
-                // debugger
-                var $this = $(this);
-                for (var i = 0; i < data.length; i++) {
-                    data[i] = wrap_activity_in_li(data[i])
-                }
-                $this.html($('<table>').html(data));
-            });
+            var list = $('.suggested-guidelines').empty();
+
+            for (var i = 0; i < data.length; i++) {
+                var listItem = $('<li>')
+                var listName = $('<span/>').text(data[i][0]).addClass('g-name highlighted');
+                var listValue = $('<span/>').text(data[i][1]).addClass('g-value');
+
+                listName.appendTo(listItem);
+                listValue.appendTo(listItem);
+                listItem.appendTo(list);
+            }
         })
     });
-
-    function wrap_activity_in_li(activity){
-        return activity = '<tr><th class="guideline">' + activity[0] + '<th class="highlighted">' +  activity[1] + '</th>' +'</th></tr>';
-    }
 
     $('#transaction_amount').keyup(function(){
         if (!this.value) {

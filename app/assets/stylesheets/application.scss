@@ -48,7 +48,6 @@
 @import 'components/layout';
 @import 'components/header';
 @import 'components/buttons';
-@import 'components/image-header';
 @import 'components/content';
 @import 'components/modal';
 @import 'components/sign-in';
@@ -57,17 +56,15 @@
 @import 'components/timeline';
 @import 'components/statistics';
 @import 'components/kudos-counter';
-@import 'components/general-menu';
-@import 'components/profile-menu';
-@import 'components/achieved-goal';
+@import 'components/dropdown-menus';
 @import 'components/message';
 @import 'components/suggested-guidelines';
 @import 'components/filter';
 @import 'components/goals';
+@import 'components/guideline-modal';
 
 //////////////////////////////
 
-//@import "responsive";
 
 //@import "bootstrap-sprockets";
 //@import "bootstrap";
@@ -75,6 +72,6 @@
 
 @import "dashboard";
 @import "transactions";
-//@import "bootstrap-modal";
+@import "bootstrap-modal";
 
 @import "jquery-ui";

@@ -9,20 +9,15 @@
   }
 
   .suggested-guidelines {
-    th {
-      line-height: 1.5rem;
-      border-top: solid 1px $dark-blue-color;
+
+    li {
+      display: flex;
       padding: $padding-small 0;
     }
 
-    th.guideline {
-      text-align: left;
-      width: 100%;
-    }
-
-    th.highlighted {
-      text-align: right;
-      width: 100%;
+    .g-name {
+      flex: 1;
+      padding-right: $padding-small;
     }
   }
 }
