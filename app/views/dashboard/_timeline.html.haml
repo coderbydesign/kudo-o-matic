@@ -11,15 +11,15 @@
     .transaction-container
       .transaction-header-container
         .transaction-kudos-container
-          = "+#{transaction.amount}"
-          %span.currency
-            ₭
-        -#.transaction-avatar-container
-        -#  %div
-        -#    = image_tag User.find(transaction.sender_id).picture_url, class:'sender'
+          %span.flex-item
+            = "+#{transaction.amount}"
+            %span.currency
+              ₭
         .transaction-avatar-container
-          %div
+          %span.flex-item
             = image_tag transaction.receiver_image, class:'sender'
+          %span.flex-item
+            = image_tag User.find(transaction.sender_id).picture_url, class:'receiver'
       .transaction-body-container
         .transaction-content
           %span

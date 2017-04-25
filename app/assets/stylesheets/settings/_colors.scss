@@ -30,12 +30,13 @@ $text-color-medium: $dark-grey-color;
 ///////////////////////////////////////////////////////////
 $transaction-button-background: rgba($dark-blue-color, 0.95), rgba($dark-blue-color, 0.7);
 $transaction-button-text: $white-color;
-$transaction-button-text-hover: $text-color-highlight;
 
 $primary-button-background: $dark-blue-color;
 $primary-button-text: rgba($text-color, 1.0);
-$primary-button-text-hover: rgba($text-color-highlight, 1.0);
-$primary-button-background-hover: rgba($white-color, 1.0);
+
+$transaction-button-background: $light-grey-color;
+$transaction-button-text: rgba($dark-blue-color, 1.0);
+
 
 ///////////////////////////////////////////////////////////
 //

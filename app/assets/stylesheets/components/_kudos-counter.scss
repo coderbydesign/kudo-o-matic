@@ -75,6 +75,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     position: absolute;
     stroke-dasharray: 630px;
     stroke-dashoffset: 630px;
+    stroke-linecap: round;
     stroke-width: 20px;
     stroke: $light-blue-color;
     top: 0;

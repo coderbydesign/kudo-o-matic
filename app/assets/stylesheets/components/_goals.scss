@@ -43,6 +43,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
 .goal-container {
   text-align: center;
   font-weight: 400;
+  margin-bottom: 2rem;
 }
 
 .progress-tracker {
@@ -120,7 +121,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
   //padding-bottom: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  //text-align: center;
+  font-size: 115%;
 }
 .progress-title {
   margin-top: 0;

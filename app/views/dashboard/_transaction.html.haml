@@ -1,4 +1,4 @@
-%div#create-transaction-container
+.create-transaction-container
   %div
     %h1.transaction-container-title
       Give ₭udo's!
@@ -11,8 +11,8 @@
         %span.currency
           -#₭
       .activity
-        = f.input_field :activity_name, as: :text, data: { autocomplete_source: activities_autocomplete_path}, field_id: false,  placeholder: "Write here the reason why you are giving ₭udo's", required: true, maxlength: '75'
+        = f.input_field :activity_name, as: :text, field_id: false,  placeholder: "Write here the reason why you are giving ₭udo's", required: true, maxlength: '90', class: 'character-count'
       .submit
-        = f.submit t('dashboard.submit_kudos'), id: 'send-kudos-button'
-    -#%span
-      %i.fa.fa-chevron-down
+        %span.flex-item
+          = f.submit t('dashboard.submit_kudos'), class: 'send-kudos-button'
+        %span.counter.flex-item

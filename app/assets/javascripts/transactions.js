@@ -48,4 +48,26 @@ $(document).ready(function() {
     $('span.expand-collapse').click(function () {
         $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
     });
+
+    // Characters left in activity input field
+    $('.counter').hide();
+    var textMax = $('.character-count').attr('maxLength');
+    console.log(textMax);
+    $('.counter').html(textMax);
+
+    $('.character-count').keyup(function() {
+        $('.counter').fadeIn('fast');
+        var textLength = $('.character-count').val().length;
+        var textRemaining = textMax - textLength;
+
+        $('.counter').html(textRemaining);
+    });
+
+    // Submit on enter in transaction textarea
+    $('.character-count').keypress(function(event) {
+        if (event.keyCode == 13 || event.which == 13) {
+            $('.send-kudos-button').click();
+            event.preventDefault();
+        }
+    });
 });

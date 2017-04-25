@@ -1,4 +1,4 @@
-#create-transaction-container {
+.create-transaction-container {
   padding: $padding;
   max-height: 100%;
   background: linear-gradient(rgba($dark-blue-color,0.95), rgba($dark-blue-color,0.7));
@@ -18,24 +18,25 @@
     cursor: pointer;
   }
 
-  .simple_form {
-    input {
-      margin-right: $whitespace;
-      border: none;
-      border-radius: $border-radius-small;
-      background-color: $simple-form-input-background;
-      color: $simple-form-input-text;
-      font-size: 0.95rem;
-    }
-    textarea {
-      border: none;
-      border-radius: $border-radius-small;
-      background-color: $simple-form-input-background;
-      color: $simple-form-input-text;
-      font-size: 0.95rem;
-      width: 100%;
-      resize: none;
-    }
+}
+
+.simple_form {
+  input {
+    margin-right: $whitespace;
+    border: none;
+    border-radius: $border-radius-small;
+    background-color: $simple-form-input-background;
+    color: $simple-form-input-text;
+    font-size: 0.95rem;
+  }
+  textarea {
+    border: none;
+    border-radius: $border-radius-small;
+    background-color: $simple-form-input-background;
+    color: $simple-form-input-text;
+    font-size: 0.95rem;
+    width: 100%;
+    resize: none;
   }
 }
 
@@ -54,6 +55,11 @@
   textarea {
     margin-top: $whitespace;
   }
+}
+
+.counter {
+  display: inline-block;
+  padding-top: 1.3rem;
 }
 
 @media screen and (min-width: 1200px) {
@@ -78,6 +84,16 @@
   }
 
   textarea {
-    height: 3.5rem;
+    height: 4.5rem;
+  }
+}
+
+@media screen and (max-width: 535px) {
+  .submit {
+    display: flex;
+  }
+
+  .flex-item {
+    flex: 1;
   }
 }
