@@ -5,24 +5,19 @@ $(document).ready(function(){
         $('.col-md-7').fadeIn(1000);
         console.log('test', this.value);
         $('#amount_of_kudo_clone').html(this.value);
-        $.get("/kudo_guidelines?kudo_amount=" + this.value, function(data){
-            console.log("getting guidelines", data);
-            $(".guidelines_container").html(data);
-            $('.guidelines_container').each(function() {
-               // debugger
-                var $this = $(this);
-                for (var i = 0; i < data.length; i++) {
-                    console.log("datarow", data[i][0], data[i][1])
-                    data[i] = wrap_activity_in_li(data[i])
-                }
-                $this.html($('<ul>').html(data));
-            });
+
+        $.get("/kudo_guidelines?kudo_amount=" + this.value, function (data) {
+            var list = $('.guidelines_container').empty();
+
+            for (var i = 0; i < data.length; i++) {
+                var listItem = $('<li>').text(data[i][0]);
+                var listValue = $('<span/>').text(data[i][1]);
+
+                listValue.appendTo(listItem);
+                listItem.appendTo(list);
+            }
         })
     });
-    function wrap_activity_in_li(activity){
-       return activity = '<li>' + activity[0] + '<span>' +  activity[1] + '</span>' +'</li>';
-
-    }
 
     $('#transaction_amount').keyup(function(){
         if (!this.value) {
