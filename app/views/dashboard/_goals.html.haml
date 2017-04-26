@@ -1,8 +1,9 @@
 .goal-container
   %ul.progress-tracker.progress-tracker--left.progress-tracker--vertical
-    - Goal.all.where(balance: Balance.current).order('amount asc').each do |goal|
+    - Goal.all.where(balance: Balance.current).order('amount desc').each do |goal|
       - if goal.achieved_on != nil
         %li.progress-step.is-complete
+          .progress-bar-complete
           %span.progress-marker
             %i.fa.fa-unlock
           %span.progress-text
@@ -14,8 +15,10 @@
             = goal.achieved_on
       - elsif Goal.next == goal
         %li.progress-step.is-active
+          .progress-bar
+            .progress-bar-inner{style: "height: #{@percentage}"}
           %span.progress-marker{style:"box-shadow: 0 0 8px #fff;"}
-            %i.fa.fa-dot-circle-o
+            %i.fa.fa-circle-o
           %span.progress-text
             %h3.progress-title.highlighted
               = goal.name
@@ -26,6 +29,7 @@
             ₭ left
       - else
         %li.progress-step
+          .progress-bar
           %span.progress-marker
             %i.fa.fa-lock
           %span.progress-text
@@ -36,3 +40,12 @@
               ₭
             = (goal.amount - Balance.current.amount)
             ₭ left
+    %li.progress-step.is-complete
+      .progress-bar-complete
+      %span.progress-marker
+        %i.fa.fa-dot-circle-o
+      %span.progress-text
+        %h3.progress-title.highlighted
+          Start
+          |
+          ₭

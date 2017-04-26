@@ -68,17 +68,45 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
   }
 
   // Path between markers, this is not created for the last step
-  &:not(:last-child)::after {
-    content: '';
-    display: block;
+  .progress-bar-inner {
     position: absolute;
-    z-index: -10;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    //z-index: 100000;
+    background: $light-blue-color;
+    border-top: 1px solid white;
+  }
+
+  // Path between markers, this is not created for the last step
+  .progress-bar {
+    position: absolute;
+    z-index: 2;
     top: $path-position;
     bottom: $path-position;
     right: - $marker-size-half;
     width: 100%;
     height: $path-height;
-    transition: background-color $animation-duration;
+    background: $medium-grey-color;
+  }
+
+  &:last-child .progress-bar {
+    display: none;
+  }
+
+  .progress-bar-complete {
+    position: absolute;
+    //z-index: -10;
+    top: $path-position;
+    bottom: $path-position;
+    right: - $marker-size-half;
+    width: 100%;
+    height: $path-height;
+    background: $light-blue-color;
+  }
+
+  &:last-child .progress-bar-complete {
+    display: none;
   }
 
   // Active state
@@ -100,14 +128,14 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 20;
+  z-index: 1;
   width: $marker-size;
   height: $marker-size;
   padding-bottom: 2px; // To align text within the marker
   color: #fff;
   font-weight: 400;
   border: 2px solid transparent;
-  border-radius: 50%;
+  border-radius: $border-radius;
   transition: background-color, border-color;
   transition-duration: $animation-duration;
 
@@ -154,7 +182,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
 
   // Active state
   &.is-active {
-    @include progress-state($light-blue-color);
+    @include progress-state($medium-grey-color, $path-color: $light-blue-color);
 
   }
 
@@ -362,14 +390,22 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
   flex-direction: column;
 
   .progress-step {
-    flex: 1 1 auto;
+    //flex: 1 1 auto;
 
-    &::after {
+    .progress-bar {
       right: auto;
-      top: $marker-size-half;
-      left: $path-position;
-      width: $path-height;
-      height: 100%;
+      top: 28px;
+      left: 0.5rem;
+      width: $path-height * 3;
+      height: 72%;
+    }
+
+    .progress-bar-complete {
+      right: auto;
+      top: 28px;
+      left: 0.5rem;
+      width: $path-height * 3;
+      height: 72%;
     }
   }
 

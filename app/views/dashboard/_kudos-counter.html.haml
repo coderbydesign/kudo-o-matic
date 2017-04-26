@@ -16,16 +16,17 @@
 
     .chart__count
       %div
-        %span.js-count{'data-count':Balance.current.amount}
+        %span.current-amount.js-count{'data-count':Balance.current.amount}
           = Balance.current.amount
         %span.kudo-currency
           ₭
-          = '/'
+      %span
+        = Goal.next.name
+        = '|'
         %span.js-count{'data-count':Goal.next.amount}
           = Goal.next.amount
         %span.kudo-currency
           ₭
-      = Goal.next.name
 
   = render 'goals'
 

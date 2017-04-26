@@ -1,10 +1,19 @@
 .filter
-  %button.filter-btn.click{type:'button'}
-    Filters
-    %i.fa.fa-minus
-  %button.filter-option.send.filter-btn{type:'button'}
-    My Send Transactions
-    %i.fa.fa-square-o
-  %button.filter-option.received.filter-btn{type:'button'}
-    My Received Transactions
-    %i.fa.fa-square-o
+  %button.btn.btn-primary.btn-filter.click{type:'button'}
+    %span.flex-span
+      %span.flex-item
+        My Transactions
+      %span
+        %i.fa.fa-filter
+  %button.btn.btn-primary.btn-filter.filter-option.send{type:'button'}
+    %span.flex-span
+      %span.flex-item
+        Send Transactions
+      %span
+        %i.fa.fa-square-o
+  %button.btn.btn-primary.btn-filter.filter-option.received{type:'button'}
+    %span.flex-span
+      %span.flex-item
+        Received Transactions
+      %span
+        %i.fa.fa-square-o

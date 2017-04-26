@@ -88,6 +88,11 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     font-size: $font-size-medium;
     position: relative;
 
+    .current-amount {
+      font-size: 140%;
+      text-align: center;
+    }
+
     div {
       color: #fff;
       font-size: 1.375rem;

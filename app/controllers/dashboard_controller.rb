@@ -11,6 +11,8 @@ class DashboardController < ApplicationController
     @balance        = Balance.current.decorate
     @transaction    = Transaction.new
     @achieved_goal  = Goal.where(balance: Balance.current).where.not(achieved_on: nil).order('achieved_on desc')
+    @number         = ((Balance.current.amount.to_f - Goal.previous.amount.to_f) / (Goal.next.amount.to_f - Goal.previous.amount.to_f)) * 100
+    @percentage     = helper.number_to_percentage(@number)
 
     if params['filter'] == 'mine'
       @transactions = Transaction.all_for_user(current_user)
@@ -26,4 +28,13 @@ class DashboardController < ApplicationController
       format.js
     end
   end
+
+  private
+
+  def helper
+    @helper ||= Class.new do
+      include ActionView::Helpers::NumberHelper
+    end.new
+  end
+
 end
