@@ -1,5 +1,5 @@
 @import 'icons/fontawesome-icons';
-@import "font-awesome";
+@import 'font-awesome';
 
 
 ///////////////////////////////////////////////////////////
@@ -65,13 +65,6 @@
 
 //////////////////////////////
 
+@import 'transactions';
 
-//@import "bootstrap-sprockets";
-//@import "bootstrap";
-
-
-@import "dashboard";
-@import "transactions";
-//@import "bootstrap-modal";
-
-@import "jquery-ui";
+@import 'jquery-ui';

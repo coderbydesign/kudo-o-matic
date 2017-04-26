@@ -34,14 +34,11 @@
   }
 
   .header-logo {
-    padding-left: $padding-small''
+    padding-left: $padding-small;
   }
 }
 
 @media screen and (max-width: 1200px) {
-  .container-header {
-
-  }
 
   .header-logo {
     padding-left: 0;
@@ -49,6 +46,7 @@
 }
 
 @media screen and (max-width: 720px) {
+
   .title {
     font-size: 150%;
   }

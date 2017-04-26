@@ -75,7 +75,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
     left: 0;
     //z-index: 100000;
     background: $light-blue-color;
-    border-top: 1px solid white;
+    border-top: 1px solid $white-color;
   }
 
   // Path between markers, this is not created for the last step
@@ -168,7 +168,8 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
     background-color: $path-color;
   }
 
-  .progress-text, .progress-step > a .progress-text {
+  .progress-text,
+  .progress-step > a .progress-text {
     color: $white-color;
   }
 }

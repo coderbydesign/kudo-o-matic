@@ -17,6 +17,8 @@ gem 'bourbon', '~> 4.3', '>= 4.3.4'
 
 gem 'rubocop', '~> 0.47.1', require: false
 
+gem 'scss_lint', require: false
+
 # Database
 gem 'pg', '~> 0.18'
 
