@@ -8,11 +8,12 @@ class DashboardController < ApplicationController
     @next           = Goal.next.decorate
     @iterate_goals  = Goal.goals
     @goals          = Goal.all.order(:cached_votes_up => :desc)
+    @current_goals  = Goal.all.where(balance: Balance.current).order('amount desc')
     @balance        = Balance.current.decorate
     @transaction    = Transaction.new
     @achieved_goal  = Goal.where(balance: Balance.current).where.not(achieved_on: nil).order('achieved_on desc')
     @number         = ((Balance.current.amount.to_f - Goal.previous.amount.to_f) / (Goal.next.amount.to_f - Goal.previous.amount.to_f)) * 100
-    @percentage     = helper.number_to_percentage(@number)
+    @percentage     = helper.number_to_percentage(@number, precision: 0)
 
     if params['filter'] == 'mine'
       @transactions = Transaction.all_for_user(current_user)
