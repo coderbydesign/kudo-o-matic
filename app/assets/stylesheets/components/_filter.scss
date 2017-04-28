@@ -1,11 +1,12 @@
 .filter {
   display: flex;
-  max-width: 60%;
+  max-width: 100%;
 }
 
 .filter-option {
   width: 100%;
   display: flex;
+  margin-left: $padding-small;
 }
 
 .click{
@@ -13,11 +14,11 @@
 }
 
 .send {
-  flex: 0.5;
+  flex: 1;
 }
 
 .received {
-  flex: 0.5;
+  flex: 1;
 }
 
 .fa-filter {
