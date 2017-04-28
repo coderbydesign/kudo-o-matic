@@ -1,25 +1,15 @@
 .timeline-container
-  -#- @achieved_goal.each do |goal|
-  -#  .transaction-container
-  -#    .transaction-header-container
-  -#    .transaction-body-container
-  -#      Achieved goal:
-  -#      = goal.name
-  -#      %span.post-time-stamp
-  -#        = "#{distance_of_time_in_words(DateTime.now, goal.updated_at)} ago"
   - @transactions.each do |transaction|
     .transaction-container
       .transaction-header-container
         .transaction-kudos-container
-          %span.flex-item
+          %span
             = "+#{transaction.amount}"
             %span.currency
               ₭
         .transaction-avatar-container
-          %span.flex-item
-            = image_tag transaction.receiver_image, class:'sender'
-          %span.flex-item
-            = image_tag User.find(transaction.sender_id).picture_url, class:'receiver'
+          = image_tag User.find(transaction.sender_id).picture_url, class:'sender'
+          = image_tag transaction.receiver_image, class:'receiver'
       .transaction-body-container
         .transaction-content
           %span

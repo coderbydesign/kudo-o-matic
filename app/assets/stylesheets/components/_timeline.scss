@@ -2,48 +2,52 @@
   height: 78%;
 
   .transaction-container {
-    padding: $padding;
-    background-color: rgba($dark-blue-color,0.7);
-    max-height: 100%;
+    background-color: rgba($dark-blue-color, 0.7);
     border-radius: $border-radius;
+    max-height: 100%;
     margin-bottom: $margin-bottom;
     overflow: hidden;
+    padding: $padding;
 
     .transaction-header-container {
       max-height: 10%;
 
       .transaction-kudos-container {
-        background-color: rgba($dark-blue-color,0.7);
-        height: 100%;
-        max-width: 100%;
-        font-size: 140%;
-        text-align: center;
-        vertical-align: middle;
-        float: left;
-        padding: $padding-small;
+        align-items: center;
+        background-color: rgba($dark-blue-color, 0.7);
         border-radius: $border-radius-small;
+        display: flex;
+        float: left;
+        font-size: 140%;
+        height: 2.5rem;
+        justify-content: center;
+        padding: $padding-small;
 
         .currency {
-          margin-left: -0.3em;
           font-size: 60%;
+          margin-left: -0.3em;
         }
       }
       .transaction-avatar-container {
-        max-width: 6rem;
-        display: flex;
+        display: inline-flex;
+        max-width: 2.5rem;
+        height: 2.5rem;
+        margin-left: $padding-small;
 
         .sender {
-          padding-left: $padding-small;
           max-width: 100%;
-          //border-radius: $border-radius-small;
+          border: 1px solid $light-blue-color;
+          border-right: 1px solid $light-blue-color;
+          border-bottom-left-radius: $border-radius-small;
+          border-top-left-radius: $border-radius-small;
         }
 
         .receiver {
-          padding: $padding-small;
-          padding-left: 0;
-          padding-top: 0;
           max-width: 100%;
-          //border-radius: $border-radius-small;
+          border: 1px solid $light-blue-color;
+          border-left: none;
+          border-bottom-right-radius: $border-radius-small;
+          border-top-right-radius: $border-radius-small;
         }
 
         .flex-item {
@@ -52,22 +56,22 @@
       }
     }
     .transaction-body-container {
-      color: rgba($white-color, 1.0);
-      margin-top: $margin-top * 0.5;
       border-radius: $border-radius-small;
-      height: 100%;
+      color: rgba($white-color, 1.0);
       font-size: 110%;
       font-weight: 300;
+      height: 100%;
       line-height: 110%;
+      margin-top: $margin-top * 0.5;
     }
 
     .post-time-stamp {
-      text-align: right;
-      padding-top: $padding;
+      color: rgba($medium-grey-color, 1.0);
+      float: right;
       font-size: 90%;
       font-weight: 300;
-      float: right;
-      color: rgba($medium-grey-color, 1.0);
+      padding-top: $padding;
+      text-align: right;
     }
   }
 }
