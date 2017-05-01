@@ -1,5 +1,5 @@
 jQuery(function() {
-    return $('#transaction_receiver_name').autocomplete({
+    return $('#transaction_receiver_name').autocomplete ({
         source: $('#transaction_receiver_name').data('autocomplete-source'),
         autoFocus: true,
         maxShowItems: 5
@@ -52,7 +52,6 @@ $(document).ready(function() {
     // Characters left in activity input field
     $('.counter').hide();
     var textMax = $('.character-count').attr('maxLength');
-    console.log(textMax);
     $('.counter').html(textMax);
 
     $('.character-count').keyup(function() {

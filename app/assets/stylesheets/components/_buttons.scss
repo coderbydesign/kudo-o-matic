@@ -26,6 +26,11 @@ button {
   text-align: left;
 }
 
+.btn-close {
+  padding-top: $padding-small;
+  color: $white-color
+}
+
 .flex-span {
   display: flex;
   width: 100%;
@@ -61,11 +66,12 @@ button {
 }
 
 @media screen and (min-width: 1200px) {
-
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 1200px) {
-
 }
 
 @media screen and (max-width: 535px) {

@@ -22,11 +22,11 @@
           ₭
       %span
         = Goal.next.name
-        %br
-        %span.js-count{'data-count':Goal.next.amount}
-          = Goal.next.amount
-        %span.kudo-currency
-          ₭
+        |
+      %span.js-count{'data-count':Goal.next.amount}
+        = Goal.next.amount
+      %span.kudo-currency
+        ₭
 
   = render 'goals'
 

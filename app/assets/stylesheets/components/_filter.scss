@@ -30,8 +30,16 @@
 }
 
 @media screen and (max-width: 535px) {
-  .filter-btn {
+  .btn-filter {
     width: 100%;
+  }
+
+  .filter {
+    display: block;
+  }
+
+  .filter-option {
+    margin-left: 0;
   }
 }
 

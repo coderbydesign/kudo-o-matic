@@ -37,7 +37,8 @@ class Transaction < ActiveRecord::Base
        ['Call for Proposal for a conference', 20],
        ['Lunch&Learn', 20],
        ['Visit conference', 20],
-       ['Be a great help for someone', 10],
+       ['Be a special help for someone', 10],
+       ['Be a quick help for someone', 5],
        ['Start a meeting in time', 1]]
 
   def self.guidelines_between(from, to)

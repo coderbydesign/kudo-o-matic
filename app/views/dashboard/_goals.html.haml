@@ -8,10 +8,10 @@
             %i.fa.fa-unlock
           %span.progress-text
             %h3.progress-title.highlighted
-              = goal.name
-              %br
               = goal.amount
               ₭
+              %br
+              = goal.name
             = goal.achieved_on
       - elsif Goal.next == goal
         %li.progress-step.is-active
@@ -22,10 +22,10 @@
               = @percentage
           %span.progress-text
             %h3.progress-title.highlighted
-              = goal.name
-              %br
               = goal.amount
               ₭
+              %br
+              = goal.name
             = (goal.amount - Balance.current.amount)
             ₭
             %span.left-text
@@ -37,10 +37,10 @@
             %i.fa.fa-lock
           %span.progress-text
             %h3.progress-title.highlighted
-              = goal.name
-              %br
               = goal.amount
               ₭
+              %br
+              = goal.name
             = (goal.amount - Balance.current.amount)
             ₭
             %span.left-text

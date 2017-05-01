@@ -120,7 +120,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     }// .chart__container
 
     .chart__count {
-      top: -135px;
+      top: -145px;
     }// .chart__count
 
   }// .chart__container
@@ -146,7 +146,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
       color: $color-gray-light;
       display: inline-block;
       font-size: 0.875rem;
-      padding-left: 0.25rem;
+      //padding-left: 0.25rem;
       position: relative;
       text-align: left;
       overflow: hidden;
