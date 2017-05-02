@@ -14,18 +14,18 @@
 
   a {
     display: flex;
-    padding: $padding-small;
+    padding: 0.5rem;
     cursor: pointer;
   }
 
-  .flex-item {
-    flex: 1;
-  }
+  //.flex-item {
+  //  flex: 1;
+  //}
 }
 
 .dropdown-container {
   white-space: nowrap;
-  overflow: hidden;
+  //overflow: hidden;
   text-overflow: ellipsis;
   color: $text-color;
   min-height: $dropdown-button-size;
@@ -42,8 +42,9 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-height: $dropdown-button-size;
-  border-top: 1px solid white;
+  min-height: $dropdown-button-size - 1rem;
+  border-top: 1px solid $dark-blue-color;
+  border-bottom: 1px solid $dark-blue-color;
   align-items: center;
 }
 
@@ -63,9 +64,48 @@
 ///////////////////////////////////////////////////////////
 
 .current-user {
-  img, i {
-    width: $dropdown-button-size - ($padding-small * 2);
-    height: $dropdown-button-size - ($padding-small * 2);
+
+  img {
+    margin-top: -20px;
+    width: 3rem;
+    height: 3rem;
+    margin-left: 0.5rem;
+    border-radius: $border-radius;
+    border: 2px solid $light-grey-color;
+  }
+
+  .fa {
+    font-size: $font-size-regular;
+    padding-left: $padding-small * 0.5;
+  }
+
+  .username {
+    padding-left: $padding;
+  }
+}
+
+.user-statistics-container {
+  display: flex;
+  padding-left: $padding-small;
+  padding-bottom: $padding-small;
+  padding-top: $padding-small;
+
+  .userstatistics {
+    text-align: center;
+    flex: 1;
+    line-height: 1.8rem;
+  }
+
+  .userstatistics:not(:last-child) {
+    border-right: 1px solid white
+  }
+
+  .statistics-title {
+    font-size: $font-size-regular;
+  }
+
+  .statistics-value {
+    font-size: $font-size-large - 0.5rem;
   }
 }
 

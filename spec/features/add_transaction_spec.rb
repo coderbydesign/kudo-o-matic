@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.feature "Add a transaction", type: :feature do
   let!(:prev_goal) { create :goal, :achieved, name: "Painting lessons", amount: 500 }
   let!(:next_goal) { create :goal, name: "Paintball", amount: 1500 }
-
   let!(:balance) { create :balance, :current, amount: 1342 }
 
   before do
@@ -30,5 +29,9 @@ RSpec.feature "Add a transaction", type: :feature do
       # 1342 + 99 = 1441
       expect(page).to have_content("1441 ₭")
     end
+  end
+
+  it 'shows the received and given transaction of the current user' do
+
   end
 end

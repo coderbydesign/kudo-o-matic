@@ -16,10 +16,10 @@
       - elsif Goal.next == goal
         %li.progress-step.is-active
           .progress-bar
-            .progress-bar-inner{style: "height: #{@percentage}"}
+            .progress-bar-inner{style: "height: #{@balance_percentage}"}
           %span.progress-marker{style:"box-shadow: 0 0 8px #fff;"}
             %span.percentage
-              = @percentage
+              = @balance_percentage
           %span.progress-text
             %h3.progress-title.highlighted
               = goal.amount
