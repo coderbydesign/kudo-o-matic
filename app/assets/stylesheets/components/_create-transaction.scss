@@ -27,8 +27,10 @@
     border-radius: $border-radius-small;
     background-color: $simple-form-input-background;
     color: $simple-form-input-text;
-    font-size: 0.95rem;
+    font-size: $font-size-regular;
+    width: 100%;
   }
+
   textarea {
     border: none;
     border-radius: $border-radius-small;
@@ -40,17 +42,18 @@
   }
 }
 
+.transaction-body {
+  display: flex;
+}
+
 .receiver {
-  input {
-    float: left;
-    width: 50%;
-  }
+  display: flex;
 }
+
 .amount {
-  input {
-    float: left;
-  }
+  display: flex;
 }
+
 .activity {
   textarea {
     margin-top: $whitespace;
@@ -63,44 +66,38 @@
   margin-left: $whitespace * 0.5;
 }
 
-.guideline-info {
+.transaction-container-title {
+  display: flex;
+}
+
+.btn-guideline-info {
   font-size: $font-size-regular;
-  float: right;
-  color: $text-color
+  color: $text-color;
+  display: flex;
+  align-items: center;
+}
+
+.btn-label {
+  margin-right: $margin * 0.5;
+}
+
+.flex-item {
+  flex: 1;
 }
 
 @media screen and (min-width: 1200px) {
-  .amount {
-    input {
-      width: 15%;
-    }
-  }
 
-  .activity {
-    textarea {
-      height: 100%;
-    }
-  }
 }
 
 @media screen and (max-width: 1200px) {
-  .amount {
-    input {
-      width: 30%;
-    }
-  }
-
   textarea {
     height: 4.5rem;
   }
+
 }
 
 @media screen and (max-width: 535px) {
-  .submit {
-    display: flex;
-  }
-
-  .flex-item {
-    flex: 1;
-  }
+  //.btn-label {
+  //  display: none;
+  //}
 }

@@ -12,13 +12,6 @@
 .container-header {
   padding: $padding;
 
-  .header-logo {
-    max-height: 4rem;
-    position: relative;
-    float: left;
-    margin-bottom: $margin-bottom;
-  }
-
   .title, .subtitle {
     font-family: Orbitron;
     text-align: center;
@@ -35,17 +28,10 @@
   .container-header {
     text-align: inherit;
   }
-
-  .header-logo {
-    padding-left: $padding-small;
-  }
 }
 
 @media screen and (max-width: 1200px) {
 
-  .header-logo {
-    padding-left: 0;
-  }
 }
 
 @media screen and (max-width: 720px) {

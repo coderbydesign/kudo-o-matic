@@ -173,17 +173,21 @@ $font-primary: 'proxima-nova-soft', sans-serif;
   }
 }
 
+.kudo-counter-background {
+  display: none;
+}
+
 @media screen and (min-width: 1200px) {
   .fa-times {
     display: none;
   }
+
+  .kudo-counter {
+    display: block !important;
+  }
 }
 
 @media screen and (max-width: 1200px) {
-  .container-right {
-    padding: 4rem
-  }
-
   .fa-times {
     display: block;
     text-align: right;
@@ -191,15 +195,22 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     cursor: pointer;
   }
 
+  .kudo-counter-background {
+    background: rgba($black-color, 0.6);
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+  }
+
   .kudo-counter {
     margin: 0 auto;
-    background: rgba($dark-blue-color, 1);
+    background: linear-gradient(rgba($dark-blue-color, 1.0), rgba($dark-blue-color, 0.9));
     display: none;
     position: fixed;
     top: $whitespace * 2; left: 0; right: 0; bottom: $whitespace * 2;
-    width: 90%;
+    max-width: 50%;
     z-index: 10;
     overflow: auto;
+
 
     .chart__background {
       stroke: $medium-grey-color;

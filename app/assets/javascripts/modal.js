@@ -15,8 +15,9 @@ $(document).ready(function() {
     });
 
     // Open guideline modal
-    $('.guideline-info').on('click', function () {
+    $('.btn-guideline-info').on('click', function () {
         $('.guideline-modal').fadeIn(250).css("display", "flex");
+        return false
     });
 
     // Close guideline modal

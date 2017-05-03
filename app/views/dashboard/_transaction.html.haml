@@ -1,20 +1,20 @@
 .create-transaction-container
   %div
     %h1.transaction-container-title
-      Create ₭udo Transaction
-      %button.guideline-info
-        Guidelines
-        %span.fa.fa-question-circle
     = simple_form_for @transaction do |f|
-      .receiver
-        -#%span
-        = f.input_field :receiver_name, data: { autocomplete_source: users_autocomplete_path}, field_id: false, placeholder: 'Receiver', required: true , maxlength: '35', autoFocus: true
-      .amount
-        = f.input_field :amount, input_html:{ min: '0', max: '999' , step: '1'} , placeholder: 'Amount', required: true
+      .transaction-body
+        %span.receiver.flex-item
+          = f.input_field :receiver_name, class:'flex-item', data: { autocomplete_source: users_autocomplete_path}, field_id: false, placeholder: 'Receiver', required: true , maxlength: '35', autoFocus: true
+        %span.amount.flex-item
+          = f.input_field :amount, class:'flex-item', input_html:{ min: '0', max: '999' , step: '1'} , placeholder: 'Amount', required: true
+        %a.btn-guideline-info{href:'#'}
+          %span.btn-label.flex-item
+            Guidelines
+          .fa.fa-question-circle
       .activity
         = f.input_field :activity_name, as: :text, field_id: false,  placeholder: "Write here the reason why you are giving ₭udo's", required: true, maxlength: '90', class: 'character-count'
       .submit
-        %span.flex-item
+        %span
           = button_tag type:'submit', class: 'btn send-kudos-button' do
             Give ₭udo's
             %i.fa.fa-paper-plane
