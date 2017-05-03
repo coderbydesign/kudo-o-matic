@@ -4,11 +4,6 @@ $(document).ready(function() {
         $(this).find('i').toggleClass('fa-square-o fa-check-square-o')
     });
 
-    // $('.filter-btn.click').click(function () {
-    //     // $(this).find('filter-option').slideToggle();
-    //     $(this).find('i').toggleClass('fa-chevron-right fa-chevron-left')
-    // });
-
     $('.filter-option').click(function () {
         if ($('.filter-option.send i').hasClass('fa-check-square-o') && $('.filter-option.received i').hasClass('fa-check-square-o')) {
             $.ajax({

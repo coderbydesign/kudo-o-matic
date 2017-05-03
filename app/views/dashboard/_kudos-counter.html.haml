@@ -1,6 +1,7 @@
 .kudo-counter
   .kudo-counter__title
     ₭udometer
+    .fa.fa-times
   .kudo-counter__date
     = Date.today.strftime('%B %d, %Y')
 
@@ -28,7 +29,7 @@
       %span.kudo-currency
         ₭
 
-  = render 'goals'
+  = render 'dashboard/goals'
 
   -#- @iterate_goals.each do |goal|
   -#  .chart.chart--second-goal.js-chart{'data-goal':goal.amount, 'data-count':Balance.current.amount}
@@ -46,5 +47,3 @@
   -#        %span.js-count{'data-count': goal.amount}
   -#          = goal.amount
   -#      = goal.name
-  %span.expand-collapse
-    %i.fa.fa-chevron-down

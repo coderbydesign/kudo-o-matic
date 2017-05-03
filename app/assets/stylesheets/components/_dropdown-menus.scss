@@ -97,7 +97,7 @@
   }
 
   .userstatistics:not(:last-child) {
-    border-right: 1px solid white
+    border-right: 1px solid $dark-blue-color
   }
 
   .statistics-title {
@@ -109,6 +109,27 @@
   }
 }
 
+///////////////////////////////////////////////////////////
+//
+// Filter dropdown
+//
+///////////////////////////////////////////////////////////
+
+.filter-container {
+  .dropdown {
+    justify-self: center;
+    flex: 1;
+  }
+
+  .dropdown:not(:last-child) {
+    margin-right: $margin;
+  }
+
+  .fa {
+    font-size: $font-size-regular;
+    padding-left: $padding-small * 0.5;
+  }
+}
 
 @media screen and (min-width: 1200px) {
 

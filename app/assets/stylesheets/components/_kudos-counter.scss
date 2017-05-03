@@ -24,7 +24,6 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 
 .kudo-counter {
   background: linear-gradient(rgba($dark-blue-color, 0.7), rgba($dark-blue-color, 0.95));
-  animation: load 1s ease-out forwards;
   border-radius: $border-radius;
   color: $white-color;
   max-height: 100%;
@@ -163,11 +162,6 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 
 }// .chart
 
-.expand-collapse {
-  padding: $padding;
-  float: right;
-}
-
 @keyframes load {
   from {
     //transform: translate3d(-50%, -40%, 0);
@@ -180,19 +174,35 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 }
 
 @media screen and (min-width: 1200px) {
-  .chart--second-goal {
-    display: block !important;
+  .fa-times {
+    display: none;
   }
 }
 
 @media screen and (max-width: 1200px) {
-
-  .kudo-counter {
-    margin-top: $margin-top;
+  .container-right {
+    padding: 4rem
   }
 
-  .expand-collapse {
+  .fa-times {
     display: block;
+    text-align: right;
+    float: right;
     cursor: pointer;
+  }
+
+  .kudo-counter {
+    margin: 0 auto;
+    background: rgba($dark-blue-color, 1);
+    display: none;
+    position: fixed;
+    top: $whitespace * 2; left: 0; right: 0; bottom: $whitespace * 2;
+    width: 90%;
+    z-index: 10;
+    overflow: auto;
+
+    .chart__background {
+      stroke: $medium-grey-color;
+    }
   }
 }

@@ -19,12 +19,15 @@
     margin-bottom: $margin-bottom;
   }
 
-  .title {
+  .title, .subtitle {
     font-family: Orbitron;
     text-align: center;
     vertical-align: middle;
-    //display: inline-block;
     margin-top: $margin-top;
+  }
+
+  .title-border {
+    border-bottom: 1px solid $white-color;
   }
 }
 
@@ -48,7 +51,11 @@
 @media screen and (max-width: 720px) {
 
   .title {
-    font-size: 150%;
+    font-size: 160%;
+  }
+
+  .title {
+    font-size: 140%;
   }
 
   .header {

@@ -1,0 +1,44 @@
+.kudo-counter-dashboard-container {
+  background: linear-gradient(rgba($dark-blue-color, 0.7), rgba($dark-blue-color, 0.7));
+  border-radius: $border-radius;
+  display: none;
+  margin-bottom: $margin-bottom;
+  overflow: hidden;
+  padding: $padding;
+  width: 100%;
+}
+
+.kudo-balance-statistics-container {
+  display: flex;
+  padding-left: $padding-small;
+  padding-bottom: $padding-small;
+  padding-top: $padding-small;
+
+  .kudo-balance-statistics {
+    text-align: center;
+    flex: 1;
+    line-height: 1.8rem;
+  }
+
+  .kudo-balance-statistics:not(:last-child) {
+    border-right: 1px solid $dark-blue-color;
+  }
+
+  .statistics-title {
+    font-size: $font-size-regular;
+  }
+
+  .statistics-value {
+    font-size: $font-size-large - 0.5rem;
+  }
+}
+
+.see-more {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+  .kudo-counter-dashboard-container {
+    display: block;
+  }
+}

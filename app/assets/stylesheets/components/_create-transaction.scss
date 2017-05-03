@@ -63,6 +63,12 @@
   margin-left: $whitespace * 0.5;
 }
 
+.guideline-info {
+  font-size: $font-size-regular;
+  float: right;
+  color: $text-color
+}
+
 @media screen and (min-width: 1200px) {
   .amount {
     input {

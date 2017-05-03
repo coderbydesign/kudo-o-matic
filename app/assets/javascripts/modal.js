@@ -15,7 +15,7 @@ $(document).ready(function() {
     });
 
     // Open guideline modal
-    $('.guidelines').on('click', function () {
+    $('.guideline-info').on('click', function () {
         $('.guideline-modal').fadeIn(250).css("display", "flex");
     });
 

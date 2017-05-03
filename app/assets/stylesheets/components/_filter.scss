@@ -1,16 +1,24 @@
-.filter {
+.filter-container {
   display: flex;
-  max-width: 100%;
+  width: 100%;
+  align-items: center;
+  margin-bottom: $margin-bottom;
+  border-bottom: 1px solid $dark-blue-color;
+}
+
+.timeline-title {
+  font-weight: 300;
+  //border: 1px solid $white-color;
+  padding: 0 $padding-small;
 }
 
 .filter-option {
   width: 100%;
   display: flex;
-  margin-left: $padding-small;
 }
 
-.click{
-  //flex: 0.5
+.filter-option:not(:first-child) {
+  margin-left: $padding-small;
 }
 
 .send {

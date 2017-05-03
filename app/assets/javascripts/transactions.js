@@ -24,14 +24,11 @@ $(document).ready(function() {
         $('.message-container').fadeOut(250);
     });
 
-    // Goals container toggle show/hide
-    $('.expand-collapse i.fa.fa-chevron-down').click(function () {
-        $('.goal-container').slideToggle(250);
-    });
-
     // Dropdown profile toggle show/hide
     $('.current-user').click(function () {
+        $(this).find('.fa').toggleClass('fa-chevron-down fa-chevron-up');
         $('.profile.dropdown-content').slideToggle(250);
+        return false
     });
 
     // Dropdown meny toggle show/hide
@@ -44,10 +41,8 @@ $(document).ready(function() {
         $(this).find('i').toggleClass('fa-bars fa-chevron-up')
     });
 
-    // Kudometer icons toggle on max width 1200px
-    $('span.expand-collapse').click(function () {
-        $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
-    });
+    // $('.current-user').click(function () {
+
 
     // Characters left in activity input field
     $('.counter').hide();
