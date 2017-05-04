@@ -32,6 +32,7 @@
 
     .container-left {
       flex: 1;
+      min-width: 0; // http://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome
     }
 
     .container-center {

@@ -16,19 +16,20 @@
         %g
           %path{d:'M110,210c-55.1,0-100-44.9-100-100C10,54.9,54.9,10,110,10s100,44.9,100,100C210,165.1,165.1,210,110,210z'}
 
-    .chart__count
-      %div
-        %span.current-amount.js-count{'data-count':Balance.current.amount}
-          = Balance.current.amount
-        %span.kudo-currency
-          ₭
-      %span
-        = Goal.next.name
-        %br
-      %span.js-count{'data-count':Goal.next.amount}
-        = Goal.next.amount
-      %span.kudo-currency
-        ₭
+      .chart__count
+        %div
+          %span.current-amount.js-count{'data-count':Balance.current.amount}
+            = Balance.current.amount
+          %span.kudo-currency
+            ₭
+        %span.next-goal-name
+          %span
+            = Goal.next.name
+        %span
+          %span.js-count{'data-count':Goal.next.amount}
+            = Goal.next.amount
+          %span.kudo-currency
+            ₭
 
   = render 'dashboard/goals'
 

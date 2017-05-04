@@ -121,8 +121,26 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     }// .chart__container
 
     .chart__count {
-      top: -145px;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      top: -150px;
+
+
     }// .chart__count
+
+    .next-goal-name {
+      overflow: hidden;
+
+      span {
+        width: 175px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        overflow: hidden;
+      }
+    }
 
   }// .chart__container
 

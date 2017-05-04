@@ -53,14 +53,20 @@
     text-align: left;
     display: flex;
     padding: $padding-small;
+    overflow: hidden;
 
     .statistics-title {
       font-size: $font-size-medium;
+      white-space: nowrap;
+      flex: 1;
+      text-overflow: ellipsis;
+      display: block;
+      overflow: hidden;
     }
 
     .statistics-value {
-      flex: 1;
       text-align: right;
+      margin-left: $margin;
     }
 
     br {
@@ -84,5 +90,4 @@
 }
 
 @media screen and (max-width: 720px) {
-
 }
