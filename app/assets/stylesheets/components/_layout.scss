@@ -26,19 +26,27 @@
   flex: 1;
 }
 
-@media screen and (min-width: 1200px) {
-  .expand-collapse {
-    display: none;
-  }
-}
-
 @media screen and (max-width: 1200px) {
   .body {
-    flex-direction: column;
-  }
+    display: flex;
 
-  .container-center {
-    margin: 0;
+    .container-left {
+      flex: 1;
+    }
+
+    .container-center {
+      flex: 2;
+      margin-right: 0;
+    }
+
+    .container-right {
+      display: none;
+
+      &.visible-as-modal {
+        display: block;
+        position: fixed;
+      }
+    }
   }
 
   .value {
@@ -69,6 +77,11 @@
 
   .body {
     width: 100%;
+    flex-direction: column;
+  }
+
+  .container-center {
+    margin: 0;
   }
 }
 

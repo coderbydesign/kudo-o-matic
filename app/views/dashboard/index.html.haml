@@ -15,13 +15,14 @@
     .body
       .container-left
         = render 'profile-menu'
+        = render 'kudo-counter-dashboard'
         -#= render 'statistics'
         -#= render 'goals'
       .container-center
         = render 'transaction'
         = render 'filter'
-        = render 'kudo-counter-dashboard'
         #results
           = render 'timeline'
       .container-right
         = render 'kudos-counter'
+        -#= render 'statistics'

@@ -6,7 +6,8 @@
       %br
       %span.statistics-value
         = Balance.current.amount
-      ₭
+        %span.currency
+          ₭
       -#.chart.chart--second-goal.js-chart{'data-goal':Goal.next.amount, 'data-count':Balance.current.amount}
         .chart__container
 
@@ -23,7 +24,8 @@
       %span.statistics-value
         %span.js-count{'data-count': Goal.next.amount}
           = Goal.next.amount
-      ₭
+        %span.currency
+          ₭
     .kudo-balance-statistics.see-more
       %span.statistics-title
         See More

@@ -2,7 +2,7 @@
 .kudo-counter
   .kudo-counter__title
     ₭udometer
-    .fa.fa-times
+    .fa.fa-times.close-button
   .kudo-counter__date
     = Date.today.strftime('%B %d, %Y')
 
@@ -24,7 +24,7 @@
           ₭
       %span
         = Goal.next.name
-        |
+        %br
       %span.js-count{'data-count':Goal.next.amount}
         = Goal.next.amount
       %span.kudo-currency

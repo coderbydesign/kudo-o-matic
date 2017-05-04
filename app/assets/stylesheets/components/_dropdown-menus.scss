@@ -33,7 +33,13 @@
 }
 
 .dropdown-content {
-  display: none;
+  height: 0;
+  overflow: hidden;
+  transition: all 300ms ease;
+}
+
+.dropdown-content.slide-menu {
+  height: 100%;
 }
 
 .menu-content {
@@ -109,6 +115,10 @@
   }
 }
 
+
+
+
+
 ///////////////////////////////////////////////////////////
 //
 // Filter dropdown
@@ -131,7 +141,7 @@
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1201px) {
 
 }
 

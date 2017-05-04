@@ -61,9 +61,24 @@
 }
 
 .counter {
-  display: inline-block;
+  display: none;
   padding-top: 1.3rem;
   margin-left: $whitespace * 0.5;
+}
+
+.counter.show-counter {
+  display: inline-block;
+  @include animation(counter, .5s)
+}
+
+@keyframes counter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+
 }
 
 .transaction-container-title {
@@ -85,7 +100,7 @@
   flex: 1;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1201px) {
 
 }
 
@@ -97,7 +112,7 @@
 }
 
 @media screen and (max-width: 535px) {
-  //.btn-label {
-  //  display: none;
-  //}
+  .btn-label {
+    display: none;
+  }
 }

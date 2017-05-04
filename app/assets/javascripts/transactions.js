@@ -20,14 +20,15 @@ $(document).ready(function() {
     });
 
     // Error container hide
-    $('.message-container .fa-times').click(function () {
-        $('.message-container').fadeOut(250);
+    $('.close-message').click(function () {
+        $('.message-container').addClass('hide-message');
     });
 
     // Dropdown profile toggle show/hide
     $('.current-user').click(function () {
         $(this).find('.fa').toggleClass('fa-chevron-down fa-chevron-up');
-        $('.profile.dropdown-content').slideToggle(250);
+        // $('.profile.dropdown-content').slideToggle(250);
+        $('.profile.dropdown-content').toggleClass('slide-menu');
         return false
     });
 
@@ -45,12 +46,11 @@ $(document).ready(function() {
 
 
     // Characters left in activity input field
-    $('.counter').hide();
     var textMax = $('.character-count').attr('maxLength');
     $('.counter').html(textMax);
 
     $('.character-count').keyup(function() {
-        $('.counter').fadeIn('fast');
+        $('.counter').addClass('show-counter');
         var textLength = $('.character-count').val().length;
         var textRemaining = textMax - textLength;
 

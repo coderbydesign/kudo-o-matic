@@ -1,11 +1,15 @@
-.message-container
+.message-container.show-message
   - if !flash[:error].blank?
     .error-message
-      .fa.fa-exclamation-circle
-      = flash[:error]
-      %i.fa.fa-times
+      %span.message
+        .fa.fa-exclamation-circle
+        = flash[:error]
+      %span
+        .fa.fa-times.close-message
   - if !flash[:notice].blank?
     .notice-message
-      .fa.fa-info-circle
-      = flash[:notice]
-      %i.fa.fa-times
+      %span.message
+        .fa.fa-info-circle
+        = flash[:notice]
+      %span
+        %i.fa.fa-times.close-message

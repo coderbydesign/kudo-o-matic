@@ -6,6 +6,7 @@
   overflow: hidden;
   padding: $padding;
   width: 100%;
+  font-weight: 300;
 }
 
 .kudo-balance-statistics-container {
@@ -20,10 +21,6 @@
     line-height: 1.8rem;
   }
 
-  .kudo-balance-statistics:not(:last-child) {
-    border-right: 1px solid $dark-blue-color;
-  }
-
   .statistics-title {
     font-size: $font-size-regular;
   }
@@ -33,12 +30,59 @@
   }
 }
 
+.currency {
+  font-size: $font-size-regular;
+}
+
 .see-more {
   cursor: pointer;
+}
+
+@media screen and (min-width: 1201px) {
+  .kudo-balance-statistics:not(:last-child) {
+    border-right: 1px solid $dark-blue-color;
+  }
+}
+
+@media screen and (min-width: 720px) and (max-width: 1200px) {
+  .kudo-balance-statistics-container {
+    flex-direction: column;
+  }
+
+  .kudo-balance-statistics {
+    text-align: left;
+    display: flex;
+    padding: $padding-small;
+
+    .statistics-title {
+      font-size: $font-size-medium;
+    }
+
+    .statistics-value {
+      flex: 1;
+      text-align: right;
+    }
+
+    br {
+      display: none;
+    }
+  }
+
+  .kudo-balance-statistics:not(:last-child) {
+    border-bottom: 1px solid $dark-blue-color;
+  }
+
+  .kudo-balance-statistics {
+    border-right: none;
+  }
 }
 
 @media screen and (max-width: 1200px) {
   .kudo-counter-dashboard-container {
     display: block;
   }
+}
+
+@media screen and (max-width: 720px) {
+
 }

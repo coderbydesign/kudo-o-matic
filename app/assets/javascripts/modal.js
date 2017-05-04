@@ -4,24 +4,24 @@ $(document).ready(function() {
     var currCookie = localStorage.getItem('modalShown');
     setTimeout(function () {
         if(!currCookie || currCookie != currentRelease) {
-            $(".welcome-modal").fadeIn(250).css("display", "flex");
+            $(".welcome-modal").addClass('show-modal');
             localStorage.setItem('modalShown', currentRelease);
         }
     }, 500);
 
     // Close welcome modal
-    $('.close-welcome').on('click', function () {
-        $('.welcome-modal').fadeOut(250).css("display", "none");
+    $('.close-welcome').click(function () {
+        $('.welcome-modal').removeClass('show-modal');
     });
 
     // Open guideline modal
-    $('.btn-guideline-info').on('click', function () {
-        $('.guideline-modal').fadeIn(250).css("display", "flex");
+    $('.btn-guideline-info').click(function () {
+        $('.guideline-modal').addClass('show-modal');
         return false
     });
 
     // Close guideline modal
-    $('.close-guidelines').on('click', function () {
-        $('.guideline-modal').fadeOut(250).css("display", "none");
+    $('.close-guidelines').click(function () {
+        $('.guideline-modal').removeClass('show-modal');
     });
 });
