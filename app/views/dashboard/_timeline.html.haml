@@ -1,4 +1,10 @@
 .timeline-container
+  - if @transactions.empty?
+    .transaction-container
+      .transaction-body-container
+        .transaction-content.empty-timeline
+          .empty-timeline-message
+            There are no transactions to show here yet &#9785;
   - @transactions.each do |transaction|
     .transaction-container
       .transaction-header-container
@@ -23,7 +29,9 @@
           %span
             for
           %span.highlighted
-            = transaction.activity_name_feed
+            - activity = transaction.activity_name_feed
+            - escapedActivity = html_escape(activity)
+            != @markdown.render(escapedActivity)
       %div
         -#%button#like-button
         -#  Like

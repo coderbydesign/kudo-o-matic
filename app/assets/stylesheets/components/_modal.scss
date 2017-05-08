@@ -6,7 +6,7 @@ $gray: #333;
 $gray-lighter: #eee;
 $space: 40px;
 
-.guideline-modal.show-modal, .welcome-modal.show-modal {
+.guideline-modal.show-modal, .welcome-modal.show-modal, .emoji-modal.show-modal {
   display: flex;
   @include animation(load, .25s);
 }
@@ -21,7 +21,8 @@ $space: 40px;
 }
 
 .guideline-modal,
-.welcome-modal {
+.welcome-modal,
+.emoji-modal {
 
   // This is modal bg
   align-items: center;
@@ -31,6 +32,17 @@ $space: 40px;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: 10;
+
+  .clipboard {
+    color: red;
+    float: right;
+  }
+}
+
+.emoji-modal {
+  .modal-dialog {
+    width: 50%;
+  }
 }
 
 // Modal Dialog
@@ -48,7 +60,7 @@ $space: 40px;
   color: $text-color-dark;
 }
 
-.modal-body{
+.modal-body {
   color: $text-color-dark;
   height: 400px;
   overflow-y: scroll;
@@ -65,6 +77,41 @@ $space: 40px;
   }
 }
 
+.guideline-list {
+  cursor: pointer;
+}
+
+.emoji-list {
+
+  li {
+    cursor: pointer;
+    float: left;
+    width: 33.33%;
+
+    div {
+      align-items: center;
+      display: flex;
+      overflow: hidden;
+    }
+  }
+
+  .emoji-img {
+    margin-right: $margin;
+  }
+
+  .emoji-name {
+    flex: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  img {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}
+
 .modal-header,
 .modal-footer{
   padding: $space/2.5 $space/2;
@@ -73,10 +120,9 @@ $space: 40px;
 .modal-header{
   border-bottom: $gray-lighter solid 1px;
 
-  h2{
+  h2 {
     font-size: 20px;
   }
-
 }
 
 .modal-footer{
@@ -87,5 +133,19 @@ $space: 40px;
 @media screen and (max-width: 1200px) {
   .modal-dialog {
     width: 90%;
+  }
+
+  .emoji-modal {
+    .modal-dialog {
+      width: 75%;
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .emoji-list {
+    li {
+      width: 50%;
+    }
   }
 }

@@ -86,7 +86,10 @@
   }
 
   .username {
+    overflow: hidden;
     padding-left: $padding;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
@@ -114,10 +117,6 @@
     font-size: $font-size-large - 0.5rem;
   }
 }
-
-
-
-
 
 ///////////////////////////////////////////////////////////
 //

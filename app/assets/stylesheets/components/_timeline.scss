@@ -56,7 +56,7 @@
       font-size: 110%;
       font-weight: 300;
       height: 100%;
-      line-height: 110%;
+      line-height: 125%;
       margin-top: $margin-top * 0.5;
     }
 
@@ -68,5 +68,16 @@
       padding-top: $padding;
       text-align: right;
     }
+  }
+}
+
+.empty-timeline {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+
+  .empty-timeline-message {
+    font-size: $font-size-medium
   }
 }

@@ -12,36 +12,30 @@
     font-size: $font-size-large;
     font-weight: 300;
   }
+}
 
-  .kudos {
-    border-top: solid 1px $white-color;
-    padding-top: $padding;
+.general-statistics-container {
+  display: flex;
+  padding-left: $padding-small;
+  padding-bottom: $padding-small;
+  padding-top: $padding-small;
+  font-weight: 300;
 
-    .month {
-      margin-top: $margin-top;
-    }
+  .generalstatistics {
+    text-align: center;
+    flex: 1;
+    line-height: 1.8rem;
   }
 
-  .all {
-    margin-top: $margin-top;
+  .generalstatistics:not(:last-child) {
+    border-right: 1px solid $dark-blue-color
   }
 
-  .value {
-    color: $text-color-mark;
-    font-size: $font-size-huge;
-    display: inline-block;
-    vertical-align: middle;
-    font-weight: 300;
-    //max-width: 50%;
+  .statistics-title {
+    font-size: $font-size-regular;
   }
 
-  .label {
-    color: $text-color;
-    font-size: $font-size-medium;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: $whitespace * 0.5;
-    font-weight: 300;
-    width: 40%;
+  .statistics-value {
+    font-size: $font-size-large - 0.5rem;
   }
 }

@@ -19,6 +19,10 @@ gem 'rubocop', '~> 0.47.1', require: false
 
 gem 'scss_lint', require: false
 
+gem 'md_emoji', '~> 1.0', '>= 1.0.2'
+
+gem 'redcarpet', '~> 3.3', '>= 3.3.4'
+
 # Database
 gem 'pg', '~> 0.18'
 

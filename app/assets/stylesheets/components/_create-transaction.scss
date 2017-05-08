@@ -36,7 +36,7 @@
     border-radius: $border-radius-small;
     background-color: $simple-form-input-background;
     color: $simple-form-input-text;
-    font-size: 0.95rem;
+    font-size: $font-size-regular;
     width: 100%;
     resize: none;
   }
@@ -55,7 +55,13 @@
 }
 
 .activity {
+  display: flex;
   textarea {
+    margin-top: $whitespace;
+    margin-right: $whitespace;
+  }
+
+  .fa-smile-o {
     margin-top: $whitespace;
   }
 }
@@ -99,6 +105,8 @@
 .flex-item {
   flex: 1;
 }
+
+
 
 @media screen and (min-width: 1201px) {
 

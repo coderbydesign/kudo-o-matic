@@ -3,10 +3,13 @@
     .modal-header
       %h2
         Kudo Guidelines
+      %p
+        Click to copy guideline to clipboard
+        %span.clipboard
     .modal-body
       %ul
         - Transaction::GUIDELINES.reverse.each do |name, value|
-          %li
+          %li.guideline-list{'data-clipboard-text':name}
             %span.g-name
               = name
             %span

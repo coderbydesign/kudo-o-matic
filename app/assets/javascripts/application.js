@@ -11,6 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require emoji
+//= require jquery.textcomplete
+//= require clipboard.min
 //= require jquery-ui
 //= require bootstrap-sprockets
 //= require jquery_ujs
