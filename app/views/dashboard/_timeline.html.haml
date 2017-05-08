@@ -24,11 +24,11 @@
             = "+#{transaction.amount} ₭"
           %span
             to
-          %span.highlighted
+          %span.highlighted.receivername
             = transaction.receiver_name_feed
           %span
             for
-          %span.highlighted
+          %span.highlighted.activityname
             - activity = transaction.activity_name_feed
             - escapedActivity = html_escape(activity)
             != @markdown.render(escapedActivity)

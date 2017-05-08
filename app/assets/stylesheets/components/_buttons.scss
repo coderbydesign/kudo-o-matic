@@ -41,7 +41,7 @@ button {
 }
 
 .simple_form {
-  .send-kudos-button {
+  #send-kudos-button {
     margin-top: $whitespace;
     border-radius: $border-radius-small;
     float: left;
@@ -75,7 +75,7 @@ button {
 }
 
 @media screen and (max-width: 535px) {
-  .send-kudos-button {
+  #send-kudos-button {
     width: auto;
   }
 
