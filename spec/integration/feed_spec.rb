@@ -10,7 +10,7 @@ describe "/feed", type: :request do
 
   context "given many transactions" do
     before do
-      balance = create :balance, :current, amount: 1000
+      balance = create :balance, :current
       @transactions = create_list(:transaction, 26, balance: balance, created_at: Date.yesterday.to_time)
     end
 

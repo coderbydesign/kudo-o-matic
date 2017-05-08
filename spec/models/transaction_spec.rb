@@ -43,13 +43,4 @@ describe Transaction do
       expect(transaction.receiver_image).to eq(user.avatar_url)
     end
   end
-
-  context 'given a transaction is deleted', callbacks: false do
-    let(:balance) { Balance.create name: 'Current balance', amount: 18, current: true }
-    let(:transaction) { Transaction.create amount: 6 }
-
-    it 'subtracts the amount of the transaction from the balance' do
-      expect(balance.amount - transaction.amount).to eq(12)
-    end
-  end
 end
