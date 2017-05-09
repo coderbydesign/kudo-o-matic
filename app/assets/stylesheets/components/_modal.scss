@@ -8,15 +8,30 @@ $space: 40px;
 
 .guideline-modal.show-modal, .welcome-modal.show-modal, .emoji-modal.show-modal {
   display: flex;
-  @include animation(load, .25s);
+  @include animation(fadeIn, .25s);
 }
 
-@keyframes load {
+@keyframes fadeIn {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
@@ -33,9 +48,17 @@ $space: 40px;
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: 10;
 
-  .clipboard {
+  .clipboard-guideline,
+  .clipboard-emoji {
     color: red;
+    display: none;
     float: right;
+  }
+
+  .clipboard-guideline.show-clipboard,
+  .clipboard-emoji.show-clipboard {
+    display: block;
+    animation: fadeInOut 3s forwards;
   }
 }
 
@@ -147,5 +170,9 @@ $space: 40px;
     li {
       width: 50%;
     }
+  }
+
+  .clipboard {
+    float:none;
   }
 }
