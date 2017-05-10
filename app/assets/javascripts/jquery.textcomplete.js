@@ -1001,7 +1001,7 @@
                 if ($parent) {
                     if (!($parent instanceof $)) { $parent = $($parent); }
                     var parentOffset = $parent.offsetParent().offset();
-                    offset.top -= parentOffset.top;
+                    // offset.top -= parentOffset.top;
                     offset.left -= parentOffset.left;
                 }
 

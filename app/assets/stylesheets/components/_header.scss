@@ -35,16 +35,7 @@
 }
 
 @media screen and (max-width: 720px) {
-
-  .title {
-    font-size: 160%;
-  }
-
-  .title {
-    font-size: 140%;
-  }
-
   .header {
-    width: 100%;
+    display: none;
   }
 }

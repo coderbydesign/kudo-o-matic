@@ -2,6 +2,7 @@
   border: 1px solid #ddd;
   background-color: white;
   color: black;
+  top: 250px !important;
 }
 
 .textcomplete-dropdown li {
@@ -62,4 +63,10 @@
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
+}
+
+@media screen and (max-width: 720px) {
+  .textcomplete-dropdown {
+    display: none !important;
+  }
 }
