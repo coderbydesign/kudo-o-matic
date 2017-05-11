@@ -51,6 +51,14 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     margin-bottom: 3.57142857rem; // converted from 50px
   }// .kudo-counter__title
 
+  &__days_left {
+    font-size: $font-size-medium;
+    margin-bottom: $margin;
+    border: 1px solid $light-blue-color;
+    padding: $padding;
+    border-radius: $border-radius;
+  }
+
 }// .kudo-counter
 
 .chart {
@@ -78,7 +86,6 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     position: absolute;
     stroke-dasharray: 630px;
     stroke-dashoffset: 630px;
-    stroke-linecap: round;
     stroke-width: 20px;
     stroke: $light-blue-color;
     top: 0;
