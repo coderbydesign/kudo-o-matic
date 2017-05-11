@@ -19,4 +19,11 @@ class Balance < ActiveRecord::Base
   def amount
     Transaction.where(balance: self).sum(:amount)
   end
+
+  def self.time_left
+      current = Date.today
+      year = Time.current.year
+      expire = Date.parse("#{year}-12-31")
+      "#{(expire - current).to_i} days left"
+    end
 end
