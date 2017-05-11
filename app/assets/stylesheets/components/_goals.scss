@@ -401,7 +401,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
       top: 28px;
       left: 0.5rem;
       width: $path-height * 3;
-      height: 74%;
+      height: 75%;
     }
 
     .progress-bar-complete {
@@ -409,7 +409,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
       top: 28px;
       left: 0.5rem;
       width: $path-height * 3;
-      height: 74%;
+      height: 75%;
     }
   }
 
@@ -425,7 +425,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
   }
 
   .left-text {
-    font-size: $font-size-small;
+    font-size: $font-size-regular;
   }
 
   .progress-step:not(:last-child) .progress-text {

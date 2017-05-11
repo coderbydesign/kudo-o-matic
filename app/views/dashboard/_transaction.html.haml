@@ -13,11 +13,12 @@
           .fa.fa-question-circle
       .activity
         = f.input_field :activity_name, as: :text, field_id: false,  placeholder: "Write here the reason why you are giving ₭udo's", required: true, maxlength: '90', class: 'character-count'
-        %a.fa.fa-smile-o{href:'#', tabindex:'-1'}
+        .activity-extras
+          %a.fa.fa-smile-o{href:'#', tabindex:'-1'}
+          %span.counter
       -#= f.input_field :activity_name, class:'testinput'
       .submit
         %span
           = button_tag type:'submit', class: 'btn send-kudos-button' do
             Give ₭udo's
             %i.fa.fa-paper-plane
-        %span.counter

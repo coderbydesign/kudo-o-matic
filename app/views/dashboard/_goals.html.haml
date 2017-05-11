@@ -7,12 +7,13 @@
           %span.progress-marker
             %i.fa.fa-unlock
           %span.progress-text
-            %h3.progress-title.highlighted
-              = goal.amount
-              ₭
-              %br
-              = goal.name
-            = goal.achieved_on
+            %h3.progress-title
+              = "#{goal.amount} ₭"
+
+              %p.highlighted
+                = goal.name
+              %span.highlighted.left-text
+                = goal.achieved_on
       - elsif Goal.next == goal
         %li.progress-step.is-active
           .progress-bar
@@ -21,30 +22,26 @@
             %span.percentage
               = @balance_percentage
           %span.progress-text
-            %h3.progress-title.highlighted
-              = goal.amount
-              ₭
-              %br
-              = goal.name
-            = (goal.amount - Balance.current.amount)
-            ₭
-            %span.left-text
-              left
+            %h3.progress-title
+              = "#{goal.amount} ₭"
+
+              %p.highlighted
+                = goal.name
+              %span.highlighted.left-text
+                = "#{goal.amount - Balance.current.amount} ₭ left"
       - else
         %li.progress-step
           .progress-bar
           %span.progress-marker
             %i.fa.fa-lock
           %span.progress-text
-            %h3.progress-title.highlighted
-              = goal.amount
-              ₭
-              %br
-              = goal.name
-            = (goal.amount - Balance.current.amount)
-            ₭
-            %span.left-text
-              left
+            %h3.progress-title
+              = "#{goal.amount} ₭"
+
+              %p.highlighted
+                = goal.name
+              %span.highlighted.left-text
+                = "#{goal.amount - Balance.current.amount} ₭ left"
     %li.progress-step.is-complete
       .progress-bar-complete
       %span.progress-marker
