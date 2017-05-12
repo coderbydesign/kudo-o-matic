@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Balance do
+describe Balance, type: :model do
   let(:activity) { Activity.create name: 'Helping with RSpec' }
   let(:activity_2) { Activity.create name: 'Helping with Capybara' }
   let(:user) { User.create name: 'Pascal', avatar_url: '/kabisa_lizard.png' }
