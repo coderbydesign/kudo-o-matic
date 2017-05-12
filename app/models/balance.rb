@@ -7,11 +7,6 @@ class Balance < ActiveRecord::Base
     where(current: true).order("created_at DESC").first
   end
 
-  def add(number_of_kudos)
-    number_of_kudos = number_of_kudos.to_i unless number_of_kudos.is_a?(Integer)
-    update(amount: amount + number_of_kudos)
-  end
-
   def last_transaction
     transactions.order("created_at DESC").first
   end
@@ -21,9 +16,9 @@ class Balance < ActiveRecord::Base
   end
 
   def self.time_left
-      current = Date.today
-      year = Time.current.year
-      expire = Date.parse("#{year}-12-31")
-      "#{(expire - current).to_i} days left"
-    end
+    current = Time.new.at_end_of_day
+    expire = Time.new.at_end_of_year
+    days_left = (expire - current).to_i / (24 * 60 * 60)
+    "#{days_left} day(s) left"
+  end
 end
