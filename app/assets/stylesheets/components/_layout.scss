@@ -13,6 +13,7 @@
 .container-right {
   height: 100%;
   flex: 1;
+  min-width: 0; // http://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome
 }
 
 .container-center {
@@ -38,6 +39,7 @@
     .container-center {
       flex: 2;
       margin-right: 0;
+
     }
 
     .container-right {
@@ -74,6 +76,7 @@
 @media screen and (max-width: 720px) {
   .page {
     width: 100%;
+    margin: 0 auto;
   }
 
   .body {

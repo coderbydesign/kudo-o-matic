@@ -17,7 +17,6 @@
     font-size: 80%;
     cursor: pointer;
   }
-
 }
 
 .simple_form {
@@ -37,7 +36,7 @@
     background-color: $simple-form-input-background;
     color: $simple-form-input-text;
     font-size: $font-size-regular;
-    width: 100%;
+    flex: 1;
     resize: none;
   }
 }
@@ -66,10 +65,14 @@
   }
 }
 
+.activity-extras {
+  display: flex;
+  flex-direction: column;
+}
+
 .counter {
   display: none;
-  padding-top: 1.3rem;
-  margin-left: $whitespace * 0.5;
+  margin-top: $whitespace;
 }
 
 .counter.show-counter {

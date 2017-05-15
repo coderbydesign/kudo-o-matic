@@ -76,6 +76,14 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
     //z-index: 100000;
     background: $light-blue-color;
     border-top: 1px solid $white-color;
+
+    .percentage {
+      margin-left: $margin;
+      border-top: 1px solid white;
+      line-height: 18px;
+      padding: 0 0 0 $padding-small;
+      font-size: $font-size-regular - 0.1rem;
+    }
   }
 
   // Path between markers, this is not created for the last step
@@ -138,10 +146,6 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
   border-radius: $border-radius;
   transition: background-color, border-color;
   transition-duration: $animation-duration;
-
-  .percentage {
-    font-size: 85%;
-  }
 }
 
 
@@ -149,13 +153,18 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
 .progress-text {
   display: block;
   padding: 0 $text-padding-X;
-  //padding-bottom: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 115%;
 }
 .progress-title {
   margin-top: 0;
+
+  .goal-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 
@@ -401,7 +410,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
       top: 28px;
       left: 0.5rem;
       width: $path-height * 3;
-      height: 74%;
+      height: 75%;
     }
 
     .progress-bar-complete {
@@ -409,7 +418,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
       top: 28px;
       left: 0.5rem;
       width: $path-height * 3;
-      height: 74%;
+      height: 75%;
     }
   }
 
@@ -425,7 +434,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
   }
 
   .left-text {
-    font-size: $font-size-small;
+    font-size: $font-size-regular;
   }
 
   .progress-step:not(:last-child) .progress-text {

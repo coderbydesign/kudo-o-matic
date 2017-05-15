@@ -10,13 +10,25 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
 //= require jquery
-//= require emoji
-//= require jquery.textcomplete
-//= require clipboard.min
-//= require jquery-ui
-//= require bootstrap-sprockets
 //= require jquery_ujs
+//= require jquery-ui
+
+//= require autocomplete/jquery.ui.autocomplete.scroll.min
+
+//= require emoji/emoji.js
+//= require emoji/jquery.textcomplete
+//= require emoji/jquery.emoji-complete
+
+//= require popper/popper
+//= require popper/tooltip
+//= require popper/new-popper
+
+//= require clipboard.min
+
+//= require bootstrap-sprockets
+
 //= require later
 //= require transactions
 //= require filter

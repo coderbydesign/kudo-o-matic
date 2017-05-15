@@ -35,6 +35,7 @@
           border-right: 1px solid $light-blue-color;
           border-bottom-left-radius: $border-radius-small;
           border-top-left-radius: $border-radius-small;
+          background: $light-grey-color;
         }
 
         .receiver {
@@ -43,6 +44,7 @@
           border-left: none;
           border-bottom-right-radius: $border-radius-small;
           border-top-right-radius: $border-radius-small;
+          background: $light-grey-color;
         }
 
         .flex-item {
@@ -76,6 +78,7 @@
   display: flex;
   justify-content: center;
   height: 3rem;
+  text-align: center;
 
   .empty-timeline-message {
     font-size: $font-size-medium

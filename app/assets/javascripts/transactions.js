@@ -1,37 +1,7 @@
-jQuery(function() {
-    return $('#transaction_receiver_name').autocomplete ({
-        source: $('#transaction_receiver_name').data('autocomplete-source'),
-        autoFocus: true,
-        maxShowItems: 5
-    });
-});
-
 $(document).ready(function() {
-
-    $('.character-count').textcomplete([
-        { // emoji strategy
-            id: 'emoji',
-            match: /\B:([\-+\w]*)$/,
-            search: function (term, callback) {
-                callback($.map(emojies, function (emoji) {
-                    return emoji.indexOf(term) === 0 ? emoji : null;
-                }));
-            },
-            template: function (value) {
-                return '<img src="https://yuku-t.com/jquery-textcomplete/media/images/emoji/' + value + '.png"></img>' + value;
-            },
-            replace: function (value) {
-                return ':' + value + ': ';
-            },
-            index: 1
-        }
-    ], {
-        onKeydown: function (e, commands) {
-            if (e.ctrlKey && e.keyCode === 74) { // CTRL-J
-                return commands.KEY_ENTER;
-            }
-        }
-    });
+    $('.input-amount').focus(function (e) {
+        e.preventDefault()
+    })
 
     $('.menu-option.filter').click(function () {
         $('.hidden-menu.filter').slideToggle("slow");
@@ -86,4 +56,15 @@ $(document).ready(function() {
             return false;
         }
     });
+});
+
+document.addEventListener('DOMContentLoaded', function(){
+    var index = 0;
+    var popper;
+
+    var instance = new Tooltip(document.getElementsByClassName("activity"), {
+        title: "Blabla",
+        trigger: "click"
+    });
+    instance.show();
 });

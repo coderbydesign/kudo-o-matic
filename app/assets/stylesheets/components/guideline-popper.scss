@@ -1,0 +1,200 @@
+p.thin {
+  font-weight: 100;
+  margin: 0;
+  line-height: 1.2em;
+}
+
+p.bold {
+  font-weight: 900;
+  margin: 0;
+  margin-top: -5px;
+}
+
+.rel {
+  width: 30%;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  padding: 20px;
+  border-style: dotted;
+  border-color: white;
+  border-width: medium;
+}
+
+.popper,
+.tooltip {
+  position: absolute;
+  background: linear-gradient(rgba($dark-blue-color,1), rgba($dark-blue-color,0.9));
+  color: $text-color;
+  width: 35%;
+  box-sizing: border-box;
+  border-radius: 3px;
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  padding: $padding;
+  padding-bottom: 0;
+  text-align: center;
+  max-height: fit-content;
+  z-index: 10;
+  top: $whitespace;
+}
+.style5 .tooltip {
+  background: #1E252B;
+  color: #FFFFFF;
+  max-width: 200px;
+  width: auto;
+  font-size: .8rem;
+  padding: .5em 1em;
+}
+.popper .popper__arrow,
+.tooltip .tooltip-arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+  margin: 5px;
+}
+
+.tooltip .tooltip-arrow,
+.popper .popper__arrow {
+  border-color: $dark-blue-color;
+}
+.style5 .tooltip .tooltip-arrow {
+  border-color: #1E252B;
+}
+.popper[x-placement^="top"],
+.tooltip[x-placement^="top"] {
+  margin-bottom: 5px;
+}
+.popper[x-placement^="top"] .popper__arrow,
+.tooltip[x-placement^="top"] .tooltip-arrow {
+  border-width: 5px 5px 0 5px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  bottom: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.popper[x-placement^="bottom"],
+.tooltip[x-placement^="bottom"] {
+  margin-top: 5px;
+}
+.tooltip[x-placement^="bottom"] .tooltip-arrow,
+.popper[x-placement^="bottom"] .popper__arrow {
+  border-width: 0 5px 5px 5px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  top: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.tooltip[x-placement^="right"],
+.popper[x-placement^="right"] {
+  margin-left: 5px;
+}
+.popper[x-placement^="right"] .popper__arrow,
+.tooltip[x-placement^="right"] .tooltip-arrow {
+  border-width: 5px 5px 5px 0;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  left: -5px;
+  top: calc(50% - 5px);
+  margin-left: 0;
+  margin-right: 0;
+}
+.popper[x-placement^="left"],
+.tooltip[x-placement^="left"] {
+  margin-right: 5px;
+}
+.popper[x-placement^="left"] .popper__arrow,
+.tooltip[x-placement^="left"] .tooltip-arrow {
+  border-width: 5px 0 5px 5px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  right: -5px;
+  top: calc(50% - 5px);
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.tooltip-inner {
+  list-style-type: none;
+  text-align: left;
+  max-height: 7rem;
+  overflow-y: scroll;
+
+  .suggested-guidelines-title {
+    font-size: $font-size-small * 1.25;
+    margin-bottom: $margin;
+  }
+
+  li {
+    display: flex;
+    padding: $padding-small 0;
+  }
+
+  .g-name {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .g-value {
+    padding: 0 $padding-small
+  }
+}
+
+//.suggestions {
+//  overflow: auto;
+//  margin-top: $whitespace;
+//  padding-left: $padding;
+//  padding-right: 30px;
+//  height: 50px;
+//  list-style-type: none;
+//
+//
+//  li {
+//    display: flex;
+//    padding: $padding-small 0;
+//  }
+//
+//  li:first-child {
+//    white-space: nowrap;
+//    overflow: hidden;
+//    text-overflow: ellipsis;
+//    display: block;
+//  }
+//
+//  .g-name {
+//    flex: 1;
+//    white-space: nowrap;
+//    overflow: hidden;
+//    text-overflow: ellipsis;
+//  }
+//
+//  .g-value {
+//    padding: 0 $padding-small
+//  }
+//}
+
+.suggestions::-webkit-scrollbar {display: none;}
+.tooltip-inner::-webkit-scrollbar {display: none;}
+
+@media screen and (min-width: 720px) {
+  .tooltip {
+    top: -$whitespace * 3.5;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .tooltip {
+    right: $whitespace * 1.5;
+    width: 60%;
+  }
+}

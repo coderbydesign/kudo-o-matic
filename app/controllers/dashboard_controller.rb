@@ -19,7 +19,8 @@ class DashboardController < ApplicationController
 
     @send_transactions_user       = Transaction.where(balance: Balance.current).where(sender: current_user).count(:id)
     @received_transactions_user   = Transaction.where(balance: Balance.current).where(receiver: current_user).count(:id)
-    @all_transactions_user        = @send_transactions_user + @received_transactions_user
+    @received_transactions_team   = Transaction.where(balance: Balance.current).where(receiver: User.where(name: ENV.fetch('COMPANY_USER', 'Kabisa'))).count(:id)
+    @all_transactions_user        = @send_transactions_user + @received_transactions_user + @received_transactions_team
 
     @weekly_transactions          = Transaction.where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week())).count(:id)
     @monthly_transactions         = Transaction.where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).count(:id)
