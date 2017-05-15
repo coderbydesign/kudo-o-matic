@@ -13,7 +13,7 @@ RSpec.feature "Add a transaction", type: :feature do
 
   before do
     visit '/sign_in'
-    click_link 'Sign in with Google Apps'
+    click_link 'Log in with Google+'
 
     expect(current_path).to eql('/')
     @transactions_before = Transaction.count

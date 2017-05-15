@@ -19,7 +19,7 @@ RSpec.feature "Dashboard", type: :feature do
 
   before do
     visit '/sign_in'
-    click_link 'Sign in with Google Apps'
+    click_link 'Log in with Google+'
   end
 
   xit "shows relevant information" do
