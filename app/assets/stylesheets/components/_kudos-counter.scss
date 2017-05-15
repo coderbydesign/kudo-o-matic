@@ -34,7 +34,6 @@ $font-primary: 'proxima-nova-soft', sans-serif;
   float: left;
   margin-bottom: $margin-bottom;
   position: relative;
-  z-index: 1;
 
   &__title {
     color: $medium-grey-color;
@@ -232,7 +231,6 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     position: fixed;
     top: $whitespace * 2; left: 0; right: 0; bottom: $whitespace * 2;
     width: 50%;
-    z-index: 10;
     overflow: auto;
 
     .visible-as-modal & {
