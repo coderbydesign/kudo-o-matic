@@ -25,7 +25,7 @@ $(document).ready(function() {
             listMore.appendTo(list)
             for (var i = 0; i < data.length; i++) {
                 var listItem = $('<li>');
-                var listName = $('<span/>').text(data[i][0]).addClass('g-name highlighted');
+                var listName = $('<span/>').text(data[i][0]).addClass('g-name');
                 var listValue = $('<span/>').text(data[i][1]).addClass('g-value');
 
                 listName.appendTo(listItem);

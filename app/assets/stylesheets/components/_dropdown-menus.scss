@@ -6,7 +6,8 @@
 
 .dropdown {
   margin-bottom: $margin-bottom;
-  background: linear-gradient(rgba($dark-blue-color,0.95), rgba($dark-blue-color,0.7));
+  background: $primary-brand-color-white;
+  box-shadow: 0 0 1px $primary-brand-color-dark;
   color: $text-color;
   font-size: $font-size-medium;
   border-radius: $border-radius;
@@ -17,15 +18,10 @@
     padding: 0.5rem;
     cursor: pointer;
   }
-
-  //.flex-item {
-  //  flex: 1;
-  //}
 }
 
 .dropdown-container {
   white-space: nowrap;
-  //overflow: hidden;
   text-overflow: ellipsis;
   color: $text-color;
   min-height: $dropdown-button-size;
@@ -43,15 +39,16 @@
 }
 
 .menu-content {
-  width: 100%;
+  align-items: center;
+  border-top: 1px solid $primary-brand-color-dark;
+  border-bottom: 1px solid $primary-brand-color-dark;
+  color: $text-color;
   font-weight: 300;
-  white-space: nowrap;
+  min-height: $dropdown-button-size - 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-height: $dropdown-button-size - 1rem;
-  border-top: 1px solid $dark-blue-color;
-  border-bottom: 1px solid $dark-blue-color;
-  align-items: center;
+  white-space: nowrap;
+  width: 100%;
 }
 
 
@@ -77,7 +74,7 @@
     height: 3rem;
     margin-left: 0.5rem;
     border-radius: $border-radius;
-    border: 2px solid $light-grey-color;
+    border: 2px solid $primary-brand-color-lightest;
   }
 
   .fa {
@@ -112,6 +109,7 @@
 
   .statistics-title {
     font-size: $font-size-regular;
+    color: $text-color-light;
   }
 
   .statistics-value {

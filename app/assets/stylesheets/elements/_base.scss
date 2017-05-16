@@ -4,8 +4,9 @@
 //
 ///////////////////////////////////////////////////////////
 html {
-  background: url('https://photos-5.dropbox.com/t/2/AAAZtV6wOtCsdP3Dl7pLtT2_ZON-MNFCDkxkwEbiDVJ58w/12/184449953/jpeg/32x32/1/_/1/2/luca-zanon-26595.jpg/EKWxh4wBGNeOBiAHKAc/UUBzN3aemwPqFwblMqoLSjkC-TjfvgyjZ2GzDfutBYE%2CHSZgne7l8epYSu8z3tnHgQpjarGSOE9jMDHMCIQm_Uw%2CA4AWukYwARqMS0UgiYo_PrNJaFJo8fQA0Pe9b7XxY3A?size=2048x1536&size_mode=3') no-repeat center center fixed;
-  background-size: cover;
+  //background: url('https://photos-5.dropbox.com/t/2/AAAZtV6wOtCsdP3Dl7pLtT2_ZON-MNFCDkxkwEbiDVJ58w/12/184449953/jpeg/32x32/1/_/1/2/luca-zanon-26595.jpg/EKWxh4wBGNeOBiAHKAc/UUBzN3aemwPqFwblMqoLSjkC-TjfvgyjZ2GzDfutBYE%2CHSZgne7l8epYSu8z3tnHgQpjarGSOE9jMDHMCIQm_Uw%2CA4AWukYwARqMS0UgiYo_PrNJaFJo8fQA0Pe9b7XxY3A?size=2048x1536&size_mode=3') no-repeat center center fixed;
+  //background-size: cover;
+  background: $primary-brand-color-lighter-grey;
   font-family: $default-font-stack;
   color: $text-color;
   text-size-adjust: 100%;
@@ -27,13 +28,6 @@ button,
 a {
   -webkit-tap-highlight-color: transparent;
   text-decoration: none;
-}
-
-a,
-a:hover,
-a:active,
-a:visited {
-  color: inherit;
 }
 
 strong {

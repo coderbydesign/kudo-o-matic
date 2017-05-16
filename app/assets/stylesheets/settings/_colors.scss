@@ -1,3 +1,27 @@
+$midnight-blue-dark:                      #052A39;
+$midnight-blue-light:                     #0C485D;
+$light-steel-blue:                        #A5B9C9;
+$cadet-blue:                              #6B90AC;
+$sea-green:                               #205E77;
+$curious-blue:                            #BBD4E8;
+$medium-grey:                             #B2ACAB;
+$light-grey:                              #E0E1E5;
+$lighter-grey:                            #F0F1F5;
+$grey:                                    #999999;
+$white-color:                             #FFFFFF;
+
+$primary-brand-color:                     $sea-green;
+$primary-brand-color-light:               $cadet-blue;
+$primary-brand-color-lighter:             $light-steel-blue;
+$primary-brand-color-lightest:            $curious-blue;
+$primary-brand-color-dark:                $midnight-blue-light;
+$primary-brand-color-darkest:             $midnight-blue-dark;
+$primary-brand-color-mid-grey:            $medium-grey;
+$primary-brand-color-light-grey:          $light-grey;
+$primary-brand-color-lighter-grey:        $lighter-grey;
+$primary-brand-color-grey:                $grey;
+$primary-brand-color-white:               $white-color;
+
 ///////////////////////////////////////////////////////////
 //
 // Base colors
@@ -9,33 +33,47 @@ $light-blue-color:                        #679EBF;
 $dark-grey-color:                         #666666;
 $medium-grey-color:                       #B2ACAB;
 $light-grey-color:                        #EAEAEA;
-$white-color:                             #FFFFFF;
+
 
 ///////////////////////////////////////////////////////////
 //
 // General colors
 //
 ///////////////////////////////////////////////////////////
-$text-color: $white-color;
+$text-color: $primary-brand-color-darkest;
+$text-color-light: $primary-brand-color-light;
+$text-color-lighter: $primary-brand-color-lighter;
+$text-color-lightest: $primary-brand-color-lightest;
+$text-color-white: $white-color;
+$text-color-mid-grey: $primary-brand-color-mid-grey;
+$text-color-grey: $primary-brand-color-grey;
 $text-color-dark: $black-color;
 $text-color-header: $white-color;
 $text-color-highlight: $dark-blue-color;
-$text-color-mark: $light-blue-color;
+$text-color-mark: $primary-brand-color;
 $text-color-medium: $dark-grey-color;
+
+///////////////////////////////////////////////////////////
+//
+// Container colors
+//
+///////////////////////////////////////////////////////////
+$primary-border-color: $primary-brand-color-darkest;
 
 ///////////////////////////////////////////////////////////
 //
 // Button colors
 //
 ///////////////////////////////////////////////////////////
-$transaction-button-background: rgba($dark-blue-color, 0.95), rgba($dark-blue-color, 0.7);
-$transaction-button-text: $white-color;
+$transaction-button-background: $primary-brand-color-lightest;
+$transaction-button-text: $text-color;
 
-$primary-button-background: $dark-blue-color;
-$primary-button-text: rgba($text-color, 1.0);
+$primary-button-background: $primary-brand-color-dark;
+$primary-button-text: $white-color;
+$primary-button-border: $primary-brand-color-darkest;
 
-$transaction-button-background: $light-grey-color;
-$transaction-button-text: rgba($dark-blue-color, 1.0);
+//$transaction-button-background: $light-grey-color;
+//$transaction-button-text: rgba($dark-blue-color, 1.0);
 
 
 ///////////////////////////////////////////////////////////
@@ -69,7 +107,7 @@ $new-transaction-background: rgba($dark-blue-color, 0.95), rgba($dark-blue-color
 //
 ///////////////////////////////////////////////////////////
 $simple-form-label-text: $text-color;
-$simple-form-input-background: rgba($light-grey-color, 1.0);
+$simple-form-input-background: $primary-brand-color-light-grey;
 $simple-form-input-text: $text-color-dark;
 
 ///////////////////////////////////////////////////////////

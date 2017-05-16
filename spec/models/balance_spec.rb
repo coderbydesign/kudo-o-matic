@@ -18,7 +18,7 @@ describe Balance, type: :model do
     it 'calculates the days left until the end of the year' do
       Balance.time_left
 
-      expect(Balance.time_left).to eq("364 day(s) left")
+      expect(Balance.time_left).to eq("364 days left")
     end
   end
 

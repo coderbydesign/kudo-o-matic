@@ -14,7 +14,7 @@ button {
 }
 
 .btn-primary {
-  background: linear-gradient(rgba($dark-blue-color, 0.8), rgba($dark-blue-color, 0.7));
+  background: $primary-brand-color-dark;
 }
 
 .btn-filter {
@@ -49,9 +49,9 @@ button {
     height: 2.5rem;
     font-weight: 500;
     font-size: 120%;
-    color: $transaction-button-text;
-    background-color: $transaction-button-background;
-    border: 2px solid $dark-blue-color
+    color: $primary-button-text;
+    background-color: $primary-button-background;
+    border: 2px solid $primary-button-border;
   }
 }
 

@@ -24,7 +24,7 @@ p.bold {
 .popper,
 .tooltip {
   position: absolute;
-  background: linear-gradient(rgba($dark-blue-color,1), rgba($dark-blue-color,0.9));
+  background: $primary-brand-color-lighter-grey;
   color: $text-color;
   width: 35%;
   box-sizing: border-box;
@@ -56,7 +56,7 @@ p.bold {
 
 .tooltip .tooltip-arrow,
 .popper .popper__arrow {
-  border-color: $dark-blue-color;
+  border-color: $primary-brand-color-lighter-grey;
 }
 .style5 .tooltip .tooltip-arrow {
   border-color: #1E252B;
@@ -150,46 +150,13 @@ p.bold {
   }
 }
 
-//.suggestions {
-//  overflow: auto;
-//  margin-top: $whitespace;
-//  padding-left: $padding;
-//  padding-right: 30px;
-//  height: 50px;
-//  list-style-type: none;
-//
-//
-//  li {
-//    display: flex;
-//    padding: $padding-small 0;
-//  }
-//
-//  li:first-child {
-//    white-space: nowrap;
-//    overflow: hidden;
-//    text-overflow: ellipsis;
-//    display: block;
-//  }
-//
-//  .g-name {
-//    flex: 1;
-//    white-space: nowrap;
-//    overflow: hidden;
-//    text-overflow: ellipsis;
-//  }
-//
-//  .g-value {
-//    padding: 0 $padding-small
-//  }
-//}
-
 .suggestions::-webkit-scrollbar {display: none;}
 .tooltip-inner::-webkit-scrollbar {display: none;}
 
 @media screen and (min-width: 720px) {
-  .tooltip {
-    top: -$whitespace * 3.5;
-  }
+  //.tooltip {
+  //  top: -$whitespace * 3.5;
+  //}
 }
 
 @media screen and (max-width: 720px) {

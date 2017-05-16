@@ -1,22 +1,15 @@
 .create-transaction-container {
   padding: $padding;
   max-height: 100%;
-  background: linear-gradient(rgba($dark-blue-color,0.95), rgba($dark-blue-color,0.7));
+  background: $white-color;
   border-radius: $border-radius;
-  margin-bottom: $margin-bottom;
+  margin-bottom: $margin-bottom * 2;
   overflow: hidden;
-
-  h1 {
-    font-size: 150%;
-    color: $white-color;
-    margin-bottom: $margin-bottom;
-  }
-
-  .fa-times {
-    float: right;
-    font-size: 80%;
-    cursor: pointer;
-  }
+  color: $text-color-white;
+  box-shadow: 0 0 1px $primary-border-color;
+  //border: 0.5rem solid transparent;
+  //border-image: linear-gradient(to bottom, rgba($primary-brand-color-darkest, 0.9) 0%, $primary-brand-color-darkest 25%);
+  //border-image-slice: 1;
 }
 
 .simple_form {
@@ -24,7 +17,7 @@
     margin-right: $whitespace;
     border: none;
     border-radius: $border-radius-small;
-    background-color: $simple-form-input-background;
+    background: $simple-form-input-background;
     color: $simple-form-input-text;
     font-size: $font-size-regular;
     width: 100%;
@@ -62,17 +55,20 @@
 
   .fa-smile-o {
     margin-top: $whitespace;
+    color: $primary-brand-color;
   }
 }
 
 .activity-extras {
   display: flex;
   flex-direction: column;
+  color: $primary-brand-color-mid-grey;
 }
 
 .counter {
   display: none;
   margin-top: $whitespace;
+  color: $primary-brand-color-mid-grey;
 }
 
 .counter.show-counter {
@@ -96,7 +92,7 @@
 
 .btn-guideline-info {
   font-size: $font-size-regular;
-  color: $text-color;
+  color: $primary-brand-color;
   display: flex;
   align-items: center;
 }

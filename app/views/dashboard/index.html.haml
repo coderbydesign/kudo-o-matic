@@ -5,24 +5,26 @@
 
 
 %body
+  .header-bg
+    %img.header-img{src:'https://www.kabisa.nl/images/kabisa-logo-d9ace243.png'}
   .page
-    .header
-      .container-header
+    -#.header
+    -#  .container-header
         %h1.title
           %span.title-border
             Kudo-o-Matic
         %h2.subtitle
           Home
-    = render 'message'
+    -#= render 'message'
     .body
       .container-left
         = render 'profile-menu'
-        = render 'kudo-counter-dashboard'
-        = render 'statistics'
+        -#= render 'kudo-counter-dashboard'
+        -#= render 'statistics'
         -#= render 'goals'
       .container-center
         = render 'transaction'
-        = render 'filter'
+        -#= render 'filter'
         #results
           = render 'timeline'
       .container-right

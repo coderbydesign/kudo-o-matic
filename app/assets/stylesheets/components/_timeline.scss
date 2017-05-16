@@ -2,10 +2,11 @@
   height: 78%;
 
   .transaction-container {
-    background-color: rgba($dark-blue-color, 0.7);
+    background-color: rgba($white-color, 1);
     border-radius: $border-radius;
+    box-shadow: 0 0 1px $primary-brand-color-dark;
     max-height: 100%;
-    margin-bottom: $margin-bottom;
+    margin-bottom: $margin-bottom * 2;
     overflow: hidden;
     padding: $padding;
 
@@ -14,8 +15,10 @@
 
       .transaction-kudos-container {
         align-items: center;
-        background-color: rgba($dark-blue-color, 0.7);
+        background-color: rgba($primary-brand-color-dark, 1);
         border-radius: $border-radius-small;
+        box-shadow: 0 0 1px $primary-brand-color-dark;
+        color: $text-color-white;
         display: flex;
         float: left;
         font-size: 140%;
@@ -31,8 +34,8 @@
 
         .sender {
           max-width: 100%;
-          border: 1px solid $light-blue-color;
-          border-right: 1px solid $light-blue-color;
+          box-shadow: 0 0 1px $primary-brand-color-dark;
+          border-right: 1px solid $primary-brand-color-white;
           border-bottom-left-radius: $border-radius-small;
           border-top-left-radius: $border-radius-small;
           background: $light-grey-color;
@@ -40,7 +43,7 @@
 
         .receiver {
           max-width: 100%;
-          border: 1px solid $light-blue-color;
+          box-shadow: 0 0 1px $primary-brand-color-dark;
           border-left: none;
           border-bottom-right-radius: $border-radius-small;
           border-top-right-radius: $border-radius-small;
@@ -54,16 +57,15 @@
     }
     .transaction-body-container {
       border-radius: $border-radius-small;
-      color: rgba($white-color, 1.0);
+      color: $text-color;
       font-size: 110%;
-      font-weight: 300;
       height: 100%;
       line-height: 125%;
       margin-top: $margin-top * 0.5;
     }
 
     .post-time-stamp {
-      color: rgba($medium-grey-color, 1.0);
+      color: $text-color-mid-grey;
       float: right;
       font-size: 90%;
       font-weight: 300;
