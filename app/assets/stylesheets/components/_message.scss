@@ -1,7 +1,4 @@
 .message-container {
-  margin: 1em auto;
-  width: 93.75%;
-
 
   .fa-times {
     cursor: pointer;
@@ -22,31 +19,18 @@
 }
 
 .show-message {
-  @include animation(show-message, .5s);
+  @include animation(show-message, 1s);
 }
 
+.notice-message,
 .error-message {
   padding: $padding;
-  background: $white-color;
-  color: $dark-blue-color;
-  border-radius: $border-radius;
-  text-align: center;
-  opacity: 0.8;
-  display: flex;
-
-  .hide-message & {
-    display: none;
-  }
-}
-
-.notice-message {
-  padding: $padding;
-  background: $dark-blue-color;
-  color: $white-color;
+  background: $primary-color-bg;
+  color: $text-primary;
   border-radius: $border-radius-small;
   text-align: center;
-  opacity: 0.85;
   display: flex;
+  margin-bottom: $margin-bottom * 2;
 
   .hide-message & {
     display: none;

@@ -1,12 +1,11 @@
 .create-transaction-container {
-  padding: $padding;
-  max-height: 100%;
-  background: $white-color;
-  border-radius: $border-radius;
-  margin-bottom: $margin-bottom * 2;
+  padding: $padding + 0.25 $padding;
+  background: $primary-color-bg;
+  border-radius: $border-radius-small;
+  margin-bottom: $margin-bottom * 4;
   overflow: hidden;
-  color: $text-color-white;
-  box-shadow: 0 0 1px $primary-border-color;
+  color: $text-primary;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
   //border: 0.5rem solid transparent;
   //border-image: linear-gradient(to bottom, rgba($primary-brand-color-darkest, 0.9) 0%, $primary-brand-color-darkest 25%);
   //border-image-slice: 1;
@@ -14,22 +13,24 @@
 
 .simple_form {
   input {
-    margin-right: $whitespace;
     border: none;
     border-radius: $border-radius-small;
-    background: $simple-form-input-background;
-    color: $simple-form-input-text;
+    background: $primary-form-bg;
+    color: $primary-form-color;
     font-size: $font-size-regular;
+    padding: $padding-small / 2;
     width: 100%;
   }
 
   textarea {
     border: none;
     border-radius: $border-radius-small;
-    background-color: $simple-form-input-background;
-    color: $simple-form-input-text;
+    background-color: $primary-form-bg;
+    color: $primary-form-color;
     font-size: $font-size-regular;
     flex: 1;
+    margin-top: $whitespace;
+    padding: $padding-small / 2;
     resize: none;
   }
 }
@@ -40,6 +41,7 @@
 
 .receiver {
   display: flex;
+  margin-right: $whitespace;
 }
 
 .amount {
@@ -48,31 +50,25 @@
 
 .activity {
   display: flex;
-  textarea {
-    margin-top: $whitespace;
-    margin-right: $whitespace;
-  }
-
-  .fa-smile-o {
-    margin-top: $whitespace;
-    color: $primary-brand-color;
-  }
 }
 
 .activity-extras {
+  color: #4DAF7C;
+  font-size: $font-size-medium;
   display: flex;
-  flex-direction: column;
-  color: $primary-brand-color-mid-grey;
+  padding: $padding / 2;
+
+  .fa-smile-o {
+    margin-left: $margin;
+  }
 }
 
 .counter {
   display: none;
-  margin-top: $whitespace;
-  color: $primary-brand-color-mid-grey;
 }
 
 .counter.show-counter {
-  display: inline-block;
+  display: block;
   @include animation(counter, .5s)
 }
 
@@ -83,8 +79,18 @@
   to {
     opacity: 1;
   }
-
 }
+
+.submit {
+  display: flex;
+  align-items: center;
+  margin-top: $margin * 1.5;
+
+  .submit-btn {
+    flex: 1;
+  }
+}
+
 
 .transaction-container-title {
   display: flex;
@@ -92,7 +98,7 @@
 
 .btn-guideline-info {
   font-size: $font-size-regular;
-  color: $primary-brand-color;
+  color: $text-primary;
   display: flex;
   align-items: center;
 }

@@ -39,20 +39,17 @@ Rails.application.routes.draw do
     post 'poll-like/:id', to: "goal#pollvote", as: :polllike
   end
 
-  get '/transactions/all' => 'transactions#all'
-  get '/transactions/send' => 'transactions#send'
-  get '/transactions/received' => 'transactions#received'
-  get '/transactions/both' => 'transactions#both'
+
 
   get '/transactions/:type' => 'transactions#filter'
 
-  get '/dashboard', to: 'dashboard#index'
+  get '/transactions', to: 'transactions#index'
 
   get "minigames" => "minigames#index"
   get "minigames/kudosclicker" => "kudosclicker#index"
   get "/feed", to: "feed#index"
 
-  root 'dashboard#index'
+  root 'transactions#index'
 end
 
 

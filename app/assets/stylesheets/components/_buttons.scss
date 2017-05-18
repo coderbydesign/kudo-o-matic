@@ -9,17 +9,17 @@ button {
 }
 
 .btn {
-  border-radius: $border-radius;
+  border-radius: $border-radius-small;
   padding: $padding-small;
 }
 
 .btn-primary {
-  background: $primary-brand-color-dark;
+  background: $primary-button-bg;
 }
 
 .btn-filter {
   height: 100%;
-  color: $text-color;
+  color: $primary-button-color;
   font-size: 80%;
   font-weight: 300;
   margin-bottom: $margin-bottom;
@@ -42,21 +42,20 @@ button {
 
 .simple_form {
   #send-kudos-button {
-    margin-top: $whitespace;
-    border-radius: $border-radius-small;
+    //border-radius: $border-radius-small;
     float: left;
     cursor: pointer;
     height: 2.5rem;
     font-weight: 500;
     font-size: 120%;
-    color: $primary-button-text;
-    background-color: $primary-button-background;
-    border: 2px solid $primary-button-border;
+    color: $primary-button-color;
+    background-color: $primary-button-bg;
+    //border: 2px solid $primary-button-border;
   }
 }
 
 #like-button {
-  color: rgba($primary-button-text, 1.0);
+  color: $primary-button-color;
   margin-top: $margin-top;
   border-radius: $border-radius-small;
   background-color: rgba(234,234,234,1.0);

@@ -22,22 +22,19 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 }
 
 .kudo-counter {
-  background: $primary-brand-color-white;
-  border-radius: $border-radius;
-  box-shadow: 0 0 1px $primary-brand-color-dark;
-  color: $text-color-dark;
-  max-height: 100%;
+  background: $primary-color-bg;
+  //border-radius: $border-radius;
+  box-shadow: 0 0 1rem rgba($primary-box-shadow, 0.2);
+  color: $text-secondary;
   font-weight: 300;
   padding: $padding;
   padding-bottom: 0;
   text-align: center;
   width: 100%;
-  float: left;
   margin-bottom: $margin-bottom;
   position: relative;
 
   &__title {
-    color: $primary-brand-color-dark;
     font-size: 1.75rem;
     margin-bottom: 0.625rem;
 
@@ -49,16 +46,16 @@ $font-primary: 'proxima-nova-soft', sans-serif;
   &__date {
     font-size: 1.375rem;
     margin-bottom: 3.57142857rem; // 50px / 16px
-    color: $primary-brand-color-light
   }// .kudo-counter__title
 
   &__days_left {
     font-size: $font-size-medium;
     margin-bottom: $margin;
-    border: 1px solid $primary-brand-color-dark;
+    //border: 1px solid $primary-brand-color-dark;
     padding: $padding;
-    border-radius: $border-radius;
-    box-shadow: 0 0 1px $primary-brand-color-dark
+    border-radius: 2.25rem;
+    box-shadow: 0 0 1rem rgba($primary-box-shadow, 0.2);
+    color: #8C7C6C
   }
 
 }// .kudo-counter
@@ -74,7 +71,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     fill: none;
     height: 100%;
     position: relative;
-    stroke: $primary-brand-color-lightest;
+    stroke: $primary-stroke-color;
     stroke-width: 20px;
     width: 100%;
   }// .kudo-chart__background
@@ -89,7 +86,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     stroke-dasharray: 630px;
     stroke-dashoffset: 630px;
     stroke-width: 20px;
-    stroke: $primary-brand-color-dark;
+    stroke: $secondary-stroke-color;
     top: 0;
     width: 100%;
   }// .kudo-chart__foreground
@@ -106,7 +103,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     }
 
     div {
-      color: $primary-brand-color-dark;
+      color: $text-primary;
       font-size: 1.375rem;
     }// .kudo-chart__count:after
 

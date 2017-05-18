@@ -2,9 +2,9 @@
   height: 78%;
 
   .transaction-container {
-    background-color: rgba($white-color, 1);
-    border-radius: $border-radius;
-    box-shadow: 0 0 1px $primary-brand-color-dark;
+    background: $primary-color-bg;
+    border-radius: $border-radius-small;
+    box-shadow: 0 0 1rem rgba($primary-box-shadow, 0.2);
     max-height: 100%;
     margin-bottom: $margin-bottom * 2;
     overflow: hidden;
@@ -15,39 +15,39 @@
 
       .transaction-kudos-container {
         align-items: center;
-        background-color: rgba($primary-brand-color-dark, 1);
         border-radius: $border-radius-small;
-        box-shadow: 0 0 1px $primary-brand-color-dark;
-        color: $text-color-white;
+        border: 0.125rem solid $secondary-border-color;
+        color: $text-tertiary;
         display: flex;
         float: left;
         font-size: 140%;
         height: 2.5rem;
         justify-content: center;
+        width: 5.5rem;
         padding: $padding-small;
       }
       .transaction-avatar-container {
         display: inline-flex;
         max-width: 2.5rem;
         height: 2.5rem;
-        margin-left: $padding-small;
+        margin-left: $whitespace + 0.25rem;
 
         .sender {
           max-width: 100%;
-          box-shadow: 0 0 1px $primary-brand-color-dark;
-          border-right: 1px solid $primary-brand-color-white;
+          box-shadow: 0 0 1rem rgba($primary-box-shadow, 0.3);
+          border-right: 1px solid $secondary-border-color;
           border-bottom-left-radius: $border-radius-small;
           border-top-left-radius: $border-radius-small;
-          background: $light-grey-color;
+          background: $secondary-color-bg;
         }
 
         .receiver {
           max-width: 100%;
-          box-shadow: 0 0 1px $primary-brand-color-dark;
+          box-shadow: 0 0 1rem rgba($primary-box-shadow, 0.3);
           border-left: none;
           border-bottom-right-radius: $border-radius-small;
           border-top-right-radius: $border-radius-small;
-          background: $light-grey-color;
+          background: $secondary-color-bg;
         }
 
         .flex-item {
@@ -57,7 +57,7 @@
     }
     .transaction-body-container {
       border-radius: $border-radius-small;
-      color: $text-color;
+      color: $text-primary;
       font-size: 110%;
       height: 100%;
       line-height: 125%;
@@ -65,7 +65,7 @@
     }
 
     .post-time-stamp {
-      color: $text-color-mid-grey;
+      color: $text-time-stamp;
       float: right;
       font-size: 90%;
       font-weight: 300;

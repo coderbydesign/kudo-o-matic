@@ -74,12 +74,12 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
     right: 0;
     left: 0;
     //z-index: 100000;
-    background: $primary-brand-color-dark;
-    border-top: 1px solid $primary-brand-color-dark;
+    background: $secondary-stroke-color;
+    border-top: 1px solid $primary-border-color;
 
     .percentage {
       margin-left: $margin;
-      border-top: 1px solid $primary-brand-color-dark;
+      border-top: 1px solid $primary-border-color;
       line-height: 18px;
       padding: 0 0 0 $padding-small;
       font-size: $font-size-regular - 0.1rem;
@@ -95,7 +95,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
     right: - $marker-size-half;
     width: 100%;
     height: $path-height;
-    background: $primary-brand-color-lightest;
+    background: $primary-stroke-color;
   }
 
   &:last-child .progress-bar {
@@ -110,7 +110,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
     right: - $marker-size-half;
     width: 100%;
     height: $path-height;
-    background: $primary-brand-color-dark;
+    background: $secondary-stroke-color;
   }
 
   &:last-child .progress-bar-complete {
@@ -183,7 +183,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
 
   .progress-text,
   .progress-step > a .progress-text {
-    color: $primary-brand-color-dark;
+    color: $text-primary;
   }
 }
 
@@ -192,17 +192,17 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
 .progress-step {
 
   // Inactive - Default state
-  @include progress-state($primary-brand-color-lightest, null, #fff, $primary-brand-color-lightest, $primary-brand-color-lightest);
+  @include progress-state($primary-stroke-color, null, #fff, $primary-stroke-color, $primary-stroke-color);
 
   // Active state
   &.is-active {
-    @include progress-state($primary-brand-color-lightest, $path-color: $primary-brand-color-lightest);
+    @include progress-state($primary-stroke-color, $path-color: $secondary-stroke-color);
 
   }
 
   // Complete state
   &.is-complete {
-    @include progress-state($primary-brand-color-dark, $path-color: $primary-brand-color-lightest);
+    @include progress-state($secondary-stroke-color, $path-color: $secondary-stroke-color);
   }
 }
 

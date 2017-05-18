@@ -39,13 +39,13 @@ $(document).ready(function() {
         var textLength = $('.character-count').val().length;
         var textRemaining = textMax - textLength;
 
-        $('.counter').html(textRemaining);
+        $('.counter').html(textRemaining + ' |');
     });
 
     // Submit on enter in transaction textarea
     $('.character-count').keypress(function(event) {
         if (event.keyCode == 13 || event.which == 13) {
-            $('.send-kudos-button').click();
+            $('#send-kudos-button').click();
             event.preventDefault();
         }
     });
@@ -56,15 +56,4 @@ $(document).ready(function() {
             return false;
         }
     });
-});
-
-document.addEventListener('DOMContentLoaded', function(){
-    var index = 0;
-    var popper;
-
-    var instance = new Tooltip(document.getElementsByClassName("activity"), {
-        title: "Blabla",
-        trigger: "click"
-    });
-    instance.show();
 });

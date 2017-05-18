@@ -5,23 +5,24 @@
 ///////////////////////////////////////////////////////////
 html {
   //background: url('https://photos-5.dropbox.com/t/2/AAAZtV6wOtCsdP3Dl7pLtT2_ZON-MNFCDkxkwEbiDVJ58w/12/184449953/jpeg/32x32/1/_/1/2/luca-zanon-26595.jpg/EKWxh4wBGNeOBiAHKAc/UUBzN3aemwPqFwblMqoLSjkC-TjfvgyjZ2GzDfutBYE%2CHSZgne7l8epYSu8z3tnHgQpjarGSOE9jMDHMCIQm_Uw%2CA4AWukYwARqMS0UgiYo_PrNJaFJo8fQA0Pe9b7XxY3A?size=2048x1536&size_mode=3') no-repeat center center fixed;
-  //background-size: cover;
-  background: $primary-brand-color-lighter-grey;
+  background-size: cover;
+  //background-image: url('yellow.jpg');
+  background-image: radial-gradient(ellipse farthest-side at 100% 100%, #65799B 20%, #252d63 130%); //linear-gradient(143deg, #000e3b 1%, #3e5293 35%, #636fa4 67%, #DBF6C8 94%);
+  //background-image: radial-gradient(ellipse farthest-side at 100% 100%, #EAE1C0 20%, #D2AE8E 50%, #E55F3A 130%); //linear-gradient(143deg, #000e3b 1%, #3e5293 35%, #636fa4 67%, #DBF6C8 94%);
   font-family: $default-font-stack;
-  color: $text-color;
+  color: $text-primary;
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   // Avoid horizontal squeeze under minimum mobile screen width
   min-width: 320px;
+  min-height: 100%;
 }
 
 html,
 body {
   position: relative;
   height: 100%;
-  //margin: 0;
-  //padding: 0;
-  //line-height: 1.25;
+  background-attachment: fixed;
 }
 
 button,

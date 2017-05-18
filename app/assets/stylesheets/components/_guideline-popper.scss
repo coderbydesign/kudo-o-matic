@@ -24,8 +24,8 @@ p.bold {
 .popper,
 .tooltip {
   position: absolute;
-  background: $primary-brand-color-lighter-grey;
-  color: $text-color;
+  background: $secondary-color-bg;
+  color: $text-primary;
   width: 35%;
   box-sizing: border-box;
   border-radius: 3px;
@@ -56,7 +56,7 @@ p.bold {
 
 .tooltip .tooltip-arrow,
 .popper .popper__arrow {
-  border-color: $primary-brand-color-lighter-grey;
+  border-color: $light-grey-color;
 }
 .style5 .tooltip .tooltip-arrow {
   border-color: #1E252B;
@@ -125,7 +125,7 @@ p.bold {
 .tooltip-inner {
   list-style-type: none;
   text-align: left;
-  max-height: 7rem;
+  max-height: 7.5rem;
   overflow-y: scroll;
 
   .suggested-guidelines-title {

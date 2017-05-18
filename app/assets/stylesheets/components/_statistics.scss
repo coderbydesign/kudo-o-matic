@@ -1,14 +1,14 @@
 .statistics-container {
   border-radius: $border-radius;
-  background: linear-gradient(rgba($dark-blue-color, 0.9), rgba($dark-blue-color, 0.7));
+  background: $primary-color-bg;
   padding: $padding;
   max-height: 100%;
   margin-bottom: $margin-bottom;
   max-width: none;
   overflow: hidden;
 
-  h1 {
-    color: $text-color;
+  h2 {
+    color: $text-primary;
     font-size: $font-size-large;
     font-weight: 300;
   }
@@ -28,11 +28,12 @@
   }
 
   .generalstatistics:not(:last-child) {
-    border-right: 1px solid $dark-blue-color
+    border-right: 1px solid $primary-border-color;
   }
 
   .statistics-title {
     font-size: $font-size-regular;
+    color: $text-primary;
   }
 
   .statistics-value {
