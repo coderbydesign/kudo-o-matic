@@ -1,14 +1,24 @@
 .timeline-container {
   height: 78%;
 
+  .transaction-container:first-child {
+    border-top-left-radius: $border-radius-small;
+    border-top-right-radius: $border-radius-small;
+  }
+
+  .transaction-container:last-child {
+    border-bottom-left-radius: $border-radius-small;
+    border-bottom-right-radius: $border-radius-small;
+  }
+
   .transaction-container {
-    background: $primary-color-bg;
-    border-radius: $border-radius-small;
-    box-shadow: 0 0 1rem rgba($primary-box-shadow, 0.2);
-    max-height: 100%;
-    margin-bottom: $margin-bottom * 2;
+    background: $primary-bg;
+    border: 1px solid $primary-border-color;
+    border-top: none;
+    font-weight: 300;
+    //margin-bottom: $margin-bottom * 2;
     overflow: hidden;
-    padding: $padding;
+    padding: $padding-medium * 3;
 
     .transaction-header-container {
       max-height: 10%;
@@ -16,14 +26,13 @@
       .transaction-kudos-container {
         align-items: center;
         border-radius: $border-radius-small;
-        border: 0.125rem solid $secondary-border-color;
-        color: $text-tertiary;
+        border: 1px solid $base-color-gray;
         display: flex;
         float: left;
-        font-size: 140%;
-        height: 2.5rem;
+        font-size: 125%;
+        height: 2rem;
         justify-content: center;
-        width: 5.5rem;
+        max-width: 5rem;
         padding: $padding-small;
       }
       .transaction-avatar-container {
@@ -33,21 +42,21 @@
         margin-left: $whitespace + 0.25rem;
 
         .sender {
-          max-width: 100%;
-          box-shadow: 0 0 1rem rgba($primary-box-shadow, 0.3);
-          border-right: 1px solid $secondary-border-color;
+          width: 100%;
+          border: 1px solid $primary-border-color;
+          border-right: 1px solid $base-color-white;
           border-bottom-left-radius: $border-radius-small;
           border-top-left-radius: $border-radius-small;
-          background: $secondary-color-bg;
+          background: $secondary-bg;
         }
 
         .receiver {
-          max-width: 100%;
-          box-shadow: 0 0 1rem rgba($primary-box-shadow, 0.3);
+          width: 100%;
+          border: 1px solid $primary-border-color;
           border-left: none;
           border-bottom-right-radius: $border-radius-small;
           border-top-right-radius: $border-radius-small;
-          background: $secondary-color-bg;
+          background: $secondary-bg;
         }
 
         .flex-item {
@@ -65,7 +74,7 @@
     }
 
     .post-time-stamp {
-      color: $text-time-stamp;
+      color: $text-light-gray;
       float: right;
       font-size: 90%;
       font-weight: 300;

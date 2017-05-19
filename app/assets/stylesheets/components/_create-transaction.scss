@@ -1,37 +1,44 @@
 .create-transaction-container {
-  padding: $padding + 0.25 $padding;
-  background: $primary-color-bg;
+  background: $primary-bg;
+  border: 1px solid $primary-border-color;
   border-radius: $border-radius-small;
-  margin-bottom: $margin-bottom * 4;
+  margin-bottom: $margin-bottom * 3;
   overflow: hidden;
-  color: $text-primary;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
-  //border: 0.5rem solid transparent;
-  //border-image: linear-gradient(to bottom, rgba($primary-brand-color-darkest, 0.9) 0%, $primary-brand-color-darkest 25%);
-  //border-image-slice: 1;
+  padding: $padding-medium * 3;
 }
 
 .simple_form {
+
+  input:focus,
+  textarea:focus {
+    border-color: $focus-border-color;
+  }
+
   input {
-    border: none;
+    border: 1px solid $primary-border-color;
     border-radius: $border-radius-small;
     background: $primary-form-bg;
     color: $primary-form-color;
-    font-size: $font-size-regular;
-    padding: $padding-small / 2;
+    font-size: $font-size-form;
+    padding: $padding-medium * 0.75 $padding-medium * 1.3125;
     width: 100%;
   }
 
   textarea {
-    border: none;
+    border: 1px solid $primary-border-color;
     border-radius: $border-radius-small;
     background-color: $primary-form-bg;
     color: $primary-form-color;
-    font-size: $font-size-regular;
+    font-size: $font-size-form;
     flex: 1;
     margin-top: $whitespace;
-    padding: $padding-small / 2;
+    padding: $padding-medium * 0.75 $padding-medium * 1.3125;
     resize: none;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: $text-light-gray;
   }
 }
 
@@ -53,13 +60,16 @@
 }
 
 .activity-extras {
-  color: #4DAF7C;
-  font-size: $font-size-medium;
+  color: $text-primary;
+  font-size: 1.0625rem;
   display: flex;
-  padding: $padding / 2;
+  align-items: center;
 
-  .fa-smile-o {
+  .fa {
+    border: 1px solid $secondary-border-color;
+    border-radius: $border-radius-small;
     margin-left: $margin;
+    padding: $padding-medium $padding;
   }
 }
 
@@ -94,13 +104,6 @@
 
 .transaction-container-title {
   display: flex;
-}
-
-.btn-guideline-info {
-  font-size: $font-size-regular;
-  color: $text-primary;
-  display: flex;
-  align-items: center;
 }
 
 .btn-label {

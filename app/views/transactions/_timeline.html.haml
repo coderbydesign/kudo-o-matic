@@ -18,7 +18,7 @@
           = image_tag transaction.receiver_image, class:'receiver'
       .transaction-body-container
         .transaction-content
-          %span.sendername
+          %span.highlighted.sendername
             = "#{transaction.sender.name}:"
           %span.highlighted
             = "+#{transaction.amount} ₭"
@@ -28,7 +28,7 @@
             = transaction.receiver_name_feed
           %span
             for
-          %span.highlighted.activityname
+          %span.activityname
             - activity = transaction.activity_name_feed
             - escapedActivity = html_escape(activity)
             != @markdown.render(escapedActivity)

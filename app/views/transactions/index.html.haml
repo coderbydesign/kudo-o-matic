@@ -5,7 +5,7 @@
 
 
 %body
-  -#.header-bg
+  .header-bg
     %img.header-img{src:'https://www.kabisa.nl/images/kabisa-logo-d9ace243.png'}
   .page
     -#.header
@@ -18,16 +18,16 @@
 
     .body
       .container-left
-        -#= render 'profile-menu'
+        = render 'profile-menu'
         -#= render 'kudo-counter-dashboard'
         -#= render 'statistics'
         -#= render 'goals'
       .container-center
         -#= render 'message'
-        -#= render 'transaction'
+        = render 'transaction'
         -#= render 'filter'
         #results
-          -#= render 'timeline'
+          = render 'timeline'
       .container-right
         -#= render 'kudos-counter'
         -#= render 'statistics'

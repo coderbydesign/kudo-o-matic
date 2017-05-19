@@ -39,7 +39,7 @@ $(document).ready(function() {
         var textLength = $('.character-count').val().length;
         var textRemaining = textMax - textLength;
 
-        $('.counter').html(textRemaining + ' |');
+        $('.counter').html(textRemaining);
     });
 
     // Submit on enter in transaction textarea

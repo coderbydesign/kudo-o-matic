@@ -42,15 +42,12 @@ button {
 
 .simple_form {
   #send-kudos-button {
-    //border-radius: $border-radius-small;
-    float: left;
+    background-color: $primary-button-bg;
+    border-radius: $border-radius-small;
+    color: $primary-button-color;
     cursor: pointer;
     height: 2.5rem;
-    font-weight: 500;
-    font-size: 120%;
-    color: $primary-button-color;
-    background-color: $primary-button-bg;
-    //border: 2px solid $primary-button-border;
+    width: 10rem;
   }
 }
 

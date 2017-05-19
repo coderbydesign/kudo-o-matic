@@ -6,11 +6,10 @@
 
 .dropdown {
   margin-bottom: $margin-bottom;
-  background: $primary-color-bg;
-  box-shadow: 0 0 1rem rgba($primary-box-shadow, 0.2);
+  border: 1px solid $primary-border-color;
+  border-radius: $border-radius-small;
+  background: $primary-bg;
   color: $text-primary;
-  font-size: $font-size-medium;
-  //border-radius: $border-radius;
   font-weight: 300;
 
   a {
@@ -23,7 +22,6 @@
 .dropdown-container {
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: #8C7C6C;
   min-height: $dropdown-button-size;
   align-items: center;
 }
@@ -66,15 +64,34 @@
 //
 ///////////////////////////////////////////////////////////
 
-.current-user {
-
-  img {
-    margin-top: -20px;
-    height: 3.5rem;
-    margin-left: 0.5rem;
-    border-radius: $border-radius-small;
-    box-shadow: 0 0 1rem rgba($primary-box-shadow, 0.2);
+.profile-picture {
+  $avatar-size: 5rem;
+  
+  align-items: flex-end;
+  background-color: $secondary-bg;
+  background-image: url('blurred_10.jpg');
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid $primary-border-color;
+  display: flex;
+  height: 8rem;
+  justify-content: center;
+  margin-bottom: $avatar-size / 2;
+  
+  .profile-img {
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    border: 3px solid $base-color-white;
+    height: $avatar-size;
+    transform: translateY(50%);
+    width: $avatar-size;
   }
+}
+
+.current-user {
+  font-size: $font-size-medium;
+  justify-content: center;
 
   .fa {
     font-size: $font-size-regular;
@@ -92,28 +109,21 @@
 
 .user-statistics-container {
   display: flex;
-  padding-left: $padding-small;
-  padding-bottom: $padding-small;
-  padding-top: $padding-small;
+  padding: 1.25rem;
 
   .userstatistics {
     text-align: center;
-    flex: 1;
-    line-height: 1.8rem;
+    flex: 1 0 auto;
   }
 
   .userstatistics:not(:last-child) {
     border-right: 1px solid $primary-border-color
   }
 
-  .statistics-title {
-    font-size: $font-size-regular;
-    color: #5F90B0;
-  }
-
   .statistics-value {
-    font-size: $font-size-large - 0.5rem;
-    color: #8C7C6C;
+    display: block;
+    font-weight: 700;
+    margin-top: 0.25rem;
   }
 }
 
