@@ -11,10 +11,10 @@
             .progress-title
               %h3
                 = "#{goal.amount} ₭"
-                %p.highlighted.goal-name
-                  = goal.name
-                %span.highlighted.left-text
-                  = goal.achieved_on
+              %p.goal-name
+                = goal.name
+              %span.left-text
+                = goal.achieved_on
 
       - elsif Goal.next == goal
         %li.progress-step.is-active
@@ -28,10 +28,12 @@
             .progress-title
               %h3
                 = "#{goal.amount} ₭"
-                %p.highlighted.goal-name
-                  = goal.name
-                %span.highlighted.left-text
-                  = "#{goal.amount - Balance.current.amount} ₭ left"
+              %p.goal-name
+                = goal.name
+              %span.left-text
+                = goal.amount - Balance.current.amount
+              %span.left-text
+                ₭ left
 
       - else
         %li.progress-step
@@ -42,10 +44,12 @@
             .progress-title
               %h3
                 = "#{goal.amount} ₭"
-                %p.highlighted.goal-name
-                  = goal.name
-                %span.highlighted.left-text
-                  = "#{goal.amount - Balance.current.amount} ₭ left"
+              %p.goal-name
+                = goal.name
+              %span.left-text
+                = goal.amount - Balance.current.amount
+              %span.left-text
+                ₭ left
 
     %li.progress-step.is-complete
       .progress-bar-complete

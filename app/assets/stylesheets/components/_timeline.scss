@@ -39,7 +39,7 @@
         display: inline-flex;
         max-width: 2.5rem;
         height: 2.5rem;
-        margin-left: $whitespace + 0.25rem;
+        margin-left: $margin-primary / 2;
 
         .sender {
           width: 100%;
@@ -70,7 +70,7 @@
       font-size: 110%;
       height: 100%;
       line-height: 125%;
-      margin-top: $margin-top * 0.5;
+      margin-top: $margin-secondary / 2;
     }
 
     .post-time-stamp {

@@ -2,7 +2,7 @@
   background: linear-gradient(rgba($dark-blue-color, 0.9), rgba($dark-blue-color, 0.7));
   border-radius: $border-radius;
   display: none;
-  margin-bottom: $margin-bottom;
+  margin-bottom: $margin-secondary;
   overflow: hidden;
   padding: $padding;
   width: 100%;
@@ -66,7 +66,7 @@
 
     .statistics-value {
       text-align: right;
-      margin-left: $margin;
+      margin-left: $margin-secondary;
     }
   }
 

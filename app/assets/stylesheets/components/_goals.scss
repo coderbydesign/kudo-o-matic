@@ -42,8 +42,8 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
 
 .goal-container {
   text-align: center;
-  font-weight: 400;
-  margin-bottom: 2rem;
+  font-weight: 300;
+  margin-bottom: $margin-primary;
 }
 
 .progress-tracker {
@@ -75,11 +75,11 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
     left: 0;
     //z-index: 100000;
     background: $secondary-stroke-color;
-    border-top: 1px solid $primary-border-color;
+    border-top: 1px solid $base-color-dark-gray;
 
     .percentage {
-      margin-left: $margin;
-      border-top: 1px solid $primary-border-color;
+      margin-left: $margin-secondary;
+      border-top: 1px solid $base-color-dark-gray;
       line-height: 18px;
       padding: 0 0 0 $padding-small;
       font-size: $font-size-regular - 0.1rem;
@@ -120,7 +120,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
   // Active state
   &.is-active {
     .progress-title {
-      font-weight: 400;
+      font-weight: 300;
     }
   }
 
@@ -155,7 +155,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
   padding: 0 $text-padding-X;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 115%;
+  font-size: 1rem;
 }
 .progress-title {
   margin-top: 0;
@@ -192,7 +192,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
 .progress-step {
 
   // Inactive - Default state
-  @include progress-state($primary-stroke-color, null, #fff, $primary-stroke-color, $primary-stroke-color);
+  @include progress-state($primary-stroke-color, null, $base-color-lighter-gray, $primary-stroke-color, $primary-stroke-color);
 
   // Active state
   &.is-active {
@@ -202,7 +202,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
 
   // Complete state
   &.is-complete {
-    @include progress-state($secondary-stroke-color, $path-color: $secondary-stroke-color);
+    @include progress-state($secondary-stroke-color, null, $base-color-white, $path-color: $secondary-stroke-color);
   }
 }
 
@@ -432,10 +432,6 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
     //padding-top: $marker-size-quarter;
     padding-left: $text-padding--vertical;
     margin-left: 0;
-  }
-
-  .left-text {
-    font-size: $font-size-regular;
   }
 
   .progress-step:not(:last-child) .progress-text {

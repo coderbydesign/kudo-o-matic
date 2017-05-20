@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////
 
 .dropdown {
-  margin-bottom: $margin-bottom;
+  margin-bottom: $margin-secondary;
   border: 1px solid $primary-border-color;
   border-radius: $border-radius-small;
   background: $primary-bg;
@@ -68,8 +68,8 @@
   $avatar-size: 5rem;
   
   align-items: flex-end;
-  background-color: $secondary-bg;
-  background-image: url('blurred_10.jpg');
+  background-color: $base-color-light-blue;
+  //background-image: url('profile/blurred_32.jpg');
   background-size: cover;
   background-position: center;
   border-bottom: 1px solid $primary-border-color;
@@ -123,7 +123,7 @@
   .statistics-value {
     display: block;
     font-weight: 700;
-    margin-top: 0.25rem;
+    margin-top: $margin-secondary / 2;
   }
 }
 
@@ -140,7 +140,7 @@
   }
 
   .dropdown:not(:last-child) {
-    margin-right: $margin;
+    margin-right: $margin-secondary;
   }
 
   .fa {

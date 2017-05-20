@@ -24,14 +24,13 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 .kudo-counter {
   background: $primary-bg;
   //border-radius: $border-radius;
-  box-shadow: 0 0 1rem rgba($primary-box-shadow, 0.2);
+  border: 1px solid $primary-border-color;
   color: $text-primary;
   font-weight: 300;
-  padding: $padding;
-  padding-bottom: 0;
+  padding: 1.25rem;
   text-align: center;
   width: 100%;
-  margin-bottom: $margin-bottom;
+  margin-bottom: $margin-secondary;
   position: relative;
 
   &__title {
@@ -51,7 +50,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 
   &__days_left {
     font-size: $font-size-medium;
-    margin-bottom: $margin;
+    margin-bottom: $margin-secondary;
     //border: 1px solid $primary-brand-color-dark;
     padding: $padding;
     border-radius: 2.25rem;

@@ -2,9 +2,9 @@
   background: $primary-bg;
   border: 1px solid $primary-border-color;
   border-radius: $border-radius-small;
-  margin-bottom: $margin-bottom * 3;
+  margin-bottom: $margin-primary;
   overflow: hidden;
-  padding: $padding-medium * 3;
+  padding: $padding-primary;
 }
 
 .simple_form {
@@ -31,7 +31,7 @@
     color: $primary-form-color;
     font-size: $font-size-form;
     flex: 1;
-    margin-top: $whitespace;
+    margin-top: $margin-secondary;
     padding: $padding-medium * 0.75 $padding-medium * 1.3125;
     resize: none;
   }
@@ -48,7 +48,7 @@
 
 .receiver {
   display: flex;
-  margin-right: $whitespace;
+  margin-right: $margin-secondary;
 }
 
 .amount {
@@ -68,7 +68,7 @@
   .fa {
     border: 1px solid $secondary-border-color;
     border-radius: $border-radius-small;
-    margin-left: $margin;
+    margin-left: $margin-secondary;
     padding: $padding-medium $padding;
   }
 }
@@ -94,7 +94,7 @@
 .submit {
   display: flex;
   align-items: center;
-  margin-top: $margin * 1.5;
+  margin-top: $margin-secondary * 1.5;
 
   .submit-btn {
     flex: 1;
@@ -107,17 +107,11 @@
 }
 
 .btn-label {
-  margin-right: $margin * 0.5;
+  margin-right: $margin-secondary / 2;
 }
 
 .flex-item {
   flex: 1;
-}
-
-
-
-@media screen and (min-width: 1201px) {
-
 }
 
 @media screen and (max-width: 1200px) {
@@ -127,8 +121,8 @@
 
 }
 
-@media screen and (max-width: 535px) {
-  .btn-label {
-    display: none;
+@media screen and (max-width: 720px) {
+  .create-transaction-container {
+    margin-bottom: $margin-secondary;
   }
 }

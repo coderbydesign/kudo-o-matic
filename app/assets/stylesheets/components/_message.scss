@@ -2,15 +2,15 @@
 
   .fa-times {
     cursor: pointer;
-    margin-left: $whitespace;
+    margin-left: $margin-secondary;
   }
 
   .fa-exclamation-circle {
-    margin-right: $whitespace;
+    margin-right: $margin-secondary;
   }
 
   .fa-info-circle {
-    margin-right: $whitespace;
+    margin-right: $margin-secondary;
   }
 
   .message {
@@ -30,7 +30,7 @@
   border-radius: $border-radius-small;
   text-align: center;
   display: flex;
-  margin-bottom: $margin-bottom * 2;
+  margin-bottom: $margin-secondary * 2;
 
   .hide-message & {
     display: none;

@@ -17,27 +17,28 @@
 }
 
 .body {
-  margin: 0 auto 53px;
+  margin: 0 auto 3.3125rem; // 53px / 16px
   width: 93.75%;
   display: flex;
-  margin-top: 1.5rem;
+  margin-top: $margin-primary;
 }
 
 .container-right {
   height: 100%;
   flex: 1;
   min-width: 0; // http://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome
+  padding: 0 1rem;
 }
 
 .container-center {
   flex: 2;
-  margin-right: 2.5%;
-  margin-left: 2.5%;
+  padding: 0 1rem;
 }
 
 .container-left {
   height: 100%;
   flex: 1;
+  padding: 0 1rem;
 }
 
 @media screen and (max-width: 1200px) {

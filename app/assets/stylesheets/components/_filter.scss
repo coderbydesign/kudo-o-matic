@@ -2,7 +2,7 @@
   display: flex;
   width: 100%;
   align-items: center;
-  margin-bottom: $margin-bottom;
+  margin-bottom: $margin-secondary;
   border-bottom: 1px solid $primary-border-color;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .filter-option:not(:first-child) {
-  margin-left: $padding-small;
+  margin-left: $margin-secondary;
 }
 
 .send {

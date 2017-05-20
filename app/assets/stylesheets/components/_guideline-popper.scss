@@ -7,7 +7,7 @@ p.thin {
 p.bold {
   font-weight: 900;
   margin: 0;
-  margin-top: -5px;
+  margin-top: -0.3125rem; // 5px / 16px
 }
 
 .rel {
@@ -51,7 +51,7 @@ p.bold {
   height: 0;
   border-style: solid;
   position: absolute;
-  margin: 5px;
+  margin: 0.3125rem; // 5px / 16px
 }
 
 .tooltip .tooltip-arrow,
@@ -63,7 +63,7 @@ p.bold {
 }
 .popper[x-placement^="top"],
 .tooltip[x-placement^="top"] {
-  margin-bottom: 5px;
+  margin-bottom: 0.3125rem; // 5px / 16px
 }
 .popper[x-placement^="top"] .popper__arrow,
 .tooltip[x-placement^="top"] .tooltip-arrow {
@@ -78,7 +78,7 @@ p.bold {
 }
 .popper[x-placement^="bottom"],
 .tooltip[x-placement^="bottom"] {
-  margin-top: 5px;
+  margin-top: 0.3125rem; // 5px / 16px
 }
 .tooltip[x-placement^="bottom"] .tooltip-arrow,
 .popper[x-placement^="bottom"] .popper__arrow {
@@ -93,7 +93,7 @@ p.bold {
 }
 .tooltip[x-placement^="right"],
 .popper[x-placement^="right"] {
-  margin-left: 5px;
+  margin-left: 0.3125rem; // 5px / 16px
 }
 .popper[x-placement^="right"] .popper__arrow,
 .tooltip[x-placement^="right"] .tooltip-arrow {
@@ -108,7 +108,7 @@ p.bold {
 }
 .popper[x-placement^="left"],
 .tooltip[x-placement^="left"] {
-  margin-right: 5px;
+  margin-right: 0.3125rem; // 5px / 16px
 }
 .popper[x-placement^="left"] .popper__arrow,
 .tooltip[x-placement^="left"] .tooltip-arrow {
@@ -130,7 +130,7 @@ p.bold {
 
   .suggested-guidelines-title {
     font-size: $font-size-small * 1.25;
-    margin-bottom: $margin;
+    margin-bottom: $margin-secondary;
   }
 
   li {
