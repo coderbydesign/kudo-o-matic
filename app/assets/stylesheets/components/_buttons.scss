@@ -15,6 +15,8 @@ button {
 
 .btn-primary {
   background: $primary-button-bg;
+  color: $primary-button-color;
+  font-weight: 300;
 }
 
 .btn-secondary {
@@ -22,9 +24,11 @@ button {
   border: 1px solid $secondary-border-color;
   color: $secondary-button-color;
   font-weight: 300;
-  text-align: left;
-  height: 100%;
+}
+
+.btn-like {
   font-size: $font-size-small;
+  width: 4rem;
 }
 
 

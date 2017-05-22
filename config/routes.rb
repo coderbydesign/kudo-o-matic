@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get :activities, to: 'activities#autocomplete_search', as: :activities_autocomplete
 
   post 'like/:id', to: "transactions#upvote", as: :like
+  post 'unlike/:id', to: "transactions#downvote", as: :unlike
 
   resources :goals do
     get :pollvote

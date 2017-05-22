@@ -49,6 +49,15 @@ class Transaction < ActiveRecord::Base
     gl
   end
 
+
+  def self.liked?
+    if @transaction.vote_by voter: current_user
+      return true
+    else
+      return false
+    end
+  end
+
   def receiver_name_feed
     receiver.nil? ? activity.name.split('for:')[0].strip : receiver.name
   end

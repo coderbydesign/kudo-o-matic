@@ -32,7 +32,13 @@ class TransactionsController < ApplicationController
   def upvote
     # TODO implement session authentication
     @transaction = Transaction.find(params[:id])
-    @transaction.liked_by User.first
+    @transaction.liked_by current_user
+    redirect_to root_path
+  end
+
+  def downvote
+    @transaction = Transaction.find(params[:id])
+    @transaction.downvote_by current_user
     redirect_to root_path
   end
 
@@ -72,6 +78,7 @@ class TransactionsController < ApplicationController
     @all_kudos                    = Transaction.where(balance: Balance.current).sum(:amount)
 
     @markdown                     = Redcarpet::Markdown.new(MdEmoji::Render, :no_intra_emphasis => true)
+
 
     if params['filter'] == 'mine'
       @transactions = Transaction.all_for_user(current_user)

@@ -71,8 +71,9 @@
       font-size: 110%;
       height: 100%;
       line-height: 125%;
-      margin-top: $margin-secondary / 2;
+      margin: $margin-secondary 0;
     }
+
 
     .post-time-stamp {
       color: $text-light-gray;
@@ -81,6 +82,35 @@
       font-weight: 300;
       padding-top: $padding;
       text-align: right;
+    }
+
+    .like-tooltip {
+      display: none;
+      border-radius: $border-radius-small;
+      background: $base-color-light-blue;
+      width: fit-content;
+      position: absolute;
+      color: $base-color-white;
+      margin-top: $margin-secondary / 2;
+      padding: 0.5rem;
+      font-size: $font-size-regular - $font-size-regular / 8
+    }
+
+    .likes:hover {
+      .like-tooltip {
+        display: block;
+
+      }
+    }
+
+    .like-tooltip-arrow {
+      width: 0px;
+      height: 0px;
+      border: 4px solid;
+      border-color: transparent transparent $base-color-light-blue transparent;
+      position: absolute;
+      top: -8px;
+      left: 68px;
     }
   }
 }
