@@ -11,6 +11,13 @@ $(document).ready(function () {
         $('.clipboard-emoji').removeClass('show-clipboard');
     });
 
+    $(document).keyup(function(e) {
+        if (e.keyCode === 27) { // esc
+            $('.emoji-modal').removeClass('show-modal');
+            $('.clipboard-emoji').removeClass('show-clipboard');
+        }
+    });
+
     // Clipboard
     var smiley = document.getElementsByClassName('emoji-container');
     var clipboard = new Clipboard(smiley);

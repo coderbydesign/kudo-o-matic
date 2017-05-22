@@ -81,7 +81,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
       margin-left: $margin-secondary;
       border-top: 1px solid $base-color-dark-gray;
       line-height: 18px;
-      padding: 0 0 0 $padding-small;
+      padding: 0 0 0 $padding-secondary * 1.5;
       font-size: $font-size-regular - 0.1rem;
     }
   }
@@ -159,12 +159,18 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
 }
 .progress-title {
   margin-top: 0;
+  margin-left: $margin-secondary * 1.5;
 
 
   .goal-name {
+    color: $base-color-gray;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .left-text {
+    color: $base-color-gray;
   }
 }
 
@@ -411,7 +417,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
       top: 28px;
       left: 0.5rem;
       width: $path-height * 3;
-      height: 75%;
+      height: 71%;
     }
 
     .progress-bar-complete {
@@ -419,7 +425,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
       top: 28px;
       left: 0.5rem;
       width: $path-height * 3;
-      height: 75%;
+      height: 71%;
     }
   }
 

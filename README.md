@@ -22,7 +22,3 @@ This is very much a work-in-progress. Things will break. More later.
 
 Now you can view your kudos [`localhost:3000`](http://localhost:3000) from your browser.
 
-
-## Notes
-
- * To secure your installation, specify a `HTTP_AUTH` env variable in the format `username:password` to enable http basic authentication.

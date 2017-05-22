@@ -25,11 +25,15 @@ $base-color-medium-gray:                  #464a4c;
 $base-color-gray:                         #999999;
 $base-color-light-gray:                   #BFBABA;
 $base-color-lighter-gray:                 #CCCCCC;
+$base-color-light-red:                    #D8827F;
 $base-color-light-blue:                   #4B4656;
+$base-color-yellow:                       #E6D0A1;
+$base-color-light-yellow:                 #FCF8E2;
 $base-color-solitude-white:               #F0F1F5;
 $base-color-white:                        #FFFFFF;
 
 $concept-color-base:                      #4B4656;
+$blue-color-base:                         #3097D1;
 
 ///////////////////////////////////////////////////////////
 //
@@ -59,15 +63,24 @@ $primary-form-color:                      $base-color-medium-gray;
 $primary-border-color:                    rgba($base-color-black, 0.125);
 $secondary-border-color:                  $base-color-lighter-gray;
 $focus-border-color:                      $base-color-light-blue;
+
 $primary-box-shadow:                      $base-color-black;
 
 // Button
 $primary-button-bg:                       $base-color-light-blue;
 $primary-button-color:                    $text-white;
+$secondary-button-bg:                     $base-color-white;
+$secondary-button-color:                  $base-color-dark-gray;
 
 // Kudo Meter
 $primary-stroke-color:                    $secondary-bg;
 $secondary-stroke-color:                  $base-color-light-blue;
+
+// Flash message
+$flash-notice-bg:                         $base-color-light-yellow;
+$flash-notice-border-color:               $base-color-yellow;
+$flash-error-bg:                          $base-color-light-red;
+$flash-error-border-color:                #d8827f;
 
 ///////////////////////////////////////////////////////////
 //

@@ -14,3 +14,18 @@
         = flash[:notice]
       %span
         %i.fa.fa-times.close-message
+-#- else
+  .message-container.show-message
+    .notice-message
+      %span.message
+        .fa.fa-info-circle
+        This is a flash message!
+      %span
+        %i.fa.fa-times.close-message
+  .message-container.show-message
+    .error-message
+      %span.message
+        .fa.fa-exclamation-circle
+        This is an error message!
+      %span
+        .fa.fa-times.close-message

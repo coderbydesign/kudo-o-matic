@@ -52,7 +52,6 @@ $space: 40px;
   .clipboard-emoji {
     color: red;
     display: none;
-    float: right;
   }
 
   .clipboard-guideline.show-clipboard,
@@ -83,6 +82,14 @@ $space: 40px;
   color: $text-primary;
 }
 
+.modal-subheader {
+  display: flex;
+
+  p {
+    flex: 1;
+  }
+}
+
 .modal-body {
   color: $text-primary;
   height: 400px;
@@ -100,6 +107,12 @@ $space: 40px;
   }
 }
 
+.welcome-modal ul li {
+  display: list-item;
+  list-style-type: disc;
+  margin-left: $margin-primary;
+}
+
 .guideline-list {
   cursor: pointer;
 }
@@ -110,6 +123,7 @@ $space: 40px;
     cursor: pointer;
     float: left;
     width: 33.33%;
+    line-height: 1.2;
 
     div {
       align-items: center;
@@ -174,5 +188,9 @@ $space: 40px;
 
   .clipboard {
     float:none;
+  }
+
+  .modal-subheader {
+    flex-direction: column;
   }
 }

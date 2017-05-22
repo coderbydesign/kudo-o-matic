@@ -1,43 +1,53 @@
 .statistics-container {
-  border-radius: $border-radius;
+  border: 1px solid $primary-border-color;
+  border-radius: $border-radius-small;
   background: $primary-bg;
-  padding: $padding;
+  padding: $padding-secondary * 2.5;
   max-height: 100%;
-  margin-bottom: $margin-secondary;
-  max-width: none;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
-  h2 {
-    color: $text-primary;
-    font-size: $font-size-large;
+  .fa {
+    justify-content: flex-start;
+  }
+
+  .statistics-main-title {
+    font-size: $font-size-medium;
     font-weight: 300;
+    text-align: center;
+    padding-bottom: $padding-primary;
+  }
+
+  .statistics-main-subtitle {
+    margin-top: 0.5rem;
+    display: flex;
+    font-weight: 400;
+    justify-content: center;
+    padding: 0.5rem;
+    box-shadow: 0 0 8px $primary-border-color;
+    border-radius: 2px
   }
 }
 
 .general-statistics-container {
   display: flex;
-  padding-left: $padding-small;
-  padding-bottom: $padding-small;
-  padding-top: $padding-small;
+  padding: $padding-secondary * 2 0;
   font-weight: 300;
 
   .generalstatistics {
     text-align: center;
-    flex: 1;
-    line-height: 1.8rem;
+    flex: 1 0 auto;
   }
 
   .generalstatistics:not(:last-child) {
     border-right: 1px solid $primary-border-color;
   }
 
-  .statistics-title {
-    font-size: $font-size-regular;
-    color: $text-primary;
-  }
-
   .statistics-value {
-    font-size: $font-size-large - 0.5rem;
+    margin-top: $margin-secondary / 2;
+    font-weight: 700;
+    display: block;
   }
 }
 

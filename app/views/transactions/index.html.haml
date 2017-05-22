@@ -6,7 +6,14 @@
 
 %body
   .header-bg
-    %img.header-img{src:'https://www.kabisa.nl/images/kabisa-logo-d9ace243.png'}
+    .header
+      .img-container
+        = image_tag('kabisa-logo-white.png', class:'header-img')
+      .github
+        %p
+          = "Bugs, issues or suggestions?\n Please report them"
+          %a{href:'https://github.com/kabisa/kudo-o-matic/issues', target:'blank'}
+            here!
   .page
     -#.header
     -#  .container-header
@@ -15,15 +22,14 @@
             Kudo-o-Matic
         %h2.subtitle
           Home
-
     .body
       .container-left
         = render 'profile-menu'
         -#= render 'kudo-counter-dashboard'
-        -#= render 'statistics'
+        = render 'statistics'
         -#= render 'goals'
       .container-center
-        -#= render 'message'
+        = render 'message'
         = render 'transaction'
         -#= render 'filter'
         #results

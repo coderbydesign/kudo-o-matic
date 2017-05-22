@@ -32,7 +32,8 @@
         font-size: 125%;
         height: 2rem;
         justify-content: center;
-        max-width: 5rem;
+        min-width: 4.75rem;
+        max-width: 5.5rem;
         padding: $padding-small;
       }
       .transaction-avatar-container {

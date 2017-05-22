@@ -13,4 +13,10 @@ $(document).ready(function () {
     $('.close-welcome').click(function () {
         $('.welcome-modal').removeClass('show-modal');
     });
+
+    $(document).keyup(function(e) {
+        if (e.keyCode === 27) { // esc
+            $('.welcome-modal').removeClass('show-modal');
+        }
+    });
 });

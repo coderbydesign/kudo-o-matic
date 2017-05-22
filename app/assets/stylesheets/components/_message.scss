@@ -15,6 +15,7 @@
 
   .message {
     flex: 1;
+    font-weight: 300;
   }
 }
 
@@ -24,17 +25,26 @@
 
 .notice-message,
 .error-message {
-  padding: $padding;
-  background: $primary-bg;
-  color: $text-primary;
+  padding: $padding-primary / 2 $padding-secondary * 2.5;
   border-radius: $border-radius-small;
+  color: $text-primary;
   text-align: center;
   display: flex;
-  margin-bottom: $margin-secondary * 2;
+  margin-bottom: $margin-secondary;
 
   .hide-message & {
     display: none;
   }
+}
+
+.notice-message {
+  background: $flash-notice-bg;
+  border: 1px solid $flash-notice-border-color;
+}
+
+.error-message {
+  background: $flash-error-bg;
+  border: 1px solid $flash-error-border-color;
 }
 
 @keyframes show-message {

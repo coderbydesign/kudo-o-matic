@@ -11,6 +11,13 @@ $(document).ready(function () {
         $('.clipboard-guideline').removeClass('show-clipboard');
     });
 
+    $(document).keyup(function(e) {
+        if (e.keyCode === 27) { // esc
+            $('.guideline-modal').removeClass('show-modal');
+            $('.clipboard-guideline').removeClass('show-clipboard');
+        }
+    });
+
     // Clipboard
     var guideline = document.getElementsByClassName('guideline-list');
     new Clipboard(guideline);

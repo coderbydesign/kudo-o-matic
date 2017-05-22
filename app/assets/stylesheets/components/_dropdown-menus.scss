@@ -14,7 +14,7 @@
 
   a {
     display: flex;
-    padding: 0.5rem;
+    padding: 0 $padding-secondary * 2.5;
     cursor: pointer;
   }
 }
@@ -38,9 +38,8 @@
 
 .menu-content {
   align-items: center;
-  border-top: 1px solid $primary-border-color;
+  //border-top: 1px solid $primary-border-color;
   border-bottom: 1px solid $primary-border-color;
-  //color: $text-color;
   font-weight: 300;
   min-height: $dropdown-button-size - 1rem;
   overflow: hidden;
@@ -124,28 +123,6 @@
     display: block;
     font-weight: 700;
     margin-top: $margin-secondary / 2;
-  }
-}
-
-///////////////////////////////////////////////////////////
-//
-// Filter dropdown
-//
-///////////////////////////////////////////////////////////
-
-.filter-container {
-  .dropdown {
-    justify-self: center;
-    flex: 1;
-  }
-
-  .dropdown:not(:last-child) {
-    margin-right: $margin-secondary;
-  }
-
-  .fa {
-    font-size: $font-size-regular;
-    padding-left: $padding-small * 0.5;
   }
 }
 

@@ -17,14 +17,16 @@ button {
   background: $primary-button-bg;
 }
 
-.btn-filter {
-  height: 100%;
-  color: $primary-button-color;
-  font-size: 80%;
+.btn-secondary {
+  background: $secondary-button-bg;
+  border: 1px solid $secondary-border-color;
+  color: $secondary-button-color;
   font-weight: 300;
-  margin-bottom: $margin-secondary;
   text-align: left;
+  height: 100%;
+  font-size: $font-size-small;
 }
+
 
 .btn-close {
   padding-top: $padding-small;
