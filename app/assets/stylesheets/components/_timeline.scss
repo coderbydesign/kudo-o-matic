@@ -16,31 +16,36 @@
     border: 1px solid $primary-border-color;
     border-top: none;
     font-weight: 300;
-    //margin-bottom: $margin-bottom * 2;
     overflow: hidden;
     padding: $padding-medium * 3;
 
     .transaction-header-container {
       max-height: 10%;
+      display: flex;
 
       .transaction-kudos-container {
         align-items: center;
         border-radius: $border-radius-small;
         border: 1px solid $base-color-gray;
         display: flex;
-        float: left;
-        font-size: 125%;
+        font-size: $font-size-medium;
         height: 2rem;
         justify-content: center;
         min-width: 4.75rem;
         max-width: 5.5rem;
         padding: $padding-small;
       }
+
+      .avatar {
+        flex: 1;
+      }
+
       .transaction-avatar-container {
         display: inline-flex;
         max-width: 2.5rem;
         height: 2.5rem;
         margin-left: $margin-primary / 2;
+
 
         .sender {
           width: 100%;
@@ -74,14 +79,20 @@
       margin: $margin-secondary 0;
     }
 
+    .transaction-footer-container {
+      align-items: center;
+      display: flex;
+    }
 
     .post-time-stamp {
       color: $text-light-gray;
-      float: right;
-      font-size: 90%;
+      font-size: $font-size-small;
       font-weight: 300;
-      padding-top: $padding;
-      text-align: right;
+    }
+
+    .number-of-likes {
+      margin-left: $margin-secondary;
+      font-size: $font-size-small;
     }
 
     .like-tooltip {
@@ -94,12 +105,12 @@
       margin-top: $margin-secondary / 2;
       padding: 0.5rem;
       font-size: $font-size-regular - $font-size-regular / 8
+
     }
 
-    .likes:hover {
+    .number-of-likes:hover {
       .like-tooltip {
         display: block;
-
       }
     }
 
@@ -109,8 +120,8 @@
       border: 4px solid;
       border-color: transparent transparent $base-color-light-blue transparent;
       position: absolute;
-      top: -8px;
-      left: 68px;
+      top: -0.5rem;
+      left: 1.25rem;
     }
   }
 }

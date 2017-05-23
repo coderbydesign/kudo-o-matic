@@ -122,8 +122,8 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 
   &--kudo {
     .chart__container {
-      height: 220px;
-      width: 220px;
+      height: 13.75rem; // 220px / 16px
+      min-width: 100%;
     }// .chart__container
 
     .chart__count {
@@ -225,9 +225,8 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 
   .kudo-counter {
     margin: 0 auto;
-    background: linear-gradient(rgba($dark-blue-color, 1.0), rgba($dark-blue-color, 0.9));
+    //background: linear-gradient(rgba($dark-blue-color, 1.0), rgba($dark-blue-color, 0.9));
     display: none;
-    height: fit-content;
     position: fixed;
     top: $whitespace * 2; left: 0; right: 0; bottom: $whitespace * 2;
     width: 50%;
@@ -236,10 +235,6 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     .visible-as-modal & {
       display: block;
       animation: kudocounter 0.25s ease-out forwards;
-    }
-
-    .chart__background {
-      stroke: $medium-grey-color;
     }
   }
 

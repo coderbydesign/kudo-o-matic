@@ -39,7 +39,8 @@
 .menu-content {
   align-items: center;
   //border-top: 1px solid $primary-border-color;
-  border-bottom: 1px solid $primary-border-color;
+  border-top: 1px solid $secondary-border-color;
+  border-bottom: 1px solid $secondary-border-color;
   font-weight: 300;
   min-height: $dropdown-button-size - 1rem;
   overflow: hidden;

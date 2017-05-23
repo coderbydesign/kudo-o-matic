@@ -13,9 +13,12 @@
             = "+#{transaction.amount}"
             %span.currency
               ₭
-        .transaction-avatar-container
-          = image_tag User.find(transaction.sender_id).picture_url, class:'sender'
-          = image_tag transaction.receiver_image, class:'receiver'
+        .avatar
+          .transaction-avatar-container
+            = image_tag User.find(transaction.sender_id).picture_url, class:'sender'
+            = image_tag transaction.receiver_image, class:'receiver'
+        %span.post-time-stamp
+          = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
       .transaction-body-container
         .transaction-content
           %span.highlighted.sendername
@@ -44,14 +47,21 @@
             = link_to like_path(transaction), method: :post do
               .fa.fa-thumbs-up
               Like
-        %span.likes
-          = transaction.get_upvotes.size
+        %span.number-of-likes
+          - if transaction.get_upvotes.size != 0
+            Liked by
+          = transaction.votes_for.by_type(User).voters.first(1).collect { |user| user }.to_sentence
+          - if transaction.get_upvotes.size > 1
+            = "and #{transaction.get_upvotes.size - 1} others"
+          - elsif transaction.get_upvotes.size == 0
+            = '0 Likes'
           .like-tooltip
             .like-tooltip-arrow
-            = transaction.votes_for.by_type(User).voters.first(1).collect { |user| user }.to_sentence
-            - if transaction.get_upvotes.size > 1
-              = "and #{transaction.get_upvotes.size - 1} others"
-
-        %span.post-time-stamp
-          = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
+            -#= transaction.votes_for.by_type(User).voters.first(4).collect { |user| user }
+            - transaction.votes_for.by_type(User).voters.first(4).each do |user|
+              = simple_format("#{user}\n")
+            - if transaction.get_upvotes.size > 4
+              = "and #{transaction.get_upvotes.size - 4} others"
+            - elsif transaction.get_upvotes.size == 0
+              = 'No likes yet, be the first one!'
   = paginate @transactions
