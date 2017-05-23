@@ -115,14 +115,15 @@
 }
 
 @media screen and (max-width: 1200px) {
-  textarea {
-    height: 4.5rem;
-  }
 
 }
 
 @media screen and (max-width: 720px) {
   .create-transaction-container {
     margin-bottom: $margin-secondary;
+  }
+
+  textarea {
+    height: 4.5rem;
   }
 }

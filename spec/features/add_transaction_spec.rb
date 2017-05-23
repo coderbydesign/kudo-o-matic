@@ -32,7 +32,7 @@ RSpec.feature "Add a transaction", type: :feature do
       expect(Transaction.count).to_not eq(@transactions_before)
       within '.timeline-container' do
         expect(page).to have_css("img[src*='kabisa_lizard.png']")
-        expect(page).to have_content("John User: +99 ₭ to Harry for helping me out less than a minute ago")
+        expect(page).to have_content("John User: +99 ₭ to Harry for helping me out")
         expect(page).to have_css("img[src*='plus1.png']")
       end
     end
@@ -51,7 +51,7 @@ RSpec.feature "Add a transaction", type: :feature do
     end
 
     it 'calculates and shows the transaction statistics in general' do
-      within '.general-statistics-container' do
+      within '.transaction-statistics' do
         expect(page).to have_content("3")
       end
     end
@@ -116,7 +116,7 @@ RSpec.feature "Add a transaction", type: :feature do
         expect(Transaction.count).to_not eq(@transactions_before)
 
         within '.timeline-container' do
-          expect(page).to have_content("John User: +50 ₭ to for helping me out less than a minute ago")
+          expect(page).to have_content("John User: +50 ₭ to for helping me out")
         end
       end
     end
