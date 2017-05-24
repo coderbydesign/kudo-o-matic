@@ -87,7 +87,7 @@ class TransactionsController < ApplicationController
     elsif params['filter'] == 'received'
       @transactions = Transaction.received_by_user(current_user)
     else
-      @transactions = Transaction.where(balance: Balance.current).order('created_at desc').page(params[:page]).per(20)
+      @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
     end
 
   end

@@ -193,6 +193,10 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
   }
 }
 
+.progress-step.is-active .progress-marker {
+  color: $base-color-dark-gray;
+}
+
 
 // States
 .progress-step {

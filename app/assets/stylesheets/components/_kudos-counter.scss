@@ -47,17 +47,6 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     margin-bottom: 3.57142857rem; // 50px / 16px
     color: $text-gray
   }// .kudo-counter__title
-
-  &__days_left {
-    font-size: $font-size-medium;
-    margin-bottom: $margin-secondary;
-    //border: 1px solid $primary-brand-color-dark;
-    padding: $padding;
-    border-radius: 2.25rem;
-    box-shadow: 0 0 1rem rgba($primary-box-shadow, 0.2);
-    //color: #8C7C6C
-  }
-
 }// .kudo-counter
 
 .chart {

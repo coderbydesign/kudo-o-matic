@@ -57,10 +57,10 @@
             = '0 Likes'
           .like-tooltip
             .like-tooltip-arrow
-            - transaction.votes_for.by_type(User).voters.first(4).each do |user|
+            - transaction.votes_for.by_type(User).voters.first(5).each do |user|
               = simple_format("#{user}\n")
-            - if transaction.get_upvotes.size > 4 # more than 4 likes
-              = "and #{transaction.get_upvotes.size - 4} others"
+            - if transaction.get_upvotes.size > 5 # more than 4 likes
+              = "and #{transaction.get_upvotes.size - 5} others"
             - elsif transaction.get_upvotes.size == 0 # 0 likes
               = 'No likes yet, be the first one!'
 
