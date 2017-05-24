@@ -1,10 +1,8 @@
 = render 'emoji-modal'
 = render 'welcome-modal'
 = render 'guideline-modal'
-= render 'like-modal'
 
 %header
-
 
 %body
   .header-bg
@@ -23,13 +21,6 @@
       new?
     %span.toggle-side-message.fa.fa-chevron-left
   .page
-    -#.header
-    -#  .container-header
-        %h1.title
-          %span.title-border
-            Kudo-o-Matic
-        %h2.subtitle
-          Home
     .body
       .container-left
         = render 'profile-menu'
