@@ -6,7 +6,7 @@ $gray: #333;
 $gray-lighter: #eee;
 $space: 40px;
 
-.guideline-modal.show-modal, .welcome-modal.show-modal, .emoji-modal.show-modal {
+.guideline-modal.show-modal, .welcome-modal.show-modal, .emoji-modal.show-modal, .like-modal.show-modal {
   display: flex;
   @include animation(fadeIn, .25s);
 }
@@ -37,7 +37,8 @@ $space: 40px;
 
 .guideline-modal,
 .welcome-modal,
-.emoji-modal {
+.emoji-modal,
+.like-modal {
 
   // This is modal bg
   align-items: center;
@@ -105,7 +106,24 @@ $space: 40px;
     flex: 1;
     padding-right: $padding-small;
   }
+
+  .user-liked-list {
+    display: flex;
+
+    .user-name-liked {
+      flex: 1;
+    }
+
+    .user-avatar-liked {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
 }
+
+
+
+
 
 .welcome-modal ul li {
   display: list-item;

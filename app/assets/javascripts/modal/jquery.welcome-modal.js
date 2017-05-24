@@ -9,6 +9,16 @@ $(document).ready(function () {
         }
     }, 500);
 
+    $('.what-new').click(function () {
+        $(".welcome-modal").addClass('show-modal');
+        return false;
+    });
+
+    $('.toggle-side-message').click(function () {
+       $('.side-message').toggleClass('slide-out');
+        $('.side-message').find('.toggle-side-message').toggleClass('fa-chevron-left fa-chevron-right')
+    });
+
     // Close welcome modal
     $('.close-welcome').click(function () {
         $('.welcome-modal').removeClass('show-modal');

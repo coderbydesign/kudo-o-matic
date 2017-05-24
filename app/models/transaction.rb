@@ -61,6 +61,7 @@ class Transaction < ActiveRecord::Base
     receiver_id.nil? ? '/kabisa_lizard.png' : receiver.picture_url
   end
 
+
   def activity_name
     activity.try(:name)
   end
