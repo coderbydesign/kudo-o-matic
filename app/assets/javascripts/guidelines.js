@@ -1,18 +1,34 @@
-$(document).ready(function(){
-    $('.col-md-7').hide();
-    $('#transaction_amount').on('keyup', function(){
-        $('.guidelines_static').hide();
-        $('.col-md-7').fadeIn(1000);
-        console.log('test', this.value);
-        $('#amount_of_kudo_clone').html(this.value);
+$(document).ready(function() {
+    var index = 0;
+    // var popper;
+
+    var instance = new Tooltip(document.getElementsByClassName("input-amount")[0], {
+        html: true,
+        title: "Suggested",
+        trigger: "none",
+        placement: "bottom",
+        referenceOffsets: '100px'
+    });
+
+    instance.hide();
+
+    $('#transaction_amount').on('keyup', function () {
+        if (this.value) {
+            instance.show();
+        }
+
+        $('.amount-of-kudos').html(this.value);
 
         $.get("/kudo_guidelines?kudo_amount=" + this.value, function (data) {
-            var list = $('.guidelines_container').empty();
-
+            var list = $('.tooltip-inner').empty();
+            listMore = $('<p>Guideline suggestions</p>').addClass('suggested-guidelines-title');
+            listMore.appendTo(list)
             for (var i = 0; i < data.length; i++) {
-                var listItem = $('<li>').text(data[i][0]);
-                var listValue = $('<span/>').text(data[i][1]);
+                var listItem = $('<li>');
+                var listName = $('<span/>').text(data[i][0]).addClass('g-name');
+                var listValue = $('<span/>').text(data[i][1]).addClass('g-value');
 
+                listName.appendTo(listItem);
                 listValue.appendTo(listItem);
                 listItem.appendTo(list);
             }
@@ -21,86 +37,13 @@ $(document).ready(function(){
 
     $('#transaction_amount').keyup(function(){
         if (!this.value) {
-            $('.col-md-7').hide();
-            $('.guidelines_static').show();
+            instance.hide()
         }
     });
 
-    // $("input").focus(function() {    // $("input").focus(function() {
-    //     console.log("focus test ")
-    //     $("header, .bottomouterwrapper").css({
-    //         filter: "blur(5px)",
-    //         transition: "100ms -webkit-filter linear"
-    //     });
-    //     $(".col-md-5").css({
-    //
-    //     });
-    //
-    //     $(".topinnerwrapper").css({height:"400px;"});
-    //
-    //     $("input").focusout(function() {
-    //         console.log("focus out test")
-    //        // $("header, .bottomouterwrapper").end()
-    //             cancelBlur();
-    //         });
-    //     });
-    //
-    // $(window).scroll(function() {
-    //     if ($(this).scrollTop()>10)
-    //     {
-    //         cancelBlur();
-    //     }
-    // });
-    //
-    // function focusOut(){
-    // }
-    //
-    // function cancelBlur() {
-    //     $("header, .bottomouterwrapper").css({
-    //         filter: "",
-    //         transition: "100ms -webkit-filter linear"
-    //     });
-    // }
-    //     console.log("focus test ")
-    //     $("header, .bottomouterwrapper").css({
-    //         filter: "blur(5px)",
-    //         transition: "100ms -webkit-filter linear"
-    //     });
-    //     $(".col-md-5").css({
-    //
-    //     });
-    //
-    //     $(".topinnerwrapper").css({height:"400px;"});
-    //
-    //     $("input").focusout(function() {
-    //         console.log("focus out test")
-    //        // $("header, .bottomouterwrapper").end()
-    //             cancelBlur();
-    //         });
-    //     });
-    //
-    // $(window).scroll(function() {
-    //     if ($(this).scrollTop()>10)
-    //     {
-    //         cancelBlur();
-    //     }
-    // });
-    //
-    // function focusOut(){
-    // }
-    //
-    // function cancelBlur() {
-    //     $("header, .bottomouterwrapper").css({
-    //         filter: "",
-    //         transition: "100ms -webkit-filter linear"
-    //     });
-    // }
-
- $('.close-new-visitor-show').click(function(){
-        $('.new-visitor-show').fadeOut(500);
+    $('#transaction_amount').focusout(function(){
+        instance.hide()
     });
 
 });
-
-
 

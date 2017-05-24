@@ -1,0 +1,23 @@
+.suggested-guidelines-container {
+  background: linear-gradient(rgba($dark-blue-color, 0.95), rgba($dark-blue-color, 0.7));
+  padding: $padding;
+  border-radius: $border-radius;
+  margin-bottom: $margin-secondary;
+
+  .suggested--guidelines-header {
+    font-size: $font-size-medium;
+  }
+
+  .suggested-guidelines {
+
+    li {
+      display: flex;
+      padding: $padding-small 0;
+    }
+
+    .g-name {
+      flex: 1;
+      padding-right: $padding-small;
+    }
+  }
+}

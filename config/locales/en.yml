@@ -4,7 +4,15 @@ en:
     title: Give ₭udos!
     i_give: To
     guidelines: Guidelines
-    submit_kudos: Give ₭udos
+    submit_kudos: Give ₭udo's
     for: for
+
+  activerecord:
+      models:
+        transaction:
+      attributes:
+        transaction:
+          activity_name_feed: "activity"
+        # will translate transaction attribute "activity_name_feed" as "activity"
 
 

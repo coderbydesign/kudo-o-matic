@@ -1,0 +1,83 @@
+button {
+  background: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.btn {
+  border-radius: $border-radius-small;
+  padding: $padding-small;
+}
+
+.btn-primary {
+  background: $primary-button-bg;
+  color: $primary-button-color;
+  font-weight: 300;
+}
+
+.btn-secondary {
+  background: $secondary-button-bg;
+  border: 1px solid $secondary-border-color;
+  color: $secondary-button-color;
+  font-weight: 300;
+}
+
+.btn-like {
+  font-size: $font-size-small;
+  width: 4rem;
+}
+
+
+.btn-close {
+  padding-top: $padding-small;
+  color: $white-color
+}
+
+.flex-span {
+  display: flex;
+  width: 100%;
+}
+
+.flex-item {
+  flex: 1;
+}
+
+.simple_form {
+  #send-kudos-button {
+    background-color: $primary-button-bg;
+    border-radius: $border-radius-small;
+    color: $primary-button-color;
+    cursor: pointer;
+    height: 2.5rem;
+    width: 10rem;
+  }
+}
+
+#like-button {
+  color: $primary-button-color;
+  margin-top: $margin-secondary;
+  border-radius: $border-radius-small;
+  background-color: rgba(234,234,234,1.0);
+  transform: translateZ(0);
+  transition-duration: 0.5s;
+  transition-property: color;
+}
+
+@media screen and (min-width: 1201px) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 535px) {
+  #send-kudos-button {
+    width: auto;
+  }
+}

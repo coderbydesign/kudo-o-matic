@@ -1,0 +1,47 @@
+.filter-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-bottom: $margin-secondary;
+}
+
+.timeline-title {
+  font-weight: 300;
+  padding: 0 $padding-small;
+}
+
+.filter-option {
+  width: 100%;
+  display: flex;
+}
+
+.filter-option:not(:first-child) {
+  margin-left: $margin-secondary;
+}
+
+.send {
+  flex: 1;
+}
+
+.received {
+  flex: 1;
+}
+@media screen and (min-width: 535px) {
+
+}
+
+@media screen and (max-width: 535px) {
+  .btn-filter {
+    width: 100%;
+  }
+
+  .filter {
+    display: block;
+  }
+
+  .filter-option {
+    margin-left: 0;
+  }
+}
+
+

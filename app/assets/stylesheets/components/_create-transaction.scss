@@ -1,0 +1,129 @@
+.create-transaction-container {
+  background: $primary-bg;
+  border: 1px solid $primary-border-color;
+  border-radius: $border-radius-small;
+  margin-bottom: $margin-secondary;
+  overflow: hidden;
+  padding: $padding-primary;
+}
+
+.simple_form {
+
+  input:focus,
+  textarea:focus {
+    border-color: $focus-border-color;
+  }
+
+  input {
+    border: 1px solid $primary-border-color;
+    border-radius: $border-radius-small;
+    background: $primary-form-bg;
+    color: $primary-form-color;
+    font-size: $font-size-form;
+    padding: $padding-medium * 0.75 $padding-medium * 1.3125;
+    width: 100%;
+  }
+
+  textarea {
+    border: 1px solid $primary-border-color;
+    border-radius: $border-radius-small;
+    background-color: $primary-form-bg;
+    color: $primary-form-color;
+    font-size: $font-size-form;
+    flex: 1;
+    margin-top: $margin-secondary;
+    padding: $padding-medium * 0.75 $padding-medium * 1.3125;
+    resize: none;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: $text-light-gray;
+  }
+}
+
+.transaction-body {
+  display: flex;
+}
+
+.receiver {
+  display: flex;
+  margin-right: $margin-secondary;
+}
+
+.amount {
+  display: flex;
+}
+
+.activity {
+  display: flex;
+}
+
+.activity-extras {
+  color: $text-primary;
+  font-size: 1.0625rem;
+  display: flex;
+  align-items: center;
+
+  .fa {
+    border: 1px solid $secondary-border-color;
+    border-radius: $border-radius-small;
+    margin-left: $margin-secondary;
+    padding: $padding-medium $padding;
+  }
+}
+
+.counter {
+  display: none;
+}
+
+.counter.show-counter {
+  display: block;
+  @include animation(counter, .5s)
+}
+
+@keyframes counter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.submit {
+  display: flex;
+  align-items: center;
+  margin-top: $margin-secondary * 1.5;
+
+  .submit-btn {
+    flex: 1;
+  }
+}
+
+
+.transaction-container-title {
+  display: flex;
+}
+
+.btn-label {
+  margin-right: $margin-secondary / 2;
+}
+
+.flex-item {
+  flex: 1;
+}
+
+@media screen and (max-width: 1200px) {
+
+}
+
+@media screen and (max-width: 720px) {
+  .create-transaction-container {
+    margin-bottom: $margin-secondary;
+  }
+
+  textarea {
+    height: 4.5rem;
+  }
+}

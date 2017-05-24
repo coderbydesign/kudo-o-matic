@@ -1,13 +1,72 @@
-@import "bourbon";
+@import 'icons/fontawesome-icons';
+@import 'font-awesome';
+@import 'icons/textcomplete';
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "font-awesome";
+///////////////////////////////////////////////////////////
+//
+// Global settings for the project
+//
+///////////////////////////////////////////////////////////
+@import 'settings/colors';
+@import 'settings/general';
+@import 'settings/typography';
 
-@import "theme";
-@import "dashboard";
-@import "transactions";
-@import "bootstrap-modal";
+///////////////////////////////////////////////////////////
+//
+// Globally available tooling
+//
+///////////////////////////////////////////////////////////
+@import 'tools/mixins';
 
-@import "jquery-ui";
+///////////////////////////////////////////////////////////
+//
+// High-level styles
+//
+///////////////////////////////////////////////////////////
+@import 'generic/reset';
+@import 'generic/box-sizing';
 
+///////////////////////////////////////////////////////////
+//
+// Bare, unclassed Elements
+//
+///////////////////////////////////////////////////////////
+@import 'elements/base';
+
+///////////////////////////////////////////////////////////
+//
+// Basic UI building blocks
+//
+///////////////////////////////////////////////////////////
+@import 'objects/media-object';
+
+///////////////////////////////////////////////////////////
+//
+// Specific UI components
+//
+///////////////////////////////////////////////////////////
+@import 'components/layout';
+@import 'components/header';
+@import 'components/buttons';
+@import 'components/content';
+@import 'components/modal';
+@import 'components/sign-in';
+@import 'components/footer';
+@import 'components/create-transaction';
+@import 'components/timeline';
+@import 'components/statistics';
+@import 'components/kudos-counter';
+@import 'components/dropdown-menus';
+@import 'components/message';
+@import 'components/suggested-guidelines';
+@import 'components/filter';
+@import 'components/goals';
+@import 'components/kudo-counter-dashboard';
+@import 'components/guideline-popper';
+@import 'components/side-message';
+
+//////////////////////////////
+
+@import 'transactions';
+
+@import 'jquery-ui';

@@ -1,0 +1,69 @@
+.sign-in-page {
+  display: flex;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.sign-in-container {
+  background: linear-gradient(rgba($dark-blue-color, 0.95), rgba($dark-blue-color, 0.7));
+  border-radius: $border-radius;
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  justify-content: center;
+  width: 500px;
+  padding: $padding;
+  text-align: center;
+
+  .sign-in-header {
+    flex: 1;
+  }
+
+  .sign-in-body {
+    flex: 2;
+
+  }
+
+  .sign-in-footer {
+    align-items: flex-end;
+    display: flex;
+    flex: 1;
+    font-size: $font-size-small;
+    justify-content: center;
+  }
+
+  img {
+    width: 50px;
+  }
+
+  h1 {
+    font-family: Orbitron;
+    font-weight: 300;
+  }
+}
+
+.flex-page {
+  align-items: center;
+  justify-content: center;
+  padding: $padding;
+}
+
+.flex-container {
+  align-items: center;
+  justify-content: center;
+  padding: $padding;
+}
+
+.btn-google {
+  background: #DD4B39;
+  width: 220px;
+  height: 36px;
+  border: none;
+  border-radius: $border-radius-small * 0.5;
+  color: #FFF;
+  font-weight: 500;
+  cursor: pointer;
+  padding:  $padding;
+  text-align: center;
+}

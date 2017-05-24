@@ -1,0 +1,41 @@
+//.header {
+//  margin: $margin-secondary auto;
+//  width: 93.75%;
+//  max-height: 100%;
+//  background: linear-gradient($black-color, $dark-blue-color);
+//  border-radius: $border-radius;
+//  opacity: 0.85;
+//  padding: $padding;
+//  overflow: hidden;
+//}
+
+.container-header {
+  padding: $padding;
+
+  .title, .subtitle {
+    font-family: Orbitron;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: $margin-secondary;
+  }
+
+  .title-border {
+    border-bottom: 1px solid $white-color;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container-header {
+    text-align: inherit;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+
+}
+
+@media screen and (max-width: 720px) {
+  .header {
+    display: none;
+  }
+}
