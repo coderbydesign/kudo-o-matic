@@ -23,6 +23,8 @@ gem 'md_emoji', '~> 1.0', '>= 1.0.2'
 
 gem 'redcarpet', '~> 3.3', '>= 3.3.4'
 
+gem 'timecop', '~> 0.8.1'
+
 # Database
 gem 'pg', '~> 0.18'
 
@@ -73,4 +75,8 @@ end
 
 group :production do
   gem 'rails_12factor'
+end
+
+group :test do
+  gem 'database_cleaner'
 end

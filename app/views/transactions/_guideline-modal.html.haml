@@ -3,9 +3,11 @@
     .modal-header
       %h2
         Kudo Guidelines
-      %p
-        Click to copy guideline to clipboard
-        %span.clipboard
+      .modal-subheader
+        %p
+          Click to copy guideline to clipboard
+        %span.clipboard-guideline
+          Copied!
     .modal-body
       %ul
         - Transaction::GUIDELINES.reverse.each do |name, value|

@@ -1,5 +1,17 @@
 require 'rails_helper'
 
+def all_for_user(user)
+  Transaction.where(balance:Balance.current).where(sender: user).or(Transaction.where(balance:Balance.current).where(receiver: user))
+end
+
+def send_by_user(user)
+  Transaction.where(balance:Balance.current).where(sender: user)
+end
+
+def received_by_user(user)
+  Transaction.where(balance:Balance.current).where(receiver: user)
+end
+
 describe Transaction do
   before(:all) do
     ActiveRecord::Base.skip_callbacks = true
@@ -44,12 +56,38 @@ describe Transaction do
     end
   end
 
-  context 'given a transaction is deleted', callbacks: false do
-    let(:balance) { Balance.create name: 'Current balance', amount: 18, current: true }
-    let(:transaction) { Transaction.create amount: 6 }
+  context' filter transactions' do
+    let(:activity) { Activity.create name: 'Helping with RSpec' }
+    let(:user) { User.create name: 'Pascal', avatar_url: '/kabisa_lizard.png' }
+    let(:user_2) { User.create name: 'John User', avatar_url: '/kabisa_lizard.png' }
+    let(:balance) { create :balance, :current }
+    let(:balance_2) { create :balance }
+    let!(:transaction) { Transaction.create sender: user_2, receiver: user, activity: activity, amount: 5, balance: balance}
+    let!(:transaction_2) { Transaction.create sender: user_2, receiver: user, activity: activity, amount: 10, balance: balance}
+    let!(:transaction_3) { Transaction.create sender: user, receiver: user_2, activity: activity, amount: 10, balance: balance}
+    let!(:transaction_4) { Transaction.create sender: user_2, receiver: user_2, activity: activity, amount: 15, balance: balance_2}
 
-    it 'subtracts the amount of the transaction from the balance' do
-      expect(balance.amount - transaction.amount).to eq(12)
+    it 'Displays all my transactions from the current balance' do
+      transactions = all_for_user(user_2)
+
+      expect(transactions.count).to eq(3)
+    end
+
+    it 'Displays my send transactions from the current balance' do
+      transactions = send_by_user(user_2)
+
+      expect(transactions.count).to eq(2)
+    end
+
+    it 'Displays my received transactions from the current balance' do
+      transactions = received_by_user(user_2)
+
+      expect(transactions.count).to eq(1)
+    end
+
+    it 'Displays a message that there is nothing to show yet' do
+
     end
   end
+
 end

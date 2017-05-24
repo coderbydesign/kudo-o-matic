@@ -4,36 +4,38 @@
 //
 ///////////////////////////////////////////////////////////
 html {
-  background: url('https://photos-5.dropbox.com/t/2/AAAZtV6wOtCsdP3Dl7pLtT2_ZON-MNFCDkxkwEbiDVJ58w/12/184449953/jpeg/32x32/1/_/1/2/luca-zanon-26595.jpg/EKWxh4wBGNeOBiAHKAc/UUBzN3aemwPqFwblMqoLSjkC-TjfvgyjZ2GzDfutBYE%2CHSZgne7l8epYSu8z3tnHgQpjarGSOE9jMDHMCIQm_Uw%2CA4AWukYwARqMS0UgiYo_PrNJaFJo8fQA0Pe9b7XxY3A?size=2048x1536&size_mode=3') no-repeat center center fixed;
+  background: url('https://photos-2.dropbox.com/t/2/AACa9BenjEYPflcomclprClKQpNh33p9_Ifv1Jf8VySyNg/12/184449953/jpeg/32x32/1/_/1/2/blurred_32.jpg/EKWxh4wBGISPBiAHKAc/WBJl7EsFwbXTDRLrVU8xklDcnASZJt-U8MyAvqF78Bo?size=2048x1536&size_mode=3') no-repeat center center fixed;
   background-size: cover;
+  background: $secondary-bg;
+  //background-image: url('blurred_27.jpg') ;
+  //background: no-repeat center center fixed;
+  //background-image: radial-gradient(ellipse -side at 100% 100%, #65799B 20%, #252d63 130%); //linear-gradient(143deg, #000e3b 1%, #3e5293 35%, #636fa4 67%, #DBF6C8 94%);
+  //background-image: radial-gradient(ellipse farthest-side at 100% 100%, #F9C8D4 20%, #D1A4DA 50%, #6343EF 130%); //linear-gradient(143deg, #000e3b 1%, #3e5293 35%, #636fa4 67%, #DBF6C8 94%);
   font-family: $default-font-stack;
-  color: $text-color;
+  color: $text-primary;
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   // Avoid horizontal squeeze under minimum mobile screen width
   min-width: 320px;
+  min-height: 100%;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
 }
 
 html,
 body {
   position: relative;
   height: 100%;
-  //margin: 0;
-  //padding: 0;
-  //line-height: 1.25;
+  background-attachment: fixed;
 }
 
 button,
 a {
   -webkit-tap-highlight-color: transparent;
   text-decoration: none;
-}
-
-a,
-a:hover,
-a:active,
-a:visited {
-  color: inherit;
 }
 
 strong {

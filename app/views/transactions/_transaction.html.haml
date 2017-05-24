@@ -7,17 +7,14 @@
           = f.input_field :receiver_name, class:'input-receiver', data: { autocomplete_source: users_autocomplete_path}, field_id: false, placeholder: 'Receiver', required: true , maxlength: '35', autoFocus: true
         %span.amount.flex-item
           = f.input_field :amount, class:'input-amount', input_html:{ min: '0', max: '999' , step: '1'} , placeholder: 'Amount', required: true, autocomplete:'off'
-        %a.btn-guideline-info{href:'#', tabindex:'-1'}
-          %span.btn-label.flex-item
-            Guidelines
-          .fa.fa-question-circle
       .activity
-        = f.input_field :activity_name, as: :text, field_id: false,  placeholder: "Write here the reason why you are giving ₭udo's", required: true, maxlength: '90', class: 'character-count'
-        .activity-extras
-          %a.fa.fa-smile-o{href:'#', tabindex:'-1'}
-          %span.counter
+        = f.input_field :activity_name, as: :text, field_id: false,  placeholder: "Why are you giving ₭udo's?", required: true, maxlength: '90', class: 'character-count'
       .submit
-        %span
-          = button_tag type:'submit', class: 'btn send-kudos-button' do
+        %span.submit-btn
+          = button_tag type:'submit', class: 'btn', id:'send-kudos-button' do
             Give ₭udo's
             %i.fa.fa-paper-plane
+        .activity-extras
+          %span.counter
+          %a.fa.fa-question-circle.btn-guideline-info{href:'#', tabindex:'-1'}
+          %a.fa.fa-smile-o{href:'#', tabindex:'-1'}

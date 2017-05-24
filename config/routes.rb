@@ -33,26 +33,24 @@ Rails.application.routes.draw do
   get :activities, to: 'activities#autocomplete_search', as: :activities_autocomplete
 
   post 'like/:id', to: "transactions#upvote", as: :like
+  post 'unlike/:id', to: "transactions#downvote", as: :unlike
 
   resources :goals do
     get :pollvote
     post 'poll-like/:id', to: "goal#pollvote", as: :polllike
   end
 
-  get '/transactions/all' => 'transactions#all'
-  get '/transactions/send' => 'transactions#send'
-  get '/transactions/received' => 'transactions#received'
-  get '/transactions/both' => 'transactions#both'
+
 
   get '/transactions/:type' => 'transactions#filter'
 
-  get '/dashboard', to: 'dashboard#index'
+  get '/transactions', to: 'transactions#index'
 
   get "minigames" => "minigames#index"
   get "minigames/kudosclicker" => "kudosclicker#index"
   get "/feed", to: "feed#index"
 
-  root 'dashboard#index'
+  root 'transactions#index'
 end
 
 

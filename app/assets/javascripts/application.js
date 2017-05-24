@@ -23,7 +23,6 @@
 
 //= require popper/popper
 //= require popper/tooltip
-//= require popper/new-popper
 
 //= require clipboard.min
 

@@ -6,12 +6,12 @@ $gray: #333;
 $gray-lighter: #eee;
 $space: 40px;
 
-.guideline-modal.show-modal, .welcome-modal.show-modal, .emoji-modal.show-modal {
+.guideline-modal.show-modal, .welcome-modal.show-modal, .emoji-modal.show-modal, .like-modal.show-modal {
   display: flex;
-  @include animation(load, .25s);
+  @include animation(fadeIn, .25s);
 }
 
-@keyframes load {
+@keyframes fadeIn {
   from {
     opacity: 0;
   }
@@ -20,9 +20,25 @@ $space: 40px;
   }
 }
 
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .guideline-modal,
 .welcome-modal,
-.emoji-modal {
+.emoji-modal,
+.like-modal {
 
   // This is modal bg
   align-items: center;
@@ -33,9 +49,16 @@ $space: 40px;
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: 10;
 
-  .clipboard {
+  .clipboard-guideline,
+  .clipboard-emoji {
     color: red;
-    float: right;
+    display: none;
+  }
+
+  .clipboard-guideline.show-clipboard,
+  .clipboard-emoji.show-clipboard {
+    display: block;
+    animation: fadeInOut 3s forwards;
   }
 }
 
@@ -57,11 +80,19 @@ $space: 40px;
 }
 
 .modal-header {
-  color: $text-color-dark;
+  color: $text-primary;
+}
+
+.modal-subheader {
+  display: flex;
+
+  p {
+    flex: 1;
+  }
 }
 
 .modal-body {
-  color: $text-color-dark;
+  color: $text-primary;
   height: 400px;
   overflow-y: scroll;
   padding: $space/2;
@@ -75,6 +106,29 @@ $space: 40px;
     flex: 1;
     padding-right: $padding-small;
   }
+
+  .user-liked-list {
+    display: flex;
+
+    .user-name-liked {
+      flex: 1;
+    }
+
+    .user-avatar-liked {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+}
+
+
+
+
+
+.welcome-modal ul li {
+  display: list-item;
+  list-style-type: disc;
+  margin-left: $margin-primary;
 }
 
 .guideline-list {
@@ -87,6 +141,7 @@ $space: 40px;
     cursor: pointer;
     float: left;
     width: 33.33%;
+    line-height: 1.2;
 
     div {
       align-items: center;
@@ -96,7 +151,7 @@ $space: 40px;
   }
 
   .emoji-img {
-    margin-right: $margin;
+    margin-right: $margin-secondary;
   }
 
   .emoji-name {
@@ -147,5 +202,13 @@ $space: 40px;
     li {
       width: 50%;
     }
+  }
+
+  .clipboard {
+    float:none;
+  }
+
+  .modal-subheader {
+    flex-direction: column;
   }
 }

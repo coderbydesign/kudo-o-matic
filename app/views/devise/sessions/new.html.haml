@@ -8,8 +8,8 @@
           %h1
             Kudo-o-Matic
           %br
-          %button.btn-google
-            = link_to 'Log in with Google+', user_google_oauth2_omniauth_authorize_path
+          %a.btn-google{href:user_google_oauth2_omniauth_authorize_path}
+            = 'Log in with Google+'
       .sign-in-footer
         %span
           *You can only log in with a Google account from Kabisa

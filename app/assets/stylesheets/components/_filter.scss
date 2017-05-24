@@ -2,13 +2,11 @@
   display: flex;
   width: 100%;
   align-items: center;
-  margin-bottom: $margin-bottom;
-  border-bottom: 1px solid $dark-blue-color;
+  margin-bottom: $margin-secondary;
 }
 
 .timeline-title {
   font-weight: 300;
-  //border: 1px solid $white-color;
   padding: 0 $padding-small;
 }
 
@@ -18,7 +16,7 @@
 }
 
 .filter-option:not(:first-child) {
-  margin-left: $padding-small;
+  margin-left: $margin-secondary;
 }
 
 .send {
@@ -28,11 +26,6 @@
 .received {
   flex: 1;
 }
-
-.fa-filter {
-  padding-left: $whitespace * 0.5;
-}
-
 @media screen and (min-width: 535px) {
 
 }

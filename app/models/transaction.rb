@@ -61,6 +61,7 @@ class Transaction < ActiveRecord::Base
     receiver_id.nil? ? '/kabisa_lizard.png' : receiver.picture_url
   end
 
+
   def activity_name
     activity.try(:name)
   end
@@ -82,15 +83,15 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.all_for_user(user)
-    Transaction.where(balance: Balance.current).where(sender: user).or(Transaction.where(receiver: user)).order('created_at desc').page.per(20)
+    Transaction.where(sender: user).or(Transaction.where(balance:Balance.current).where(receiver: user)).order('created_at desc').page.per(20)
   end
 
   def self.send_by_user(user)
-    Transaction.where(balance: Balance.current).where(sender: user).order('created_at desc').page.per(20)
+    Transaction.where(sender: user).order('created_at desc').page.per(20)
   end
 
   def self.received_by_user(user)
-    Transaction.where(balance: Balance.current).where(receiver: user).or(Transaction.where(balance: Balance.current).where(receiver: User.where(name: ENV.fetch('COMPANY_USER', 'Kabisa')))).order('created_at desc').page.per(20)
+    Transaction.where(receiver: user).or(Transaction.where(balance: Balance.current).where(receiver: User.where(name: ENV.fetch('COMPANY_USER', 'Kabisa')))).order('created_at desc').page.per(20)
   end
 
   EMOJIES = [
@@ -256,5 +257,4 @@ class Transaction < ActiveRecord::Base
       'wind_chime', 'wine_glass', 'wink', 'wolf', 'woman', 'womans_clothes',
       'womans_hat', 'womens', 'worried', 'wrench', 'x', 'yellow_heart', 'yen',
       'yum', 'zap', 'zero', 'zzz']
-
 end

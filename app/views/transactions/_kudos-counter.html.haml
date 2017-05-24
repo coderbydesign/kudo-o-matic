@@ -30,10 +30,8 @@
             = Goal.next.amount
           %span.kudo-currency
             ₭
-  .kudo-counter__days_left
-    = Balance.time_left
 
-  = render 'dashboard/goals'
+  = render 'goals'
 
   -#- @iterate_goals.each do |goal|
   -#  .chart.chart--second-goal.js-chart{'data-goal':goal.amount, 'data-count':Balance.current.amount}
