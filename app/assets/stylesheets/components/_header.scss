@@ -1,13 +1,13 @@
-.header {
-  margin: 0.5rem auto;
-  width: 93.75%;
-  max-height: 100%;
-  background: linear-gradient($black-color, $dark-blue-color);
-  border-radius: $border-radius;
-  opacity: 0.85;
-  padding: $padding;
-  overflow: hidden;
-}
+//.header {
+//  margin: $margin-secondary auto;
+//  width: 93.75%;
+//  max-height: 100%;
+//  background: linear-gradient($black-color, $dark-blue-color);
+//  border-radius: $border-radius;
+//  opacity: 0.85;
+//  padding: $padding;
+//  overflow: hidden;
+//}
 
 .container-header {
   padding: $padding;
@@ -16,7 +16,7 @@
     font-family: Orbitron;
     text-align: center;
     vertical-align: middle;
-    margin-top: $margin-top;
+    margin-top: $margin-secondary;
   }
 
   .title-border {
@@ -35,16 +35,7 @@
 }
 
 @media screen and (max-width: 720px) {
-
-  .title {
-    font-size: 160%;
-  }
-
-  .title {
-    font-size: 140%;
-  }
-
   .header {
-    width: 100%;
+    display: none;
   }
 }

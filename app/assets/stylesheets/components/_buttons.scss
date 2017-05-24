@@ -9,22 +9,28 @@ button {
 }
 
 .btn {
-  border-radius: $border-radius;
+  border-radius: $border-radius-small;
   padding: $padding-small;
 }
 
 .btn-primary {
-  background: linear-gradient(rgba($dark-blue-color, 0.8), rgba($dark-blue-color, 0.7));
+  background: $primary-button-bg;
+  color: $primary-button-color;
+  font-weight: 300;
 }
 
-.btn-filter {
-  height: 100%;
-  color: $text-color;
-  font-size: 80%;
+.btn-secondary {
+  background: $secondary-button-bg;
+  border: 1px solid $secondary-border-color;
+  color: $secondary-button-color;
   font-weight: 300;
-  margin-bottom: $margin-bottom;
-  text-align: left;
 }
+
+.btn-like {
+  font-size: $font-size-small;
+  width: 4rem;
+}
+
 
 .btn-close {
   padding-top: $padding-small;
@@ -41,23 +47,19 @@ button {
 }
 
 .simple_form {
-  .send-kudos-button {
-    margin-top: $whitespace;
+  #send-kudos-button {
+    background-color: $primary-button-bg;
     border-radius: $border-radius-small;
-    float: left;
+    color: $primary-button-color;
     cursor: pointer;
     height: 2.5rem;
-    font-weight: 500;
-    font-size: 120%;
-    color: $transaction-button-text;
-    background-color: $transaction-button-background;
-    border: 2px solid $dark-blue-color
+    width: 10rem;
   }
 }
 
 #like-button {
-  color: rgba($primary-button-text, 1.0);
-  margin-top: $margin-top;
+  color: $primary-button-color;
+  margin-top: $margin-secondary;
   border-radius: $border-radius-small;
   background-color: rgba(234,234,234,1.0);
   transform: translateZ(0);
@@ -65,7 +67,7 @@ button {
   transition-property: color;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1201px) {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -75,11 +77,7 @@ button {
 }
 
 @media screen and (max-width: 535px) {
-  .send-kudos-button {
+  #send-kudos-button {
     width: auto;
-  }
-
-  .counter {
-
   }
 }

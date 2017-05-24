@@ -1,36 +1,64 @@
 .message-container {
-  margin: 1em auto;
-  width: 93.75%;
 
   .fa-times {
-    float: right;
     cursor: pointer;
+    margin-left: $margin-secondary;
   }
 
   .fa-exclamation-circle {
-    margin-right: $whitespace;
+    margin-right: $margin-secondary;
   }
 
   .fa-info-circle {
-    margin-right: $whitespace;
+    margin-right: $margin-secondary;
+  }
+
+  .message {
+    flex: 1;
+    font-weight: 300;
   }
 }
 
+.show-message {
+  @include animation(show-message, 1s);
+}
+
+.notice-message,
 .error-message {
-  padding: $padding;
-  background: $white-color;
-  color: $dark-blue-color;
-  border-radius: $border-radius;
+  padding: $padding-primary / 2 $padding-secondary * 2.5;
+  border-radius: $border-radius-small;
+  color: $text-primary;
   text-align: center;
-  opacity: 0.8;
+  display: flex;
+  margin-bottom: $margin-secondary;
+
+  .hide-message & {
+    display: none;
+  }
 }
 
 .notice-message {
-  padding: $padding;
-  background: $dark-blue-color;
-  color: $white-color;
-  border-radius: $border-radius-small;
-  text-align: center;
-  opacity: 0.85;
+  background: $flash-notice-bg;
+  border: 1px solid $flash-notice-border-color;
 }
 
+.error-message {
+  background: $flash-error-bg;
+  border: 1px solid $flash-error-border-color;
+}
+
+@keyframes show-message {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .message-container {
+    width: 100%;
+  }
+}

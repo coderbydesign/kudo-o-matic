@@ -1,0 +1,23 @@
+.emoji-modal
+  .modal-dialog
+    .modal-header
+      %h2
+        Emoji List
+      .modal-subheader
+        %p
+          Click to copy emoji to clipboard
+        %span.clipboard-emoji
+    .modal-body
+      %ul.emoji-list
+        - Transaction::EMOJIES.each do |emoji|
+          %li.emoji-container{'data-clipboard-text':':' + emoji + ':'}
+            %div
+              %span.emoji-img
+                %img{src:'https://yuku-t.com/jquery-textcomplete/media/images/emoji/' + emoji + '.png'}
+              %span.emoji-name
+                = ':' + emoji + ':'
+
+
+    .modal-footer
+      %button.btn.btn-primary.btn-close.close-emoji
+        Close

@@ -1,33 +1,22 @@
-jQuery(function() {
-    return $('#transaction_receiver_name').autocomplete ({
-        source: $('#transaction_receiver_name').data('autocomplete-source'),
-        autoFocus: true,
-        maxShowItems: 5
-    });
-});
-
-// jQuery(function() {
-//     return $('#transaction_activity_name').autocomplete({
-//         source: $('#transaction_activity_name').data('autocomplete-source'),
-//         autoFocus: true,
-//         maxShowItems: 5
-//     });
-// });
-
 $(document).ready(function() {
+    $('.input-amount').focus(function (e) {
+        e.preventDefault()
+    })
+
     $('.menu-option.filter').click(function () {
         $('.hidden-menu.filter').slideToggle("slow");
     });
 
     // Error container hide
-    $('.message-container .fa-times').click(function () {
-        $('.message-container').fadeOut(250);
+    $('.close-message').click(function () {
+        $('.message-container').addClass('hide-message');
     });
 
     // Dropdown profile toggle show/hide
     $('.current-user').click(function () {
         $(this).find('.fa').toggleClass('fa-chevron-down fa-chevron-up');
-        $('.profile.dropdown-content').slideToggle(250);
+        // $('.profile.dropdown-content').slideToggle(250);
+        $('.profile.dropdown-content').toggleClass('slide-menu');
         return false
     });
 
@@ -41,16 +30,12 @@ $(document).ready(function() {
         $(this).find('i').toggleClass('fa-bars fa-chevron-up')
     });
 
-    // $('.current-user').click(function () {
-
-
     // Characters left in activity input field
-    $('.counter').hide();
     var textMax = $('.character-count').attr('maxLength');
     $('.counter').html(textMax);
 
     $('.character-count').keyup(function() {
-        $('.counter').fadeIn('fast');
+        $('.counter').addClass('show-counter');
         var textLength = $('.character-count').val().length;
         var textRemaining = textMax - textLength;
 
@@ -60,8 +45,15 @@ $(document).ready(function() {
     // Submit on enter in transaction textarea
     $('.character-count').keypress(function(event) {
         if (event.keyCode == 13 || event.which == 13) {
-            $('.send-kudos-button').click();
+            $('#send-kudos-button').click();
             event.preventDefault();
+        }
+    });
+
+    $('.input-receiver, .input-amount').keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
         }
     });
 });

@@ -21,34 +21,32 @@ $font-primary: 'proxima-nova-soft', sans-serif;
   box-sizing: border-box;
 }
 
-
 .kudo-counter {
-  background: linear-gradient(rgba($dark-blue-color, 0.7), rgba($dark-blue-color, 0.95));
-  border-radius: $border-radius;
-  color: $white-color;
-  max-height: 100%;
+  background: $primary-bg;
+  //border-radius: $border-radius;
+  border: 1px solid $primary-border-color;
+  color: $text-primary;
   font-weight: 300;
-  padding: $padding;
-  padding-bottom: 0;
+  padding: 1.25rem;
   text-align: center;
   width: 100%;
-  float: left;
-  margin-bottom: $margin-bottom;
+  margin-bottom: $margin-secondary;
   position: relative;
-  z-index: 1;
-
 
   &__title {
-    color: $medium-grey-color;
     font-size: 1.75rem;
     margin-bottom: 0.625rem;
+
+    .fa-times {
+      display: none;
+    }
   }// .kudo-counter__title
 
   &__date {
     font-size: 1.375rem;
-    margin-bottom: 3.57142857rem; // converted from 50px
+    margin-bottom: 3.57142857rem; // 50px / 16px
+    color: $text-gray
   }// .kudo-counter__title
-
 }// .kudo-counter
 
 .chart {
@@ -62,7 +60,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     fill: none;
     height: 100%;
     position: relative;
-    stroke: $dark-blue-color;
+    stroke: $primary-stroke-color;
     stroke-width: 20px;
     width: 100%;
   }// .kudo-chart__background
@@ -76,9 +74,8 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     position: absolute;
     stroke-dasharray: 630px;
     stroke-dashoffset: 630px;
-    stroke-linecap: round;
     stroke-width: 20px;
-    stroke: $light-blue-color;
+    stroke: $secondary-stroke-color;
     top: 0;
     width: 100%;
   }// .kudo-chart__foreground
@@ -95,7 +92,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     }
 
     div {
-      color: $white-color;
+      color: $text-primary;
       font-size: 1.375rem;
     }// .kudo-chart__count:after
 
@@ -114,13 +111,31 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 
   &--kudo {
     .chart__container {
-      height: 220px;
-      width: 220px;
+      height: 13.75rem; // 220px / 16px
+      min-width: 100%;
     }// .chart__container
 
     .chart__count {
-      top: -145px;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      top: -150px;
+
+
     }// .chart__count
+
+    .next-goal-name {
+      overflow: hidden;
+
+      span {
+        width: 175px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        overflow: hidden;
+      }
+    }
 
   }// .chart__container
 
@@ -162,58 +177,69 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 
 }// .chart
 
-@keyframes load {
-  from {
-    //transform: translate3d(-50%, -40%, 0);
-    opacity: 0;
-  }
-  to {
-    //transform: translate3d(-50%, -50%, 0);
-    opacity: 1;
-  }
-}
+//@keyframes load {
+//  from {
+//    opacity: 0;
+//  }
+//  to {
+//    opacity: 1;
+//  }
+//}
 
 .kudo-counter-background {
   display: none;
 }
 
-@media screen and (min-width: 1200px) {
-  .fa-times {
-    display: none;
-  }
-
-  .kudo-counter {
-    display: block !important;
-  }
-}
-
 @media screen and (max-width: 1200px) {
-  .fa-times {
-    display: block;
-    text-align: right;
-    float: right;
-    cursor: pointer;
+  .kudo-counter__title .fa-times {
+    .visible-as-modal & {
+      display: block;
+      text-align: right;
+      float: right;
+      cursor: pointer;
+    }
   }
 
   .kudo-counter-background {
+
     background: rgba($black-color, 0.6);
     position: fixed;
     top: 0; right: 0; bottom: 0; left: 0;
+
+    .visible-as-modal & {
+      display: block;
+      animation: kudocounter 0.25s ease-out;
+    }
   }
 
   .kudo-counter {
     margin: 0 auto;
-    background: linear-gradient(rgba($dark-blue-color, 1.0), rgba($dark-blue-color, 0.9));
+    //background: linear-gradient(rgba($dark-blue-color, 1.0), rgba($dark-blue-color, 0.9));
     display: none;
     position: fixed;
     top: $whitespace * 2; left: 0; right: 0; bottom: $whitespace * 2;
-    max-width: 50%;
-    z-index: 10;
+    width: 50%;
     overflow: auto;
 
-
-    .chart__background {
-      stroke: $medium-grey-color;
+    .visible-as-modal & {
+      display: block;
+      animation: kudocounter 0.25s ease-out forwards;
     }
   }
+
+  @keyframes kudocounter {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .kudo-counter {
+    width: 90%;
+  }
+
 }

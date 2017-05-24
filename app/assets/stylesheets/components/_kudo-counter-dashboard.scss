@@ -1,27 +1,23 @@
 .kudo-counter-dashboard-container {
-  background: linear-gradient(rgba($dark-blue-color, 0.7), rgba($dark-blue-color, 0.7));
-  border-radius: $border-radius;
+  background: $primary-bg;
+  border: 1px solid $primary-border-color;
+  border-radius: $border-radius-small;
   display: none;
-  margin-bottom: $margin-bottom;
+  margin-bottom: $margin-secondary;
   overflow: hidden;
-  padding: $padding;
+  padding: $padding-primary;
   width: 100%;
+  font-weight: 300;
 }
 
 .kudo-balance-statistics-container {
   display: flex;
-  padding-left: $padding-small;
-  padding-bottom: $padding-small;
-  padding-top: $padding-small;
+  //padding-left: $padding-small;
+  //padding-bottom: $padding-small;
+  //padding-top: $padding-small;
 
   .kudo-balance-statistics {
-    text-align: center;
     flex: 1;
-    line-height: 1.8rem;
-  }
-
-  .kudo-balance-statistics:not(:last-child) {
-    border-right: 1px solid $dark-blue-color;
   }
 
   .statistics-title {
@@ -29,16 +25,89 @@
   }
 
   .statistics-value {
-    font-size: $font-size-large - 0.5rem;
+    font-size: $font-size-regular;
   }
+}
+
+.currency {
+  font-size: $font-size-regular;
 }
 
 .see-more {
   cursor: pointer;
+
+  &-text {
+    flex: 1;
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  .kudo-balance-statistics:not(:last-child) {
+    border-right: 1px solid $primary-border-color;
+  }
+}
+
+@media screen and (min-width: 720px) and (max-width: 1200px) {
+  .kudo-balance-statistics-container {
+    flex-direction: column;
+  }
+
+  .kudo-balance-statistics {
+    text-align: left;
+    display: flex;
+    padding: $padding-small;
+    overflow: hidden;
+
+    .statistics-title {
+      white-space: nowrap;
+      flex: 1;
+      text-overflow: ellipsis;
+      display: block;
+      overflow: hidden;
+    }
+
+    .statistics-value {
+      text-align: right;
+      margin-left: $margin-secondary;
+    }
+    
+    .statistics-text {
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  .kudo-balance-statistics:not(:last-child) {
+    border-bottom: 1px solid $primary-border-color;
+  }
+
+  .kudo-balance-statistics {
+    border-right: none;
+  }
 }
 
 @media screen and (max-width: 1200px) {
   .kudo-counter-dashboard-container {
     display: block;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .kudo-balance-statistics {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .statistics-main-title {
+    display: none;
+  }
+
+  .statistics-value {
+    margin-top: $margin-secondary / 2;
   }
 }
