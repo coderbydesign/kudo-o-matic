@@ -19,14 +19,14 @@ RSpec.feature "Dashboard", type: :feature do
 
   before do
     visit '/sign_in'
-    click_link 'Sign in with Google Apps'
+    click_link 'Log in with Google+'
   end
 
   xit "shows relevant information" do
     visit '/'
 
-    within('.last-transactions') do
-      expect(page).to have_content("42 ₭ Harry William less than a minute ago Writing a blog post")
+    within('.timeline-container') do
+      expect(page).to have_content("John User: +99 ₭ to Harry for helping me out less than a minute ago")
     end
 
     within('.next-goal') do

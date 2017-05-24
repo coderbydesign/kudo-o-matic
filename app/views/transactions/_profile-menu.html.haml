@@ -1,0 +1,32 @@
+.dropdown
+  .profile-picture
+    .profile-img{style: "background-image: url(#{current_user.picture_url})"}
+
+  %a.dropdown-container.current-user{href:'#'}
+
+    %span.username
+      = current_user
+    .fa.fa-chevron-down
+
+  .profile.dropdown-content
+    %a.menu-content{href:destroy_user_session_path}
+      %span.flex-item
+        Sign Out
+      %i.fa.fa-sign-out{'aria-hidden':true}
+
+  .user-statistics-container
+    .userstatistics
+      %span.statistics-title
+        Given
+      %span.statistics-value
+        = @send_transactions_user
+    .userstatistics
+      %span.statistics-title
+        Received
+      %span.statistics-value
+        = @received_transactions_user + @received_transactions_team
+    .userstatistics
+      %span.statistics-title
+        Total
+      %span.statistics-value
+        = @all_transactions_user

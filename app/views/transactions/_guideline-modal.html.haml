@@ -1,0 +1,21 @@
+.guideline-modal
+  .modal-dialog
+    .modal-header
+      %h2
+        Kudo Guidelines
+      .modal-subheader
+        %p
+          Click to copy guideline to clipboard
+        %span.clipboard-guideline
+          Copied!
+    .modal-body
+      %ul
+        - Transaction::GUIDELINES.reverse.each do |name, value|
+          %li.guideline-list{'data-clipboard-text':name}
+            %span.g-name
+              = name
+            %span
+              = value
+    .modal-footer
+      %button.btn.btn-primary.btn-close.close-guidelines
+        Close

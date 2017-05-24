@@ -1,16 +1,22 @@
-.filter {
+.filter-container {
   display: flex;
-  max-width: 100%;
+  width: 100%;
+  align-items: center;
+  margin-bottom: $margin-secondary;
+}
+
+.timeline-title {
+  font-weight: 300;
+  padding: 0 $padding-small;
 }
 
 .filter-option {
   width: 100%;
   display: flex;
-  margin-left: $padding-small;
 }
 
-.click{
-  //flex: 0.5
+.filter-option:not(:first-child) {
+  margin-left: $margin-secondary;
 }
 
 .send {
@@ -20,11 +26,6 @@
 .received {
   flex: 1;
 }
-
-.fa-filter {
-  padding-left: $whitespace * 0.5;
-}
-
 @media screen and (min-width: 535px) {
 
 }

@@ -1,4 +1,4 @@
-(function($) {
+$(document).ready(function () {
 
     // Chart Functionality
     $.fn.setChart = function() {
@@ -36,4 +36,12 @@
         $('.js-count').count();
     });
 
-})(jQuery);
+    $('.see-more').click(function () {
+        $('.container-right').addClass('visible-as-modal');
+    });
+
+    $('.close-button, .kudo-counter-background').click(function () {
+        $('.container-right').removeClass('visible-as-modal');
+    });
+
+});
