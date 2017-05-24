@@ -1,7 +1,9 @@
 .dropdown
+  .profile-picture
+    .profile-img{style: "background-image: url(#{current_user.picture_url})"}
+
   %a.dropdown-container.current-user{href:'#'}
-    %span
-      %img{src:current_user.picture_url}
+
     %span.username
       = current_user
     .fa.fa-chevron-down
@@ -15,19 +17,16 @@
   .user-statistics-container
     .userstatistics
       %span.statistics-title
-        Received
-      %br
-      %span.statistics-value
-        = @received_transactions_user + @received_transactions_team
-    .userstatistics
-      %span.statistics-title
         Given
-      %br
       %span.statistics-value
         = @send_transactions_user
     .userstatistics
       %span.statistics-title
+        Received
+      %span.statistics-value
+        = @received_transactions_user + @received_transactions_team
+    .userstatistics
+      %span.statistics-title
         Total
-      %br
       %span.statistics-value
         = @all_transactions_user

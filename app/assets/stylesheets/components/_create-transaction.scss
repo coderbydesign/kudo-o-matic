@@ -1,43 +1,44 @@
 .create-transaction-container {
-  padding: $padding;
-  max-height: 100%;
-  background: linear-gradient(rgba($dark-blue-color,0.95), rgba($dark-blue-color,0.7));
-  border-radius: $border-radius;
-  margin-bottom: $margin-bottom;
+  background: $primary-bg;
+  border: 1px solid $primary-border-color;
+  border-radius: $border-radius-small;
+  margin-bottom: $margin-secondary;
   overflow: hidden;
-
-  h1 {
-    font-size: 150%;
-    color: $white-color;
-    margin-bottom: $margin-bottom;
-  }
-
-  .fa-times {
-    float: right;
-    font-size: 80%;
-    cursor: pointer;
-  }
+  padding: $padding-primary;
 }
 
 .simple_form {
+
+  input:focus,
+  textarea:focus {
+    border-color: $focus-border-color;
+  }
+
   input {
-    margin-right: $whitespace;
-    border: none;
+    border: 1px solid $primary-border-color;
     border-radius: $border-radius-small;
-    background-color: $simple-form-input-background;
-    color: $simple-form-input-text;
-    font-size: $font-size-regular;
+    background: $primary-form-bg;
+    color: $primary-form-color;
+    font-size: $font-size-form;
+    padding: $padding-medium * 0.75 $padding-medium * 1.3125;
     width: 100%;
   }
 
   textarea {
-    border: none;
+    border: 1px solid $primary-border-color;
     border-radius: $border-radius-small;
-    background-color: $simple-form-input-background;
-    color: $simple-form-input-text;
-    font-size: $font-size-regular;
+    background-color: $primary-form-bg;
+    color: $primary-form-color;
+    font-size: $font-size-form;
     flex: 1;
+    margin-top: $margin-secondary;
+    padding: $padding-medium * 0.75 $padding-medium * 1.3125;
     resize: none;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: $text-light-gray;
   }
 }
 
@@ -47,6 +48,7 @@
 
 .receiver {
   display: flex;
+  margin-right: $margin-secondary;
 }
 
 .amount {
@@ -55,28 +57,28 @@
 
 .activity {
   display: flex;
-  textarea {
-    margin-top: $whitespace;
-    margin-right: $whitespace;
-  }
-
-  .fa-smile-o {
-    margin-top: $whitespace;
-  }
 }
 
 .activity-extras {
+  color: $text-primary;
+  font-size: 1.0625rem;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+
+  .fa {
+    border: 1px solid $secondary-border-color;
+    border-radius: $border-radius-small;
+    margin-left: $margin-secondary;
+    padding: $padding-medium $padding;
+  }
 }
 
 .counter {
   display: none;
-  margin-top: $whitespace;
 }
 
 .counter.show-counter {
-  display: inline-block;
+  display: block;
   @include animation(counter, .5s)
 }
 
@@ -87,43 +89,41 @@
   to {
     opacity: 1;
   }
-
 }
+
+.submit {
+  display: flex;
+  align-items: center;
+  margin-top: $margin-secondary * 1.5;
+
+  .submit-btn {
+    flex: 1;
+  }
+}
+
 
 .transaction-container-title {
   display: flex;
 }
 
-.btn-guideline-info {
-  font-size: $font-size-regular;
-  color: $text-color;
-  display: flex;
-  align-items: center;
-}
-
 .btn-label {
-  margin-right: $margin * 0.5;
+  margin-right: $margin-secondary / 2;
 }
 
 .flex-item {
   flex: 1;
 }
 
-
-
-@media screen and (min-width: 1201px) {
+@media screen and (max-width: 1200px) {
 
 }
 
-@media screen and (max-width: 1200px) {
-  textarea {
-    height: 4.5rem;
+@media screen and (max-width: 720px) {
+  .create-transaction-container {
+    margin-bottom: $margin-secondary;
   }
 
-}
-
-@media screen and (max-width: 535px) {
-  .btn-label {
-    display: none;
+  textarea {
+    height: 4.5rem;
   }
 }

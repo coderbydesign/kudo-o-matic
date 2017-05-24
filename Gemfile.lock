@@ -66,7 +66,8 @@ GEM
     arel (7.1.4)
     ast (2.3.0)
       execjs
-    autoprefixer-rails (6.7.7)
+    autoprefixer-rails (6.7.7.2)
+      execjs
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)

@@ -19,6 +19,6 @@ class Balance < ActiveRecord::Base
     current = Time.new.at_end_of_day
     expire = Time.new.at_end_of_year
     days_left = (expire - current).to_i / (24 * 60 * 60)
-    "#{days_left} day(s) left"
+    "#{days_left} days left"
   end
 end

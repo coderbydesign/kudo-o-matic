@@ -7,7 +7,7 @@ p.thin {
 p.bold {
   font-weight: 900;
   margin: 0;
-  margin-top: -5px;
+  margin-top: -0.3125rem; // 5px / 16px
 }
 
 .rel {
@@ -24,12 +24,12 @@ p.bold {
 .popper,
 .tooltip {
   position: absolute;
-  background: linear-gradient(rgba($dark-blue-color,1), rgba($dark-blue-color,0.9));
-  color: $text-color;
+  background: $secondary-bg;
+  color: $text-primary;
   width: 35%;
   box-sizing: border-box;
   border-radius: 3px;
-  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  border: 1px solid $secondary-color;
   padding: $padding;
   padding-bottom: 0;
   text-align: center;
@@ -51,19 +51,19 @@ p.bold {
   height: 0;
   border-style: solid;
   position: absolute;
-  margin: 5px;
+  margin: 0.3125rem; // 5px / 16px
 }
 
 .tooltip .tooltip-arrow,
 .popper .popper__arrow {
-  border-color: $dark-blue-color;
+  border-color: $secondary-color;
 }
 .style5 .tooltip .tooltip-arrow {
   border-color: #1E252B;
 }
 .popper[x-placement^="top"],
 .tooltip[x-placement^="top"] {
-  margin-bottom: 5px;
+  margin-bottom: 0.3125rem; // 5px / 16px
 }
 .popper[x-placement^="top"] .popper__arrow,
 .tooltip[x-placement^="top"] .tooltip-arrow {
@@ -78,7 +78,7 @@ p.bold {
 }
 .popper[x-placement^="bottom"],
 .tooltip[x-placement^="bottom"] {
-  margin-top: 5px;
+  margin-top: 0.3125rem; // 5px / 16px
 }
 .tooltip[x-placement^="bottom"] .tooltip-arrow,
 .popper[x-placement^="bottom"] .popper__arrow {
@@ -93,7 +93,7 @@ p.bold {
 }
 .tooltip[x-placement^="right"],
 .popper[x-placement^="right"] {
-  margin-left: 5px;
+  margin-left: 0.3125rem; // 5px / 16px
 }
 .popper[x-placement^="right"] .popper__arrow,
 .tooltip[x-placement^="right"] .tooltip-arrow {
@@ -108,7 +108,7 @@ p.bold {
 }
 .popper[x-placement^="left"],
 .tooltip[x-placement^="left"] {
-  margin-right: 5px;
+  margin-right: 0.3125rem; // 5px / 16px
 }
 .popper[x-placement^="left"] .popper__arrow,
 .tooltip[x-placement^="left"] .tooltip-arrow {
@@ -125,12 +125,12 @@ p.bold {
 .tooltip-inner {
   list-style-type: none;
   text-align: left;
-  max-height: 7rem;
+  max-height: 8.25rem;
   overflow-y: scroll;
 
   .suggested-guidelines-title {
     font-size: $font-size-small * 1.25;
-    margin-bottom: $margin;
+    margin-bottom: $margin-secondary;
   }
 
   li {
@@ -143,6 +143,7 @@ p.bold {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.2;
   }
 
   .g-value {
@@ -150,46 +151,13 @@ p.bold {
   }
 }
 
-//.suggestions {
-//  overflow: auto;
-//  margin-top: $whitespace;
-//  padding-left: $padding;
-//  padding-right: 30px;
-//  height: 50px;
-//  list-style-type: none;
-//
-//
-//  li {
-//    display: flex;
-//    padding: $padding-small 0;
-//  }
-//
-//  li:first-child {
-//    white-space: nowrap;
-//    overflow: hidden;
-//    text-overflow: ellipsis;
-//    display: block;
-//  }
-//
-//  .g-name {
-//    flex: 1;
-//    white-space: nowrap;
-//    overflow: hidden;
-//    text-overflow: ellipsis;
-//  }
-//
-//  .g-value {
-//    padding: 0 $padding-small
-//  }
-//}
-
 .suggestions::-webkit-scrollbar {display: none;}
 .tooltip-inner::-webkit-scrollbar {display: none;}
 
 @media screen and (min-width: 720px) {
-  .tooltip {
-    top: -$whitespace * 3.5;
-  }
+  //.tooltip {
+  //  top: -$whitespace * 3.5;
+  //}
 }
 
 @media screen and (max-width: 720px) {

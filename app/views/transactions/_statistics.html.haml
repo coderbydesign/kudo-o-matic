@@ -1,0 +1,41 @@
+.statistics-container
+  .statistics-main-title
+    %span
+      Statistics
+    .fa.fa-bar-chart
+  .statistics-main-subtitle
+    Transactions
+  .general-statistics-container.transaction-statistics
+    .generalstatistics
+      %span.statistics-title
+        Week
+      %span.statistics-value
+        = @weekly_transactions
+    .generalstatistics
+      %span.statistics-title
+        Month
+      %span.statistics-value
+        = @monthly_transactions
+    .generalstatistics
+      %span.statistics-title
+        Total
+      %span.statistics-value
+        = @all_transactions
+  .statistics-main-subtitle
+    ₭udo's
+  .general-statistics-container.kudos-statistics
+    .generalstatistics
+      %span.statistics-title
+        Week
+      %span.statistics-value
+        = @weekly_kudos
+    .generalstatistics
+      %span.statistics-title
+        Month
+      %span.statistics-value
+        = @monthly_kudos
+    .generalstatistics
+      %span.statistics-title
+        Total
+      %span.statistics-value
+        = @all_kudos
