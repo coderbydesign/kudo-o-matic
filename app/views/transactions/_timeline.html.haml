@@ -10,9 +10,7 @@
       .transaction-header-container
         .transaction-kudos-container
           %span
-            = "+#{transaction.amount}"
-            %span.currency
-              ₭
+            = "#{transaction.amount} ₭"
         .avatar
           .transaction-avatar-container
             = image_tag User.find(transaction.sender_id).picture_url, class:'sender'

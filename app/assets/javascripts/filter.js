@@ -31,4 +31,29 @@ $(document).ready(function() {
             });
         }
     });
+
+    $('.given-transactions').click(function () {
+        $.ajax({
+            type:'GET',
+            url: "/transactions.js?filter=send", success: function (result) {
+            }
+        });
+    });
+
+    $('.received-transactions').click(function () {
+        $.ajax({
+            type:'GET',
+            url: "/transactions.js?filter=received", success: function (result) {
+            }
+        });
+    });
+
+    $('.all-transactions').click(function () {
+        $.ajax({
+            type:'GET',
+            url: "/transactions.js?filter=mine", success: function (result) {
+            }
+        });
+    });
+
 });

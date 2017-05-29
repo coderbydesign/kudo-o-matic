@@ -15,17 +15,17 @@
       %i.fa.fa-sign-out{'aria-hidden':true}
 
   .user-statistics-container
-    .userstatistics
+    .userstatistics.given-transactions
       %span.statistics-title
         Given
       %span.statistics-value
         = @send_transactions_user
-    .userstatistics
+    .userstatistics.received-transactions
       %span.statistics-title
         Received
       %span.statistics-value
         = @received_transactions_user + @received_transactions_team
-    .userstatistics
+    .userstatistics.all-transactions
       %span.statistics-title
         Total
       %span.statistics-value
