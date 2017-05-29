@@ -1,8 +1,12 @@
 .filter-container {
-  display: flex;
-  width: 100%;
   align-items: center;
-  margin-bottom: $margin-secondary;
+  background: $primary-bg;
+  border: 1px solid $primary-border-color;
+  padding: $padding-primary;
+  display: flex;
+
+  width: 100%;
+
 }
 
 .timeline-title {

@@ -16,8 +16,8 @@ GIT
       selectize-rails (~> 0.6)
 
 GIT
-  remote: https://github.com/petetan/md_emoji.git
-  revision: 1218cb051a67dc6f3424f7f4f1ef76d723394ce5
+  remote: https://github.com/egonm12/md_emoji.git
+  revision: eccf74691602f4407c335ff1da06a7d6518fb435
   branch: master
   specs:
     md_emoji (1.0.1)
