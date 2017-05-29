@@ -1,11 +1,22 @@
 .filter-container
-  %button.btn.btn-secondary.btn-filter.filter-option.send{type:'button'}
+  %select
+    %option
+      None
+    %option
+      All
+    %option
+      Send
+    %option
+      Received
+    .fa.fa-chevron-circle-right
+
+  -#.btn-filter.filter-option.send{type:'button'}
     %span.flex-span
       %span.flex-item
         Send Transactions
-      %span
+      -#%span
         %i.fa.fa-square-o
-  %button.btn.btn-secondary.btn-filter.filter-option.received{type:'button'}
+  -#%button.btn.btn-secondary.btn-filter.filter-option.received{type:'button'}
     %span.flex-span
       %span.flex-item
         Received Transactions

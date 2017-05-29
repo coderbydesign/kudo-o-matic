@@ -79,12 +79,6 @@
       margin: $margin-secondary 0;
     }
 
-    .activityname {
-      p {
-        display: inline-block; // md_emoji gem adds p tag to span element
-      }
-    }
-
     .transaction-footer-container {
       align-items: center;
       display: flex;
