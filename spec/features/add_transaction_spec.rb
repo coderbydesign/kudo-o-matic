@@ -33,7 +33,7 @@ RSpec.feature "Add a transaction", type: :feature do
       within '.timeline-container' do
         expect(page).to have_css("img[src*='kabisa_lizard.png']")
         expect(page).to have_content("John User: +99 ₭ to Harry for helping me out")
-        expect(page).to have_css("img[src*='plus1.png']")
+        expect(page).to have_css("img[src*='plus1-6ba5fab051ddb1e4712f523f1b10164a5d87ffe3f10861f038bd36ebf9e9184f.png']")
       end
     end
 

@@ -33,6 +33,7 @@ RSpec.feature "Open a modal", type: :feature do
     visit '/sign_in'
     click_link 'Log in with Google+'
     expect(current_path).to eql('/')
+    find('.close-welcome').click
   end
 
   context 'Given the guideline modal' do

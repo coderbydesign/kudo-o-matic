@@ -19,7 +19,9 @@ gem 'rubocop', '~> 0.47.1', require: false
 
 gem 'scss_lint', require: false
 
-gem 'md_emoji', '~> 1.0', '>= 1.0.2'
+
+
+gem 'md_emoji', git: 'https://github.com/petetan/md_emoji.git', branch: 'master'
 
 gem 'redcarpet', '~> 3.3', '>= 3.3.4'
 
@@ -69,7 +71,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.0'
   gem 'spring'
 end
 
