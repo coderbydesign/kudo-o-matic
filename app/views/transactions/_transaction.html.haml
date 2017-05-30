@@ -8,7 +8,7 @@
         %span.amount.flex-item
           = f.input_field :amount, class:'input-amount', input_html:{ min: '0', max: '999' , step: '1'} , placeholder: 'Amount', required: true, autocomplete:'off'
       .activity
-        = f.input_field :activity_name, as: :text, field_id: false,  placeholder: "Why are you giving ₭udo's?", required: true, maxlength: '90', class: 'character-count'
+        = f.input_field :activity_name, as: :text, field_id: false,  placeholder: "Why are you giving ₭udo's?", required: true, maxlength: '90', class: 'character-count textarea-field'
       .submit
         %span.submit-btn
           = button_tag type:'submit', class: 'btn', id:'send-kudos-button' do

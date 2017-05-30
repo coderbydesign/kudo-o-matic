@@ -60,7 +60,8 @@ $(document).ready(function() {
             url: "/transactions.js?filter=mine", success: function (result) {
             }
         });
-        $('.active-filter-text').html('All (Personal)');
+        // $('.active-filter-text').add('All (Personal)');
+        $('.active-filter-text').html('<option>All (Personal)</option>');
     });
 
     $('.delete-filter').click(function () {
@@ -69,8 +70,10 @@ $(document).ready(function() {
             url: "/transactions.js?filter=all", success: function (result) {
             }
         });
-        $('.active-filter-text').html('None')
+        $('.active-filter-select').html('None');
         $('.delete-filter').removeClass('button-enabled');
     });
+
+    if ($('.active-filter-select'))
 
 });

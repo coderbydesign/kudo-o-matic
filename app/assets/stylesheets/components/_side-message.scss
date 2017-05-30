@@ -1,8 +1,8 @@
 .side-message {
   align-items: center;
   animation: slideIn 1.5s forwards;
-  background: $flash-notice-bg;
-  border: 1px solid $flash-notice-border-color;
+  background: $side-message-bg;
+  border: 1px solid $side-message-border-color;
   color: $text-primary;
   display: flex;
   font-weight: 300;

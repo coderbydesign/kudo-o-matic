@@ -12,8 +12,15 @@
   %span
     Filter:
   .active-filter
-    %span.active-filter-text
-      None
+    %select.active-filter-select
+      %option.option-none
+        None
+      %option.option-given
+        Given
+      %option.option-received
+        Received
+      %option.option-all
+        All
   %button.btn.btn-primary.delete-filter{type:'button'}
     Delete filter
 
