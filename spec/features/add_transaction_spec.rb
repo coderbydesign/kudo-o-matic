@@ -37,12 +37,6 @@ RSpec.feature "Add a transaction", type: :feature do
       end
     end
 
-    it 'shows a flash success notice' do
-      within '.message-container' do
-        expect(page).to have_css(".notice-message")
-      end
-    end
-
     it 'calculates and shows the transaction statistics of the current user' do
       within '.user-statistics-container' do
         expect(page).to have_content("0") #received transactions
@@ -104,12 +98,6 @@ RSpec.feature "Add a transaction", type: :feature do
         fill_in 'transaction_activity_name', with: 'helping me out'
         fill_in 'transaction_amount', with: '50'
         click_button 'send-kudos-button'
-      end
-
-      it 'shows a flash success notice' do
-        within '.message-container' do
-          expect(page).to have_css(".notice-message")
-        end
       end
 
       it 'creates and shows a new transaction' do
