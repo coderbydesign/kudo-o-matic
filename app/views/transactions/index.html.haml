@@ -23,9 +23,10 @@
   .page
     .body
       .container-left
-        = render 'profile-menu'
-        = render 'kudo-counter-dashboard'
-        = render 'statistics'
+        .fixed-div
+          = render 'profile-menu'
+          = render 'kudo-counter-dashboard'
+          = render 'statistics'
       .container-center
         = render 'message'
         = render 'transaction'
@@ -33,4 +34,5 @@
         #results
           = render 'timeline'
       .container-right
-        = render 'kudos-counter'
+        .fixed-div2
+          = render 'kudos-counter'
