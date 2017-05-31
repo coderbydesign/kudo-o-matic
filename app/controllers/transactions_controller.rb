@@ -25,7 +25,7 @@ class TransactionsController < ApplicationController
       redirect_to root_path
     else
       flash[:error] = @transaction.errors.full_messages.to_sentence.capitalize
-      @transaction.activity.name = @transaction.activity.name.split(': ')[1]
+      @transaction.activity.name = @transaction.activity.name.split('for: ')[1]
       render 'index'
     end
   end
