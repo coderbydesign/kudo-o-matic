@@ -5,12 +5,12 @@
         Emoji List
       .modal-subheader
         %p
-          Click to copy emoji to clipboard
+          Click to add emoji to input field
         %span.clipboard-emoji
     .modal-body
       %ul.emoji-list
         - Transaction::EMOJIES.each do |emoji|
-          %li.emoji-container{'data-clipboard-text':':' + emoji + ':'}
+          %li.emoji-container{'data-clipboard':':' + emoji + ':'}
             %div
               %span.emoji-img
                 %img{src:'https://yuku-t.com/jquery-textcomplete/media/images/emoji/' + emoji + '.png'}

@@ -32,12 +32,17 @@ $(document).ready(function() {
         }
     });
 
+    $('.user-statistics-container').click(function () {
+        $('.delete-filter').addClass('button-enabled');
+    });
+
     $('.given-transactions').click(function () {
         $.ajax({
             type:'GET',
             url: "/transactions.js?filter=send", success: function (result) {
             }
         });
+        $('.active-filter-text').html('Given (Personal)');
     });
 
     $('.received-transactions').click(function () {
@@ -46,6 +51,7 @@ $(document).ready(function() {
             url: "/transactions.js?filter=received", success: function (result) {
             }
         });
+        $('.active-filter-text').html('Received (Personal)')
     });
 
     $('.all-transactions').click(function () {
@@ -54,6 +60,17 @@ $(document).ready(function() {
             url: "/transactions.js?filter=mine", success: function (result) {
             }
         });
+        // $('.active-filter-text').add('All (Personal)');
+        $('.active-filter-text').html('All (Personal)');
     });
 
+    $('.delete-filter').click(function () {
+        $.ajax({
+            type:'GET',
+            url: "/transactions.js?filter=all", success: function (result) {
+            }
+        });
+        $('.active-filter-select').html('None');
+        $('.delete-filter').removeClass('button-enabled');
+    });
 });

@@ -1,6 +1,6 @@
 .create-transaction-container {
   background: $primary-bg;
-  border: 1px solid $primary-border-color;
+  border: 1px solid $base-color-dark-gray;
   border-radius: $border-radius-small;
   margin-bottom: $margin-secondary;
   overflow: hidden;
@@ -17,7 +17,7 @@
   input {
     border: 1px solid $primary-border-color;
     border-radius: $border-radius-small;
-    background: $primary-form-bg;
+    background: $primary-input-bg;
     color: $primary-form-color;
     font-size: $font-size-form;
     padding: $padding-medium * 0.75 $padding-medium * 1.3125;
@@ -27,7 +27,7 @@
   textarea {
     border: 1px solid $primary-border-color;
     border-radius: $border-radius-small;
-    background-color: $primary-form-bg;
+    background-color: $primary-input-bg;
     color: $primary-form-color;
     font-size: $font-size-form;
     flex: 1;

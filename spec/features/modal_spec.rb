@@ -53,7 +53,7 @@ RSpec.feature "Open a modal", type: :feature do
 
     it 'Copies a guideline on click', js: true do
       find(:css, '.guideline-list', match: :first).click
-      within ('.guideline-modal') do
+      within('.guideline-modal') do
         within '.clipboard-guideline' do
           expect(page).to have_content('Copied!')
         end
