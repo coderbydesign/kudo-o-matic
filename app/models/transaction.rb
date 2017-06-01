@@ -1,6 +1,7 @@
 class Transaction < ActiveRecord::Base
-  validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 9999, message: "can't be negative or over 1000" }
-  validates :activity_name_feed, length: {minimum: 4}
+  validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: "is not correct. You can't give negative ₭udo's or exceed over 1000" }
+  validates :activity_name_feed, length: { minimum: 4 }
+
 
   after_commit :send_slack_notification, on: :create, unless: :skip_callbacks
 
