@@ -44,9 +44,14 @@ $(document).ready(function () {
         var divRightTotal = divRightHeight + divOffset;
 
         if ($windowPort < divLeftTotal) {
-            $fixedDivLeft.unstick()
+            $fixedDivLeft.unstick();
+            console.log('first')
+        } else if ($windowPort < 720) {
+            $fixedDivLeft.unstick();
+            console.log('second')
         } else {
             $fixedDivLeft.sticky({getWidthFrom: '.fixed-div-left', topSpacing: 8})
+            console.log('third')
 
         }
 
@@ -57,14 +62,11 @@ $(document).ready(function () {
         }
     }
 
-
-
     if ($(window).width() > 720) {
         stickySideBars();
-
-        if ('classList' in document.documentElement && 'addEventListener' in window)  {
-            window.addEventListener("resize", debounce(stickySideBars, 100));
-            window.addEventListener("resize", throttle(stickySideBars, 100));
-        }
     }
+
+    $(window).resize(function () {
+        stickySideBars();
+    });
 });
