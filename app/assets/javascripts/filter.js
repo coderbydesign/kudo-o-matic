@@ -61,7 +61,7 @@ $(document).ready(function() {
             }
         });
         // $('.active-filter-text').add('All (Personal)');
-        $('.active-filter-text').html('<option>All (Personal)</option>');
+        $('.active-filter-text').html('All (Personal)');
     });
 
     $('.delete-filter').click(function () {
@@ -73,7 +73,4 @@ $(document).ready(function() {
         $('.active-filter-select').html('None');
         $('.delete-filter').removeClass('button-enabled');
     });
-
-    if ($('.active-filter-select'))
-
 });

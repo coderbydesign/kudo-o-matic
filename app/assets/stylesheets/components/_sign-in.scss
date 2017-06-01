@@ -6,13 +6,14 @@
 }
 
 .sign-in-container {
-  background: linear-gradient(rgba($dark-blue-color, 0.95), rgba($dark-blue-color, 0.7));
-  border-radius: $border-radius;
+  background: $primary-bg;
+  border: 1px solid $primary-border-color;
+  border-radius: $border-radius-small;
   display: flex;
   flex-direction: column;
   height: 250px;
   justify-content: center;
-  width: 500px;
+  width: 50%;
   padding: $padding;
   text-align: center;
 
@@ -38,7 +39,7 @@
   }
 
   h1 {
-    font-family: Orbitron;
+    font-family: Danube;
     font-weight: 300;
   }
 }
@@ -47,6 +48,7 @@
   align-items: center;
   justify-content: center;
   padding: $padding;
+  margin-top: -5rem;
 }
 
 .flex-container {
@@ -56,7 +58,7 @@
 }
 
 .btn-google {
-  background: #DD4B39;
+  background: $primary-button-bg;
   width: 220px;
   height: 36px;
   border: none;
@@ -66,4 +68,29 @@
   cursor: pointer;
   padding:  $padding;
   text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .sign-in-container {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .sign-in-container {
+    width: 100%;
+
+    h1 {
+      font-size: $font-size-large;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .sign-in-container {
+
+    h1 {
+      font-size: $font-size-medium;
+    }
+  }
 }
