@@ -56,6 +56,7 @@
   flex: 1;
   min-width: 0; // http://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome
   padding: 0 1rem;
+  //position: fixed;
 }
 
 .container-center {
@@ -67,6 +68,12 @@
   height: 100%;
   flex: 1;
   padding: 0 1rem;
+  position: relative;
+  
+  .fixed-div {
+    //position: fixed;
+    //width: inherit;
+  }
 }
 
 @media screen and (max-width: 1200px) {

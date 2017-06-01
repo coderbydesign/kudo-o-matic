@@ -14,8 +14,13 @@
   }
 
   .message {
+    display: flex;
     flex: 1;
     font-weight: 300;
+
+    ul {
+      flex: 1;
+    }
   }
 }
 

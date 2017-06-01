@@ -11,6 +11,7 @@
   position: absolute; left: 0; top: 6.5625rem;
   padding: $padding-primary;
   padding-right: $padding-secondary;
+  z-index: 1;
 }
 
 .side-message.slide-out {

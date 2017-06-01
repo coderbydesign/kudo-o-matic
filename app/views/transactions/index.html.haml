@@ -5,9 +5,7 @@
 .header-bg
   .header
     .img-container
-      -#= link_to root_url
-      %a{href:root_url}
-        = image_tag('kudo-o-matic-white.png', class:'header-img')
+      = image_tag('kabisa-logo-white.png', class:'header-img')
     .github
       %p
         = "Bugs, issues or suggestions?\n Please report them"
@@ -22,9 +20,10 @@
 .page
   .body
     .container-left
-      = render 'profile-menu'
-      = render 'kudo-counter-dashboard'
-      = render 'statistics'
+      .fixed-div-left
+        = render 'profile-menu'
+        = render 'kudo-counter-dashboard'
+        = render 'statistics'
     .container-center
       = render 'message'
       = render 'transaction'
@@ -32,4 +31,5 @@
       #results
         = render 'timeline'
     .container-right
-      = render 'kudos-counter'
+      .fixed-div-right
+        = render 'kudos-counter'
