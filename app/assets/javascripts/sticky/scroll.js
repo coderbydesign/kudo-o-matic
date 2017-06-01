@@ -57,10 +57,14 @@ $(document).ready(function () {
         }
     }
 
-    stickySideBars();
 
-    if ('classList' in document.documentElement && 'addEventListener' in window) {
-        window.addEventListener("resize", debounce(stickySideBars, 100));
-        window.addEventListener("resize", throttle(stickySideBars, 100));
+
+    if ($(window).width() > 720) {
+        stickySideBars();
+
+        if ('classList' in document.documentElement && 'addEventListener' in window)  {
+            window.addEventListener("resize", debounce(stickySideBars, 100));
+            window.addEventListener("resize", throttle(stickySideBars, 100));
+        }
     }
 });

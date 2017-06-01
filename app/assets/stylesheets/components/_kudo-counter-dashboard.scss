@@ -12,20 +12,9 @@
 
 .kudo-balance-statistics-container {
   display: flex;
-  //padding-left: $padding-small;
-  //padding-bottom: $padding-small;
-  //padding-top: $padding-small;
 
   .kudo-balance-statistics {
     flex: 1;
-  }
-
-  .statistics-title {
-    font-size: $font-size-regular;
-  }
-
-  .statistics-value {
-    font-size: $font-size-regular;
   }
 }
 
