@@ -24,6 +24,7 @@ $(document).ready(function () {
     });
 
     $('.welcome-modal-background').click(function () {
+        $('.welcome-modal').removeClass('show-modal');
         $('.welcome-modal-background').removeClass('visible-as-modal');
     })
 });
