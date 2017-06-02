@@ -1,0 +1,59 @@
+.kudo-counter-background
+.kudo-counter
+  .kudo-counter__title
+    ₭udometer
+    .fa.fa-times.close-button
+  .kudo-counter__date
+    = Date.today.strftime('%B %d, %Y')
+  .kudo-counter__upcoming
+    Next Goal
+
+  .chart.chart--kudo.js-chart{'data-goal':Goal.next.amount, 'data-count':Balance.current.amount}
+    .chart__container
+
+      %svg.chart__background{x:'0px', y:'0px', height:'220px', viewBox:'0 0 220 220'}
+        %g
+          %path{d:'M110,210c-55.1,0-100-44.9-100-100C10,54.9,54.9,10,110,10s100,44.9,100,100C210,165.1,165.1,210,110,210z'}
+      %svg.chart__foreground{x:'0px', y:'0px', height:'220px', viewBox:'0 0 220 220'}
+        %g
+          %path{d:'M110,210c-55.1,0-100-44.9-100-100C10,54.9,54.9,10,110,10s100,44.9,100,100C210,165.1,165.1,210,110,210z'}
+
+      .chart__count
+        -#%span
+          Next goal
+        %div
+          %span.current-amount.js-count{'data-count':Balance.current.amount}
+            = Balance.current.amount
+          %span.kudo-currency
+            ₭
+        %span.next-goal-amount
+          %span
+            of
+          %span.goal-amount.js-count{'data-count':Goal.next.amount}
+            = Goal.next.amount
+          %span.kudo-currency
+            ₭
+          %span
+            for
+        %span.next-goal-name
+          %span
+            = Goal.next.name
+
+  = render 'goals'
+
+  -#- @iterate_goals.each do |goal|
+  -#  .chart.chart--second-goal.js-chart{'data-goal':goal.amount, 'data-count':Balance.current.amount}
+  -#    .chart__container
+  -#
+  -#      %svg.chart__background{x:'0px', y:'0px', height:'220px', viewBox:'0 0 220 220'}
+  -#        %g
+  -#          %path{d:'M110,210c-55.1,0-100-44.9-100-100C10,54.9,54.9,10,110,10s100,44.9,100,100C210,165.1,165.1,210,110,210z'}
+  -#      %svg.chart__foreground{x:'0px', y:'0px', height:'220px', viewBox:'0 0 220 220'}
+  -#        %g
+  -#          %path{d:'M110,210c-55.1,0-100-44.9-100-100C10,54.9,54.9,10,110,10s100,44.9,100,100C210,165.1,165.1,210,110,210z'}
+  -#
+  -#    .chart__count.chart__count--second-goal
+  -#      %div
+  -#        %span.js-count{'data-count': goal.amount}
+  -#          = goal.amount
+  -#      = goal.name

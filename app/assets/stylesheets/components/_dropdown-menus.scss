@@ -1,0 +1,212 @@
+///////////////////////////////////////////////////////////
+//
+// Base dropdown
+//
+///////////////////////////////////////////////////////////
+
+.dropdown {
+  margin-bottom: $margin-secondary;
+  border: 1px solid $primary-border-color;
+  border-radius: $border-radius-small;
+  background: $primary-bg;
+  color: $text-primary;
+  font-weight: 300;
+
+  a {
+    display: flex;
+    padding: 0 $padding-secondary;
+    cursor: pointer;
+  }
+}
+
+.drop-menu {
+  display: flex;
+  justify-content: center;
+
+  .menu-tooltip {
+    width: 0;
+    height: 0;
+    border: 0.5rem solid;
+    border-color: transparent transparent $base-color-light-blue transparent;
+    position: absolute;
+    top: -1rem; left: 4.5rem;
+    display: none;
+  }
+}
+
+.menu-tooltip.show-tooltip {
+  display: block;
+}
+
+.dropdown-container {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-height: $dropdown-button-size;
+  align-items: center;
+}
+
+.dropdown-content {
+  transition: all 300ms ease;
+  background: $base-color-light-blue;
+  color: $text-white;
+  position: absolute;
+  margin-top: 3rem;
+  display: none;
+}
+
+.dropdown-content.slide-menu {
+  display: block;
+}
+
+.menu-content {
+  align-items: center;
+  font-weight: 300;
+  min-height: $dropdown-button-size - 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+
+  .flex-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 0.5rem;
+    line-height: 1.2;
+  }
+}
+
+.dropdown-content.slide-menu .menu-content:hover {
+  background: $secondary-bg;
+  color: $text-primary;
+}
+
+
+///////////////////////////////////////////////////////////
+//
+// General dropdown
+//
+///////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////
+//
+// Profile dropdown
+//
+///////////////////////////////////////////////////////////
+
+.profile-picture {
+  $avatar-size: 5rem;
+  
+  align-items: flex-end;
+  background-color: $base-color-light-blue;
+  //background-image: url('profile/blurred_32.jpg');
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid $primary-border-color;
+  display: flex;
+  height: 8rem;
+  justify-content: center;
+  margin-bottom: $avatar-size / 2;
+
+  .profile-img {
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    border: 3px solid $base-color-white;
+    height: $avatar-size;
+    transform: translateY(50%);
+    width: $avatar-size;
+  }
+}
+
+.current-user {
+  font-size: $font-size-medium;
+  justify-content: center;
+
+  .fa {
+    font-size: $font-size-regular;
+    padding-left: $padding-small * 0.5;
+  }
+
+  .username {
+    line-height: 1.25;
+    overflow: hidden;
+    padding-left: $padding;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.user-statistics-container {
+  display: flex;
+  padding: 1.25rem;
+
+  .userstatistics {
+    text-align: center;
+    flex: 1 0 auto;
+    //cursor: pointer;
+  }
+
+  .userstatistics:not(:last-child) {
+    border-right: 1px solid $primary-border-color
+  }
+
+  .statistics-value {
+    display: block;
+    font-weight: 700;
+    margin-top: $margin-secondary / 2;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .profile-picture-mobile {
+    display: none;
+  }
+
+  .dropdown {
+    display: block;
+  }
+
+}
+
+@media screen and (max-width: 720px) {
+
+  .dropdown-container {
+    min-height: fit-content;
+  }
+  .profile-picture-mobile {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: $margin-secondary;
+    background: white;
+    padding: $padding-secondary $padding-primary;
+
+
+    .profile-img {
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      border: 3px solid $base-color-white;
+      height: 4rem;
+      width: 4rem;
+    }
+  }
+
+  .dropdown-content.slide-menu {
+    display: flex;
+    flex-direction: column;
+    padding: $padding-secondary;
+  }
+
+  .menu-content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .dropdown {
+    display: none;
+  }
+}

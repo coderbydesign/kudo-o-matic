@@ -1,0 +1,16 @@
+.like-modal
+  .modal-dialog
+    .modal-header
+      %h2
+        Liked by
+      .modal-subheader
+    .modal-body
+      %ul
+        %li.user-liked-list
+          %span.user-name-liked
+
+          %span
+            -#= image_tag user.picture_url, class:'user-avatar-liked'
+    .modal-footer
+      %button.btn.btn-primary.btn-close.close-likes
+        Close

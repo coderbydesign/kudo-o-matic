@@ -1,0 +1,11 @@
+- if @transaction.errors.any?
+  .message-container.show-message
+    .error-message
+      %span.message
+        .fa.fa-exclamation-circle
+        %ul
+          - @transaction.errors.full_messages.each do |msg|
+            %li
+              = msg.capitalize
+      %span
+        .fa.fa-times.close-message

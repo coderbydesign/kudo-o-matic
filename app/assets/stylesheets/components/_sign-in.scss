@@ -1,0 +1,96 @@
+.sign-in-page {
+  display: flex;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.sign-in-container {
+  background: $primary-bg;
+  border: 1px solid $primary-border-color;
+  border-radius: $border-radius-small;
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  justify-content: center;
+  width: 50%;
+  padding: $padding;
+  text-align: center;
+
+  .sign-in-header {
+    flex: 1;
+  }
+
+  .sign-in-body {
+    flex: 2;
+
+  }
+
+  .sign-in-footer {
+    align-items: flex-end;
+    display: flex;
+    flex: 1;
+    font-size: $font-size-small;
+    justify-content: center;
+  }
+
+  img {
+    width: 50px;
+  }
+
+  h1 {
+    font-family: Danube;
+    font-weight: 300;
+  }
+}
+
+.flex-page {
+  align-items: center;
+  justify-content: center;
+  padding: $padding;
+  margin-top: -5rem;
+}
+
+.flex-container {
+  align-items: center;
+  justify-content: center;
+  padding: $padding;
+}
+
+.btn-google {
+  background: $primary-button-bg;
+  width: 220px;
+  height: 36px;
+  border: none;
+  border-radius: $border-radius-small * 0.5;
+  color: #FFF;
+  font-weight: 500;
+  cursor: pointer;
+  padding:  $padding;
+  text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .sign-in-container {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .sign-in-container {
+    width: 100%;
+
+    h1 {
+      font-size: $font-size-large;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .sign-in-container {
+
+    h1 {
+      font-size: $font-size-medium;
+    }
+  }
+}

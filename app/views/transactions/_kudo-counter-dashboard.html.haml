@@ -1,0 +1,24 @@
+.kudo-counter-dashboard-container
+  .kudo-balance-statistics-container
+    .statistics-main-title
+      %span
+        Dashboard
+    .kudo-balance-statistics
+      %span.statistics-title
+        Current
+      %span.statistics-value
+        = "#{Balance.current.amount} ₭"
+    .kudo-balance-statistics
+      %span.statistics-title
+        = Goal.next.name
+      %span.statistics-value.js-count{'data-count': Goal.next.amount}
+        = Goal.next.amount
+        %span.currency
+          ₭
+    .kudo-balance-statistics.see-more
+      -#%span.statistics-title
+
+      %span.statistics-text
+        %span.see-more-text
+          See More
+        %span.fa.fa-chevron-right

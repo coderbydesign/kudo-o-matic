@@ -1,0 +1,42 @@
+.side-message {
+  align-items: center;
+  animation: slideIn 1.5s forwards;
+  background: $side-message-bg;
+  border: 1px solid $side-message-border-color;
+  color: $text-primary;
+  display: flex;
+  font-weight: 300;
+  height: 3rem;
+  justify-content: center;
+  position: absolute; left: 0; top: 6.5625rem;
+  padding: $padding-primary;
+  padding-right: $padding-secondary;
+  z-index: 1;
+}
+
+.side-message.slide-out {
+  animation: slideOut 1.5s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    left: -4.875rem;
+  }
+  to {
+    left: 0;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    left: 0;
+  }
+  to {
+    left: -4.875rem;
+  }
+
+}
+
+.what-new {
+  flex: 1;
+}

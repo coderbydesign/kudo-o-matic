@@ -28,20 +28,12 @@ Rails.application.routes.draw do
 
   end
 
-  # resources :users
-  # # , only: [] do
-  # #   get :autocomplete_user_name, on: :collection
-  # # end
-
   get :users, to: 'users#autocomplete_search', as: :users_autocomplete
-
-  # resources :activities, only: [] do
-  #   get :autocomplete_activity_name, on: :collection
-  # end
 
   get :activities, to: 'activities#autocomplete_search', as: :activities_autocomplete
 
   post 'like/:id', to: "transactions#upvote", as: :like
+  post 'unlike/:id', to: "transactions#downvote", as: :unlike
 
   resources :goals do
     get :pollvote
@@ -49,15 +41,16 @@ Rails.application.routes.draw do
   end
 
 
-#  get '/minigames/kudosclicker#kudosclicker' => 'minigames/kudosclicker#kudosclicker'
 
- # get "/path/to/your/mission/page", to: "static_pages#mission", as: "kudosclicker"
+  get '/transactions/:type' => 'transactions#filter'
+
+  get '/transactions', to: 'transactions#index'
 
   get "minigames" => "minigames#index"
   get "minigames/kudosclicker" => "kudosclicker#index"
   get "/feed", to: "feed#index"
 
-  root 'dashboard#index'
+  root 'transactions#index'
 end
 
 

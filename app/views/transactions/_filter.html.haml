@@ -1,0 +1,33 @@
+.filter-container
+  -#%select
+    %option
+      None
+    %option
+      All
+    %option
+      Send
+    %option
+      Received
+    .fa.fa-chevron-circle-right
+  %span
+    Timeline
+  -#.active-filter
+  -#  %span.active-filter-text
+  -#    None
+  -#%button.btn.btn-primary.delete-filter{type:'button'}
+  -#  Delete filter
+
+
+
+  -#.btn-filter.filter-option.send{type:'button'}
+    %span.flex-span
+      %span.flex-item
+        Send Transactions
+      -#%span
+        %i.fa.fa-square-o
+  -#%button.btn.btn-secondary.btn-filter.filter-option.received{type:'button'}
+    %span.flex-span
+      %span.flex-item
+        Received Transactions
+      %span
+        %i.fa.fa-square-o

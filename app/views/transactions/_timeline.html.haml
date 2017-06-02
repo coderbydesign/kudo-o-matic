@@ -1,0 +1,67 @@
+.timeline-container
+  - if @transactions.empty?
+    .transaction-container
+      .transaction-body-container
+        .transaction-content.empty-timeline
+          .empty-timeline-message
+            There are no transactions to show here yet &#9785;
+  - @transactions.each do |transaction|
+    .transaction-container{'data-likes': transaction.votes_for.by_type(User).voters.collect { |user| user}}
+      .transaction-header-container
+        .transaction-kudos-container
+          %span
+            = "#{transaction.amount} ₭"
+        .avatar
+          .transaction-avatar-container
+            = image_tag User.find(transaction.sender_id).picture_url, class:'sender'
+            = image_tag transaction.receiver_image, class:'receiver'
+        %span.post-time-stamp{id:transaction.id}
+          = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
+      .transaction-body-container
+        .transaction-content
+          %span.highlighted.sendername
+            = "#{transaction.sender.name}:"
+          %span.highlighted
+            = "+#{transaction.amount} ₭"
+          %span
+            to
+          %span.highlighted.receivername
+            = transaction.receiver_name_feed
+          %span
+            for
+          %span.activityname
+            - activity = transaction.activity_name_feed
+            - escapedActivity = html_escape(activity)
+            -#- escapedActivity = escapedActivity.scan(/<p>([^<>]*)<\/p>/imu).flatten.to_sentence
+            != @markdown.render(escapedActivity)
+      .transaction-footer-container
+        -#%button#like-button
+        -#  Like
+        - if current_user.voted_for? transaction
+          %button.btn.btn-primary.btn-like
+            .fa.fa-thumbs-up
+            Liked!
+        - else
+          .btn.btn-secondary.btn-like
+            = link_to like_path(transaction, anchor: "#{transaction.id}"), method: :post do
+              .fa.fa-thumbs-up
+              Like
+        %span.number-of-likes
+          - if transaction.get_upvotes.size != 0
+            Liked by
+          = transaction.votes_for.by_type(User).voters.first(1).collect { |user| user }.to_sentence
+          - if transaction.get_upvotes.size > 1 # more than 1 like
+            = "and #{transaction.get_upvotes.size - 1} others"
+          - elsif transaction.get_upvotes.size == 0 # 0 likes
+            = '0 Likes'
+          .like-tooltip
+            .like-tooltip-arrow
+            - transaction.votes_for.by_type(User).voters.first(5).each do |user|
+              = simple_format("#{user}\n")
+            - if transaction.get_upvotes.size > 5 # more than 4 likes
+              = "and #{transaction.get_upvotes.size - 5} others"
+            - elsif transaction.get_upvotes.size == 0 # 0 likes
+              = 'No likes yet, be the first one!'
+
+
+  = paginate @transactions

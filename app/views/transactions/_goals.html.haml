@@ -1,0 +1,58 @@
+.goal-container
+  %ul.progress-tracker.progress-tracker--left.progress-tracker--vertical
+    - @current_goals.each do |goal|
+
+      - if goal.achieved_on != nil
+        %li.progress-step.is-complete
+          .progress-bar-complete
+          %span.progress-marker
+            %i.fa.fa-unlock
+          %span.progress-text
+            .progress-title
+              %h3
+                = "#{goal.amount} ₭"
+              %p.goal-name
+                = goal.name
+              %span.left-text
+                = goal.achieved_on
+
+      - elsif Goal.next == goal
+        %li.progress-step.is-active
+          .progress-bar
+            .progress-bar-inner{style: "height: #{@balance_percentage}"}
+              %span.percentage
+                = @balance_percentage
+          %span.progress-marker{style:"box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);"}
+            %i.fa.fa-lock
+          %span.progress-text
+            .progress-title
+              %h3
+                = "#{goal.amount} ₭"
+              %p.goal-name
+                = goal.name
+              %span.left-text
+                = goal.amount - Balance.current.amount
+              %span.left-text
+                ₭ left
+      - else
+        %li.progress-step
+          .progress-bar
+          %span.progress-marker
+            %i.fa.fa-lock
+          %span.progress-text
+            .progress-title
+              %h3
+                = "#{goal.amount} ₭"
+              %p.goal-name
+                = goal.name
+              %span.left-text
+                = goal.amount - Balance.current.amount
+              %span.left-text
+                ₭ left
+    %li.progress-step.is-complete
+      .progress-bar-complete
+      %span.progress-marker
+        %i.fa.fa-dot-circle-o
+      %span.progress-text
+        %h3.progress-title.highlighted
+          = "Balance #{Balance.current.name}"
