@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('.whatsnew').click(function () {
         $('.whatsnew-modal').addClass('show-modal');
-        $('.whatsnew-modal-background').addClass('visible-as-modal')
+        $('.whatsnew-modal-background').addClass('visible-as-modal');
         return false
     });
 
