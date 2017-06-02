@@ -2,16 +2,12 @@
   align-items: center;
   background: $primary-bg;
   border: 1px solid $primary-border-color;
-  padding: $padding-primary;
+  padding: $padding-secondary $padding-primary;
   display: flex;
+  font-size: $font-size-small;
 
   width: 100%;
 
-}
-
-.timeline-title {
-  font-weight: 300;
-  padding: 0 $padding-small;
 }
 
 .filter-option {
@@ -23,13 +19,29 @@
   margin-left: $margin-secondary;
 }
 
-.send {
+.active-filter {
+  margin-left: $margin-primary / 2;
+  display: flex;
+  width: 100%;
   flex: 1;
+
+  &-text {
+    background: $secondary-bg;
+    border-radius: $border-radius-small;
+    padding: 0.375rem;
+  }
 }
 
-.received {
-  flex: 1;
+.delete-filter {
+  opacity: 0.6;
+  cursor: default;
 }
+
+.delete-filter.button-enabled {
+  opacity: 1;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 535px) {
 
 }

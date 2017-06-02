@@ -45,15 +45,13 @@ RSpec.feature "Open a modal", type: :feature do
     it 'Opens the modal and displays the guidelines' do
       expect(page).to have_css('.guideline-modal', visible: true)
       within '.guideline-modal' do
-        within '.modal-body' do
-          expect(page).to have_selector('.guideline-list', count: @guidelines)
-        end
+        expect(page).to have_selector('.guideline-list', count: @guidelines)
       end
     end
 
     it 'Copies a guideline on click', js: true do
       find(:css, '.guideline-list', match: :first).click
-      within ('.guideline-modal') do
+      within('.guideline-modal') do
         within '.clipboard-guideline' do
           expect(page).to have_content('Copied!')
         end
@@ -65,15 +63,13 @@ RSpec.feature "Open a modal", type: :feature do
   context 'Given the emoji modal' do
     before do
       @emoji = Transaction::EMOJIES.count
-      find('.fa.fa-smile-o').click
+      find('.create-transaction-container .fa.fa-smile-o').click
     end
 
     it 'Opens the modal and displays the emojies' do
       expect(page).to have_css('.emoji-modal', visible: true)
       within '.emoji-modal' do
-        within '.modal-body' do
-          expect(page).to have_selector('.emoji-container', count: @emoji)
-        end
+        expect(page).to have_selector('.emoji-container', count: @emoji)
       end
     end
 

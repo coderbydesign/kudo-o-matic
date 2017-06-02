@@ -44,4 +44,9 @@ $(document).ready(function () {
         $('.container-right').removeClass('visible-as-modal');
     });
 
+    $(document).keyup(function(e) {
+        if (e.keyCode === 27) { // esc
+            $('.container-right').removeClass('visible-as-modal');
+        }
+    });
 });

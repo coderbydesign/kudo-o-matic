@@ -2,6 +2,7 @@ $(document).ready(function () {
     // Open emoji modal
     $('.fa-smile-o').click(function () {
         $('.emoji-modal').addClass('show-modal');
+        $('.emoji-modal-background').addClass('visible-as-modal');
         return false
     });
 
@@ -9,21 +10,41 @@ $(document).ready(function () {
     $('.close-emoji').click(function () {
         $('.emoji-modal').removeClass('show-modal');
         $('.clipboard-emoji').removeClass('show-clipboard');
+        $('.emoji-modal-background').removeClass('visible-as-modal');
+        $('.character-count').focus();
     });
 
     $(document).keyup(function(e) {
         if (e.keyCode === 27) { // esc
             $('.emoji-modal').removeClass('show-modal');
             $('.clipboard-emoji').removeClass('show-clipboard');
+            $('.emoji-modal-background').removeClass('visible-as-modal');
+            $('.character-count').focus();
         }
     });
 
-    // Clipboard
-    var smiley = document.getElementsByClassName('emoji-container');
-    var clipboard = new Clipboard(smiley);
+    $('.emoji-modal-background').click(function () {
+        $('.emoji-modal').removeClass('show-modal');
+        $('.emoji-modal-background').removeClass('visible-as-modal')
+    });
 
-    clipboard.on('success', function(e) {
-        $('.clipboard-emoji').html("Copied: '" + e.text +"'");
+    $('.emoji-container').click(function () {
+        var target = $(this).closest('.emoji-container');
+        var emojiName = target.data('clipboard');
+
+        var activityLength = $('.textarea-field').val().length;
+        var emojiLength = (emojiName).length;
+        var totalLength = activityLength + emojiLength;
+
+        var $clipboardEmoji = $('.clipboard-emoji');
+        var $textareaField = $('.textarea-field');
+
+        if (totalLength < 90) {
+            $clipboardEmoji.html("Added: '" + emojiName + "'");
+            $textareaField.val($('.textarea-field').val() + emojiName + ' ');
+        } else {
+            $clipboardEmoji.html("Max. characters reached, can't copy");
+        }
     });
 
     $('.emoji-container').click(function () {

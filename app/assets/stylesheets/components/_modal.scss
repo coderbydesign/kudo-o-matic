@@ -6,8 +6,9 @@ $gray: #333;
 $gray-lighter: #eee;
 $space: 40px;
 
-.guideline-modal.show-modal, .welcome-modal.show-modal, .emoji-modal.show-modal, .like-modal.show-modal {
+.guideline-modal.show-modal, .welcome-modal.show-modal, .emoji-modal.show-modal, .help-modal.show-modal, .whatsnew-modal.show-modal {
   display: flex;
+  flex-direction: column;
   @include animation(fadeIn, .25s);
 }
 
@@ -35,31 +36,18 @@ $space: 40px;
   }
 }
 
-.guideline-modal,
-.welcome-modal,
-.emoji-modal,
-.like-modal {
+.modal {
 
   // This is modal bg
   align-items: center;
-  background: rgba(0,0,0, 0.6);
+  //background: rgba(0,0,0, 0.6);
   display: none;
   justify-content: center;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: 10;
 
-  .clipboard-guideline,
-  .clipboard-emoji {
-    color: red;
-    display: none;
-  }
 
-  .clipboard-guideline.show-clipboard,
-  .clipboard-emoji.show-clipboard {
-    display: block;
-    animation: fadeInOut 3s forwards;
-  }
 }
 
 .emoji-modal {
@@ -71,7 +59,7 @@ $space: 40px;
 // Modal Dialog
 // ----------------------
 
-.modal-dialog{
+.modal-dialog {
   background: #fefefe;
   border: $gray solid 1px;
   border-radius: 5px;
@@ -121,9 +109,17 @@ $space: 40px;
   }
 }
 
+.clipboard-guideline,
+.clipboard-emoji {
+  color: red;
+  display: none;
+}
 
-
-
+.clipboard-guideline.show-clipboard,
+.clipboard-emoji.show-clipboard {
+  display: block;
+  animation: fadeInOut 3s forwards;
+}
 
 .welcome-modal ul li {
   display: list-item;
@@ -131,8 +127,79 @@ $space: 40px;
   margin-left: $margin-primary;
 }
 
+.modal-header,
+.modal-footer{
+  padding: $space/2.5 $space/2;
+}
+
+.modal-header{
+  border-bottom: $gray-lighter solid 1px;
+
+  h2 {
+    font-size: 20px;
+  }
+}
+
+.modal-footer{
+  border-top: $gray-lighter solid 1px;
+  text-align: right;
+}
+
+////// Guideline modal
+.guideline-modal {
+  margin: 0 auto;
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 10%;
+  bottom: 12.5%;
+  width: 50%;
+}
+
 .guideline-list {
   cursor: pointer;
+}
+
+.guideline-container {
+  padding: 0.5rem 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.125);
+  background: none;
+
+  p {
+    font-weight: 300;
+    padding: 0.25rem 0;
+  }
+}
+
+.guideline-modal-background {
+  background: rgba($black-color, 0.6);
+  display: none;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: 3;
+}
+
+.guideline-modal-background.visible-as-modal {
+  display: block;
+  animation: kudocounter 0.25s ease-out;
+}
+
+////// Emoji Modal
+.emoji-modal {
+  margin: 0 auto;
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 10%;
+  bottom: 11%;
+  width: 50%;
+
+  p {
+    font-weight: 300;
+    padding: 0.25rem 0;
+  }
 }
 
 .emoji-list {
@@ -167,22 +234,112 @@ $space: 40px;
   }
 }
 
-.modal-header,
-.modal-footer{
-  padding: $space/2.5 $space/2;
+.emoji-modal-background {
+  background: rgba($black-color, 0.6);
+  display: none;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: 3;
 }
 
-.modal-header{
-  border-bottom: $gray-lighter solid 1px;
+.emoji-modal-background.visible-as-modal {
+  display: block;
+  animation: kudocounter 0.25s ease-out;
+}
 
-  h2 {
-    font-size: 20px;
+////// Help modal
+.help-modal {
+  margin: 0 auto;
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 10%;
+  bottom: 15%;
+  width: 50%;
+
+  .modal-body {
+    padding: 0 0 1.125rem;
   }
 }
 
-.modal-footer{
-  border-top: $gray-lighter solid 1px;
-  text-align: right;
+.help-container {
+  padding: 0.5rem 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.125);
+  background: none;
+
+  p {
+    font-weight: 300;
+    padding: 0.25rem 0;
+  }
+}
+
+.help-modal-background {
+  background: rgba($black-color, 0.6);
+  display: none;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: 3;
+}
+
+.help-modal-background.visible-as-modal {
+  display: block;
+  animation: kudocounter 0.25s ease-out;
+}
+
+////// Whats new modal
+.whatsnew-modal {
+  margin: 0 auto;
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 10%;
+  bottom: 15%;
+  width: 50%;
+
+  .modal-body {
+    padding: 0 0 1.125rem;
+  }
+}
+
+.update-container {
+  padding: 0.5rem 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.125);
+  background: none;
+  ul {
+    margin-top: $margin-secondary;
+    padding: 0 0 0 $padding-primary;
+
+    li {
+      display: list-item;
+      font-weight: 300;
+      list-style-type: disc;
+      padding: 0;
+
+    }
+  }
+}
+
+.whatsnew-modal-background {
+  background: rgba($black-color, 0.6);
+  display: none;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: 3;
+}
+
+.whatsnew-modal-background.visible-as-modal {
+  display: block;
+  animation: kudocounter 0.25s ease-out;
+}
+
+ul.not-visible {
+  display: none;
+}
+
+ul.not-visible.is-visible {
+  display: block;
 }
 
 @media screen and (max-width: 1200px) {

@@ -44,9 +44,16 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 
   &__date {
     font-size: 1.375rem;
-    margin-bottom: 3.57142857rem; // 50px / 16px
-    color: $text-gray
+    color: $text-gray;
+    margin-bottom: 2.5rem; // 40px / 16px
   }// .kudo-counter__title
+
+  &__upcoming {
+    //font-size: 1
+    font-weight: 700;
+    margin-bottom: $margin-primary;
+
+  }
 }// .kudo-counter
 
 .chart {
@@ -129,12 +136,21 @@ $font-primary: 'proxima-nova-soft', sans-serif;
       overflow: hidden;
 
       span {
-        width: 175px;
+        width: 10.25rem; // 164px / 16px
         white-space: nowrap;
         text-overflow: ellipsis;
         display: block;
         overflow: hidden;
       }
+
+    }
+
+    .next-goal-amount {
+      width: 11rem; // 176px / 16px
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      display: block;
+      overflow: hidden;
     }
 
   }// .chart__container
@@ -217,7 +233,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     //background: linear-gradient(rgba($dark-blue-color, 1.0), rgba($dark-blue-color, 0.9));
     display: none;
     position: fixed;
-    top: $whitespace * 2; left: 0; right: 0; bottom: $whitespace * 2;
+    left: 0; right: 0; top: 10%; bottom: 10%;
     width: 50%;
     overflow: auto;
 

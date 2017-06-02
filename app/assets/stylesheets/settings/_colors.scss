@@ -58,6 +58,7 @@ $text-white:                              $base-color-white;
 // Form
 $primary-form-bg:                         $primary-bg;
 $primary-form-color:                      $base-color-medium-gray;
+$primary-input-bg:                        $secondary-bg;
 
 // Border
 $primary-border-color:                    rgba($base-color-black, 0.125);
@@ -77,10 +78,12 @@ $primary-stroke-color:                    $secondary-bg;
 $secondary-stroke-color:                  $base-color-light-blue;
 
 // Flash message
-$flash-notice-bg:                         $base-color-light-yellow;
-$flash-notice-border-color:               $base-color-yellow;
 $flash-error-bg:                          $base-color-light-red;
 $flash-error-border-color:                #d8827f;
+
+// Side message
+$side-message-bg:                         $base-color-light-yellow;
+$side-message-border-color:               $base-color-yellow;
 
 ///////////////////////////////////////////////////////////
 //

@@ -2,6 +2,7 @@ $(document).ready(function () {
     // Open guideline modal
     $('.btn-guideline-info').click(function () {
         $('.guideline-modal').addClass('show-modal');
+        $('.guideline-modal-background').addClass('visible-as-modal');
         return false
     });
 
@@ -9,13 +10,20 @@ $(document).ready(function () {
     $('.close-guidelines').click(function () {
         $('.guideline-modal').removeClass('show-modal');
         $('.clipboard-guideline').removeClass('show-clipboard');
+        $('.guideline-modal-background').removeClass('visible-as-modal');
     });
 
     $(document).keyup(function(e) {
         if (e.keyCode === 27) { // esc
             $('.guideline-modal').removeClass('show-modal');
             $('.clipboard-guideline').removeClass('show-clipboard');
+            $('.guideline-modal-background').removeClass('visible-as-modal');
         }
+    });
+
+    $('.guideline-modal-background').click(function () {
+        $('.guideline-modal').removeClass('show-modal');
+        $('.guideline-modal-background').removeClass('visible-as-modal')
     });
 
     // Clipboard

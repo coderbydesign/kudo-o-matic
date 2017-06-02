@@ -10,14 +10,12 @@
       .transaction-header-container
         .transaction-kudos-container
           %span
-            = "+#{transaction.amount}"
-            %span.currency
-              ₭
+            = "#{transaction.amount} ₭"
         .avatar
           .transaction-avatar-container
             = image_tag User.find(transaction.sender_id).picture_url, class:'sender'
             = image_tag transaction.receiver_image, class:'receiver'
-        %span.post-time-stamp
+        %span.post-time-stamp{id:transaction.id}
           = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
       .transaction-body-container
         .transaction-content
@@ -45,7 +43,7 @@
             Liked!
         - else
           .btn.btn-secondary.btn-like
-            = link_to like_path(transaction), method: :post do
+            = link_to like_path(transaction, anchor: "#{transaction.id}"), method: :post do
               .fa.fa-thumbs-up
               Like
         %span.number-of-likes

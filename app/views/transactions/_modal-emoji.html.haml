@@ -1,0 +1,23 @@
+.emoji-modal-background
+.modal-dialog.emoji-modal
+  .modal-header
+    %h2
+      Emoji List
+    .modal-subheader
+      %p
+        Click to add emoji to input field
+      %span.clipboard-emoji
+  .modal-body
+    %ul.emoji-list
+      - Transaction::EMOJIES.each do |emoji|
+        %li.emoji-container{'data-clipboard':':' + emoji + ':'}
+          %div
+            %span.emoji-img
+              %img{src:'https://yuku-t.com/jquery-textcomplete/media/images/emoji/' + emoji + '.png'}
+            %span.emoji-name
+              = ':' + emoji + ':'
+
+
+  .modal-footer
+    %button.btn.btn-primary.btn-close.close-emoji
+      Close

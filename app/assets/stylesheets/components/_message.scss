@@ -14,8 +14,13 @@
   }
 
   .message {
+    display: flex;
     flex: 1;
     font-weight: 300;
+
+    ul {
+      flex: 1;
+    }
   }
 }
 
@@ -23,7 +28,6 @@
   @include animation(show-message, 1s);
 }
 
-.notice-message,
 .error-message {
   padding: $padding-primary / 2 $padding-secondary * 2.5;
   border-radius: $border-radius-small;
@@ -35,11 +39,6 @@
   .hide-message & {
     display: none;
   }
-}
-
-.notice-message {
-  background: $flash-notice-bg;
-  border: 1px solid $flash-notice-border-color;
 }
 
 .error-message {

@@ -1,5 +1,5 @@
 .filter-container
-  %select
+  -#%select
     %option
       None
     %option
@@ -9,6 +9,15 @@
     %option
       Received
     .fa.fa-chevron-circle-right
+  %span
+    Timeline
+  -#.active-filter
+  -#  %span.active-filter-text
+  -#    None
+  -#%button.btn.btn-primary.delete-filter{type:'button'}
+  -#  Delete filter
+
+
 
   -#.btn-filter.filter-option.send{type:'button'}
     %span.flex-span
