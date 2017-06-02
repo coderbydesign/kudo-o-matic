@@ -6,8 +6,9 @@ $gray: #333;
 $gray-lighter: #eee;
 $space: 40px;
 
-.guideline-modal.show-modal, .welcome-modal.show-modal, .emoji-modal.show-modal{
+.guideline-modal.show-modal, .welcome-modal.show-modal, .emoji-modal.show-modal, .help-modal.show-modal, .whatsnew-modal.show-modal {
   display: flex;
+  flex-direction: column;
   @include animation(fadeIn, .25s);
 }
 
@@ -154,7 +155,6 @@ $space: 40px;
   top: 10%;
   bottom: 12.5%;
   width: 50%;
-  overflow: auto;
 }
 
 .guideline-list {
@@ -185,10 +185,6 @@ $space: 40px;
   animation: kudocounter 0.25s ease-out;
 }
 
-.guideline-modal.show-modal {
-  display: block;
-}
-
 ////// Emoji Modal
 .emoji-modal {
   margin: 0 auto;
@@ -199,7 +195,6 @@ $space: 40px;
   top: 10%;
   bottom: 11%;
   width: 50%;
-  overflow: auto;
 
   p {
     font-weight: 300;
@@ -252,11 +247,6 @@ $space: 40px;
   animation: kudocounter 0.25s ease-out;
 }
 
-.emoji-modal.show-modal {
-  display: block;
-}
-
-
 ////// Help modal
 .help-modal {
   margin: 0 auto;
@@ -267,7 +257,6 @@ $space: 40px;
   top: 10%;
   bottom: 15%;
   width: 50%;
-  overflow: auto;
 
   .modal-body {
     padding: 0 0 1.125rem;
@@ -298,10 +287,6 @@ $space: 40px;
   animation: kudocounter 0.25s ease-out;
 }
 
-.help-modal.show-modal {
-  display: block;
-}
-
 ////// Whats new modal
 .whatsnew-modal {
   margin: 0 auto;
@@ -312,7 +297,6 @@ $space: 40px;
   top: 10%;
   bottom: 15%;
   width: 50%;
-  overflow: auto;
 
   .modal-body {
     padding: 0 0 1.125rem;
@@ -348,10 +332,6 @@ $space: 40px;
 .whatsnew-modal-background.visible-as-modal {
   display: block;
   animation: kudocounter 0.25s ease-out;
-}
-
-.whatsnew-modal.show-modal {
-  display: block;
 }
 
 ul.not-visible {
