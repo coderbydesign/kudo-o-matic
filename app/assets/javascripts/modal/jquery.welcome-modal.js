@@ -13,17 +13,18 @@ $(document).ready(function () {
     // Close welcome modal
     $('.close-welcome').click(function () {
         $('.welcome-modal').removeClass('show-modal');
-        ('.welcome-modal-background').removeClass('visible-as-modal');
+        $('.welcome-modal-background').removeClass('visible-as-modal');
     });
 
     $(document).keyup(function(e) {
         if (e.keyCode === 27) { // esc
             $('.welcome-modal').removeClass('show-modal');
-            ('.welcome-modal-background').removeClass('visible-as-modal');
+            $('.welcome-modal-background').removeClass('visible-as-modal');
         }
     });
 
     $('.welcome-modal-background').click(function () {
-        ('.welcome-modal-background').removeClass('visible-as-modal');
+        $('.welcome-modal').removeClass('show-modal');
+        $('.welcome-modal-background').removeClass('visible-as-modal');
     })
 });
