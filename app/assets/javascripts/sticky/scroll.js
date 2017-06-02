@@ -45,13 +45,10 @@ $(document).ready(function () {
 
         if ($windowPort < divLeftTotal) {
             $fixedDivLeft.unstick();
-            console.log('first')
         } else if ($windowPort < 720) {
             $fixedDivLeft.unstick();
-            console.log('second')
         } else {
             $fixedDivLeft.sticky({getWidthFrom: '.fixed-div-left', topSpacing: 8})
-            console.log('third')
 
         }
 

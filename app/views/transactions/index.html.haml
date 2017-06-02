@@ -1,6 +1,8 @@
-= render 'emoji-modal'
+= render 'modal-emoji'
 = render 'welcome-modal'
-= render 'guideline-modal'
+= render 'modal-guideline'
+= render 'help-modal'
+= render 'modal-whatsnew'
 
 .header-bg
   .header
@@ -14,12 +16,12 @@
         = "Bugs, issues or suggestions?\n Please report them"
         %a{href:'https://github.com/kabisa/kudo-o-matic/issues', target:'blank'}
           here!
-.side-message
-  %a.what-new{href:'#'}
-    What's
-    %br
-    new?
-  %span.toggle-side-message.fa.fa-chevron-left
+-#.side-message
+-#  %a.what-new{href:'#'}
+-#    What's
+-#    %br
+-#    new?
+-#  %span.toggle-side-message.fa.fa-chevron-left
 .page
   .body
     .container-left

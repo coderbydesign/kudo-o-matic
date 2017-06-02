@@ -21,8 +21,8 @@ $(document).ready(function() {
 
         $.get("/kudo_guidelines?kudo_amount=" + this.value, function (data) {
             var list = $('.tooltip-inner').empty();
-            listMore = $('<p>Guideline suggestions</p>').addClass('suggested-guidelines-title');
-            listMore.appendTo(list)
+            var listMore = $('<p>Guideline suggestions</p>').addClass('suggested-guidelines-title');
+            listMore.appendTo(list);
             for (var i = 0; i < data.length; i++) {
                 var listItem = $('<li>');
                 var listName = $('<span/>').text(data[i][0]).addClass('g-name');
@@ -31,6 +31,11 @@ $(document).ready(function() {
                 listName.appendTo(listItem);
                 listValue.appendTo(listItem);
                 listItem.appendTo(list);
+            }
+
+            if (data.length === 0) {
+                var listZero = $('<li>No suggestions available at this value</li>');
+                listZero.appendTo(list)
             }
         })
     });
