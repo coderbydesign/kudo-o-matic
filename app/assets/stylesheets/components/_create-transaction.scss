@@ -40,6 +40,11 @@
   textarea::placeholder {
     color: $text-light-gray;
   }
+
+  input::-moz-placeholder,
+  textarea::-moz-placeholder {
+    color: inherit;
+  }
 }
 
 .transaction-body {
@@ -125,5 +130,9 @@
 
   textarea {
     height: 4.5rem;
+  }
+
+  .fa-smile-o {
+    display: none;
   }
 }

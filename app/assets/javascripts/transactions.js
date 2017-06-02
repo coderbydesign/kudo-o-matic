@@ -12,14 +12,6 @@ $(document).ready(function() {
         $('.message-container').addClass('hide-message');
     });
 
-    // Dropdown profile toggle show/hide
-    $('.current-user').click(function () {
-        $(this).find('.fa').toggleClass('fa-chevron-down fa-chevron-up');
-        // $('.profile.dropdown-content').slideToggle(250);
-        $('.profile.dropdown-content').toggleClass('slide-menu');
-        return false
-    });
-
     // Dropdown meny toggle show/hide
     $('.general-menu').click(function () {
         $('.general.dropdown-content').slideToggle(250);

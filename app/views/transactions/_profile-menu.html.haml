@@ -1,19 +1,25 @@
 .dropdown
   .profile-picture
     .profile-img{style: "background-image: url(#{current_user.picture_url})"}
-
-  %a.dropdown-container.current-user{href:'#'}
-
-    %span.username
-      = current_user
-    .fa.fa-chevron-down
-
-  .profile.dropdown-content
-    %a.menu-content{href:destroy_user_session_path}
-      %span.flex-item
-        Sign Out
-      %i.fa.fa-sign-out{'aria-hidden':true}
-
+  .drop-menu
+    %a.dropdown-container.current-user{href:'#'}
+      %span.username
+        = current_user
+      .fa.fa-chevron-down
+    .profile.dropdown-content
+      .menu-tooltip
+      %a.menu-content{href:destroy_user_session_path}
+        %span.flex-item
+          Sign Out
+        %i.fa.fa-sign-out
+      %a.menu-content.help-me{href:"#"}
+        %span.flex-item
+          Help
+        %i.fa.fa-question-circle
+      %a.menu-content.whatsnew{href:"#"}
+        %span.flex-item
+          Releases
+        %i.fa.fa-wrench
   .user-statistics-container
     .userstatistics.given-transactions
       %span.statistics-title
@@ -30,3 +36,25 @@
         Total
       %span.statistics-value
         = @all_transactions_user
+
+.profile-picture-mobile
+  .profile-img{style: "background-image: url(#{current_user.picture_url})"}
+  .drop-menu
+    %a.dropdown-container.current-user{href:'#'}
+      %span.username
+        = current_user
+      .fa.fa-chevron-down
+    .profile.dropdown-content
+      .menu-tooltip
+      %a.menu-content{href:destroy_user_session_path}
+        %span.flex-item
+          Sign Out
+        %i.fa.fa-sign-out
+      %a.menu-content.help-me{href:"#"}
+        %span.flex-item
+          Help
+        %i.fa.fa-question-circle
+      %a.menu-content.whatsnew{href:"#"}
+        %span.flex-item
+          Releases
+        %i.fa.fa-wrench

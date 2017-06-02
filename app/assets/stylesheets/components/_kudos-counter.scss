@@ -233,7 +233,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     //background: linear-gradient(rgba($dark-blue-color, 1.0), rgba($dark-blue-color, 0.9));
     display: none;
     position: fixed;
-    left: 0; right: 0;
+    left: 0; right: 0; top: 10%; bottom: 10%;
     width: 50%;
     overflow: auto;
 

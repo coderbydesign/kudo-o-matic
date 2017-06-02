@@ -1,0 +1,52 @@
+.whatsnew-modal-background
+.modal-dialog.whatsnew-modal
+  .modal-header
+    %h2
+      What's new in the last update
+    .modal-subheader
+
+  .modal-body
+    .update-container
+      %h4
+        Release v2.0.0
+        %ul
+          %li
+            New application design
+          %li
+            You can now like transactions
+            = "\u{1F44D}"
+          %li
+            Add emoji's to your ₭udo transaction
+            = "\u{1f4a9} \u{1F601}"
+          %li
+            Multiple goals are now visible on the ₭udo Meter
+          %li
+            Other minor bug fixes
+    .update-container.clickable
+      %h4
+        Release v1.1.0
+        %i.fa.fa-chevron-right
+        %ul.not-visible
+          %li
+            Slack Notifications are send when someone gives kudo's and when a goal is achieved
+          %li
+            Autocomplete username is working also on Safari and Firefox
+          %li
+            Other minor bug fixes
+    .update-container.clickable
+      %h4
+        Release v1.0.2
+        %i.fa.fa-chevron-right
+        %ul.not-visible
+          %li
+            Feed with last transactions
+    .update-container.clickable
+      %h4
+        Release v1.0.1
+        %i.fa.fa-chevron-right
+        %ul.not-visible
+          %li
+            Bugfix previous goal
+  .modal-footer
+    %button.btn.btn-primary.btn-close.close-whatsnew
+      Close
