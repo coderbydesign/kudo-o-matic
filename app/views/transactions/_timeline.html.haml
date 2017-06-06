@@ -32,36 +32,27 @@
           %span.activityname
             - activity = transaction.activity_name_feed
             - escapedActivity = html_escape(activity)
-            -#- escapedActivity = escapedActivity.scan(/<p>([^<>]*)<\/p>/imu).flatten.to_sentence
             != @markdown.render(escapedActivity)
       .transaction-footer-container
         -#%button#like-button
         -#  Like
         - if current_user.voted_for? transaction
           %button.btn.btn-primary.btn-like
-            .fa.fa-thumbs-up
-            Liked!
+            = link_to unlike_path(transaction), remote: true, method: :post, class: 'downvote-transaction' do
+              .fa.fa-thumbs-up
+              Liked!
         - else
           .btn.btn-secondary.btn-like
-            = link_to like_path(transaction, anchor: "#{transaction.id}"), method: :post do
+            = link_to like_path(transaction), remote: true, method: :post, class: 'upvote-transaction' do
               .fa.fa-thumbs-up
               Like
-        %span.number-of-likes
-          - if transaction.get_upvotes.size != 0
-            Liked by
-          = transaction.votes_for.by_type(User).voters.first(1).collect { |user| user }.to_sentence
-          - if transaction.get_upvotes.size > 1 # more than 1 like
-            = "and #{transaction.get_upvotes.size - 1} others"
-          - elsif transaction.get_upvotes.size == 0 # 0 likes
-            = '0 Likes'
+        %span.number-of-likes{class: "number-of-likes-#{transaction.id}"}
+          = display_likes(transaction)
           .like-tooltip
             .like-tooltip-arrow
             - transaction.votes_for.by_type(User).voters.first(5).each do |user|
-              = simple_format("#{user}\n")
-            - if transaction.get_upvotes.size > 5 # more than 4 likes
-              = "and #{transaction.get_upvotes.size - 5} others"
-            - elsif transaction.get_upvotes.size == 0 # 0 likes
-              = 'No likes yet, be the first one!'
+              = simple_format("#{user.name}\n")
+            = tooltip_other_likes(transaction)
 
 
   = paginate @transactions

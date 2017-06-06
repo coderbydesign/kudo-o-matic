@@ -34,12 +34,34 @@ class TransactionsController < ApplicationController
     # TODO implement session authentication
     @transaction = Transaction.find(params[:id])
     @transaction.liked_by current_user
+    respond_to do |format|
+      if !current_user.voted_for? @transaction
+        format.html {redirect_to :back }
+        format.json { head :no_content }
+        format.js { render layout: false }
+      else
+        format.html { redirect_to :back }
+        format.json { head :no_content }
+        format.js
+      end
+    end
     redirect_to root_path
   end
 
   def downvote
     @transaction = Transaction.find(params[:id])
-    @transaction.downvote_by current_user
+    @transaction.unliked_by current_user
+    respond_to do |format|
+      if current_user.voted_for? @transaction
+        format.html {redirect_to :back }
+        format.json { head :no_content }
+        format.js { render layout: false }
+      else
+        format.html { redirect_to :back }
+        format.json { head :no_content }
+        format.js
+      end
+    end
     redirect_to root_path
   end
 

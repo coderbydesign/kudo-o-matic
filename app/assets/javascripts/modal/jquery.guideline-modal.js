@@ -1,4 +1,14 @@
 $(document).ready(function () {
+    $('.btn-guideline-info').click(function(e) {
+        e.preventDefault();
+        $('body').css('overflow', 'hidden');
+    });
+
+    $('.close-guidelines').click(function(e) {
+        e.preventDefault();
+        $('body').css('overflow', 'auto');
+    });
+
     // Open guideline modal
     $('.btn-guideline-info').click(function () {
         $('.guideline-modal').addClass('show-modal');
