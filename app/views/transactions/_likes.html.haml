@@ -1,0 +1,5 @@
+.btn.btn-secondary.btn-like{id: "like-#{transaction.id}"}
+  = link_to like_path(transaction.id), remote: true, method: :post, class: 'upvote-transaction' do
+    .fa.fa-thumbs-up
+    Like
+

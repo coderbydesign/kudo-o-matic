@@ -38,7 +38,6 @@ class TransactionsController < ApplicationController
       format.html { redirect_to :back }
       format.js
     end
-    # redirect_to root_path
   end
 
   def downvote
@@ -48,7 +47,6 @@ class TransactionsController < ApplicationController
       format.html { redirect_to :back }
       format.js
     end
-    # redirect_to root_path
   end
 
   def kudo_guidelines
