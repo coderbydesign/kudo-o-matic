@@ -1,6 +1,6 @@
 module TransactionsHelper
   def display_likes(transaction)
-    likes = transaction.votes_for.by_type("User").voters.first(1).collect { |user| user }.to_sentence
+    likes = transaction.votes_for.voters.first(1).collect { |user| user }.to_sentence
     list_likers(transaction, likes)
   end
 

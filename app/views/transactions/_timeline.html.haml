@@ -6,7 +6,7 @@
           .empty-timeline-message
             There are no transactions to show here yet &#9785;
   - @transactions.each do |transaction|
-    .transaction-container{'data-likes': transaction.votes_for.by_type("User").voters.collect { |user| user}}
+    .transaction-container{'data-likes': transaction.votes_for.voters.collect { |user| user}}
       .transaction-header-container
         .transaction-kudos-container
           %span
