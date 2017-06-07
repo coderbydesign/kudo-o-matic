@@ -15,8 +15,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 
-//= require upvote
-
 //= require autocomplete/jquery.ui.autocomplete.scroll.min
 
 //= require emoji/emoji.js

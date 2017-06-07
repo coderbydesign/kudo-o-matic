@@ -1,0 +1,7 @@
+%span.number-of-likes{class: "number-of-likes-#{transaction.id}"}
+  = display_likes(transaction)
+  .like-tooltip
+    .like-tooltip-arrow
+    - transaction.votes_for.by_type(User).voters.first(5).each do |user|
+      = simple_format("#{user.name}\n")
+    = tooltip_other_likes(transaction)

@@ -35,34 +35,20 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
     @transaction.liked_by current_user
     respond_to do |format|
-      if !current_user.voted_for? @transaction
-        format.html {redirect_to :back }
-        format.json { head :no_content }
-        format.js { render layout: false }
-      else
-        format.html { redirect_to :back }
-        format.json { head :no_content }
-        format.js
-      end
+      format.html { redirect_to :back }
+      format.js
     end
-    redirect_to root_path
+    # redirect_to root_path
   end
 
   def downvote
     @transaction = Transaction.find(params[:id])
     @transaction.unliked_by current_user
     respond_to do |format|
-      if current_user.voted_for? @transaction
-        format.html {redirect_to :back }
-        format.json { head :no_content }
-        format.js { render layout: false }
-      else
-        format.html { redirect_to :back }
-        format.json { head :no_content }
-        format.js
-      end
+      format.html { redirect_to :back }
+      format.js
     end
-    redirect_to root_path
+    # redirect_to root_path
   end
 
   def kudo_guidelines

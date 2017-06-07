@@ -1,0 +1,2 @@
+$('#like-<%= @transaction.id %>').replaceWith('<%= escape_javascript render 'unlikes', transaction: @transaction %>');
+$('#like-tooltip-<%= @transaction.id %>').html('<%= escape_javascript render 'like-tooltip', transaction: @transaction %>');

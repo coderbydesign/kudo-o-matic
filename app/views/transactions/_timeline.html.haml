@@ -34,25 +34,12 @@
             - escapedActivity = html_escape(activity)
             != @markdown.render(escapedActivity)
       .transaction-footer-container
-        -#%button#like-button
-        -#  Like
         - if current_user.voted_for? transaction
-          %button.btn.btn-primary.btn-like
-            = link_to unlike_path(transaction), remote: true, method: :post, class: 'downvote-transaction' do
-              .fa.fa-thumbs-up
-              Liked!
+          = render 'unlikes', transaction: transaction
         - else
-          .btn.btn-secondary.btn-like
-            = link_to like_path(transaction), remote: true, method: :post, class: 'upvote-transaction' do
-              .fa.fa-thumbs-up
-              Like
-        %span.number-of-likes{class: "number-of-likes-#{transaction.id}"}
-          = display_likes(transaction)
-          .like-tooltip
-            .like-tooltip-arrow
-            - transaction.votes_for.by_type(User).voters.first(5).each do |user|
-              = simple_format("#{user.name}\n")
-            = tooltip_other_likes(transaction)
+          = render 'likes', transaction: transaction
+        %span{id: "like-tooltip-#{transaction.id}"}
+          = render 'like-tooltip', transaction: transaction
 
 
   = paginate @transactions

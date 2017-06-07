@@ -1,0 +1,4 @@
+.btn.btn-primary.btn-like{id: "unlike-#{transaction.id}"}
+  = link_to unlike_path(transaction.id), remote: true, method: :post, class: 'downvote-transaction' do
+    .fa.fa-thumbs-up
+    Liked!
