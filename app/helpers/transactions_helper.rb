@@ -15,16 +15,12 @@ module TransactionsHelper
       "Liked by #{likes}"
     elsif number_of_likes(transaction) > 1
       "Liked by #{likes} and #{number_of_likes(transaction) - 1} others"
-    else
-      '0 Likes'
     end
   end
 
   def list_others_tooltip(transaction)
     if number_of_likes(transaction) > 5 # more than 4 likes
       "and #{number_of_likes(transaction) - 5} others"
-    elsif number_of_likes(transaction) == 0 # 0 likes
-      'No likes yet, be the first one!'
     end
   end
 
