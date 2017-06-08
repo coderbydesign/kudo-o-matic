@@ -1,33 +1,23 @@
 .filter-container
-  -#%select
-    %option
-      None
-    %option
-      All
-    %option
-      Send
-    %option
-      Received
-    .fa.fa-chevron-circle-right
-  %span
-    Timeline
-  -#.active-filter
-  -#  %span.active-filter-text
-  -#    None
-  -#%button.btn.btn-primary.delete-filter{type:'button'}
-  -#  Delete filter
-
-
-
-  -#.btn-filter.filter-option.send{type:'button'}
-    %span.flex-span
-      %span.flex-item
-        Send Transactions
-      -#%span
-        %i.fa.fa-square-o
-  -#%button.btn.btn-secondary.btn-filter.filter-option.received{type:'button'}
-    %span.flex-span
-      %span.flex-item
-        Received Transactions
-      %span
-        %i.fa.fa-square-o
+  .filter-options
+    %span
+      Filter
+    .filter-button
+      %button.btn.btn-secondary.btn-filter
+        All transactions
+      .filter-content
+        .menu-tooltip
+        %a.menu-content.all-transactions{href:"#"}
+          All transactions
+        %a.menu-content.my-transactions{href:"#"}
+          My total transactions
+        %a.menu-content.send-transactions{href:"#"}
+          My given transactions
+        %a.menu-content.received-transactions{href:"#"}
+          My received transactions
+    .ajax-preloader
+      = image_tag 'preloader.gif'
+    .delete-filter-container
+      .delete-filter
+        delete filter
+        %i.fa.fa-times

@@ -24,5 +24,6 @@ $(document).ready(function () {
 
     $(window).click(function () {
         $('.dropdown-content').removeClass('slide-menu');
+        $('.drop-menu .menu-tooltip').removeClass('show-tooltip');
     });
 });
