@@ -19,6 +19,7 @@ $black-color:                             #000000;
 //
 ///////////////////////////////////////////////////////////
 
+$base-color-brand:                        #4B4656;
 $base-color-black:                        #000000;
 $base-color-dark-gray:                    #292B2C;
 $base-color-medium-gray:                  #464A4C;
@@ -26,12 +27,8 @@ $base-color-gray:                         #999999;
 $base-color-light-gray:                   #BFBABA;
 $base-color-lighter-gray:                 #CCCCCC;
 $base-color-light-red:                    #D8827F;
-$base-color-light-blue:                   #4B4656;
 $base-color-solitude-white:               #F0F1F5;
 $base-color-white:                        #FFFFFF;
-
-$concept-color-base:                      #4B4656;
-$blue-color-base:                         #3097D1;
 
 ///////////////////////////////////////////////////////////
 //
@@ -44,7 +41,7 @@ $primary-bg:                              $base-color-white;
 $secondary-bg:                            $base-color-solitude-white;
 
 $primary-color:                           $base-color-dark-gray;
-$secondary-color:                         $base-color-light-blue;
+$secondary-color:                         $base-color-brand;
 
 // Text
 $text-primary:                            $base-color-dark-gray;
@@ -61,17 +58,17 @@ $primary-input-bg:                        $secondary-bg;
 // Border
 $primary-border-color:                    rgba($base-color-black, 0.125);
 $secondary-border-color:                  $base-color-lighter-gray;
-$focus-border-color:                      $base-color-light-blue;
+$focus-border-color:                      $base-color-brand;
 
 // Button
-$primary-button-bg:                       $base-color-light-blue;
+$primary-button-bg:                       $base-color-brand;
 $primary-button-color:                    $text-white;
 $secondary-button-bg:                     $base-color-white;
 $secondary-button-color:                  $base-color-dark-gray;
 
 // Kudo Meter
 $primary-stroke-color:                    $secondary-bg;
-$secondary-stroke-color:                  $base-color-light-blue;
+$secondary-stroke-color:                  $base-color-brand;
 
 // Flash message
 $flash-error-bg:                          $base-color-light-red;

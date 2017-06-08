@@ -19,8 +19,6 @@ gem 'rubocop', '~> 0.47.1', require: false
 
 gem 'scss_lint', require: false
 
-
-
 gem 'md_emoji', git: 'https://github.com/egonm12/md_emoji.git', branch: 'master'
 
 gem 'redcarpet', '~> 3.3', '>= 3.3.4'

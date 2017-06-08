@@ -1,6 +1,4 @@
 class TransactionsController < ApplicationController
-  layout 'dashboard'
-
   protect_from_forgery with: :exception
 
   def index
