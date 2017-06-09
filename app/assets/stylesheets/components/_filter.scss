@@ -32,6 +32,11 @@
   flex-direction: column;
 }
 
+.filter-content.slide-menu .menu-content:hover {
+  background: $secondary-bg;
+  color: $text-primary;
+}
+
 
 .filter-options {
   width: 100%;

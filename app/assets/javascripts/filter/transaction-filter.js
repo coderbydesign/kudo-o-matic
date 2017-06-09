@@ -53,7 +53,7 @@ $(document).ready(function () {
                 $ajaxpreloader.removeClass('show-preloader');
             }
         });
-        $('.btn-filter').html('No filter');
+        $('.btn-filter').html('All transactions');
         $('.delete-filter').removeClass('show-delete');
         return false
     });
