@@ -57,7 +57,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
 .progress-step {
   display: block;
   position: relative;
-  flex: 1 1 0%;
+  flex: 1 1 0;
   margin: 0;
   padding: 0;
   min-width: $marker-size; // For a flexbox bug in firefox that wont allow the text overflow on the text
