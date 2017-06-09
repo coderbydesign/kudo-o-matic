@@ -6,6 +6,8 @@ $gray: #333;
 $gray-lighter: #eee;
 $space: 40px;
 
+
+
 .guideline-modal.show-modal, .welcome-modal.show-modal, .emoji-modal.show-modal, .help-modal.show-modal, .whatsnew-modal.show-modal {
   display: flex;
   flex-direction: column;
@@ -36,20 +38,6 @@ $space: 40px;
   }
 }
 
-.modal {
-
-  // This is modal bg
-  align-items: center;
-  //background: rgba(0,0,0, 0.6);
-  display: none;
-  justify-content: center;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 10;
-
-
-}
-
 .emoji-modal {
   .modal-dialog {
     width: 50%;
@@ -63,8 +51,13 @@ $space: 40px;
   background: #fefefe;
   border: $gray solid 1px;
   border-radius: 5px;
+  display: none;
   z-index: 11;
-  width: 40%;
+  position: fixed;
+  margin:0 auto;
+  top: 10%; left: 0; bottom: 10%; right: 0;
+  width: 50%;
+
 }
 
 .modal-header {
@@ -81,7 +74,7 @@ $space: 40px;
 
 .modal-body {
   color: $text-primary;
-  height: 400px;
+  height: 100%;
   overflow-y: scroll;
   padding: $space/2;
 
@@ -145,18 +138,6 @@ $space: 40px;
   text-align: right;
 }
 
-////// Welcome modal
-.welcome-modal {
-  margin: 0 auto;
-  display: none;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 10%;
-  width: 50%;
-  max-height: 80%;
-}
-
 .welcome-modal-background {
   background: rgba($black-color, 0.6);
   display: none;
@@ -168,18 +149,6 @@ $space: 40px;
 .welcome-modal-background.visible-as-modal {
   display: block;
   animation: kudocounter 0.25s ease-out;
-}
-
-////// Guideline modal
-.guideline-modal {
-  margin: 0 auto;
-  display: none;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 10%;
-  width: 50%;
-  max-height: 80%;
 }
 
 .guideline-list {
@@ -212,14 +181,6 @@ $space: 40px;
 
 ////// Emoji Modal
 .emoji-modal {
-  margin: 0 auto;
-  display: none;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 10%;
-  width: 50%;
-  max-height: 80%;
 
   p {
     font-weight: 300;
@@ -272,22 +233,6 @@ $space: 40px;
   animation: kudocounter 0.25s ease-out;
 }
 
-////// Help modal
-.help-modal {
-  margin: 0 auto;
-  display: none;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 10%;
-  width: 50%;
-  max-height: 80%;
-
-  .modal-body {
-    padding: 0 0 1.125rem;
-  }
-}
-
 .help-container {
   padding: 0.5rem 1.5rem;
   border-bottom: 1px solid rgba(0,0,0,0.125);
@@ -310,22 +255,6 @@ $space: 40px;
 .help-modal-background.visible-as-modal {
   display: block;
   animation: kudocounter 0.25s ease-out;
-}
-
-////// Whats new modal
-.whatsnew-modal {
-  margin: 0 auto;
-  display: none;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 10%;
-  width: 50%;
-  max-height: 80%;
-
-  .modal-body {
-    padding: 0 0 1.125rem;
-  }
 }
 
 .update-container {

@@ -13,8 +13,8 @@
             = "#{transaction.amount} ₭"
         .avatar
           .transaction-avatar-container
-            = image_tag User.find(transaction.sender_id).picture_url, class:'sender'
-            = image_tag transaction.receiver_image, class:'receiver'
+            = image_tag User.find(transaction.sender_id).picture_url, class:'sender flex-item'
+            = image_tag transaction.receiver_image, class:'receiver flex-item'
         %span.post-time-stamp{id:transaction.id}
           = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
       .transaction-body-container
