@@ -1,5 +1,41 @@
 require 'rails_helper'
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
 
+options = {js_errors: false, timeout: 30}
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, options)
+end
+
+module WaitForAjax
+  def wait_for_ajax
+    Timeout.timeout(Capybara.default_max_wait_time) do
+      loop until finished_all_ajax_requests?
+    end
+  end
+
+  def finished_all_ajax_requests?
+    page.evaluate_script('jQuery.active').zero?
+  end
+end
+
+RSpec.configure do |config|
+  config.include WaitForAjax, type: :feature
+  config.use_transactional_fixtures = false
+
+  config.before :each do
+    if Capybara.current_driver == :rack_test
+      DatabaseCleaner.strategy = :transaction
+    else
+      DatabaseCleaner.strategy = :truncation
+    end
+    DatabaseCleaner.start
+  end
+
+  config.after do
+    DatabaseCleaner.clean
+  end
+end
 
 RSpec.feature "Filter a transaction", type: :feature do
   let!(:prev_goal) { create :goal, :achieved, name: "Painting lessons", amount: 100 }
@@ -12,14 +48,17 @@ RSpec.feature "Filter a transaction", type: :feature do
   before do
     visit '/sign_in'
     click_link 'Log in with Google+'
-
     expect(current_path).to eql('/')
+    find('.close-welcome').click
+
   end
 
-  it 'has a 200 status code' do
-    find('.userstatistics.send-transactions', :first).click
-
-    assert_respond_to(200)
+  it 'Changes the filter text', js: true do
+    first('.send-transactions').click
+    wait_for_ajax
+    within '.btn-filter' do
+      expect(page).to have_content('My given transactions')
+    end
 
   end
 end
