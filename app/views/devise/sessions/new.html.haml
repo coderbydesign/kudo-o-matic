@@ -13,11 +13,11 @@
   .sign-in-container
     .sign-in-header
     .sign-in-body
-      %span
+      .body-content
         -#%img{src:'https://images.contentful.com/ede0ajjyowtx/10E3dXOquIM0couc84WAW2/785cd70b5bd013c189d9dd45e8db70af/kabisa_icon.png'}
-        %h1
-          Kudo-o-Matic
-        %br
+        -#%h1
+        -#  Kudo-o-Matic
+        = image_tag 'logo-without-lizard-black.png'
         %a.btn-google{href:user_google_oauth2_omniauth_authorize_path}
           = 'Log in with Google+'
     .sign-in-footer
