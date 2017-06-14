@@ -39,6 +39,7 @@
   position: absolute;
   margin-top: 3rem;
   display: none;
+  right: 20%; // Internet Explorer position correct
 }
 
 .dropdown-content.slide-menu {
@@ -59,7 +60,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding-right: 0.5rem;
-    line-height: 1.2;
+    line-height: 1.5;
   }
 }
 
