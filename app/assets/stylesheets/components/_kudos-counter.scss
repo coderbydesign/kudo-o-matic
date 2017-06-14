@@ -148,17 +148,22 @@ $font-primary: 'proxima-nova-soft', sans-serif;
   opacity: 0.925;
   color: $text-white;
   position: absolute;
-  margin-top: $margin-secondary;
+  //margin-top: $margin-secondary;
   display: none;
   //right: 30%; // Internet Explorer position correct
   font-size: initial;
   padding: $padding-secondary;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  min-width: 10rem;
-  max-width: 12rem;
+  width: 10rem; // 160px / 16px
   z-index: 3;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  left: 2.625rem; // Because of padding-left in .progress-text
+  right: 0;
+  margin: $margin-secondary auto;
+  line-height: 1.4;
+
+
 
   .menu-content {
     min-height: 0;
@@ -191,12 +196,8 @@ $font-primary: 'proxima-nova-soft', sans-serif;
   overflow: hidden;
 }
 
-.goal-content.show-tooltip  {
+.goal-content.show-tooltip, .menu-tooltip.show-tooltip   {
   display: flex;
-}
-
-.menu-tooltip.show-tooltip  {
-  display: block;
 }
 
 .kudo-counter-background {
