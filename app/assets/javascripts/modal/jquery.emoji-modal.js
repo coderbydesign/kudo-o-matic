@@ -28,6 +28,7 @@ $(document).ready(function () {
         $('.emoji-modal-background').removeClass('visible-as-modal')
     });
 
+    // Add emoji to input field
     $('.emoji-container').click(function () {
         var target = $(this).closest('.emoji-container');
         var emojiName = target.data('clipboard');
@@ -47,6 +48,7 @@ $(document).ready(function () {
         }
     });
 
+    // Show copied emoji
     $('.emoji-container').click(function () {
         $('.clipboard-emoji').removeClass('show-clipboard');
         setTimeout(function () {
