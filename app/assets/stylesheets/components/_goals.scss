@@ -41,29 +41,12 @@ $progress-step-height:      100px;
 
 // ----- Elements -----
 
-@media all and (max-width: 1200px), (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  /* IE10+ CSS styles go here */
-  //.goal-content {
-  //  right: 25%;
-  //}
-}
-
-
 // Container element
 
 .goal-container {
   text-align: center;
   font-weight: 300;
   margin-bottom: $margin-primary;
-}
-
-.goal-name-info-container {
-  //display: flex;
-  //justify-content: center;
-
-  .goal-content {
-    //margin-top: $margin-primary;
-  }
 }
 
 .progress-tracker {
