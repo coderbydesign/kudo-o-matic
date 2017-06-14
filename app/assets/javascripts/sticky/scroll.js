@@ -54,11 +54,12 @@ $(document).ready(function () {
 
         if ($windowPort < divRightTotal) {
             $fixedDivRight.unstick()
-        } else if ($windowWidth < 720) {
+        } else if ($windowWidth < 1200) {
             $fixedDivRight.unstick();
         } else {
             $fixedDivRight.sticky({getWidthFrom: '.fixed-div-right', topSpacing: 8})
         }
+
     }
 
     if ($(window).width() > 720) {
