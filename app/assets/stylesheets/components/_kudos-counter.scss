@@ -94,15 +94,10 @@ $font-primary: 'proxima-nova-soft', sans-serif;
     position: relative;
 
     .current-amount {
-      font-size: 140%;
+      font-size: 1.75rem;
       text-align: center;
-    }
-
-    div {
       color: $text-primary;
-      font-size: 1.375rem;
-    }// .kudo-chart__count:after
-
+    }
   }// .kudo-chart__count
 
   .kudo-currency {
@@ -134,15 +129,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
 
     .next-goal-name {
       overflow: hidden;
-
-      span {
-        width: 10.25rem; // 164px / 16px
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        display: block;
-        overflow: hidden;
-      }
-
+      line-height: 1.2;
     }
 
     .next-goal-amount {
@@ -152,55 +139,65 @@ $font-primary: 'proxima-nova-soft', sans-serif;
       display: block;
       overflow: hidden;
     }
-
   }// .chart__container
-
-  &--second-goal {
-    float: left;
-    margin-bottom: 3.125rem;
-    text-align: left;
-    width: 40%;
-    margin-left: 5%;
-    margin-right: 5%;
-
-    .chart__container {
-      height: 1.875rem;
-      width: 1.875rem;
-    }// .chart__container
-
-    .chart__foreground {
-      stroke: $light-grey-color;
-    }// .chart__count
-
-    .chart__count {
-      color: $color-gray-light;
-      display: inline-block;
-      font-size: 0.875rem;
-      //padding-left: 0.25rem;
-      position: relative;
-      text-align: left;
-      overflow: hidden;
-      height: 100%;
-
-      div {
-        color: $white-color;
-        font-size: $font-size-regular;
-      }// div
-
-    }// .chart__count
-
-  }// .chart__container
-
 }// .chart
 
-//@keyframes load {
-//  from {
-//    opacity: 0;
-//  }
-//  to {
-//    opacity: 1;
-//  }
-//}
+.goal-content {
+  transition: all 300ms ease;
+  background: $base-color-light-blue;
+  opacity: 0.925;
+  color: $text-white;
+  position: absolute;
+  margin-top: $margin-secondary;
+  display: none;
+  //right: 30%; // Internet Explorer position correct
+  font-size: initial;
+  padding: $padding-secondary;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-width: 10rem;
+  max-width: 12rem;
+  z-index: 3;
+
+  .menu-content {
+    min-height: 0;
+  }
+
+  span {
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: initial;
+    display: initial;
+  }
+
+  .menu-tooltip {
+    width: 0;
+    height: 0;
+    border: 0.5rem solid;
+    border-color: transparent transparent $base-color-light-blue transparent;
+    opacity: 0.925;
+    position: absolute;
+    top: -1rem;
+    display: none;
+  }
+}
+
+.goal-name-tooltip {
+  width: 10.25rem; // 164px / 16px
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+}
+
+.goal-content.show-tooltip  {
+  display: flex;
+}
+
+.menu-tooltip.show-tooltip  {
+  display: block;
+}
 
 .kudo-counter-background {
   display: none;

@@ -49,4 +49,14 @@ $(document).ready(function () {
             $('.container-right').removeClass('visible-as-modal');
         }
     });
+
+    $('.next-goal-name, .goal-name-info-container').hover(function () {
+        $('.goal-content', this).addClass('show-tooltip ');
+        $('.menu-tooltip', this).addClass('show-tooltip ');
+        console.log('hovered!')
+    }, function () {
+        $('.goal-content', this).removeClass('show-tooltip ');
+        $('.menu-tooltip', this).removeClass('show-tooltip ');
+    })
+
 });
