@@ -33,9 +33,6 @@ $progress-tracker-word-padding: ($word-size + $text-padding-X + $marker-size-hal
 $animation-duration:        0.3s !default;
 $ripple-color:              rgba(0, 0, 0, 0.3) !default;
 
-$progress-step-height:      100px;
-
-
 // ----- Progress Tracker -----
 
 
@@ -56,13 +53,13 @@ $progress-step-height:      100px;
   list-style: none;
 }
 
-// Step container that creates lines between egsteps
+// Step container that creates lines between steps
 .progress-step {
   display: block;
   position: relative;
+  flex: 1 1 0%;
   margin: 0;
   padding: 0;
-  height: $progress-step-height;
   min-width: $marker-size; // For a flexbox bug in firefox that wont allow the text overflow on the text
 
   // Stops the last step growing
@@ -78,15 +75,14 @@ $progress-step-height:      100px;
     left: 0;
     //z-index: 100000;
     background: $secondary-stroke-color;
+    border-top: 1px solid $base-color-dark-gray;
 
     .percentage {
       margin-left: $margin-secondary;
-      border-top: 1px solid $base-color-brand;
+      border-top: 1px solid $base-color-dark-gray;
+      line-height: 18px;
       padding: 0 0 0 $padding-secondary * 1.5;
       font-size: $font-size-regular - 0.1rem;
-      position: absolute;
-      top: 0;
-      left: 0;
     }
   }
 
@@ -418,13 +414,14 @@ $progress-step-height:      100px;
   flex-direction: column;
 
   .progress-step {
+    //flex: 1 1 auto;
 
     .progress-bar {
       right: auto;
       top: 28px;
       left: 0.5rem;
       width: $path-height * 3;
-      height: $progress-step-height - $marker-size;
+      height: 71%;
     }
 
     .progress-bar-complete {
@@ -432,7 +429,7 @@ $progress-step-height:      100px;
       top: 28px;
       left: 0.5rem;
       width: $path-height * 3;
-      height: $progress-step-height - $marker-size;
+      height: 71%;
     }
   }
 
@@ -445,6 +442,10 @@ $progress-step-height:      100px;
     //padding-top: $marker-size-quarter;
     padding-left: $text-padding--vertical;
     margin-left: 0;
+  }
+
+  .progress-step:not(:last-child) .progress-text {
+    padding-bottom: $text-padding--vertical;
   }
 }
 
