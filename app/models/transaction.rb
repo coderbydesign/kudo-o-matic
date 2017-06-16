@@ -15,39 +15,10 @@ class Transaction < ActiveRecord::Base
   delegate :name, to: :receiver, prefix: true
   delegate :name, to: :activity, prefix: true
 
-  GUIDELINES =
-      [['Margin / month super (>=15% ROS)', 500],
-       ['Turnover / month super (>= 350k)', 500],
-       ['Score a project of >50 hours', 250],
-       ['Margin / month fine (>= 10% ROS <=15%)', 200],
-       ['Turnover / month fine (>= 300k; <= 350k)', 200],
-       ['Get a client quote for the website', 100],
-       ['Margin / month reasonable (>= 5% ROS <= 10%)', 100],
-       ['New colleague', 100],
-       ['Speak at a conference', 100],
-       ['Turnover / month reasonable (>= 280k <= 300k)', 100],
-       ['Get a great client satisfaction score', 80],
-       ['Organize event for external relations (workshop, coderetreat)', 50],
-       ['Score consultancy project', 50],
-       ['BlogPost Inbound', 40],
-       ['Project RefCase', 40],
-       ['Get a client satisfaction score', 40],
-       ['Pizza Session', 40],
-       ['Introduce a new potential client (ZOHO)', 40],
-       ['Blog tech', 20],
-       ['Call for Proposal for a conference', 20],
-       ['Lunch&Learn', 20],
-       ['Visit conference', 20],
-       ['Be a special help for someone', 10],
-       ['Be a quick help for someone', 5],
-       ['Start a meeting in time', 1]]
-
-  def self.guidelines_between(from, to)
-    gl = []
-    GUIDELINES.each do |g|
-      gl.push g if g[1] >= from && g[1] <= to
-    end
-    gl
+  def self.goal_reached_transaction
+    activity = Activity.create name:"reaching the goal #{Goal.previous.name} :boom:, here are some ₭udo's to boost your hunt for the next goal"
+    user = User.find_or_create_by(name: ENV.fetch('COMPANY_USER', 'Kabisa'))
+    Transaction.create sender: user, receiver: user, amount: 100, activity: activity, balance: Balance.current
   end
 
   def receiver_name_feed
@@ -92,6 +63,41 @@ class Transaction < ActiveRecord::Base
 
   def self.received_by_user(user)
     Transaction.where(receiver: user).or(Transaction.where(balance: Balance.current).where(receiver: User.where(name: ENV.fetch('COMPANY_USER', 'Kabisa')))).order('created_at desc').page.per(20)
+  end
+
+  GUIDELINES =
+      [['Margin / month super (>=15% ROS)', 500],
+       ['Turnover / month super (>= 350k)', 500],
+       ['Score a project of >50 hours', 250],
+       ['Margin / month fine (>= 10% ROS <=15%)', 200],
+       ['Turnover / month fine (>= 300k; <= 350k)', 200],
+       ['Get a client quote for the website', 100],
+       ['Margin / month reasonable (>= 5% ROS <= 10%)', 100],
+       ['New colleague', 100],
+       ['Speak at a conference', 100],
+       ['Turnover / month reasonable (>= 280k <= 300k)', 100],
+       ['Get a great client satisfaction score', 80],
+       ['Organize event for external relations (workshop, coderetreat)', 50],
+       ['Score consultancy project', 50],
+       ['BlogPost Inbound', 40],
+       ['Project RefCase', 40],
+       ['Get a client satisfaction score', 40],
+       ['Pizza Session', 40],
+       ['Introduce a new potential client (ZOHO)', 40],
+       ['Blog tech', 20],
+       ['Call for Proposal for a conference', 20],
+       ['Lunch&Learn', 20],
+       ['Visit conference', 20],
+       ['Be a special help for someone', 10],
+       ['Be a quick help for someone', 5],
+       ['Start a meeting in time', 1]]
+
+  def self.guidelines_between(from, to)
+    gl = []
+    GUIDELINES.each do |g|
+      gl.push g if g[1] >= from && g[1] <= to
+    end
+    gl
   end
 
   EMOJIES = [
