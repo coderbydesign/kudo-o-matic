@@ -78,6 +78,14 @@
       margin: $margin-secondary 0;
     }
 
+    .media-attachment {
+      margin-top: $margin-secondary;
+
+      img {
+        width: 100%;
+      }
+    }
+
     .transaction-footer-container {
       align-items: center;
       display: flex;

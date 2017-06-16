@@ -19,7 +19,7 @@ gem 'rubocop', '~> 0.47.1', require: false
 
 gem 'scss_lint', require: false
 
-
+gem 'paperclip', '~> 5.1'
 
 gem 'md_emoji', git: 'https://github.com/egonm12/md_emoji.git', branch: 'master'
 

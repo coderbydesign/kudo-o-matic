@@ -33,6 +33,9 @@
             - activity = transaction.activity_name_feed
             - escapedActivity = html_escape(activity)
             != @markdown.render(escapedActivity)
+          - if transaction.image.present?
+            .media-attachment
+              = image_tag(transaction.image.url)
       .transaction-footer-container
         -#%button#like-button
         -#  Like

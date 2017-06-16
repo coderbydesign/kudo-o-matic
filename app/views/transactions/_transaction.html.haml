@@ -9,6 +9,8 @@
           = f.input_field :amount, class:'input-amount', input_html:{ min: '0', max: '999' , step: '1'} , placeholder: 'Amount', required: true, autocomplete:'off'
       .activity
         = f.input_field :activity_name, as: :text, field_id: false,  placeholder: "Why are you giving ₭udo's?", required: true, maxlength: '90', class: 'character-count textarea-field'
+      .attachment
+        = f.input_field :image, as: :file, id:'media-attachment'
       .submit
         %span.submit-btn
           = button_tag type:'submit', class: 'btn', id:'send-kudos-button' do
@@ -16,5 +18,13 @@
             %i.fa.fa-paper-plane
         .activity-extras
           %span.counter
+          -#%i.fa.fa-times.delete-pic
+          %i.fa.fa-camera.add-attachment{tabindex:'-1'}
+          .attachment-content
+            .attachment-tooltip
+            .attachment-preview
+            .name-of-attachment
+              %span.file-name
           %a.fa.fa-info-circle.btn-guideline-info{href:'#', tabindex:'-1'}
           %a.fa.fa-smile-o{href:'#', tabindex:'-1'}
+
