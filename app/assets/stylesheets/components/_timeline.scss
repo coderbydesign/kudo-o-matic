@@ -76,6 +76,11 @@
       height: 100%;
       line-height: 125%;
       margin: $margin-secondary 0;
+
+      a {
+        text-decoration: underline;
+        color: rgb(0,0,255);
+      }
     }
 
     .media-attachment {
