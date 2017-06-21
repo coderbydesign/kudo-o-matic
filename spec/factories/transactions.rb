@@ -4,7 +4,7 @@ FactoryGirl.define do
     receiver
     activity
     balance
-
+    image
     amount 100
   end
 end

@@ -9,13 +9,14 @@ RSpec.feature "Add a transaction", type: :feature do
   let(:user_2) { User.create name: 'John User', avatar_url: '/kabisa_lizard.png' }
   let(:balance) { create :balance, :current }
   let!(:transaction) { Transaction.create sender: user, receiver: user, activity: activity, amount: 5, balance: balance}
-  let!(:transaction_2) { Transaction.create sender: user, receiver: user, activity: activity, amount: 10, balance: balance}
+  let!(:transaction_2) { Transaction.create sender: user, receiver: user, activity: activity, amount: 10, image: File.new(Rails.root + 'spec/fixtures/images/rails.png'), balance: balance}
 
   before do
     visit '/sign_in'
     click_link 'Log in with Google+'
 
     expect(current_path).to eql('/')
+    find('.close-welcome').click
     @transactions_before = Transaction.count
   end
 
@@ -69,6 +70,18 @@ RSpec.feature "Add a transaction", type: :feature do
       within('.percentage') do
         expect(page).to have_content(@balance_percentage)
       end
+    end
+  end
+
+  context 'Create a transaction with an image' do
+    it 'should be valid' do
+      image = Transaction.new sender: user, receiver: user, activity: activity, amount: 10, balance: balance, image: File.new(Rails.root + 'spec/fixtures/images/rails.png')
+      expect(image).to be_valid
+    end
+
+    it 'should be invalid' do
+      image = Transaction.new sender: user, receiver: user, activity: activity, amount: 10, balance: balance, image: File.new(Rails.root + 'spec/fixtures/images/blank.txt')
+      expect(image).to_not be_valid
     end
   end
 
