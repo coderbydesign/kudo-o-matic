@@ -78,6 +78,12 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+staging:
+  <<: *default
+  database: kudo-o-matic_staging
+  username: kudo-o-matic
+  password: <%= ENV['KUDO-O-MATIC_DATABASE_PASSWORD'] %>
+
 production:
   <<: *default
   database: kudo-o-matic_production
