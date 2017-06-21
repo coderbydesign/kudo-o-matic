@@ -27,6 +27,7 @@ $(document).ready(function() {
     $('.counter').html(textMax);
 
     $('.character-count').keyup(function() {
+        $('.attachment-tooltip').css({ left: '2.5rem' });
         $('.counter').addClass('show-counter');
         var textLength = $('.character-count').val().length;
         var textRemaining = textMax - textLength;

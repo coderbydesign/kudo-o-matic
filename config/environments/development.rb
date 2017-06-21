@@ -1,6 +1,20 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # paperclip S3
+  config.paperclip_defaults = {
+      storage: :s3,
+      s3_protocol: :https,
+      s3_region: ENV["AWS_S3_REGION"],
+      bucket: ENV["AWS_S3_BUCKET"],
+      s3_credentials: {
+          s3_host_name: ENV["AWS_S3_HOST_NAME"],
+          s3_region: ENV["AWS_S3_REGION"],
+          path: "image/:id/:filename",
+          url: ':s3_domain_url'
+      }
+  }
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
