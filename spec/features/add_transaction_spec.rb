@@ -9,7 +9,7 @@ RSpec.feature "Add a transaction", type: :feature do
   let(:user_2) { User.create name: 'John User', avatar_url: '/kabisa_lizard.png' }
   let(:balance) { create :balance, :current }
   let!(:transaction) { Transaction.create sender: user, receiver: user, activity: activity, amount: 5, balance: balance}
-  let!(:transaction_2) { Transaction.create sender: user, receiver: user, activity: activity, amount: 10, image: File.new(Rails.root + 'spec/fixtures/images/rails.png'), balance: balance}
+  let!(:transaction_2) { Transaction.create sender: user, receiver: user, activity: activity, amount: 10, balance: balance}
 
   before do
     visit '/sign_in'
