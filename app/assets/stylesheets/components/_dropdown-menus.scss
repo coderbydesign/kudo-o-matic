@@ -82,15 +82,6 @@
   color: $text-primary;
 }
 
-
-///////////////////////////////////////////////////////////
-//
-// General dropdown
-//
-///////////////////////////////////////////////////////////
-
-
-
 ///////////////////////////////////////////////////////////
 //
 // Profile dropdown
@@ -99,7 +90,6 @@
 
 .profile-picture {
   $avatar-size: 5rem;
-  
   align-items: flex-end;
   background-color: $base-color-light-blue;
   //background-image: url('profile/blurred_32.jpg');

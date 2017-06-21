@@ -70,11 +70,15 @@
   display: flex;
   align-items: center;
 
-  .fa {
+  a.fa, .add-attachment {
     border: 1px solid $secondary-border-color;
     border-radius: $border-radius-small;
     margin-left: $margin-secondary;
     padding: $padding-medium $padding;
+  }
+
+  .add-attachment {
+    cursor: pointer;
   }
 }
 
@@ -121,6 +125,20 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: $font-size-small;
+  display: flex;
+  line-height: 1.2;
+
+  .file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1 1 auto;
+  }
+
+  .destroy-attachment {
+    margin-left: $margin-secondary;
+    cursor: pointer;
+  }
 }
 
 .counter {
