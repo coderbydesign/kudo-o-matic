@@ -33,7 +33,9 @@
     flex: 1;
     margin-top: $margin-secondary;
     padding: $padding-medium * 0.75 $padding-medium * 1.3125;
+    padding-right: 1.5rem;
     resize: none;
+    height: 4.5rem;
   }
 
   input::placeholder,
@@ -147,7 +149,11 @@
 
 .counter.show-counter {
   display: block;
-  @include animation(counter, .5s)
+  @include animation(counter, .5s);
+  position: absolute;
+  padding: $padding-primary / 3 0;
+  font-size: $font-size-small;
+  color: $text-gray;
 }
 
 @keyframes counter {
@@ -184,7 +190,6 @@
 
 .file-upload {
   position: relative;
-  //overflow: hidden;
   cursor: pointer;
 
   .fa {
@@ -208,16 +213,11 @@
 }
 
 @media screen and (max-width: 1200px) {
-
 }
 
 @media screen and (max-width: 720px) {
   .create-transaction-container {
     margin-bottom: $margin-secondary;
-  }
-
-  textarea {
-    height: 4.5rem;
   }
 
   .fa-smile-o {

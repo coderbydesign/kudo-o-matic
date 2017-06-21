@@ -26,21 +26,22 @@ $(document).ready(function () {
         $('.file-name').html(splitPath);
     });
 
-    function heightAttachment() {
+    function offsetAttachment() {
         var $addAttachment = $('.add-attachment');
         var $offsetTop = $addAttachment.offset().top;
+        var $offsetLeft = $addAttachment.offset().left;
         var $height = $addAttachment.height();
-        $('.attachment-content').css({ top: $offsetTop + ($height * 2.5)});
+        $('.attachment-content').css({ top: $offsetTop + ($height * 2.5), left: $offsetLeft - 8  });
     }
 
-    heightAttachment();
+    offsetAttachment();
 
     $(window).resize(function () {
-        heightAttachment();
+        offsetAttachment();
     });
 
     $('.close-message').click(function () {
-        heightAttachment();
+        offsetAttachment();
     });
 
     $('.destroy-attachment').click(function () {

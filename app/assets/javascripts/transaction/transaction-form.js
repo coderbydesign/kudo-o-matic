@@ -20,10 +20,28 @@ $(document).ready(function() {
     $('.counter').html(textMax);
 
     $('.character-count').keyup(function() {
-        $('.attachment-tooltip').css({ left: '2.5rem' }); // Because img preview container is getting moved when character count is displayed
         $('.counter').addClass('show-counter');
         var textLength = $('.character-count').val().length;
         var textRemaining = textMax - textLength;
         $('.counter').html(textRemaining);
+    });
+
+
+    function offsetCounter() {
+        var $textareaField = $('.textarea-field');
+        var $offsetTop = $textareaField.offset().top;
+        var $offsetLeft = $textareaField.offset().left;
+        var $width = $textareaField.width();
+        $('.counter').css({ top: $offsetTop, left: $offsetLeft + $width + 16 });
+    }
+
+    offsetCounter();
+
+    $(window).resize(function () {
+        offsetCounter();
+    });
+
+    $('.close-message').click(function () {
+        offsetCounter();
     });
 });
