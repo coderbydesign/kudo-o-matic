@@ -24,6 +24,12 @@
   .sign-in-body {
     flex: 2;
 
+    .body-content {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+
   }
 
   .sign-in-footer {
@@ -35,12 +41,8 @@
   }
 
   img {
-    width: 50px;
-  }
-
-  h1 {
-    font-family: Danube;
-    font-weight: 300;
+    width: 400px;
+    margin-bottom: $margin-primary;
   }
 }
 
@@ -67,7 +69,9 @@
   font-weight: 500;
   cursor: pointer;
   padding:  $padding;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1200px) {
@@ -80,8 +84,8 @@
   .sign-in-container {
     width: 100%;
 
-    h1 {
-      font-size: $font-size-large;
+    img {
+      width: 325px;
     }
   }
 }
@@ -89,8 +93,8 @@
 @media screen and (max-width: 320px) {
   .sign-in-container {
 
-    h1 {
-      font-size: $font-size-medium;
+    img {
+      width: 200px;
     }
   }
 }

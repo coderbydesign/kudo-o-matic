@@ -34,6 +34,7 @@ $(document).ready(function () {
         var $fixedDivRight = $('.fixed-div-right');
 
         var $windowPort = $(window).outerHeight();
+        var $windowWidth = $(window).outerWidth();
 
         var divLeftHeight = $fixedDivLeft.outerHeight();
         var divRightHeight = $fixedDivRight.outerHeight();
@@ -45,18 +46,20 @@ $(document).ready(function () {
 
         if ($windowPort < divLeftTotal) {
             $fixedDivLeft.unstick();
-        } else if ($windowPort < 720) {
+        } else if ($windowWidth < 720) {
             $fixedDivLeft.unstick();
         } else {
-            $fixedDivLeft.sticky({getWidthFrom: '.fixed-div-left', topSpacing: 8})
-
+            $fixedDivLeft.sticky({getWidthFrom: '.fixed-div-left', topSpacing: 8});
         }
 
         if ($windowPort < divRightTotal) {
             $fixedDivRight.unstick()
+        } else if ($windowWidth < 1200) {
+            $fixedDivRight.unstick();
         } else {
             $fixedDivRight.sticky({getWidthFrom: '.fixed-div-right', topSpacing: 8})
         }
+
     }
 
     if ($(window).width() > 720) {
