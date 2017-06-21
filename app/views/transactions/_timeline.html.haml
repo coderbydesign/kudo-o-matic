@@ -32,7 +32,6 @@
           %span.activityname
             - activity = transaction.activity_name_feed
             - escapedActivity = html_escape(activity)
-            -#- escapedActivity = escapedActivity.scan(/<p>([^<>]*)<\/p>/imu).flatten.to_sentence
             != @markdown.render(escapedActivity)
       .transaction-footer-container
         -#%button#like-button
