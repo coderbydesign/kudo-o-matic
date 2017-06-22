@@ -10,7 +10,7 @@ $(document).ready(function () {
         $ajaxpreloader.addClass('show-preloader');
         $.ajax({
             type:'GET',
-            url: "/transactions.js?filter=minee", complete: function (result) {
+            url: "/transactions.js?filter=mine", complete: function (result) {
                 $ajaxpreloader.removeClass('show-preloader');
             }
         });

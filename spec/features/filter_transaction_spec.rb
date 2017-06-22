@@ -7,20 +7,7 @@ Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, options)
 end
 
-module WaitForAjax
-  def wait_for_ajax
-    Timeout.timeout(Capybara.default_max_wait_time) do
-      loop until finished_all_ajax_requests?
-    end
-  end
-
-  def finished_all_ajax_requests?
-    page.evaluate_script('jQuery.active').zero?
-  end
-end
-
 RSpec.configure do |config|
-  config.include WaitForAjax, type: :feature
   config.use_transactional_fixtures = false
 
   config.before :each do
@@ -50,12 +37,10 @@ RSpec.feature "Filter a transaction", type: :feature do
     click_link 'Log in with Google+'
     expect(current_path).to eql('/')
     find('.close-welcome').click
-
   end
 
   it 'Changes the filter text', js: true do
     first('.send-transactions').click
-    wait_for_ajax
     within '.btn-filter' do
       expect(page).to have_content('My given transactions')
     end
