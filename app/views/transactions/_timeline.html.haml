@@ -30,10 +30,7 @@
           %span
             for
           %span.activityname
-            - activity = transaction.activity_name_feed
-            - escapedActivity = html_escape(activity)
-            - autoLink = auto_link(escapedActivity, :all, target: '_blank')
-            != @markdown.render(autoLink)
+            = render_activity(transaction)
           - if transaction.image.present?
             .media-attachment
               = image_tag(transaction.image.url)
