@@ -161,6 +161,10 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
   margin-top: 0;
   margin-left: $margin-secondary * 1.5;
 
+  .goal-content {
+    left: 2.625rem; // Because of padding-left in .progress-text
+  }
+
 
   .goal-name {
     color: $base-color-gray;

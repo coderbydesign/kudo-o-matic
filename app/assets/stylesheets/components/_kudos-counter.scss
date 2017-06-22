@@ -156,7 +156,7 @@ $font-primary: 'proxima-nova-soft', sans-serif;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  left: 2.625rem; // Because of padding-left in .progress-text
+  left: 0;
   right: 0;
   margin: $margin-secondary auto;
   line-height: 1.4;
