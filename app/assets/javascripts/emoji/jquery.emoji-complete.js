@@ -9,7 +9,7 @@ $(document).ready(function () {
                 }));
             },
             template: function (value) {
-               return '<img src="https://yuku-t.com/jquery-textcomplete/media/images/emoji/' + value + '.png"></img>' + value;
+                return '<img src="textcomplete/' + value + '.png">' + value;
             },
             replace: function (value) {
                 return ':' + value + ': ';
