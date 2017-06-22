@@ -11,8 +11,13 @@
             .progress-title
               %h3
                 = "#{goal.amount} ₭"
-              %p.goal-name
-                = goal.name
+              .goal-name-info-container
+                %p.goal-name
+                  = goal.name
+                .goal.goal-content
+                  .menu-tooltip
+                  %span.menu-content
+                    = goal.name
               %span.left-text
                 = goal.achieved_on
 
@@ -28,8 +33,13 @@
             .progress-title
               %h3
                 = "#{goal.amount} ₭"
-              %p.goal-name
-                = goal.name
+              .goal-name-info-container
+                %p.goal-name
+                  = goal.name
+                .goal.goal-content
+                  .menu-tooltip
+                  %span.menu-content
+                    = goal.name
               %span.left-text
                 = goal.amount - Balance.current.amount
               %span.left-text
@@ -43,8 +53,13 @@
             .progress-title
               %h3
                 = "#{goal.amount} ₭"
-              %p.goal-name
-                = goal.name
+              .goal-name-info-container
+                %p.goal-name
+                  = goal.name
+                .goal.goal-content
+                  .menu-tooltip
+                  %span.menu-content
+                    = goal.name
               %span.left-text
                 = goal.amount - Balance.current.amount
               %span.left-text

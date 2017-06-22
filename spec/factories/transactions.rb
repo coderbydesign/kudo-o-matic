@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :transaction do
-    sender
+    sender 
     receiver
     activity
     balance

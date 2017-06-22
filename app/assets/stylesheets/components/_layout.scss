@@ -81,25 +81,25 @@
 @media screen and (max-width: 1200px) {
   .body {
     display: flex;
+  }
 
-    .container-left {
-      flex: 1;
-      min-width: 0; // http://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome
-    }
+  .container-left {
+    flex: 1;
+    min-width: 0; // http://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome
+  }
 
-    .container-center {
-      flex: 2;
-      margin-right: 0;
+  .container-center {
+    flex: 2;
+    margin-right: 0;
 
-    }
+  }
 
-    .container-right {
-      display: none;
+  .container-right {
+    display: none;
 
-      &.visible-as-modal {
-        display: block;
-        position: fixed;
-      }
+    &.visible-as-modal {
+      display: block;
+      position: fixed;
     }
   }
 
@@ -143,6 +143,10 @@
 
   .container-center {
     margin: 0;
+  }
+
+  .container-left {
+    flex: 1 0 auto;
   }
   
   .header-img {

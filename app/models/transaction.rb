@@ -2,7 +2,6 @@ class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: "is not correct. You can't give negative ₭udo's or exceed over 1000" }
   validates :activity_name_feed, length: { minimum: 4 }
 
-
   after_commit :send_slack_notification, on: :create, unless: :skip_callbacks
 
   acts_as_votable
@@ -14,6 +13,60 @@ class Transaction < ActiveRecord::Base
   delegate :name, to: :sender,   prefix: true
   delegate :name, to: :receiver, prefix: true
   delegate :name, to: :activity, prefix: true
+
+  def self.goal_reached_transaction
+    activity = Activity.create name:"reaching the goal #{Goal.previous.name} :boom:, here are some ₭udo's to boost your hunt for the next goal"
+    user = User.find_or_create_by(name: ENV.fetch('COMPANY_USER', 'Kabisa'))
+    Transaction.create sender: user, receiver: user, amount: 100, activity: activity, balance: Balance.current
+  end
+
+  def receiver_name_feed
+    receiver.nil? ? activity.name.split('for:')[0].strip : receiver.name
+  end
+
+  def activity_name_feed
+    receiver.nil? ? activity.name.split('for:')[1].strip : activity.name
+  end
+
+  def receiver_image
+    receiver_id.nil? ? '/kabisa_lizard.png' : receiver.picture_url
+  end
+
+  def activity_name
+    activity.try(:name)
+  end
+
+  def activity_name=(name)
+    self.activity = Activity.find_or_create_by(name: name) if name.present?
+  end
+
+  def receiver_name
+    receiver.try(:name)
+  end
+
+  def receiver_name=(name)
+    self.receiver = User.find_by(name: name) if name.present?
+  end
+
+  def send_slack_notification
+    SlackNotifications.new(self).send_new_transaction
+    end
+
+  def self.send_whenever
+    SlackNotifications.new(self).send_reminder
+  end
+
+  def self.all_for_user(user)
+    Transaction.where(sender: user).or(Transaction.where(balance:Balance.current).where(receiver: user)).order('created_at desc').page.per(20)
+  end
+
+  def self.send_by_user(user)
+    Transaction.where(sender: user).order('created_at desc').page.per(20)
+  end
+
+  def self.received_by_user(user)
+    Transaction.where(receiver: user).or(Transaction.where(balance: Balance.current).where(receiver: User.where(name: ENV.fetch('COMPANY_USER', 'Kabisa')))).order('created_at desc').page.per(20)
+  end
 
   GUIDELINES =
       [['Margin / month super (>=15% ROS)', 500],
@@ -48,50 +101,6 @@ class Transaction < ActiveRecord::Base
       gl.push g if g[1] >= from && g[1] <= to
     end
     gl
-  end
-
-  def receiver_name_feed
-    receiver.nil? ? activity.name.split('for:')[0].strip : receiver.name
-  end
-
-  def activity_name_feed
-    receiver.nil? ? activity.name.split('for:')[1].strip : activity.name
-  end
-
-  def receiver_image
-    receiver_id.nil? ? '/kabisa_lizard.png' : receiver.picture_url
-  end
-
-  def activity_name
-    activity.try(:name)
-  end
-
-  def activity_name=(name)
-    self.activity = Activity.find_or_create_by(name: name) if name.present?
-  end
-
-  def receiver_name
-    receiver.try(:name)
-  end
-
-  def receiver_name=(name)
-    self.receiver = User.find_by(name: name) if name.present?
-  end
-
-  def send_slack_notification
-    SlackNotifications.new(self).send_new_transaction
-  end
-
-  def self.all_for_user(user)
-    Transaction.where(sender: user).or(Transaction.where(balance:Balance.current).where(receiver: user)).order('created_at desc').page.per(20)
-  end
-
-  def self.send_by_user(user)
-    Transaction.where(sender: user).order('created_at desc').page.per(20)
-  end
-
-  def self.received_by_user(user)
-    Transaction.where(receiver: user).or(Transaction.where(balance: Balance.current).where(receiver: User.where(name: ENV.fetch('COMPANY_USER', 'Kabisa')))).order('created_at desc').page.per(20)
   end
 
   EMOJIES = [
