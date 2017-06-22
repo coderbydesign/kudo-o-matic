@@ -41,38 +41,24 @@ RSpec.feature "Add a like", type: :feature do
     click_link 'Log in with Google+'
     expect(current_path).to eql('/')
     find('button.close-welcome').click
-    find("#like-#{transaction.id}").click
-  end
-
-  after do
-    # save_and_open_page
   end
 
   context 'User likes transaction' do
 
     it 'displays who liked', js: true do
+      find("#like-#{transaction.id}").click
       within "#number-of-likes-#{transaction.id}" do
-        expect(page).to have_content("Liked by John User and 1 others")
+        expect(page).to have_content("and 1 others")
       end
     end
   end
 
   context 'User unlikes transaction' do
     it 'displays who liked', js: true do
+      find("#like-#{transaction.id}").click
       find("#unlike-#{transaction.id}").click
       within "#number-of-likes-#{transaction.id}" do
         expect(page).to have_content("Liked by Piet")
-      end
-    end
-  end
-
-  context 'User hovers over likes' do
-    xit 'displays who liked in a tooltip', js: true do
-      find("#like-#{transaction.id}").hover
-      within "#like-#{transaction.id}" do
-        within '.like-tooltip' do
-          expect().to have_content('Piet')
-        end
       end
     end
   end
