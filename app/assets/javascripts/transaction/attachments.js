@@ -15,8 +15,7 @@ $(document).ready(function () {
         reader.readAsDataURL(image)
     });
 
-    $('#media-attachment').one("change", function () {
-        console.log('change')
+    $('#media-attachment').on("change", function () {
         $('.attachment-content').addClass('show-attachment');
         $('.attachment-tooltip').addClass('show-tooltip');
     });
@@ -27,24 +26,28 @@ $(document).ready(function () {
         $('.file-name').html(splitPath);
     });
 
-    function heightAttachment() {
+    function offsetAttachment() {
         var $addAttachment = $('.add-attachment');
         var $offsetTop = $addAttachment.offset().top;
+        var $offsetLeft = $addAttachment.offset().left;
         var $height = $addAttachment.height();
-        $('.attachment-content').css({ top: $offsetTop + ($height * 2.5)});
+        $('.attachment-content').css({ top: $offsetTop + ($height * 2.5), left: $offsetLeft - 8  });
     }
 
-    heightAttachment();
+    offsetAttachment();
 
     $(window).resize(function () {
-        heightAttachment();
+        offsetAttachment();
     });
 
     $('.close-message').click(function () {
-        heightAttachment();
+        offsetAttachment();
     });
 
-    $('.add-attachment').draggable(function () {
-        
+    $('.destroy-attachment').click(function () {
+        var $el = $('#media-attachment');
+        $el.wrap('<form>').closest('form').get(0).reset();
+        $el.unwrap();
+        $('.attachment-content').removeClass('show-attachment');
     })
 });
