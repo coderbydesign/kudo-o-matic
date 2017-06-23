@@ -7,13 +7,6 @@ class DeleteCachedVotesToGoals < ActiveRecord::Migration[5.0]
     remove_column :goals, :cached_weighted_score, :integer, :default => 0
     remove_column :goals, :cached_weighted_total, :integer, :default => 0
     remove_column :goals, :cached_weighted_average, :float, :default => 0.0
-    remove_index  :goals, :cached_votes_total
-    remove_index  :goals, :cached_votes_score
-    remove_index  :goals, :cached_votes_up
-    remove_index  :goals, :cached_votes_down
-    remove_index  :goals, :cached_weighted_score
-    remove_index  :goals, :cached_weighted_total
-    remove_index  :goals, :cached_weighted_average
 
     # Uncomment this line to force caching of existing votes
     # Post.find_each(&:update_cached_votes)
