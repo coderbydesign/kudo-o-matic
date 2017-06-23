@@ -32,9 +32,6 @@
   }
 }
 
-.menu-tooltip.show-tooltip {
-  display: block;
-}
 
 .dropdown-container {
   white-space: nowrap;
@@ -60,6 +57,7 @@
 }
 
 .menu-content {
+  display: flex;
   align-items: center;
   font-weight: 300;
   min-height: $dropdown-button-size - 1rem;
@@ -136,7 +134,7 @@
   .userstatistics {
     text-align: center;
     flex: 1 0 auto;
-    //cursor: pointer;
+    cursor: pointer;
   }
 
   .userstatistics:not(:last-child) {
