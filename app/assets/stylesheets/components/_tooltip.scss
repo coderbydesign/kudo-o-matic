@@ -1,0 +1,13 @@
+.menu-tooltip {
+  width: 0;
+  height: 0;
+  border: 0.5rem solid;
+  border-color: transparent transparent $base-color-brand transparent;
+  position: absolute;
+  top: -1rem;
+  display: none;
+}
+
+.menu-tooltip.show-tooltip {
+  display: block;
+}
