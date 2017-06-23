@@ -12,7 +12,7 @@ $(document).ready(function () {
             type:'GET',
             url: "/transactions.js?filter=mine", complete: function (result) {
                 $ajaxpreloader.removeClass('show-preloader');
-            }, succes: function () {
+            }, success: function () {
                 $('.btn-filter').html('My total transactions');
                 $('.delete-filter').addClass('show-delete');
             }
@@ -26,7 +26,7 @@ $(document).ready(function () {
             type:'GET',
             url: "/transactions.js?filter=send", complete: function (result) {
                 $ajaxpreloader.removeClass('show-preloader');
-            }, succes: function () {
+            }, success: function () {
                 $('.btn-filter').html('My given transactions');
                 $('.delete-filter').addClass('show-delete');
             }
@@ -40,7 +40,7 @@ $(document).ready(function () {
             type:'GET',
             url: "/transactions.js?filter=received", complete: function (result) {
                 $ajaxpreloader.removeClass('show-preloader');
-            }, succes: function () {
+            }, success: function () {
                 $('.btn-filter').html('My received transactions');
                 $('.delete-filter').addClass('show-delete');
             }
@@ -54,7 +54,7 @@ $(document).ready(function () {
             type:'GET',
             url: "/transactions.js?filter=all", complete: function (result) {
                 $ajaxpreloader.removeClass('show-preloader');
-            }, succes: function () {
+            }, success: function () {
                 $('.btn-filter').html('All transactions');
                 $('.delete-filter').removeClass('show-delete');
             }
