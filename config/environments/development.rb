@@ -10,6 +10,8 @@ Rails.application.configure do
       s3_credentials: {
           s3_host_name: ENV["AWS_S3_HOST_NAME"],
           s3_region: ENV["AWS_S3_REGION"],
+          access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+          secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
           path: "image/:id/:filename",
           url: ':s3_domain_url'
       }
