@@ -2,9 +2,10 @@ module TransactionsHelper
   include ActionView::Helpers::TextHelper
 
   def render_activity(transaction)
-    escapteHTML = html_escape(transaction.activity_name_feed)
-    autolink = auto_link(escapteHTML, :all, target: '_blank')
+    escapeHTML = html_escape(transaction.activity_name_feed)
+    autolink = auto_link(escapeHTML, :all, target: '_blank')
     @markdown.render(autolink).html_safe
+  end
 
   def display_likes(transaction)
     likes = transaction.votes_for.voters.first(1).collect { |user| user }.to_sentence
