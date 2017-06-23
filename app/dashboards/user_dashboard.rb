@@ -13,6 +13,7 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     slack_name: Field::String,
+    admin: Field::Boolean,
     email: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -27,6 +28,7 @@ class UserDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :slack_name,
+    :admin,
     :sent_transactions,
     :received_transactions,
   ]
@@ -37,6 +39,7 @@ class UserDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :slack_name,
+    :admin,
     :created_at,
     :updated_at,
     :sent_transactions,
@@ -49,7 +52,8 @@ class UserDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :name,
     :email,
-    :slack_name
+    :slack_name,
+    :admin
   ]
 
   # Overwrite this method to customize how users are displayed
