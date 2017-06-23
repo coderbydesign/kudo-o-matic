@@ -83,7 +83,7 @@ class SlackNotifications
   end
 
   def receiver_slack_mention
-    if transaction.receiver && !transaction.receiver.slack_name.empty?
+    if transaction.receiver && !transaction.receiver.slack_name.blank?
       " (<@#{transaction.receiver.slack_name}>)"
     else
       ''
