@@ -15,20 +15,6 @@ $(document).ready(function () {
                 return ':' + value + ': ';
             },
             index: 1
-        },
-        { // tech companies
-            id: 'tech-companies',
-            words: ['apple', 'google', 'facebook', 'github'],
-            match: /\b(\w{2,})$/,
-            search: function (term, callback) {
-                callback($.map(this.words, function (word) {
-                    return word.indexOf(term) === 0 ? word : null;
-                }));
-            },
-            index: 1,
-            replace: function (word) {
-                return word + ' ';
-            }
         }
     ], {
         onKeydown: function (e, commands) {

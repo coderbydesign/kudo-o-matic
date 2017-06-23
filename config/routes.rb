@@ -40,8 +40,6 @@ Rails.application.routes.draw do
     post 'poll-like/:id', to: "goal#pollvote", as: :polllike
   end
 
-
-
   get '/transactions/:type' => 'transactions#filter'
 
   get '/transactions', to: 'transactions#index'

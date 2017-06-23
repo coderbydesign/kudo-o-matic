@@ -1,6 +1,4 @@
 class TransactionsController < ApplicationController
-  layout 'dashboard'
-
   protect_from_forgery with: :exception
 
   def index
@@ -34,13 +32,19 @@ class TransactionsController < ApplicationController
     # TODO implement session authentication
     @transaction = Transaction.find(params[:id])
     @transaction.liked_by current_user
-    redirect_to root_path
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end
   end
 
   def downvote
     @transaction = Transaction.find(params[:id])
-    @transaction.downvote_by current_user
-    redirect_to root_path
+    @transaction.unliked_by current_user
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end
   end
 
   def kudo_guidelines
