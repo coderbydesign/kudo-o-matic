@@ -43,6 +43,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'railties', '~> 5.0', '>= 5.0.0.1'
 gem 'chronic', '~> 0.10.2'
+gem 'aws-sdk', '~> 2.9', '>= 2.9.43'
 
 gem 'draper', '= 3.0.0.pre1'
 gem "administrate", github: "pablo-co/administrate", branch: "rails5"
@@ -56,6 +57,20 @@ gem 'pry'
 
 gem "autoprefixer-rails"
 
+gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+gem 'slack-notifier', '~> 2.1.0'
+gem 'settingslogic', '~> 2.0', '>= 2.0.9'
+gem 'bourbon', '~> 4.3', '>= 4.3.4'
+gem 'rubocop', '~> 0.47.1', require: false
+gem 'scss_lint', require: false
+gem 'paperclip', '~> 5.1'
+
+gem 'rails_autolink', '~> 1.1', '>= 1.1.6'
+
+gem 'md_emoji', git: 'https://github.com/egonm12/md_emoji.git', branch: 'master'
+gem 'redcarpet', '~> 3.3', '>= 3.3.4'
+
+gem 'timecop', '~> 0.8.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

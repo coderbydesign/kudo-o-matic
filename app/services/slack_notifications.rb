@@ -56,7 +56,8 @@ class SlackNotifications
                     }
                 ],
                 footer: "#{Settings.slack.company_name} | #{Settings.slack.company_project} | Created at: #{transaction.created_at}",
-                footer_icon: Settings.slack.company_icon
+                footer_icon: Settings.slack.company_icon,
+                image_url: transaction.image.url
             }
         ]
     )
@@ -82,7 +83,7 @@ class SlackNotifications
   end
 
   def receiver_slack_mention
-    if transaction.receiver && !transaction.receiver.slack_name.empty?
+    if transaction.receiver && !transaction.receiver.slack_name.blank?
       " (<@#{transaction.receiver.slack_name}>)"
     else
       ''

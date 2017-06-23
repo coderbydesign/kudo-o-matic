@@ -30,9 +30,10 @@
           %span
             for
           %span.activityname
-            - activity = transaction.activity_name_feed
-            - escapedActivity = html_escape(activity)
-            != @markdown.render(escapedActivity)
+            = render_activity(transaction)
+          - if transaction.image.present?
+            .media-attachment
+              = image_tag(transaction.image.url)
       .transaction-footer-container
         - if current_user.voted_for? transaction
           = render 'unlikes', transaction: transaction
