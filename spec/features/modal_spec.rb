@@ -76,18 +76,11 @@ RSpec.feature "Open a modal", type: :feature do
     # Problems with on success function javascript which triggers .clipboard-emoji to have content
     xit 'Copies a emoji on click', js: true do
       find(:css, '.emoji-container', match: :first).click
-      within ('.emoji-modal') do
-        within '.clipboard-emoji' do
-          expect(page).to have_content('Copied')
-        end
-        expect(page).to have_css('.show-clipboard')
+      within ('.textarea-field') do
+        expect(page).to have_content(':+1:')
       end
     end
   end
 
-  context 'Given the welcome modal' do
-    xit 'Opens the modal if content has changed', js: true do
-
-    end
-  end
+  #TODO Write spec for Help Modal and Release Modal
 end

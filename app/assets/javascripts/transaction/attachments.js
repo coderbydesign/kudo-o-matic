@@ -1,9 +1,11 @@
 $(document).ready(function () {
+    var $mediaAttachment = $('#media-attachment');
+
     $('.add-attachment').click(function () {
-        $('#media-attachment').click();
+        $mediaAttachment.click();
     });
 
-    $('#media-attachment').change(function (event) {
+    $mediaAttachment.change(function (event) {
         var files = event.target.files;
         var image = files[0];
         var reader = new FileReader();
@@ -15,12 +17,12 @@ $(document).ready(function () {
         reader.readAsDataURL(image)
     });
 
-    $('#media-attachment').on("change", function () {
+    $mediaAttachment.on("change", function () {
         $('.attachment-content').addClass('show-attachment');
         $('.attachment-tooltip').addClass('show-tooltip');
     });
 
-    $('#media-attachment').change(function () {
+    $mediaAttachment.change(function () {
         var $pathname = ($('#media-attachment').val());
         var splitPath = $pathname.split("fakepath\\")[1];
         $('.file-name').html(splitPath);
@@ -49,5 +51,12 @@ $(document).ready(function () {
         $el.wrap('<form>').closest('form').get(0).reset();
         $el.unwrap();
         $('.attachment-content').removeClass('show-attachment');
-    })
+    });
+
+    // Toggle show and hide transaction attachment per transaction
+    $('.hide-file').click(function () {
+        var closestAttachment = $(this).closest('.media-attachment').find('.attachment-file');
+        closestAttachment.toggleClass('hide-image');
+       $(this).toggleClass('fa-chevron-down fa-chevron-right')
+    });
 });
