@@ -33,7 +33,12 @@
             = render_activity(transaction)
           - if transaction.image.present?
             .media-attachment
-              = image_tag(transaction.image.url)
+              .img-file
+                %span.file-name
+                  = transaction.image_file_name
+                %span
+                  %i.fa.fa-chevron-down.hide-file
+              = image_tag transaction.image.url, class:'attachment-file'
       .transaction-footer-container
         - if current_user.voted_for? transaction
           = render 'unlikes', transaction: transaction

@@ -84,10 +84,31 @@
     }
 
     .media-attachment {
-      margin-top: $margin-secondary;
 
-      img {
+      .img-file {
+        display: flex;
+        max-width: 50%;
+        font-size: 0.875rem;
+
+        .file-name {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          margin-right: $margin-secondary;
+        }
+
+        .hide-file {
+          cursor: pointer;
+        }
+      }
+
+      .attachment-file {
         max-width: 100%;
+        max-height: 30rem;
+      }
+
+      .attachment-file.hide-image {
+        display: none;
       }
     }
 
