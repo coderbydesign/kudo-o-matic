@@ -80,6 +80,21 @@
   position: relative;
 }
 
+.back-to-top-container {
+
+}
+
+.back-to-top {
+  display: none;
+  //position: fixed;
+  right: 2rem;
+  width: fit-content !important;
+}
+
+.back-to-top.show-button {
+  display: block;
+}
+
 @media screen and (max-width: 1200px) {
   .body {
     display: flex;
