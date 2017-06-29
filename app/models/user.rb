@@ -11,7 +11,7 @@ acts_as_voter
 
   def self.from_omniauth(access_token)
     data = access_token.info
-    return if data['email'].split('@')[1] != 'kabisa.nl'
+    return if data['email'].split('@')[1] != ENV.fetch('DEVISE_DOMAIN', 'gmail.com')
     user = User.where(email: data['email']).first_or_create!
 
     user.update(
