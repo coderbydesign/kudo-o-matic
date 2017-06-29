@@ -253,7 +253,7 @@ Devise.setup do |config|
     prompt: 'select_account',
     image_aspect_ration: 'square',
     image_size: 512,
-    hd: 'kabisa.nl'
+    hd: ENV.fetch('DEVISE_DOMAIN', 'gmail.com')
   }
 
 
