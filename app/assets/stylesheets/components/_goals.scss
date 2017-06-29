@@ -57,10 +57,10 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
 .progress-step {
   display: block;
   position: relative;
-  flex: 1 1 0%;
   margin: 0;
   padding: 0;
   min-width: $marker-size; // For a flexbox bug in firefox that wont allow the text overflow on the text
+  height: 100px;
 
   // Stops the last step growing
   &:last-child {
@@ -73,16 +73,16 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
     bottom: 0;
     right: 0;
     left: 0;
-    //z-index: 100000;
     background: $secondary-stroke-color;
-    border-top: 1px solid $base-color-dark-gray;
 
     .percentage {
       margin-left: $margin-secondary;
-      border-top: 1px solid $base-color-dark-gray;
-      line-height: 18px;
+      border-top: 1px solid $base-color-brand;
       padding: 0 0 0 $padding-secondary * 1.5;
       font-size: $font-size-regular - 0.1rem;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   }
 
@@ -425,7 +425,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
       top: 28px;
       left: 0.5rem;
       width: $path-height * 3;
-      height: 71%;
+      height: 72px;
     }
 
     .progress-bar-complete {
@@ -433,7 +433,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
       top: 28px;
       left: 0.5rem;
       width: $path-height * 3;
-      height: 71%;
+      height: 72px;
     }
   }
 
