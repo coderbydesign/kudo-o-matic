@@ -141,6 +141,10 @@
     border-right: 1px solid $primary-border-color
   }
 
+  .my-transactions.is-active, .send-transactions.is-active, .received-transactions.is-active {
+    color: rgba(0,0,0,0.5);
+  }
+
   .statistics-value {
     display: block;
     font-weight: 700;
