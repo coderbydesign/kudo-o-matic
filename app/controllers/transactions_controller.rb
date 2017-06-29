@@ -36,6 +36,8 @@ class TransactionsController < ApplicationController
       format.html { redirect_to :back }
       format.js
     end
+
+    GoalReacher.check!
   end
 
   def downvote
