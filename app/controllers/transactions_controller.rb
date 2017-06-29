@@ -39,6 +39,7 @@ class TransactionsController < ApplicationController
   end
 
   def downvote
+    # TODO implement session authentication
     @transaction = Transaction.find(params[:id])
     @transaction.unliked_by current_user
     respond_to do |format|

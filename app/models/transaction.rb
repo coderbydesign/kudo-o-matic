@@ -17,11 +17,17 @@ class Transaction < ActiveRecord::Base
   delegate :name, to: :receiver, prefix: true
   delegate :name, to: :activity, prefix: true
 
-  def self.goal_reached_transaction
-    activity = Activity.create name:"reaching the goal #{Goal.previous.name} :boom:, here are some ₭udo's to boost your hunt for the next goal"
-    user = User.find_or_create_by(name: ENV.fetch('COMPANY_USER', 'Kabisa'))
-    Transaction.create sender: user, receiver: user, amount: 100, activity: activity, balance: Balance.current
-  end
+  # def self.goal_reached_transaction
+  #   activity = Activity.create name:"reaching the goal #{Goal.previous.name} :boom:, here are some ₭udo's to boost your hunt for the next goal"
+  #   user = User.find_or_create_by(name: ENV.fetch('COMPANY_USER', 'Kabisa'))
+  #   Transaction.create sender: user, receiver: user, amount: 100, activity: activity, balance: Balance.current
+  # end
+
+  # def self.number_of_likes
+  #   Transaction.where(balance: self).each do |transaction|
+  #   amount = amount + transaction.get_upvotes.size
+  #   end
+  # end
 
   def receiver_name_feed
     receiver.nil? ? activity.name.split('for:')[0].strip : receiver.name

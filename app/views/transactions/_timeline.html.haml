@@ -9,8 +9,8 @@
     .transaction-container{'data-likes': transaction.votes_for.voters.collect { |user| user}}
       .transaction-header-container
         .transaction-kudos-container
-          %span
-            = "#{transaction.amount} ₭"
+          %span{id: "kudos-container-#{transaction.id}"}
+            = render 'amount-in-kudos', transaction: transaction
         .avatar
           .transaction-avatar-container
             = image_tag User.find(transaction.sender_id).picture_url, class:'sender flex-item'

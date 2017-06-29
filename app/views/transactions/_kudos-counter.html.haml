@@ -21,11 +21,9 @@
       .chart__count
         -#%span
           Next goal
-        %div
-          %span.current-amount.js-count{'data-count':Balance.current.amount}
-            = Balance.current.amount
-          %span.kudo-currency
-            ₭
+        %div#kudo-meter
+          = render 'amount-in-total'
+
         %span.next-goal-amount
           %span
             of
