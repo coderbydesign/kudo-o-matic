@@ -17,7 +17,7 @@ class SlackNotifications
     User.where.not(slack_name: blank?).each do |user|
       notifier.ping(
           channel: "@#{user.slack_name}",
-          text: "Hey <@#{user.slack_name}>! It's almost weekend \u{1f389}. But don't forget to think back about this week \u{1f914} and if someone earned some <#{root_url}|₭udo's> \u{1f60f}.")
+          text: "Hey <@#{user.slack_name}>! It's almost weekend \u{1f389}. But don't forget to think back about this week \u{1f914} because there is definitely someone who deserves a compliment <#{root_url}|Go give that person some ₭udo's> \u{1f60f}.")
     end
   end
 
