@@ -94,7 +94,7 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          margin-right: $margin-secondary;
+          margin-right: $margin-secondary / 2;
         }
 
         .hide-file {
@@ -104,7 +104,7 @@
 
       .attachment-file {
         max-width: 100%;
-        max-height: 30rem;
+        max-height: 25rem;
       }
 
       .attachment-file.hide-image {
