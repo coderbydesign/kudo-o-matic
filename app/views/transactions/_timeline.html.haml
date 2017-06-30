@@ -34,8 +34,8 @@
           - if transaction.image.present?
             .media-attachment
               .img-file
-                %span.file-name
-                  = transaction.image_file_name
+                %i.file-name
+                  = "Attachment (#{(transaction.image_file_size / 1000)}kb)"
                 %span
                   %i.fa.fa-chevron-down.hide-file
               = image_tag transaction.image.url, class:'attachment-file'
