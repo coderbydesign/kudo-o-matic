@@ -66,7 +66,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.all_for_user(user)
-    Transaction.where(sender: user).or(Transaction.where(receiver: user)).order('created_at desc').page.per(20)
+    Transaction.where(sender: user).or(Transaction.where(receiver: user)).or(Transaction.where(receiver: User.where(name: ENV.fetch('COMPANY_USER', 'Kabisa')))).order('created_at desc').page.per(20)
   end
 
   def self.send_by_user(user)
