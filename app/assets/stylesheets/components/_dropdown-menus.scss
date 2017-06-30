@@ -77,6 +77,7 @@
 .dropdown-content.slide-menu .menu-content:hover {
   background: $secondary-bg;
   color: $text-primary;
+  border: 1px solid $focus-border-color;
 }
 
 ///////////////////////////////////////////////////////////
@@ -139,6 +140,10 @@
 
   .userstatistics:not(:last-child) {
     border-right: 1px solid $primary-border-color
+  }
+
+  .my-transactions.is-active, .send-transactions.is-active, .received-transactions.is-active {
+    color: rgba(0,0,0,0.5);
   }
 
   .statistics-value {

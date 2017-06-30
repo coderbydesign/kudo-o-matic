@@ -9,4 +9,3 @@ User.delete_all
 Goal.create(name: "Goal 1", amount: 1500,  balance: @balance, achieved_on: nil)
 Goal.create(name: "Goal 2", amount: 5000, balance: @balance, achieved_on: nil)
 Goal.create(name: "Goal 3", amount: 10000, balance: @balance, achieved_on: nil)
-

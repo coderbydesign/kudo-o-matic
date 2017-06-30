@@ -20,6 +20,11 @@
         %span.flex-item
           Releases
         %i.fa.fa-wrench
+      - if current_user.try(:admin)
+        %a.menu-content{href: '/admin'}
+          %span.flex-item
+            Admin
+          %i.fa.fa-users
   .user-statistics-container
     .userstatistics.send-transactions
       %span.statistics-title
