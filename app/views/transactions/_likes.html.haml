@@ -1,10 +1,5 @@
 .btn.btn-secondary.btn-like{id: "like-#{transaction.id}"}
-  - if Balance.current.amount + 1 >= Goal.next.amount
-    = link_to like_path(transaction.id), remote: false, method: :post, class: 'upvote-transaction' do
-      .fa.fa-thumbs-up
-      Like
-  - else
-    = link_to like_path(transaction.id), remote: true, method: :post, class: 'upvote-transaction' do
-      .fa.fa-thumbs-up
-      Like
+  = link_to like_path(transaction.id), id:'like-me', remote: true, method: :post, class: 'upvote-transaction' do
+    .fa.fa-thumbs-up
+    Like
 
