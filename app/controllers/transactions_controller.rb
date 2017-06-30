@@ -31,13 +31,16 @@ class TransactionsController < ApplicationController
   def upvote
     # TODO implement session authentication
     @transaction = Transaction.find(params[:id])
+
     @transaction.liked_by current_user
     respond_to do |format|
       format.html { redirect_to :back }
       format.js
     end
-
-    GoalReacher.check!
+    if Balance.current.amount >= Goal.next.amount
+      GoalReacher.check!
+      # redirect_to root_path
+    end
   end
 
   def downvote
