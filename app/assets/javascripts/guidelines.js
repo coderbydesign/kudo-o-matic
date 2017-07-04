@@ -2,7 +2,7 @@ $(document).ready(function() {
     var index = 0;
     // var popper;
 
-    var instance = new Tooltip(document.getElementsByClassName("input-amount")[0], {
+    var instance = new Tooltip(document.getElementsByClassName("amount")[0], {
         html: true,
         title: "Suggested",
         trigger: "none",
