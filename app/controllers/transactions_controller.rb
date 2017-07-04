@@ -31,7 +31,6 @@ class TransactionsController < ApplicationController
   def upvote
     # TODO implement session authentication
     @transaction = Transaction.find(params[:id])
-
     @transaction.liked_by current_user
     respond_to do |format|
       format.html { redirect_to :back }

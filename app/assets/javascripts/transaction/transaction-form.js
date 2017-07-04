@@ -25,23 +25,4 @@ $(document).ready(function() {
         var textRemaining = textMax - textLength;
         $('.counter').html(textRemaining);
     });
-
-
-    // function offsetCounter() {
-    //     var $textareaField = $('.textarea-field');
-    //     var $offsetTop = $textareaField.offset().top;
-    //     var $offsetLeft = $textareaField.offset().left;
-    //     var $width = $textareaField.width();
-    //     $('.counter').css({ top: $offsetTop, left: $offsetLeft + $width + 16 });
-    // }
-    //
-    // offsetCounter();
-    //
-    // $(window).resize(function () {
-    //     offsetCounter();
-    // });
-    //
-    // $('.close-message').click(function () {
-    //     offsetCounter();
-    // });
 });
