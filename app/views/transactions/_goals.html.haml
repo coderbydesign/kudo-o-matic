@@ -1,6 +1,6 @@
 .goal-container
   %ul.progress-tracker.progress-tracker--left.progress-tracker--vertical
-    - @current_goals.each do |goal|
+    - Goal.all.where(balance: Balance.current).order('amount desc').each do |goal|
 
       - if goal.achieved_on != nil
         %li.progress-step.is-complete

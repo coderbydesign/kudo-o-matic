@@ -36,9 +36,9 @@ class TransactionsController < ApplicationController
       format.html { redirect_to :back }
       format.js
     end
-    # if Balance.current.amount >= Goal.next.amount
-    #   GoalReacher.check!
-    # end
+    if Balance.current.amount >= Goal.next.amount
+      GoalReacher.check!
+    end
   end
 
   def downvote

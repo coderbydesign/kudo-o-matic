@@ -1,4 +1,6 @@
 $('#unlike-<%= @transaction.id %>').replaceWith('<%= escape_javascript render 'likes', transaction: @transaction %>');
 $('#like-tooltip-<%= @transaction.id %>').html('<%= escape_javascript render 'display-likes', transaction: @transaction %>');
 $('#kudos-container-<%= @transaction.id %>').html('<%= escape_javascript render 'amount-in-kudos', transaction: @transaction %>');
-$('#kudo-meter').html('<%= escape_javascript render 'amount-in-total'%>');
+$('.fixed-div-right').html('<%= escape_javascript render 'kudos-counter' %>');
+$('#thermogoal').html('<%= escape_javascript render 'goals', goal: @current_goals %>');
+$('.js-chart').setChart();

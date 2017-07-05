@@ -21,8 +21,11 @@
       .chart__count
         -#%span
           Next goal
-        %div#kudo-meter
-          = render 'amount-in-total'
+        %div
+          %span.current-amount.js-count{'data-count':Balance.current.amount}
+            = Balance.current.amount
+          %span.kudo-currency
+            ₭
 
         %span.next-goal-amount
           %span
@@ -40,4 +43,5 @@
             .menu-tooltip
             %span.menu-content
               = Goal.next.name
-  = render 'goals'
+  #thermogoal
+    = render 'goals'
