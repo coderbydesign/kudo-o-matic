@@ -30,6 +30,7 @@ class TransactionsController < ApplicationController
 
   def upvote
     # TODO implement session authentication
+    query_variables
     @transaction = Transaction.find(params[:id])
     @transaction.liked_by current_user
     respond_to do |format|
@@ -43,6 +44,7 @@ class TransactionsController < ApplicationController
 
   def downvote
     # TODO implement session authentication
+    query_variables
     @transaction = Transaction.find(params[:id])
     @transaction.unliked_by current_user
     respond_to do |format|
@@ -70,9 +72,6 @@ class TransactionsController < ApplicationController
     @transaction                  = Transaction.new
     @achieved_goal                = Goal.where(balance: Balance.current).where.not(achieved_on: nil).order('achieved_on desc')
 
-    @number                       = ((Balance.current.amount.to_f - Goal.previous.amount.to_f) / (Goal.next.amount.to_f - Goal.previous.amount.to_f)) * 100
-    @balance_percentage           = helper.number_to_percentage(@number, precision: 0)
-
     @send_transactions_user       = Transaction.where(sender: current_user).count(:id)
     @received_transactions_user   = Transaction.where(receiver: current_user).count(:id)
     @received_transactions_team   = Transaction.where(receiver: User.where(name: ENV.fetch('COMPANY_USER', 'Kabisa'))).count(:id)
@@ -98,11 +97,5 @@ class TransactionsController < ApplicationController
       @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
     end
 
-  end
-
-  def helper
-    @helper ||= Class.new do
-      include ActionView::Helpers::NumberHelper
-    end.new
   end
 end

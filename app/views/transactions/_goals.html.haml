@@ -1,6 +1,6 @@
 .goal-container
   %ul.progress-tracker.progress-tracker--left.progress-tracker--vertical
-    - Goal.all.where(balance: Balance.current).order('amount desc').each do |goal|
+    - current_goals.each do |goal|
 
       - if goal.achieved_on != nil
         %li.progress-step.is-complete
@@ -24,9 +24,9 @@
       - elsif Goal.next == goal
         %li.progress-step.is-active
           .progress-bar
-            .progress-bar-inner{style: "height: #{@balance_percentage}"}
+            .progress-bar-inner{style: "height: #{percentage_next_goal}"}
               %span.percentage
-                = @balance_percentage
+                = percentage_next_goal
           %span.progress-marker{style:"box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);"}
             %i.fa.fa-lock
           %span.progress-text

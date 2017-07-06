@@ -43,5 +43,4 @@
             .menu-tooltip
             %span.menu-content
               = Goal.next.name
-  #thermogoal
-    = render 'goals'
+  = render 'goals', current_goals: @current_goals

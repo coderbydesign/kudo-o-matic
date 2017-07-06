@@ -30,7 +30,7 @@
           %span
             for
           %span.activityname
-            = render_activity(transaction)
+            = render_activity(transaction, markdown)
           - if transaction.image.present?
             .media-attachment
               .img-file
