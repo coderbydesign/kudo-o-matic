@@ -58,7 +58,7 @@ RSpec.feature "Add a like", type: :feature do
       find("#like-#{transaction.id}").click
       find("#unlike-#{transaction.id}").click
       within "#number-of-likes-#{transaction.id}" do
-        expect(page).to have_content("Liked by Piet")
+        expect(page).to have_content("+1 ₭ by Piet")
       end
     end
   end

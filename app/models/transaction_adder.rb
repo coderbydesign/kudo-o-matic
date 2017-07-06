@@ -11,7 +11,7 @@ class TransactionAdder
       activity: activity,
       image: image,
       balance: Balance.current,
-      amount: params[:amount]
+      amount: params[:amount],
     )
 
     Transaction.transaction do

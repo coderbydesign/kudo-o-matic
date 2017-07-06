@@ -17,11 +17,17 @@ class Transaction < ActiveRecord::Base
   delegate :name, to: :receiver, prefix: true
   delegate :name, to: :activity, prefix: true
 
-  def self.goal_reached_transaction
-    activity = Activity.create name:"reaching the goal #{Goal.previous.name} :boom:, here are some ₭udo's to boost your hunt for the next goal"
-    user = User.find_or_create_by(name: ENV.fetch('COMPANY_USER', 'Kabisa'))
-    Transaction.create sender: user, receiver: user, amount: 100, activity: activity, balance: Balance.current
-  end
+  # def self.goal_reached_transaction
+  #   activity = Activity.create name:"reaching the goal #{Goal.previous.name} :boom:, here are some ₭udo's to boost your hunt for the next goal"
+  #   user = User.find_or_create_by(name: ENV.fetch('COMPANY_USER', 'Kabisa'))
+  #   Transaction.create sender: user, receiver: user, amount: 100, activity: activity, balance: Balance.current
+  # end
+
+  # def self.number_of_likes
+  #   Transaction.where(balance: self).each do |transaction|
+  #   amount = amount + transaction.get_upvotes.size
+  #   end
+  # end
 
   def receiver_name_feed
     receiver.nil? ? activity.name.split('for:')[0].strip : receiver.name
@@ -116,17 +122,15 @@ class Transaction < ActiveRecord::Base
       'arrow_right', 'arrow_right_hook', 'arrow_up', 'arrow_up_down',
       'arrow_up_small', 'arrow_upper_left', 'arrow_upper_right',
       'arrows_clockwise', 'arrows_counterclockwise', 'art', 'articulated_lorry',
-      'astonished', 'athletic_shoe', 'atm', 'b', 'baby', 'baby_bottle',
-      'baby_chick', 'baby_symbol', 'back', 'baggage_claim', 'balloon',
+      'astonished', 'atm', 'b', 'baby', 'baby_bottle',
+      'baby_chick', 'baby_symbol', 'baggage_claim', 'balloon',
       'ballot_box_with_check', 'bamboo', 'banana', 'bangbang', 'bank', 'bar_chart',
       'barber', 'baseball', 'basketball', 'bath', 'bathtub', 'battery', 'bear',
-      'bee', 'beer', 'beers', 'beetle', 'beginner', 'bell', 'bento', 'bicyclist',
+      'beer', 'beers', 'beetle', 'beginner', 'bell', 'bento', 'bicyclist',
       'bike', 'bikini', 'bird', 'birthday', 'black_circle', 'black_joker',
-      'black_large_square', 'black_medium_small_square', 'black_medium_square',
-      'black_nib', 'black_small_square', 'black_square_button', 'blossom',
-      'blowfish', 'blue_book', 'blue_car', 'blue_heart', 'blush', 'boar', 'boat',
-      'bomb', 'book', 'bookmark', 'bookmark_tabs', 'books', 'boom', 'boot',
-      'bouquet', 'bow', 'bowling', 'bowtie', 'boy', 'bread', 'bride_with_veil',
+      'black_nib', 'black_square_button', 'blossom', 'blowfish', 'blue_book', 'blue_car',
+      'blue_heart', 'blush', 'boar', 'boat', 'bomb', 'book', 'bookmark', 'bookmark_tabs', 'books',
+      'boom', 'boot', 'bouquet', 'bow', 'bowling', 'bowtie', 'boy', 'bread', 'bride_with_veil',
       'bridge_at_night', 'briefcase', 'broken_heart', 'bug', 'bulb',
       'bullettrain_front', 'bullettrain_side', 'bus', 'busstop',
       'bust_in_silhouette', 'busts_in_silhouette', 'cactus', 'cake', 'calendar',
@@ -145,7 +149,7 @@ class Transaction < ActiveRecord::Base
       'confounded', 'confused', 'congratulations', 'construction',
       'construction_worker', 'convenience_store', 'cookie', 'cool', 'cop',
       'copyright', 'corn', 'couple', 'couple_with_heart', 'couplekiss', 'cow',
-      'cow2', 'credit_card', 'crescent_moon', 'crocodile', 'crossed_flags',
+      'cow2', 'credit_card', 'crocodile', 'crossed_flags',
       'crown', 'cry', 'crying_cat_face', 'crystal_ball', 'cupid', 'curly_loop',
       'currency_exchange', 'curry', 'custard', 'customs', 'cyclone', 'dancer',
       'dancers', 'dango', 'dart', 'dash', 'date', 'de', 'deciduous_tree',
@@ -156,7 +160,7 @@ class Transaction < ActiveRecord::Base
       'dvd', 'e-mail', 'ear', 'ear_of_rice', 'earth_africa', 'earth_americas',
       'earth_asia', 'egg', 'eggplant', 'eight', 'eight_pointed_black_star',
       'eight_spoked_asterisk', 'electric_plug', 'elephant', 'email', 'end',
-      'envelope', 'envelope_with_arrow', 'es', 'euro', 'european_castle',
+      'envelope', 'es', 'euro', 'european_castle',
       'european_post_office', 'evergreen_tree', 'exclamation', 'expressionless',
       'eyeglasses', 'eyes', 'facepunch', 'factory', 'fallen_leaf', 'family',
       'fast_forward', 'fax', 'fearful', 'feelsgood', 'feet', 'ferris_wheel',
@@ -164,7 +168,7 @@ class Transaction < ActiveRecord::Base
       'first_quarter_moon', 'first_quarter_moon_with_face', 'fish', 'fish_cake',
       'fishing_pole_and_fish', 'fist', 'five', 'flags', 'flashlight',
       'floppy_disk', 'flower_playing_cards', 'flushed', 'foggy', 'football',
-      'footprints', 'fork_and_knife', 'fountain', 'four', 'four_leaf_clover', 'fr',
+      'fork_and_knife', 'fountain', 'four', 'four_leaf_clover', 'fr',
       'free', 'fried_shrimp', 'fries', 'frog', 'frowning', 'fu', 'fuelpump',
       'full_moon', 'full_moon_with_face', 'game_die', 'gb', 'gem', 'gemini',
       'ghost', 'gift', 'gift_heart', 'girl', 'globe_with_meridians', 'goat',
@@ -186,8 +190,7 @@ class Transaction < ActiveRecord::Base
       'jack_o_lantern', 'japan', 'japanese_castle', 'japanese_goblin',
       'japanese_ogre', 'jeans', 'joy', 'joy_cat', 'jp', 'key', 'keycap_ten',
       'kimono', 'kiss', 'kissing', 'kissing_cat', 'kissing_closed_eyes',
-      'kissing_heart', 'kissing_smiling_eyes', 'koala', 'koko', 'kr', 'lantern',
-      'large_blue_circle', 'large_blue_diamond', 'large_orange_diamond',
+      'kissing_heart', 'kissing_smiling_eyes', 'koala', 'koko', 'kr', 'large_blue_circle', 'large_blue_diamond', 'large_orange_diamond',
       'last_quarter_moon', 'last_quarter_moon_with_face', 'laughing', 'leaves',
       'ledger', 'left_luggage', 'left_right_arrow', 'leftwards_arrow_with_hook',
       'lemon', 'leo', 'leopard', 'libra', 'light_rail', 'link', 'lips', 'lipstick',
@@ -209,9 +212,8 @@ class Transaction < ActiveRecord::Base
       'notebook_with_decorative_cover', 'notes', 'nut_and_bolt', 'o', 'o2',
       'ocean', 'octocat', 'octopus', 'oden', 'office', 'ok', 'ok_hand', 'ok_woman',
       'older_man', 'older_woman', 'on', 'oncoming_automobile', 'oncoming_bus',
-      'oncoming_police_car', 'oncoming_taxi', 'one', 'open_book',
-      'open_file_folder', 'open_hands', 'open_mouth', 'ophiuchus', 'orange_book',
-      'outbox_tray', 'ox', 'package', 'page_facing_up', 'page_with_curl', 'pager',
+      'oncoming_police_car', 'oncoming_taxi', 'one', 'open_file_folder', 'open_hands', 'open_mouth', 'ophiuchus', 'orange_book',
+      'outbox_tray', 'ox', 'page_facing_up', 'page_with_curl', 'pager',
       'palm_tree', 'panda_face', 'paperclip', 'parking', 'part_alternation_mark',
       'partly_sunny', 'passport_control', 'paw_prints', 'peach', 'pear', 'pencil',
       'pencil2', 'penguin', 'pensive', 'performing_arts', 'persevere',
@@ -239,7 +241,7 @@ class Transaction < ActiveRecord::Base
       'small_red_triangle', 'small_red_triangle_down', 'smile', 'smile_cat',
       'smiley', 'smiley_cat', 'smiling_imp', 'smirk', 'smirk_cat', 'smoking',
       'snail', 'snake', 'snowboarder', 'snowflake', 'snowman', 'sob', 'soccer',
-      'soon', 'sos', 'sound', 'space_invader', 'spades', 'spaghetti', 'sparkle',
+      'soon', 'sos', 'sound', 'space_invader', 'spades', 'spaghetti',
       'sparkler', 'sparkles', 'sparkling_heart', 'speak_no_evil', 'speaker',
       'speech_balloon', 'speedboat', 'squirrel', 'star', 'star2', 'stars',
       'station', 'statue_of_liberty', 'steam_locomotive', 'stew', 'straight_ruler',
@@ -264,9 +266,7 @@ class Transaction < ActiveRecord::Base
       'warning', 'watch', 'water_buffalo', 'watermelon', 'wave', 'wavy_dash',
       'waxing_crescent_moon', 'waxing_gibbous_moon', 'wc', 'weary', 'wedding',
       'whale', 'whale2', 'wheelchair', 'white_check_mark', 'white_circle',
-      'white_flower', 'white_large_square', 'white_medium_small_square',
-      'white_medium_square', 'white_small_square', 'white_square_button',
-      'wind_chime', 'wine_glass', 'wink', 'wolf', 'woman', 'womans_clothes',
+      'white_flower', 'white_square_button', 'wind_chime', 'wine_glass', 'wink', 'wolf', 'woman', 'womans_clothes',
       'womans_hat', 'womens', 'worried', 'wrench', 'x', 'yellow_heart', 'yen',
       'yum', 'zap', 'zero', 'zzz']
 end

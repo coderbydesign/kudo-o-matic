@@ -26,6 +26,7 @@
             = Balance.current.amount
           %span.kudo-currency
             ₭
+
         %span.next-goal-amount
           %span
             of
@@ -42,4 +43,4 @@
             .menu-tooltip
             %span.menu-content
               = Goal.next.name
-  = render 'goals'
+  = render 'goals', current_goals: @current_goals
