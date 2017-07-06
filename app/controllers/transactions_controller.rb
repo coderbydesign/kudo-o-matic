@@ -81,9 +81,13 @@ class TransactionsController < ApplicationController
     @monthly_transactions         = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).count(:id)
     @all_transactions             = Transaction.count(:id)
 
-    @weekly_kudos                 = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week())).sum(:amount)
-    @monthly_kudos                = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).sum(:amount)
-    @all_kudos                    = Transaction.where(balance: Balance.current).sum(:amount)
+    @weekly_likes                 = Transaction.joins("INNER JOIN votes on votes.votable_id = transactions.id and votable_type='Transaction'").where("balance_id=#{Balance.current.id}").where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week())).count
+    @monthly_likes                = Transaction.joins("INNER JOIN votes on votes.votable_id = transactions.id and votable_type='Transaction'").where("balance_id=#{Balance.current.id}").where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month())).count
+
+    @weekly_kudos                 = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week())).sum(:amount) + @weekly_likes
+    @monthly_kudos                = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).sum(:amount) + @monthly_likes
+
+
 
     @markdown                     = Redcarpet::Markdown.new(MdEmoji::Render, :no_intra_emphasis => true)
 
