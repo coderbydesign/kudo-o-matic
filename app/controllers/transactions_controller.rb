@@ -88,13 +88,12 @@ class TransactionsController < ApplicationController
 
     @markdown                     = Redcarpet::Markdown.new(MdEmoji::Render, :no_intra_emphasis => true)
 
-
     if params['filter'] == 'mine'
-      @transactions = Transaction.all_for_user(current_user)
+      @transactions = Transaction.all_for_user(current_user).page(params[:page]).per(20)
     elsif params['filter'] == 'send'
-      @transactions = Transaction.send_by_user(current_user)
+      @transactions = Transaction.send_by_user(current_user).page(params[:page]).per(20)
     elsif params['filter'] == 'received'
-      @transactions = Transaction.received_by_user(current_user)
+      @transactions = Transaction.received_by_user(current_user).page(params[:page]).per(20)
     else
       @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
     end
