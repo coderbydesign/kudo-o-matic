@@ -16,18 +16,4 @@ describe BalanceDecorator do
     @transaction_amount = Transaction.where(balance: Balance.current).sum(:amount)
     expect(@transaction_amount).to eq(700)
   end
-
-  it 'returns the completion percentage' do
-    # expect(subject.percentage).to eq(73)
-    def helper
-      @helper ||= Class.new do
-        include ActionView::Helpers::NumberHelper
-      end.new
-    end
-
-    @number = ((Balance.current.amount.to_f - Goal.previous.amount.to_f) / (Goal.next.amount.to_f - Goal.previous.amount.to_f)) * 100
-    @balance_percentage = helper.number_to_percentage(@number, precision: 0)
-
-    expect(@balance_percentage).to eq('70%')
-  end
 end

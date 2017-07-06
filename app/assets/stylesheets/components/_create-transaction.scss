@@ -24,6 +24,25 @@
     width: 100%;
   }
 
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+
+  input:last-child {
+    padding-right: $padding-primary;
+  }
+
+  .btn-guideline-info {
+    position: absolute;
+    padding: $padding-secondary;
+    right: 0;
+    top: 0;
+  }
+
   textarea {
     border: 1px solid $primary-border-color;
     border-radius: $border-radius-small;
@@ -36,6 +55,7 @@
     padding-right: 1.5rem;
     resize: none;
     height: 4.5rem;
+    overflow: auto;
   }
 
   input::placeholder,
@@ -60,10 +80,13 @@
 
 .amount {
   display: flex;
+  color: $text-gray;
+  position: relative; // IE has problems with position: absolute on child elements without this
 }
 
 .activity {
   display: flex;
+  position: relative; // IE has problems with position: absolute on child elements without this
 }
 
 .activity-extras {
@@ -145,15 +168,17 @@
 
 .counter {
   display: none;
+  padding: $padding-secondary;
+  position: absolute;
+  font-size: $font-size-small;
+  color: $text-gray;
+  right: 0;
+  bottom: 0;
 }
 
 .counter.show-counter {
   display: block;
   @include animation(counter, .5s);
-  position: absolute;
-  padding: $padding-primary / 3 0;
-  font-size: $font-size-small;
-  color: $text-gray;
 }
 
 @keyframes counter {

@@ -23,7 +23,8 @@ RSpec.describe GoalReacher, type: :model do
       expect(Goal.previous).to eq(goal)
     end
 
-    it 'creates a transaction for the reached goal' do
+    # Skipped because of unused function Transaction.goal_reached_transaction
+    xit 'creates a transaction for the reached goal' do
       GoalReacher.check!
       expect(Transaction.last.activity.name).to eq("reaching the goal #{Goal.previous.name} :boom:, here are some ₭udo's to boost your hunt for the next goal")
     end

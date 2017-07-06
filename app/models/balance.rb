@@ -11,8 +11,13 @@ class Balance < ActiveRecord::Base
     transactions.order("created_at DESC").first
   end
 
+  def likes
+    Transaction.joins("INNER JOIN votes on votes.votable_id = transactions.id and votable_type='Transaction'").where("balance_id=#{self.id}").count
+  end
+
   def amount
-    Transaction.where(balance: self).sum(:amount)
+    amount = Transaction.where(balance: self).sum(:amount) + likes
+
   end
 
   def self.time_left
