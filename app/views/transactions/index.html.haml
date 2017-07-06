@@ -22,8 +22,10 @@
     .container-left
       .fixed-div-left
         = render 'profile-menu'
-        = render 'kudo-counter-dashboard'
-        = render 'statistics'
+        .dashboard
+          = render 'kudo-counter-dashboard'
+        .statistic-board
+          = render 'statistics', weekly_kudos: @weekly_kudos, monthly_kudos: @monthly_kudos
     .container-center
       = render 'message'
       = render 'transaction'

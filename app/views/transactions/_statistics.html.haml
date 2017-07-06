@@ -20,21 +20,21 @@
         Total
       %span.statistics-value
         = @all_transactions
-  .statistics-main-subtitle
+  -#.statistics-main-subtitle
     ₭udo's
-  .general-statistics-container.kudos-statistics
+  -#.general-statistics-container.kudos-statistics
     .generalstatistics
       %span.statistics-title
         Week
       %span.statistics-value
-        = @weekly_kudos
+        = weekly_kudos
     .generalstatistics
       %span.statistics-title
         Month
       %span.statistics-value
-        = @monthly_kudos
+        = monthly_kudos
     .generalstatistics
       %span.statistics-title
         Total
       %span.statistics-value
-        = @all_kudos
+        = Balance.current.amount
