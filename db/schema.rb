@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170410124320) do
+ActiveRecord::Schema.define(version: 20170622095509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,26 +30,12 @@ ActiveRecord::Schema.define(version: 20170410124320) do
   end
 
   create_table "goals", force: :cascade do |t|
-    t.string   "name",                    limit: 32
+    t.string   "name",        limit: 32
     t.integer  "amount"
     t.date     "achieved_on"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "balance_id"
-    t.integer  "cached_votes_total",                 default: 0
-    t.integer  "cached_votes_score",                 default: 0
-    t.integer  "cached_votes_up",                    default: 0
-    t.integer  "cached_votes_down",                  default: 0
-    t.integer  "cached_weighted_score",              default: 0
-    t.integer  "cached_weighted_total",              default: 0
-    t.float    "cached_weighted_average",            default: 0.0
-    t.index ["cached_votes_down"], name: "index_goals_on_cached_votes_down", using: :btree
-    t.index ["cached_votes_score"], name: "index_goals_on_cached_votes_score", using: :btree
-    t.index ["cached_votes_total"], name: "index_goals_on_cached_votes_total", using: :btree
-    t.index ["cached_votes_up"], name: "index_goals_on_cached_votes_up", using: :btree
-    t.index ["cached_weighted_average"], name: "index_goals_on_cached_weighted_average", using: :btree
-    t.index ["cached_weighted_score"], name: "index_goals_on_cached_weighted_score", using: :btree
-    t.index ["cached_weighted_total"], name: "index_goals_on_cached_weighted_total", using: :btree
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -58,8 +44,12 @@ ActiveRecord::Schema.define(version: 20170410124320) do
     t.integer  "activity_id"
     t.integer  "balance_id"
     t.integer  "amount"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,6 +77,7 @@ ActiveRecord::Schema.define(version: 20170410124320) do
     t.string   "uid"
     t.string   "avatar_url"
     t.string   "slack_name"
+    t.boolean  "admin",                  default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree

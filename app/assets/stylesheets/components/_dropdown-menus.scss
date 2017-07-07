@@ -20,24 +20,18 @@
 }
 
 .drop-menu {
-  display: flex;
-  justify-content: center;
-  position: relative;
 
   .menu-tooltip {
     width: 0;
     height: 0;
     border: 0.5rem solid;
-    border-color: transparent transparent $base-color-light-blue transparent;
+    border-color: transparent transparent $base-color-brand transparent;
     position: absolute;
-    top: -1rem; left: 4.5rem;
+    top: -1rem;
     display: none;
   }
 }
 
-.menu-tooltip.show-tooltip {
-  display: block;
-}
 
 .dropdown-container {
   white-space: nowrap;
@@ -48,19 +42,22 @@
 
 .dropdown-content {
   transition: all 300ms ease;
-  background: $base-color-light-blue;
+  background: $base-color-brand;
   color: $text-white;
   position: absolute;
-  margin-top: 3rem;
   display: none;
-  right: 20%; // Internet Explorer position correct
+  left: 0; right: 0;
+  margin: auto;
 }
 
 .dropdown-content.slide-menu {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .menu-content {
+  display: flex;
   align-items: center;
   font-weight: 300;
   min-height: $dropdown-button-size - 1rem;
@@ -80,16 +77,8 @@
 .dropdown-content.slide-menu .menu-content:hover {
   background: $secondary-bg;
   color: $text-primary;
+  border: 1px solid $focus-border-color;
 }
-
-
-///////////////////////////////////////////////////////////
-//
-// General dropdown
-//
-///////////////////////////////////////////////////////////
-
-
 
 ///////////////////////////////////////////////////////////
 //
@@ -99,9 +88,8 @@
 
 .profile-picture {
   $avatar-size: 5rem;
-  
   align-items: flex-end;
-  background-color: $base-color-light-blue;
+  background-color: $base-color-brand;
   //background-image: url('profile/blurred_32.jpg');
   background-size: cover;
   background-position: center;
@@ -147,11 +135,15 @@
   .userstatistics {
     text-align: center;
     flex: 1 0 auto;
-    //cursor: pointer;
+    cursor: pointer;
   }
 
   .userstatistics:not(:last-child) {
     border-right: 1px solid $primary-border-color
+  }
+
+  .my-transactions.is-active, .send-transactions.is-active, .received-transactions.is-active {
+    color: rgba(0,0,0,0.5);
   }
 
   .statistics-value {
@@ -200,6 +192,7 @@
     display: flex;
     flex-direction: column;
     padding: $padding-secondary;
+    margin-top: $margin-secondary;
   }
 
   .menu-content {

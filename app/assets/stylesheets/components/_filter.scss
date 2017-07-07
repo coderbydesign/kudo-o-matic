@@ -5,14 +5,45 @@
   padding: $padding-secondary $padding-primary;
   display: flex;
   font-size: $font-size-small;
-
   width: 100%;
-
+}
+.btn-filter {
+  margin-left: $margin-secondary;
+  min-width: 10rem;
 }
 
-.filter-option {
+.filter-content {
+  transition: all 300ms ease;
+  background: $base-color-brand;
+  color: $text-white;
+  position: absolute;
+  margin-top: 1rem;
+  display: none;
+
+  .menu-content {
+    height: 1.5rem;
+    min-height: 0;
+    padding: 0 0.5rem
+  }
+}
+
+.filter-content.slide-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-content.slide-menu .menu-content:hover {
+  background: $secondary-bg;
+  color: $text-primary;
+  border: 1px solid $focus-border-color
+}
+
+
+.filter-options {
   width: 100%;
   display: flex;
+  align-items: center;
 }
 
 .filter-option:not(:first-child) {
@@ -32,14 +63,37 @@
   }
 }
 
-.delete-filter {
-  opacity: 0.6;
-  cursor: default;
+.delete-filter-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
 }
 
-.delete-filter.button-enabled {
-  opacity: 1;
+.delete-filter {
+  background: $secondary-bg;
+  border-radius: $border-radius-small;
+  display: none;
+  padding: $padding-secondary
+}
+
+.delete-filter.show-delete {
   cursor: pointer;
+  display: block;
+}
+
+.ajax-preloader {
+  display: none;
+  margin-left: $margin-secondary;
+
+  img {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}
+
+.ajax-preloader.show-preloader {
+  display: block;
 }
 
 @media screen and (min-width: 535px) {
@@ -47,14 +101,6 @@
 }
 
 @media screen and (max-width: 535px) {
-  .btn-filter {
-    width: 100%;
-  }
-
-  .filter {
-    display: block;
-  }
-
   .filter-option {
     margin-left: 0;
   }

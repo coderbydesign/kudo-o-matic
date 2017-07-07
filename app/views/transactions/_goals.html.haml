@@ -1,6 +1,6 @@
 .goal-container
   %ul.progress-tracker.progress-tracker--left.progress-tracker--vertical
-    - @current_goals.each do |goal|
+    - current_goals.each do |goal|
 
       - if goal.achieved_on != nil
         %li.progress-step.is-complete
@@ -11,25 +11,35 @@
             .progress-title
               %h3
                 = "#{goal.amount} ₭"
-              %p.goal-name
-                = goal.name
+              .goal-name-info-container
+                %p.goal-name
+                  = goal.name
+                .goal.goal-content
+                  .menu-tooltip
+                  %span.menu-content
+                    = goal.name
               %span.left-text
                 = goal.achieved_on
 
       - elsif Goal.next == goal
         %li.progress-step.is-active
           .progress-bar
-            .progress-bar-inner{style: "height: #{@balance_percentage}"}
+            .progress-bar-inner{style: "height: #{percentage_next_goal}"}
               %span.percentage
-                = @balance_percentage
+                = percentage_next_goal
           %span.progress-marker{style:"box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);"}
             %i.fa.fa-lock
           %span.progress-text
             .progress-title
               %h3
                 = "#{goal.amount} ₭"
-              %p.goal-name
-                = goal.name
+              .goal-name-info-container
+                %p.goal-name
+                  = goal.name
+                .goal.goal-content
+                  .menu-tooltip
+                  %span.menu-content
+                    = goal.name
               %span.left-text
                 = goal.amount - Balance.current.amount
               %span.left-text
@@ -43,8 +53,13 @@
             .progress-title
               %h3
                 = "#{goal.amount} ₭"
-              %p.goal-name
-                = goal.name
+              .goal-name-info-container
+                %p.goal-name
+                  = goal.name
+                .goal.goal-content
+                  .menu-tooltip
+                  %span.menu-content
+                    = goal.name
               %span.left-text
                 = goal.amount - Balance.current.amount
               %span.left-text

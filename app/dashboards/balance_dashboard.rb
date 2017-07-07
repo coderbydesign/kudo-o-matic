@@ -11,7 +11,6 @@ class BalanceDashboard < Administrate::BaseDashboard
     transactions: Field::HasMany,
     id: Field::Number,
     name: Field::String,
-    amount: Field::Number,
     current: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -26,7 +25,6 @@ class BalanceDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :transactions,
-    :amount,
     :current,
   ]
 
@@ -35,7 +33,6 @@ class BalanceDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :name,
-    :amount,
     :current,
     :created_at,
     :updated_at,
@@ -47,7 +44,6 @@ class BalanceDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
-    :amount,
     :current,
   ]
 

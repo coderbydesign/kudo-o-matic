@@ -250,13 +250,13 @@ a.ui-button:active,
 .ui-button:active,
 .ui-button.ui-state-active:hover {
   border: 1px solid $primary-border-color;
-  background: $base-color-light-blue;
+  background: $base-color-brand;
   font-weight: normal;
   color: #ffffff;
 }
 .ui-icon-background,
 .ui-state-active .ui-icon-background {
-  border: $base-color-light-blue;
+  border: $base-color-brand;
   background-color: #ffffff;
 }
 .ui-state-active a,

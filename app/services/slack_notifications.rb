@@ -1,14 +1,25 @@
 require 'slack-notifier'
 
 class SlackNotifications
-   include Rails.application.routes.url_helpers
+  include Rails.application.routes.url_helpers
 
-   attr_reader :transaction, :enabled
+  attr_reader :transaction, :enabled
 
-   def initialize(transaction, enabled: !Rails.env.test?)
-     @transaction = transaction
-     @enabled = enabled
-   end
+  def initialize(transaction, enabled: !Rails.env.test?)
+    @transaction = transaction
+    @enabled = enabled
+  end
+
+  def send_reminder
+    slack_webhook_url = ENV['SLACK_WEBHOOK_URL']
+    return if slack_webhook_url.nil? || !enabled
+    notifier = Slack::Notifier.new slack_webhook_url
+    User.where.not(slack_name: blank?).each do |user|
+      notifier.ping(
+          channel: "@#{user.slack_name}",
+          text: "Hey <@#{user.slack_name}>! It's almost weekend \u{1f389}. But don't forget to think back about this week \u{1f914} because there is definitely someone who deserves a compliment! <#{root_url}|Go give that person some ₭udo's> \u{1f60f}.")
+    end
+  end
 
   def send_new_transaction
     slack_webhook_url = ENV['SLACK_WEBHOOK_URL']
@@ -45,7 +56,8 @@ class SlackNotifications
                     }
                 ],
                 footer: "#{Settings.slack.company_name} | #{Settings.slack.company_project} | Created at: #{transaction.created_at}",
-                footer_icon: Settings.slack.company_icon
+                footer_icon: Settings.slack.company_icon,
+                image_url: transaction.image.url
             }
         ]
     )
@@ -71,7 +83,7 @@ class SlackNotifications
   end
 
   def receiver_slack_mention
-    if transaction.receiver && !transaction.receiver.slack_name.empty?
+    if transaction.receiver && !transaction.receiver.slack_name.blank?
       " (<@#{transaction.receiver.slack_name}>)"
     else
       ''
