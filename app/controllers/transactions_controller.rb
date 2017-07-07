@@ -3,6 +3,7 @@ class TransactionsController < ApplicationController
 
   def index
     query_variables
+    @transaction = Transaction.new
     respond_to do |format|
       format.html
       format.js
@@ -30,23 +31,25 @@ class TransactionsController < ApplicationController
 
   def upvote
     # TODO implement session authentication
-    query_variables
     @transaction = Transaction.find(params[:id])
     @transaction.liked_by current_user
+    query_variables
     respond_to do |format|
       format.html { redirect_to :back }
       format.js
     end
+
     if Balance.current.amount >= Goal.next.amount
       GoalReacher.check!
     end
+
   end
 
   def downvote
     # TODO implement session authentication
-    query_variables
     @transaction = Transaction.find(params[:id])
     @transaction.unliked_by current_user
+    query_variables
     respond_to do |format|
       format.html { redirect_to :back }
       format.js
@@ -69,7 +72,6 @@ class TransactionsController < ApplicationController
     @current_goals                = Goal.all.where(balance: Balance.current).order('amount desc')
 
     @balance                      = Balance.current.decorate
-    @transaction                  = Transaction.new
     @achieved_goal                = Goal.where(balance: Balance.current).where.not(achieved_on: nil).order('achieved_on desc')
 
     @send_transactions_user       = Transaction.where(sender: current_user).count(:id)
