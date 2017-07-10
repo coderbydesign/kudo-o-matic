@@ -1,0 +1,8 @@
+%p
+  Hi
+  = "#{@transaction.receiver.name},"
+%p
+  = "You just received #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} from #{@transaction.sender.name} for: #{@transaction.activity_name_feed.capitalize}"
+%br
+  = "Go and thank #{@transaction.sender.name} by liking the"
+  = link_to 'transaction', root_url
