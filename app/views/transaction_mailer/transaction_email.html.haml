@@ -1,8 +1,25 @@
-%p
-  Hi
-  = "#{@transaction.receiver.name},"
-%p
-  = "You just received #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} from #{@transaction.sender.name} for: #{@transaction.activity_name_feed.capitalize}"
-%br
-  = "Go and thank #{@transaction.sender.name} by liking the"
-  = link_to 'transaction', root_url
+= stylesheet_link_tag 'components/transaction-email', media: 'all'
+
+
+.mail-container
+  .mail-header
+
+  .mail-body
+    %p
+      Hi
+      = "#{@user},"
+    %br
+    %p
+      = "#{@transaction.sender.name} has given #{@transaction.receiver.name} #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} for '#{render_activity(@transaction, @markdown)}'".html_safe
+      = "There are #{kudos_to_next_goal} ₭ left until '#{Goal.next.name}' is reached."
+    %p
+      Go and show your appreciation too! Like the
+      = link_to 'transaction', root_url
+      to give +1 ₭udo.
+    - if @transaction.image.present?
+      .media-attachment
+        .img-file
+          = image_tag @transaction.image.url, class:'attachment-file'
+    %p
+      Happy ₭udoing!
+  .mail-footer

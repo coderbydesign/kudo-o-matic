@@ -20,6 +20,10 @@ module TransactionsHelper
     number = ((Balance.current.amount.to_f - Goal.previous.amount.to_f) / (Goal.next.amount.to_f - Goal.previous.amount.to_f)) * 100
     helper.number_to_percentage(number, precision: 0)
   end
+  
+  def kudos_to_next_goal
+    Goal.next.amount - Balance.current.amount
+  end
 
   private
 
