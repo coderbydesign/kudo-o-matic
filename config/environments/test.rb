@@ -36,13 +36,6 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.deliveries = []
 
-  # SMTP settings for gmail
-  config.action_mailer.smtp_settings = {
-      address: 'smtp.gmail.com',
-      port: 587,
-      enable_starttls_auto: true
-  }
-
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
