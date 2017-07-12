@@ -1,9 +1,5 @@
 require 'rails_helper'
 
-def create_goal_transaction
-
-end
-
 RSpec.describe GoalReacher, type: :model do
   let(:user) { User.create name: 'John' }
   let(:user_goal) { User.create name: 'Kabisa' }
