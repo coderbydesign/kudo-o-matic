@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe GoalReacher, type: :model do
-  let(:user) { User.create name: 'John' }
+  let!(:user) { User.create name: 'John', email:'johndoe@example.com' }
+  let!(:user_2) { User.create name: 'Jane', email:'janedoe@example.com' }
   let(:user_goal) { User.create name: 'Kabisa' }
   let(:activity) { Activity.create name:'Helping me with Rspec' }
   let(:balance) { create :balance, :current }
@@ -19,10 +20,9 @@ RSpec.describe GoalReacher, type: :model do
       expect(Goal.previous).to eq(goal)
     end
 
-    xit 'sends an email' do
-      GoalReachedMailer.new_goal(goal)
-      expect { GoalReachedMailer.new_goal(goal) }
-      .to change { ActionMailer::Base.deliveries.count }.by(1)
+    it 'sends an email' do
+      GoalReachedMailer.preview_new_goal(user, goal).deliver
+      expect(ActionMailer::Base.deliveries.count).to be(1)
     end
 
     # Skipped because of unused function Transaction.goal_reached_transaction
