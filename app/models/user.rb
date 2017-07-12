@@ -12,7 +12,14 @@ acts_as_voter
   def self.from_omniauth(access_token)
     data = access_token.info
     return if data['email'].split('@')[1] != ENV.fetch('DEVISE_DOMAIN', 'gmail.com')
-    user = User.where(email: data['email']).first_or_create!
+    user = User.where(email: data['email'])
+
+    if user.exists?
+      user = user.first_or_create!
+    else
+      user = user.first_or_create!
+      UserMailer.new_user(user)
+    end
 
     user.update(
       provider: access_token.provider,
@@ -31,5 +38,4 @@ acts_as_voter
   def picture_url
     avatar_url || '/no-picture-icon.jpg'
   end
-
 end

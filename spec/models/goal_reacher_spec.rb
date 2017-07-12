@@ -23,6 +23,12 @@ RSpec.describe GoalReacher, type: :model do
       expect(Goal.previous).to eq(goal)
     end
 
+    xit 'sends an email' do
+      GoalReachedMailer.new_goal(goal)
+      expect { GoalReachedMailer.new_goal(goal) }
+      .to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+
     # Skipped because of unused function Transaction.goal_reached_transaction
     xit 'creates a transaction for the reached goal' do
       GoalReacher.check!

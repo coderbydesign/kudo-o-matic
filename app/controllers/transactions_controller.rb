@@ -17,11 +17,11 @@ class TransactionsController < ApplicationController
 
   def create
     query_variables
-    @transaction = TransactionAdder.create(params[:transaction], current_user)
+    @transaction  = TransactionAdder.create(params[:transaction], current_user)
 
     if @transaction.save
       flash[:notice] = 'Transaction was successfully created!'
-      TransactionMailer.new_request(@transaction)
+      TransactionMailer.new_transaction(@transaction)
       redirect_to root_path
     else
       flash[:error] = @transaction.errors.full_messages.to_sentence.capitalize

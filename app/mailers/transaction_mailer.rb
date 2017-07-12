@@ -1,11 +1,8 @@
 class TransactionMailer < ApplicationMailer
-  def self.new_request(transaction)
-    @transaction = transaction
+  def self.new_transaction(transaction)
     @user = User.where.not(email:"")
     @user.each do |user|
-      if user == !transaction.sender
-        transaction_email(user, transaction).deliver_later
-      end
+      transaction_email(user, transaction).deliver_later
     end
   end
 
@@ -16,7 +13,7 @@ class TransactionMailer < ApplicationMailer
     mail(to: user.email, subject: 'New Transaction')
   end
 
-  def self.preview_new_request(transaction, user)
+  def self.preview_new_transaction(transaction, user)
     transaction_email(user, transaction)
   end
 end
