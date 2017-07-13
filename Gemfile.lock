@@ -221,16 +221,12 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-    os (0.9.6)
     paperclip (5.1.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
-    paperclip-compression (0.3.16)
-      os (~> 0.9.6)
-      paperclip (>= 4.3.6)
     parser (2.4.0.0)
       ast (~> 2.2)
     pg (0.20.0)
@@ -392,7 +388,6 @@ DEPENDENCIES
   md_emoji!
   omniauth-google-oauth2
   paperclip (~> 5.1)
-  paperclip-compression (~> 0.3.16)
   pg (~> 0.18)
   poltergeist
   pry
