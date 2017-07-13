@@ -46,7 +46,7 @@ gem 'bourbon', '~> 4.3', '>= 4.3.4'
 gem 'rubocop', '~> 0.47.1', require: false
 gem 'scss_lint', require: false
 gem 'paperclip', '~> 5.1'
-
+gem 'paperclip-compression', '~> 0.3.16'
 gem 'rails_autolink', '~> 1.1', '>= 1.1.6'
 
 gem 'md_emoji', git: 'https://github.com/egonm12/md_emoji.git', branch: 'master'
