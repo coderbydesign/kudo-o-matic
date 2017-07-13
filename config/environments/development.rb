@@ -3,7 +3,6 @@ Rails.application.configure do
 
   # paperclip S3
   config.paperclip_defaults = {
-      compression: { png: '-o 5 -quiet', jpeg: '-copy none -optimize -perfect' },
       storage: :s3,
       s3_protocol: :https,
       bucket: ENV["AWS_S3_BUCKET"],
