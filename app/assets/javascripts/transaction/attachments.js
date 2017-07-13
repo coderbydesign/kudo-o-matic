@@ -54,8 +54,9 @@ $(document).ready(function () {
     });
 
     // Toggle show and hide transaction attachment per transaction
-    $('.hide-file').click(function () {
+    $(document).on("click", '.hide-file', function () {
         var closestAttachment = $(this).closest('.media-attachment').find('.attachment-file');
+        console.log(closestAttachment)
         closestAttachment.toggleClass('hide-image');
        $(this).toggleClass('fa-chevron-down fa-chevron-right')
     });
