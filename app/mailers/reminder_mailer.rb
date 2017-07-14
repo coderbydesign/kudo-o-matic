@@ -1,6 +1,7 @@
 class ReminderMailer < ApplicationMailer
-  def self.new_reminder(user)
-    @user = User.where.not(email:"")
+  def self.new_reminder
+    return if (Rails.env != :test && ENV['GMAIL_USERNAME'] == nil)
+    @user = User.where.not(email:"").where(mail_notifications: true)
     @user.each do |user|
       reminder_email(user).deliver_later
     end
@@ -11,7 +12,8 @@ class ReminderMailer < ApplicationMailer
     mail(to: user.email, subject: '₭udo Reminder!')
   end
 
-  def self.preview_new_reminder(user)
+  def self.preview_new_reminder
+    user = User.where.not(email:"").first
     reminder_email(user)
   end
 end

@@ -14,6 +14,7 @@ class UserDashboard < Administrate::BaseDashboard
     name: Field::String,
     slack_name: Field::String,
     admin: Field::Boolean,
+    mail_notifications: Field::Boolean,
     email: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -29,6 +30,7 @@ class UserDashboard < Administrate::BaseDashboard
     :name,
     :slack_name,
     :admin,
+    :mail_notifications,
     :sent_transactions,
     :received_transactions,
   ]
@@ -40,6 +42,7 @@ class UserDashboard < Administrate::BaseDashboard
     :name,
     :slack_name,
     :admin,
+    :mail_notifications,
     :created_at,
     :updated_at,
     :sent_transactions,
@@ -53,7 +56,8 @@ class UserDashboard < Administrate::BaseDashboard
     :name,
     :email,
     :slack_name,
-    :admin
+    :admin,
+    :mail_notifications,
   ]
 
   # Overwrite this method to customize how users are displayed

@@ -7,7 +7,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.paths << Emoji.images_path
 
 Rails.application.config.assets.precompile += %w(*.png)
-Rails.application.config.assets.precompile << 'components/transaction-email.scss'
+Rails.application.config.assets.precompile << 'components/_email-styling.scss'
 
 
 # Precompile additional assets.

@@ -1,5 +1,7 @@
 class UserMailer < ApplicationMailer
   def self.new_user(user)
+    return if (Rails.env != :test && ENV['GMAIL_USERNAME'] == nil)
+    return unless user.email != ""
     welcome_email(user).deliver_later
   end
 

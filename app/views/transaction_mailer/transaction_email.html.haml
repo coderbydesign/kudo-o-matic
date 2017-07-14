@@ -1,4 +1,4 @@
-= stylesheet_link_tag 'components/transaction-email', media: 'all'
+= stylesheet_link_tag 'components/_email-styling', media: 'all'
 
 
 .mail-container
@@ -10,7 +10,7 @@
       = "#{@user},"
     %br
     %p
-      = "#{@transaction.sender.name} has given #{@transaction.receiver.name} #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} for '#{render_activity(@transaction, @markdown)}'".html_safe
+      = "#{@transaction.sender.name} has given #{@transaction.receiver_name_feed} #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} for '#{render_activity(@transaction, @markdown)}'".html_safe
       = "There are #{kudos_to_next_goal} ₭ left until '#{Goal.next.name}' is reached."
     %p
       Go and show your appreciation too! Like the

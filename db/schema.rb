@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170622095509) do
+ActiveRecord::Schema.define(version: 20170714064230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,7 +77,8 @@ ActiveRecord::Schema.define(version: 20170622095509) do
     t.string   "uid"
     t.string   "avatar_url"
     t.string   "slack_name"
-    t.boolean  "admin",                  default: false
+    t.boolean  "admin"
+    t.boolean  "mail_notifications",     default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
