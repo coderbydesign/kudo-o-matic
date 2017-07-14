@@ -8,8 +8,8 @@
   ],
   "scripts": {
     "dokku": {
-      ¦ "predeploy": "echo $RAILS_ENV; bin/rails assets:clobber && bin/rails assets:precompile",
-      ¦ "postdeploy": "bundle exec rake db:migrate"
+      "predeploy": "echo $RAILS_ENV; bin/rails assets:clobber && bin/rails assets:precompile",
+      "postdeploy": "bundle exec rake db:migrate"
     }
   }
 }
