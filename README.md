@@ -84,6 +84,13 @@ The application will use the Slack Incoming Webhooks API (https://api.slack.com/
 * Copy the 'Webhook URL' and paste it in the `SLACK_WEBHOOK_URL` environment variable in your `.env` file
 * As an extra option you can also define `SLACK_CHANNEL` but if you decide to not use this environment variable you should delete the `channnel` option from the Slack notifications in `slack_notifications.rb`
 
+## Mail Notifications
+Only necessary if you want to connect your Kudo-o-Matic to your Email to get notifications from the application
+
+The application is using Rails' ActionMailer for this. The default is that if there is no ENV variable configured for this it won't try to send notifications.
+
+* To set up a mail notifier you need to define `
+
 ## Admin Panel
 You can find and add stuff in the database by visiting `localhost:3000/admin`
 * To do this you first need an account with admin rights
@@ -107,6 +114,7 @@ A transaction:
 * Has *1* amount
 * Has *1* activity
 * Has *0..1* file (jpg, png, gif)
+* Has 0..* likes
 
 ### Activities
 A activity is part of a transaction. A activity:
@@ -118,6 +126,7 @@ A user:
 * Has a username
 * Has an email
 * Has a slack username (optional)
+* Has admin rights (optional)
 * Has *0..n* Transactions
 
 ### Balance
@@ -131,3 +140,6 @@ A balance is the base of the whole Kudo-o-Matic. A balance:
 * You can't use the Kudo-o-Matic without a Balance, and `current` should be set to `true` if there is no balance with current yet
 * Transactions are always added to the current Balance
 * If there are multiple Balances with `current: true` the transaction will be added to the last created Balance
+* If you delete users that have transactions the application will crash
+
+![Demo](https://kudo-o-matic-development.s3.amazonaws.com/Screenshot%202017-07-14%2015.17.38.png)
