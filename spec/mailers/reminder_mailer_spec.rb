@@ -5,8 +5,8 @@ RSpec.describe ReminderMailer, type: :mailer do
     let!(:prev_goal) { create :goal, :achieved, name: "Painting lessons", amount: 100 }
     let!(:next_goal) { create :goal, name: "Paintball", amount: 1500 }
     let(:balance) { create :balance, :current }
-    let(:user) { User.create name: 'John Doe', email:'johndoe@example.com' }
-    let(:mail) { described_class.preview_new_reminder(user).deliver_now }
+    let!(:user) { User.create name: 'John Doe', email:'johndoe@example.com' }
+    let(:mail) { described_class.preview_new_reminder.deliver_now }
 
     it 'renders the subject' do
       expect(mail.subject).to eq('₭udo Reminder!')
@@ -17,7 +17,7 @@ RSpec.describe ReminderMailer, type: :mailer do
     end
 
     it 'renders the sender email' do
-      expect(mail.from).to eq([ENV.fetch('GMAIL_USERNAME', 'example@mail.com')])
+      expect(mail.from).to eq(['example@mail.com'])
     end
 
     it 'assigns @user' do
