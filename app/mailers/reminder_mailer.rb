@@ -1,6 +1,6 @@
 class ReminderMailer < ApplicationMailer
   def self.new_reminder
-    return if (Rails.env != :test && ENV['GMAIL_USERNAME'] == nil)
+    return if (Rails.env != 'test' && ENV['MAIL_USERNAME'] == nil)
     @user = User.where.not(email:"").where(mail_notifications: true)
     @user.each do |user|
       reminder_email(user).deliver_later

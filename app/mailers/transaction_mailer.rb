@@ -1,6 +1,6 @@
 class TransactionMailer < ApplicationMailer
   def self.new_transaction(transaction)
-    return if (Rails.env != :test && ENV['GMAIL_USERNAME'] == nil)
+    return if (Rails.env != 'test' && ENV['MAIL_USERNAME'] == nil)
     @user = User.where.not(email:"").where(mail_notifications:true)
     @user.each do |user|
       transaction_email(user, transaction).deliver_later
