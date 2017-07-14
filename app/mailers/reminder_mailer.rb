@@ -3,7 +3,7 @@ class ReminderMailer < ApplicationMailer
     return if (Rails.env != 'test' && ENV['MAIL_USERNAME'] == nil)
     @user = User.where.not(email:"").where(mail_notifications: true)
     @user.each do |user|
-      reminder_email(user).deliver_later
+      reminder_email(user).deliver_now
     end
   end
 

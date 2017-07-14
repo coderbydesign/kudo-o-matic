@@ -15,7 +15,7 @@ acts_as_voter
     user = User.where(email: data['email'])
 
     if user.exists?
-      user = user.first_or_create!
+      user = user.first
     else
       user = user.first_or_create!
       UserMailer.new_user(user)

@@ -17,7 +17,7 @@ class TransactionsController < ApplicationController
 
   def create
     query_variables
-    @transaction  = TransactionAdder.create(params[:transaction], current_user)
+    @transaction = TransactionAdder.create(params[:transaction], current_user)
 
     if @transaction.save
       flash[:notice] = 'Transaction was successfully created!'
