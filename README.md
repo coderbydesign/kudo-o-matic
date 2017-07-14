@@ -89,14 +89,10 @@ Only necessary if you want to connect your Kudo-o-Matic to your Email to get not
 
 The application is using Rails' ActionMailer for this. The default is that if there is no ENV variable configured for this it won't try to send notifications.
 
-* To set up a mail notifier you need to define `
+* To set up a mail notifier you need to define `MAIL_USERNAME`, `MAIL_PASSWORD` and `MAIL_ADDRESS`.
 
 ## Admin Panel
 You can find and add stuff in the database by visiting `localhost:3000/admin`
-* To do this you first need an account with admin rights
-  * Create a new account
-  * In your terminal type `rails c`, find your account and set User `admin: true` (default is false)
-* You are now able to visit the admin page and you can see on the left side all database attributes (Balances, Goals, Transactions, Activities and Users)
 
 ### Goals
 A goal depends on a balance, to set and see a goal on the Kudo Meter you need to set the Goal to the current Balance.
