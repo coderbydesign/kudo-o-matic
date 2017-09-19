@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $(window).scroll(fadeBackToTopButtonInAndOut);
+    $(window).scroll($.throttle(250, fadeBackToTopButtonInAndOut));
     $('.back-to-top').click(scrollToTopWithSmoothAnimation);
 
     function fadeBackToTopButtonInAndOut() {
