@@ -16,6 +16,7 @@
 //= require jquery-ui
 
 //= require autocomplete/jquery.ui.autocomplete.scroll.min
+//= require throttle-debounce/jquery.ba-throttle-debounce.min
 
 //= require emoji/emoji.js
 //= require emoji/jquery.textcomplete
