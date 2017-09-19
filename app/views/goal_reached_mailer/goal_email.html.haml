@@ -1,0 +1,15 @@
+= stylesheet_link_tag 'components/_email-styling', media: 'all'
+
+
+.mail-container
+  .mail-header
+  .mail-body
+    %p
+      = "Hi #{@user},"
+    %br
+    %p
+      = "You and your colleagues just achieved a goal so don't forget to pick a date!\nThe achieved goal is: #{Goal.previous.name}! #{link_to 'Click here', root_url } for more details.".html_safe
+    %br
+    %p
+      = '- The ₭udo Team'
+  .mail-footer

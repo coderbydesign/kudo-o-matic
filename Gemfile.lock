@@ -115,6 +115,8 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    css_parser (1.5.0)
+      addressable
     database_cleaner (1.6.1)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
@@ -163,6 +165,7 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
+    htmlentities (4.3.4)
     i18n (0.8.4)
     jbuilder (2.6.4)
       activesupport (>= 3.0.0)
@@ -236,6 +239,13 @@ GEM
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
     powerpack (0.1.1)
+    premailer (1.10.4)
+      addressable
+      css_parser (>= 1.4.10)
+      htmlentities (>= 4.0.0)
+    premailer-rails (1.9.7)
+      actionmailer (>= 3, < 6)
+      premailer (~> 1.7, >= 1.7.9)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -391,6 +401,7 @@ DEPENDENCIES
   paperclip (~> 5.1)
   pg (~> 0.18)
   poltergeist
+  premailer-rails (~> 1.9, >= 1.9.7)
   pry
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)

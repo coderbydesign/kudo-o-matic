@@ -1,8 +1,8 @@
 
 namespace :events do
   desc "Rake task to send Slack reminder"
-  task :fetch => :environment do
-    puts "Send notification at #{Time.now}"
+  task fetch: :environment do
     Transaction.send_whenever
+    ReminderMailer.new_reminder
   end
 end

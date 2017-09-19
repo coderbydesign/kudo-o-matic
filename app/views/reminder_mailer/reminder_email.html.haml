@@ -1,0 +1,19 @@
+= stylesheet_link_tag 'components/_email-styling', media: 'all'
+
+
+.mail-container
+  .mail-header
+  .mail-body
+    %p
+      = "Hi #{@user},"
+    %br
+    %p
+      = "It's almost weekend \u{1f389}. But don't forget to think back about this week \u{1f914} because there is definitely someone who deserves a compliment!"
+    %p
+      = "#{link_to "Go give that person some ₭udo's", root_url} \u{1f60f}.".html_safe
+    %br
+    %p
+      Happy ₭udoing!
+    %p
+      = '- The ₭udo Team'
+  .mail-footer

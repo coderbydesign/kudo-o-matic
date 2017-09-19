@@ -1,0 +1,40 @@
+$mail-primary-background: #4B4656;
+$mail-secondary-background: #F0F1F5;
+
+.mail-container {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background: $mail-secondary-background;
+
+  p {
+    line-height: 1;
+  }
+}
+
+.mail-header {
+  height: 4rem;
+  width: 100%;
+  background: $mail-primary-background;
+  //padding: 1.5rem;
+}
+
+.mail-body {
+  padding: 1.5rem;
+
+  .media-attachment {
+    .attachment-file {
+      max-width: 100%;
+      max-height: 25rem;
+    }
+  }
+}
+
+.side-note {
+  font-size: 0.75rem;
+}
+
+.mail-footer {
+  height: 4rem;
+  width: 100%;
+  background: $mail-primary-background;
+  //padding: 1.5rem;
+}

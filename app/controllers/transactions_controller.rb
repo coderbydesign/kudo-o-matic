@@ -21,6 +21,7 @@ class TransactionsController < ApplicationController
 
     if @transaction.save
       flash[:notice] = 'Transaction was successfully created!'
+      TransactionMailer.new_transaction(@transaction)
       redirect_to root_path
     else
       flash[:error] = @transaction.errors.full_messages.to_sentence.capitalize
@@ -88,8 +89,6 @@ class TransactionsController < ApplicationController
 
     @weekly_kudos                 = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week())).sum(:amount) + @weekly_likes
     @monthly_kudos                = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).sum(:amount) + @monthly_likes
-
-
 
     @markdown                     = Redcarpet::Markdown.new(MdEmoji::Render, :no_intra_emphasis => true)
 

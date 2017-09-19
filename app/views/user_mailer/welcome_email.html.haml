@@ -1,0 +1,32 @@
+= stylesheet_link_tag 'components/_email-styling', media: 'all'
+
+
+.mail-container
+  .mail-header
+
+  .mail-body
+    %p
+      Hi
+      = "#{@user},"
+    %br
+    %p
+      = "Welcome to the #{link_to '₭udo-o-Matic', root_url}! We hope you will enjoy your time with us and give a lot of ₭udo's to your colleagues!".html_safe
+    %ul
+      %li
+        You will receive notifications regarding activity on the ₭udo-o-Matic via Email and Slack*
+      %li
+        For any help regarding how to use the ₭udo-o-Matic please read the FAQ, which you can find in your profile menu.
+      %li
+        = "If you discover any issues, you can report them #{link_to 'here.', 'https://github.com/kabisa/kudo-o-matic/issues'}".html_safe
+      %li
+        = "Information about this open source project can be found #{link_to 'here.', 'https://github.com/kabisa/kudo-o-matic'}".html_safe
+      %li
+        = "For other questions please contact #{mail_to 'info@kabisa.nl'}.".html_safe
+    %br
+    %p
+      Happy ₭udoing!
+    %p
+      = '- The ₭udo Team'
+    %p.side-note
+      *Slack notifications will only be received if an administrator added your Slack username. Please ask a administrator if that's not the case yet.
+  .mail-footer
