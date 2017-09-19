@@ -16,18 +16,28 @@ module Admin
     # See https://administrate-docs.herokuapp.com/customizing_controller_actions
     # for more information
 
-    def destroy
-      # @user = User.find(params[:id])
-      if User.all.where(admin: true).count <= 1
-        flash[:error] = 'You can not delete this user because there is no other administrator.'
-        redirect_to admin_users_path
+    def update
+      if no_admin_left?
+        flash[:error] = 'You can not degrade this administrator to a normal user because there are no other administrators.'
+        redirect_back(fallback_location: root_path)
         return
       end
+
       super
     end
 
-    def update
+    def destroy
+      if no_admin_left?
+        flash[:error] = 'You can not delete this user because there are no other administrators.'
+        redirect_to admin_users_path
+        return
+      end
+
       super
+    end
+
+    def no_admin_left?
+      User.all.where(admin: true).count <= 1
     end
   end
 end
