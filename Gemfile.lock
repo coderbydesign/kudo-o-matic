@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: https://github.com/egonm12/md_emoji.git
-  revision: eccf74691602f4407c335ff1da06a7d6518fb435
+  revision: 961ef9ee9020f2bc3d57096c6f768dcc40206b0f
   branch: master
   specs:
     md_emoji (1.0.1)
@@ -163,7 +163,7 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
-    i18n (0.8.1)
+    i18n (0.8.4)
     jbuilder (2.6.4)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2)

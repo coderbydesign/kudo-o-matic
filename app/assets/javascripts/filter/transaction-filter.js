@@ -1,69 +1,109 @@
 $(document).ready(function () {
-   $('.btn-filter').click(function () {
-       $('.filter-content').toggleClass('slide-menu');
-       $('.filter-content .menu-tooltip').toggleClass('show-tooltip');
+    var $filterContent = $('.filter-content');
+    var $filterContenTooltip = $('.filter-content .menu-tooltip')
+    var $ajaxpreloader = $('.ajax-preloader');
+    var $btnFilter = $('.btn-filter');
+    var $deleteFilter = $('.delete-filter');
+    var $myTransactions = $('.my-transactions');
+    var $sendTransactions = $('.send-transactions');
+    var $receivedTransactions = $('.received-transactions');
+
+    $btnFilter.click(function () {
+        $filterContent.toggleClass('slide-menu');
+        $filterContenTooltip.toggleClass('show-tooltip');
    });
 
-    var $ajaxpreloader = $('.ajax-preloader');
 
-    $('.my-transactions').click(function () {
+
+
+    $myTransactions.click(function () {
         $ajaxpreloader.addClass('show-preloader');
-        $.ajax({
-            type:'GET',
-            url: "/transactions.js?filter=mine", complete: function (result) {
-                $ajaxpreloader.removeClass('show-preloader');
-            }, success: function () {
-                $('.btn-filter').html('My total transactions');
-                $('.delete-filter').addClass('show-delete');
-            }
-        });
+        // Checks if filter yet active
+        if ($myTransactions.hasClass('is-active')) {
+            deleteFilter()
+        } else {
+            $.ajax({
+                type:'GET',
+                url: "/transactions.js?filter=mine", complete: function (result) {
+                    $ajaxpreloader.removeClass('show-preloader');
+                }, success: function () {
+                    $btnFilter.html('My total transactions');
+                    $deleteFilter.addClass('show-delete');
+                    $myTransactions.addClass('is-active');
+                    $sendTransactions.removeClass('is-active');
+                    $receivedTransactions.removeClass('is-active');
+                }
+            });
+        }
         return false
     });
 
-    $('.send-transactions').click(function () {
+    $sendTransactions.click(function () {
         $ajaxpreloader.addClass('show-preloader');
-        $.ajax({
-            type:'GET',
-            url: "/transactions.js?filter=send", complete: function (result) {
-                $ajaxpreloader.removeClass('show-preloader');
-            }, success: function () {
-                $('.btn-filter').html('My given transactions');
-                $('.delete-filter').addClass('show-delete');
-            }
-        });
+        // Checks if filter yet active
+        if ($sendTransactions.hasClass('is-active')) {
+            deleteFilter()
+        } else {
+            $.ajax({
+                type: 'GET',
+                url: "/transactions.js?filter=send", complete: function (result) {
+                    $ajaxpreloader.removeClass('show-preloader');
+                }, success: function () {
+                    $btnFilter.html('My given transactions');
+                    $deleteFilter.addClass('show-delete');
+                    $sendTransactions.addClass('is-active');
+                    $myTransactions.removeClass('is-active');
+                    $receivedTransactions.removeClass('is-active');
+                }
+            });
+        }
         return false
     });
 
-    $('.received-transactions').click(function () {
+    $receivedTransactions.click(function () {
         $ajaxpreloader.addClass('show-preloader');
-        $.ajax({
-            type:'GET',
-            url: "/transactions.js?filter=received", complete: function (result) {
-                $ajaxpreloader.removeClass('show-preloader');
-            }, success: function () {
-                $('.btn-filter').html('My received transactions');
-                $('.delete-filter').addClass('show-delete');
-            }
-        });
+        // Checks if filter yet active
+        if ($receivedTransactions.hasClass('is-active')) {
+            deleteFilter()
+        } else {
+            $.ajax({
+                type: 'GET',
+                url: "/transactions.js?filter=received", complete: function (result) {
+                    $ajaxpreloader.removeClass('show-preloader');
+                }, success: function () {
+                    $btnFilter.html('My received transactions');
+                    $deleteFilter.addClass('show-delete');
+                    $receivedTransactions.addClass('is-active');
+                    $myTransactions.removeClass('is-active');
+                    $sendTransactions.removeClass('is-active');
+                }
+            });
+        }
         return false
     });
 
     $('.all-transactions, .delete-filter').click(function () {
-        $ajaxpreloader.addClass('show-preloader');
+        deleteFilter()
+    });
+
+    // Get's all transactions
+    function deleteFilter() {
         $.ajax({
             type:'GET',
             url: "/transactions.js?filter=all", complete: function (result) {
                 $ajaxpreloader.removeClass('show-preloader');
             }, success: function () {
-                $('.btn-filter').html('All transactions');
-                $('.delete-filter').removeClass('show-delete');
+                $btnFilter.html('All transactions');
+                $deleteFilter.removeClass('show-delete');
+                $myTransactions.removeClass('is-active');
+                $sendTransactions.removeClass('is-active');
+                $receivedTransactions.removeClass('is-active');
             }
         });
-        return false
-    });
+    }
 
     $('.filter-content .menu-content').click(function () {
-        $('.filter-content').removeClass('slide-menu');
-        $('.filter-content .menu-tooltip').removeClass('show-tooltip');
+        $filterContent.removeClass('slide-menu');
+        $filterContenTooltip.removeClass('show-tooltip');
     });
 });

@@ -3,6 +3,7 @@ class TransactionsController < ApplicationController
 
   def index
     query_variables
+    @transaction = Transaction.new
     respond_to do |format|
       format.html
       format.js
@@ -32,15 +33,23 @@ class TransactionsController < ApplicationController
     # TODO implement session authentication
     @transaction = Transaction.find(params[:id])
     @transaction.liked_by current_user
+    query_variables
     respond_to do |format|
       format.html { redirect_to :back }
       format.js
     end
+
+    if Balance.current.amount >= Goal.next.amount
+      GoalReacher.check!
+    end
+
   end
 
   def downvote
+    # TODO implement session authentication
     @transaction = Transaction.find(params[:id])
     @transaction.unliked_by current_user
+    query_variables
     respond_to do |format|
       format.html { redirect_to :back }
       format.js
@@ -63,11 +72,7 @@ class TransactionsController < ApplicationController
     @current_goals                = Goal.all.where(balance: Balance.current).order('amount desc')
 
     @balance                      = Balance.current.decorate
-    @transaction                  = Transaction.new
     @achieved_goal                = Goal.where(balance: Balance.current).where.not(achieved_on: nil).order('achieved_on desc')
-
-    @number                       = ((Balance.current.amount.to_f - Goal.previous.amount.to_f) / (Goal.next.amount.to_f - Goal.previous.amount.to_f)) * 100
-    @balance_percentage           = helper.number_to_percentage(@number, precision: 0)
 
     @send_transactions_user       = Transaction.where(sender: current_user).count(:id)
     @received_transactions_user   = Transaction.where(receiver: current_user).count(:id)
@@ -78,28 +83,25 @@ class TransactionsController < ApplicationController
     @monthly_transactions         = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).count(:id)
     @all_transactions             = Transaction.count(:id)
 
-    @weekly_kudos                 = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week())).sum(:amount)
-    @monthly_kudos                = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).sum(:amount)
-    @all_kudos                    = Transaction.where(balance: Balance.current).sum(:amount)
+    @weekly_likes                 = Transaction.joins("INNER JOIN votes on votes.votable_id = transactions.id and votable_type='Transaction'").where("balance_id=#{Balance.current.id}").where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week())).count
+    @monthly_likes                = Transaction.joins("INNER JOIN votes on votes.votable_id = transactions.id and votable_type='Transaction'").where("balance_id=#{Balance.current.id}").where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month())).count
+
+    @weekly_kudos                 = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week())).sum(:amount) + @weekly_likes
+    @monthly_kudos                = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).sum(:amount) + @monthly_likes
+
+
 
     @markdown                     = Redcarpet::Markdown.new(MdEmoji::Render, :no_intra_emphasis => true)
 
-
     if params['filter'] == 'mine'
-      @transactions = Transaction.all_for_user(current_user)
+      @transactions = Transaction.all_for_user(current_user).page(params[:page]).per(20)
     elsif params['filter'] == 'send'
-      @transactions = Transaction.send_by_user(current_user)
+      @transactions = Transaction.send_by_user(current_user).page(params[:page]).per(20)
     elsif params['filter'] == 'received'
-      @transactions = Transaction.received_by_user(current_user)
+      @transactions = Transaction.received_by_user(current_user).page(params[:page]).per(20)
     else
       @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
     end
 
-  end
-
-  def helper
-    @helper ||= Class.new do
-      include ActionView::Helpers::NumberHelper
-    end.new
   end
 end

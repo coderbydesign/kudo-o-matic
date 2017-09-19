@@ -14,12 +14,17 @@
         %i.fa.fa-sign-out
       %a.menu-content.help-me{href:"#"}
         %span.flex-item
-          Help
+          FAQ
         %i.fa.fa-question-circle
       %a.menu-content.whatsnew{href:"#"}
         %span.flex-item
           Releases
         %i.fa.fa-wrench
+      - if current_user.try(:admin)
+        %a.menu-content{href: '/admin'}
+          %span.flex-item
+            Admin
+          %i.fa.fa-users
   .user-statistics-container
     .userstatistics.send-transactions
       %span.statistics-title
@@ -52,7 +57,7 @@
         %i.fa.fa-sign-out
       %a.menu-content.help-me{href:"#"}
         %span.flex-item
-          Help
+          FAQ
         %i.fa.fa-question-circle
       %a.menu-content.whatsnew{href:"#"}
         %span.flex-item

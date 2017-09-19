@@ -30,7 +30,7 @@
         display: flex;
         font-size: $font-size-medium;
         justify-content: center;
-        min-width: 4.25rem;
+        min-width: 4.75rem;
         max-width: 5.5rem;
         padding: $padding-small;
       }
@@ -90,11 +90,11 @@
         max-width: 50%;
         font-size: 0.875rem;
 
-        .file-name {
+        .attachment-name {
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          margin-right: $margin-secondary;
+          margin-right: $margin-secondary / 2;
         }
 
         .hide-file {
@@ -104,7 +104,7 @@
 
       .attachment-file {
         max-width: 100%;
-        max-height: 30rem;
+        max-height: 25rem;
       }
 
       .attachment-file.hide-image {
@@ -171,5 +171,27 @@
 
   .empty-timeline-message {
     font-size: $font-size-medium
+  }
+}
+
+.pagination {
+  margin-top: $margin-secondary * 2;
+  text-align: center;
+
+  .page {
+    border-radius: $border-radius-small;
+    padding: $padding-small;
+    background: $secondary-button-bg;
+    border: 1px solid $secondary-border-color;
+    color: $secondary-button-color;
+    font-weight: 300;
+    margin-right: $margin-secondary;
+  }
+
+  .page.current {
+    background: $primary-button-bg;
+    border: 1px solid $primary-border-color;
+    color: $primary-button-color;
+    font-weight: 300;
   }
 }

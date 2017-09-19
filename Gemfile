@@ -7,25 +7,7 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
 gem 'dotenv-rails', group: [:development, :test]
 
-gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
-
-gem 'slack-notifier', '~> 2.1.0'
-
-gem 'settingslogic', '~> 2.0', '>= 2.0.9'
-
-gem 'bourbon', '~> 4.3', '>= 4.3.4'
-
-gem 'rubocop', '~> 0.47.1', require: false
-
-gem 'scss_lint', require: false
-
 gem 'whenever', require: false
-
-gem 'md_emoji', git: 'https://github.com/egonm12/md_emoji.git', branch: 'master'
-
-gem 'redcarpet', '~> 3.3', '>= 3.3.4'
-
-gem 'timecop', '~> 0.8.1'
 
 # Database
 gem 'pg', '~> 0.18'
@@ -64,7 +46,6 @@ gem 'bourbon', '~> 4.3', '>= 4.3.4'
 gem 'rubocop', '~> 0.47.1', require: false
 gem 'scss_lint', require: false
 gem 'paperclip', '~> 5.1'
-
 gem 'rails_autolink', '~> 1.1', '>= 1.1.6'
 
 gem 'md_emoji', git: 'https://github.com/egonm12/md_emoji.git', branch: 'master'
