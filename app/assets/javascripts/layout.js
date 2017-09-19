@@ -1,26 +1,16 @@
 $(document).ready(function () {
+    $(window).scroll(fadeBackToTopButtonInAndOut);
+    $('.back-to-top').click(scrollToTopWithSmoothAnimation);
 
-    function backToTop() {
-        if (document.body.scrollTop > 300) {
-            $('.back-to-top').addClass('show-button');
-            $('.back-to-top').sticky({getWidthFrom: '.back-to-top' , topSpacing: 8});
+    function fadeBackToTopButtonInAndOut() {
+        if ($(this).scrollTop() > 100) {
+            $('.back-to-top').fadeIn();
         } else {
-            $('.back-to-top').removeClass('show-button')
+            $('.back-to-top').fadeOut();
         }
-
     }
 
-    backToTop();
-
-    $(document).scroll(function () {
-        backToTop()
-    });
-
-    $(document).resize(function () {
-        backToTop()
-    });
-
-    $('.back-to-top').click(function () {
-       $(document).scrollTop(0)
-    });
+    function scrollToTopWithSmoothAnimation() {
+        $('html, body').animate({scrollTop: 0}, 800);
+    }
 });

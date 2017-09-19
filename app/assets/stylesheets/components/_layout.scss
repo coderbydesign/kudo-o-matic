@@ -37,7 +37,7 @@
 
 .header-img {
   width: 320px;
-  margin-top: -$margin-secondary / 2 ;
+  margin-top: -$margin-secondary / 2;
 }
 
 .mobile-img {
@@ -80,19 +80,12 @@
   position: relative;
 }
 
-.back-to-top-container {
-
-}
-
 .back-to-top {
-  display: none;
-  //position: fixed;
+  display: none; // button is hidden by default
+  position: fixed;
+  bottom: 2rem;
   right: 2rem;
   width: fit-content !important;
-}
-
-.back-to-top.show-button {
-  display: block;
 }
 
 @media screen and (max-width: 1200px) {
@@ -165,11 +158,11 @@
   .container-left {
     flex: 1 0 auto;
   }
-  
+
   .header-img {
     display: none;
   }
-  
+
   .mobile-img {
     display: block;
   }
