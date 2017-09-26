@@ -23,10 +23,20 @@ Rails.application.routes.draw do
   # API namespace
   namespace :api do
     namespace :v1 do
-      jsonapi_resources :balances
-      jsonapi_resources :goals
+      jsonapi_resources :balances do
+        collection do
+          get :current_amount
+        end
+      end
 
-      post 'authentication/retrieve_api_token', to: 'authentication#retrieve_api_token'
+      jsonapi_resources :goals do
+        collection do
+          get :next_amount
+          get :next_name
+        end
+      end
+
+      post 'authentication/retrieve_api_token'
     end
   end
 
