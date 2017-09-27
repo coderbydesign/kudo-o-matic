@@ -1,5 +1,7 @@
 module Admin
   class UsersController < Admin::ApplicationController
+    before_action :set_user, only: [:update, :destroy]
+
     # To customize the behavior of this controller,
     # simply overwrite any of the RESTful actions. For example:
     #
@@ -17,27 +19,33 @@ module Admin
     # for more information
 
     def update
-      if no_admin_left?
-        flash[:error] = 'You can not degrade this administrator to a normal user because there are no other administrators.'
-        redirect_back(fallback_location: root_path)
-        return
+      begin
+        @user.update(user_params)
+        redirect_to admin_user_path
+      rescue Exception => e
+        flash[:error] = e.message
+        redirect_back(fallback_location: edit_admin_user_path)
       end
-
-      super
     end
 
     def destroy
-      if no_admin_left?
-        flash[:error] = 'You can not delete this user because there are no other administrators.'
+      begin
+        @user.destroy
         redirect_to admin_users_path
-        return
+      rescue Exception => e
+        flash[:error] = e.message
+        redirect_back(fallback_location: admin_users_path)
       end
-
-      super
     end
 
-    def no_admin_left?
-      User.all.where(admin: true).count <= 1
+    private
+
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    def user_params
+      params.require(:user).permit(:name, :email, :slack_name, :admin, :mail_notifications)
     end
   end
 end
