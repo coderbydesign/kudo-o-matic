@@ -1,7 +1,4 @@
 class User < ActiveRecord::Base
-  after_update :ensure_an_admin_remains
-  after_destroy :ensure_an_admin_remains
-
   acts_as_voter
 
   has_many :sent_transactions, class_name: 'Transaction', foreign_key: :sender_id
@@ -36,13 +33,5 @@ class User < ActiveRecord::Base
 
   def picture_url
     avatar_url || '/no-picture-icon.jpg'
-  end
-
-  private
-
-  def ensure_an_admin_remains
-    if User.where(admin: true).count < 1
-      raise "Last administrator can't be removed from the system"
-    end
   end
 end
