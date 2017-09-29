@@ -1,4 +1,3 @@
-class Api::V1::BalanceResource < JSONAPI::Resource
-  primary_key :id
+class Api::V1::BalanceResource < Api::V1::BaseResource
   attributes :current, :name
 end
