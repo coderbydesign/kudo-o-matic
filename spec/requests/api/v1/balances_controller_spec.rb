@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/shared/api/v1/unauthorized'
+require 'shared/api/v1/unauthorized'
 
 RSpec.describe Api::V1::BalancesController, type: :request do
   include RequestHelpers
