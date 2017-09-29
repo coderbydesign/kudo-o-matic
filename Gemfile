@@ -54,6 +54,11 @@ gem 'redcarpet', '~> 3.3', '>= 3.3.4'
 
 gem 'timecop', '~> 0.8.1'
 
+gem 'jsonapi-resources', '~> 0.9'
+gem 'jsonapi-resources-matchers', '~> 1.0'
+gem 'google-id-token', '~> 1.4'
+gem 'rack-cors', '~> 1.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
