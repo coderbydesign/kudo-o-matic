@@ -26,7 +26,7 @@ module Admin
     end
 
     def destroy
-      if no_admin_left?
+      if User.find(params[:id]).admin? && no_admin_left?
         flash[:error] = "Last administrator can't be removed"
         redirect_back(fallback_location: admin_users_path)
       else
