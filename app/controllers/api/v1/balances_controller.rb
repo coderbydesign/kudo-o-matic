@@ -1,5 +1,6 @@
 class Api::V1::BalancesController < Api::V1::ApiController
-  def current_amount
-    render json: {data: {'current_amount': Balance.current.amount}}
+  def current
+    @balance = Balance.current
+    render :balance
   end
 end

@@ -6,9 +6,9 @@ class Api::V1::AuthenticationController < ActionController::Base
   def retrieve_api_token
     if validate_jwt_token(params[:jwt_token])
       user = User.from_api_token_request(api_token_request_params)
-      render json: {api_token: user.api_token}
+      render json: {api_token: user.api_token}, status: :ok
     else
-      render json: {error: 'Invalid ID token'}
+      render json: {error: 'Invalid ID token'}, status: :unauthorized
     end
   end
 

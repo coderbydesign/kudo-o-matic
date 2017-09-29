@@ -25,14 +25,14 @@ Rails.application.routes.draw do
     namespace :v1 do
       jsonapi_resources :balances do
         collection do
-          get :current_amount
+          get :current
         end
       end
 
       jsonapi_resources :goals do
         collection do
-          get :next_amount
-          get :next_name
+          get :next
+          get :previous
         end
       end
 

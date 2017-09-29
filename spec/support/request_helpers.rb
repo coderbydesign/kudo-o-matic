@@ -1,11 +1,7 @@
-module Requests
-  module JsonHelpers
-    def json
-      JSON.parse(response.body).with_indifferent_access
-    end
+require 'rails_helper'
 
-    def expect_unauthorized
-      expect(json).to match({error: 'Unauthorized'})
-    end
+module RequestHelpers
+  def json
+    JSON.parse(response.body).with_indifferent_access
   end
 end
