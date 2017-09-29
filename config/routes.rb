@@ -36,7 +36,7 @@ Rails.application.routes.draw do
         end
       end
 
-      post 'authentication/retrieve_api_token'
+      post 'authentication/obtain_api_token'
     end
   end
 

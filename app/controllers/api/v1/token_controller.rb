@@ -1,24 +1,26 @@
-class Api::V1::AuthenticationController < ActionController::Base
-  # before_action :add_allow_credentials_headers
+class Api::V1::TokenController < ActionController::Base
+  before_action :set_default_response_format
 
-  respond_to :json
-
-  def retrieve_api_token
+  def obtain_api_token
     if validate_jwt_token(params[:jwt_token])
       user = User.from_api_token_request(api_token_request_params)
       render json: {api_token: user.api_token}, status: :ok
     else
-      render json: {error: 'Invalid ID token'}, status: :unauthorized
+      render json: {error: 'Invalid JWT token'}, status: :unauthorized
     end
   end
 
   private
 
+  def set_default_response_format
+    request.format = :json
+  end
+
   def validate_jwt_token(jwt_token)
     validator = GoogleIDToken::Validator.new
 
     begin
-      validator.check(jwt_token, ENV["KUDO_O_MOBILE_CLIENT_ID"])
+      validator.check(jwt_token, ENV["GOOGLE_CLIENT_ID_KUDO_O_MOBILE"])
       true
     rescue GoogleIDToken::SignatureError => e
       logger.error e.message

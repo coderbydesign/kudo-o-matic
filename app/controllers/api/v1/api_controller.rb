@@ -1,9 +1,9 @@
 class Api::V1::ApiController < JSONAPI::ResourceController
-  before_action :authenticate_request, :set_default_response_format
+  before_action :authorize_request, :set_default_response_format
 
   private
 
-  def authenticate_request
+  def authorize_request
     api_token = request.headers['Api-Token']
     api_token_known = User.where(api_token: api_token).exists?
 
