@@ -20,6 +20,26 @@ Rails.application.routes.draw do
     root to: "balances#index"
   end
 
+  # API namespace
+  namespace :api do
+    namespace :v1 do
+      jsonapi_resources :balances do
+        collection do
+          get :current
+        end
+      end
+
+      jsonapi_resources :goals do
+        collection do
+          get :next
+          get :previous
+        end
+      end
+
+      post 'authentication/retrieve_api_token'
+    end
+  end
+
   get :kudo_guidelines, to: 'transactions#kudo_guidelines'
 
   resources :transactions,
