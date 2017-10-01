@@ -1,26 +1,29 @@
 Rails.application.routes.draw do
+  root 'transactions#index'
 
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  resources :transactions, only: [:index, :new, :create]
 
-  devise_scope :user do
-    get 'sign_in', to: 'devise/sessions#new', as: :new_user_session
-    get 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
-  end
+  post 'like/:id', to: 'transactions#upvote', as: :like
+  post 'unlike/:id', to: 'transactions#downvote', as: :unlike
 
-  get 'transactions/new'
+  get :kudo_guidelines, to: 'transactions#kudo_guidelines'
+  get 'transactions/:type', to: 'transactions#filter'
 
-  # Administrate
+  get :activities, to: 'activities#autocomplete_search', as: :activities_autocomplete
+  get :users, to: 'users#autocomplete_search', as: :users_autocomplete
+
+  get :feed, to: 'feed#index'
+
   namespace :admin do
+    root 'balances#index'
+
     resources :balances
     resources :goals
     resources :transactions
     resources :activities
     resources :users
-
-    root to: "balances#index"
   end
 
-  # API namespace
   namespace :api do
     namespace :v1 do
       jsonapi_resources :balances do
@@ -40,35 +43,10 @@ Rails.application.routes.draw do
     end
   end
 
-  get :kudo_guidelines, to: 'transactions#kudo_guidelines'
+  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
 
-  resources :transactions,
-    only: [:new, :create] do
-      get :guidelines, on: :collection
-
+  devise_scope :user do
+    get :sign_in, to: 'devise/sessions#new', as: :new_user_session
+    get :sign_out, to: 'devise/sessions#destroy', as: :destroy_user_session
   end
-
-  get :users, to: 'users#autocomplete_search', as: :users_autocomplete
-
-  get :activities, to: 'activities#autocomplete_search', as: :activities_autocomplete
-
-  post 'like/:id', to: "transactions#upvote", as: :like
-  post 'unlike/:id', to: "transactions#downvote", as: :unlike
-
-  resources :goals do
-    get :pollvote
-    post 'poll-like/:id', to: "goal#pollvote", as: :polllike
-  end
-
-  get '/transactions/:type' => 'transactions#filter'
-
-  get '/transactions', to: 'transactions#index'
-
-  get "minigames" => "minigames#index"
-  get "minigames/kudosclicker" => "kudosclicker#index"
-  get "/feed", to: "feed#index"
-
-  root 'transactions#index'
 end
-
-
