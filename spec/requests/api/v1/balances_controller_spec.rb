@@ -30,8 +30,10 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                             self: "#{host}#{request}/#{balance1.id}"
                         },
                         attributes: {
+                            name: balance1.name,
                             current: balance1.current,
-                            name: balance1.name
+                            'created-at': to_api_timestamp_format(balance1.created_at),
+                            'updated-at': to_api_timestamp_format(balance1.updated_at)
                         }
                     },
                     {
@@ -41,8 +43,10 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                             self: "#{host}#{request}/#{balance2.id}"
                         },
                         attributes: {
+                            name: balance2.name,
                             current: balance1.current,
-                            name: balance2.name
+                            'created-at': to_api_timestamp_format(balance2.created_at),
+                            'updated-at': to_api_timestamp_format(balance2.updated_at)
                         }
                     }
                 ]
@@ -94,8 +98,10 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                         self: "#{host}#{request}"
                     },
                     attributes: {
+                        name: balance.name,
                         current: balance.current,
-                        name: balance.name
+                        'created-at': to_api_timestamp_format(balance.created_at),
+                        'updated-at': to_api_timestamp_format(balance.updated_at)
                     }
                 }
             }.with_indifferent_access
@@ -149,8 +155,10 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                         self: "#{host}#{request}/#{assigned_id}"
                     },
                     attributes: {
+                        name: balance.name,
                         current: balance.current,
-                        name: balance.name
+                        'created-at': assigned_created_at,
+                        'updated-at': assigned_updated_at
                     }
                 }
             }.with_indifferent_access
@@ -218,8 +226,10 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                           self: "#{host}#{request}"
                       },
                       attributes: {
+                          name: edited_name,
                           current: edited_current,
-                          name: edited_name
+                          'created-at': to_api_timestamp_format(balance.created_at),
+                          'updated-at': assigned_updated_at
                       }
                   }
               }.with_indifferent_access
@@ -256,8 +266,10 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                           self: "#{host}#{request}"
                       },
                       attributes: {
+                          name: balance.name,
                           current: balance.current,
-                          name: balance.name
+                          'created-at': to_api_timestamp_format(balance.created_at),
+                          'updated-at': to_api_timestamp_format(balance.updated_at)
                       }
                   }
               }.with_indifferent_access
@@ -354,8 +366,10 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                     id: balance.id,
                     type: resource_type,
                     attributes: {
+                        name: balance.name,
                         current: balance.current,
-                        name: balance.name
+                        'created-at': to_api_timestamp_format(balance.created_at),
+                        'updated-at': to_api_timestamp_format(balance.updated_at)
                     }
                 }
             }.with_indifferent_access

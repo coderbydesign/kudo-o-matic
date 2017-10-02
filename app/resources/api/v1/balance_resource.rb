@@ -1,3 +1,4 @@
 class Api::V1::BalanceResource < Api::V1::BaseResource
-  attributes :current, :name
+  attributes :name, :current, :created_at, :updated_at
+  filters :name, :current, :created_at, :updated_at
 end
