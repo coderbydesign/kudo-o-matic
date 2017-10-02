@@ -3,7 +3,8 @@ class Transaction < ActiveRecord::Base
   validates :activity_name_feed, length: { minimum: 4 }
 
   after_commit :send_slack_notification, on: :create, unless: :skip_callbacks
-  has_attached_file :image, styles: { small: "64x64", med: "100x100", large: "200x200" }
+  # also creates a second image file with a maximum width and/or height of 800 pixels with its aspect ratio preserved
+  has_attached_file :image, styles: {thumb: '600x600'}
   validates_attachment :image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
   validates_with AttachmentSizeValidator, attributes: :image, less_than: 10.megabytes
 
