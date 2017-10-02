@@ -38,7 +38,9 @@
                   = "Attachment (#{transaction.image.size / 1000}kb)"
                 %span
                   %i.fa.fa-chevron-down.hide-file
-              = link_to image_tag(transaction.image.url(:thumb), class:'attachment-file'), transaction.image.url, target: '_blank'
+              -# checks whether or not the thumbnail exists so older posts (without thumb) will still be displayed
+              = link_to image_tag(transaction.image.exists?(:thumb) ? transaction.image.url(:thumb) : transaction.image,
+              class:'attachment-file'), transaction.image.url, target: '_blank'
       .transaction-footer-container
         - if current_user.voted_for? transaction
           = render 'unlikes', transaction: transaction
