@@ -35,10 +35,10 @@
             .media-attachment
               .img-file
                 %i.attachment-name
-                  = "Attachment (#{(transaction.image_file_size / 1000)}kb)"
+                  = "Attachment (#{transaction.image.size / 1000}kb)"
                 %span
                   %i.fa.fa-chevron-down.hide-file
-              = image_tag transaction.image.url, class:'attachment-file'
+              = link_to image_tag(transaction.image.url(:thumb), class:'attachment-file'), transaction.image.url, target: '_blank'
       .transaction-footer-container
         - if current_user.voted_for? transaction
           = render 'unlikes', transaction: transaction
