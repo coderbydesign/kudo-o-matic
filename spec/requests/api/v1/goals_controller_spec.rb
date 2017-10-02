@@ -30,9 +30,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                             self: "#{host}#{request}/#{goal1.id}"
                         },
                         attributes: {
-                            'achieved-on': goal1.achieved_on,
                             name: goal1.name,
-                            amount: goal1.amount
+                            amount: goal1.amount,
+                            'achieved-on': goal1.achieved_on,
+                            'created-at': to_api_timestamp_format(goal1.created_at),
+                            'updated-at': to_api_timestamp_format(goal1.updated_at)
                         },
                         relationships: {
                             balance: {
@@ -50,9 +52,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                             self: "#{host}#{request}/#{goal2.id}"
                         },
                         attributes: {
-                            'achieved-on': goal2.achieved_on,
                             name: goal2.name,
-                            amount: goal2.amount
+                            amount: goal2.amount,
+                            'achieved-on': goal2.achieved_on,
+                            'created-at': to_api_timestamp_format(goal2.created_at),
+                            'updated-at': to_api_timestamp_format(goal2.updated_at)
                         },
                         relationships: {
                             balance: {
@@ -110,9 +114,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                         self: "#{host}#{request}"
                     },
                     attributes: {
-                        'achieved-on': goal.achieved_on,
                         name: goal.name,
-                        amount: goal.amount
+                        amount: goal.amount,
+                        'achieved-on': goal.achieved_on,
+                        'created-at': to_api_timestamp_format(goal.created_at),
+                        'updated-at': to_api_timestamp_format(goal.updated_at)
                     },
                     relationships: {
                         balance: {
@@ -153,7 +159,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
   describe 'POST api/v1/goals' do
     let (:request) {'/api/v1/goals'}
     let! (:goal) {build(:goal)}
-    let (:assigned_id) {json['data']['id']}
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
@@ -174,9 +179,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                         self: "#{host}#{request}/#{assigned_id}"
                     },
                     attributes: {
-                        'achieved-on': goal.achieved_on,
                         name: goal.name,
-                        amount: goal.amount
+                        amount: goal.amount,
+                        'achieved-on': goal.achieved_on,
+                        'created-at': assigned_created_at,
+                        'updated-at': assigned_updated_at
                     },
                     relationships: {
                         balance: {
@@ -246,9 +253,9 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                         type: 'goals',
                         id: goal.id,
                         attributes: {
-                            'achieved-on': edited_achieved_on,
                             name: edited_name,
-                            amount: edited_amount
+                            amount: edited_amount,
+                            'achieved-on': edited_achieved_on
                         }
                     }
                 }.to_json
@@ -264,9 +271,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                           self: "#{host}#{request}"
                       },
                       attributes: {
-                          'achieved-on': edited_achieved_on,
                           name: edited_name,
-                          amount: edited_amount
+                          amount: edited_amount,
+                          'achieved-on': edited_achieved_on,
+                          'created-at': to_api_timestamp_format(goal.created_at),
+                          'updated-at': assigned_updated_at
                       },
                       relationships: {
                           balance: {
@@ -317,9 +326,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                           self: "#{host}#{request}"
                       },
                       attributes: {
-                          'achieved-on': goal.achieved_on,
                           name: goal.name,
-                          amount: goal.amount
+                          amount: goal.amount,
+                          'achieved-on': goal.achieved_on,
+                          'created-at': to_api_timestamp_format(goal.created_at),
+                          'updated-at': to_api_timestamp_format(goal.updated_at)
                       },
                       relationships: {
                           balance: {
@@ -413,7 +424,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let(:assigned_id) {json['data']['id']}
       let(:no_next_goal_achieved_on) {nil}
       let(:no_next_goal_name) {'TBD'}
       let(:no_next_goal_amount) {1000}
@@ -432,9 +442,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                       id: goal.id,
                       type: resource_type,
                       attributes: {
-                          'achieved-on': goal.achieved_on,
                           name: goal.name,
-                          amount: goal.amount
+                          amount: goal.amount,
+                          'achieved-on': goal.achieved_on,
+                          'created-at': to_api_timestamp_format(goal.created_at),
+                          'updated-at': to_api_timestamp_format(goal.updated_at)
                       }
                   }
               }.with_indifferent_access
@@ -461,9 +473,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                       id: assigned_id,
                       type: resource_type,
                       attributes: {
-                          'achieved-on': no_next_goal_achieved_on,
                           name: no_next_goal_name,
-                          amount: goal.amount + no_next_goal_amount
+                          amount: goal.amount + no_next_goal_amount,
+                          'achieved-on': no_next_goal_achieved_on,
+                          'created-at': assigned_created_at,
+                          'updated-at': assigned_updated_at
                       }
                   }
               }.with_indifferent_access
@@ -482,16 +496,17 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         end
 
         it 'creates a new goal that is to be defined' do
-
           expected =
               {
                   data: {
                       id: assigned_id,
                       type: resource_type,
                       attributes: {
-                          'achieved-on': no_next_goal_achieved_on,
                           name: no_next_goal_name,
-                          amount: no_next_goal_amount
+                          amount: no_next_goal_amount,
+                          'achieved-on': no_next_goal_achieved_on,
+                          'created-at': assigned_created_at,
+                          'updated-at': assigned_updated_at
                       }
                   }
               }.with_indifferent_access
@@ -544,9 +559,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                       id: goal1.id,
                       type: resource_type,
                       attributes: {
-                          'achieved-on': goal1.achieved_on.to_s,
                           name: goal1.name,
-                          amount: goal1.amount
+                          amount: goal1.amount,
+                          'achieved-on': goal1.achieved_on.to_s,
+                          'created-at': to_api_timestamp_format(goal1.created_at),
+                          'updated-at': to_api_timestamp_format(goal1.updated_at)
                       }
                   }
               }.with_indifferent_access
@@ -575,9 +592,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                       id: nil,
                       type: resource_type,
                       attributes: {
-                          'achieved-on': no_previous_goal_achieved_on,
                           name: no_previous_goal_name,
-                          amount: no_previous_goal_amount
+                          amount: no_previous_goal_amount,
+                          'achieved-on': no_previous_goal_achieved_on,
+                          'created-at': assigned_created_at,
+                          'updated-at': assigned_updated_at
                       }
                   }
               }.with_indifferent_access
