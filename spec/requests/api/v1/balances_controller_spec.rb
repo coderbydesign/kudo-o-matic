@@ -6,6 +6,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
   let (:host) {'http://www.example.com'}
   let (:resource_type) {'balances'}
+  let (:relationship_type_transactions) {'transactions'}
 
   describe 'GET api/v1/balances' do
     let (:request) {'/api/v1/balances'}
@@ -34,6 +35,14 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                             current: balance1.current,
                             'created-at': to_api_timestamp_format(balance1.created_at),
                             'updated-at': to_api_timestamp_format(balance1.updated_at)
+                        },
+                        relationships: {
+                            transactions: {
+                                links: {
+                                    self: "#{host}#{request}/#{balance1.id}/relationships/#{relationship_type_transactions}",
+                                    related: "#{host}#{request}/#{balance1.id}/#{relationship_type_transactions}"
+                                }
+                            }
                         }
                     },
                     {
@@ -47,6 +56,14 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                             current: balance1.current,
                             'created-at': to_api_timestamp_format(balance2.created_at),
                             'updated-at': to_api_timestamp_format(balance2.updated_at)
+                        },
+                        relationships: {
+                            transactions: {
+                                links: {
+                                    self: "#{host}#{request}/#{balance2.id}/relationships/#{relationship_type_transactions}",
+                                    related: "#{host}#{request}/#{balance2.id}/#{relationship_type_transactions}"
+                                }
+                            }
                         }
                     }
                 ]
@@ -102,6 +119,14 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                         current: balance.current,
                         'created-at': to_api_timestamp_format(balance.created_at),
                         'updated-at': to_api_timestamp_format(balance.updated_at)
+                    },
+                    relationships: {
+                        transactions: {
+                            links: {
+                                self: "#{host}#{request}/relationships/#{relationship_type_transactions}",
+                                related: "#{host}#{request}/#{relationship_type_transactions}"
+                            }
+                        }
                     }
                 }
             }.with_indifferent_access
@@ -134,7 +159,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
   describe 'POST api/v1/balances' do
     let (:request) {'/api/v1/balances'}
     let! (:balance) {build(:balance)}
-    let (:assigned_id) {json['data']['id']}
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
@@ -142,7 +166,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
       before do
         post request,
              headers: {'Api-Token': user.api_token, 'Content-Type': 'application/vnd.api+json'},
-             params: {data: {type: 'balances', attributes: {name: balance.name, current: balance.current}}}.to_json
+             params: {data: {type: resource_type, attributes: {name: balance.name, current: balance.current}}}.to_json
       end
 
       it 'returns the newly created balance' do
@@ -159,6 +183,14 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                         current: balance.current,
                         'created-at': assigned_created_at,
                         'updated-at': assigned_updated_at
+                    },
+                    relationships: {
+                        transactions: {
+                            links: {
+                                self: "#{host}#{request}/#{assigned_id}/relationships/#{relationship_type_transactions}",
+                                related: "#{host}#{request}/#{assigned_id}/#{relationship_type_transactions}"
+                            }
+                        }
                     }
                 }
             }.with_indifferent_access
@@ -182,7 +214,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
       before do
         post request,
              headers: {'Api-Token': 'invalid api-token', 'Content-Type': 'application/vnd.api+json'},
-             params: {data: {type: 'balance', attributes: {name: balance.name, current: balance.current}}}.to_json
+             params: {data: {type: resource_type, attributes: {name: balance.name, current: balance.current}}}.to_json
       end
 
       expect_unauthorized_message_and_status_code
@@ -192,7 +224,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
       before do
         post request,
              headers: {'Api-Token': 'application/vnd.api+json'},
-             params: {data: {type: 'balance', attributes: {name: balance.name, current: balance.current}}}.to_json
+             params: {data: {type: resource_type, attributes: {name: balance.name, current: balance.current}}}.to_json
       end
 
       expect_unauthorized_message_and_status_code
@@ -202,18 +234,29 @@ RSpec.describe Api::V1::BalancesController, type: :request do
   describe 'PATCH api/v1/balances/:id' do
     let (:request) {"/api/v1/balances/#{balance.id}"}
     let! (:balance) {create(:balance)}
+    let(:edited_name) {'edited name'}
+    let(:edited_current) {true}
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
 
       context 'and updated values' do
-        let(:edited_name) {'edited name'}
-        let(:edited_current) {true}
-
         before do
           patch request,
-                headers: {'Api-Token': user.api_token, 'Content-Type': 'application/vnd.api+json'},
-                params: {data: {type: 'balances', id: balance.id, attributes: {current: edited_current, name: edited_name}}}.to_json
+                headers: {
+                    'Api-Token': user.api_token,
+                    'Content-Type': 'application/vnd.api+json'
+                },
+                params: {
+                    data: {
+                        type: 'balances',
+                        id: balance.id,
+                        attributes: {
+                            current: edited_current,
+                            name: edited_name
+                        }
+                    }
+                }.to_json
         end
 
         it 'returns the updated balance associated with the id with updated values' do
@@ -230,6 +273,14 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                           current: edited_current,
                           'created-at': to_api_timestamp_format(balance.created_at),
                           'updated-at': assigned_updated_at
+                      },
+                      relationships: {
+                          transactions: {
+                              links: {
+                                  self: "#{host}#{request}/relationships/#{relationship_type_transactions}",
+                                  related: "#{host}#{request}/#{relationship_type_transactions}"
+                              }
+                          }
                       }
                   }
               }.with_indifferent_access
@@ -270,6 +321,14 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                           current: balance.current,
                           'created-at': to_api_timestamp_format(balance.created_at),
                           'updated-at': to_api_timestamp_format(balance.updated_at)
+                      },
+                      relationships: {
+                          transactions: {
+                              links: {
+                                  self: "#{host}#{request}/relationships/#{relationship_type_transactions}",
+                                  related: "#{host}#{request}/#{relationship_type_transactions}"
+                              }
+                          }
                       }
                   }
               }.with_indifferent_access
@@ -293,8 +352,20 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     context 'with an invalid api-token' do
       before do
         patch request,
-              headers: {'Api-Token': 'invalid api-token', 'Content-Type': 'application/vnd.api+json'},
-              params: {data: {type: 'balances', id: balance.id, attributes: {name: 'edited name', current: true}}}.to_json
+              headers: {
+                  'Api-Token': 'invalid api-token',
+                  'Content-Type': 'application/vnd.api+json'
+              },
+              params: {
+                  data: {
+                      type: 'balances',
+                      id: balance.id,
+                      attributes: {
+                          current: edited_current,
+                          name: edited_name
+                      }
+                  }
+              }.to_json
       end
 
       expect_unauthorized_message_and_status_code
@@ -303,8 +374,19 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     context 'without an api-token' do
       before do
         patch request,
-              headers: {'Content-Type': 'application/vnd.api+json'},
-              params: {data: {type: 'balances', id: balance.id, attributes: {name: 'edited name', current: true}}}.to_json
+              headers: {
+                  'Content-Type': 'application/vnd.api+json'
+              },
+              params: {
+                  data: {
+                      type: 'balances',
+                      id: balance.id,
+                      attributes: {
+                          current: edited_current,
+                          name: edited_name
+                      }
+                  }
+              }.to_json
       end
 
       expect_unauthorized_message_and_status_code

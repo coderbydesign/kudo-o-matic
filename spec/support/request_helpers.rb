@@ -17,6 +17,10 @@ module RequestHelpers
     json['data']['attributes']['updated-at']
   end
 
+  def assigned_image_updated_at
+    json['data']['attributes']['image_updated_at']
+  end
+
   def to_api_timestamp_format(timestamp)
     timestamp.strftime('%FT%T.%LZ')
   end

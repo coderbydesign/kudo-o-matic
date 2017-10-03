@@ -16,4 +16,6 @@ RSpec.describe Api::V1::BalanceResource, type: :resource do
   it {is_expected.to filter :current}
   it {is_expected.to filter :created_at}
   it {is_expected.to filter :updated_at}
+
+  it {is_expected.to have_many :transactions}
 end

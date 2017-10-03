@@ -6,6 +6,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
 
   let (:host) {'http://www.example.com'}
   let (:resource_type) {'goals'}
+  let (:relationship_type_balance) {'balance'}
 
   describe 'GET api/v1/goals' do
     let (:request) {'/api/v1/goals'}
@@ -39,8 +40,8 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                         relationships: {
                             balance: {
                                 links: {
-                                    self: "#{host}#{request}/#{goal1.id}/relationships/balance",
-                                    related: "#{host}#{request}/#{goal1.id}/balance"
+                                    self: "#{host}#{request}/#{goal1.id}/relationships/#{relationship_type_balance}",
+                                    related: "#{host}#{request}/#{goal1.id}/#{relationship_type_balance}"
                                 }
                             }
                         }
@@ -61,8 +62,8 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                         relationships: {
                             balance: {
                                 links: {
-                                    self: "#{host}#{request}/#{goal2.id}/relationships/balance",
-                                    related: "#{host}#{request}/#{goal2.id}/balance"
+                                    self: "#{host}#{request}/#{goal2.id}/relationships/#{relationship_type_balance}",
+                                    related: "#{host}#{request}/#{goal2.id}/#{relationship_type_balance}"
                                 }
                             }
                         }
@@ -123,8 +124,8 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                     relationships: {
                         balance: {
                             links: {
-                                self: "#{host}#{request}/relationships/balance",
-                                related: "#{host}#{request}/balance"
+                                self: "#{host}#{request}/relationships/#{relationship_type_balance}",
+                                related: "#{host}#{request}/#{relationship_type_balance}"
                             }
                         }
                     }
@@ -165,8 +166,20 @@ RSpec.describe Api::V1::GoalsController, type: :request do
 
       before do
         post request,
-             headers: {'Api-Token': user.api_token, 'Content-Type': 'application/vnd.api+json'},
-             params: {data: {type: 'goals', attributes: {name: goal.name, amount: goal.amount}}}.to_json
+             headers: {
+                 'Api-Token': user.api_token,
+                 'Content-Type': 'application/vnd.api+json'
+             },
+             params: {
+                 data: {
+                     type: resource_type,
+                     attributes: {
+                         name: goal.name,
+                         amount: goal.amount,
+                         'achieved-on': goal.achieved_on
+                     }
+                 }
+             }.to_json
       end
 
       it 'returns the newly created goal' do
@@ -188,8 +201,8 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                     relationships: {
                         balance: {
                             links: {
-                                self: "#{host}#{request}/#{assigned_id}/relationships/balance",
-                                related: "#{host}#{request}/#{assigned_id}/balance"
+                                self: "#{host}#{request}/#{assigned_id}/relationships/#{relationship_type_balance}",
+                                related: "#{host}#{request}/#{assigned_id}/#{relationship_type_balance}"
                             }
                         }
                     }
@@ -215,8 +228,20 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     context 'with an invalid api-token' do
       before do
         post request,
-             headers: {'Api-Token': 'invalid api-token', 'Content-Type': 'application/vnd.api+json'},
-             params: {data: {type: 'goals', attributes: {name: goal.name, amount: goal.amount}}}.to_json
+             headers: {
+                 'Api-Token': 'invalid api-token',
+                 'Content-Type': 'application/vnd.api+json'
+             },
+             params: {
+                 data: {
+                     type: resource_type,
+                     attributes: {
+                         name: goal.name,
+                         amount: goal.amount,
+                         'achieved-on': goal.achieved_on
+                     }
+                 }
+             }.to_json
       end
 
       expect_unauthorized_message_and_status_code
@@ -225,8 +250,20 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     context 'without an api-token' do
       before do
         post request,
-             headers: {'Api-Token': 'application/vnd.api+json'},
-             params: {data: {type: 'goals', attributes: {name: goal.name, amount: goal.amount}}}.to_json
+             headers: {
+                 'Api-Token': 'invalid api-token',
+                 'Content-Type': 'application/vnd.api+json'
+             },
+             params: {
+                 data: {
+                     type: resource_type,
+                     attributes: {
+                         name: goal.name,
+                         amount: goal.amount,
+                         'achieved-on': goal.achieved_on
+                     }
+                 }
+             }.to_json
       end
 
       expect_unauthorized_message_and_status_code
@@ -236,18 +273,19 @@ RSpec.describe Api::V1::GoalsController, type: :request do
   describe 'PATCH api/v1/goals/:id' do
     let (:request) {"/api/v1/goals/#{goal.id}"}
     let! (:goal) {create(:goal)}
+    let(:edited_name) {'edited name'}
+    let(:edited_amount) {12345}
+    let(:edited_achieved_on) {'2015-01-01'}
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
 
       context 'and updated values' do
-        let(:edited_achieved_on) {'2015-01-01'}
-        let(:edited_name) {'edited name'}
-        let(:edited_amount) {12345}
-
         before do
           patch request,
-                headers: {'Api-Token': user.api_token, 'Content-Type': 'application/vnd.api+json'},
+                headers: {'Api-Token': user.api_token,
+                          'Content-Type': 'application/vnd.api+json'
+                },
                 params: {
                     data: {
                         type: 'goals',
@@ -280,8 +318,8 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                       relationships: {
                           balance: {
                               links: {
-                                  self: "#{host}#{request}/relationships/balance",
-                                  related: "#{host}#{request}/balance"
+                                  self: "#{host}#{request}/relationships/#{relationship_type_balance}",
+                                  related: "#{host}#{request}/#{relationship_type_balance}"
                               }
                           }
                       }
@@ -335,8 +373,8 @@ RSpec.describe Api::V1::GoalsController, type: :request do
                       relationships: {
                           balance: {
                               links: {
-                                  self: "#{host}#{request}/relationships/balance",
-                                  related: "#{host}#{request}/balance"
+                                  self: "#{host}#{request}/relationships/#{relationship_type_balance}",
+                                  related: "#{host}#{request}/#{relationship_type_balance}"
                               }
                           }
                       }
@@ -363,8 +401,20 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     context 'with an invalid api-token' do
       before do
         patch request,
-              headers: {'Api-Token': 'invalid api-token', 'Content-Type': 'application/vnd.api+json'},
-              params: {data: {type: 'goals', id: goal.id, attributes: {name: 'edited name', amount: 12345}}}.to_json
+              headers: {
+                  'Api-Token': 'invalid api-token',
+                  'Content-Type': 'application/vnd.api+json'
+              },
+              params: {
+                  data: {
+                      type: 'goals',
+                      id: goal.id,
+                      attributes: {
+                          name: edited_name,
+                          amount: edited_amount
+                      }
+                  }
+              }.to_json
       end
 
       expect_unauthorized_message_and_status_code
@@ -373,8 +423,19 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     context 'without an api-token' do
       before do
         patch request,
-              headers: {'Content-Type': 'application/vnd.api+json'},
-              params: {data: {type: 'goals', id: goal.id, attributes: {name: 'edited name', amount: 12345}}}.to_json
+              headers: {
+                  'Content-Type': 'application/vnd.api+json'
+              },
+              params: {
+                  data: {
+                      type: 'goals',
+                      id: goal.id,
+                      attributes: {
+                          name: edited_name,
+                          amount: edited_amount
+                      }
+                  }
+              }.to_json
       end
 
       expect_unauthorized_message_and_status_code
