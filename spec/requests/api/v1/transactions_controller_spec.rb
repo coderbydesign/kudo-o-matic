@@ -7,6 +7,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
   let (:host) {'http://www.example.com'}
   let (:resource_type) {'transactions'}
   let (:relationship_type_balance) {'balance'}
+  let (:relationship_type_activity) {'activity'}
 
   describe 'GET api/v1/transactions' do
     let (:request) {'/api/v1/transactions'}
@@ -31,19 +32,25 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                             self: "#{host}#{request}/#{transaction1.id}"
                         },
                         attributes: {
+                            'created-at': to_api_timestamp_format(transaction1.created_at),
+                            'updated-at': to_api_timestamp_format(transaction1.updated_at),
                             amount: transaction1.amount,
                             'image-file-name': transaction1.image_file_name,
                             'image-content-type': transaction1.image_content_type,
                             'image-file-size': transaction1.image_file_size,
                             'image-updated-at': to_api_timestamp_format(transaction1.image_updated_at),
-                            'created-at': to_api_timestamp_format(transaction1.created_at),
-                            'updated-at': to_api_timestamp_format(transaction1.updated_at)
                         },
                         relationships: {
                             balance: {
                                 links: {
                                     self: "#{host}#{request}/#{transaction1.id}/relationships/#{relationship_type_balance}",
                                     related: "#{host}#{request}/#{transaction1.id}/#{relationship_type_balance}"
+                                }
+                            },
+                            activity: {
+                                links: {
+                                    self: "#{host}#{request}/#{transaction1.id}/relationships/#{relationship_type_activity}",
+                                    related: "#{host}#{request}/#{transaction1.id}/#{relationship_type_activity}"
                                 }
                             }
                         }
@@ -55,19 +62,25 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                             self: "#{host}#{request}/#{transaction2.id}"
                         },
                         attributes: {
+                            'created-at': to_api_timestamp_format(transaction2.created_at),
+                            'updated-at': to_api_timestamp_format(transaction2.updated_at),
                             amount: transaction2.amount,
                             'image-file-name': transaction2.image_file_name,
                             'image-content-type': transaction2.image_content_type,
                             'image-file-size': transaction2.image_file_size,
-                            'image-updated-at': to_api_timestamp_format(transaction2.image_updated_at),
-                            'created-at': to_api_timestamp_format(transaction2.created_at),
-                            'updated-at': to_api_timestamp_format(transaction2.updated_at)
+                            'image-updated-at': to_api_timestamp_format(transaction2.image_updated_at)
                         },
                         relationships: {
                             balance: {
                                 links: {
                                     self: "#{host}#{request}/#{transaction2.id}/relationships/#{relationship_type_balance}",
                                     related: "#{host}#{request}/#{transaction2.id}/#{relationship_type_balance}"
+                                }
+                            },
+                            activity: {
+                                links: {
+                                    self: "#{host}#{request}/#{transaction2.id}/relationships/#{relationship_type_activity}",
+                                    related: "#{host}#{request}/#{transaction2.id}/#{relationship_type_activity}"
                                 }
                             }
                         }
@@ -121,19 +134,25 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                         self: "#{host}#{request}"
                     },
                     attributes: {
+                        'created-at': to_api_timestamp_format(transaction.created_at),
+                        'updated-at': to_api_timestamp_format(transaction.updated_at),
                         amount: transaction.amount,
                         'image-file-name': transaction.image_file_name,
                         'image-content-type': transaction.image_content_type,
                         'image-file-size': transaction.image_file_size,
-                        'image-updated-at': to_api_timestamp_format(transaction.image_updated_at),
-                        'created-at': to_api_timestamp_format(transaction.created_at),
-                        'updated-at': to_api_timestamp_format(transaction.updated_at)
+                        'image-updated-at': to_api_timestamp_format(transaction.image_updated_at)
                     },
                     relationships: {
                         balance: {
                             links: {
                                 self: "#{host}#{request}/relationships/#{relationship_type_balance}",
                                 related: "#{host}#{request}/#{relationship_type_balance}"
+                            }
+                        },
+                        activity: {
+                            links: {
+                                self: "#{host}#{request}/relationships/#{relationship_type_activity}",
+                                related: "#{host}#{request}/#{relationship_type_activity}"
                             }
                         }
                     }

@@ -7,13 +7,13 @@ RSpec.describe Api::V1::TransactionResource, type: :resource do
 
   it {is_expected.to have_primary_key :id}
 
+  it {is_expected.to have_attribute :created_at}
+  it {is_expected.to have_attribute :updated_at}
   it {is_expected.to have_attribute :amount}
   it {is_expected.to have_attribute :image_file_name}
   it {is_expected.to have_attribute :image_content_type}
   it {is_expected.to have_attribute :image_file_size}
   it {is_expected.to have_attribute :image_updated_at}
-  it {is_expected.to have_attribute :created_at}
-  it {is_expected.to have_attribute :updated_at}
 
   it {is_expected.to filter :amount}
   it {is_expected.to filter :image_file_name}
@@ -24,4 +24,5 @@ RSpec.describe Api::V1::TransactionResource, type: :resource do
   it {is_expected.to filter :updated_at}
 
   it {is_expected.to have_one :balance}
+  it {is_expected.to have_one :activity}
 end

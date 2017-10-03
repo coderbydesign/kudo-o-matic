@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       end
 
       jsonapi_resources :transactions
+      jsonapi_resources :activities
 
       post 'authentication/obtain_api_token'
     end
