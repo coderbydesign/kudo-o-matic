@@ -450,6 +450,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                     attributes: {
                         name: balance.name,
                         current: balance.current,
+                        amount: balance.amount,
                         'created-at': to_api_timestamp_format(balance.created_at),
                         'updated-at': to_api_timestamp_format(balance.updated_at)
                     }
