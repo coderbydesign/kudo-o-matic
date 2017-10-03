@@ -6,6 +6,8 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
   let (:host) {'http://www.example.com'}
   let (:resource_type) {'transactions'}
+  let (:relationship_type_sender) {'sender'}
+  let (:relationship_type_receiver) {'receiver'}
   let (:relationship_type_balance) {'balance'}
   let (:relationship_type_activity) {'activity'}
 
@@ -41,6 +43,18 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                             'image-updated-at': to_api_timestamp_format(transaction1.image_updated_at),
                         },
                         relationships: {
+                            sender: {
+                                links: {
+                                    self: "#{host}#{request}/#{transaction1.id}/relationships/#{relationship_type_sender}",
+                                    related: "#{host}#{request}/#{transaction1.id}/#{relationship_type_sender}"
+                                }
+                            },
+                            receiver: {
+                                links: {
+                                    self: "#{host}#{request}/#{transaction1.id}/relationships/#{relationship_type_receiver}",
+                                    related: "#{host}#{request}/#{transaction1.id}/#{relationship_type_receiver}"
+                                }
+                            },
                             balance: {
                                 links: {
                                     self: "#{host}#{request}/#{transaction1.id}/relationships/#{relationship_type_balance}",
@@ -71,6 +85,18 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                             'image-updated-at': to_api_timestamp_format(transaction2.image_updated_at)
                         },
                         relationships: {
+                            sender: {
+                                links: {
+                                    self: "#{host}#{request}/#{transaction2.id}/relationships/#{relationship_type_sender}",
+                                    related: "#{host}#{request}/#{transaction2.id}/#{relationship_type_sender}"
+                                }
+                            },
+                            receiver: {
+                                links: {
+                                    self: "#{host}#{request}/#{transaction2.id}/relationships/#{relationship_type_receiver}",
+                                    related: "#{host}#{request}/#{transaction2.id}/#{relationship_type_receiver}"
+                                }
+                            },
                             balance: {
                                 links: {
                                     self: "#{host}#{request}/#{transaction2.id}/relationships/#{relationship_type_balance}",
@@ -143,6 +169,18 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                         'image-updated-at': to_api_timestamp_format(transaction.image_updated_at)
                     },
                     relationships: {
+                        sender: {
+                            links: {
+                                self: "#{host}#{request}/relationships/#{relationship_type_sender}",
+                                related: "#{host}#{request}/#{relationship_type_sender}"
+                            }
+                        },
+                        receiver: {
+                            links: {
+                                self: "#{host}#{request}/relationships/#{relationship_type_receiver}",
+                                related: "#{host}#{request}/#{relationship_type_receiver}"
+                            }
+                        },
                         balance: {
                             links: {
                                 self: "#{host}#{request}/relationships/#{relationship_type_balance}",
@@ -184,7 +222,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
   end
 
-  # TODO add tests for post and patch
+  # TODO add integration tests for POST en PATCH requests
 
   describe 'DELETE api/v1/transactions/:id' do
     let (:request) {"/api/v1/transactions/#{transaction.id}"}
