@@ -336,7 +336,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
           expect(json).to eq(expected)
         end
 
-        it 'persists the updated balance wihout updated values' do
+        it 'persists the updated balance without updated values' do
           updated_balance = Balance.find(balance.id)
 
           expect(updated_balance.name).to eq(balance.name)

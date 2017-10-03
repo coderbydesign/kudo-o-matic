@@ -368,7 +368,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
           expect(json).to eq(expected)
         end
 
-        it 'persists the updated activity wihout updated values' do
+        it 'persists the updated activity without updated values' do
           updated_activity = Activity.find(activity.id)
 
           expect(updated_activity.name).to eq(activity.name)
