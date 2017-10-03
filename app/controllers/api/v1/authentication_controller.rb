@@ -1,4 +1,4 @@
-class Api::V1::TokenController < ActionController::Base
+class Api::V1::AuthenticationController < ActionController::Base
   before_action :set_default_response_format
 
   def obtain_api_token
