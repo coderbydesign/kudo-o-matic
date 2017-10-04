@@ -82,7 +82,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
 
     context 'without an api-token' do
@@ -90,7 +90,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
   end
 
@@ -145,7 +145,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
 
     context 'without an api-token' do
@@ -153,7 +153,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
   end
 
@@ -244,7 +244,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
              }.to_json
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
 
     context 'without an api-token' do
@@ -266,7 +266,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
              }.to_json
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
   end
 
@@ -421,7 +421,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
               }.to_json
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
 
     context 'without an api-token' do
@@ -442,7 +442,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
               }.to_json
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
   end
 
@@ -471,7 +471,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
 
     context 'without an api-token' do
@@ -479,7 +479,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         delete request
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
   end
 
@@ -504,7 +504,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
           expected =
               {
                   data: {
-                      id: goal.id,
+                      id: goal.id.to_s,
                       type: resource_type,
                       attributes: {
                           'created-at': to_api_timestamp_format(goal.created_at),
@@ -590,7 +590,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
 
     context 'without an api-token' do
@@ -598,7 +598,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
   end
 
@@ -621,7 +621,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
           expected =
               {
                   data: {
-                      id: goal1.id,
+                      id: goal1.id.to_s,
                       type: resource_type,
                       attributes: {
                           'created-at': to_api_timestamp_format(goal1.created_at),
@@ -680,7 +680,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
 
     context 'without an api-token' do
@@ -688,7 +688,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
   end
 end

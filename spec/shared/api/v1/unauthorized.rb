@@ -1,6 +1,15 @@
-def expect_unauthorized_message_and_status_code
+def expect_unauthorized_response_and_status_code
   it 'returns an unauthorized message' do
-    expect(json).to match({error: 'Unauthorized'})
+    expected = {
+        errors: {
+            title: 'Unauthorized',
+            detail: 'No valid API-token was provided.',
+            code: '401',
+            status: '401'
+        }
+    }.with_indifferent_access
+
+    expect(json).to match(expected)
   end
 
   it 'returns a 401 (unauthorized) status code' do
