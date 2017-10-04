@@ -1,7 +1,7 @@
 json.key_format! :dasherize
 
 json.data do
-  json.id @goal.id
+  json.id @goal.id.nil? ? nil : @goal.id.to_s # return nil when the goal id is nil, instead of an empty string
   json.type 'goals'
   json.attributes do
     json.name @goal.name
