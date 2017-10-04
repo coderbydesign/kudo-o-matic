@@ -1,7 +1,8 @@
 json.key_format! :dasherize
 
 json.data do
-  json.id @balance.id
+  json.id @balance.id.nil? ? nil : @balance.id.to_s # return nil when the balance id is nil, instead of an empty string
+
   json.type 'balances'
   json.attributes do
     json.name @balance.name

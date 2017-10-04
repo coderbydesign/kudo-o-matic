@@ -3,10 +3,10 @@ class Api::V1::AuthenticationController < ActionController::Base
 
   def obtain_api_token
     if validate_jwt_token(params[:jwt_token])
-      user = User.from_api_token_request(api_token_request_params)
-      render json: {api_token: user.api_token}, status: :ok
+      @user = User.from_api_token_request(api_token_request_params)
+      render 'api/v1/authentication/api_token', status: :ok
     else
-      render json: {error: 'Invalid JWT token'}, status: :unauthorized
+      render 'api/v1/authentication/error', status: :unauthorized
     end
   end
 
