@@ -55,16 +55,16 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                                     related: "#{host}#{request}/#{transaction1.id}/#{relationship_type_receiver}"
                                 }
                             },
-                            balance: {
-                                links: {
-                                    self: "#{host}#{request}/#{transaction1.id}/relationships/#{relationship_type_balance}",
-                                    related: "#{host}#{request}/#{transaction1.id}/#{relationship_type_balance}"
-                                }
-                            },
                             activity: {
                                 links: {
                                     self: "#{host}#{request}/#{transaction1.id}/relationships/#{relationship_type_activity}",
                                     related: "#{host}#{request}/#{transaction1.id}/#{relationship_type_activity}"
+                                }
+                            },
+                            balance: {
+                                links: {
+                                    self: "#{host}#{request}/#{transaction1.id}/relationships/#{relationship_type_balance}",
+                                    related: "#{host}#{request}/#{transaction1.id}/#{relationship_type_balance}"
                                 }
                             }
                         }
@@ -97,16 +97,16 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                                     related: "#{host}#{request}/#{transaction2.id}/#{relationship_type_receiver}"
                                 }
                             },
-                            balance: {
-                                links: {
-                                    self: "#{host}#{request}/#{transaction2.id}/relationships/#{relationship_type_balance}",
-                                    related: "#{host}#{request}/#{transaction2.id}/#{relationship_type_balance}"
-                                }
-                            },
                             activity: {
                                 links: {
                                     self: "#{host}#{request}/#{transaction2.id}/relationships/#{relationship_type_activity}",
                                     related: "#{host}#{request}/#{transaction2.id}/#{relationship_type_activity}"
+                                }
+                            },
+                            balance: {
+                                links: {
+                                    self: "#{host}#{request}/#{transaction2.id}/relationships/#{relationship_type_balance}",
+                                    related: "#{host}#{request}/#{transaction2.id}/#{relationship_type_balance}"
                                 }
                             }
                         }
@@ -127,7 +127,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
 
     context 'without an api-token' do
@@ -135,7 +135,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
   end
 
@@ -181,16 +181,16 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                                 related: "#{host}#{request}/#{relationship_type_receiver}"
                             }
                         },
-                        balance: {
-                            links: {
-                                self: "#{host}#{request}/relationships/#{relationship_type_balance}",
-                                related: "#{host}#{request}/#{relationship_type_balance}"
-                            }
-                        },
                         activity: {
                             links: {
                                 self: "#{host}#{request}/relationships/#{relationship_type_activity}",
                                 related: "#{host}#{request}/#{relationship_type_activity}"
+                            }
+                        },
+                        balance: {
+                            links: {
+                                self: "#{host}#{request}/relationships/#{relationship_type_balance}",
+                                related: "#{host}#{request}/#{relationship_type_balance}"
                             }
                         }
                     }
@@ -210,7 +210,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
 
     context 'without an api-token' do
@@ -218,7 +218,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
   end
 
@@ -249,7 +249,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
 
     context 'without an api-token' do
@@ -257,7 +257,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         delete request
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_unauthorized_response_and_status_code
     end
   end
 end
