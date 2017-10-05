@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  after_update :ensure_an_admin_remains
+  after_destroy :ensure_an_admin_remains
+
   acts_as_voter
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -44,6 +47,12 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def ensure_an_admin_remains
+    if User.where(admin: true).count < 1
+      raise "Last administrator can't be removed from the system"
+    end
+  end
 
   def self.generate_unique_api_token
     api_token = SecureRandom.urlsafe_base64
