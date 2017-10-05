@@ -8,6 +8,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
   let (:resource_type) {'users'}
   let (:relationship_type_sent_transactions) {'sent-transactions'}
   let (:relationship_type_received_transactions) {'received-transactions'}
+  let (:relationship_type_votes) {'votes'}
 
   describe 'GET api/v1/users' do
     let (:request) {'/api/v1/users'}
@@ -50,6 +51,12 @@ RSpec.describe Api::V1::UsersController, type: :request do
                                     self: "#{host}#{request}/#{user1.id}/relationships/#{relationship_type_received_transactions}",
                                     related: "#{host}#{request}/#{user1.id}/#{relationship_type_received_transactions}"
                                 }
+                            },
+                            votes: {
+                                links: {
+                                    self: "#{host}#{request}/#{user1.id}/relationships/#{relationship_type_votes}",
+                                    related: "#{host}#{request}/#{user1.id}/#{relationship_type_votes}"
+                                }
                             }
                         }
                     },
@@ -78,6 +85,12 @@ RSpec.describe Api::V1::UsersController, type: :request do
                                 links: {
                                     self: "#{host}#{request}/#{user2.id}/relationships/#{relationship_type_received_transactions}",
                                     related: "#{host}#{request}/#{user2.id}/#{relationship_type_received_transactions}"
+                                }
+                            },
+                            votes: {
+                                links: {
+                                    self: "#{host}#{request}/#{user2.id}/relationships/#{relationship_type_votes}",
+                                    related: "#{host}#{request}/#{user2.id}/#{relationship_type_votes}"
                                 }
                             }
                         }
@@ -149,6 +162,12 @@ RSpec.describe Api::V1::UsersController, type: :request do
                             links: {
                                 self: "#{host}#{request}/relationships/#{relationship_type_received_transactions}",
                                 related: "#{host}#{request}/#{relationship_type_received_transactions}"
+                            }
+                        },
+                        votes: {
+                            links: {
+                                self: "#{host}#{request}/relationships/#{relationship_type_votes}",
+                                related: "#{host}#{request}/#{relationship_type_votes}"
                             }
                         }
                     }
@@ -234,6 +253,12 @@ RSpec.describe Api::V1::UsersController, type: :request do
                             links: {
                                 self: "#{host}#{request}/#{assigned_id}/relationships/#{relationship_type_received_transactions}",
                                 related: "#{host}#{request}/#{assigned_id}/#{relationship_type_received_transactions}"
+                            }
+                        },
+                        votes: {
+                            links: {
+                                self: "#{host}#{request}/#{assigned_id}/relationships/#{relationship_type_votes}",
+                                related: "#{host}#{request}/#{assigned_id}/#{relationship_type_votes}"
                             }
                         }
                     }
@@ -364,6 +389,12 @@ RSpec.describe Api::V1::UsersController, type: :request do
                                   self: "#{host}#{request}/relationships/#{relationship_type_received_transactions}",
                                   related: "#{host}#{request}/#{relationship_type_received_transactions}"
                               }
+                          },
+                          votes: {
+                              links: {
+                                  self: "#{host}#{request}/relationships/#{relationship_type_votes}",
+                                  related: "#{host}#{request}/#{relationship_type_votes}"
+                              }
                           }
                       }
                   }
@@ -421,6 +452,12 @@ RSpec.describe Api::V1::UsersController, type: :request do
                               links: {
                                   self: "#{host}#{request}/relationships/#{relationship_type_received_transactions}",
                                   related: "#{host}#{request}/#{relationship_type_received_transactions}"
+                              }
+                          },
+                          votes: {
+                              links: {
+                                  self: "#{host}#{request}/relationships/#{relationship_type_votes}",
+                                  related: "#{host}#{request}/#{relationship_type_votes}"
                               }
                           }
                       }
@@ -495,6 +532,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
 
   describe 'DELETE api/v1/users/:id' do
     let (:request) {"/api/v1/users/#{user.id}"}
+    let! (:administrator) {create(:user, :admin)} # deleting a user requires at least one administrator in the system
     let! (:user) {create(:user)}
 
     context 'with a valid api-token' do

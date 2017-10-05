@@ -25,4 +25,5 @@ RSpec.describe Api::V1::TransactionResource, type: :resource do
 
   it {is_expected.to have_one :balance}
   it {is_expected.to have_one :activity}
+  it {is_expected.to have_many :votes}
 end

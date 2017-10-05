@@ -10,6 +10,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
   let (:relationship_type_receiver) {'receiver'}
   let (:relationship_type_balance) {'balance'}
   let (:relationship_type_activity) {'activity'}
+  let (:relationship_type_votes) {'votes'}
 
   describe 'GET api/v1/transactions' do
     let (:request) {'/api/v1/transactions'}
@@ -66,6 +67,12 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                                     self: "#{host}#{request}/#{transaction1.id}/relationships/#{relationship_type_balance}",
                                     related: "#{host}#{request}/#{transaction1.id}/#{relationship_type_balance}"
                                 }
+                            },
+                            votes: {
+                                links: {
+                                    self: "#{host}#{request}/#{transaction1.id}/relationships/#{relationship_type_votes}",
+                                    related: "#{host}#{request}/#{transaction1.id}/#{relationship_type_votes}"
+                                }
                             }
                         }
                     },
@@ -107,6 +114,12 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                                 links: {
                                     self: "#{host}#{request}/#{transaction2.id}/relationships/#{relationship_type_balance}",
                                     related: "#{host}#{request}/#{transaction2.id}/#{relationship_type_balance}"
+                                }
+                            },
+                            votes: {
+                                links: {
+                                    self: "#{host}#{request}/#{transaction2.id}/relationships/#{relationship_type_votes}",
+                                    related: "#{host}#{request}/#{transaction2.id}/#{relationship_type_votes}"
                                 }
                             }
                         }
@@ -191,6 +204,12 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                             links: {
                                 self: "#{host}#{request}/relationships/#{relationship_type_balance}",
                                 related: "#{host}#{request}/#{relationship_type_balance}"
+                            }
+                        },
+                        votes: {
+                            links: {
+                                self: "#{host}#{request}/relationships/#{relationship_type_votes}",
+                                related: "#{host}#{request}/#{relationship_type_votes}"
                             }
                         }
                     }

@@ -5,4 +5,5 @@ class Api::V1::TransactionResource < Api::V1::BaseResource
   has_one :receiver
   has_one :activity
   has_one :balance
+  has_many :votes
 end
