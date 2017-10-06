@@ -16,6 +16,7 @@ RSpec.describe Api::V1::TransactionResource, type: :resource do
   it {is_expected.to have_attribute :image_updated_at}
 
   it {is_expected.to filter :amount}
+  it {is_expected.to filter :image_url}
   it {is_expected.to filter :image_file_name}
   it {is_expected.to filter :image_content_type}
   it {is_expected.to filter :image_file_size}
