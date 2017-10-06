@@ -1,12 +1,26 @@
 require 'rails_helper'
-require 'shared/api/v1/unauthorized'
+require 'shared/api/v1/shared_expectations'
+
+def expect_record_count_same
+  it 'does not change the record count' do
+    expect(record_count_before_request).to be == Activity.count
+  end
+end
+
+def expect_record_count_increase
+  it 'increases the record count' do
+    expect(record_count_before_request).to be < Activity.count
+  end
+end
+
+def expect_record_count_decrease
+  it 'decreases the record count' do
+    expect(record_count_before_request).to be > Activity.count
+  end
+end
 
 RSpec.describe Api::V1::ActivitiesController, type: :request do
   include RequestHelpers
-
-  let (:host) {'http://www.example.com'}
-  let (:resource_type) {'activities'}
-  let (:relationship_type_transactions) {'transactions'}
 
   describe 'GET api/v1/activities' do
     let (:request) {'/api/v1/activities'}
@@ -15,10 +29,13 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Activity.count}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
       end
+
+      expect_record_count_same
 
       it 'returns all activities' do
         expected =
@@ -26,9 +43,9 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
                 data: [
                     {
                         id: activity1.id.to_s,
-                        type: resource_type,
+                        type: 'activities',
                         links: {
-                            self: "#{host}#{request}/#{activity1.id}"
+                            self: "http://www.example.com#{request}/#{activity1.id}"
                         },
                         attributes: {
                             'created-at': to_api_timestamp_format(activity1.created_at),
@@ -39,17 +56,17 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
                         relationships: {
                             transactions: {
                                 links: {
-                                    self: "#{host}#{request}/#{activity1.id}/relationships/#{relationship_type_transactions}",
-                                    related: "#{host}#{request}/#{activity1.id}/#{relationship_type_transactions}"
+                                    self: "http://www.example.com#{request}/#{activity1.id}/relationships/transactions",
+                                    related: "http://www.example.com#{request}/#{activity1.id}/transactions"
                                 }
                             }
                         }
                     },
                     {
                         id: activity2.id.to_s,
-                        type: resource_type,
+                        type: 'activities',
                         links: {
-                            self: "#{host}#{request}/#{activity2.id}"
+                            self: "http://www.example.com#{request}/#{activity2.id}"
                         },
                         attributes: {
                             'created-at': to_api_timestamp_format(activity2.created_at),
@@ -60,8 +77,8 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
                         relationships: {
                             transactions: {
                                 links: {
-                                    self: "#{host}#{request}/#{activity2.id}/relationships/#{relationship_type_transactions}",
-                                    related: "#{host}#{request}/#{activity2.id}/#{relationship_type_transactions}"
+                                    self: "http://www.example.com#{request}/#{activity2.id}/relationships/transactions",
+                                    related: "http://www.example.com#{request}/#{activity2.id}/transactions"
                                 }
                             }
                         }
@@ -72,25 +89,35 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         expect(json).to eq(expected)
       end
 
-      it 'returns a 200 (ok) status code' do
-        expect(response).to have_http_status(200)
-      end
+      expect_status_200_ok
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Activity.count}
+
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Activity.count}
+
       before do
         get request
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
@@ -100,19 +127,22 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Activity.count}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
       end
+
+      expect_record_count_same
 
       it 'returns the activity associated with the id' do
         expected =
             {
                 data: {
                     id: activity.id.to_s,
-                    type: resource_type,
+                    type: 'activities',
                     links: {
-                        self: "#{host}#{request}"
+                        self: "http://www.example.com#{request}"
                     },
                     attributes: {
                         'created-at': to_api_timestamp_format(activity.created_at),
@@ -123,8 +153,8 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
                     relationships: {
                         transactions: {
                             links: {
-                                self: "#{host}#{request}/relationships/#{relationship_type_transactions}",
-                                related: "#{host}#{request}/#{relationship_type_transactions}"
+                                self: "http://www.example.com#{request}/relationships/transactions",
+                                related: "http://www.example.com#{request}/transactions"
                             }
                         }
                     }
@@ -134,25 +164,35 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         expect(json).to eq(expected)
       end
 
-      it 'returns a 200 (ok) status code' do
-        expect(response).to have_http_status(200)
-      end
+      expect_status_200_ok
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Activity.count}
+
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Activity.count}
+
       before do
         get request
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
@@ -162,6 +202,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Activity.count}
 
       before do
         post request,
@@ -171,7 +212,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
              },
              params: {
                  data: {
-                     type: resource_type,
+                     type: 'activities',
                      attributes: {
                          name: activity.name,
                          'suggested-amount': activity.suggested_amount
@@ -180,14 +221,23 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
              }.to_json
       end
 
-      it 'returns the newly created activity' do
+      it 'persists the created activity' do
+        new_activity = Activity.find(assigned_id)
+
+        expect(new_activity.name).to eq(activity.name)
+        expect(new_activity.suggested_amount).to eq(activity.suggested_amount)
+      end
+
+      expect_record_count_increase
+
+      it 'returns the created activity' do
         expected =
             {
                 data: {
                     id: assigned_id,
-                    type: resource_type,
+                    type: 'activities',
                     links: {
-                        self: "#{host}#{request}/#{assigned_id}"
+                        self: "http://www.example.com#{request}/#{assigned_id}"
                     },
                     attributes: {
                         'created-at': assigned_created_at,
@@ -198,8 +248,8 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
                     relationships: {
                         transactions: {
                             links: {
-                                self: "#{host}#{request}/#{assigned_id}/relationships/#{relationship_type_transactions}",
-                                related: "#{host}#{request}/#{assigned_id}/#{relationship_type_transactions}"
+                                self: "http://www.example.com#{request}/#{assigned_id}/relationships/transactions",
+                                related: "http://www.example.com#{request}/#{assigned_id}/transactions"
                             }
                         }
                     }
@@ -209,19 +259,12 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         expect(json).to eq(expected)
       end
 
-      it 'persists the newly created activity' do
-        new_activity = Activity.find(assigned_id)
-
-        expect(new_activity.name).to eq(activity.name)
-        expect(new_activity.suggested_amount).to eq(activity.suggested_amount)
-      end
-
-      it 'returns a 201 (created) status code' do
-        expect(response).to have_http_status(201)
-      end
+      expect_status_201_created
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Activity.count}
+
       before do
         post request,
              headers: {
@@ -230,7 +273,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
              },
              params: {
                  data: {
-                     type: resource_type,
+                     type: 'activities',
                      attributes: {
                          name: activity.name,
                          current: activity.suggested_amount
@@ -239,10 +282,16 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
              }.to_json
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Activity.count}
+
       before do
         post request,
              headers: {
@@ -250,7 +299,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
              },
              params: {
                  data: {
-                     type: resource_type,
+                     type: 'activities',
                      attributes: {
                          name: activity.name,
                          current: activity.suggested_amount
@@ -259,7 +308,11 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
              }.to_json
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
@@ -273,6 +326,8 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
 
       context 'and updated values' do
+        let! (:record_count_before_request) {Activity.count}
+
         before do
           patch request,
                 headers: {
@@ -281,7 +336,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
                 },
                 params: {
                     data: {
-                        type: resource_type,
+                        type: 'activities',
                         id: activity.id,
                         attributes: {
                             name: edited_name,
@@ -291,14 +346,23 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
                 }.to_json
         end
 
+        it 'persists the updated activity associated with the id with updated values' do
+          updated_activity = Activity.find(activity.id)
+
+          expect(updated_activity.name).to eq(edited_name)
+          expect(updated_activity.suggested_amount).to eq(edited_suggested_amount)
+        end
+
+        expect_record_count_same
+
         it 'returns the updated activity associated with the id with updated values' do
           expected =
               {
                   data: {
                       id: activity.id.to_s,
-                      type: resource_type,
+                      type: 'activities',
                       links: {
-                          self: "#{host}#{request}"
+                          self: "http://www.example.com#{request}"
                       },
                       attributes: {
                           'created-at': to_api_timestamp_format(activity.created_at),
@@ -309,8 +373,8 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
                       relationships: {
                           transactions: {
                               links: {
-                                  self: "#{host}#{request}/relationships/#{relationship_type_transactions}",
-                                  related: "#{host}#{request}/#{relationship_type_transactions}"
+                                  self: "http://www.example.com#{request}/relationships/transactions",
+                                  related: "http://www.example.com#{request}/transactions"
                               }
                           }
                       }
@@ -320,33 +384,35 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
           expect(json).to eq(expected)
         end
 
-        it 'persists the updated activity with updated values' do
-          updated_activity = Activity.find(activity.id)
-
-          expect(updated_activity.name).to eq(edited_name)
-          expect(updated_activity.suggested_amount).to eq(edited_suggested_amount)
-        end
-
-        it 'returns a 200 (ok) status code' do
-          expect(response).to have_http_status(200)
-        end
+        expect_status_200_ok
       end
 
       context 'and without updated values' do
+        let! (:record_count_before_request) {Activity.count}
+
         before do
           patch request,
                 headers: {'Api-Token': user.api_token, 'Content-Type': 'application/vnd.api+json'},
-                params: {data: {type: resource_type, id: activity.id}}.to_json
+                params: {data: {type: 'activities', id: activity.id}}.to_json
         end
+
+        it 'persists the updated activity associated with the id without updated values' do
+          updated_activity = Activity.find(activity.id)
+
+          expect(updated_activity.name).to eq(activity.name)
+          expect(updated_activity.suggested_amount).to eq(activity.suggested_amount)
+        end
+
+        expect_record_count_same
 
         it 'returns the updated activity associated with the id without updated values' do
           expected =
               {
                   data: {
                       id: activity.id.to_s,
-                      type: resource_type,
+                      type: 'activities',
                       links: {
-                          self: "#{host}#{request}"
+                          self: "http://www.example.com#{request}"
                       },
                       attributes: {
                           'created-at': to_api_timestamp_format(activity.created_at),
@@ -357,8 +423,8 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
                       relationships: {
                           transactions: {
                               links: {
-                                  self: "#{host}#{request}/relationships/#{relationship_type_transactions}",
-                                  related: "#{host}#{request}/#{relationship_type_transactions}"
+                                  self: "http://www.example.com#{request}/relationships/transactions",
+                                  related: "http://www.example.com#{request}/transactions"
                               }
                           }
                       }
@@ -368,20 +434,13 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
           expect(json).to eq(expected)
         end
 
-        it 'persists the updated activity without updated values' do
-          updated_activity = Activity.find(activity.id)
-
-          expect(updated_activity.name).to eq(activity.name)
-          expect(updated_activity.suggested_amount).to eq(activity.suggested_amount)
-        end
-
-        it 'returns a 200 (ok) status code' do
-          expect(response).to have_http_status(200)
-        end
+        expect_status_200_ok
       end
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Activity.count}
+
       before do
         patch request,
               headers: {
@@ -390,7 +449,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
               },
               params: {
                   data: {
-                      type: resource_type,
+                      type: 'activities',
                       id: activity.id,
                       attributes: {
                           name: edited_name,
@@ -400,10 +459,16 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
               }.to_json
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Activity.count}
+
       before do
         patch request,
               headers: {
@@ -411,7 +476,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
               },
               params: {
                   data: {
-                      type: resource_type,
+                      type: 'activities',
                       id: activity.id,
                       attributes: {
                           name: edited_name,
@@ -421,7 +486,11 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
               }.to_json
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
@@ -431,6 +500,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Activity.count}
 
       before do
         delete request, headers: {'Api-Token': user.api_token}
@@ -440,25 +510,37 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         expect {Activity.find(activity.id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
 
-      it 'returns a 204 (no content) status code' do
-        expect(response).to have_http_status(204)
-      end
+      expect_record_count_decrease
+
+      expect_status_204_no_content
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Activity.count}
+
       before do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Activity.count}
+
       before do
         delete request
       end
 
-      expect_unauthorized_message_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 end

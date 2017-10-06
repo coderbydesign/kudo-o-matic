@@ -1,12 +1,26 @@
 require 'rails_helper'
-require 'shared/api/v1/unauthorized'
+require 'shared/api/v1/shared_expectations'
+
+def expect_record_count_same
+  it 'does not change the record count' do
+    expect(record_count_before_request).to be == Balance.count
+  end
+end
+
+def expect_record_count_increase
+  it 'increases the record count' do
+    expect(record_count_before_request).to be < Balance.count
+  end
+end
+
+def expect_record_count_decrease
+  it 'decreases the record count' do
+    expect(record_count_before_request).to be > Balance.count
+  end
+end
 
 RSpec.describe Api::V1::BalancesController, type: :request do
   include RequestHelpers
-
-  let (:host) {'http://www.example.com'}
-  let (:resource_type) {'balances'}
-  let (:relationship_type_transactions) {'transactions'}
 
   describe 'GET api/v1/balances' do
     let (:request) {'/api/v1/balances'}
@@ -15,10 +29,13 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Balance.count}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
       end
+
+      expect_record_count_same
 
       it 'returns all balances' do
         expected =
@@ -26,9 +43,9 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                 data: [
                     {
                         id: balance1.id.to_s,
-                        type: resource_type,
+                        type: 'balances',
                         links: {
-                            self: "#{host}#{request}/#{balance1.id}"
+                            self: "http://www.example.com#{request}/#{balance1.id}"
                         },
                         attributes: {
                             'created-at': to_api_timestamp_format(balance1.created_at),
@@ -39,17 +56,17 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                         relationships: {
                             transactions: {
                                 links: {
-                                    self: "#{host}#{request}/#{balance1.id}/relationships/#{relationship_type_transactions}",
-                                    related: "#{host}#{request}/#{balance1.id}/#{relationship_type_transactions}"
+                                    self: "http://www.example.com#{request}/#{balance1.id}/relationships/transactions",
+                                    related: "http://www.example.com#{request}/#{balance1.id}/transactions"
                                 }
                             }
                         }
                     },
                     {
                         id: balance2.id.to_s,
-                        type: resource_type,
+                        type: 'balances',
                         links: {
-                            self: "#{host}#{request}/#{balance2.id}"
+                            self: "http://www.example.com#{request}/#{balance2.id}"
                         },
                         attributes: {
                             'created-at': to_api_timestamp_format(balance2.created_at),
@@ -60,8 +77,8 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                         relationships: {
                             transactions: {
                                 links: {
-                                    self: "#{host}#{request}/#{balance2.id}/relationships/#{relationship_type_transactions}",
-                                    related: "#{host}#{request}/#{balance2.id}/#{relationship_type_transactions}"
+                                    self: "http://www.example.com#{request}/#{balance2.id}/relationships/transactions",
+                                    related: "http://www.example.com#{request}/#{balance2.id}/transactions"
                                 }
                             }
                         }
@@ -72,25 +89,35 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         expect(json).to eq(expected)
       end
 
-      it 'returns a 200 (ok) status code' do
-        expect(response).to have_http_status(200)
-      end
+      expect_status_200_ok
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Balance.count}
+
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Balance.count}
+
       before do
         get request
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
@@ -100,19 +127,22 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Balance.count}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
       end
+
+      expect_record_count_same
 
       it 'returns the balance associated with the id' do
         expected =
             {
                 data: {
                     id: balance.id.to_s,
-                    type: resource_type,
+                    type: 'balances',
                     links: {
-                        self: "#{host}#{request}"
+                        self: "http://www.example.com#{request}"
                     },
                     attributes: {
                         'created-at': to_api_timestamp_format(balance.created_at),
@@ -123,8 +153,8 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                     relationships: {
                         transactions: {
                             links: {
-                                self: "#{host}#{request}/relationships/#{relationship_type_transactions}",
-                                related: "#{host}#{request}/#{relationship_type_transactions}"
+                                self: "http://www.example.com#{request}/relationships/transactions",
+                                related: "http://www.example.com#{request}/transactions"
                             }
                         }
                     }
@@ -134,25 +164,35 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         expect(json).to eq(expected)
       end
 
-      it 'returns a 200 (ok) status code' do
-        expect(response).to have_http_status(200)
-      end
+      expect_status_200_ok
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Balance.count}
+
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Balance.count}
+
       before do
         get request
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
@@ -162,21 +202,31 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Balance.count}
 
       before do
         post request,
              headers: {'Api-Token': user.api_token, 'Content-Type': 'application/vnd.api+json'},
-             params: {data: {type: resource_type, attributes: {name: balance.name, current: balance.current}}}.to_json
+             params: {data: {type: 'balances', attributes: {name: balance.name, current: balance.current}}}.to_json
       end
 
-      it 'returns the newly created balance' do
+      it 'persists the created balance with the correct values' do
+        new_balance = Balance.find(assigned_id)
+
+        expect(new_balance.name).to eq(balance.name)
+        expect(new_balance.current).to eq(balance.current)
+      end
+
+      expect_record_count_increase
+
+      it 'returns the created balance' do
         expected =
             {
                 data: {
                     id: assigned_id,
-                    type: resource_type,
+                    type: 'balances',
                     links: {
-                        self: "#{host}#{request}/#{assigned_id}"
+                        self: "http://www.example.com#{request}/#{assigned_id}"
                     },
                     attributes: {
                         'created-at': assigned_created_at,
@@ -187,8 +237,8 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                     relationships: {
                         transactions: {
                             links: {
-                                self: "#{host}#{request}/#{assigned_id}/relationships/#{relationship_type_transactions}",
-                                related: "#{host}#{request}/#{assigned_id}/#{relationship_type_transactions}"
+                                self: "http://www.example.com#{request}/#{assigned_id}/relationships/transactions",
+                                related: "http://www.example.com#{request}/#{assigned_id}/transactions"
                             }
                         }
                     }
@@ -198,36 +248,39 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         expect(json).to eq(expected)
       end
 
-      it 'persists the newly created balance' do
-        new_balance = Balance.find(assigned_id)
-
-        expect(new_balance.name).to eq(balance.name)
-        expect(new_balance.current).to eq(balance.current)
-      end
-
-      it 'returns a 201 (created) status code' do
-        expect(response).to have_http_status(201)
-      end
+      expect_status_201_created
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Balance.count}
+
       before do
         post request,
              headers: {'Api-Token': 'invalid api-token', 'Content-Type': 'application/vnd.api+json'},
-             params: {data: {type: resource_type, attributes: {name: balance.name, current: balance.current}}}.to_json
+             params: {data: {type: 'balances', attributes: {name: balance.name, current: balance.current}}}.to_json
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Balance.count}
+
       before do
         post request,
              headers: {'Api-Token': 'application/vnd.api+json'},
-             params: {data: {type: resource_type, attributes: {name: balance.name, current: balance.current}}}.to_json
+             params: {data: {type: 'balances', attributes: {name: balance.name, current: balance.current}}}.to_json
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
@@ -241,6 +294,8 @@ RSpec.describe Api::V1::BalancesController, type: :request do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
 
       context 'and updated values' do
+        let! (:record_count_before_request) {Balance.count}
+
         before do
           patch request,
                 headers: {
@@ -259,14 +314,23 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                 }.to_json
         end
 
+        it 'persists the updated balance associated with the id with updated values' do
+          updated_balance = Balance.find(balance.id)
+
+          expect(updated_balance.name).to eq(edited_name)
+          expect(updated_balance.current).to eq(edited_current)
+        end
+
+        expect_record_count_same
+
         it 'returns the updated balance associated with the id with updated values' do
           expected =
               {
                   data: {
                       id: balance.id.to_s,
-                      type: resource_type,
+                      type: 'balances',
                       links: {
-                          self: "#{host}#{request}"
+                          self: "http://www.example.com#{request}"
                       },
                       attributes: {
                           'created-at': to_api_timestamp_format(balance.created_at),
@@ -277,8 +341,8 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                       relationships: {
                           transactions: {
                               links: {
-                                  self: "#{host}#{request}/relationships/#{relationship_type_transactions}",
-                                  related: "#{host}#{request}/#{relationship_type_transactions}"
+                                  self: "http://www.example.com#{request}/relationships/transactions",
+                                  related: "http://www.example.com#{request}/transactions"
                               }
                           }
                       }
@@ -288,33 +352,35 @@ RSpec.describe Api::V1::BalancesController, type: :request do
           expect(json).to eq(expected)
         end
 
-        it 'persists the updated balance with updated values' do
-          updated_balance = Balance.find(balance.id)
-
-          expect(updated_balance.name).to eq(edited_name)
-          expect(updated_balance.current).to eq(edited_current)
-        end
-
-        it 'returns a 200 (ok) status code' do
-          expect(response).to have_http_status(200)
-        end
+        expect_status_200_ok
       end
 
       context 'and without updated values' do
+        let! (:record_count_before_request) {Balance.count}
+
         before do
           patch request,
                 headers: {'Api-Token': user.api_token, 'Content-Type': 'application/vnd.api+json'},
                 params: {data: {type: 'balances', id: balance.id}}.to_json
         end
 
+        it 'persists the updated balance associated with the id without updated values' do
+          updated_balance = Balance.find(balance.id)
+
+          expect(updated_balance.name).to eq(balance.name)
+          expect(updated_balance.current).to eq(balance.current)
+        end
+
+        expect_record_count_same
+
         it 'returns the updated balance associated with the id without updated values' do
           expected =
               {
                   data: {
                       id: balance.id.to_s,
-                      type: resource_type,
+                      type: 'balances',
                       links: {
-                          self: "#{host}#{request}"
+                          self: "http://www.example.com#{request}"
                       },
                       attributes: {
                           'created-at': to_api_timestamp_format(balance.created_at),
@@ -325,8 +391,8 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                       relationships: {
                           transactions: {
                               links: {
-                                  self: "#{host}#{request}/relationships/#{relationship_type_transactions}",
-                                  related: "#{host}#{request}/#{relationship_type_transactions}"
+                                  self: "http://www.example.com#{request}/relationships/transactions",
+                                  related: "http://www.example.com#{request}/transactions"
                               }
                           }
                       }
@@ -336,20 +402,13 @@ RSpec.describe Api::V1::BalancesController, type: :request do
           expect(json).to eq(expected)
         end
 
-        it 'persists the updated balance without updated values' do
-          updated_balance = Balance.find(balance.id)
-
-          expect(updated_balance.name).to eq(balance.name)
-          expect(updated_balance.current).to eq(balance.current)
-        end
-
-        it 'returns a 200 (ok) status code' do
-          expect(response).to have_http_status(200)
-        end
+        expect_status_200_ok
       end
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Balance.count}
+
       before do
         patch request,
               headers: {
@@ -368,10 +427,16 @@ RSpec.describe Api::V1::BalancesController, type: :request do
               }.to_json
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Balance.count}
+
       before do
         patch request,
               headers: {
@@ -389,7 +454,11 @@ RSpec.describe Api::V1::BalancesController, type: :request do
               }.to_json
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
@@ -399,6 +468,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Balance.count}
 
       before do
         delete request, headers: {'Api-Token': user.api_token}
@@ -408,25 +478,37 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         expect {Balance.find(balance.id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
 
-      it 'returns a 204 (no content) status code' do
-        expect(response).to have_http_status(204)
-      end
+      expect_record_count_decrease
+
+      expect_status_204_no_content
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Balance.count}
+
       before do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Balance.count}
+
       before do
         delete request
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
@@ -436,17 +518,20 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Balance.count}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
       end
+
+      expect_record_count_same
 
       it 'returns the current balance' do
         expected =
             {
                 data: {
                     id: balance.id.to_s,
-                    type: resource_type,
+                    type: 'balances',
                     attributes: {
                         'created-at': to_api_timestamp_format(balance.created_at),
                         'updated-at': to_api_timestamp_format(balance.updated_at),
@@ -460,25 +545,35 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         expect(json).to eq(expected)
       end
 
-      it 'returns a 200 (ok) status code' do
-        expect(response).to have_http_status(200)
-      end
+      expect_status_200_ok
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Balance.count}
+
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Balance.count}
+
       before do
         get request
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 end

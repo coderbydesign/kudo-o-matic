@@ -1,13 +1,26 @@
 require 'rails_helper'
-require 'shared/api/v1/unauthorized'
+require 'shared/api/v1/shared_expectations'
+
+def expect_record_count_same
+  it 'does not change the record count' do
+    expect(record_count_before_request).to be == Vote.count
+  end
+end
+
+def expect_record_count_increase
+  it 'increases the record count' do
+    expect(record_count_before_request).to be < Vote.count
+  end
+end
+
+def expect_record_count_decrease
+  it 'decreases the record count' do
+    expect(record_count_before_request).to be > Vote.count
+  end
+end
 
 RSpec.describe Api::V1::VotesController, type: :request do
   include RequestHelpers
-
-  let (:host) {'http://www.example.com'}
-  let (:resource_type) {'votes'}
-  let (:relationship_type_user_voter) {'user-voter'}
-  let (:relationship_type_transaction_votable) {'transaction-votable'}
 
   describe 'GET api/v1/votes' do
     let (:request) {'/api/v1/votes'}
@@ -16,10 +29,13 @@ RSpec.describe Api::V1::VotesController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Vote.count}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
       end
+
+      expect_record_count_same
 
       it 'returns all votes' do
         expected =
@@ -27,9 +43,9 @@ RSpec.describe Api::V1::VotesController, type: :request do
                 data: [
                     {
                         id: vote1.id.to_s,
-                        type: resource_type,
+                        type: 'votes',
                         links: {
-                            self: "#{host}#{request}/#{vote1.id}"
+                            self: "http://www.example.com#{request}/#{vote1.id}"
                         },
                         attributes: {
                             'created-at': to_api_timestamp_format(vote1.created_at),
@@ -45,23 +61,23 @@ RSpec.describe Api::V1::VotesController, type: :request do
                         relationships: {
                             'user-voter': {
                                 links: {
-                                    self: "#{host}#{request}/#{vote1.id}/relationships/#{relationship_type_user_voter}",
-                                    related: "#{host}#{request}/#{vote1.id}/#{relationship_type_user_voter}"
+                                    self: "http://www.example.com#{request}/#{vote1.id}/relationships/user-voter",
+                                    related: "http://www.example.com#{request}/#{vote1.id}/user-voter"
                                 }
                             },
                             'transaction-votable': {
                                 links: {
-                                    self: "#{host}#{request}/#{vote1.id}/relationships/#{relationship_type_transaction_votable}",
-                                    related: "#{host}#{request}/#{vote1.id}/#{relationship_type_transaction_votable}"
+                                    self: "http://www.example.com#{request}/#{vote1.id}/relationships/transaction-votable",
+                                    related: "http://www.example.com#{request}/#{vote1.id}/transaction-votable"
                                 }
                             }
                         }
                     },
                     {
                         id: vote2.id.to_s,
-                        type: resource_type,
+                        type: 'votes',
                         links: {
-                            self: "#{host}#{request}/#{vote2.id}"
+                            self: "http://www.example.com#{request}/#{vote2.id}"
                         },
                         attributes: {
                             'created-at': to_api_timestamp_format(vote2.created_at),
@@ -77,14 +93,14 @@ RSpec.describe Api::V1::VotesController, type: :request do
                         relationships: {
                             'user-voter': {
                                 links: {
-                                    self: "#{host}#{request}/#{vote2.id}/relationships/#{relationship_type_user_voter}",
-                                    related: "#{host}#{request}/#{vote2.id}/#{relationship_type_user_voter}"
+                                    self: "http://www.example.com#{request}/#{vote2.id}/relationships/user-voter",
+                                    related: "http://www.example.com#{request}/#{vote2.id}/user-voter"
                                 }
                             },
                             'transaction-votable': {
                                 links: {
-                                    self: "#{host}#{request}/#{vote2.id}/relationships/#{relationship_type_transaction_votable}",
-                                    related: "#{host}#{request}/#{vote2.id}/#{relationship_type_transaction_votable}"
+                                    self: "http://www.example.com#{request}/#{vote2.id}/relationships/transaction-votable",
+                                    related: "http://www.example.com#{request}/#{vote2.id}/transaction-votable"
                                 }
                             }
                         }
@@ -95,23 +111,35 @@ RSpec.describe Api::V1::VotesController, type: :request do
         expect(json).to eq(expected)
       end
 
-      it {expect(response).to have_http_status(200)}
+      expect_status_200_ok
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Vote.count}
+
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Vote.count}
+
       before do
         get request
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
@@ -121,19 +149,22 @@ RSpec.describe Api::V1::VotesController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Vote.count}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
       end
+
+      expect_record_count_same
 
       it 'returns the vote associated with the id' do
         expected =
             {
                 data: {
                     id: vote.id.to_s,
-                    type: resource_type,
+                    type: 'votes',
                     links: {
-                        self: "#{host}#{request}"
+                        self: "http://www.example.com#{request}"
                     },
                     attributes: {
                         'created-at': to_api_timestamp_format(vote.created_at),
@@ -149,14 +180,14 @@ RSpec.describe Api::V1::VotesController, type: :request do
                     relationships: {
                         'user-voter': {
                             links: {
-                                self: "#{host}#{request}/relationships/#{relationship_type_user_voter}",
-                                related: "#{host}#{request}/#{relationship_type_user_voter}"
+                                self: "http://www.example.com#{request}/relationships/user-voter",
+                                related: "http://www.example.com#{request}/user-voter"
                             }
                         },
                         'transaction-votable': {
                             links: {
-                                self: "#{host}#{request}/relationships/#{relationship_type_transaction_votable}",
-                                related: "#{host}#{request}/#{relationship_type_transaction_votable}"
+                                self: "http://www.example.com#{request}/relationships/transaction-votable",
+                                related: "http://www.example.com#{request}/transaction-votable"
                             }
                         }
                     }
@@ -166,34 +197,46 @@ RSpec.describe Api::V1::VotesController, type: :request do
         expect(json).to eq(expected)
       end
 
-      it 'returns a 200 (ok) status code' do
-        expect(response).to have_http_status(200)
-      end
+      expect_status_200_ok
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Vote.count}
+
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Vote.count}
+
       before do
         get request
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
   describe 'POST api/v1/votes' do
     let (:request) {'/api/v1/votes'}
     let! (:vote) {build(:vote)}
+    let! (:record_count_before_request) {Vote.count}
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Vote.count}
 
       before do
         post request,
@@ -203,7 +246,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
              },
              params: {
                  data: {
-                     type: resource_type,
+                     type: 'votes',
                      attributes: {
                          'votable-type': vote.votable_type,
                          'votable-id': vote.votable_id,
@@ -217,14 +260,28 @@ RSpec.describe Api::V1::VotesController, type: :request do
              }.to_json
       end
 
-      it 'returns the newly created vote' do
+      it 'persists the created vote' do
+        new_vote = Vote.find(assigned_id)
+
+        expect(new_vote.votable_type).to eq(vote.votable_type)
+        expect(new_vote.votable_id).to eq(vote.votable_id)
+        expect(new_vote.voter_type).to eq(vote.voter_type)
+        expect(new_vote.voter_id).to eq(vote.voter_id)
+        expect(new_vote.vote_flag).to eq(vote.vote_flag)
+        expect(new_vote.vote_scope).to eq(vote.vote_scope)
+        expect(new_vote.vote_weight).to eq(vote.vote_weight)
+      end
+
+      expect_record_count_increase
+
+      it 'returns the created vote' do
         expected =
             {
                 data: {
                     id: assigned_id,
-                    type: resource_type,
+                    type: 'votes',
                     links: {
-                        self: "#{host}#{request}/#{assigned_id}"
+                        self: "http://www.example.com#{request}/#{assigned_id}"
                     },
                     attributes: {
                         'created-at': assigned_created_at,
@@ -240,14 +297,14 @@ RSpec.describe Api::V1::VotesController, type: :request do
                     relationships: {
                         'user-voter': {
                             links: {
-                                self: "#{host}#{request}/#{assigned_id}/relationships/#{relationship_type_user_voter}",
-                                related: "#{host}#{request}/#{assigned_id}/#{relationship_type_user_voter}"
+                                self: "http://www.example.com#{request}/#{assigned_id}/relationships/user-voter",
+                                related: "http://www.example.com#{request}/#{assigned_id}/user-voter"
                             }
                         },
                         'transaction-votable': {
                             links: {
-                                self: "#{host}#{request}/#{assigned_id}/relationships/#{relationship_type_transaction_votable}",
-                                related: "#{host}#{request}/#{assigned_id}/#{relationship_type_transaction_votable}"
+                                self: "http://www.example.com#{request}/#{assigned_id}/relationships/transaction-votable",
+                                related: "http://www.example.com#{request}/#{assigned_id}/transaction-votable"
                             }
                         }
                     }
@@ -257,24 +314,12 @@ RSpec.describe Api::V1::VotesController, type: :request do
         expect(json).to eq(expected)
       end
 
-      it 'persists the newly created vote' do
-        new_vote = Vote.find(assigned_id)
-
-        expect(new_vote.votable_type).to eq(vote.votable_type)
-        expect(new_vote.votable_id).to eq(vote.votable_id)
-        expect(new_vote.voter_type).to eq(vote.voter_type)
-        expect(new_vote.voter_id).to eq(vote.voter_id)
-        expect(new_vote.vote_flag).to eq(vote.vote_flag)
-        expect(new_vote.vote_scope).to eq(vote.vote_scope)
-        expect(new_vote.vote_weight).to eq(vote.vote_weight)
-      end
-
-      it 'returns a 201 (created) status code' do
-        expect(response).to have_http_status(201)
-      end
+      expect_status_201_created
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Vote.count}
+
       before do
         post request,
              headers: {
@@ -283,7 +328,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
              },
              params: {
                  data: {
-                     type: resource_type,
+                     type: 'votes',
                      attributes: {
                          'votable-type': vote.votable_type,
                          'votable-id': vote.votable_id,
@@ -297,10 +342,16 @@ RSpec.describe Api::V1::VotesController, type: :request do
              }.to_json
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Vote.count}
+
       before do
         post request,
              headers: {
@@ -309,7 +360,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
              },
              params: {
                  data: {
-                     type: resource_type,
+                     type: 'votes',
                      attributes: {
                          'votable-type': vote.votable_type,
                          'votable-id': vote.votable_id,
@@ -323,7 +374,11 @@ RSpec.describe Api::V1::VotesController, type: :request do
              }.to_json
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
@@ -342,6 +397,8 @@ RSpec.describe Api::V1::VotesController, type: :request do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
 
       context 'and updated values' do
+        let! (:record_count_before_request) {Vote.count}
+
         before do
           patch request,
                 headers: {
@@ -350,7 +407,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
                 },
                 params: {
                     data: {
-                        type: resource_type,
+                        type: 'votes',
                         id: vote.id,
                         attributes: {
                             'votable-type': edited_votable_type,
@@ -365,14 +422,28 @@ RSpec.describe Api::V1::VotesController, type: :request do
                 }.to_json
         end
 
+        it 'persists the updated vote associated with the id with updated values' do
+          updated_vote = Vote.find(vote.id)
+
+          expect(updated_vote.votable_type).to eq(edited_votable_type)
+          expect(updated_vote.votable_id).to eq(edited_votable_id)
+          expect(updated_vote.voter_type).to eq(edited_voter_type)
+          expect(updated_vote.voter_id).to eq(edited_voter_id)
+          expect(updated_vote.vote_flag).to eq(edited_vote_flag)
+          expect(updated_vote.vote_scope).to eq(edited_vote_scope)
+          expect(updated_vote.vote_weight).to eq(edited_vote_weight)
+        end
+
+        expect_record_count_same
+
         it 'returns the updated vote associated with the id with updated values' do
           expected =
               {
                   data: {
                       id: vote.id.to_s,
-                      type: resource_type,
+                      type: 'votes',
                       links: {
-                          self: "#{host}#{request}"
+                          self: "http://www.example.com#{request}"
                       },
                       attributes: {
                           'created-at': to_api_timestamp_format(vote.created_at),
@@ -388,14 +459,14 @@ RSpec.describe Api::V1::VotesController, type: :request do
                       relationships: {
                           'user-voter': {
                               links: {
-                                  self: "#{host}#{request}/relationships/#{relationship_type_user_voter}",
-                                  related: "#{host}#{request}/#{relationship_type_user_voter}"
+                                  self: "http://www.example.com#{request}/relationships/user-voter",
+                                  related: "http://www.example.com#{request}/user-voter"
                               }
                           },
                           'transaction-votable': {
                               links: {
-                                  self: "#{host}#{request}/relationships/#{relationship_type_transaction_votable}",
-                                  related: "#{host}#{request}/#{relationship_type_transaction_votable}"
+                                  self: "http://www.example.com#{request}/relationships/transaction-votable",
+                                  related: "http://www.example.com#{request}/transaction-votable"
                               }
                           }
                       }
@@ -405,24 +476,12 @@ RSpec.describe Api::V1::VotesController, type: :request do
           expect(json).to eq(expected)
         end
 
-        it 'persists the updated vote with updated values' do
-          updated_vote = Vote.find(vote.id)
-
-          expect(updated_vote.votable_type).to eq(edited_votable_type)
-          expect(updated_vote.votable_id).to eq(edited_votable_id)
-          expect(updated_vote.voter_type).to eq(edited_voter_type)
-          expect(updated_vote.voter_id).to eq(edited_voter_id)
-          expect(updated_vote.vote_flag).to eq(edited_vote_flag)
-          expect(updated_vote.vote_scope).to eq(edited_vote_scope)
-          expect(updated_vote.vote_weight).to eq(edited_vote_weight)
-        end
-
-        it 'returns a 200 (ok) status code' do
-          expect(response).to have_http_status(200)
-        end
+        expect_status_200_ok
       end
 
       context 'and without updated values' do
+        let! (:record_count_before_request) {Vote.count}
+
         before do
           patch request,
                 headers: {
@@ -431,20 +490,34 @@ RSpec.describe Api::V1::VotesController, type: :request do
                 },
                 params: {
                     data: {
-                        type: resource_type,
+                        type: 'votes',
                         id: vote.id
                     }
                 }.to_json
         end
+
+        it 'persists the updated vote associated with the id without updated values' do
+          updated_vote = Vote.find(vote.id)
+
+          expect(updated_vote.votable_type).to eq(vote.votable_type)
+          expect(updated_vote.votable_id).to eq(vote.votable_id)
+          expect(updated_vote.voter_type).to eq(vote.voter_type)
+          expect(updated_vote.voter_id).to eq(vote.voter_id)
+          expect(updated_vote.vote_flag).to eq(vote.vote_flag)
+          expect(updated_vote.vote_scope).to eq(vote.vote_scope)
+          expect(updated_vote.vote_weight).to eq(vote.vote_weight)
+        end
+
+        expect_record_count_same
 
         it 'returns the updated vote associated with the id without updated values' do
           expected =
               {
                   data: {
                       id: vote.id.to_s,
-                      type: resource_type,
+                      type: 'votes',
                       links: {
-                          self: "#{host}#{request}"
+                          self: "http://www.example.com#{request}"
                       },
                       attributes: {
                           'created-at': to_api_timestamp_format(vote.created_at),
@@ -460,14 +533,14 @@ RSpec.describe Api::V1::VotesController, type: :request do
                       relationships: {
                           'user-voter': {
                               links: {
-                                  self: "#{host}#{request}/relationships/#{relationship_type_user_voter}",
-                                  related: "#{host}#{request}/#{relationship_type_user_voter}"
+                                  self: "http://www.example.com#{request}/relationships/user-voter",
+                                  related: "http://www.example.com#{request}/user-voter"
                               }
                           },
                           'transaction-votable': {
                               links: {
-                                  self: "#{host}#{request}/relationships/#{relationship_type_transaction_votable}",
-                                  related: "#{host}#{request}/#{relationship_type_transaction_votable}"
+                                  self: "http://www.example.com#{request}/relationships/transaction-votable",
+                                  related: "http://www.example.com#{request}/transaction-votable"
                               }
                           }
                       }
@@ -477,25 +550,13 @@ RSpec.describe Api::V1::VotesController, type: :request do
           expect(json).to eq(expected)
         end
 
-        it 'persists the updated vote without updated values' do
-          updated_vote = Vote.find(vote.id)
-
-          expect(updated_vote.votable_type).to eq(vote.votable_type)
-          expect(updated_vote.votable_id).to eq(vote.votable_id)
-          expect(updated_vote.voter_type).to eq(vote.voter_type)
-          expect(updated_vote.voter_id).to eq(vote.voter_id)
-          expect(updated_vote.vote_flag).to eq(vote.vote_flag)
-          expect(updated_vote.vote_scope).to eq(vote.vote_scope)
-          expect(updated_vote.vote_weight).to eq(vote.vote_weight)
-        end
-
-        it 'returns a 200 (ok) status code' do
-          expect(response).to have_http_status(200)
-        end
+        expect_status_200_ok
       end
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Vote.count}
+
       before do
         patch request,
               headers: {
@@ -504,7 +565,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
               },
               params: {
                   data: {
-                      type: resource_type,
+                      type: 'votes',
                       id: vote.id,
                       attributes: {
                           'votable-type': edited_votable_type,
@@ -519,10 +580,16 @@ RSpec.describe Api::V1::VotesController, type: :request do
               }.to_json
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Vote.count}
+
       before do
         patch request,
               headers: {
@@ -530,7 +597,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
               },
               params: {
                   data: {
-                      type: resource_type,
+                      type: 'votes',
                       id: vote.id,
                       attributes: {
                           'votable-type': edited_votable_type,
@@ -545,7 +612,11 @@ RSpec.describe Api::V1::VotesController, type: :request do
               }.to_json
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 
@@ -555,6 +626,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let! (:record_count_before_request) {Vote.count}
 
       before do
         delete request, headers: {'Api-Token': user.api_token}
@@ -564,25 +636,37 @@ RSpec.describe Api::V1::VotesController, type: :request do
         expect {Vote.find(vote.id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
 
-      it 'returns a 204 (no content) status code' do
-        expect(response).to have_http_status(204)
-      end
+      expect_record_count_decrease
+
+      expect_status_204_no_content
     end
 
     context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Vote.count}
+
       before do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
 
     context 'without an api-token' do
+      let! (:record_count_before_request) {Vote.count}
+
       before do
         delete request
       end
 
-      expect_unauthorized_response_and_status_code
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
     end
   end
 end
