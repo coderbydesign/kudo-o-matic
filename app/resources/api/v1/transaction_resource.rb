@@ -14,6 +14,6 @@ class Api::V1::TransactionResource < Api::V1::BaseResource
 
   def image_url_thumb
     # return nil if the transaction has no thumb image
-    @model.image.url(:thumb) == '/images/original/missing.png' ? nil : @model.image.url(:thumb)
+    @model.image.url(:thumb) == '/images/thumb/missing.png' ? nil : @model.image.url(:thumb)
   end
 end
