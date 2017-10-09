@@ -16,7 +16,7 @@ class Balance < ActiveRecord::Base
   end
 
   def amount
-    Transaction.where(balance: self).sum(:amount) + Balance.likes(Balance.current)
+    Transaction.where(balance: self).sum(:amount) + Balance.likes(self)
   end
 
   def self.time_left
