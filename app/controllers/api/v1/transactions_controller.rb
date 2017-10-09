@@ -21,19 +21,17 @@ class Api::V1::TransactionsController < Api::V1::ApiController
       begin
         @transaction = Transaction.find(transaction_id)
       rescue
-        raise JSONAPI::Exceptions::RecordNotFound.new(
-            transaction_id,
-            title: 'Transaction record not found',
-            detail: "The transaction record identified by #{transaction_id} could not be found.")
+        error_object_overrides = {title: 'Transaction record not found',
+                                  detail: "The transaction record identified by #{transaction_id} could not be found."}
+        raise JSONAPI::Exceptions::RecordNotFound.new(transaction_id, error_object_overrides)
       end
 
       begin
         @user = User.find(user_id)
       rescue
-        raise JSONAPI::Exceptions::RecordNotFound.new(
-            user_id,
-            title: 'User record not found',
-            detail: "The user record identified by #{user_id} could not be found.")
+        error_object_overrides = {title: 'User record not found',
+                                  detail: "The user record identified by #{user_id} could not be found."}
+        raise JSONAPI::Exceptions::RecordNotFound.new(user_id, error_object_overrides)
       end
     rescue => e
       handle_exceptions(e)
