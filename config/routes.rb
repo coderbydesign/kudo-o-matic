@@ -39,7 +39,13 @@ Rails.application.routes.draw do
         end
       end
 
-      jsonapi_resources :transactions
+      jsonapi_resources :transactions do
+        member do
+          put 'votes/:user_id', to: 'transactions#update_vote'
+          delete 'votes/:user_id', to: 'transactions#destroy_vote'
+        end
+      end
+
       jsonapi_resources :activities
       jsonapi_resources :users
       jsonapi_resources :votes
