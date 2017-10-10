@@ -574,9 +574,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let(:no_next_goal_achieved_on) {nil}
-      let(:no_next_goal_name) {'TBD'}
-      let(:no_next_goal_amount) {1000}
 
       context 'and a next goal that is not achieved' do
         let! (:goal) {create(:goal, balance: balance)}
@@ -588,26 +585,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
 
         expect_record_count_same
 
-        it 'returns the next goal' do
-          expected =
-              {
-                  data: {
-                      id: goal.id.to_s,
-                      type: 'goals',
-                      attributes: {
-                          'created-at': to_api_timestamp_format(goal.created_at),
-                          'updated-at': to_api_timestamp_format(goal.updated_at),
-                          name: goal.name,
-                          amount: goal.amount,
-                          'achieved-on': goal.achieved_on
-                      }
-                  }
-              }.with_indifferent_access
-
-          expect(json).to eq(expected)
+        it 'redirects to the next goal path' do
+          expect(response).to redirect_to api_v1_goal_path(goal)
         end
 
-        expect_status_200_ok
+        expect_status_302_found
       end
 
       context 'and a next goal that is achieved' do
@@ -620,26 +602,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
 
         expect_record_count_increase
 
-        it 'creates a new goal that is to be defined' do
-          expected =
-              {
-                  data: {
-                      id: assigned_id,
-                      type: 'goals',
-                      attributes: {
-                          'created-at': assigned_created_at,
-                          'updated-at': assigned_updated_at,
-                          name: no_next_goal_name,
-                          amount: goal.amount + no_next_goal_amount,
-                          'achieved-on': no_next_goal_achieved_on
-                      }
-                  }
-              }.with_indifferent_access
-
-          expect(json).to eq(expected)
+        it 'redirects to the next goal path' do
+          expect(response).to redirect_to api_v1_goal_path(Goal.last)
         end
 
-        expect_status_200_ok
+        expect_status_302_found
       end
 
       context 'and no next goal' do
@@ -651,26 +618,11 @@ RSpec.describe Api::V1::GoalsController, type: :request do
 
         expect_record_count_increase
 
-        it 'creates a new goal that is to be defined' do
-          expected =
-              {
-                  data: {
-                      id: assigned_id,
-                      type: 'goals',
-                      attributes: {
-                          'created-at': assigned_created_at,
-                          'updated-at': assigned_updated_at,
-                          name: no_next_goal_name,
-                          amount: no_next_goal_amount,
-                          'achieved-on': no_next_goal_achieved_on
-                      }
-                  }
-              }.with_indifferent_access
-
-          expect(json).to eq(expected)
+        it 'redirects to the next goal path' do
+          expect(response).to redirect_to api_v1_goal_path(Goal.last)
         end
 
-        expect_status_200_ok
+        expect_status_302_found
       end
     end
 
@@ -711,8 +663,8 @@ RSpec.describe Api::V1::GoalsController, type: :request do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
 
       context 'and a previous goal' do
-        let! (:goal1) {create(:goal, :achieved, balance: balance)}
-        let! (:goal2) {create(:goal, balance: balance)}
+        let! (:previous_goal) {create(:goal, :achieved, balance: balance)}
+        let! (:goal) {create(:goal, balance: balance)}
         let! (:record_count_before_request) {Goal.count}
 
         before do
@@ -721,33 +673,15 @@ RSpec.describe Api::V1::GoalsController, type: :request do
 
         expect_record_count_same
 
-        it 'returns the previous goal' do
-          expected =
-              {
-                  data: {
-                      id: goal1.id.to_s,
-                      type: 'goals',
-                      attributes: {
-                          'created-at': to_api_timestamp_format(goal1.created_at),
-                          'updated-at': to_api_timestamp_format(goal1.updated_at),
-                          name: goal1.name,
-                          amount: goal1.amount,
-                          'achieved-on': goal1.achieved_on.to_s
-                      }
-                  }
-              }.with_indifferent_access
-
-          expect(json).to eq(expected)
+        it 'redirects to the previous goal path' do
+          expect(response).to redirect_to api_v1_goal_path(previous_goal)
         end
 
-        expect_status_200_ok
+        expect_status_302_found
       end
 
       context 'and no previous goal' do
         let! (:record_count_before_request) {Goal.count}
-        let(:no_previous_goal_achieved_on) {nil}
-        let(:no_previous_goal_name) {'N/A'}
-        let(:no_previous_goal_amount) {0}
 
         before do
           get request, headers: {'Api-Token': user.api_token}
@@ -755,26 +689,9 @@ RSpec.describe Api::V1::GoalsController, type: :request do
 
         expect_record_count_same
 
-        it 'returns a not available response' do
-          expected =
-              {
-                  data: {
-                      id: nil,
-                      type: 'goals',
-                      attributes: {
-                          'created-at': assigned_created_at,
-                          'updated-at': assigned_updated_at,
-                          name: no_previous_goal_name,
-                          amount: no_previous_goal_amount,
-                          'achieved-on': no_previous_goal_achieved_on
-                      }
-                  }
-              }.with_indifferent_access
+        expect_previous_goal_record_not_found_response
 
-          expect(json).to eq(expected)
-        end
-
-        expect_status_200_ok
+        expect_status_404_not_found
       end
     end
 

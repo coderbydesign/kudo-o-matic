@@ -1,21 +1,39 @@
 require 'rails_helper'
 require 'shared/api/v1/shared_expectations'
 
-def expect_record_count_same
-  it 'does not change the record count' do
+def expect_transaction_record_count_same
+  it 'does not change the transaction record count' do
     expect(record_count_before_request).to be == Transaction.count
   end
 end
 
-def expect_record_count_increase
-  it 'increases the record count' do
+def expect_transaction_record_count_increase
+  it 'increases the transaction record count' do
     expect(record_count_before_request).to be < Transaction.count
   end
 end
 
-def expect_record_count_decrease
-  it 'decreases the record count' do
+def expect_transaction_record_count_decrease
+  it 'decreases the transaction record count' do
     expect(record_count_before_request).to be > Transaction.count
+  end
+end
+
+def expect_vote_record_count_same
+  it 'does not change the vote record count' do
+    expect(record_count_before_request).to be == Vote.count
+  end
+end
+
+def expect_vote_record_count_increase
+  it 'increases the vote record count' do
+    expect(record_count_before_request).to be < Vote.count
+  end
+end
+
+def expect_vote_record_count_decrease
+  it 'decreases the vote record count' do
+    expect(record_count_before_request).to be > Vote.count
   end
 end
 
@@ -35,7 +53,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_record_count_same
+      expect_transaction_record_count_same
 
       it 'returns all transactions' do
         expected =
@@ -157,7 +175,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_transaction_record_count_same
 
       expect_unauthorized_response
 
@@ -171,7 +189,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_transaction_record_count_same
 
       expect_unauthorized_response
 
@@ -191,7 +209,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_record_count_same
+      expect_transaction_record_count_same
 
       it 'returns the transaction associated with the id' do
         expected =
@@ -261,7 +279,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_transaction_record_count_same
 
       expect_unauthorized_response
 
@@ -275,7 +293,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_transaction_record_count_same
 
       expect_unauthorized_response
 
@@ -869,7 +887,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         expect {Transaction.find(transaction.id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
 
-      expect_record_count_decrease
+      expect_transaction_record_count_decrease
 
       expect_status_204_no_content
     end
@@ -881,7 +899,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_transaction_record_count_same
 
       expect_unauthorized_response
 
@@ -895,7 +913,231 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         delete request
       end
 
-      expect_record_count_same
+      expect_transaction_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+  end
+
+  describe 'PUT api/v1/transactions/:id/votes/:user_id' do
+    let! (:transaction) {create(:transaction)}
+    let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+    let (:default_vote_flag) {true}
+    let (:default_vote_scope) {nil}
+    let (:default_vote_weight) {1}
+    let (:invalid_transaction_id) {-1}
+    let (:invalid_user_id) {-1}
+
+    context 'with a valid api-token' do
+      context 'and a valid transaction id' do
+        context 'and a valid user id' do
+          let (:request) {"/api/v1/transactions/#{transaction.id}/votes/#{user.id}"}
+          let! (:record_count_before_request) {Vote.count}
+
+          before do
+            put request, headers: {'Api-Token': user.api_token}
+          end
+
+          it 'persists the vote' do
+            created_vote = Vote.find_by(votable_id: transaction.id, voter_id: user.id)
+
+            expect(created_vote.votable_type).to eq(transaction.class.name)
+            expect(created_vote.votable_id).to eq(transaction.id)
+            expect(created_vote.voter_type).to eq(user.class.name)
+            expect(created_vote.voter_id).to eq(user.id)
+            expect(created_vote.vote_flag).to eq(default_vote_flag)
+            expect(created_vote.vote_scope).to eq(default_vote_scope)
+            expect(created_vote.vote_weight).to eq(default_vote_weight)
+          end
+
+          expect_vote_record_count_increase
+
+          it 'redirects to the created vote path' do
+            expect(response).to redirect_to api_v1_vote_path(Vote.last)
+          end
+
+          expect_status_302_found
+        end
+        context 'and an invalid user id' do
+          let (:request) {"/api/v1/transactions/#{transaction.id}/votes/#{invalid_user_id}"}
+          let! (:record_count_before_request) {Vote.count}
+
+          before do
+            put request, headers: {'Api-Token': user.api_token}
+          end
+
+          expect_user_record_not_found_response
+
+          expect_vote_record_count_same
+
+          expect_status_404_not_found
+        end
+      end
+      context 'an an invalid transaction id' do
+        context 'and a valid user id' do
+          let (:request) {"/api/v1/transactions/#{invalid_transaction_id}/votes/#{user.id}"}
+          let! (:record_count_before_request) {Vote.count}
+
+          before do
+            put request, headers: {'Api-Token': user.api_token}
+          end
+
+          expect_transaction_record_not_found_response
+
+          expect_vote_record_count_same
+
+          expect_status_404_not_found
+        end
+
+        context 'and an invalid user id' do
+          let (:request) {"/api/v1/transactions/#{invalid_transaction_id}/votes/#{invalid_user_id}"}
+          let! (:record_count_before_request) {Vote.count}
+
+          before do
+            put request, headers: {'Api-Token': user.api_token}
+          end
+
+          expect_transaction_record_not_found_response
+
+          expect_vote_record_count_same
+
+          expect_status_404_not_found
+        end
+      end
+    end
+
+    context 'with an invalid api-token' do
+      let (:request) {"/api/v1/transactions/#{transaction.id}/votes/#{user.id}"}
+      let! (:record_count_before_request) {Vote.count}
+
+      before do
+        put request, headers: {'Api-Token': 'invalid api-token'}
+      end
+
+      expect_vote_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+
+    context 'without an api-token' do
+      let (:request) {"/api/v1/transactions/#{transaction.id}/votes/#{user.id}"}
+      let! (:record_count_before_request) {Vote.count}
+
+      before do
+        put request
+      end
+
+      expect_vote_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+  end
+
+  describe 'DELETE api/v1/transactions/:id/votes/:user_id' do
+    let! (:transaction) {create(:transaction)}
+    let! (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+    let!(:vote) {
+      create(:vote, votable_type: 'Transaction', votable_id: transaction.id, voter_type: 'User', voter_id: user.id)
+    }
+    let (:invalid_transaction_id) {-1}
+    let (:invalid_user_id) {-1}
+
+    context 'with a valid api-token' do
+      context 'and a valid transaction id' do
+        context 'and a valid user id' do
+          let (:request) {"/api/v1/transactions/#{transaction.id}/votes/#{user.id}"}
+          let! (:record_count_before_request) {Vote.count}
+
+          before do
+            delete request, headers: {'Api-Token': user.api_token}
+          end
+
+          it "deletes the vote associated with the transaction and user id's" do
+            expect {Vote.find(vote.id)}.to raise_error(ActiveRecord::RecordNotFound)
+          end
+
+          expect_vote_record_count_decrease
+
+          expect_status_204_no_content
+        end
+        context 'and an invalid user id' do
+          let (:request) {"/api/v1/transactions/#{transaction.id}/votes/#{invalid_user_id}"}
+          let! (:record_count_before_request) {Vote.count}
+
+          before do
+            delete request, headers: {'Api-Token': user.api_token}
+          end
+
+          expect_user_record_not_found_response
+
+          expect_vote_record_count_same
+
+          expect_status_404_not_found
+        end
+      end
+      context 'an an invalid transaction id' do
+        context 'and a valid user id' do
+          let (:request) {"/api/v1/transactions/#{invalid_transaction_id}/votes/#{user.id}"}
+          let! (:record_count_before_request) {Vote.count}
+
+          before do
+            delete request, headers: {'Api-Token': user.api_token}
+          end
+
+          expect_transaction_record_not_found_response
+
+          expect_vote_record_count_same
+
+          expect_status_404_not_found
+        end
+
+        context 'and an invalid user id' do
+          let (:request) {"/api/v1/transactions/#{invalid_transaction_id}/votes/#{invalid_user_id}"}
+          let! (:record_count_before_request) {Vote.count}
+
+          before do
+            delete request, headers: {'Api-Token': user.api_token}
+          end
+
+          expect_transaction_record_not_found_response
+
+          expect_vote_record_count_same
+
+          expect_status_404_not_found
+        end
+      end
+    end
+
+    context 'with an invalid api-token' do
+      let (:request) {"/api/v1/transactions/#{transaction.id}/votes/#{user.id}"}
+      let! (:record_count_before_request) {Vote.count}
+
+      before do
+        delete request, headers: {'Api-Token': 'invalid api-token'}
+      end
+
+      expect_vote_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+
+    context 'without an api-token' do
+      let (:request) {"/api/v1/transactions/#{transaction.id}/votes/#{user.id}"}
+      let! (:record_count_before_request) {Vote.count}
+
+      before do
+        delete request
+      end
+
+      expect_vote_record_count_same
 
       expect_unauthorized_response
 
