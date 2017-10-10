@@ -7,10 +7,12 @@ class Api::V1::ApiController < JSONAPI::ResourceController
 
   def authorize_request
     api_token = request.headers['Api-Token']
-    api_token_known = User.where(api_token: api_token).exists?
+    api_token_unknown = !User.where(api_token: api_token).exists?
 
-    unless !api_token.nil? && api_token_known
-      render 'api/v1/api/error', status: :unauthorized
+    if api_token.nil? || api_token_unknown
+      error_object_overrides = {title: 'Unauthorized', detail: 'No valid API-token was provided.'}
+      errors = Api::V1::UnauthorizedError.new(error_object_overrides).errors
+      render_errors(errors)
     end
   end
 

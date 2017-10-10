@@ -1,12 +1,31 @@
 def expect_unauthorized_response
   it 'returns an unauthorized message' do
     expected = {
-        errors: {
-            title: 'Unauthorized',
-            detail: 'No valid API-token was provided.',
-            code: '401',
-            status: '401'
-        }
+        errors: [
+            {
+                title: 'Unauthorized',
+                detail: 'No valid API-token was provided.',
+                code: '401',
+                status: '401'
+            }
+        ]
+    }.with_indifferent_access
+
+    expect(json).to match(expected)
+  end
+end
+
+def expect_previous_goal_record_not_found_response
+  it 'returns a previous goal not found message' do
+    expected = {
+        errors: [
+            {
+                title: 'Previous goal record not found',
+                detail: 'There is no previous goal record.',
+                code: '404',
+                status: '404'
+            }
+        ]
     }.with_indifferent_access
 
     expect(json).to match(expected)
