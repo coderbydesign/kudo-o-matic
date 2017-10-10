@@ -24,7 +24,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
   describe 'GET api/v1/transactions' do
     let (:request) {'/api/v1/transactions'}
-    let! (:transaction1) {create(:transaction)}
+    let! (:transaction1) {create(:transaction, :image)}
     let! (:transaction2) {create(:transaction)}
 
     context 'with a valid api-token' do
@@ -101,12 +101,12 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                             'created-at': to_api_timestamp_format(transaction2.created_at),
                             'updated-at': to_api_timestamp_format(transaction2.updated_at),
                             amount: transaction2.amount,
-                            'image-url-original': transaction2.image.url,
-                            'image-url-thumb': transaction2.image.url(:thumb),
-                            'image-file-name': transaction2.image_file_name,
-                            'image-content-type': transaction2.image_content_type,
-                            'image-file-size': transaction2.image_file_size,
-                            'image-updated-at': to_api_timestamp_format(transaction2.image_updated_at)
+                            'image-url-original': nil,
+                            'image-url-thumb': nil,
+                            'image-file-name': nil,
+                            'image-content-type': nil,
+                            'image-file-size': nil,
+                            'image-updated-at': nil
                         },
                         relationships: {
                             sender: {
@@ -181,7 +181,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
   describe 'GET api/v1/transactions/:id' do
     let (:request) {"/api/v1/transactions/#{transaction.id}"}
-    let! (:transaction) {create(:transaction)}
+    let! (:transaction) {create(:transaction, :image)}
 
     context 'with a valid api-token' do
       let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
@@ -283,7 +283,575 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
   end
 
-  # TODO add integration tests for POST en PATCH requests
+  describe 'POST api/v1/transactions' do
+    let (:request) {"/api/v1/transactions"}
+    let! (:transaction) {build(:transaction)}
+    let! (:activity) {create(:activity)}
+    let! (:sender) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+    let! (:receiver) {create(:user)}
+    let! (:balance) {create(:balance, :current)}
+
+    context 'with a valid api-token' do
+      context 'and an image attachment' do
+        let! (:record_count_before_request) {Transaction.count}
+
+        # TODO add integration test for adding a transaction with an image attachment
+
+        it 'persists the created transaction with an image attachment'
+        it 'increases the record count'
+        it 'returns the created transaction'
+      end
+
+      context 'and without an image attachment' do
+        let! (:record_count_before_request) {Transaction.count}
+
+        before do
+          post request,
+               headers: {
+                   'Api-Token': sender.api_token,
+                   'Content-Type': 'application/vnd.api+json'
+               },
+               params: {
+                   data: {
+                       type: 'transactions',
+                       attributes: {
+                           amount: transaction.amount
+                       },
+                       relationships: {
+                           activity: {
+                               data: {
+                                   type: 'activities',
+                                   id: activity.id
+                               }
+                           },
+                           sender: {
+                               data: {
+                                   type: 'users',
+                                   id: sender.id
+                               }
+                           },
+                           receiver: {
+                               data: {
+                                   type: 'users',
+                                   id: receiver.id
+                               }
+                           },
+                           balance: {
+                               data: {
+                                   type: 'balances',
+                                   id: balance.id
+                               }
+                           }
+                       }
+                   }
+               }.to_json
+        end
+
+        it 'persists the created transaction without an image attachment' do
+          new_transaction = Transaction.find(assigned_id)
+
+          expect(new_transaction.amount).to eq(transaction.amount)
+        end
+
+        expect_record_count_increase
+
+        it 'returns the created transaction' do
+          expected =
+              {
+                  data: {
+                      id: assigned_id,
+                      type: 'transactions',
+                      links: {
+                          self: "http://www.example.com#{request}/#{assigned_id}"
+                      },
+                      attributes: {
+                          'created-at': assigned_created_at,
+                          'updated-at': assigned_updated_at,
+                          amount: transaction.amount,
+                          'image-url-original': nil,
+                          'image-url-thumb': nil,
+                          'image-file-name': nil,
+                          'image-content-type': nil,
+                          'image-file-size': nil,
+                          'image-updated-at': nil
+                      },
+                      relationships: {
+                          sender: {
+                              links: {
+                                  self: "http://www.example.com#{request}/#{assigned_id}/relationships/sender",
+                                  related: "http://www.example.com#{request}/#{assigned_id}/sender"
+                              }
+                          },
+                          receiver: {
+                              links: {
+                                  self: "http://www.example.com#{request}/#{assigned_id}/relationships/receiver",
+                                  related: "http://www.example.com#{request}/#{assigned_id}/receiver"
+                              }
+                          },
+                          activity: {
+                              links: {
+                                  self: "http://www.example.com#{request}/#{assigned_id}/relationships/activity",
+                                  related: "http://www.example.com#{request}/#{assigned_id}/activity"
+                              }
+                          },
+                          balance: {
+                              links: {
+                                  self: "http://www.example.com#{request}/#{assigned_id}/relationships/balance",
+                                  related: "http://www.example.com#{request}/#{assigned_id}/balance"
+                              }
+                          },
+                          votes: {
+                              links: {
+                                  self: "http://www.example.com#{request}/#{assigned_id}/relationships/votes",
+                                  related: "http://www.example.com#{request}/#{assigned_id}/votes"
+                              }
+                          }
+                      }
+                  }
+              }.with_indifferent_access
+
+          expect(json).to eq(expected)
+        end
+      end
+    end
+
+    context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Transaction.count}
+
+      before do
+        post request,
+             headers: {
+                 'Api-Token': 'invalid api-token',
+                 'Content-Type': 'application/vnd.api+json'
+             },
+             params: {
+                 data: {
+                     type: 'transactions',
+                     attributes: {
+                         amount: transaction.amount
+                     },
+                     relationships: {
+                         activity: {
+                             data: {
+                                 type: 'activities',
+                                 id: activity.id
+                             }
+                         },
+                         sender: {
+                             data: {
+                                 type: 'users',
+                                 id: sender.id
+                             }
+                         },
+                         receiver: {
+                             data: {
+                                 type: 'users',
+                                 id: receiver.id
+                             }
+                         },
+                         balance: {
+                             data: {
+                                 type: 'balances',
+                                 id: balance.id
+                             }
+                         }
+                     }
+                 }
+             }.to_json
+      end
+
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+
+    context 'without an api-token' do
+      let! (:record_count_before_request) {Transaction.count}
+
+      before do
+        post request,
+             headers: {
+                 'Content-Type': 'application/vnd.api+json'
+             },
+             params: {
+                 data: {
+                     type: 'transactions',
+                     attributes: {
+                         amount: transaction.amount
+                     },
+                     relationships: {
+                         activity: {
+                             data: {
+                                 type: 'activities',
+                                 id: activity.id
+                             }
+                         },
+                         sender: {
+                             data: {
+                                 type: 'users',
+                                 id: sender.id
+                             }
+                         },
+                         receiver: {
+                             data: {
+                                 type: 'users',
+                                 id: receiver.id
+                             }
+                         },
+                         balance: {
+                             data: {
+                                 type: 'balances',
+                                 id: balance.id
+                             }
+                         }
+                     }
+                 }
+             }.to_json
+      end
+
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+  end
+
+  describe 'PATCH api/v1/transactions/:id' do
+    let (:request) {"/api/v1/transactions/#{transaction.id}"}
+    let! (:transaction) {create(:transaction)}
+    let! (:activity) {create(:activity)}
+    let! (:sender) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+    let! (:receiver) {create(:user)}
+    let! (:balance) {create(:balance, :current)}
+    let (:edited_amount) {500}
+
+    context 'with a valid api-token' do
+      context 'and updated values' do
+        let! (:record_count_before_request) {Transaction.count}
+
+        before do
+          patch request,
+                headers: {
+                    'Api-Token': sender.api_token,
+                    'Content-Type': 'application/vnd.api+json'
+                },
+                params: {
+                    data: {
+                        id: transaction.id,
+                        type: 'transactions',
+                        attributes: {
+                            amount: edited_amount
+                        },
+                        relationships: {
+                            activity: {
+                                data: {
+                                    type: 'activities',
+                                    id: activity.id
+                                }
+                            },
+                            sender: {
+                                data: {
+                                    type: 'users',
+                                    id: sender.id
+                                }
+                            },
+                            receiver: {
+                                data: {
+                                    type: 'users',
+                                    id: receiver.id
+                                }
+                            },
+                            balance: {
+                                data: {
+                                    type: 'balances',
+                                    id: balance.id
+                                }
+                            }
+                        }
+                    }
+                }.to_json
+        end
+
+        it 'persists the updated transaction associated with the id with updated values' do
+          updated_transaction = Transaction.find(transaction.id)
+
+          expect(updated_transaction.amount).to eq(edited_amount)
+        end
+
+        expect_record_count_same
+
+        it 'returns the updated transaction associated with the id with updated values' do
+          expected =
+              {
+                  data: {
+                      id: transaction.id.to_s,
+                      type: 'transactions',
+                      links: {
+                          self: "http://www.example.com#{request}"
+                      },
+                      attributes: {
+                          'created-at': to_api_timestamp_format(transaction.created_at),
+                          'updated-at': assigned_updated_at,
+                          amount: edited_amount,
+                          'image-url-original': nil,
+                          'image-url-thumb': nil,
+                          'image-file-name': nil,
+                          'image-content-type': nil,
+                          'image-file-size': nil,
+                          'image-updated-at': nil
+                      },
+                      relationships: {
+                          sender: {
+                              links: {
+                                  self: "http://www.example.com#{request}/relationships/sender",
+                                  related: "http://www.example.com#{request}/sender"
+                              }
+                          },
+                          receiver: {
+                              links: {
+                                  self: "http://www.example.com#{request}/relationships/receiver",
+                                  related: "http://www.example.com#{request}/receiver"
+                              }
+                          },
+                          activity: {
+                              links: {
+                                  self: "http://www.example.com#{request}/relationships/activity",
+                                  related: "http://www.example.com#{request}/activity"
+                              }
+                          },
+                          balance: {
+                              links: {
+                                  self: "http://www.example.com#{request}/relationships/balance",
+                                  related: "http://www.example.com#{request}/balance"
+                              }
+                          },
+                          votes: {
+                              links: {
+                                  self: "http://www.example.com#{request}/relationships/votes",
+                                  related: "http://www.example.com#{request}/votes"
+                              }
+                          }
+                      }
+                  }
+              }.with_indifferent_access
+
+          expect(json).to eq(expected)
+        end
+      end
+
+      context 'and without updated values' do
+        let! (:record_count_before_request) {Transaction.count}
+
+        before do
+          patch request,
+                headers: {
+                    'Api-Token': sender.api_token,
+                    'Content-Type': 'application/vnd.api+json'
+                },
+                params: {
+                    data: {
+                        id: transaction.id,
+                        type: 'transactions',
+                        relationships: {
+                            activity: {
+                                data: {
+                                    type: 'activities',
+                                    id: activity.id
+                                }
+                            },
+                            sender: {
+                                data: {
+                                    type: 'users',
+                                    id: sender.id
+                                }
+                            },
+                            receiver: {
+                                data: {
+                                    type: 'users',
+                                    id: receiver.id
+                                }
+                            },
+                            balance: {
+                                data: {
+                                    type: 'balances',
+                                    id: balance.id
+                                }
+                            }
+                        }
+                    }
+                }.to_json
+        end
+
+        it 'persists the updated transaction associated with the id without updated values' do
+          updated_transaction = Transaction.find(transaction.id)
+
+          expect(updated_transaction.amount).to eq(transaction.amount)
+        end
+
+        expect_record_count_same
+
+        it 'returns the updated transaction associated with the id without updated values' do
+          expected =
+              {
+                  data: {
+                      id: transaction.id.to_s,
+                      type: 'transactions',
+                      links: {
+                          self: "http://www.example.com#{request}"
+                      },
+                      attributes: {
+                          'created-at': to_api_timestamp_format(transaction.created_at),
+                          'updated-at': assigned_updated_at,
+                          amount: transaction.amount,
+                          'image-url-original': nil,
+                          'image-url-thumb': nil,
+                          'image-file-name': nil,
+                          'image-content-type': nil,
+                          'image-file-size': nil,
+                          'image-updated-at': nil
+                      },
+                      relationships: {
+                          sender: {
+                              links: {
+                                  self: "http://www.example.com#{request}/relationships/sender",
+                                  related: "http://www.example.com#{request}/sender"
+                              }
+                          },
+                          receiver: {
+                              links: {
+                                  self: "http://www.example.com#{request}/relationships/receiver",
+                                  related: "http://www.example.com#{request}/receiver"
+                              }
+                          },
+                          activity: {
+                              links: {
+                                  self: "http://www.example.com#{request}/relationships/activity",
+                                  related: "http://www.example.com#{request}/activity"
+                              }
+                          },
+                          balance: {
+                              links: {
+                                  self: "http://www.example.com#{request}/relationships/balance",
+                                  related: "http://www.example.com#{request}/balance"
+                              }
+                          },
+                          votes: {
+                              links: {
+                                  self: "http://www.example.com#{request}/relationships/votes",
+                                  related: "http://www.example.com#{request}/votes"
+                              }
+                          }
+                      }
+                  }
+              }.with_indifferent_access
+
+          expect(json).to eq(expected)
+        end
+      end
+    end
+
+    context 'with an invalid api-token' do
+      let! (:record_count_before_request) {Transaction.count}
+
+      before do
+        patch request,
+              headers: {
+                  'Api-Token': 'invalid api-token',
+                  'Content-Type': 'application/vnd.api+json'
+              },
+              params: {
+                  data: {
+                      id: transaction.id,
+                      type: 'transactions',
+                      relationships: {
+                          activity: {
+                              data: {
+                                  type: 'activities',
+                                  id: activity.id
+                              }
+                          },
+                          sender: {
+                              data: {
+                                  type: 'users',
+                                  id: sender.id
+                              }
+                          },
+                          receiver: {
+                              data: {
+                                  type: 'users',
+                                  id: receiver.id
+                              }
+                          },
+                          balance: {
+                              data: {
+                                  type: 'balances',
+                                  id: balance.id
+                              }
+                          }
+                      }
+                  }
+              }.to_json
+      end
+
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+
+    context 'without an api-token' do
+      let! (:record_count_before_request) {Transaction.count}
+
+      before do
+        patch request,
+              headers: {
+                  'Content-Type': 'application/vnd.api+json'
+              },
+              params: {
+                  data: {
+                      id: transaction.id,
+                      type: 'transactions',
+                      relationships: {
+                          activity: {
+                              data: {
+                                  type: 'activities',
+                                  id: activity.id
+                              }
+                          },
+                          sender: {
+                              data: {
+                                  type: 'users',
+                                  id: sender.id
+                              }
+                          },
+                          receiver: {
+                              data: {
+                                  type: 'users',
+                                  id: receiver.id
+                              }
+                          },
+                          balance: {
+                              data: {
+                                  type: 'balances',
+                                  id: balance.id
+                              }
+                          }
+                      }
+                  }
+              }.to_json
+      end
+
+      expect_record_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+  end
 
   describe 'DELETE api/v1/transactions/:id' do
     let (:request) {"/api/v1/transactions/#{transaction.id}"}
