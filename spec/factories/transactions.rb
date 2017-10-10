@@ -4,7 +4,10 @@ FactoryGirl.define do
     receiver
     activity
     balance
-    image File.new(Rails.root + 'spec/fixtures/images/rails.png')
     amount 100
+
+    trait :image do
+      image File.new(Rails.root + 'spec/fixtures/images/rails.png')
+    end
   end
 end
