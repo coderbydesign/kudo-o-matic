@@ -41,8 +41,8 @@ Rails.application.routes.draw do
 
       jsonapi_resources :transactions do
         member do
-          get 'like/:user_id', to: 'transactions#create_like'
-          delete 'like/:user_id', to: 'transactions#destroy_like'
+          put 'votes/:user_id', to: 'transactions#update_vote'
+          delete 'votes/:user_id', to: 'transactions#destroy_vote'
         end
       end
 

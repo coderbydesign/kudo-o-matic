@@ -1,13 +1,13 @@
 class Api::V1::TransactionsController < Api::V1::ApiController
-  before_action :set_transaction_and_user, only: [:create_like, :destroy_like]
+  before_action :set_transaction_and_user, only: [:update_vote, :destroy_vote]
 
-  def create_like
+  def update_vote
     @transaction.liked_by @user
 
     redirect_to api_v1_vote_path(Vote.last)
   end
 
-  def destroy_like
+  def destroy_vote
     @transaction.unliked_by @user
   end
 
