@@ -371,7 +371,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
           expect(new_transaction.amount).to eq(transaction.amount)
         end
 
-        expect_record_count_increase
+        expect_transaction_record_count_increase
 
         it 'returns the created transaction' do
           expected =
@@ -478,7 +478,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
              }.to_json
       end
 
-      expect_record_count_same
+      expect_transaction_record_count_same
 
       expect_unauthorized_response
 
@@ -529,7 +529,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
              }.to_json
       end
 
-      expect_record_count_same
+      expect_transaction_record_count_same
 
       expect_unauthorized_response
 
@@ -599,7 +599,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
           expect(updated_transaction.amount).to eq(edited_amount)
         end
 
-        expect_record_count_same
+        expect_transaction_record_count_same
 
         it 'returns the updated transaction associated with the id with updated values' do
           expected =
@@ -709,7 +709,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
           expect(updated_transaction.amount).to eq(transaction.amount)
         end
 
-        expect_record_count_same
+        expect_transaction_record_count_same
 
         it 'returns the updated transaction associated with the id without updated values' do
           expected =
@@ -814,7 +814,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
               }.to_json
       end
 
-      expect_record_count_same
+      expect_transaction_record_count_same
 
       expect_unauthorized_response
 
@@ -863,7 +863,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
               }.to_json
       end
 
-      expect_record_count_same
+      expect_transaction_record_count_same
 
       expect_unauthorized_response
 
