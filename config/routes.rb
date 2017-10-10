@@ -39,6 +39,11 @@ Rails.application.routes.draw do
         end
       end
 
+      jsonapi_resources :transactions
+      jsonapi_resources :activities
+      jsonapi_resources :users
+      jsonapi_resources :votes
+
       post 'authentication/obtain_api_token'
     end
   end
