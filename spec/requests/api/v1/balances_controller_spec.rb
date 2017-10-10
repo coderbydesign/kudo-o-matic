@@ -26,10 +26,10 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     let (:request) {'/api/v1/balances'}
     let! (:balance1) {create(:balance)}
     let! (:balance2) {create(:balance)}
+    let! (:record_count_before_request) {Balance.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Balance.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
@@ -93,8 +93,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Balance.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -107,8 +105,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Balance.count}
-
       before do
         get request
       end
@@ -124,10 +120,10 @@ RSpec.describe Api::V1::BalancesController, type: :request do
   describe 'GET api/v1/balances/:id' do
     let (:request) {"/api/v1/balances/#{balance.id}"}
     let! (:balance) {create(:balance)}
+    let! (:record_count_before_request) {Balance.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Balance.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
@@ -168,8 +164,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Balance.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -182,8 +176,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Balance.count}
-
       before do
         get request
       end
@@ -199,10 +191,10 @@ RSpec.describe Api::V1::BalancesController, type: :request do
   describe 'POST api/v1/balances' do
     let (:request) {'/api/v1/balances'}
     let! (:balance) {build(:balance)}
+    let! (:record_count_before_request) {Balance.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Balance.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         post request,
@@ -252,8 +244,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Balance.count}
-
       before do
         post request,
              headers: {'Api-Token': 'invalid api-token', 'Content-Type': 'application/vnd.api+json'},
@@ -268,8 +258,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Balance.count}
-
       before do
         post request,
              headers: {'Api-Token': 'application/vnd.api+json'},
@@ -287,15 +275,14 @@ RSpec.describe Api::V1::BalancesController, type: :request do
   describe 'PATCH api/v1/balances/:id' do
     let (:request) {"/api/v1/balances/#{balance.id}"}
     let! (:balance) {create(:balance)}
-    let(:edited_name) {'edited name'}
-    let(:edited_current) {true}
+    let (:edited_name) {'edited name'}
+    let (:edited_current) {true}
+    let! (:record_count_before_request) {Balance.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let (:user) {create(:user, :api_token)}
 
       context 'and updated values' do
-        let! (:record_count_before_request) {Balance.count}
-
         before do
           patch request,
                 headers: {
@@ -356,8 +343,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
       end
 
       context 'and without updated values' do
-        let! (:record_count_before_request) {Balance.count}
-
         before do
           patch request,
                 headers: {'Api-Token': user.api_token, 'Content-Type': 'application/vnd.api+json'},
@@ -407,8 +392,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Balance.count}
-
       before do
         patch request,
               headers: {
@@ -435,8 +418,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Balance.count}
-
       before do
         patch request,
               headers: {
@@ -465,10 +446,10 @@ RSpec.describe Api::V1::BalancesController, type: :request do
   describe 'DELETE api/v1/balances/:id' do
     let (:request) {"/api/v1/balances/#{balance.id}"}
     let! (:balance) {create(:balance)}
+    let! (:record_count_before_request) {Balance.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Balance.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         delete request, headers: {'Api-Token': user.api_token}
@@ -484,8 +465,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Balance.count}
-
       before do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -498,8 +477,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Balance.count}
-
       before do
         delete request
       end
@@ -515,10 +492,10 @@ RSpec.describe Api::V1::BalancesController, type: :request do
   describe 'GET /api/v1/balances/current' do
     let (:request) {'/api/v1/balances/current'}
     let! (:balance) {create(:balance, :current)}
+    let! (:record_count_before_request) {Balance.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Balance.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
@@ -549,8 +526,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Balance.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -563,8 +538,6 @@ RSpec.describe Api::V1::BalancesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Balance.count}
-
       before do
         get request
       end

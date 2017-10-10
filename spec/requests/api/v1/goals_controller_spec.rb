@@ -26,11 +26,10 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     let (:request) {'/api/v1/goals'}
     let! (:goal1) {create(:goal)}
     let! (:goal2) {create(:goal)}
+    let! (:record_count_before_request) {Goal.count}
 
     context 'with a valid api-token' do
-      let! (:record_count_before_request) {Goal.count}
-
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let (:user) {create(:user, :api_token)}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
@@ -96,8 +95,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Goal.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -110,8 +107,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Goal.count}
-
       before do
         get request
       end
@@ -127,10 +122,10 @@ RSpec.describe Api::V1::GoalsController, type: :request do
   describe 'GET api/v1/goals/:id' do
     let (:request) {"/api/v1/goals/#{goal.id}"}
     let! (:goal) {create(:goal)}
+    let! (:record_count_before_request) {Goal.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Goal.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
@@ -172,8 +167,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Goal.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -186,8 +179,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Goal.count}
-
       before do
         get request
       end
@@ -203,10 +194,10 @@ RSpec.describe Api::V1::GoalsController, type: :request do
   describe 'POST api/v1/goals' do
     let (:request) {'/api/v1/goals'}
     let! (:goal) {build(:goal)}
+    let! (:record_count_before_request) {Goal.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Goal.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         post request,
@@ -270,8 +261,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Goal.count}
-
       before do
         post request,
              headers: {
@@ -298,8 +287,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Goal.count}
-
       before do
         post request,
              headers: {
@@ -329,16 +316,15 @@ RSpec.describe Api::V1::GoalsController, type: :request do
   describe 'PATCH api/v1/goals/:id' do
     let (:request) {"/api/v1/goals/#{goal.id}"}
     let! (:goal) {create(:goal)}
-    let(:edited_name) {'edited name'}
-    let(:edited_amount) {12345}
-    let(:edited_achieved_on) {'2015-01-01'}
+    let (:edited_name) {'edited name'}
+    let (:edited_amount) {12345}
+    let (:edited_achieved_on) {'2015-01-01'}
+    let! (:record_count_before_request) {Goal.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let (:user) {create(:user, :api_token)}
 
       context 'and updated values' do
-        let! (:record_count_before_request) {Goal.count}
-
         before do
           patch request,
                 headers: {
@@ -402,8 +388,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
       end
 
       context 'and without updated values' do
-        let! (:record_count_before_request) {Goal.count}
-
         before do
           patch request,
                 headers: {
@@ -463,8 +447,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Goal.count}
-
       before do
         patch request,
               headers: {
@@ -491,8 +473,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Goal.count}
-
       before do
         patch request,
               headers: {
@@ -521,10 +501,10 @@ RSpec.describe Api::V1::GoalsController, type: :request do
   describe 'DELETE api/v1/goals/:id' do
     let (:request) {"/api/v1/goals/#{goal.id}"}
     let! (:goal) {create(:goal)}
+    let! (:record_count_before_request) {Goal.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Goal.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         delete request, headers: {'Api-Token': user.api_token}
@@ -540,8 +520,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Goal.count}
-
       before do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -554,8 +532,6 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Goal.count}
-
       before do
         delete request
       end
@@ -573,10 +549,10 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     let! (:balance) {create(:balance, :current)}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let(:no_next_goal_achieved_on) {nil}
-      let(:no_next_goal_name) {'TBD'}
-      let(:no_next_goal_amount) {1000}
+      let (:user) {create(:user, :api_token)}
+      let (:no_next_goal_achieved_on) {nil}
+      let (:no_next_goal_name) {'TBD'}
+      let (:no_next_goal_amount) {1000}
 
       context 'and a next goal that is not achieved' do
         let! (:goal) {create(:goal, balance: balance)}
@@ -708,7 +684,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
     let! (:balance) {create(:balance, :current)}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let (:user) {create(:user, :api_token)}
 
       context 'and a previous goal' do
         let! (:goal1) {create(:goal, :achieved, balance: balance)}
@@ -744,10 +720,10 @@ RSpec.describe Api::V1::GoalsController, type: :request do
       end
 
       context 'and no previous goal' do
+        let (:no_previous_goal_achieved_on) {nil}
+        let (:no_previous_goal_name) {'N/A'}
+        let (:no_previous_goal_amount) {0}
         let! (:record_count_before_request) {Goal.count}
-        let(:no_previous_goal_achieved_on) {nil}
-        let(:no_previous_goal_name) {'N/A'}
-        let(:no_previous_goal_amount) {0}
 
         before do
           get request, headers: {'Api-Token': user.api_token}

@@ -26,10 +26,10 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     let (:request) {'/api/v1/activities'}
     let! (:activity1) {create(:activity)}
     let! (:activity2) {create(:activity)}
+    let! (:record_count_before_request) {Activity.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Activity.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
@@ -93,8 +93,6 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Activity.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -107,8 +105,6 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Activity.count}
-
       before do
         get request
       end
@@ -124,10 +120,10 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
   describe 'GET api/v1/activities/:id' do
     let (:request) {"/api/v1/activities/#{activity.id}"}
     let! (:activity) {create(:activity)}
+    let! (:record_count_before_request) {Activity.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Activity.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
@@ -168,8 +164,6 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Activity.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -182,8 +176,6 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Activity.count}
-
       before do
         get request
       end
@@ -199,10 +191,10 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
   describe 'POST api/v1/activities' do
     let (:request) {'/api/v1/activities'}
     let! (:activity) {build(:activity)}
+    let! (:record_count_before_request) {Activity.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Activity.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         post request,
@@ -263,8 +255,6 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Activity.count}
-
       before do
         post request,
              headers: {
@@ -290,8 +280,6 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Activity.count}
-
       before do
         post request,
              headers: {
@@ -321,13 +309,12 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     let! (:activity) {create(:activity)}
     let(:edited_name) {'edited name'}
     let(:edited_suggested_amount) {12345}
+    let! (:record_count_before_request) {Activity.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let (:user) {create(:user, :api_token)}
 
       context 'and updated values' do
-        let! (:record_count_before_request) {Activity.count}
-
         before do
           patch request,
                 headers: {
@@ -388,8 +375,6 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
       end
 
       context 'and without updated values' do
-        let! (:record_count_before_request) {Activity.count}
-
         before do
           patch request,
                 headers: {'Api-Token': user.api_token, 'Content-Type': 'application/vnd.api+json'},
@@ -439,8 +424,6 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Activity.count}
-
       before do
         patch request,
               headers: {
@@ -467,8 +450,6 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Activity.count}
-
       before do
         patch request,
               headers: {
@@ -497,10 +478,10 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
   describe 'DELETE api/v1/activities/:id' do
     let (:request) {"/api/v1/activities/#{activity.id}"}
     let! (:activity) {create(:activity)}
+    let! (:record_count_before_request) {Activity.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Activity.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         delete request, headers: {'Api-Token': user.api_token}
@@ -516,8 +497,6 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Activity.count}
-
       before do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -530,8 +509,6 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Activity.count}
-
       before do
         delete request
       end

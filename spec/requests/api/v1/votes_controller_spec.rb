@@ -26,10 +26,10 @@ RSpec.describe Api::V1::VotesController, type: :request do
     let (:request) {'/api/v1/votes'}
     let! (:vote1) {create(:vote)}
     let! (:vote2) {create(:vote)}
+    let! (:record_count_before_request) {Vote.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Vote.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
@@ -115,8 +115,6 @@ RSpec.describe Api::V1::VotesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Vote.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -129,8 +127,6 @@ RSpec.describe Api::V1::VotesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Vote.count}
-
       before do
         get request
       end
@@ -146,10 +142,10 @@ RSpec.describe Api::V1::VotesController, type: :request do
   describe 'GET api/v1/votes/:id' do
     let (:request) {"/api/v1/votes/#{vote.id}"}
     let! (:vote) {create(:vote)}
+    let! (:record_count_before_request) {Vote.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Vote.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
@@ -201,8 +197,6 @@ RSpec.describe Api::V1::VotesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Vote.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -215,8 +209,6 @@ RSpec.describe Api::V1::VotesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Vote.count}
-
       before do
         get request
       end
@@ -235,8 +227,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
     let! (:record_count_before_request) {Vote.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Vote.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         post request,
@@ -318,8 +309,6 @@ RSpec.describe Api::V1::VotesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Vote.count}
-
       before do
         post request,
              headers: {
@@ -350,8 +339,6 @@ RSpec.describe Api::V1::VotesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Vote.count}
-
       before do
         post request,
              headers: {
@@ -386,19 +373,18 @@ RSpec.describe Api::V1::VotesController, type: :request do
     let (:request) {"/api/v1/votes/#{vote.id}"}
     let! (:vote) {create(:vote)}
     let(:edited_votable_type) {'edited votable type'}
-    let(:edited_votable_id) {12345}
-    let(:edited_voter_type) {'edited voter type'}
-    let(:edited_voter_id) {67890}
-    let(:edited_vote_flag) {true}
-    let(:edited_vote_scope) {'edited vote scope'}
-    let(:edited_vote_weight) {1}
+    let (:edited_votable_id) {12345}
+    let (:edited_voter_type) {'edited voter type'}
+    let (:edited_voter_id) {67890}
+    let (:edited_vote_flag) {true}
+    let (:edited_vote_scope) {'edited vote scope'}
+    let (:edited_vote_weight) {1}
+    let! (:record_count_before_request) {Vote.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+      let (:user) {create(:user, :api_token)}
 
       context 'and updated values' do
-        let! (:record_count_before_request) {Vote.count}
-
         before do
           patch request,
                 headers: {
@@ -480,8 +466,6 @@ RSpec.describe Api::V1::VotesController, type: :request do
       end
 
       context 'and without updated values' do
-        let! (:record_count_before_request) {Vote.count}
-
         before do
           patch request,
                 headers: {
@@ -555,8 +539,6 @@ RSpec.describe Api::V1::VotesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Vote.count}
-
       before do
         patch request,
               headers: {
@@ -588,8 +570,6 @@ RSpec.describe Api::V1::VotesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Vote.count}
-
       before do
         patch request,
               headers: {
@@ -623,10 +603,10 @@ RSpec.describe Api::V1::VotesController, type: :request do
   describe 'DELETE api/v1/votes/:id' do
     let (:request) {"/api/v1/votes/#{vote.id}"}
     let! (:vote) {create(:vote)}
+    let! (:record_count_before_request) {Vote.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Vote.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         delete request, headers: {'Api-Token': user.api_token}
@@ -642,8 +622,6 @@ RSpec.describe Api::V1::VotesController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Vote.count}
-
       before do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -656,8 +634,6 @@ RSpec.describe Api::V1::VotesController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Vote.count}
-
       before do
         delete request
       end
