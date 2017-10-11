@@ -6,5 +6,9 @@ FactoryGirl.define do
     trait :admin do
       admin true
     end
+
+    trait :api_token do
+      api_token 'X0EfAbSlaeQkXm6gFmNtKA'
+    end
   end
 end

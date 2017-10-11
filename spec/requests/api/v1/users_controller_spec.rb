@@ -24,14 +24,13 @@ RSpec.describe Api::V1::UsersController, type: :request do
 
   describe 'GET api/v1/users' do
     let (:request) {'/api/v1/users'}
-    let! (:user1) {create(:user)}
+    let! (:user1) {create(:user, :api_token)}
+    let! (:user2) {create(:user)}
+    let! (:record_count_before_request) {User.count}
 
     context 'with a valid api-token' do
-      let! (:user2) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {User.count}
-
       before do
-        get request, headers: {'Api-Token': user2.api_token}
+        get request, headers: {'Api-Token': user1.api_token}
       end
 
       expect_record_count_same
@@ -120,8 +119,6 @@ RSpec.describe Api::V1::UsersController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {User.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -134,8 +131,6 @@ RSpec.describe Api::V1::UsersController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {User.count}
-
       before do
         get request
       end
@@ -150,12 +145,10 @@ RSpec.describe Api::V1::UsersController, type: :request do
 
   describe 'GET api/v1/users/:id' do
     let (:request) {"/api/v1/users/#{user.id}"}
-    let! (:user) {create(:user)}
+    let! (:user) {create(:user, :api_token)}
+    let! (:record_count_before_request) {User.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {User.count}
-
       before do
         get request, headers: {'Api-Token': user.api_token}
       end
@@ -209,8 +202,6 @@ RSpec.describe Api::V1::UsersController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {User.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -223,8 +214,6 @@ RSpec.describe Api::V1::UsersController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {User.count}
-
       before do
         get request
       end
@@ -239,13 +228,10 @@ RSpec.describe Api::V1::UsersController, type: :request do
 
   describe 'POST api/v1/users' do
     let (:request) {'/api/v1/users'}
-    let! (:user) {build(:user)}
+    let! (:user) {create(:user, :api_token)}
     let! (:record_count_before_request) {User.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {User.count}
-
       before do
         post request,
              headers: {
@@ -323,8 +309,6 @@ RSpec.describe Api::V1::UsersController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {User.count}
-
       before do
         post request,
              headers: {
@@ -352,8 +336,6 @@ RSpec.describe Api::V1::UsersController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {User.count}
-
       before do
         post request,
              headers: {
@@ -382,18 +364,15 @@ RSpec.describe Api::V1::UsersController, type: :request do
 
   describe 'PATCH api/v1/users/:id' do
     let (:request) {"/api/v1/users/#{user.id}"}
-    let! (:user) {create(:user)}
-    let(:edited_name) {'edited name'}
-    let(:edited_email) {'edited email'}
-    let(:edited_avatar_url) {'edited avatar url'}
-    let(:edited_admin) {true}
+    let! (:user) {create(:user, :api_token)}
+    let (:edited_name) {'edited name'}
+    let (:edited_email) {'edited email'}
+    let (:edited_avatar_url) {'edited avatar url'}
+    let (:edited_admin) {true}
+    let! (:record_count_before_request) {User.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-
       context 'and updated values' do
-        let! (:record_count_before_request) {User.count}
-
         before do
           patch request,
                 headers: {
@@ -472,8 +451,6 @@ RSpec.describe Api::V1::UsersController, type: :request do
       end
 
       context 'and without updated values' do
-        let! (:record_count_before_request) {User.count}
-
         before do
           patch request,
                 headers: {'Api-Token': user.api_token, 'Content-Type': 'application/vnd.api+json'},
@@ -539,8 +516,6 @@ RSpec.describe Api::V1::UsersController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {User.count}
-
       before do
         patch request,
               headers: {
@@ -569,8 +544,6 @@ RSpec.describe Api::V1::UsersController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {User.count}
-
       before do
         patch request,
               headers: {
@@ -601,12 +574,10 @@ RSpec.describe Api::V1::UsersController, type: :request do
   describe 'DELETE api/v1/users/:id' do
     let (:request) {"/api/v1/users/#{user.id}"}
     let! (:administrator) {create(:user, :admin)} # deleting a user requires at least one administrator in the system
-    let! (:user) {create(:user)}
+    let! (:user) {create(:user, :api_token)}
+    let! (:record_count_before_request) {User.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {User.count}
-
       before do
         delete request, headers: {'Api-Token': user.api_token}
       end
@@ -621,8 +592,6 @@ RSpec.describe Api::V1::UsersController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {User.count}
-
       before do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -635,8 +604,6 @@ RSpec.describe Api::V1::UsersController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {User.count}
-
       before do
         delete request
       end
