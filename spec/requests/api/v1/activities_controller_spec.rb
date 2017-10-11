@@ -1,24 +1,6 @@
 require 'rails_helper'
 require 'shared/api/v1/shared_expectations'
 
-def expect_record_count_same
-  it 'does not change the record count' do
-    expect(record_count_before_request).to be == Activity.count
-  end
-end
-
-def expect_record_count_increase
-  it 'increases the record count' do
-    expect(record_count_before_request).to be < Activity.count
-  end
-end
-
-def expect_record_count_decrease
-  it 'decreases the record count' do
-    expect(record_count_before_request).to be > Activity.count
-  end
-end
-
 RSpec.describe Api::V1::ActivitiesController, type: :request do
   include RequestHelpers
 
@@ -35,7 +17,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_record_count_same
+      expect_activity_count_same
 
       it 'returns all activities' do
         expected =
@@ -97,7 +79,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_activity_count_same
 
       expect_unauthorized_response
 
@@ -109,7 +91,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_activity_count_same
 
       expect_unauthorized_response
 
@@ -129,7 +111,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_record_count_same
+      expect_activity_count_same
 
       it 'returns the activity associated with the id' do
         expected =
@@ -168,7 +150,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_activity_count_same
 
       expect_unauthorized_response
 
@@ -180,7 +162,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_activity_count_same
 
       expect_unauthorized_response
 
@@ -220,7 +202,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         expect(new_activity.suggested_amount).to eq(activity.suggested_amount)
       end
 
-      expect_record_count_increase
+      expect_activity_count_increase
 
       it 'returns the created activity' do
         expected =
@@ -272,7 +254,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
              }.to_json
       end
 
-      expect_record_count_same
+      expect_activity_count_same
 
       expect_unauthorized_response
 
@@ -296,7 +278,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
              }.to_json
       end
 
-      expect_record_count_same
+      expect_activity_count_same
 
       expect_unauthorized_response
 
@@ -340,7 +322,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
           expect(updated_activity.suggested_amount).to eq(edited_suggested_amount)
         end
 
-        expect_record_count_same
+        expect_activity_count_same
 
         it 'returns the updated activity associated with the id with updated values' do
           expected =
@@ -388,7 +370,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
           expect(updated_activity.suggested_amount).to eq(activity.suggested_amount)
         end
 
-        expect_record_count_same
+        expect_activity_count_same
 
         it 'returns the updated activity associated with the id without updated values' do
           expected =
@@ -442,7 +424,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
               }.to_json
       end
 
-      expect_record_count_same
+      expect_activity_count_same
 
       expect_unauthorized_response
 
@@ -467,7 +449,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
               }.to_json
       end
 
-      expect_record_count_same
+      expect_activity_count_same
 
       expect_unauthorized_response
 
@@ -491,7 +473,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         expect {Activity.find(activity.id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
 
-      expect_record_count_decrease
+      expect_activity_count_decrease
 
       expect_status_204_no_content
     end
@@ -501,7 +483,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_activity_count_same
 
       expect_unauthorized_response
 
@@ -513,7 +495,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
         delete request
       end
 
-      expect_record_count_same
+      expect_activity_count_same
 
       expect_unauthorized_response
 

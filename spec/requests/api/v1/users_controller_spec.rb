@@ -1,24 +1,6 @@
 require 'rails_helper'
 require 'shared/api/v1/shared_expectations'
 
-def expect_record_count_same
-  it 'does not change the record count' do
-    expect(record_count_before_request).to be == User.count
-  end
-end
-
-def expect_record_count_increase
-  it 'increases the record count' do
-    expect(record_count_before_request).to be < User.count
-  end
-end
-
-def expect_record_count_decrease
-  it 'decreases the record count' do
-    expect(record_count_before_request).to be > User.count
-  end
-end
-
 RSpec.describe Api::V1::UsersController, type: :request do
   include RequestHelpers
 
@@ -33,7 +15,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
         get request, headers: {'Api-Token': user1.api_token}
       end
 
-      expect_record_count_same
+      expect_user_count_same
 
       it 'returns all users' do
         expected =
@@ -123,7 +105,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_user_count_same
 
       expect_unauthorized_response
 
@@ -135,7 +117,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_user_count_same
 
       expect_unauthorized_response
 
@@ -153,7 +135,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_record_count_same
+      expect_user_count_same
 
       it 'returns the user associated with the id' do
         expected =
@@ -206,7 +188,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_user_count_same
 
       expect_unauthorized_response
 
@@ -218,7 +200,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_user_count_same
 
       expect_unauthorized_response
 
@@ -260,7 +242,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
         expect(new_user.admin).to eq(user.admin)
       end
 
-      expect_record_count_increase
+      expect_user_count_increase
 
       it 'returns the created user' do
         expected =
@@ -328,7 +310,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
              }.to_json
       end
 
-      expect_record_count_same
+      expect_user_count_same
 
       expect_unauthorized_response
 
@@ -354,7 +336,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
              }.to_json
       end
 
-      expect_record_count_same
+      expect_user_count_same
 
       expect_unauthorized_response
 
@@ -402,7 +384,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
           expect(updated_user.admin).to eq(edited_admin)
         end
 
-        expect_record_count_same
+        expect_user_count_same
 
         it 'returns the updated user associated with the id with updated values' do
           expected =
@@ -466,7 +448,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
           expect(updated_user.admin).to eq(user.admin)
         end
 
-        expect_record_count_same
+        expect_user_count_same
 
         it 'returns the updated user associated with the id without updated values' do
           expected =
@@ -536,7 +518,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
               }.to_json
       end
 
-      expect_record_count_same
+      expect_user_count_same
 
       expect_unauthorized_response
 
@@ -563,7 +545,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
               }.to_json
       end
 
-      expect_record_count_same
+      expect_user_count_same
 
       expect_unauthorized_response
 
@@ -586,7 +568,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
         expect {User.find(user.id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
 
-      expect_record_count_decrease
+      expect_user_count_decrease
 
       expect_status_204_no_content
     end
@@ -596,7 +578,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_user_count_same
 
       expect_unauthorized_response
 
@@ -608,7 +590,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
         delete request
       end
 
-      expect_record_count_same
+      expect_user_count_same
 
       expect_unauthorized_response
 

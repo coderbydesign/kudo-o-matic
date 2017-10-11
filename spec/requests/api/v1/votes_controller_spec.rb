@@ -1,24 +1,6 @@
 require 'rails_helper'
 require 'shared/api/v1/shared_expectations'
 
-def expect_record_count_same
-  it 'does not change the record count' do
-    expect(record_count_before_request).to be == Vote.count
-  end
-end
-
-def expect_record_count_increase
-  it 'increases the record count' do
-    expect(record_count_before_request).to be < Vote.count
-  end
-end
-
-def expect_record_count_decrease
-  it 'decreases the record count' do
-    expect(record_count_before_request).to be > Vote.count
-  end
-end
-
 RSpec.describe Api::V1::VotesController, type: :request do
   include RequestHelpers
 
@@ -35,7 +17,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_record_count_same
+      expect_vote_count_same
 
       it 'returns all votes' do
         expected =
@@ -119,7 +101,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 
@@ -131,7 +113,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 
@@ -151,7 +133,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_record_count_same
+      expect_vote_count_same
 
       it 'returns the vote associated with the id' do
         expected =
@@ -201,7 +183,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 
@@ -213,7 +195,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 
@@ -263,7 +245,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
         expect(new_vote.vote_weight).to eq(vote.vote_weight)
       end
 
-      expect_record_count_increase
+      expect_vote_count_increase
 
       it 'returns the created vote' do
         expected =
@@ -331,7 +313,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
              }.to_json
       end
 
-      expect_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 
@@ -361,7 +343,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
              }.to_json
       end
 
-      expect_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 
@@ -420,7 +402,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
           expect(updated_vote.vote_weight).to eq(edited_vote_weight)
         end
 
-        expect_record_count_same
+        expect_vote_count_same
 
         it 'returns the updated vote associated with the id with updated values' do
           expected =
@@ -492,7 +474,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
           expect(updated_vote.vote_weight).to eq(vote.vote_weight)
         end
 
-        expect_record_count_same
+        expect_vote_count_same
 
         it 'returns the updated vote associated with the id without updated values' do
           expected =
@@ -562,7 +544,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
               }.to_json
       end
 
-      expect_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 
@@ -592,7 +574,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
               }.to_json
       end
 
-      expect_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 
@@ -616,7 +598,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
         expect {Vote.find(vote.id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
 
-      expect_record_count_decrease
+      expect_vote_count_decrease
 
       expect_status_204_no_content
     end
@@ -626,7 +608,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 
@@ -638,7 +620,7 @@ RSpec.describe Api::V1::VotesController, type: :request do
         delete request
       end
 
-      expect_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 

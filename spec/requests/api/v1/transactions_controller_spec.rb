@@ -1,42 +1,6 @@
 require 'rails_helper'
 require 'shared/api/v1/shared_expectations'
 
-def expect_transaction_record_count_same
-  it 'does not change the transaction record count' do
-    expect(record_count_before_request).to be == Transaction.count
-  end
-end
-
-def expect_transaction_record_count_increase
-  it 'increases the transaction record count' do
-    expect(record_count_before_request).to be < Transaction.count
-  end
-end
-
-def expect_transaction_record_count_decrease
-  it 'decreases the transaction record count' do
-    expect(record_count_before_request).to be > Transaction.count
-  end
-end
-
-def expect_vote_record_count_same
-  it 'does not change the vote record count' do
-    expect(record_count_before_request).to be == Vote.count
-  end
-end
-
-def expect_vote_record_count_increase
-  it 'increases the vote record count' do
-    expect(record_count_before_request).to be < Vote.count
-  end
-end
-
-def expect_vote_record_count_decrease
-  it 'decreases the vote record count' do
-    expect(record_count_before_request).to be > Vote.count
-  end
-end
-
 RSpec.describe Api::V1::TransactionsController, type: :request do
   include RequestHelpers
 
@@ -53,7 +17,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_transaction_record_count_same
+      expect_transaction_count_same
 
       it 'returns all transactions' do
         expected =
@@ -175,7 +139,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_transaction_record_count_same
+      expect_transaction_count_same
 
       expect_unauthorized_response
 
@@ -187,7 +151,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request
       end
 
-      expect_transaction_record_count_same
+      expect_transaction_count_same
 
       expect_unauthorized_response
 
@@ -207,7 +171,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_transaction_record_count_same
+      expect_transaction_count_same
 
       it 'returns the transaction associated with the id' do
         expected =
@@ -276,7 +240,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_transaction_record_count_same
+      expect_transaction_count_same
 
       expect_unauthorized_response
 
@@ -288,7 +252,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         get request
       end
 
-      expect_transaction_record_count_same
+      expect_transaction_count_same
 
       expect_unauthorized_response
 
@@ -364,7 +328,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
           expect(new_transaction.amount).to eq(transaction.amount)
         end
 
-        expect_transaction_record_count_increase
+        expect_transaction_count_increase
 
         it 'returns the created transaction' do
           expected =
@@ -470,7 +434,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
              }.to_json
       end
 
-      expect_transaction_record_count_same
+      expect_transaction_count_same
 
       expect_unauthorized_response
 
@@ -519,7 +483,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
              }.to_json
       end
 
-      expect_transaction_record_count_same
+      expect_transaction_count_same
 
       expect_unauthorized_response
 
@@ -588,7 +552,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
           expect(updated_transaction.amount).to eq(edited_amount)
         end
 
-        expect_transaction_record_count_same
+        expect_transaction_count_same
 
         it 'returns the updated transaction associated with the id with updated values' do
           expected =
@@ -697,7 +661,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
           expect(updated_transaction.amount).to eq(transaction.amount)
         end
 
-        expect_transaction_record_count_same
+        expect_transaction_count_same
 
         it 'returns the updated transaction associated with the id without updated values' do
           expected =
@@ -801,7 +765,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
               }.to_json
       end
 
-      expect_transaction_record_count_same
+      expect_transaction_count_same
 
       expect_unauthorized_response
 
@@ -848,7 +812,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
               }.to_json
       end
 
-      expect_transaction_record_count_same
+      expect_transaction_count_same
 
       expect_unauthorized_response
 
@@ -872,7 +836,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         expect {Transaction.find(transaction.id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
 
-      expect_transaction_record_count_decrease
+      expect_transaction_count_decrease
 
       expect_status_204_no_content
     end
@@ -882,7 +846,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_transaction_record_count_same
+      expect_transaction_count_same
 
       expect_unauthorized_response
 
@@ -894,7 +858,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         delete request
       end
 
-      expect_transaction_record_count_same
+      expect_transaction_count_same
 
       expect_unauthorized_response
 
@@ -933,7 +897,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
             expect(created_vote.vote_weight).to eq(default_vote_weight)
           end
 
-          expect_vote_record_count_increase
+          expect_vote_count_increase
 
           it 'redirects to the created vote path' do
             expect(response).to redirect_to api_v1_vote_path(Vote.last)
@@ -951,7 +915,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
           expect_user_record_not_found_response
 
-          expect_vote_record_count_same
+          expect_vote_count_same
 
           expect_status_404_not_found
         end
@@ -967,7 +931,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
           expect_transaction_record_not_found_response
 
-          expect_vote_record_count_same
+          expect_vote_count_same
 
           expect_status_404_not_found
         end
@@ -982,7 +946,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
           expect_transaction_record_not_found_response
 
-          expect_vote_record_count_same
+          expect_vote_count_same
 
           expect_status_404_not_found
         end
@@ -997,7 +961,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         put request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_vote_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 
@@ -1012,7 +976,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         put request
       end
 
-      expect_vote_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 
@@ -1043,7 +1007,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
             expect {Vote.find(vote.id)}.to raise_error(ActiveRecord::RecordNotFound)
           end
 
-          expect_vote_record_count_decrease
+          expect_vote_count_decrease
 
           expect_status_204_no_content
         end
@@ -1057,7 +1021,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
           expect_user_record_not_found_response
 
-          expect_vote_record_count_same
+          expect_vote_count_same
 
           expect_status_404_not_found
         end
@@ -1073,7 +1037,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
           expect_transaction_record_not_found_response
 
-          expect_vote_record_count_same
+          expect_vote_count_same
 
           expect_status_404_not_found
         end
@@ -1088,7 +1052,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
           expect_transaction_record_not_found_response
 
-          expect_vote_record_count_same
+          expect_vote_count_same
 
           expect_status_404_not_found
         end
@@ -1103,7 +1067,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_vote_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 
@@ -1118,7 +1082,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         delete request
       end
 
-      expect_vote_record_count_same
+      expect_vote_count_same
 
       expect_unauthorized_response
 

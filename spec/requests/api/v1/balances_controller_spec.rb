@@ -1,24 +1,6 @@
 require 'rails_helper'
 require 'shared/api/v1/shared_expectations'
 
-def expect_record_count_same
-  it 'does not change the record count' do
-    expect(record_count_before_request).to be == Balance.count
-  end
-end
-
-def expect_record_count_increase
-  it 'increases the record count' do
-    expect(record_count_before_request).to be < Balance.count
-  end
-end
-
-def expect_record_count_decrease
-  it 'decreases the record count' do
-    expect(record_count_before_request).to be > Balance.count
-  end
-end
-
 RSpec.describe Api::V1::BalancesController, type: :request do
   include RequestHelpers
 
@@ -35,7 +17,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       it 'returns all balances' do
         expected =
@@ -99,7 +81,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       expect_unauthorized_response
 
@@ -111,7 +93,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       expect_unauthorized_response
 
@@ -131,7 +113,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       it 'returns the balance associated with the id' do
         expected =
@@ -171,7 +153,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       expect_unauthorized_response
 
@@ -183,7 +165,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       expect_unauthorized_response
 
@@ -212,7 +194,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         expect(new_balance.current).to eq(balance.current)
       end
 
-      expect_record_count_increase
+      expect_balance_count_increase
 
       it 'returns the created balance' do
         expected =
@@ -254,7 +236,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
              params: {data: {type: 'balances', attributes: {name: balance.name, current: balance.current}}}.to_json
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       expect_unauthorized_response
 
@@ -268,7 +250,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
              params: {data: {type: 'balances', attributes: {name: balance.name, current: balance.current}}}.to_json
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       expect_unauthorized_response
 
@@ -312,7 +294,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
           expect(updated_balance.current).to eq(edited_current)
         end
 
-        expect_record_count_same
+        expect_balance_count_same
 
         it 'returns the updated balance associated with the id with updated values' do
           expected =
@@ -361,7 +343,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
           expect(updated_balance.current).to eq(balance.current)
         end
 
-        expect_record_count_same
+        expect_balance_count_same
 
         it 'returns the updated balance associated with the id without updated values' do
           expected =
@@ -416,7 +398,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
               }.to_json
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       expect_unauthorized_response
 
@@ -441,7 +423,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
               }.to_json
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       expect_unauthorized_response
 
@@ -465,7 +447,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         expect {Balance.find(balance.id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
 
-      expect_record_count_decrease
+      expect_balance_count_decrease
 
       expect_status_204_no_content
     end
@@ -475,7 +457,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       expect_unauthorized_response
 
@@ -487,7 +469,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         delete request
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       expect_unauthorized_response
 
@@ -507,7 +489,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       it 'redirects to the current balance path' do
         expect(response).to redirect_to api_v1_balance_path(balance)
@@ -521,7 +503,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       expect_unauthorized_response
 
@@ -533,7 +515,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_balance_count_same
 
       expect_unauthorized_response
 
