@@ -433,6 +433,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
   describe 'DELETE api/v1/balances/:id' do
     let (:request) {"/api/v1/balances/#{balance.id}"}
+    let! (:current_balance) {create(:balance, :current)} # deleting a balance requires at least one current balance in the system
     let! (:balance) {create(:balance)}
     let! (:record_count_before_request) {Balance.count}
 
