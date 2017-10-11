@@ -24,7 +24,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
   describe 'GET api/v1/balances' do
     let (:request) {'/api/v1/balances'}
-    let! (:balance1) {create(:balance)}
+    let! (:balance1) {create(:balance, :current)}
     let! (:balance2) {create(:balance)}
     let! (:record_count_before_request) {Balance.count}
 
@@ -51,7 +51,8 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                             'created-at': to_api_timestamp_format(balance1.created_at),
                             'updated-at': to_api_timestamp_format(balance1.updated_at),
                             name: balance1.name,
-                            current: balance1.current
+                            current: balance1.current,
+                            amount: balance1.amount
                         },
                         relationships: {
                             transactions: {
@@ -72,7 +73,8 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                             'created-at': to_api_timestamp_format(balance2.created_at),
                             'updated-at': to_api_timestamp_format(balance2.updated_at),
                             name: balance2.name,
-                            current: balance1.current
+                            current: balance2.current,
+                            amount: balance2.amount
                         },
                         relationships: {
                             transactions: {
@@ -119,7 +121,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
   describe 'GET api/v1/balances/:id' do
     let (:request) {"/api/v1/balances/#{balance.id}"}
-    let! (:balance) {create(:balance)}
+    let! (:balance) {create(:balance, :current)}
     let! (:record_count_before_request) {Balance.count}
 
     context 'with a valid api-token' do
@@ -144,7 +146,8 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                         'created-at': to_api_timestamp_format(balance.created_at),
                         'updated-at': to_api_timestamp_format(balance.updated_at),
                         name: balance.name,
-                        current: balance.current
+                        current: balance.current,
+                        amount: balance.amount
                     },
                     relationships: {
                         transactions: {
@@ -190,7 +193,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
   describe 'POST api/v1/balances' do
     let (:request) {'/api/v1/balances'}
-    let! (:balance) {build(:balance)}
+    let! (:balance) {build(:balance, :current)}
     let! (:record_count_before_request) {Balance.count}
 
     context 'with a valid api-token' do
@@ -224,7 +227,8 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                         'created-at': assigned_created_at,
                         'updated-at': assigned_updated_at,
                         name: balance.name,
-                        current: balance.current
+                        current: balance.current,
+                        amount: 0
                     },
                     relationships: {
                         transactions: {
@@ -274,7 +278,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
   describe 'PATCH api/v1/balances/:id' do
     let (:request) {"/api/v1/balances/#{balance.id}"}
-    let! (:balance) {create(:balance)}
+    let! (:balance) {create(:balance, :current)}
     let (:edited_name) {'edited name'}
     let (:edited_current) {true}
     let! (:record_count_before_request) {Balance.count}
@@ -323,7 +327,8 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                           'created-at': to_api_timestamp_format(balance.created_at),
                           'updated-at': assigned_updated_at,
                           name: edited_name,
-                          current: edited_current
+                          current: edited_current,
+                          amount: balance.amount
                       },
                       relationships: {
                           transactions: {
@@ -371,7 +376,8 @@ RSpec.describe Api::V1::BalancesController, type: :request do
                           'created-at': to_api_timestamp_format(balance.created_at),
                           'updated-at': to_api_timestamp_format(balance.updated_at),
                           name: balance.name,
-                          current: balance.current
+                          current: balance.current,
+                          amount: balance.amount
                       },
                       relationships: {
                           transactions: {
@@ -491,7 +497,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
   describe 'GET /api/v1/balances/current' do
     let (:request) {'/api/v1/balances/current'}
-    let! (:balance) {create(:balance, :current)}
+    let! (:current_balance) {create(:balance, :current)}
     let! (:record_count_before_request) {Balance.count}
 
     context 'with a valid api-token' do
@@ -503,26 +509,11 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
       expect_record_count_same
 
-      it 'returns the current balance' do
-        expected =
-            {
-                data: {
-                    id: balance.id.to_s,
-                    type: 'balances',
-                    attributes: {
-                        'created-at': to_api_timestamp_format(balance.created_at),
-                        'updated-at': to_api_timestamp_format(balance.updated_at),
-                        name: balance.name,
-                        current: balance.current,
-                        amount: balance.amount
-                    }
-                }
-            }.with_indifferent_access
-
-        expect(json).to eq(expected)
+      it 'redirects to the current balance path' do
+        expect(response).to redirect_to api_v1_balance_path(current_balance)
       end
 
-      expect_status_200_ok
+      expect_status_302_found
     end
 
     context 'with an invalid api-token' do
