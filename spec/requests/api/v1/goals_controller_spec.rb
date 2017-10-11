@@ -1,24 +1,6 @@
 require 'rails_helper'
 require 'shared/api/v1/shared_expectations'
 
-def expect_record_count_same
-  it 'does not change the record count' do
-    expect(record_count_before_request).to be == Goal.count
-  end
-end
-
-def expect_record_count_increase
-  it 'increases the record count' do
-    expect(record_count_before_request).to be < Goal.count
-  end
-end
-
-def expect_record_count_decrease
-  it 'decreases the record count' do
-    expect(record_count_before_request).to be > Goal.count
-  end
-end
-
 RSpec.describe Api::V1::GoalsController, type: :request do
   include RequestHelpers
 
@@ -35,7 +17,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       it 'returns all goals' do
         expected =
@@ -99,7 +81,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -111,7 +93,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -131,7 +113,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request, headers: {'Api-Token': user.api_token}
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       it 'returns the goal associated with the id' do
         expected =
@@ -171,7 +153,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -183,7 +165,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -225,7 +207,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         expect(new_goal.amount).to eq(goal.amount)
       end
 
-      expect_record_count_increase
+      expect_goal_count_increase
 
       it 'returns the created goal' do
         expected =
@@ -279,7 +261,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
              }.to_json
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -305,7 +287,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
              }.to_json
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -352,7 +334,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
           expect(updated_goal.amount).to eq(edited_amount)
         end
 
-        expect_record_count_same
+        expect_goal_count_same
 
         it 'returns the updated goal associated with the id with updated values' do
           expected =
@@ -410,7 +392,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
           expect(updated_goal.amount).to eq(goal.amount)
         end
 
-        expect_record_count_same
+        expect_goal_count_same
 
         it 'returns the updated vote associated with the id without updated values' do
           expected =
@@ -465,7 +447,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
               }.to_json
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -490,7 +472,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
               }.to_json
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -514,7 +496,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         expect {Goal.find(goal.id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
 
-      expect_record_count_decrease
+      expect_goal_count_decrease
 
       expect_status_204_no_content
     end
@@ -524,7 +506,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -536,7 +518,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         delete request
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -558,7 +540,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
           get request, headers: {'Api-Token': user.api_token}
         end
 
-        expect_record_count_same
+        expect_goal_count_same
 
         it 'redirects to the next goal path' do
           expect(response).to redirect_to api_v1_goal_path(goal)
@@ -575,7 +557,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
           get request, headers: {'Api-Token': user.api_token}
         end
 
-        expect_record_count_increase
+        expect_goal_count_increase
 
         it 'redirects to the next goal path' do
           expect(response).to redirect_to api_v1_goal_path(Goal.last)
@@ -591,7 +573,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
           get request, headers: {'Api-Token': user.api_token}
         end
 
-        expect_record_count_increase
+        expect_goal_count_increase
 
         it 'redirects to the next goal path' do
           expect(response).to redirect_to api_v1_goal_path(Goal.last)
@@ -608,7 +590,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -622,7 +604,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -644,7 +626,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
           get request, headers: {'Api-Token': user.api_token}
         end
 
-        expect_record_count_same
+        expect_goal_count_same
 
         it 'redirects to the previous goal path' do
           expect(response).to redirect_to api_v1_goal_path(goal)
@@ -660,7 +642,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
           get request, headers: {'Api-Token': user.api_token}
         end
 
-        expect_record_count_same
+        expect_goal_count_same
 
         expect_previous_goal_record_not_found_response
 
@@ -675,7 +657,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 
@@ -689,7 +671,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         get request
       end
 
-      expect_record_count_same
+      expect_goal_count_same
 
       expect_unauthorized_response
 

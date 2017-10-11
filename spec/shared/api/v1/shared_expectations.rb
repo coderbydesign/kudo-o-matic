@@ -1,3 +1,5 @@
+# expect JSON respones
+
 def expect_unauthorized_response
   it 'returns an unauthorized message' do
     expected = {
@@ -65,6 +67,118 @@ def expect_transaction_record_not_found_response
     expect(json).to match(expected)
   end
 end
+
+# expect record counts
+
+def expect_activity_count_same
+  it 'does not change the activity record count' do
+    expect(record_count_before_request).to be == Activity.count
+  end
+end
+
+def expect_activity_count_increase
+  it 'increases the activity record count' do
+    expect(record_count_before_request).to be < Activity.count
+  end
+end
+
+def expect_activity_count_decrease
+  it 'decreases the activity record count' do
+    expect(record_count_before_request).to be > Activity.count
+  end
+end
+
+def expect_balance_count_same
+  it 'does not change the balance record count' do
+    expect(record_count_before_request).to be == Balance.count
+  end
+end
+
+def expect_balance_count_increase
+  it 'increases the balance record count' do
+    expect(record_count_before_request).to be < Balance.count
+  end
+end
+
+def expect_balance_count_decrease
+  it 'decreases the balance record count' do
+    expect(record_count_before_request).to be > Balance.count
+  end
+end
+
+def expect_goal_count_same
+  it 'does not change the goal record count' do
+    expect(record_count_before_request).to be == Goal.count
+  end
+end
+
+def expect_goal_count_increase
+  it 'increases the goal record count' do
+    expect(record_count_before_request).to be < Goal.count
+  end
+end
+
+def expect_goal_count_decrease
+  it 'decreases the goal record count' do
+    expect(record_count_before_request).to be > Goal.count
+  end
+end
+
+def expect_transaction_count_same
+  it 'does not change the transaction record count' do
+    expect(record_count_before_request).to be == Transaction.count
+  end
+end
+
+def expect_transaction_count_increase
+  it 'increases the transaction record count' do
+    expect(record_count_before_request).to be < Transaction.count
+  end
+end
+
+def expect_transaction_count_decrease
+  it 'decreases the transaction record count' do
+    expect(record_count_before_request).to be > Transaction.count
+  end
+end
+
+def expect_user_count_same
+  it 'does not change the user record count' do
+    expect(record_count_before_request).to be == User.count
+  end
+end
+
+def expect_user_count_increase
+  it 'increases the user record count' do
+    expect(record_count_before_request).to be < User.count
+  end
+end
+
+def expect_user_count_decrease
+  it 'decreases the user record count' do
+    expect(record_count_before_request).to be > User.count
+  end
+end
+
+def expect_vote_count_same
+  it 'does not change the vote record count' do
+    expect(record_count_before_request).to be == Vote.count
+  end
+end
+
+def expect_vote_count_increase
+  it 'increases the vote record count' do
+    expect(record_count_before_request).to be < Vote.count
+  end
+end
+
+def expect_vote_count_decrease
+  it 'decreases the vote record count' do
+    expect(record_count_before_request).to be > Vote.count
+  end
+end
+
+# expect HTTP status codes
 
 def expect_status_200_ok
   it 'returns a 200 (ok) status code' do
