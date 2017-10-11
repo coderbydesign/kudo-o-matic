@@ -546,13 +546,12 @@ RSpec.describe Api::V1::GoalsController, type: :request do
 
   describe 'GET api/v1/goals/next' do
     let (:request) {'/api/v1/goals/next'}
-    let! (:balance) {create(:balance, :current)}
 
     context 'with a valid api-token' do
       let (:user) {create(:user, :api_token)}
 
       context 'and a next goal that is not achieved' do
-        let! (:goal) {create(:goal, balance: balance)}
+        let! (:goal) {create(:goal)}
         let! (:record_count_before_request) {Goal.count}
 
         before do
@@ -569,7 +568,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
       end
 
       context 'and a next goal that is achieved' do
-        let! (:goal) {create(:goal, :achieved, balance: balance)}
+        let! (:goal) {create(:goal, :achieved)}
         let! (:record_count_before_request) {Goal.count}
 
         before do
@@ -633,14 +632,12 @@ RSpec.describe Api::V1::GoalsController, type: :request do
 
   describe 'GET api/v1/goals/previous' do
     let (:request) {'/api/v1/goals/previous'}
-    let! (:balance) {create(:balance, :current)}
 
     context 'with a valid api-token' do
       let (:user) {create(:user, :api_token)}
 
       context 'and a previous goal' do
-        let! (:previous_goal) {create(:goal, :achieved, balance: balance)}
-        let! (:goal) {create(:goal, balance: balance)}
+        let! (:goal) {create(:goal, :achieved)}
         let! (:record_count_before_request) {Goal.count}
 
         before do
@@ -650,7 +647,7 @@ RSpec.describe Api::V1::GoalsController, type: :request do
         expect_record_count_same
 
         it 'redirects to the previous goal path' do
-          expect(response).to redirect_to api_v1_goal_path(previous_goal)
+          expect(response).to redirect_to api_v1_goal_path(goal)
         end
 
         expect_status_302_found

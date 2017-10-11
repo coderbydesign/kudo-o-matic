@@ -497,7 +497,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
 
   describe 'GET /api/v1/balances/current' do
     let (:request) {'/api/v1/balances/current'}
-    let! (:current_balance) {create(:balance, :current)}
+    let! (:balance) {create(:balance, :current)}
     let! (:record_count_before_request) {Balance.count}
 
     context 'with a valid api-token' do
@@ -510,7 +510,7 @@ RSpec.describe Api::V1::BalancesController, type: :request do
       expect_record_count_same
 
       it 'redirects to the current balance path' do
-        expect(response).to redirect_to api_v1_balance_path(current_balance)
+        expect(response).to redirect_to api_v1_balance_path(balance)
       end
 
       expect_status_302_found
