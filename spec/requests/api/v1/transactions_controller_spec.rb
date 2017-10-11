@@ -44,10 +44,10 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     let (:request) {'/api/v1/transactions'}
     let! (:transaction1) {create(:transaction, :image)}
     let! (:transaction2) {create(:transaction)}
+    let! (:record_count_before_request) {Transaction.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Transaction.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
@@ -169,8 +169,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Transaction.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -183,8 +181,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Transaction.count}
-
       before do
         get request
       end
@@ -200,10 +196,10 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
   describe 'GET api/v1/transactions/:id' do
     let (:request) {"/api/v1/transactions/#{transaction.id}"}
     let! (:transaction) {create(:transaction, :image)}
+    let! (:record_count_before_request) {Transaction.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Transaction.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         get request, headers: {'Api-Token': user.api_token}
@@ -273,8 +269,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Transaction.count}
-
       before do
         get request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -287,8 +281,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Transaction.count}
-
       before do
         get request
       end
@@ -305,13 +297,13 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     let (:request) {"/api/v1/transactions"}
     let! (:transaction) {build(:transaction)}
     let! (:activity) {create(:activity)}
-    let! (:sender) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+    let! (:sender) {create(:user, :api_token)}
     let! (:receiver) {create(:user)}
     let! (:balance) {create(:balance, :current)}
+    let! (:record_count_before_request) {Transaction.count}
 
     context 'with a valid api-token' do
       context 'and an image attachment' do
-        let! (:record_count_before_request) {Transaction.count}
 
         # TODO add integration test for adding a transaction with an image attachment
 
@@ -321,8 +313,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
       end
 
       context 'and without an image attachment' do
-        let! (:record_count_before_request) {Transaction.count}
-
         before do
           post request,
                headers: {
@@ -434,8 +424,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Transaction.count}
-
       before do
         post request,
              headers: {
@@ -486,8 +474,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Transaction.count}
-
       before do
         post request,
              headers: {
@@ -541,15 +527,14 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     let (:request) {"/api/v1/transactions/#{transaction.id}"}
     let! (:transaction) {create(:transaction)}
     let! (:activity) {create(:activity)}
-    let! (:sender) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
+    let! (:sender) {create(:user, :api_token)}
     let! (:receiver) {create(:user)}
     let! (:balance) {create(:balance, :current)}
     let (:edited_amount) {500}
+    let! (:record_count_before_request) {Transaction.count}
 
     context 'with a valid api-token' do
       context 'and updated values' do
-        let! (:record_count_before_request) {Transaction.count}
-
         before do
           patch request,
                 headers: {
@@ -661,8 +646,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
       end
 
       context 'and without updated values' do
-        let! (:record_count_before_request) {Transaction.count}
-
         before do
           patch request,
                 headers: {
@@ -772,8 +755,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Transaction.count}
-
       before do
         patch request,
               headers: {
@@ -822,8 +803,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Transaction.count}
-
       before do
         patch request,
               headers: {
@@ -874,10 +853,10 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
   describe 'DELETE api/v1/transactions/:id' do
     let (:request) {"/api/v1/transactions/#{transaction.id}"}
     let! (:transaction) {create(:transaction)}
+    let! (:record_count_before_request) {Transaction.count}
 
     context 'with a valid api-token' do
-      let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
-      let! (:record_count_before_request) {Transaction.count}
+      let (:user) {create(:user, :api_token)}
 
       before do
         delete request, headers: {'Api-Token': user.api_token}
@@ -893,8 +872,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let! (:record_count_before_request) {Transaction.count}
-
       before do
         delete request, headers: {'Api-Token': 'invalid api-token'}
       end
@@ -907,8 +884,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'without an api-token' do
-      let! (:record_count_before_request) {Transaction.count}
-
       before do
         delete request
       end
