@@ -75,6 +75,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                             'image-content-type': transaction1.image_content_type,
                             'image-file-size': transaction1.image_file_size,
                             'image-updated-at': to_api_timestamp_format(transaction1.image_updated_at),
+                            'likes-amount': transaction1.likes_amount
                         },
                         relationships: {
                             sender: {
@@ -124,7 +125,8 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                             'image-file-name': nil,
                             'image-content-type': nil,
                             'image-file-size': nil,
-                            'image-updated-at': nil
+                            'image-updated-at': nil,
+                            'likes-amount': transaction2.likes_amount
                         },
                         relationships: {
                             sender: {
@@ -225,7 +227,8 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                         'image-file-name': transaction.image_file_name,
                         'image-content-type': transaction.image_content_type,
                         'image-file-size': transaction.image_file_size,
-                        'image-updated-at': to_api_timestamp_format(transaction.image_updated_at)
+                        'image-updated-at': to_api_timestamp_format(transaction.image_updated_at),
+                        'likes-amount': transaction.likes_amount
                     },
                     relationships: {
                         sender: {
@@ -381,7 +384,8 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                           'image-file-name': nil,
                           'image-content-type': nil,
                           'image-file-size': nil,
-                          'image-updated-at': nil
+                          'image-updated-at': nil,
+                          'likes-amount': transaction.likes_amount
                       },
                       relationships: {
                           sender: {
@@ -604,7 +608,8 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                           'image-file-name': nil,
                           'image-content-type': nil,
                           'image-file-size': nil,
-                          'image-updated-at': nil
+                          'image-updated-at': nil,
+                          'likes-amount': transaction.likes_amount
                       },
                       relationships: {
                           sender: {
@@ -712,7 +717,8 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                           'image-file-name': nil,
                           'image-content-type': nil,
                           'image-file-size': nil,
-                          'image-updated-at': nil
+                          'image-updated-at': nil,
+                          'likes-amount': transaction.likes_amount
                       },
                       relationships: {
                           sender: {
