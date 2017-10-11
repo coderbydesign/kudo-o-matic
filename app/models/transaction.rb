@@ -25,11 +25,9 @@ class Transaction < ActiveRecord::Base
   #   Transaction.create sender: user, receiver: user, amount: 100, activity: activity, balance: Balance.current
   # end
 
-  # def self.number_of_likes
-  #   Transaction.where(balance: self).each do |transaction|
-  #   amount = amount + transaction.get_upvotes.size
-  #   end
-  # end
+  def likes_amount
+    self.votes.count
+  end
 
   def receiver_name_feed
     receiver.nil? ? activity.name.split('for:')[0].strip : receiver.name
