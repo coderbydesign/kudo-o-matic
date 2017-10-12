@@ -1,6 +1,6 @@
 module Admin
   class UsersController < Admin::ApplicationController
-    before_action :set_user, only: [:update, :destroy]
+    before_action :set_user, only: [:update, :deactivate, :reactivate]
 
     # To customize the behavior of this controller,
     # simply overwrite any of the RESTful actions. For example:
@@ -28,14 +28,19 @@ module Admin
       end
     end
 
-    def destroy
+    def deactivate
       begin
-        @user.destroy
+        @user.deactivate
         redirect_to admin_users_path
       rescue Exception => e
         flash[:error] = e.message
         redirect_back(fallback_location: admin_users_path)
       end
+    end
+
+    def reactivate
+      @user.reactivate
+      redirect_back(fallback_location: admin_users_path)
     end
 
     private
