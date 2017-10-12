@@ -15,13 +15,16 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(access_token)
     data = access_token.info
-    return if data['email'].split('@')[1] != ENV.fetch('DEVISE_DOMAIN', 'gmail.com')
+
+    email_address = data['email']
+    email_domain = extract_email_domain(email_address)
+    return if email_domain_not_allowed?(email_domain)
 
     user = User.where(uid: access_token.uid).first_or_create(
         provider: access_token.provider,
         uid: access_token.uid,
         name: data['name'],
-        email: data['email'],
+        email: email_address,
         avatar_url: data['image']
     )
 
@@ -31,6 +34,13 @@ class User < ActiveRecord::Base
   end
 
   def self.from_api_token_request(params)
+    email_domain = extract_email_domain(params['email'])
+    if email_domain_not_allowed?(email_domain)
+      error_object_overrides = {title: 'Invalid email domain', detail: "Email domain #{email_domain} is not allowed."}
+      error = Api::V1::UnauthorizedError.new(error_object_overrides)
+      raise error
+    end
+
     user = User.where(uid: params['uid']).first_or_create(params.except(:jwt_token))
     user.update(api_token: generate_unique_api_token)
 
@@ -39,12 +49,12 @@ class User < ActiveRecord::Base
     user
   end
 
-  def to_s
-    name
-  end
-
   def picture_url
     avatar_url || '/no-picture-icon.jpg'
+  end
+
+  def to_s
+    name
   end
 
   private
@@ -53,6 +63,14 @@ class User < ActiveRecord::Base
     if User.where(admin: true).count < 1
       raise "Last administrator can't be removed from the system"
     end
+  end
+
+  def self.extract_email_domain(email_address)
+    email_address.split('@')[1]
+  end
+
+  def self.email_domain_not_allowed?(email_domain)
+    email_domain != ENV.fetch('DEVISE_DOMAIN', 'gmail.com')
   end
 
   def self.generate_unique_api_token
