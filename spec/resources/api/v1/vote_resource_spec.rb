@@ -17,8 +17,8 @@ RSpec.describe Api::V1::VoteResource, type: :resource do
   it {is_expected.to have_attribute :vote_scope}
   it {is_expected.to have_attribute :vote_weight}
 
-  it {is_expected.to have_attribute :created_at}
-  it {is_expected.to have_attribute :updated_at}
+  it {is_expected.to filter :created_at}
+  it {is_expected.to filter :updated_at}
   it {is_expected.to filter :votable_type}
   it {is_expected.to filter :votable_id}
   it {is_expected.to filter :voter_type}
