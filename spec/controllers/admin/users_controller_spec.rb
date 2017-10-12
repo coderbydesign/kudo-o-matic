@@ -1,73 +1,121 @@
 require 'rails_helper'
+require 'shared/controllers/admin/shared_expectations'
 
 RSpec.describe Admin::UsersController, type: :controller do
   let!(:user) {create(:user, :admin)}
 
-  def admin_count
-    User.where(admin: true).count
-  end
-
   before do
     sign_in user
-
-    user.admin = false
   end
 
   describe 'PATCH #update' do
     let (:perform_update) {patch :update, params: {id: user.id, user: user.attributes}}
 
-    context 'with at least one other administrator left' do
-      let!(:administrator) {create(:user, :admin)}
-
-      it 'successfully degrades the administrator to a normal user' do
-        expect {perform_update}.to change {admin_count}
+    context 'upgrading an administrator to a normal user' do
+      before do
+        user.admin = false
       end
 
-      it 'redirects back to admin user path' do
-        perform_update
+      context 'with at least one other administrator left' do
+        let!(:administrator) {create(:user, :admin)}
+        let! (:record_count_before_request) {User.count}
 
-        expect(response).to redirect_to(admin_user_path)
+        before do
+          perform_update
+        end
+
+        it 'degrades the administrator to a normal user' do
+          expect(User.find(user.id).admin).not_to eq(true)
+        end
+
+        expect_user_count_same
+
+        it 'redirects back to the admin user path' do
+          expect(response).to redirect_to(admin_user_path)
+        end
       end
-    end
 
-    context 'with no other administrators left' do
-      it 'does not degrade the administrator to a normal user' do
-        expect {perform_update}.not_to change {admin_count}
-      end
+      context 'with no other administrators left' do
+        let! (:record_count_before_request) {User.count}
 
-      it 'redirects back to the edit admin user page ' do
-        perform_update
+        before do
+          perform_update
+        end
 
-        expect(response).to redirect_to(edit_admin_user_path)
+        it 'does not degrade the administrator to a normal user' do
+          expect(User.find(user.id).admin).to eq(true)
+        end
+
+        expect_user_count_same
+
+        it 'redirects back to the edit admin user path ' do
+          expect(response).to redirect_to(edit_admin_user_path(user.id))
+        end
       end
     end
   end
 
-  describe 'DELETE #destroy' do
-    let (:perform_delete) {delete :destroy, params: {id: user.id}}
+  describe 'PATCH #deactivate' do
+    let (:perform_deactivate) {patch :deactivate, params: {id: user.id}}
 
-    context 'with at least one other administrator left' do
-      let!(:administrator) {create(:user, :admin)}
+    context 'deactivating an active user' do
+      context 'with at least one other administrator left' do
+        let!(:administrator) {create(:user, :admin)}
+        let! (:record_count_before_request) {User.count}
 
-      it 'successfully deletes the administrator' do
-        expect {perform_delete}.to change {admin_count}
+        before do
+          perform_deactivate
+        end
+
+        it 'deactivates the user' do
+          expect(User.find(user.id).deactivated_at).not_to be_nil
+        end
+
+        expect_user_count_same
+
+        it 'redirects back to admin users path' do
+          expect(response).to redirect_to(admin_users_path)
+        end
       end
 
-      it 'redirects back to admin users path' do
-        perform_delete
+      context 'with no other administrators left' do
+        let! (:record_count_before_request) {User.count}
 
-        expect(response).to redirect_to(admin_users_path)
+        before do
+          perform_deactivate
+        end
+
+        it 'does not deactivate the administrator' do
+          expect(User.find(user.id).deactivated_at).to be_nil
+        end
+
+        expect_user_count_same
+
+        it 'redirects back to the admin users path' do
+          expect(response).to redirect_to(admin_users_path)
+        end
       end
     end
+  end
 
-    context 'with no other administrators left' do
-      it 'does not delete the administrator' do
-        expect {perform_delete}.not_to change {admin_count}
+  describe 'PATCH #reactivate' do
+    let (:perform_reactivate) {patch :reactivate, params: {id: user.id}}
+    let! (:record_count_before_request) {User.count}
+
+    before do
+      user.deactivated_at = DateTime.now
+
+      perform_reactivate
+    end
+
+    context 'activating a deactivated user' do
+      it 'actives the user' do
+        expect(User.find(user.id).deactivated_at).to be_nil
       end
 
-      it 'redirects back to the admin users path' do
-        perform_delete
+      expect_user_count_same
 
+      it 'returns back to the admin users path' do
         expect(response).to redirect_to(admin_users_path)
       end
     end
