@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
     data = access_token.info
 
     email_address = data['email']
-    return if email_domain_not_allowed?(extract_email_domain(email_address))
+    email_domain = extract_email_domain(email_address)
+    return if email_domain_not_allowed?(email_domain)
 
     user = User.where(uid: access_token.uid).first_or_create(
         provider: access_token.provider,
