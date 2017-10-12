@@ -34,11 +34,18 @@
   color: $text-primary;
   text-align: center;
   display: flex;
-  margin-bottom: $margin-secondary;
 
   .hide-message & {
     display: none;
   }
+}
+
+.margin-top {
+  margin-top: $margin-secondary;
+}
+
+.margin-bottom {
+  margin-bottom: $margin-secondary;
 }
 
 .error-message {
