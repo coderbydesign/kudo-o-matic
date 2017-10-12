@@ -6,6 +6,7 @@ class Api::V1::TransactionResource < Api::V1::BaseResource
   has_one :activity
   has_one :balance
   has_many :votes
+  paginator :offset
 
   def image_url_original
     # return nil if the transaction has no original image
