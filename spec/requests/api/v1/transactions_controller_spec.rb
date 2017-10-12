@@ -125,7 +125,124 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                             }
                         }
                     }
-                ]
+                ],
+                links: {
+                    first: "http://www.example.com#{request}?page%5Blimit%5D=10&page%5Boffset%5D=0",
+                    last: "http://www.example.com#{request}?page%5Blimit%5D=10&page%5Boffset%5D=0"
+                }
+            }.with_indifferent_access
+
+        expect(json).to eq(expected)
+      end
+
+      expect_status_200_ok
+    end
+
+    context 'with an invalid api-token' do
+      before do
+        get request, headers: {'Api-Token': 'invalid api-token'}
+      end
+
+      expect_transaction_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+
+    context 'without an api-token' do
+      before do
+        get request
+      end
+
+      expect_transaction_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+  end
+
+  describe 'GET api/v1/transactions?page[limit]=:limit&page[offset]=:offset' do
+    let (:request) {'/api/v1/transactions?page[limit]=1&page[offset]=2'}
+    let! (:transaction1) {create(:transaction)}
+    let! (:transaction2) {create(:transaction)}
+    let! (:transaction3) {create(:transaction)}
+    let! (:transaction4) {create(:transaction)}
+    let! (:transaction5) {create(:transaction)}
+    let! (:record_count_before_request) {Transaction.count}
+
+    context 'with a valid api-token' do
+      let (:user) {create(:user, :api_token)}
+
+      before do
+        get request, headers: {'Api-Token': user.api_token}
+      end
+
+      expect_transaction_count_same
+
+      it 'returns a paginated collection of transactions' do
+        expected =
+            {
+                data: [
+                    {
+                        id: transaction3.id.to_s,
+                        type: 'transactions',
+                        links: {
+                            self: "http://www.example.com/api/v1/transactions/#{transaction3.id}"
+                        },
+                        attributes: {
+                            'created-at': to_api_timestamp_format(transaction3.created_at),
+                            'updated-at': to_api_timestamp_format(transaction3.updated_at),
+                            amount: transaction3.amount,
+                            'image-url-original': nil,
+                            'image-url-thumb': nil,
+                            'image-file-name': nil,
+                            'image-content-type': nil,
+                            'image-file-size': nil,
+                            'image-updated-at': nil,
+                            'likes-amount': transaction3.likes_amount
+                        },
+                        relationships: {
+                            sender: {
+                                links: {
+                                    self: "http://www.example.com/api/v1/transactions/#{transaction3.id}/relationships/sender",
+                                    related: "http://www.example.com/api/v1/transactions/#{transaction3.id}/sender"
+                                }
+                            },
+                            receiver: {
+                                links: {
+                                    self: "http://www.example.com/api/v1/transactions/#{transaction3.id}/relationships/receiver",
+                                    related: "http://www.example.com/api/v1/transactions/#{transaction3.id}/receiver"
+                                }
+                            },
+                            activity: {
+                                links: {
+                                    self: "http://www.example.com/api/v1/transactions/#{transaction3.id}/relationships/activity",
+                                    related: "http://www.example.com/api/v1/transactions/#{transaction3.id}/activity"
+                                }
+                            },
+                            balance: {
+                                links: {
+                                    self: "http://www.example.com/api/v1/transactions/#{transaction3.id}/relationships/balance",
+                                    related: "http://www.example.com/api/v1/transactions/#{transaction3.id}/balance"
+                                }
+                            },
+                            votes: {
+                                links: {
+                                    self: "http://www.example.com/api/v1/transactions/#{transaction3.id}/relationships/votes",
+                                    related: "http://www.example.com/api/v1/transactions/#{transaction3.id}/votes"
+                                }
+                            }
+                        }
+                    }
+                ],
+                links: {
+                    first: "http://www.example.com/api/v1/transactions?page%5Blimit%5D=1&page%5Boffset%5D=0",
+                    prev: "http://www.example.com/api/v1/transactions?page%5Blimit%5D=1&page%5Boffset%5D=1",
+                    next: "http://www.example.com/api/v1/transactions?page%5Blimit%5D=1&page%5Boffset%5D=3",
+                    last: "http://www.example.com/api/v1/transactions?page%5Blimit%5D=1&page%5Boffset%5D=4"
+                }
             }.with_indifferent_access
 
         expect(json).to eq(expected)
