@@ -17,8 +17,12 @@
         = image_tag 'logo-without-lizard-black.png'
         %a.btn-google{href:user_google_oauth2_omniauth_authorize_path}
           = 'Log in with Google+'
+        - if notice
+          .message-container.error-message.margin-top
+            %span.message
+              .fa.fa-exclamation-circle
+              #notice= notice
     .sign-in-footer
-      %span
-        *You can only log in with a Google account from Kabisa
+      *You can only log in with a Google account from Kabisa
 
 

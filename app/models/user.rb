@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   after_update :ensure_an_admin_remains
-  after_destroy :ensure_an_admin_remains
 
   acts_as_voter
   # Include default devise modules. Others available are:
@@ -53,6 +52,24 @@ class User < ActiveRecord::Base
     avatar_url || '/no-picture-icon.jpg'
   end
 
+  def deactivate
+    update_attribute(:deactivated_at, DateTime.now)
+    ensure_an_admin_remains
+  end
+
+  def reactivate
+    update_attribute(:deactivated_at, nil)
+  end
+
+  def deactivated?
+    !deactivated_at.nil?
+  end
+
+  # overridden Devise method that checks the soft delete timestamp on authentication
+  def active_for_authentication?
+    super && !deactivated_at
+  end
+
   def to_s
     name
   end
@@ -60,7 +77,7 @@ class User < ActiveRecord::Base
   private
 
   def ensure_an_admin_remains
-    if User.where(admin: true).count < 1
+    if User.where(admin: true, deactivated_at: nil).count < 1
       raise "Last administrator can't be removed from the system"
     end
   end

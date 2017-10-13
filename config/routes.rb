@@ -21,7 +21,13 @@ Rails.application.routes.draw do
     resources :goals
     resources :transactions
     resources :activities
-    resources :users
+
+    resources :users, except: :destroy do
+      member do
+        patch :deactivate
+        patch :reactivate
+      end
+    end
   end
 
   namespace :api do

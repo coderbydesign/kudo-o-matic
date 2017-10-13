@@ -1,0 +1,5 @@
+en:
+  administrate:
+    actions:
+      deactivate: 'Deactivate'
+      reactivate: 'Reactivate'
