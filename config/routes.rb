@@ -15,12 +15,7 @@ Rails.application.routes.draw do
   get :feed, to: 'feed#index'
 
   namespace :admin do
-    root 'balances#index'
-
-    resources :balances
-    resources :goals
-    resources :transactions
-    resources :activities
+    root 'users#index'
 
     resources :users, except: :destroy do
       member do
@@ -28,6 +23,12 @@ Rails.application.routes.draw do
         patch :reactivate
       end
     end
+
+    resources :balances
+    resources :goals
+    resources :transactions
+    resources :activities
+    resources :votes
   end
 
   namespace :api do

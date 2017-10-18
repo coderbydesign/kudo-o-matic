@@ -8,18 +8,20 @@ class UserDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-      sent_transactions: Field::HasMany.with_options(class_name: "Transaction"),
-      received_transactions: Field::HasMany.with_options(class_name: "Transaction"),
       id: Field::Number,
       name: Field::String,
+      email: Field::String,
+      avatar_url: Field::Image,
       slack_name: Field::String,
       admin: Field::Boolean,
       mail_notifications: Field::Boolean,
-      email: Field::String,
       api_token: Field::String,
       deactivated_at: Field::DateTime,
       created_at: Field::DateTime,
       updated_at: Field::DateTime,
+      sent_transactions: Field::HasMany.with_options(class_name: 'Transaction'),
+      received_transactions: Field::HasMany.with_options(class_name: 'Transaction'),
+      votes: Field::HasMany
   }
 
   # COLLECTION_ATTRIBUTES
@@ -30,12 +32,12 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
       :id,
       :name,
+      :email,
       :slack_name,
       :admin,
-      :mail_notifications,
       :sent_transactions,
       :received_transactions,
-      :deactivated_at,
+      :deactivated_at
   ]
 
   # SHOW_PAGE_ATTRIBUTES
@@ -43,15 +45,18 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
       :id,
       :name,
+      :avatar_url,
+      :email,
       :slack_name,
-      :api_token,
       :admin,
       :mail_notifications,
+      :api_token,
       :created_at,
       :updated_at,
       :deactivated_at,
       :sent_transactions,
-      :received_transactions
+      :received_transactions,
+      :votes
   ]
 
   # FORM_ATTRIBUTES
@@ -61,14 +66,14 @@ class UserDashboard < Administrate::BaseDashboard
       :name,
       :email,
       :slack_name,
-      :api_token,
+      :avatar_url,
       :admin,
-      :mail_notifications
+      :mail_notifications,
+      :api_token
   ]
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
-  #
   def display_resource(user)
     user.name
   end

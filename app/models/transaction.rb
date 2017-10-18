@@ -13,7 +13,7 @@ class Transaction < ActiveRecord::Base
   belongs_to :activity
   belongs_to :sender,   class_name: 'User'
   belongs_to :receiver, class_name: 'User'
-  has_many :votes, class_name: 'Vote', foreign_key: 'votable_id'
+  has_many :votes, foreign_key: 'votable_id'
 
   delegate :name, to: :sender,   prefix: true
   delegate :name, to: :receiver, prefix: true
