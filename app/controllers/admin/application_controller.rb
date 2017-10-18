@@ -7,9 +7,17 @@
 module Admin
   class ApplicationController < Administrate::ApplicationController
     before_action :authenticate_admin
+    before_filter :default_params
+
+    private
 
     def authenticate_admin
       redirect_to root_path unless current_user.try(:admin)
+    end
+
+    def default_params
+      params[:order] ||= :created_at
+      params[:direction] ||= :desc
     end
 
     # Override this value to specify the number of elements to display at a time

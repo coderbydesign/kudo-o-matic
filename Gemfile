@@ -4,7 +4,6 @@ ruby '2.3.1'
 
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'administrate', '~> 0.8.1'
-gem 'administrate-field-image', '~> 1.1.0'
 gem 'autoprefixer-rails', '~> 6.7.7.2'
 gem 'aws-sdk', '~> 2.9.43'
 gem 'bootstrap-sass', '~> 3.3.6'
