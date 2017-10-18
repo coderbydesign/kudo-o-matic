@@ -60,6 +60,7 @@ class User < ActiveRecord::Base
 
   def deactivate
     update_attribute(:deactivated_at, DateTime.now)
+    update_attribute(:api_token, nil)
     ensure_an_admin_remains
   end
 
