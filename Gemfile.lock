@@ -66,8 +66,6 @@ GEM
       momentjs-rails (~> 2.8)
       sass-rails (~> 5.0)
       selectize-rails (~> 0.6)
-    administrate-field-image (1.1.0)
-      administrate (>= 0.2.0.rc1)
     arel (7.1.4)
     ast (2.3.0)
     autoprefixer-rails (6.7.7.2)
@@ -387,7 +385,6 @@ PLATFORMS
 DEPENDENCIES
   acts_as_votable (~> 0.10.0)
   administrate (~> 0.8.1)
-  administrate-field-image (~> 1.1.0)
   autoprefixer-rails (~> 6.7.7.2)
   aws-sdk (~> 2.9.43)
   bootstrap-sass (~> 3.3.6)
