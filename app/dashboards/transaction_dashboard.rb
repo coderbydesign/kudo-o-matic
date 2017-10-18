@@ -29,7 +29,7 @@ class TransactionDashboard < Administrate::BaseDashboard
       :sender,
       :receiver,
       :activity,
-      :balance,
+      :balance
   ]
 
   # SHOW_PAGE_ATTRIBUTES
@@ -42,7 +42,7 @@ class TransactionDashboard < Administrate::BaseDashboard
       :activity,
       :balance,
       :created_at,
-      :updated_at,
+      :updated_at
   ]
 
   # FORM_ATTRIBUTES

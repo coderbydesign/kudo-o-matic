@@ -11,7 +11,7 @@ class UserDashboard < Administrate::BaseDashboard
       id: Field::Number,
       name: Field::String,
       email: Field::String,
-      avatar_url: Field::Image,
+      avatar_url: Field::String,
       slack_name: Field::String,
       admin: Field::Boolean,
       mail_notifications: Field::Boolean,
@@ -45,8 +45,8 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
       :id,
       :name,
-      :avatar_url,
       :email,
+      :avatar_url,
       :slack_name,
       :admin,
       :mail_notifications,
