@@ -41,6 +41,12 @@ class User < ActiveRecord::Base
     end
 
     user = User.where(uid: params['uid']).first_or_create(params.except(:jwt_token))
+    if user.deactivated?
+      error_object_overrides = {title: 'Deactivated user account', detail: "User #{user.name} is deactivated."}
+      error = Api::V1::UnauthorizedError.new(error_object_overrides)
+      raise error
+    end
+
     user.update(api_token: generate_unique_api_token)
 
     UserMailer.new_user(user)
@@ -54,6 +60,7 @@ class User < ActiveRecord::Base
 
   def deactivate
     update_attribute(:deactivated_at, DateTime.now)
+    update_attribute(:api_token, nil)
     ensure_an_admin_remains
   end
 
