@@ -1,5 +1,10 @@
 en:
   administrate:
     actions:
-      deactivate: 'Deactivate'
-      reactivate: 'Reactivate'
+      deactivate: Deactivate
+      reactivate: Reactivate
+  helpers:
+    label:
+      vote:
+        transaction_votable: transaction
+        user_voter: user

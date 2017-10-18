@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :goals
     resources :transactions
     resources :activities
+    resources :votes
 
     resources :users, except: :destroy do
       member do
