@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
     email_domain = extract_email_domain(email_address)
     return if email_domain_not_allowed?(email_domain)
 
+    existing_user = User.exists? uid: access_token.uid
+
     user = User.where(uid: access_token.uid).first_or_create(
         provider: access_token.provider,
         uid: access_token.uid,
@@ -27,7 +29,9 @@ class User < ActiveRecord::Base
         avatar_url: data['image']
     )
 
-    UserMailer.new_user(user)
+    unless existing_user
+      UserMailer.new_user(user)
+    end
 
     user
   end
@@ -40,7 +44,10 @@ class User < ActiveRecord::Base
       raise error
     end
 
+    existing_user = User.exists? uid: params['uid']
+
     user = User.where(uid: params['uid']).first_or_create(params.except(:jwt_token))
+
     if user.deactivated?
       error_object_overrides = {title: 'Deactivated user account', detail: "User #{user.name} is deactivated."}
       error = Api::V1::UnauthorizedError.new(error_object_overrides)
@@ -49,9 +56,15 @@ class User < ActiveRecord::Base
 
     user.update(api_token: generate_unique_api_token)
 
-    UserMailer.new_user(user)
+    unless existing_user
+      UserMailer.new_user(user)
+    end
 
     user
+  end
+
+  def first_name
+    name.split(' ')[0]
   end
 
   def picture_url
@@ -59,13 +72,14 @@ class User < ActiveRecord::Base
   end
 
   def deactivate
-    update_attribute(:deactivated_at, DateTime.now)
-    update_attribute(:api_token, nil)
-    ensure_an_admin_remains
+    transaction do
+      update(deactivated_at: DateTime.now, api_token: nil)
+      ensure_an_admin_remains
+    end
   end
 
   def reactivate
-    update_attribute(:deactivated_at, nil)
+    update(deactivated_at: nil)
   end
 
   def deactivated?
