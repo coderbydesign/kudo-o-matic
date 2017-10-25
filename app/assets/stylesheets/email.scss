@@ -1,0 +1,76 @@
+@import 'settings/colors';
+@import 'settings/general';
+@import 'settings/typography';
+@import 'components/timeline';
+@import 'components/buttons';
+@import 'components/content';
+@import 'components/kudos-counter';
+@import 'font-awesome';
+
+.mail-container {
+  font-family: $default-font-stack;
+  background: $base-color-solitude-white;
+  max-width: 50rem;
+  margin: 0 auto;
+
+  p {
+    line-height: 1.5;
+  }
+}
+
+.mail-header {
+  height: 6rem;
+  width: 100%;
+  background: $base-color-brand;
+
+  .logo {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1.5rem;
+    max-width: 100%;
+    max-height: 3.5rem;
+    box-sizing: content-box;
+  }
+}
+
+.mail-body {
+  padding: 1.5rem;
+  border-left: 1px solid $base-color-lighter-gray;
+  border-right: 1px solid $base-color-lighter-gray;
+
+  .media-attachment {
+    .attachment-file {
+      max-width: 100%;
+      max-height: 25rem;
+    }
+  }
+}
+
+.mail-footer {
+  height: 2rem;
+  width: 100%;
+  background: $base-color-brand;
+}
+
+.side-note {
+  font-size: 0.75rem;
+}
+
+.kudo-progress-mail {
+  stroke-dashoffset: attr(stroke-dashoffset);
+}
+
+.transaction-container-mail:first-child {
+  border-top: 1px solid $primary-border-color;
+}
+
+.button-mail-container {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.button-mail {
+  text-decoration: none;
+  padding: 1rem;
+}
+

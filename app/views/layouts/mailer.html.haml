@@ -1,3 +1,20 @@
+!!!
 %html
+  %head
+    = stylesheet_link_tag 'email', media: 'all'
   %body
-    = yield
+    .mail-container
+      .mail-header
+        = link_to image_tag(attachments['logo.png'].url, class:'logo'), root_url
+      .mail-body
+        %p
+          = "Hi #{@user.first_name},"
+        %br/
+        = yield
+        %br/
+        %br/
+        %p.margin-bottom
+          Happy ₭udoing!
+          %br/
+          = '- The ₭udo Team'
+      .mail-footer
