@@ -1,8 +1,9 @@
 class TransactionMailer < ApplicationMailer
   def self.new_transaction(transaction)
-    return if (Rails.env != 'test' && ENV['MAIL_USERNAME'] == nil)
-    @user = User.where.not(email:"").where(mail_notifications:true)
-    @user.each do |user|
+    return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil
+
+    user = transaction.receiver
+    if user.email != '' && user.mail_notifications == true
       transaction_email(user, transaction).deliver_later
     end
   end
@@ -10,11 +11,11 @@ class TransactionMailer < ApplicationMailer
   def transaction_email(user, transaction)
     @transaction = transaction
     @user = user
-    @markdown = Redcarpet::Markdown.new(MdEmoji::Render, :no_intra_emphasis => true)
-    mail(to: user.email, subject: 'New Transaction')
-  end
 
-  def self.preview_new_transaction(transaction, user)
-    transaction_email(user, transaction)
+    @markdown = Redcarpet::Markdown.new(MdEmoji::Render, :no_intra_emphasis => true)
+
+    attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/kudo-o-matic-white-mail.png")
+
+    mail(to: user.email, subject: "You just received #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} from #{@transaction.receiver.name}!")
   end
 end

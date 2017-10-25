@@ -1,10 +1,7 @@
 class ApplicationMailer < ActionMailer::Base
-  if Rails.env == 'test'
-    default from: 'example@mail.com'
-  else
-    default from: ENV['MAIL_USERNAME']
-  end
+  default from: Rails.env == 'test' ? 'example@mail.com' : ENV['MAIL_USERNAME']
   layout 'mailer'
+
   add_template_helper(TransactionsHelper)
 end
 

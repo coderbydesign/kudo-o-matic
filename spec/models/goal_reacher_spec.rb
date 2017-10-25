@@ -21,7 +21,7 @@ RSpec.describe GoalReacher, type: :model do
     end
 
     it 'sends an email' do
-      GoalReachedMailer.preview_new_goal(user, goal).deliver
+      GoalMailer.goal_email(user, goal).deliver_now
       expect(ActionMailer::Base.deliveries.count).to be(1)
     end
 
