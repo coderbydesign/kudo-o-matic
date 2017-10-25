@@ -1,6 +1,15 @@
 class Api::V1::TransactionsController < Api::V1::ApiController
   before_action :set_transaction_and_user, only: [:update_vote, :destroy_vote]
 
+  def create
+    @transaction = TransactionAdder.create_from_api_request(request.headers, params)
+    render 'api/v1/transactions/transaction', status: :created
+  rescue Exception => e
+    error_object_overrides = {title: 'Transaction could not be created',
+                              detail: e}
+    handle_exceptions(JSONAPI::Exceptions::BadRequest.new(error_object_overrides))
+  end
+
   def update_vote
     @transaction.liked_by @user
 
@@ -37,4 +46,5 @@ class Api::V1::TransactionsController < Api::V1::ApiController
       handle_exceptions(e)
     end
   end
+
 end
