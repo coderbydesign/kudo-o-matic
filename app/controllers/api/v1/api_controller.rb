@@ -3,13 +3,18 @@ class Api::V1::ApiController < JSONAPI::ResourceController
 
   before_action :authorize_request, :set_default_response_format
 
+  def api_user
+    User.where(api_token: api_token).first
+  end
+
   private
 
-  def authorize_request
-    api_token = request.headers['Api-Token']
-    api_token_unknown = !User.where(api_token: api_token).exists?
+  def api_token
+    request.headers['Api-Token']
+  end
 
-    if api_token.nil? || api_token_unknown
+  def authorize_request
+    if api_token.blank? || api_user.nil?
       error_object_overrides = {title: 'Unauthorized', detail: 'No valid API-token was provided.'}
       errors = Api::V1::UnauthorizedError.new(error_object_overrides).errors
       render_errors(errors)

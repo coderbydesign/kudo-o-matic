@@ -23,5 +23,4 @@ RSpec.describe Api::V1::UserResource, type: :resource do
 
   it {is_expected.to have_many :sent_transactions}
   it {is_expected.to have_many :received_transactions}
-  it {is_expected.to have_many :votes}
 end
