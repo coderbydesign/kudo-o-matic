@@ -337,7 +337,158 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
   end
 
-  # TODO add integration test for new POST action implementation
+  describe 'POST api/v1/transactions' do
+    let (:request) {"/api/v1/transactions"}
+    let! (:transaction) {build(:transaction)}
+    let! (:sender) {create(:user, :api_token)}
+    let! (:receiver) {create(:user)}
+    let! (:balance) {create(:balance, :current)}
+    let! (:record_count_before_request) {Transaction.count}
+
+    context 'with a valid api-token' do
+      context 'and an image attachment' do
+
+        # TODO add integration test for adding a transaction with an image attachment
+
+        it 'persists the created transaction with an image attachment'
+        it 'increases the record count'
+        it 'returns the created transaction'
+      end
+
+      context 'and without an image attachment' do
+        before do
+          post request,
+               headers: {
+                   'Api-Token': sender.api_token,
+                   'Content-Type': 'application/vnd.api+json'
+               },
+               params: {
+                   data: {
+                       type: 'transactions',
+                       attributes: {
+                           amount: transaction.amount,
+                           activity: transaction.activity.name
+                       },
+                       relationships: {
+                           receiver: {
+                               data: {
+                                   type: 'users',
+                                   id: receiver.id
+                               }
+                           }
+                       }
+                   }
+               }.to_json
+        end
+
+        it 'persists the created transaction without an image attachment' do
+          new_transaction = Transaction.find(assigned_id)
+
+          expect(new_transaction.amount).to eq(transaction.amount)
+        end
+
+        expect_transaction_count_increase
+
+        it 'returns the created transaction' do
+          expected =
+              {
+                  data: {
+                      id: assigned_id,
+                      type: 'transactions',
+                      links: {
+                          self: "http://www.example.com#{request}/#{assigned_id}"
+                      },
+                      attributes: {
+                          'created-at': assigned_created_at,
+                          'updated-at': assigned_updated_at,
+                          amount: transaction.amount,
+                          activity: transaction.activity.name,
+                          'votes-count': transaction.likes_amount,
+                          'api-user-voted': (sender.voted_on? transaction),
+                          'image-url-original': nil,
+                          'image-url-thumb': nil,
+                          'image-file-name': nil,
+                          'image-content-type': nil,
+                          'image-file-size': nil,
+                          'image-updated-at': nil
+                      }
+                  }
+              }.with_indifferent_access
+
+          expect(json).to eq(expected)
+        end
+
+        expect_status_201_created
+      end
+    end
+
+    context 'with an invalid api-token' do
+      before do
+        post request,
+             headers: {
+                 'Api-Token': 'invalid api-token',
+                 'Content-Type': 'application/vnd.api+json'
+             },
+             params: {
+                 data: {
+                     type: 'transactions',
+                     attributes: {
+                         amount: transaction.amount,
+                         activity: transaction.activity.name
+                     },
+                     relationships: {
+                         receiver: {
+                             data: {
+                                 type: 'users',
+                                 id: receiver.id
+                             }
+                         }
+                     }
+                 }
+             }.to_json
+      end
+
+      expect_transaction_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+
+    context 'without an api-token' do
+      before do
+        post request,
+             headers: {
+                 'Content-Type': 'application/vnd.api+json'
+             },
+             params: {
+                 data: {
+                     data: {
+                         type: 'transactions',
+                         attributes: {
+                             amount: transaction.amount,
+                             activity: transaction.activity.name
+                         },
+                         relationships: {
+                             receiver: {
+                                 data: {
+                                     type: 'users',
+                                     id: receiver.id
+                                 }
+                             }
+                         }
+                     }
+                 }
+             }.to_json
+      end
+
+      expect_transaction_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+  end
 
   describe 'PUT api/v1/transactions/:id/votes' do
     let! (:transaction) {create(:transaction)}

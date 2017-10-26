@@ -3,6 +3,7 @@ class Api::V1::TransactionsController < Api::V1::ApiController
 
   def create
     @transaction = TransactionAdder.create_from_api_request(request.headers, params)
+    @api_user_voted = api_user.voted_on? @transaction
     render 'api/v1/transactions/transaction', status: :created
   rescue Exception => e
     error_object_overrides = {title: 'Transaction could not be created',
