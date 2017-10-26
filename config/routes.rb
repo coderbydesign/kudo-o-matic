@@ -69,7 +69,7 @@ Rails.application.routes.draw do
         jsonapi_related_resource :balance, only: :show
       end
 
-      jsonapi_resources :users, only: :show do
+      jsonapi_resources :users, only: [:index, :show] do
         jsonapi_links :sent_transactions, only: :show
         jsonapi_links :received_transactions, only: :show
 
