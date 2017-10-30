@@ -408,6 +408,7 @@ DEPENDENCIES
   jsonapi-resources-matchers (~> 1.0)
   launchy (~> 2.4.3)
   md_emoji!
+  nokogiri (~> 1.8.0)
   omniauth-google-oauth2 (~> 0.4.1)
   paperclip (~> 5.1)
   pg (~> 0.18)
