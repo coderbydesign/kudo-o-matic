@@ -2,8 +2,7 @@ class GoalMailer < ApplicationMailer
   def self.new_goal(goal)
     return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil
 
-    users = User.where.not(email: '').where(mail_notifications: true)
-    users.each do |user|
+    User.where.not(email: '').where(mail_notifications: true).each do |user|
       goal_email(user, goal).deliver_later
     end
   end

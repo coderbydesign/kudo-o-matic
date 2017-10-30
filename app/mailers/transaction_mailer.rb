@@ -3,6 +3,9 @@ class TransactionMailer < ApplicationMailer
     return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil
 
     user = transaction.receiver
+
+    return if user.nil?
+
     if user.email != '' && user.mail_notifications == true
       transaction_email(user, transaction).deliver_later
     end

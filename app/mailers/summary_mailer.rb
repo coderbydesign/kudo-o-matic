@@ -1,8 +1,8 @@
 class SummaryMailer < ApplicationMailer
   def self.new_summary
     return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil
-    users = User.where.not(email: '').where(mail_notifications: true)
-    users.each do |user|
+
+    User.where.not(email: '').where(mail_notifications: true).each do |user|
       summary_email(user).deliver!
     end
   end
