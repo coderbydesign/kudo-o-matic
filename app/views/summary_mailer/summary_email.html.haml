@@ -15,12 +15,12 @@
                   = "#{transaction.amount + transaction.get_upvotes.size} ₭"
                 %td.spacing-container
                 %td.avatar-container
-                  - if User.find(transaction.sender_id).avatar_url.blank?
+                  - if transaction.sender_id.nil? || User.find(transaction.sender_id).avatar_url.blank?
                     = image_tag attachments['no-picture.jpg'].url, class: 'avatar'
                   - else
                     = image_tag User.find(transaction.sender_id).avatar_url, class: 'avatar'
                 %td.avatar-container
-                  - if User.find(transaction.receiver_id).avatar_url.blank?
+                  - if transaction.receiver_id.nil? || User.find(transaction.receiver_id).avatar_url.blank?
                     = image_tag attachments['no-picture.jpg'].url, class: 'avatar'
                   - else
                     = image_tag User.find(transaction.receiver_id).avatar_url, class: 'avatar'
