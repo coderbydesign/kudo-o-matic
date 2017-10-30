@@ -12,7 +12,7 @@
             %table
               %tr
                 %td.count-container
-                  = "#{transaction.amount + transaction.get_upvotes.size} ₭"
+                  = "#{transaction.kudos_amount} ₭"
                 %td.spacing-container
                 %td.avatar-container
                   - if transaction.sender_id.nil? || User.find(transaction.sender_id).avatar_url.blank?

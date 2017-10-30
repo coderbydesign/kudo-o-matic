@@ -3,7 +3,7 @@
     = "You just received #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} from"
     = "#{@transaction.sender.name} for '#{@transaction.activity}'! \u{1f389}".html_safe
     %br
-    Go and show your appreciation by liking the
+    Show your appreciation by liking the
     = "#{link_to 'transaction', root_url}.".html_safe
     = "\u{1f44d}"
     %p

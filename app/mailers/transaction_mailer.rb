@@ -15,7 +15,7 @@ class TransactionMailer < ApplicationMailer
     @transaction = transaction
     @user = user
 
-    @markdown = Redcarpet::Markdown.new(MdEmoji::Render, :no_intra_emphasis => true)
+    @markdown = Redcarpet::Markdown.new(MdEmoji::Render, no_intra_emphasis: true)
 
     attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/kudo-o-matic-white-mail.png")
 
