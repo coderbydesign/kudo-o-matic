@@ -1,91 +1,70 @@
-%p
-  Time for the weekly ₭udo summary!
-%p
-  = "Don't forget to think back about this week, because there is definitely someone who deserves a compliment. \u{1f914}"
-%p.button-mail-container
-  = link_to "Give ₭udo's!", root_url, class: 'btn btn-primary button-mail'
-%p
-  .timeline-container
-    - if @transactions.empty?
-      .transaction-container
-        .transaction-body-container
-          .transaction-content.empty-timeline
-            .empty-timeline-message
-              There are no transactions to show here yet &#9785;
-    - @transactions.each do |transaction|
-      .transaction-container.transaction-container-mail{'data-likes': transaction.votes_for.voters.collect { |user| user}}
-        .transaction-header-container
-          .transaction-kudos-container
-            %span{id: "kudos-container-#{transaction.id}"}
-              = render 'transactions/amount-in-kudos', transaction: transaction
-          .avatar
-            .transaction-avatar-container
-              - if User.find(transaction.sender_id).picture_url.nil?
-                = image_tag attachments['no-picture-icon.jpg'].url, class:'receiver flex-item'
-              - else
-                = image_tag User.find(transaction.sender_id).picture_url, class:'sender flex-item'
-              - if transaction.receiver_image.nil?
-                = image_tag transaction.receiver_image, class:'receiver flex-item'
-              - else
-                = image_tag attachments['no-picture-icon.jpg'].url, class:'receiver flex-item'
-        .transaction-body-container
-          .transaction-content
-            %span.highlighted.sendername
-              = "#{transaction.sender.name}:"
-            %span.highlighted
-              = "+#{transaction.amount} ₭"
-            %span
+%tr
+  %td.content
+    Time for the weekly ₭udo summary!
+    %p
+      = "Don't forget to think back about this week, because there is definitely someone who deserves a compliment. \u{1f914}"
+    .button-container
+      = link_to "Give ₭udo's!".html_safe, root_url, class: 'btn btn-primary button'
+    %table.outer-table.transactions-container
+      - @transactions.each do |transaction|
+        %tr
+          %td.inner-table
+            %table
+              %tr
+                %td.count-container
+                  = "#{transaction.amount + transaction.get_upvotes.size} ₭"
+                %td.spacing-container
+                %td.avatar-container
+                  - if User.find(transaction.sender_id).avatar_url.blank?
+                    = image_tag attachments['no-picture.jpg'].url, class: 'avatar'
+                  - else
+                    = image_tag User.find(transaction.sender_id).avatar_url, class: 'avatar'
+                %td.avatar-container
+                  - if User.find(transaction.receiver_id).avatar_url.blank?
+                    = image_tag attachments['no-picture.jpg'].url, class: 'avatar'
+                  - else
+                    = image_tag User.find(transaction.receiver_id).avatar_url, class: 'avatar'
+                %td
+          %tr
+            %td.transaction-container{colspan: 2}
+              %strong
+                = "#{transaction.sender.name}: +#{transaction.amount} ₭"
               to
-            %span.highlighted.receivername
-              = transaction.receiver_name_feed
-            %span
-              for
-            %span.activityname
-              = transaction.activity
-            .post-time-stamp
+              %strong
+                = "#{transaction.receiver_name_feed}"
+              = "for #{transaction.activity}"
+          - if transaction.image.present?
+            %td.image-container{colspan: 2}
+              = link_to image_tag(transaction.image.url(:thumb), class: 'image'), transaction.image.url, target: '_blank'
+          - if transaction.votes.size >= 1
+            %tr
+              %td.likes-container{colspan: 2}
+                = display_likes(transaction)
+          %tr
+            %td.timestamp-container{colspan: 2}
               = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
-            - if transaction.image.present?
-              %p
-                .media-attachment
-                  -# checks whether or not the thumbnail exists so older posts (without thumb) will still be displayed
-                  = link_to image_tag(transaction.image.exists?(:thumb) ? transaction.image.url(:thumb) : transaction.image,
-                  class:'attachment-file'), transaction.image.url, target: '_blank'
-
-%p
-  .kudo-counter
-    .kudo-counter__title
-      ₭udometer
-    .kudo-counter__date
-      = Date.today.strftime('%B %d, %Y')
-    .kudo-counter__upcoming
-      Next Goal
-    .chart.chart--kudo.js-chart{'data-goal':Goal.next.amount, 'data-count':Balance.current.amount}
-      .chart__container
-        %svg.chart__background{x:'0px', y:'0px', height:'220px', viewBox:'0 0 220 220'}
-          %g
-            %path{d:'M110,210c-55.1,0-100-44.9-100-100C10,54.9,54.9,10,110,10s100,44.9,100,100C210,165.1,165.1,210,110,210z'}
-        %svg.chart__foreground.kudo-progress-mail{'stroke-dashoffset': "#{(628.184 - ((628.184 / Goal.next.amount) * Balance.current.amount)).round}", x:'0px', y:'0px', height:'220px', viewBox:'0 0 220 220'}
-          %g
-            %path{d:'M110,210c-55.1,0-100-44.9-100-100C10,54.9,54.9,10,110,10s100,44.9,100,100C210,165.1,165.1,210,110,210z'}
-        .chart__count
-          %div
-            %span.current-amount.js-count{'data-count':Balance.current.amount}
-              = Balance.current.amount
-            %span.kudo-currency
-              ₭
-          %span.next-goal-amount
-            %span
+      - if @transactions.empty?
+        %tr
+          %td
+            = "There are no transactions to yet, so start giving ₭udo's to your colleagues! \u{1f628}"
+    %p
+    %table.outer-table.kudometer-container
+      %tr
+        %td.kudometer
+          %p
+            %strong
+              ₭udometer
+            %br
+            = Date.today.strftime('%B %d, %Y')
+          %p
+            %p
+              %strong
+                = Balance.current.amount
+                ₭
               of
-            %span.goal-amount.js-count{'data-count':Goal.next.amount}
-              = Goal.next.amount
-            %span.kudo-currency
-              ₭
-            %span
+              %strong
+                = Goal.next.amount
+                ₭
               for
-          %span.next-goal-name
-            %span.goal-name-tooltip
-              = Goal.next.name
-            .goal.goal-content
-              .menu-tooltip
-              %span.menu-content
+              %strong
                 = Goal.next.name

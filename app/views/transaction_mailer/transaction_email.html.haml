@@ -1,16 +1,17 @@
-%p
-  = "You just received #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} from"
-  = "#{@transaction.sender.name} for '#{@transaction.activity}'! \u{1f389}".html_safe
-  %br/
-  Go and show your appreciation by liking the
-  = "#{link_to 'transaction', root_url}.".html_safe
-  = "\u{1f44d}"
-%p
-- if @transaction.image.present?
-  .media-attachment
-    .img-file
-      -# checks whether or not the thumbnail exists so older posts (without thumb) will still be displayed
-      = link_to image_tag(@transaction.image.exists?(:thumb) ? @transaction.image.url(:thumb) : @transaction.image,
-              class:'attachment-file'), @transaction.image.url, target: '_blank'
-%p
-  = "There is #{kudos_to_next_goal} ₭ left until goal '#{Goal.next.name}' is reached."
+%tr
+  %td.content
+    = "You just received #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} from"
+    = "#{@transaction.sender.name} for '#{@transaction.activity}'! \u{1f389}".html_safe
+    %br
+    Go and show your appreciation by liking the
+    = "#{link_to 'transaction', root_url}.".html_safe
+    = "\u{1f44d}"
+    %p
+    - if @transaction.image.present?
+      .media-attachment
+        .img-file
+          -# checks whether or not the thumbnail exists so older posts (without thumb) will still be displayed
+          = link_to image_tag(@transaction.image.exists?(:thumb) ? @transaction.image.url(:thumb) : @transaction.image,
+                  class:'attachment-file'), @transaction.image.url, target: '_blank'
+    %p
+      = "There is #{kudos_to_next_goal} ₭ left until goal '#{Goal.next.name}' is reached."
