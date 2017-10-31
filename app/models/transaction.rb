@@ -25,6 +25,10 @@ class Transaction < ActiveRecord::Base
   #   Transaction.create sender: user, receiver: user, amount: 100, activity: activity, balance: Balance.current
   # end
 
+  def kudos_amount
+    self.amount + self.votes.count
+  end
+
   def likes_amount
     self.votes.count
   end

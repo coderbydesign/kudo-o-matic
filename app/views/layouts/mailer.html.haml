@@ -1,3 +1,22 @@
+!!!
 %html
+  %head
+    %meta{content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type'}
+    %meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
+    = stylesheet_link_tag 'email', media: 'all'
   %body
-    = yield
+    %table.outer-table
+      %tr
+        %td.header
+          = link_to image_tag(attachments['logo.png'].url, alt: 'Kudo-o-Matic logo', class: 'logo'), root_url
+      %tr
+        %td.greeting
+          = "Hi #{@user.first_name},"
+      = yield
+      %tr
+        %td.signature
+          Happy ₭udoing!
+          %br
+          = '- The ₭udo Team'
+      %tr
+        %td.footer
