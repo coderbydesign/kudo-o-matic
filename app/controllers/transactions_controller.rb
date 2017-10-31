@@ -21,7 +21,6 @@ class TransactionsController < ApplicationController
 
     if @transaction.save
       flash[:notice] = 'Transaction was successfully created!'
-      TransactionMailer.new_transaction(@transaction)
       redirect_to root_path
     else
       flash[:error] = @transaction.errors.full_messages.to_sentence.capitalize
