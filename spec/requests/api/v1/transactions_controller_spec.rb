@@ -407,31 +407,14 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                    data: {
                        type: 'transactions',
                        attributes: {
-                           amount: transaction.amount
+                           amount: transaction.amount,
+                           activity: activity.name
                        },
                        relationships: {
-                           activity: {
-                               data: {
-                                   type: 'activities',
-                                   id: activity.id
-                               }
-                           },
-                           sender: {
-                               data: {
-                                   type: 'users',
-                                   id: sender.id
-                               }
-                           },
                            receiver: {
                                data: {
                                    type: 'users',
                                    id: receiver.id
-                               }
-                           },
-                           balance: {
-                               data: {
-                                   type: 'balances',
-                                   id: balance.id
                                }
                            }
                        }
@@ -467,38 +450,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                           'image-file-size': nil,
                           'image-updated-at': nil,
                           'likes-amount': transaction.likes_amount
-                      },
-                      relationships: {
-                          sender: {
-                              links: {
-                                  self: "http://www.example.com#{request}/#{assigned_id}/relationships/sender",
-                                  related: "http://www.example.com#{request}/#{assigned_id}/sender"
-                              }
-                          },
-                          receiver: {
-                              links: {
-                                  self: "http://www.example.com#{request}/#{assigned_id}/relationships/receiver",
-                                  related: "http://www.example.com#{request}/#{assigned_id}/receiver"
-                              }
-                          },
-                          activity: {
-                              links: {
-                                  self: "http://www.example.com#{request}/#{assigned_id}/relationships/activity",
-                                  related: "http://www.example.com#{request}/#{assigned_id}/activity"
-                              }
-                          },
-                          balance: {
-                              links: {
-                                  self: "http://www.example.com#{request}/#{assigned_id}/relationships/balance",
-                                  related: "http://www.example.com#{request}/#{assigned_id}/balance"
-                              }
-                          },
-                          votes: {
-                              links: {
-                                  self: "http://www.example.com#{request}/#{assigned_id}/relationships/votes",
-                                  related: "http://www.example.com#{request}/#{assigned_id}/votes"
-                              }
-                          }
                       }
                   }
               }.with_indifferent_access
