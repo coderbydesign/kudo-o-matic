@@ -9,7 +9,7 @@ every :thursday, at: '03:30 pm' do
   rake 'events:slack'
 end
 
-every :friday, at: '10:00 am' do
+every 10.minute do
   rake 'events:email'
 end
 
