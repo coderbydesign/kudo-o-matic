@@ -411,6 +411,26 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                           'image-content-type': nil,
                           'image-file-size': nil,
                           'image-updated-at': nil
+                      },
+                      relationships: {
+                          sender: {
+                              links: {
+                                  self: "http://www.example.com/api/v1/transactions/#{assigned_id}/relationships/sender",
+                                  related: "http://www.example.com/api/v1/transactions/#{assigned_id}/sender"
+                              }
+                          },
+                          receiver: {
+                              links: {
+                                  self: "http://www.example.com/api/v1/transactions/#{assigned_id}/relationships/receiver",
+                                  related: "http://www.example.com/api/v1/transactions/#{assigned_id}/receiver"
+                              }
+                          },
+                          balance: {
+                              links: {
+                                  self: "http://www.example.com/api/v1/transactions/#{assigned_id}/relationships/balance",
+                                  related: "http://www.example.com/api/v1/transactions/#{assigned_id}/balance"
+                              }
+                          }
                       }
                   }
               }.with_indifferent_access

@@ -22,4 +22,27 @@ json.data do
     json.image_file_size @transaction.image_file_size
     json.image_updated_at @transaction.image_updated_at
   end
+
+  json.relationships do
+    json.sender do
+      json.links do
+        json.self "#{root_url}api/v1/transactions/#{@transaction.id}/relationships/sender"
+        json.related "#{root_url}api/v1/transactions/#{@transaction.id}/sender"
+      end
+    end
+
+    json.receiver do
+      json.links do
+        json.self "#{root_url}api/v1/transactions/#{@transaction.id}/relationships/receiver"
+        json.related "#{root_url}api/v1/transactions/#{@transaction.id}/receiver"
+      end
+    end
+
+    json.balance do
+      json.links do
+        json.self "#{root_url}api/v1/transactions/#{@transaction.id}/relationships/balance"
+        json.related "#{root_url}api/v1/transactions/#{@transaction.id}/balance"
+      end
+    end
+  end
 end
