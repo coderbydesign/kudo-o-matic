@@ -33,29 +33,49 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      jsonapi_resources :balances do
+      jsonapi_resources :balances, only: :show do
         collection do
           get :current
         end
+
+        jsonapi_links :transactions, only: :show
+
+        jsonapi_related_resources :transactions, only: :show
       end
 
-      jsonapi_resources :goals do
+      jsonapi_resources :goals, only: :show do
         collection do
           get :next
           get :previous
         end
+
+        jsonapi_link :balance, only: :show
+
+        jsonapi_related_resource :balance, only: :show
       end
 
-      jsonapi_resources :transactions do
+      jsonapi_resources :transactions, only: [:index, :show, :create] do
         member do
-          put 'votes/:user_id', to: 'transactions#update_vote'
-          delete 'votes/:user_id', to: 'transactions#destroy_vote'
+          put :votes, to: 'transactions#like'
+          delete :votes, to: 'transactions#unlike'
         end
+
+        jsonapi_link :sender, only: :show
+        jsonapi_link :receiver, only: :show
+        jsonapi_link :balance, only: :show
+
+        jsonapi_related_resource :sender, only: :show
+        jsonapi_related_resource :receiver, only: :show
+        jsonapi_related_resource :balance, only: :show
       end
 
-      jsonapi_resources :activities
-      jsonapi_resources :users
-      jsonapi_resources :votes
+      jsonapi_resources :users, only: [:index, :show] do
+        jsonapi_links :sent_transactions, only: :show
+        jsonapi_links :received_transactions, only: :show
+
+        jsonapi_related_resources :sent_transactions, only: :show
+        jsonapi_related_resources :received_transactions, only: :show
+      end
 
       post 'authentication/obtain_api_token'
     end

@@ -1,40 +1,37 @@
 class Api::V1::TransactionsController < Api::V1::ApiController
-  before_action :set_transaction_and_user, only: [:update_vote, :destroy_vote]
+  before_action :set_transaction, only: [:like, :unlike]
 
-  def update_vote
-    @transaction.liked_by @user
-
-    redirect_to api_v1_vote_path(Vote.last)
+  def create
+    @transaction = TransactionAdder.create_from_api_request(request.headers, params)
+    @api_user_voted = api_user.voted_on? @transaction
+    render 'api/v1/transactions/transaction', status: :created
+  rescue Exception => e
+    error_object_overrides = {title: 'Transaction could not be created',
+                              detail: e}
+    handle_exceptions(JSONAPI::Exceptions::BadRequest.new(error_object_overrides))
   end
 
-  def destroy_vote
-    @transaction.unliked_by @user
+  def like
+    @transaction.liked_by api_user
+  end
+
+  def unlike
+    @transaction.unliked_by api_user
   end
 
   private
 
-  def set_transaction_and_user
+  # context that is by the TransactionResource to generate the value of the 'api_user_voted' attribute
+  def context
+    {api_user: api_user}
+  end
+
+  def set_transaction
     transaction_id = params[:id]
-    user_id = params[:user_id]
-
-    begin
-      begin
-        @transaction = Transaction.find(transaction_id)
-      rescue
-        error_object_overrides = {title: 'Transaction record not found',
-                                  detail: "The transaction record identified by #{transaction_id} could not be found."}
-        raise JSONAPI::Exceptions::RecordNotFound.new(transaction_id, error_object_overrides)
-      end
-
-      begin
-        @user = User.find(user_id)
-      rescue
-        error_object_overrides = {title: 'User record not found',
-                                  detail: "The user record identified by #{user_id} could not be found."}
-        raise JSONAPI::Exceptions::RecordNotFound.new(user_id, error_object_overrides)
-      end
-    rescue => e
-      handle_exceptions(e)
-    end
+    @transaction = Transaction.find(transaction_id)
+  rescue
+    error_object_overrides = {title: 'Transaction record not found',
+                              detail: "The transaction record identified by #{transaction_id} could not be found."}
+    handle_exceptions(JSONAPI::Exceptions::RecordNotFound.new(transaction_id, error_object_overrides))
   end
 end

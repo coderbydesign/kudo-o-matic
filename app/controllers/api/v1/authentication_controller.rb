@@ -21,16 +21,14 @@ class Api::V1::AuthenticationController < JSONAPI::ResourceController
   def validate_jwt_token(jwt_token)
     validator = GoogleIDToken::Validator.new
 
+    validator.check(jwt_token, ENV['GOOGLE_CLIENT_ID_KUDO_O_MOBILE_IOS'])
+  rescue GoogleIDToken::ValidationError
     begin
-      validator.check(jwt_token, ENV['GOOGLE_CLIENT_ID_KUDO_O_MOBILE_IOS'])
+      validator.check(jwt_token, ENV['GOOGLE_CLIENT_ID_KUDO_O_MOBILE_ANDROID'])
     rescue GoogleIDToken::ValidationError
-      begin
-        validator.check(jwt_token, ENV['GOOGLE_CLIENT_ID_KUDO_O_MOBILE_ANDROID'])
-      rescue GoogleIDToken::ValidationError
-        error_object_overrides = {title: 'Invalid JWT Token', detail: 'No valid JWT-token was provided.'}
-        error = Api::V1::UnauthorizedError.new(error_object_overrides)
-        raise error
-      end
+      error_object_overrides = {title: 'Invalid JWT Token', detail: 'No valid JWT-token was provided.'}
+      error = Api::V1::UnauthorizedError.new(error_object_overrides)
+      raise error
     end
   end
 
