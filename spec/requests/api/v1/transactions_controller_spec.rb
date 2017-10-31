@@ -521,12 +521,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         end
 
         expect_vote_count_increase
-
-        it 'redirects to the transaction path' do
-          expect(response).to redirect_to api_v1_transaction_path(transaction)
-        end
-
-        expect_status_302_found
       end
       context 'an an invalid transaction id' do
         let (:request) {"/api/v1/transactions/#{invalid_transaction_id}/votes"}
@@ -598,12 +592,6 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         end
 
         expect_vote_count_decrease
-
-        it 'redirects to the transaction path' do
-          expect(response).to redirect_to api_v1_transaction_path(transaction)
-        end
-
-        expect_status_302_found
       end
 
       context 'an an invalid transaction id' do

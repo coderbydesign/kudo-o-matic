@@ -13,14 +13,10 @@ class Api::V1::TransactionsController < Api::V1::ApiController
 
   def like
     @transaction.liked_by api_user
-
-    redirect_to api_v1_transaction_path(@transaction)
   end
 
   def unlike
     @transaction.unliked_by api_user
-
-    redirect_to api_v1_transaction_path(@transaction)
   end
 
   private
