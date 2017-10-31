@@ -6,8 +6,7 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   class ApplicationController < Administrate::ApplicationController
-    before_action :authenticate_admin
-    before_filter :default_params
+    before_action :authenticate_admin, :default_params
 
     private
 

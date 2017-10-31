@@ -1,13 +1,17 @@
 class TransactionMailer < ApplicationMailer
   def self.new_transaction(transaction)
-    return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil
+    return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil || transaction.receiver.nil?
 
-    user = transaction.receiver
+    receiver = transaction.receiver
 
-    return if user.nil?
+    if receiver.email != '' && receiver.mail_notifications == true
+      transaction_email(receiver, transaction).deliver_later
+    end
 
-    if user.email != '' && user.mail_notifications == true
-      transaction_email(user, transaction).deliver_later
+    if receiver.name === 'Kabisa'
+      User.where.not(email: '').where.not(email: transaction.sender.email).where(mail_notifications: true).each do |user|
+        transaction_email(user, transaction).deliver_later
+      end
     end
   end
 
@@ -19,6 +23,6 @@ class TransactionMailer < ApplicationMailer
 
     attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/kudo-o-matic-white-mail.png")
 
-    mail(to: user.email, subject: "You just received #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} from #{@transaction.receiver.name}!")
+    mail(to: user.email, subject: "You just received #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} from #{@transaction.sender.name}!")
   end
 end
