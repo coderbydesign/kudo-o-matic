@@ -5,6 +5,9 @@ class TransactionAdder
     name = params[:activity_name].to_s.downcase
     name = "#{receiver_name} for: #{name}" if receiver.nil?
 
+    puts 'params'
+    puts params[:image]
+
     transaction = Transaction.new(
         amount: params[:amount],
         activity: Activity.find_or_create_by(name: name),
