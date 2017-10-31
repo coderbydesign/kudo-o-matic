@@ -5,10 +5,10 @@ RSpec.describe UserMailer, type: :mailer do
     let!(:next_goal) { create :goal, name: "Paintball", amount: 1500 }
     let(:balance) { create :balance, :current }
     let(:user) { User.create name: 'John Doe', email:'johndoe@example.com' }
-    let(:mail) { described_class.preview_new_user(user).deliver_now }
+    let(:mail) {described_class.welcome_email(user).deliver_now}
 
     it 'renders the subject' do
-      expect(mail.subject).to eq('Welcome!')
+      expect(mail.subject).to eq('Welcome to the ₭udo-o-Matic!')
     end
 
     it 'renders the receiver email' do
@@ -20,7 +20,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     it 'assigns @user' do
-      expect(mail.body.encoded).to match(user.name)
+      expect(mail.body.encoded).to match(user.first_name)
     end
   end
 end

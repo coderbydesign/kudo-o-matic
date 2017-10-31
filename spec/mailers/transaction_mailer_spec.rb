@@ -8,10 +8,10 @@ RSpec.describe TransactionMailer, type: :mailer do
     let(:user) { User.create name: 'John Doe', email:'johndoe@example.com' }
     let(:activity) { create :activity, name: 'Helping me out' }
     let(:transaction) { create :transaction, sender: user, receiver: user, amount: 5, activity: activity, balance: balance }
-    let(:mail) { described_class.preview_new_transaction(transaction, user).deliver_now }
+    let(:mail) {described_class.transaction_email(user, transaction).deliver_now}
 
     it 'renders the subject' do
-      expect(mail.subject).to eq('New Transaction')
+      expect(mail.subject).to eq('You just received 5 ₭ from John Doe!')
     end
 
     it 'renders the receiver email' do
@@ -23,7 +23,7 @@ RSpec.describe TransactionMailer, type: :mailer do
     end
 
     it 'assigns @user' do
-      expect(mail.body.encoded).to match(user.name)
+      expect(mail.body.encoded).to match(user.first_name)
     end
 
     it 'assigns @transaction' do

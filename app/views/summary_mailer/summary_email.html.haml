@@ -1,0 +1,70 @@
+%tr
+  %td.content
+    Time for the weekly ₭udo summary!
+    %p
+      = "Don't forget to think back about this week, because there is definitely someone who deserves a compliment. \u{1f914}"
+    .button-container
+      = link_to "Give ₭udo's!".html_safe, root_url, class: 'btn btn-primary button'
+    %table.outer-table.transactions-container
+      - @transactions.each do |transaction|
+        %tr
+          %td.inner-table
+            %table
+              %tr
+                %td.count-container
+                  = "#{transaction.kudos_amount} ₭"
+                %td.spacing-container
+                %td.avatar-container
+                  - if transaction.sender_id.nil? || User.find(transaction.sender_id).avatar_url.blank?
+                    = image_tag attachments['no-picture.jpg'].url, class: 'avatar'
+                  - else
+                    = image_tag User.find(transaction.sender_id).avatar_url, class: 'avatar'
+                %td.avatar-container
+                  - if transaction.receiver_id.nil? || User.find(transaction.receiver_id).avatar_url.blank?
+                    = image_tag attachments['no-picture.jpg'].url, class: 'avatar'
+                  - else
+                    = image_tag User.find(transaction.receiver_id).avatar_url, class: 'avatar'
+                %td
+          %tr
+            %td.transaction-container{colspan: 2}
+              %strong
+                = "#{transaction.sender.name}: +#{transaction.amount} ₭"
+              to
+              %strong
+                = "#{transaction.receiver_name_feed}"
+              = "for #{transaction.activity}"
+          - if transaction.image.present?
+            %td.image-container{colspan: 2}
+              = link_to image_tag(transaction.image.url(:thumb), class: 'image'), transaction.image.url, target: '_blank'
+          - if transaction.votes.size >= 1
+            %tr
+              %td.likes-container{colspan: 2}
+                = display_likes(transaction)
+          %tr
+            %td.timestamp-container{colspan: 2}
+              = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
+      - if @transactions.empty?
+        %tr
+          %td.no-transactions-container
+            = "There are no transactions to yet, so start giving ₭udo's to your colleagues! \u{1f628}"
+    %p
+    %table.outer-table.kudometer-container
+      %tr
+        %td.kudometer
+          %p
+            %strong
+              ₭udometer
+            %br
+            = Date.today.strftime('%B %d, %Y')
+          %p
+            %p
+              %strong
+                = Balance.current.amount
+                ₭
+              of
+              %strong
+                = Goal.next.amount
+                ₭
+              for
+              %strong
+                = Goal.next.name

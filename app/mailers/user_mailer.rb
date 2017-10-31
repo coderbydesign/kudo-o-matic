@@ -1,16 +1,17 @@
 class UserMailer < ApplicationMailer
   def self.new_user(user)
-    return if (Rails.env != 'test' && ENV['MAIL_USERNAME'] == nil)
-    return unless user.email != ""
-    welcome_email(user).deliver_later
+    return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil
+
+    if user.email != ''
+      welcome_email(user).deliver_later
+    end
   end
 
   def welcome_email(user)
     @user = user
-    mail(to: user.email, subject: 'Welcome!')
-  end
 
-  def self.preview_new_user(user)
-    welcome_email(user)
+    attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/kudo-o-matic-white-mail.png")
+
+    mail(to: user.email, subject: 'Welcome to the ₭udo-o-Matic!')
   end
 end

@@ -2,7 +2,8 @@
 class TransactionMailerPreview < ActionMailer::Preview
   def new_transaction
     transaction = Transaction.last
-    user = User.where.not(email:"").first
-    TransactionMailer.preview_new_transaction(transaction, user)
+    user = User.where.not(email: '').first
+
+    TransactionMailer.transaction_email(user, transaction)
   end
 end
