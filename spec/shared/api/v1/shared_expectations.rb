@@ -34,23 +34,6 @@ def expect_previous_goal_record_not_found_response
   end
 end
 
-def expect_user_record_not_found_response
-  it 'returns a user not found message' do
-    expected = {
-        errors: [
-            {
-                title: 'User record not found',
-                detail: 'The user record identified by -1 could not be found.',
-                code: '404',
-                status: '404'
-            }
-        ]
-    }.with_indifferent_access
-
-    expect(json).to match(expected)
-  end
-end
-
 def expect_transaction_record_not_found_response
   it 'returns a transaction not found message' do
     expected = {
@@ -70,39 +53,9 @@ end
 
 # expect record counts
 
-def expect_activity_count_same
-  it 'does not change the activity record count' do
-    expect(record_count_before_request).to be == Activity.count
-  end
-end
-
-def expect_activity_count_increase
-  it 'increases the activity record count' do
-    expect(record_count_before_request).to be < Activity.count
-  end
-end
-
-def expect_activity_count_decrease
-  it 'decreases the activity record count' do
-    expect(record_count_before_request).to be > Activity.count
-  end
-end
-
 def expect_balance_count_same
   it 'does not change the balance record count' do
     expect(record_count_before_request).to be == Balance.count
-  end
-end
-
-def expect_balance_count_increase
-  it 'increases the balance record count' do
-    expect(record_count_before_request).to be < Balance.count
-  end
-end
-
-def expect_balance_count_decrease
-  it 'decreases the balance record count' do
-    expect(record_count_before_request).to be > Balance.count
   end
 end
 
@@ -118,12 +71,6 @@ def expect_goal_count_increase
   end
 end
 
-def expect_goal_count_decrease
-  it 'decreases the goal record count' do
-    expect(record_count_before_request).to be > Goal.count
-  end
-end
-
 def expect_transaction_count_same
   it 'does not change the transaction record count' do
     expect(record_count_before_request).to be == Transaction.count
@@ -136,27 +83,9 @@ def expect_transaction_count_increase
   end
 end
 
-def expect_transaction_count_decrease
-  it 'decreases the transaction record count' do
-    expect(record_count_before_request).to be > Transaction.count
-  end
-end
-
 def expect_user_count_same
   it 'does not change the user record count' do
     expect(record_count_before_request).to be == User.count
-  end
-end
-
-def expect_user_count_increase
-  it 'increases the user record count' do
-    expect(record_count_before_request).to be < User.count
-  end
-end
-
-def expect_user_count_decrease
-  it 'decreases the user record count' do
-    expect(record_count_before_request).to be > User.count
   end
 end
 
