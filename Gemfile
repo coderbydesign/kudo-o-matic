@@ -34,6 +34,7 @@ gem 'rails_autolink', '~> 1.1.6'
 gem 'railties', '~> 5.0.3'
 gem 'redcarpet', '~> 3.4'
 gem 'rubocop', '~> 0.47.1', require: false
+gem 'rufus-scheduler', '~> 3.4.2'
 gem 'sass-rails', '~> 5.0'
 gem 'scss_lint', '~> 0.54', require: false
 gem 'settingslogic', '~> 2.0.9'
@@ -41,7 +42,6 @@ gem 'simple_form', '~> 3.5'
 gem 'slack-notifier', '~> 2.1.0'
 gem 'timecop', '~> 0.8.1'
 gem 'uglifier', '~> 3.2'
-gem 'whenever', '~> 0.9.7', require: false
 
 group :development, :test do
   gem 'byebug', '~> 9.0.6'
