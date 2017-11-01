@@ -91,6 +91,13 @@ The application is using Rails' ActionMailer for this. The default is that if th
 
 * To set up a mail notifier you need to define `MAIL_USERNAME`, `MAIL_PASSWORD` and `MAIL_ADDRESS`.
 
+## Cron job
+The Kudo-o-Matic automatically sends a Kudo-summary email to all users with an email address that have email notifications enabled using rufus-scheduler (thread based Ruby job scheduler).
+
+#### Schedule
+Every friday at 10.00 AM.  
+Crontab expression: `0 10 * * 5`
+
 ## Admin Panel
 You can find and add stuff in the database by visiting `localhost:3000/admin`
 
