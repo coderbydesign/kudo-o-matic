@@ -7,11 +7,6 @@ RSpec.describe GoalMailer, type: :mailer do
     let(:balance) {create :balance, :current}
     let(:user) {User.create name: 'John Doe', email: 'johndoe@example.com', mail_notifications: true}
     let(:mail) {described_class.goal_email(user, prev_goal)}
-    let!(:deliveries_count_before_delivery) {ActionMailer::Base.deliveries.count}
-
-    before do
-      mail.deliver_now
-    end
 
     it 'renders the subject' do
       expect(mail.subject).to eq("Goal 'Painting lessons' is reached! \u{1f389}")
@@ -34,7 +29,7 @@ RSpec.describe GoalMailer, type: :mailer do
     end
 
     it 'sends the email' do
-      expect(deliveries_count_before_delivery).to be < ActionMailer::Base.deliveries.count
+      expect {mail.deliver_now}.to change {ActionMailer::Base.deliveries.count}.from(0).to(1)
     end
   end
 end

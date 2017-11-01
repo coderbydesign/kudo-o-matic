@@ -6,11 +6,6 @@ RSpec.describe UserMailer, type: :mailer do
     let(:balance) { create :balance, :current }
     let(:user) { User.create name: 'John Doe', email:'johndoe@example.com' }
     let(:mail) {described_class.welcome_email(user)}
-    let!(:deliveries_count_before_delivery) {ActionMailer::Base.deliveries.count}
-
-    before do
-      mail.deliver_now
-    end
 
     it 'renders the subject' do
       expect(mail.subject).to eq('Welcome to the ₭udo-o-Matic!')
@@ -29,7 +24,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     it 'sends the email' do
-      expect(deliveries_count_before_delivery).to be < ActionMailer::Base.deliveries.count
+      expect {mail.deliver_now}.to change {ActionMailer::Base.deliveries.count}.from(0).to(1)
     end
   end
 end

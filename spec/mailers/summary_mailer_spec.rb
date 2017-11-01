@@ -9,11 +9,6 @@ RSpec.describe SummaryMailer, type: :mailer do
     let(:activity) {create :activity, name: 'Helping me out'}
     let(:transaction) {create :transaction, sender: user, receiver: user, amount: 5, activity: activity, balance: balance}
     let(:mail) {described_class.summary_email(user)}
-    let!(:deliveries_count_before_delivery) {ActionMailer::Base.deliveries.count}
-
-    before do
-      mail.deliver_now
-    end
 
     it 'renders the subject' do
       expect(mail.subject).to eq('Weekly ₭udo summary!')
@@ -32,7 +27,7 @@ RSpec.describe SummaryMailer, type: :mailer do
     end
 
     it 'sends the email' do
-      expect(deliveries_count_before_delivery).to be < ActionMailer::Base.deliveries.count
+      expect {mail.deliver_now}.to change {ActionMailer::Base.deliveries.count}.from(0).to(1)
     end
   end
 end
