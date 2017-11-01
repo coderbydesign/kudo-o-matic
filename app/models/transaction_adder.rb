@@ -40,8 +40,9 @@ class TransactionAdder
     Transaction.transaction do
       transaction.save!
       GoalReacher.check!
-      TransactionMailer.new_transaction(transaction)
     end
+
+    TransactionMailer.new_transaction(transaction)
 
     transaction
   end
