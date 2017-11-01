@@ -96,7 +96,7 @@ The Kudo-o-Matic automatically sends a Kudo-summary email to all users with an e
 
 #### Schedule
 Every friday at 10.00 AM.  
-Crontab expression: `0 0 10 ? * FRI *`
+Crontab expression: `0 10 * * 5`
 
 ## Admin Panel
 You can find and add stuff in the database by visiting `localhost:3000/admin`
