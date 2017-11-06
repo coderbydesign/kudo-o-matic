@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'shared/api/v1/shared_expectations'
+require 'base64'
 
 RSpec.describe Api::V1::TransactionsController, type: :request do
   include RequestHelpers
@@ -347,12 +348,91 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
     context 'with a valid api-token' do
       context 'and an image attachment' do
+        before do
+          post request,
+               headers: {
+                   'Api-Token': sender.api_token,
+                   'Content-Type': 'application/vnd.api+json'
+               },
+               params: {
+                   data: {
+                       type: 'transactions',
+                       attributes: {
+                           amount: transaction.amount,
+                           activity: transaction.activity.name,
+                           image: Base64.encode64(File.open(Rails.root + 'spec/fixtures/images/rails.png') {|io| io.read}),
+                           'image-file-type': 'png'
+                       },
+                       relationships: {
+                           receiver: {
+                               data: {
+                                   type: 'users',
+                                   id: receiver.id
+                               }
+                           }
+                       }
+                   }
+               }.to_json
+        end
 
-        # TODO add integration test for adding a transaction with an image attachment
+        it 'persists the created transaction with an image attachment' do
+          new_transaction = Transaction.find(assigned_id)
 
-        it 'persists the created transaction with an image attachment'
-        it 'increases the record count'
-        it 'returns the created transaction'
+          expect(new_transaction.amount).to eq(transaction.amount)
+        end
+
+        expect_transaction_count_increase
+
+        it 'returns the created transaction' do
+          expected =
+              {
+                  data: {
+                      id: assigned_id,
+                      type: 'transactions',
+                      links: {
+                          self: "http://www.example.com#{request}/#{assigned_id}"
+                      },
+                      attributes: {
+                          'created-at': assigned_created_at,
+                          'updated-at': assigned_updated_at,
+                          amount: transaction.amount,
+                          activity: transaction.activity.name,
+                          'votes-count': transaction.likes_amount,
+                          'api-user-voted': (sender.voted_on? transaction),
+                          'image-url-original': json['data']['attributes']['image-url-original'],
+                          'image-url-thumb': json['data']['attributes']['image-url-thumb'],
+                          'image-file-name': 'image.png',
+                          'image-content-type': 'image/png',
+                          'image-file-size': json['data']['attributes']['image-file-size'],
+                          'image-updated-at': json['data']['attributes']['image-updated-at']
+                      },
+                      relationships: {
+                          sender: {
+                              links: {
+                                  self: "http://www.example.com/api/v1/transactions/#{assigned_id}/relationships/sender",
+                                  related: "http://www.example.com/api/v1/transactions/#{assigned_id}/sender"
+                              }
+                          },
+                          receiver: {
+                              links: {
+                                  self: "http://www.example.com/api/v1/transactions/#{assigned_id}/relationships/receiver",
+                                  related: "http://www.example.com/api/v1/transactions/#{assigned_id}/receiver"
+                              }
+                          },
+                          balance: {
+                              links: {
+                                  self: "http://www.example.com/api/v1/transactions/#{assigned_id}/relationships/balance",
+                                  related: "http://www.example.com/api/v1/transactions/#{assigned_id}/balance"
+                              }
+                          }
+                      }
+                  }
+              }.with_indifferent_access
+
+          expect(json).to eq(expected)
+        end
+
+        expect_status_201_created
       end
 
       context 'and without an image attachment' do
