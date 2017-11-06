@@ -31,6 +31,11 @@ class TransactionAdder
         balance: Balance.current
     )
 
+    unless attributes[:image].nil? || attributes['image-file-type'].nil?
+      file_type = attributes['image-file-type']
+      transaction.update(image: "data:image/#{file_type};base64,#{attributes[:image]}", image_file_name: "image.#{file_type}")
+    end
+
     save_and_check_goal_reached transaction
   end
 
