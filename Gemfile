@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
+gem 'activerecord-typedstore', '~> 1.1.1'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'administrate', '~> 0.8.1'
 gem 'autoprefixer-rails', '~> 6.7.7.2'

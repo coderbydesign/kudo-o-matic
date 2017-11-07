@@ -33,6 +33,11 @@ button {
   text-align: center;
 }
 
+.btn-save {
+  margin-top: $margin-primary;
+  font-size: 1rem;
+  cursor: pointer;
+}
 
 .btn-close {
   padding-top: $padding-small;
@@ -63,7 +68,7 @@ button {
   color: $primary-button-color;
   margin-top: $margin-secondary;
   border-radius: $border-radius-small;
-  background-color: rgba(234,234,234,1.0);
+  background-color: rgba(234, 234, 234, 1.0);
   transform: translateZ(0);
   transition-duration: 0.5s;
   transition-property: color;

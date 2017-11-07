@@ -5,7 +5,7 @@ RSpec.describe GoalMailer, type: :mailer do
     let!(:prev_goal) {create :goal, :achieved, name: "Painting lessons", amount: 100}
     let!(:next_goal) {create :goal, name: "Paintball", amount: 1500}
     let(:balance) {create :balance, :current}
-    let(:user) {User.create name: 'John Doe', email: 'johndoe@example.com', mail_notifications: true}
+    let(:user) {User.create name: 'John Doe', email: 'johndoe@example.com'}
     let(:mail) {described_class.goal_email(user, prev_goal)}
 
     it 'renders the subject' do

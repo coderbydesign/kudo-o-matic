@@ -1,0 +1,18 @@
+= form_for @user do |f|
+  %table.settings-table
+    %tr
+      %td
+        = f.label :transaction_received_mail
+      %td.settings-table-value
+        = f.check_box :transaction_received_mail, class: 'settings-checkbox'
+    %tr
+      %td
+        = f.label :goal_reached_mail
+      %td.settings-table-value
+        = f.check_box :goal_reached_mail, class: 'settings-checkbox'
+    %tr
+      %td
+        = f.label :summary_mail
+      %td.settings-table-value
+        = f.check_box :summary_mail, class: 'settings-checkbox'
+  = f.submit class: 'btn btn-primary btn-save'

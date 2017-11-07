@@ -50,7 +50,7 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:name, :email, :slack_name, :avatar_url, :admin, :mail_notifications, 'api_token')
+      params.require(:user).permit(:name, :email, :slack_name, :avatar_url, :admin, :transaction_received_mail, :goal_reached_mail, :summary_mail, 'api_token')
     end
   end
 end
