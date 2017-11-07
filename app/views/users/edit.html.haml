@@ -1,0 +1,7 @@
+= render 'layouts/header'
+.page
+  .settings-container
+    %h1.settings-title Mail preferences
+    %p.settings-text
+      = "Configure the mails that you want to receive on the mail address #{@user.email}"
+    = render 'form', user: @user
