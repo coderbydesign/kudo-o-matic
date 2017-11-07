@@ -32,8 +32,7 @@ class User < ActiveRecord::Base
         uid: access_token.uid,
         name: data['name'],
         email: email_address,
-        avatar_url: data['image'],
-        mail_notifications: true
+        avatar_url: data['image']
     )
 
     unless existing_user
@@ -61,7 +60,7 @@ class User < ActiveRecord::Base
       raise error
     end
 
-    user.update(mail_notifications: true, api_token: generate_unique_api_token)
+    user.update(api_token: generate_unique_api_token)
 
     unless existing_user
       UserMailer.new_user(user)

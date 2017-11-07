@@ -6,5 +6,9 @@ en:
   helpers:
     label:
       vote:
-        transaction_votable: transaction
-        user_voter: user
+        transaction_votable: Transaction
+        user_voter: User
+      user:
+        transaction_received_mail: Receive mail on transaction received
+        goal_reached_mail: Receive mail on goal reached
+        summary_mail: Receive weekly summary mail

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171107075128) do
+ActiveRecord::Schema.define(version: 20171107123354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 20171107075128) do
     t.string   "avatar_url"
     t.string   "slack_name"
     t.boolean  "admin",                  default: false
-    t.boolean "mail_notifications"
     t.string "api_token"
     t.datetime "deactivated_at"
     t.json "preferences"

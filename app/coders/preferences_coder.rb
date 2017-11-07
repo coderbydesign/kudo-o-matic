@@ -1,4 +1,4 @@
-# Encodes User preferences to Postgres HStore or JSON data
+# Encodes User preferences to JSON data
 module PreferencesCoder
   extend self
 

@@ -4,13 +4,13 @@ class TransactionMailer < ApplicationMailer
 
     receiver = transaction.receiver
 
-    if receiver.email != '' && receiver.mail_notifications == true
+    if !receiver.email.blank? && receiver.transaction_received_mail
       transaction_email(receiver, transaction).deliver_later
     end
 
     if receiver.name === 'Kabisa'
-      User.where.not(email: '').where.not(email: transaction.sender.email).where(mail_notifications: true).each do |user|
-        transaction_email(user, transaction).deliver_later
+      User.where.not(email: '').where.not(email: transaction.sender.email).each do |user|
+        transaction_email(user, transaction).deliver_later if user.transaction_received_mail
       end
     end
   end
