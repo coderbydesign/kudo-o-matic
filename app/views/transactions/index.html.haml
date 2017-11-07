@@ -5,18 +5,7 @@
 = render 'modal-whatsnew'
 = render 'modal-attachment'
 
-.header-bg
-  .header
-    .img-container
-      %a{href: root_url}
-        = image_tag('kudo-o-matic-white.png', class:'header-img')
-        = image_tag('lizard.png', class:'mobile-img')
-
-    .github
-      %p
-        = "Bugs, issues or suggestions?\n Please report them"
-        %a{href:'https://github.com/kabisa/kudo-o-matic/issues', target:'blank'}
-          here!
+= render 'layouts/header'
 .page
   .body
     .container-left
