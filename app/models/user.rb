@@ -12,6 +12,12 @@ class User < ActiveRecord::Base
   has_many :received_transactions, class_name: 'Transaction', foreign_key: :receiver_id
   has_many :votes, foreign_key: 'voter_id'
 
+  typed_store :preferences, coder: PreferencesCoder do |p|
+    p.boolean :transaction_received_mail, default: false
+    p.boolean :goal_reached_mail, default: false
+    p.boolean :summary_mail, default: false
+  end
+
   def self.from_omniauth(access_token)
     data = access_token.info
 
