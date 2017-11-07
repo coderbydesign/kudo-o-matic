@@ -16,6 +16,10 @@
         %span.flex-item
           Releases
         %i.fa.fa-wrench
+      %a.menu-content{href: '/settings'}
+        %span.flex-item
+          Settings
+        %i.fa.fa-cog
       - if current_user.try(:admin)
         %a.menu-content{href: '/admin'}
           %span.flex-item
