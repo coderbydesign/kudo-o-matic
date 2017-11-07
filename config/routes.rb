@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get :activities, to: 'activities#autocomplete_search', as: :activities_autocomplete
   get :users, to: 'users#autocomplete_search', as: :users_autocomplete
 
+  get :settings, to: 'users#edit', as: :user
+  patch :settings, to: 'users#update'
+
   get :feed, to: 'feed#index'
 
   namespace :admin do

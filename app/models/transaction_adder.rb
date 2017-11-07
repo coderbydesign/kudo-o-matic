@@ -14,7 +14,7 @@ class TransactionAdder
         balance: Balance.current
     )
 
-    save_and_check_goal_reached transaction
+    save transaction
   rescue
     return transaction
   end
@@ -36,16 +36,15 @@ class TransactionAdder
       transaction.update(image: "data:image/#{file_type};base64,#{attributes[:image]}", image_file_name: "image.#{file_type}")
     end
 
-    save_and_check_goal_reached transaction
+    save transaction
   end
 
   private
 
-  def self.save_and_check_goal_reached(transaction)
-    Transaction.transaction do
-      transaction.save!
-      GoalReacher.check!
-    end
+  def self.save(transaction)
+    transaction.save!
+
+    GoalReacher.check!
 
     TransactionMailer.new_transaction(transaction)
 

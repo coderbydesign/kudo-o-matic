@@ -14,7 +14,9 @@ class UserDashboard < Administrate::BaseDashboard
       avatar_url: Field::String,
       slack_name: Field::String,
       admin: Field::Boolean,
-      mail_notifications: Field::Boolean,
+      transaction_received_mail: Field::Boolean,
+      goal_reached_mail: Field::Boolean,
+      summary_mail: Field::Boolean,
       api_token: Field::String,
       deactivated_at: Field::DateTime,
       created_at: Field::DateTime,
@@ -49,7 +51,9 @@ class UserDashboard < Administrate::BaseDashboard
       :avatar_url,
       :slack_name,
       :admin,
-      :mail_notifications,
+      :transaction_received_mail,
+      :goal_reached_mail,
+      :summary_mail,
       :api_token,
       :created_at,
       :updated_at,
@@ -68,7 +72,9 @@ class UserDashboard < Administrate::BaseDashboard
       :slack_name,
       :avatar_url,
       :admin,
-      :mail_notifications,
+      :transaction_received_mail,
+      :goal_reached_mail,
+      :summary_mail,
       :api_token
   ]
 

@@ -1,5 +1,6 @@
 en:
   kudos: ₭udos
+
   dashboard:
     title: Give ₭udos!
     i_give: To
@@ -12,7 +13,13 @@ en:
         transaction:
       attributes:
         transaction:
-          activity_name_feed: "activity"
-        # will translate transaction attribute "activity_name_feed" as "activity"
+          activity_name_feed: activity # will translate transaction attribute "activity_name_feed" as "activity"
+        user:
+          transaction_received_mail: Transaction received
+          goal_reached_mail: Goal reached
+          summary_mail: Weekly summary
 
-
+  helpers:
+    submit:
+      user:
+        update: Save
