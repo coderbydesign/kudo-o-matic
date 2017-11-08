@@ -81,10 +81,12 @@
 .amount {
   display: flex;
   color: $text-gray;
+  position: relative; // IE has problems with position: absolute on child elements without this
 }
 
 .activity {
   display: flex;
+  position: relative; // IE has problems with position: absolute on child elements without this
 }
 
 .activity-extras {
