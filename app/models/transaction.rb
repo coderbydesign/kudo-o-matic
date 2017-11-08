@@ -7,6 +7,7 @@ class Transaction < ActiveRecord::Base
   has_attached_file :image, styles: {thumb: '600x600'}
   validates_attachment :image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
   validates_with AttachmentSizeValidator, attributes: :image, less_than: 10.megabytes
+  process_in_background :image
 
   acts_as_votable
   belongs_to :balance
