@@ -9,6 +9,7 @@ class SummaryMailer < ApplicationMailer
 
   def summary_email(user)
     @user = user
+    @reached_goal = Goal.where('achieved_on >= ?', 1.week.ago).last
     @transactions = Transaction.where('created_at >= ?', 1.week.ago).sort_by(&:kudos_amount).reverse.first(7)
 
     @markdown = Redcarpet::Markdown.new(MdEmoji::Render, no_intra_emphasis: true)
