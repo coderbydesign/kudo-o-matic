@@ -16,6 +16,7 @@ ul {
   margin-right: auto;
   width: 600px;
   border-collapse: collapse;
+  background-color: $base-color-white;
 }
 
 .box {
@@ -61,10 +62,6 @@ ul {
 
 .content {
   @extend .body;
-}
-
-.transactions-container {
-  background-color: $base-color-white;
 }
 
 .inner-table {
@@ -138,11 +135,7 @@ ul {
   background: $base-color-solitude-white;
 }
 
-.kudometer-container {
-  background-color: $base-color-white;
-}
-
-.kudometer {
+.content-block {
   padding: 15px;
   text-align: center;
   border: 1px solid $base-color-lighter-gray;
