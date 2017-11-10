@@ -3,7 +3,7 @@ class SummaryMailer < ApplicationMailer
     return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil
 
     User.where.not(email: '').each do |user|
-      summary_email(user).deliver! if user.summary_mail
+      summary_email(user).deliver_later if user.summary_mail
     end
   end
 
