@@ -5,7 +5,23 @@
       = "Don't forget to think back about this week, because there is definitely someone who deserves a compliment. \u{1f914}"
     .button-container
       = link_to "Give ₭udo's!".html_safe, root_url, class: 'btn btn-primary button'
-    %table.outer-table.transactions-container
+    - if !@reached_goal.nil?
+      %table.outer-table
+        %tr
+          %td.content-block
+            %p
+              %strong
+                = "\u{1f389} Congratulations! \u{1f389}"
+            %p
+              You and your colleagues achieved goal
+              %strong
+                = "'#{@reached_goal.name}'"
+              last week!
+              %br
+              Don't forget to pick a date!
+    %p
+
+    %table.outer-table
       - @transactions.each do |transaction|
         %tr
           %td.inner-table
@@ -33,10 +49,6 @@
               %strong
                 = "#{transaction.receiver_name_feed}"
               = "for #{transaction.activity}"
-          - if transaction.image.present?
-            %td.image-container{colspan: 2}
-              = link_to image_tag(transaction.image.exists?(:thumb) ? transaction.image.url(:thumb) : transaction.image,
-                  class:'image'), transaction.image.url, target: '_blank'
           - if transaction.votes.size >= 1
             %tr
               %td.likes-container{colspan: 2}
@@ -49,9 +61,10 @@
           %td.no-transactions-container
             = "There are no transactions to yet, so start giving ₭udo's to your colleagues! \u{1f628}"
     %p
-    %table.outer-table.kudometer-container
+
+    %table.outer-table
       %tr
-        %td.kudometer
+        %td.content-block
           %p
             %strong
               ₭udometer
