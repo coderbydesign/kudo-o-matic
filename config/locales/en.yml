@@ -14,12 +14,13 @@ en:
       attributes:
         transaction:
           activity_name_feed: activity # will translate transaction attribute "activity_name_feed" as "activity"
-        user:
-          transaction_received_mail: Transaction received
-          goal_reached_mail: Goal reached
-          summary_mail: Weekly summary
 
   helpers:
+    label:
+      user:
+        transaction_received_mail: Receive mail notification when I receive Kudo's
+        goal_reached_mail: Receive mail notification when a goal is reached
+        summary_mail: Receive weekly summary mail
     submit:
       user:
         update: Save
