@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'transactions#index'
 
-  resources :transactions, only: [:index, :new, :create]
+  resources :transactions, only: [:index, :show, :create]
 
   post 'like/:id', to: 'transactions#upvote', as: :like
   post 'unlike/:id', to: 'transactions#downvote', as: :unlike
