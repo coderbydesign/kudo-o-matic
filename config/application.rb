@@ -31,5 +31,8 @@ module KudoOMatic
                  methods: [:get, :post, :patch, :put, :delete, :options]
       end
     end
+
+    # Delayed::Job
+    config.active_job.queue_adapter = :delayed_job
   end
 end
