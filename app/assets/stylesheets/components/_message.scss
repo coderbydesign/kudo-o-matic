@@ -53,6 +53,19 @@
   border: 1px solid $flash-error-border-color;
 }
 
+.success-message {
+  padding: $padding-primary / 2 $padding-secondary * 2.5;
+  border-radius: $border-radius-small;
+  color: $text-primary;
+  background: $flash-success-bg;
+  border: 1px solid $flash-success-border-color;
+
+  text-align: center;
+  display: flex;
+
+  margin-bottom: $margin-primary;
+}
+
 @keyframes show-message {
   from {
     opacity: 0;

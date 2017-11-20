@@ -34,7 +34,23 @@
   margin-bottom: $margin-primary;
 }
 
+.settings-text-highlighted {
+  @extend .settings-text;
+
+  border-radius: 1rem;
+  padding: 0.35rem;
+  color: $green-color;
+  background-color: $green-light-color;
+  font-weight: 400;
+}
+
 .settings-title {
+  @extend .settings-text;
+
+  font-size: 2.25rem;
+}
+
+.settings-subtitle {
   @extend .settings-text;
 
   font-size: 1.75rem;

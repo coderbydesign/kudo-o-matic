@@ -23,12 +23,11 @@ class TransactionsController < ApplicationController
     @transaction = TransactionAdder.create(params[:transaction], current_user)
 
     if @transaction.save
-      flash[:notice] = 'Transaction was successfully created!'
       redirect_to root_path
     else
       flash[:error] = @transaction.errors.full_messages.to_sentence.capitalize
       @transaction.activity.name = @transaction.activity.name.split('for: ')[1]
-      render 'index'
+      render :index
     end
   end
 

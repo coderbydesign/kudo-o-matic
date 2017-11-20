@@ -5,6 +5,7 @@
 ///////////////////////////////////////////////////////////
 
 $red-color:                               #E8643E;
+$green-light-color: rgba(77, 175, 124, 0.15);
 $green-color:                             #4DAF7C;
 $blue-color:                              #5F90B0;
 $brown-color:                             #8C7C6C;
@@ -74,3 +75,6 @@ $secondary-stroke-color:                  $base-color-brand;
 // Flash message
 $flash-error-bg:                          $base-color-light-red;
 $flash-error-border-color:                #d8827f;
+
+$flash-success-bg: $green-light-color;
+$flash-success-border-color: $green-color;
