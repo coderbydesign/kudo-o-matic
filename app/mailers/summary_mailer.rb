@@ -2,7 +2,7 @@ class SummaryMailer < ApplicationMailer
   def self.new_summary
     return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil
 
-    User.where.not(email: '').each do |user|
+    User.where.not(email: '').where(deactivated_at: nil).each do |user|
       summary_email(user).deliver_later if user.summary_mail
     end
   end
