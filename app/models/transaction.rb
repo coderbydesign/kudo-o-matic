@@ -63,11 +63,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def send_slack_notification
-    SlackNotifications.new(self).send_new_transaction
-    end
-
-  def self.send_whenever
-    SlackNotifications.new(self).send_reminder
+    SlackService.instance.send_new_transaction(self)
   end
 
   def self.all_for_user(user)
