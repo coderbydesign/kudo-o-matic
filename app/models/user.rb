@@ -13,9 +13,9 @@ class User < ActiveRecord::Base
   has_many :votes, foreign_key: 'voter_id'
 
   typed_store :preferences, coder: PreferencesCoder do |p|
-    p.boolean :transaction_received_mail, default: false
-    p.boolean :goal_reached_mail, default: false
-    p.boolean :summary_mail, default: false
+    p.boolean :transaction_received_mail, default: true
+    p.boolean :goal_reached_mail, default: true
+    p.boolean :summary_mail, default: true
   end
 
   def self.from_omniauth(access_token)
