@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   post 'slack/action'
   post 'slack/command'
+  post 'slack/reaction'
 
   namespace :admin do
     root 'users#index'
