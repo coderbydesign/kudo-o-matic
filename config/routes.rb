@@ -17,6 +17,9 @@ Rails.application.routes.draw do
 
   get :feed, to: 'feed#index'
 
+  post 'slack/action'
+  post 'slack/command'
+
   namespace :admin do
     root 'users#index'
 

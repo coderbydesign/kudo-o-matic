@@ -18,7 +18,7 @@ en:
   helpers:
     label:
       user:
-        transaction_received_mail: Receive mail notification when I receive Kudo's
+        transaction_received_mail: Receive mail notification when I receive ₭udo's
         goal_reached_mail: Receive mail notification when a goal is reached
         summary_mail: Receive weekly summary mail
     submit:

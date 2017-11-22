@@ -19,7 +19,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       profile = user['profile']
       slack_name = profile['display_name'].present? ? profile['display_name'] : profile['real_name']
 
-      flash[:notice] = "Successfully #{current_user.slack_name.blank? ? 'connected to Slack!' : 'updated your Slack display name!'}"
+      flash[:notice] = "Successfully #{current_user.slack_name.blank? | current_user.slack_id.blank? ?
+                                           'connected to Slack!' : 'updated your Slack display name!'}"
 
       current_user.update(slack_name: slack_name, slack_id: slack_id)
     end
