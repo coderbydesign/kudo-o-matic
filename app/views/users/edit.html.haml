@@ -10,9 +10,9 @@
       Settings
     %h2.settings-subtitle
       Slack
-    - if @user.slack_name.blank?
+    - if @user.slack_name.blank? || @user.slack_id.blank?
       %p.settings-text
-        Sign in to receive personalized Kudo-o-Matic notifications on Slack:
+        Sign in to receive personalized notifications, use the ₭udo command and like ₭udo transactions on Slack:
     - else
       %p.settings-text
         %span.settings-text
