@@ -18,7 +18,7 @@ class SlackService
         attachments: [
             {
                 fallback: 'New ₭udo transaction!',
-                color: '#4B4656',
+                color: '#B58342',
                 pretext: "#{ADJECTIVES.sample}, a new ₭udo transaction! "\
                          "Only #{goal.amount - balance.amount} ₭ left until the next ₭udo goal is reached! #{TRANSACTION_EMOJI.sample}\n"\
                          "Click <#{transaction_url(transaction)}|here> for more details.",
@@ -65,7 +65,7 @@ class SlackService
             [
                 {
                     fallback: '₭udo goal achieved! :trophy:',
-                    color: '#4B4656',
+                    color: '#B58342',
                     pretext: "<!channel> Congratulations! You and your colleagues just achieved a ₭udo goal! #{GOAL_EMOJI.sample}\n"\
                              "Don't forget to pick a date! Click <#{root_url}|here> for more details.",
                     fields: [
@@ -92,14 +92,14 @@ class SlackService
 
     settings = Settings.slack
 
-    User.where(deactivated_at: nil).where.not(slack_name: blank?).each do |user|
+    User.where(deactivated_at: nil).where.not(slack_id: nil).each do |user|
       SLACK_NOTIFIER.delay(queue: :slack, priority: 2).ping(
-          channel: "@#{user.slack_name}",
+          channel: "@#{user.slack_id}",
           attachments:
               [
                   {
                       fallback: '₭udo reminder! :clock11:',
-                      color: '#4B4656',
+                      color: '#B58342',
                       pretext: "#{GREETINGS.sample} #{user.first_name},\n\n"\
                                "It's almost weekend, but don't forget to think back about this week "\
                                "because there is definitely someone who deserves a compliment! :thinking_face:\n\n"\
