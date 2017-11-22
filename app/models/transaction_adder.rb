@@ -46,7 +46,7 @@ class TransactionAdder
     receiver = User.find_by_slack_id(arguments[0][2..10])
 
     raise SlackArgumentsError.new("Invalid number of arguments. Use the following syntax to give ₭udo's:\n"\
-                                  ' */kudo* <@receiver> <amount> <reason>') if arguments.length != 3
+                                  ' */kudo* @receiver <amount> <reason>') if arguments.length != 3
     raise SlackConnectionError.new('You are *not* connected to the ₭udo-o-Matic') if sender.nil?
     raise SlackConnectionError.new('Receiver is *not* connected to the ₭udo-o-Matic') if receiver.nil?
 
@@ -62,7 +62,8 @@ class TransactionAdder
   end
 
   def self.create_from_slack_reaction(params, message)
-    sender = User.find_by_slack_id(params['event']['user'])
+    event = params['event']
+    sender = User.find_by_slack_id(event['user'])
     receiver = User.find_by_slack_id(message['user'])
 
     raise SlackConnectionError.new('You are *not* connected to the ₭udo-o-Matic') if sender.nil?
@@ -73,7 +74,8 @@ class TransactionAdder
         activity: Activity.find_or_create_by(name: "slack message: '#{message['text']}'"),
         sender: sender,
         receiver: receiver,
-        balance: Balance.current
+        balance: Balance.current,
+        slack_reaction_created_at: event['item']['ts']
     )
 
     save transaction

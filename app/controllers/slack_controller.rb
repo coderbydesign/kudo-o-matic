@@ -10,7 +10,7 @@ class SlackController < ApplicationController
     transaction = Transaction.find(payload['callback_id'])
     user = User.find_by_slack_id(payload['user']['id'])
 
-    if transactions_path.present? && user.present?
+    if transaction.present? && user.present?
       transaction.liked_by user
 
       SlackService.instance.update_transaction(payload)
@@ -31,7 +31,7 @@ class SlackController < ApplicationController
   rescue ActiveRecord::RecordInvalid, SlackConnectionError, SlackArgumentsError => error
     SlackService.instance.send_response(params['response_url'], error)
   rescue
-    message = "Use the following syntax to give ₭udo's:\n */kudo* <@receiver> <amount> <reason>"
+    message = "Use the following syntax to give ₭udo's:\n */kudo* @receiver <amount> <reason>"
     SlackService.instance.send_response(params['response_url'], message)
   end
 
@@ -39,16 +39,28 @@ class SlackController < ApplicationController
     return if check_challenge
 
     event = params['event']
+    user_id = event['user']
     item = event['item']
+    timestamp = item['ts']
     channel = item['channel']
 
     return unless check_verification_token(params['token']) && event['reaction'] == 'kudo'
 
-    kudo_message = SlackService.instance.retrieve_message(channel, item['ts'])
-    transaction = TransactionAdder.create_from_slack_reaction(params, kudo_message)
+    transaction = Transaction.find_by_slack_reaction_created_at(timestamp)
+    user = User.find_by_slack_id(user_id)
 
-    message = "Successfully created ₭udo transaction! Click <#{transaction_url(transaction)}|here> for more details."
-    SlackService.instance.send_ephemeral_message(channel, event['user'], message)
+    if transaction.present? && user.present?
+      transaction.liked_by user
+
+      message = "Successfully liked ₭udo transaction! Click <#{transaction_url(transaction)}|here> for more details."
+      SlackService.instance.send_ephemeral_message(channel, user_id, message)
+    else
+      message = SlackService.instance.retrieve_message(channel, timestamp)
+      transaction = TransactionAdder.create_from_slack_reaction(params, message)
+
+      message = "Successfully created ₭udo transaction! Click <#{transaction_url(transaction)}|here> for more details."
+      SlackService.instance.send_ephemeral_message(channel, user_id, message)
+    end
   rescue ActiveRecord::RecordInvalid, SlackConnectionError => error
     event = params['event']
     SlackService.instance.send_ephemeral_message(event['item']['channel'], event['user'], error)
