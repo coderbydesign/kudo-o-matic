@@ -25,17 +25,18 @@ class SlackController < ApplicationController
   def command
     return unless check_verification_token(params['token'])
 
-    send_command_help if params['text'].casecmp?('help')
+    text = params['text'].strip
+    raise if text.blank? || text.casecmp('help') == 0
 
     transaction = TransactionAdder.create_from_slack_command(params)
 
-    response_url = params['response_url']
     message = "Successfully created ₭udo transaction! Click <#{transaction_url(transaction)}|here> for more details."
-    SlackService.instance.send_response(response_url, message)
+    SlackService.instance.send_response(params['response_url'], message)
   rescue ActiveRecord::RecordInvalid, SlackConnectionError, SlackArgumentsError => error
     SlackService.instance.send_response(params['response_url'], error)
   rescue
-    send_command_help
+    message = "Use the following syntax to give ₭udo's:\n */kudo* <amount> *to* @receiver *for* <reason>"
+    SlackService.instance.send_response(params['response_url'], message)
   end
 
   def reaction
@@ -73,11 +74,6 @@ class SlackController < ApplicationController
 
   def check_verification_token(token)
     token == ENV['SLACK_VERIFICATION_TOKEN']
-  end
-
-  def send_command_help
-    message = "Use the following syntax to give ₭udo's:\n */kudo* @receiver <amount> <reason>"
-    SlackService.instance.send_response(params['response_url'], message)
   end
 
   def check_challenge
