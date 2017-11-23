@@ -8,6 +8,13 @@
   border: 1px solid $primary-border-color;
   font-weight: 300;
   padding: 1.25rem;
+
+  ul {
+    line-height: 150%;
+    list-style: initial;
+    padding: 0 0 0 20px;
+    margin-bottom: $margin-primary;
+  }
 }
 
 .settings-table {

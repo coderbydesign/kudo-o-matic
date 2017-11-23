@@ -40,19 +40,25 @@ class TransactionAdder
   end
 
   def self.create_from_slack_command(params)
-    arguments = params['text'].split(' ', 3)
+    text = params['text']
+    arguments = params['text'].split.size
 
+    amount = text[/^(.+?) /]
+    activity = text[/.for (.*)/, 1]
     sender = User.find_by_slack_id(params['user_id'])
-    receiver = User.find_by_slack_id(arguments[0][2..10])
 
-    raise SlackArgumentsError.new("Invalid number of arguments. Use the following syntax to give ₭udo's:\n"\
-                                  ' */kudo* @receiver <amount> <reason>') if arguments.length != 3
+    receiver_text = text[/to @(.*?) for/m, 1]
+    receiver = User.find_by_slack_name(receiver_text)
+    receiver = User.find_by_slack_username(receiver_text) if receiver.nil?
+
+    raise SlackArgumentsError.new("Invalid command. Use the following syntax to give ₭udo's:\n"\
+                                  '*/kudo* <amount> *to* @receiver *for* <reason>') if arguments < 5 ||amount.nil? || activity.nil?
     raise SlackConnectionError.new('You are *not* connected to the ₭udo-o-Matic') if sender.nil?
     raise SlackConnectionError.new('Receiver is *not* connected to the ₭udo-o-Matic') if receiver.nil?
 
     transaction = Transaction.new(
-        amount: arguments[1],
-        activity: Activity.find_or_create_by(name: arguments[2]),
+        amount: amount,
+        activity: Activity.find_or_create_by(name: activity),
         sender: sender,
         receiver: receiver,
         balance: Balance.current
@@ -71,7 +77,7 @@ class TransactionAdder
 
     transaction = Transaction.new(
         amount: 1,
-        activity: Activity.find_or_create_by(name: "slack message: '#{message['text']}'"),
+        activity: Activity.find_or_create_by(name: "Slack message: '#{message['text']}'"),
         sender: sender,
         receiver: receiver,
         balance: Balance.current,

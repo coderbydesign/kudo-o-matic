@@ -2,6 +2,8 @@ class SlackController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:action, :command, :reaction]
   skip_before_action :authenticate_user!, only: [:action, :command, :reaction]
 
+  KUDO_REACTJI = %w(kudo kudocoin)
+
   def action
     payload = JSON.parse(params['payload'])
 
@@ -23,15 +25,17 @@ class SlackController < ApplicationController
   def command
     return unless check_verification_token(params['token'])
 
+    text = params['text'].strip
+    raise if text.blank? || text.casecmp('help') == 0
+
     transaction = TransactionAdder.create_from_slack_command(params)
 
-    response_url = params['response_url']
     message = "Successfully created ₭udo transaction! Click <#{transaction_url(transaction)}|here> for more details."
-    SlackService.instance.send_response(response_url, message)
+    SlackService.instance.send_response(params['response_url'], message)
   rescue ActiveRecord::RecordInvalid, SlackConnectionError, SlackArgumentsError => error
     SlackService.instance.send_response(params['response_url'], error)
   rescue
-    message = "Use the following syntax to give ₭udo's:\n */kudo* @receiver <amount> <reason>"
+    message = "Use the following syntax to give ₭udo's:\n */kudo* <amount> *to* @receiver *for* <reason>"
     SlackService.instance.send_response(params['response_url'], message)
   end
 
@@ -44,7 +48,7 @@ class SlackController < ApplicationController
     timestamp = item['ts']
     channel = item['channel']
 
-    return unless check_verification_token(params['token']) && event['reaction'] == 'kudo'
+    return unless check_verification_token(params['token']) && event['reaction'].in?(KUDO_REACTJI)
 
     transaction = Transaction.find_by_slack_reaction_created_at(timestamp)
     user = User.find_by_slack_id(user_id)

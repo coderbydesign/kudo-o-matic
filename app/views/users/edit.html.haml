@@ -12,7 +12,7 @@
       Slack
     - if @user.slack_id.blank?
       %p.settings-text
-        Sign in to receive personalized notifications, use the ₭udo command and like ₭udo transactions on Slack:
+        Sign in to connect the ₭udo-o-Matic with Slack:
     - else
       %p.settings-text
         %span.settings-text
@@ -23,7 +23,13 @@
     %p.settings-text
       %a{href: user_slack_omniauth_authorize_path}
         %img{alt: 'Sign in with Slack', width: '172', height: '40', src: 'https://platform.slack-edge.com/img/sign_in_with_slack.png',
-        srcset: 'https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x', }
+        srcset: 'https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x' }
+    %p.settings-text
+      %ul
+        %li Receive personalized notifications and reminders
+        %li Give ₭udo's with the /kudo command
+        %li Give ₭udo's by adding the :kudo: or :kudocoin: reactji to a message
+        %li Like ₭udo transactions using the like button
     %h2.settings-subtitle
       Mail
     %p.settings-text

@@ -14,15 +14,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def slack
     User.transaction do
-      user = request.env['omniauth.auth']['extra']['user_info']['user']
-      slack_id = user['id']
-      profile = user['profile']
+      data = request.env['omniauth.auth']
+
+      info = data['info']
+      slack_id = info['user_id']
+      slack_username = info['user']
+
+      profile = data['extra']['user_info']['user']['profile']
       slack_name = profile['display_name'].present? ? profile['display_name'] : profile['real_name']
 
-      flash[:notice] = "Successfully #{current_user.slack_name.blank? | current_user.slack_id.blank? ?
-                                           'connected to Slack!' : 'updated your Slack display name!'}"
+      flash[:notice] = "Successfully #{current_user.slack_id.blank? ? 'connected to Slack!' : 'updated your Slack display name!'}"
 
-      current_user.update(slack_name: slack_name, slack_id: slack_id)
+      current_user.update(slack_id: slack_id, slack_username: slack_username, slack_name: slack_name)
     end
 
     redirect_to settings_path
