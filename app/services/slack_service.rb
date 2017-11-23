@@ -13,7 +13,10 @@ class SlackService
     uri = URI.parse('https://slack.com/api/chat.postMessage')
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    request = Net::HTTP::Post.new(uri.path, {'Content-type' => 'application/json', 'Authorization' => "Bearer #{ENV['SLACK_BOT_ACCESS_TOKEN']}"})
+    request = Net::HTTP::Post.new(uri.path, {
+        'Content-type' => 'application/json',
+        'Authorization' => "Bearer #{ENV['SLACK_BOT_ACCESS_TOKEN']}"}
+    )
 
     request.body = {
         channel: ENV['SLACK_CHANNEL'],
@@ -73,7 +76,10 @@ class SlackService
     uri = URI.parse('https://slack.com/api/chat.update')
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    request = Net::HTTP::Post.new(uri.path, {'Content-type' => 'application/json', 'Authorization' => "Bearer #{ENV['SLACK_BOT_ACCESS_TOKEN']}"})
+    request = Net::HTTP::Post.new(uri.path, {
+        'Content-type' => 'application/json',
+        'Authorization' => "Bearer #{ENV['SLACK_BOT_ACCESS_TOKEN']}"}
+    )
 
     attachments = payload['original_message']['attachments']
     attachments[0].delete('actions')
@@ -142,21 +148,67 @@ class SlackService
     end
   end
 
-  def send_response(response_url, response)
+  def send_response(response_url, message)
     return if slack_not_configured
 
     uri = URI.parse(response_url)
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    request = Net::HTTP::Post.new(uri.path, {'Content-type' => 'application/json', 'Authorization' => "Bearer #{ENV['SLACK_BOT_ACCESS_TOKEN']}"})
+    request = Net::HTTP::Post.new(uri.path, {
+        'Content-type' => 'application/json',
+        'Authorization' => "Bearer #{ENV['SLACK_BOT_ACCESS_TOKEN']}"}
+    )
 
     request.body = {
-        response_type: 'emphemeral',
+        response_type: 'ephemeral',
         replace_original: false,
-        text: response
+        text: message
     }.to_json
 
     http.request(request)
+  end
+
+  def send_ephemeral_message(channel, user, message)
+    return if slack_not_configured
+
+    uri = URI.parse('https://slack.com/api/chat.postEphemeral')
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Post.new(uri.path, {
+        'Content-type' => 'application/json',
+        'Authorization' => "Bearer #{ENV['SLACK_BOT_ACCESS_TOKEN']}"}
+    )
+
+    request.body = {
+        channel: channel,
+        user: user,
+        text: message
+    }.to_json
+
+    http.request(request)
+  end
+
+  def retrieve_message(channel, timestamp)
+    return if slack_not_configured
+
+    uri = URI.parse('https://slack.com/api/channels.history')
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Post.new(uri.path, {
+        'Content-type' => 'application/x-www-form-urlencoded'}
+    )
+
+    request.body = URI.encode_www_form(
+        token: ENV['SLACK_ACCESS_TOKEN'],
+        channel: channel,
+        latest: timestamp,
+        inclusive: true,
+        count: 1
+    )
+
+    response = http.request(request).body
+
+    JSON.parse(response)['messages'][0]
   end
 
   private

@@ -39,23 +39,43 @@ class TransactionAdder
     save transaction
   end
 
-  def self.create_from_slack_request(params)
-    args = params['text'].split(' ', 3)
+  def self.create_from_slack_command(params)
+    arguments = params['text'].split(' ', 3)
 
     sender = User.find_by_slack_id(params['user_id'])
-    receiver = User.find_by_slack_id(args[0][2..10])
+    receiver = User.find_by_slack_id(arguments[0][2..10])
 
     raise SlackArgumentsError.new("Invalid number of arguments. Use the following syntax to give ₭udo's:\n"\
-                                  ' */kudo* <@receiver> <amount> <reason>') if args.length != 3
+                                  ' */kudo* @receiver <amount> <reason>') if arguments.length != 3
     raise SlackConnectionError.new('You are *not* connected to the ₭udo-o-Matic') if sender.nil?
     raise SlackConnectionError.new('Receiver is *not* connected to the ₭udo-o-Matic') if receiver.nil?
 
     transaction = Transaction.new(
-        amount: args[1],
-        activity: Activity.find_or_create_by(name: args[2]),
+        amount: arguments[1],
+        activity: Activity.find_or_create_by(name: arguments[2]),
         sender: sender,
         receiver: receiver,
         balance: Balance.current
+    )
+
+    save transaction
+  end
+
+  def self.create_from_slack_reaction(params, message)
+    event = params['event']
+    sender = User.find_by_slack_id(event['user'])
+    receiver = User.find_by_slack_id(message['user'])
+
+    raise SlackConnectionError.new('You are *not* connected to the ₭udo-o-Matic') if sender.nil?
+    raise SlackConnectionError.new('Message is *not* sent by a connected ₭udo-o-Matic user') if receiver.nil?
+
+    transaction = Transaction.new(
+        amount: 1,
+        activity: Activity.find_or_create_by(name: "slack message: '#{message['text']}'"),
+        sender: sender,
+        receiver: receiver,
+        balance: Balance.current,
+        slack_reaction_created_at: event['item']['ts']
     )
 
     save transaction
