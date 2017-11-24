@@ -1,5 +1,6 @@
 class Api::V1::TransactionsController < Api::V1::ApiController
   before_action :set_transaction, only: [:like, :unlike]
+  after_action :update_slack_transaction, only: [:like, :unlike]
 
   def create
     @transaction = TransactionAdder.create_from_api_request(request.headers, params)
@@ -33,5 +34,9 @@ class Api::V1::TransactionsController < Api::V1::ApiController
     error_object_overrides = {title: 'Transaction record not found',
                               detail: "The transaction record identified by #{transaction_id} could not be found."}
     handle_exceptions(JSONAPI::Exceptions::RecordNotFound.new(transaction_id, error_object_overrides))
+  end
+
+  def update_slack_transaction
+    SlackService.instance.send_updated_transaction(@transaction)
   end
 end

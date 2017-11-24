@@ -45,7 +45,6 @@ gem 'sass-rails', '~> 5.0'
 gem 'scss_lint', '~> 0.54', require: false
 gem 'settingslogic', '~> 2.0.9'
 gem 'simple_form', '~> 3.5'
-gem 'slack-notifier', '~> 2.1.0'
 gem 'timecop', '~> 0.8.1'
 gem 'uglifier', '~> 3.2'
 
