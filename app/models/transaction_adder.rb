@@ -61,7 +61,8 @@ class TransactionAdder
         activity: Activity.find_or_create_by(name: activity),
         sender: sender,
         receiver: receiver,
-        balance: Balance.current
+        slack_kudos_left_on_creation: Goal.next.amount - Balance.current.amount - amount.to_i,
+        balance: Balance.current,
     )
 
     save transaction
@@ -80,8 +81,9 @@ class TransactionAdder
         activity: Activity.find_or_create_by(name: "Slack message: '#{message['text']}'"),
         sender: sender,
         receiver: receiver,
-        balance: Balance.current,
-        slack_reaction_created_at: event['item']['ts']
+        slack_reaction_created_at: event['item']['ts'],
+        slack_kudos_left_on_creation: Goal.next.amount - Balance.current.amount - 1,
+        balance: Balance.current
     )
 
     save transaction

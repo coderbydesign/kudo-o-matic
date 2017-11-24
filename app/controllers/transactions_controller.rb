@@ -3,6 +3,7 @@ class TransactionsController < ApplicationController
 
   before_action :query_variables, only: [:index, :show, :create, :upvote, :downvote]
   before_action :set_transaction, only: [:show, :upvote, :downvote]
+  after_action :update_slack_transaction, only: [:upvote, :downvote]
 
   def index
     @transaction = Transaction.new
@@ -63,6 +64,10 @@ class TransactionsController < ApplicationController
 
   def set_transaction
     @transaction = Transaction.find(params[:id])
+  end
+
+  def update_slack_transaction
+    SlackService.instance.send_updated_transaction(@transaction)
   end
 
   def query_variables

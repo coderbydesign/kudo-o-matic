@@ -15,7 +15,7 @@ class SlackController < ApplicationController
     if transaction.present? && user.present?
       transaction.liked_by user
 
-      SlackService.instance.update_transaction(payload)
+      SlackService.instance.send_updated_transaction(transaction)
 
       message = "Successfully liked ₭udo transaction! Click <#{transaction_url(transaction)}|here> for more details."
       SlackService.instance.send_response(payload['response_url'], message)
@@ -55,6 +55,8 @@ class SlackController < ApplicationController
 
     if transaction.present? && user.present?
       transaction.liked_by user
+
+      SlackService.instance.send_updated_transaction(transaction)
 
       message = "Successfully liked ₭udo transaction! Click <#{transaction_url(transaction)}|here> for more details."
       SlackService.instance.send_ephemeral_message(channel, user_id, message)
