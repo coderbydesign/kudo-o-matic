@@ -8,6 +8,10 @@ RSpec.describe SlackController, type: :controller do
     let!(:transaction) {create(:transaction)}
     let!(:invalid_user_slack_id) {-1}
 
+    before do
+      ENV['SLACK_VERIFICATION_TOKEN']='1'
+    end
+
     context 'with a valid verification token' do
       context 'and a valid transaction (callback) id' do
         context 'and a valid user slack id' do
@@ -79,6 +83,10 @@ RSpec.describe SlackController, type: :controller do
     let!(:sender) {create(:user, slack_id: 1)}
     let!(:receiver) {create(:user, slack_name: 'receiver')}
     let!(:record_count_before_request) {Transaction.count}
+
+    before do
+      ENV['SLACK_VERIFICATION_TOKEN']='1'
+    end
 
     RSpec::Expectations.configuration.on_potential_false_positives = :nothing
 
@@ -173,6 +181,10 @@ RSpec.describe SlackController, type: :controller do
     let!(:user) {create(:user, slack_id: 1)}
     let!(:transaction) {create(:transaction, slack_reaction_created_at: DateTime.now)}
     let!(:invalid_reaction) {'invalid'}
+
+    before do
+      ENV['SLACK_VERIFICATION_TOKEN']='1'
+    end
 
     context 'with a valid verification token' do
       context 'and a valid reactji' do
