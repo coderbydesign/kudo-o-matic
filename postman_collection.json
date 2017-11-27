@@ -1,0 +1,1822 @@
+{
+  "info": {
+    "name": "Kudo-o-Matic",
+    "_postman_id": "3d6ba09c-ff97-53d6-556e-7178752ce495",
+    "description": "This is the API documentation of the Kudo-o-Matic REST API that is used by the Kudo-o-Mobile app.\n\nAPI resource requests and responses are structured according to the JSON API specification (http://jsonapi.org/).\n\nTo obtain an API-token, the Kudo-o-Mobile app has to POST the callback data that it retrieves from a Google OAuth 2.0 sign in event to the authtenication/obtain_api_token endpoint.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "V1",
+      "description": "Version 1",
+      "item": [
+        {
+          "name": "Balances",
+          "description": "",
+          "item": [
+            {
+              "name": "balances/:id",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/balances/1",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "balances",
+                    "1"
+                  ]
+                },
+                "description": "Retrieves the Balance with the corresponding :id."
+              },
+              "response": [
+                {
+                  "id": "86ae2ee8-bd0b-4849-b105-d4e42fb73e9d",
+                  "name": "balances/1",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/balances/1",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "balances",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"229631e866cac1a646d5887f6fa29ee5\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "119a48ce-cba3-480c-92ad-5a3f8d264e8d",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.020488",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 24,
+                  "body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"balances\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/api/v1/balances/1\"\n        },\n        \"attributes\": {\n            \"name\": \"Balance 1\",\n            \"current\": true,\n            \"amount\": 1000,\n            \"created-at\": \"2017-10-02T10:40:51.727Z\",\n            \"updated-at\": \"2017-10-04T08:15:26.769Z\"\n        },\n        \"relationships\": {\n            \"transactions\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/balances/1/relationships/transactions\",\n                    \"related\": \"http://localhost:3000/api/v1/balances/1/transactions\"\n                }\n            }\n        }\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "balances/current",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/balances/current",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "balances",
+                    "current"
+                  ]
+                },
+                "description": "Retrieves the current Balance."
+              },
+              "response": [
+                {
+                  "id": "193f7f68-2917-409e-8349-1eba31aba430",
+                  "name": "balance/current",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/balances/current",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "balances",
+                        "current"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3628d632e01950421f7926ab87b30d6d\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "dd2658c8-0c24-4158-a9f9-2b71dd1f5d72",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.066854",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 70,
+                  "body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"balances\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/api/v1/balances/1\"\n        },\n        \"attributes\": {\n            \"name\": \"Balance 1\",\n            \"current\": true,\n            \"amount\": 1000,\n            \"created-at\": \"2017-10-02T10:40:51.727Z\",\n            \"updated-at\": \"2017-10-04T08:15:26.769Z\"\n        },\n        \"relationships\": {\n            \"transactions\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/balances/1/relationships/transactions\",\n                    \"related\": \"http://localhost:3000/api/v1/balances/1/transactions\"\n                }\n            }\n        }\n    }\n}"
+                }
+              ]
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "Goals",
+          "description": "",
+          "item": [
+            {
+              "name": "goals/:id",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/goals/1",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "goals",
+                    "1"
+                  ]
+                },
+                "description": "Retrieves the Goal with the corresponding :id."
+              },
+              "response": [
+                {
+                  "id": "f3cc124f-78f1-4105-b746-2ba4765ad7df",
+                  "name": "goals/1",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/goals/1",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "goals",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"da56563da13e35eccf449a2a936bb330\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "5884aa84-7a88-4fdd-ae45-a0e197277bde",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.047980",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 74,
+                  "body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"goals\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/api/v1/goals/1\"\n        },\n        \"attributes\": {\n            \"name\": \"Goal 1\",\n            \"amount\": 1500,\n            \"achieved-on\": null,\n            \"created-at\": \"2017-10-02T10:40:51.745Z\",\n            \"updated-at\": \"2017-10-02T10:40:51.745Z\"\n        },\n        \"relationships\": {\n            \"balance\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/goals/1/relationships/balance\",\n                    \"related\": \"http://localhost:3000/api/v1/goals/1/balance\"\n                }\n            }\n        }\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "goals/next",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/goals/next",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "goals",
+                    "next"
+                  ]
+                },
+                "description": "Retrieves the next Goal."
+              },
+              "response": [
+                {
+                  "id": "48850a20-82ca-4c12-84a0-00b6aab17c3c",
+                  "name": "goals/next",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/goals/next",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "goals",
+                        "next"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"6f1d89544297bca372797c9071e68a49\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "b43ebae1-804f-4ae7-83b4-670e3484c1d9",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.042703",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 47,
+                  "body": "{\n    \"data\": {\n        \"id\": \"2\",\n        \"type\": \"goals\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/api/v1/goals/2\"\n        },\n        \"attributes\": {\n            \"name\": \"Goal 2\",\n            \"amount\": 1500,\n            \"achieved-on\": null,\n            \"created-at\": \"2017-10-02T10:40:51.745Z\",\n            \"updated-at\": \"2017-10-02T10:40:51.745Z\"\n        },\n        \"relationships\": {\n            \"balance\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/goals/2/relationships/balance\",\n                    \"related\": \"http://localhost:3000/api/v1/goals/2/balance\"\n                }\n            }\n        }\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "goals/previous",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/goals/previous",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "goals",
+                    "previous"
+                  ]
+                },
+                "description": "Retrieves the previous Goal."
+              },
+              "response": [
+                {
+                  "id": "753b883b-393c-4b8d-b0a9-3e718602a106",
+                  "name": "goals/previous",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/goals/previous",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "goals",
+                        "previous"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"60ecbb941c1522dacbfd7ee7e1e879cf\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "1f9ff9ce-bff9-4d3f-9c06-578532eb40c5",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.037911",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 44,
+                  "body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"goals\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/api/v1/goals/1\"\n        },\n        \"attributes\": {\n            \"name\": \"Goal 1\",\n            \"amount\": 1500,\n            \"achieved-on\": null,\n            \"created-at\": \"2017-10-02T10:40:51.745Z\",\n            \"updated-at\": \"2017-10-02T10:40:51.745Z\"\n        },\n        \"relationships\": {\n            \"balance\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/goals/1/relationships/balance\",\n                    \"related\": \"http://localhost:3000/api/v1/goals/1/balance\"\n                }\n            }\n        }\n    }\n}"
+                }
+              ]
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "Transactions",
+          "description": "",
+          "item": [
+            {
+              "name": "transactions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/transactions",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "transactions"
+                  ]
+                },
+                "description": "Retrieves all Transactions."
+              },
+              "response": [
+                {
+                  "id": "ffe12d6a-2e41-404c-937f-e90355f96348",
+                  "name": "transactions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/transactions",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "transactions"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"5bf9d3191d2506e08758facf88acf68f\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "09f5dfd8-b012-4eac-85f3-a81787787187",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.024679",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 53,
+                  "body": "{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"transactions\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/api/v1/transactions/1\"\n            },\n            \"attributes\": {\n                \"created-at\": \"2017-10-06T08:25:21.381Z\",\n                \"updated-at\": \"2017-10-06T08:25:21.381Z\",\n                \"amount\": 100,\n                \"activity\": \"activity\",\n                \"votes-count\": 0,\n                \"api-user-voted\": false,\n                \"image-url-original\": \"http://www.example.com/kudo-o-matic-development/transactions/images/001/original/image.jpg\",\n                \"image-url-thumb\": \"http://www.example.com/kudo-o-matic-development/transactions/images/001/thumb/image.jpg\",\n                \"image-file-name\": \"image.jpg\",\n                \"image-content-type\": \"image/jpeg\",\n                \"image-file-size\": 100000,\n                \"image-updated-at\": \"2017-10-06T08:25:20.842Z\"\n            },\n            \"relationships\": {\n                \"sender\": {\n                    \"links\": {\n                        \"self\": \"http://localhost:3000/api/v1/transactions/1/relationships/sender\",\n                        \"related\": \"http://localhost:3000/api/v1/transactions/1/sender\"\n                    }\n                },\n                \"receiver\": {\n                    \"links\": {\n                        \"self\": \"http://localhost:3000/api/v1/transactions/1/relationships/receiver\",\n                        \"related\": \"http://localhost:3000/api/v1/transactions/1/receiver\"\n                    }\n                },\n                \"balance\": {\n                    \"links\": {\n                        \"self\": \"http://localhost:3000/api/v1/transactions/1/relationships/balance\",\n                        \"related\": \"http://localhost:3000/api/v1/transactions/1/balance\"\n                    }\n                }\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"transactions\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/api/v1/transactions/2\"\n            },\n            \"attributes\": {\n                \"created-at\": \"2017-10-05T07:34:07.24Z\",\n                \"updated-at\": \"2017-10-05T07:34:07.24Z\",\n                \"amount\": 200,\n                \"activity\": \"activity\",\n                \"votes-count\": 0,\n                \"api-user-voted\": false,\n                \"image-url-original\": null,\n                \"image-url-thumb\": null,\n                \"image-file-name\": null,\n                \"image-content-type\": null,\n                \"image-file-size\": null,\n                \"image-updated-at\": null\n            },\n            \"relationships\": {\n                \"sender\": {\n                    \"links\": {\n                        \"self\": \"http://localhost:3000/api/v1/transactions/2/relationships/sender\",\n                        \"related\": \"http://localhost:3000/api/v1/transactions/2/sender\"\n                    }\n                },\n                \"receiver\": {\n                    \"links\": {\n                        \"self\": \"http://localhost:3000/api/v1/transactions/2/relationships/receiver\",\n                        \"related\": \"http://localhost:3000/api/v1/transactions/2/receiver\"\n                    }\n                },\n                \"balance\": {\n                    \"links\": {\n                        \"self\": \"http://localhost:3000/api/v1/transactions/2/relationships/balance\",\n                        \"related\": \"http://localhost:3000/api/v1/transactions/2/balance\"\n                    }\n                }\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:3000/api/v1/transactions?page%5Blimit%5D=10&page%5Boffset%5D=0\",\n        \"last\": \"http://localhost:3000/api/v1/transactions?page%5Blimit%5D=10&page%5Boffset%5D=0\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "transactions/:id",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/transactions/1",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "transactions",
+                    "1"
+                  ]
+                },
+                "description": "Retrieves the Transaction with the corresponding :id."
+              },
+              "response": [
+                {
+                  "id": "12f1ea8a-09fd-4f16-8e87-6e3327788b59",
+                  "name": "transactions/1",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/transactions/1",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "transactions",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"ba47e998be6bb46e36985a3365fb6c5b\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "35c3a27e-bb81-46ed-a3e7-b1004aa12d52",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.022310",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 53,
+                  "body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"transactions\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/api/v1/transactions/1\"\n        },\n        \"attributes\": {\n            \"created-at\": \"2017-10-06T08:25:21.381Z\",\n            \"updated-at\": \"2017-10-06T08:25:21.381Z\",\n            \"amount\": 100,\n            \"activity\": \"activity\",\n            \"votes-count\": 0,\n            \"api-user-voted\": false,\n            \"image-url-original\": \"http://www.example.com/kudo-o-matic-development/transactions/images/001/original/image.jpg\",\n            \"image-url-thumb\": \"http://www.example.com/kudo-o-matic-development/transactions/images/001/thumb/image.jpg\",\n            \"image-file-name\": \"image.jpg\",\n            \"image-content-type\": \"image/jpeg\",\n            \"image-file-size\": 100000,\n            \"image-updated-at\": \"2017-10-06T08:25:20.842Z\"\n        },\n        \"relationships\": {\n            \"sender\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/transactions/1/relationships/sender\",\n                    \"related\": \"http://localhost:3000/api/v1/transactions/1/sender\"\n                }\n            },\n            \"receiver\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/transactions/1/relationships/receiver\",\n                    \"related\": \"http://localhost:3000/api/v1/transactions/1/receiver\"\n                }\n            },\n            \"balance\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/transactions/1/relationships/balance\",\n                    \"related\": \"http://localhost:3000/api/v1/transactions/1/balance\"\n                }\n            }\n        }\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "transactions",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "{{content-type}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"data\": {\n\t\t\"type\": \"transactions\",\n\t\t\"attributes\": {\n\t\t\t\"amount\": 1,\n\t\t\t\"activity\": \"activity\",\n\t\t\t\"image\": z4Ag4oiIIOKEnQ,\n\t\t\t\"image-file-type\": \"jpg\"\n\t\t},\n\t\t\"relationships\": {\n\t\t\t\"receiver\": { \n\t\t\t\t\"data\": {\n\t\t\t\t\t\"type\": \"users\",\n\t\t\t\t\t\"id\": 1\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
+                },
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/transactions",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "transactions"
+                  ]
+                },
+                "description": "Adds a new Transaction based on the provided data attributes in the body of the request.\nThe body should contain the Transaction _amount_ and _activity_ attributes and _receiver_ (User) relationship.\nThe _image_ and _image-file-type_ attributes are optional.\nThe Content-Type request header should be set to _application/vnd.api+json_."
+              },
+              "response": [
+                {
+                  "id": "957ed558-d327-401e-9830-673fd59b7934",
+                  "name": "transactions",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "{{content-type}}"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\t\"data\": {\n\t\t\"type\": \"transactions\",\n\t\t\"attributes\": {\n\t\t\t\"amount\": 1,\n\t\t\t\"activity\": \"activity\",\n\t\t\t\"image\": z4Ag4oiIIOKEnQ,\n\t\t\t\"image-file-type\": \"jpg\"\n\t\t},\n\t\t\"relationships\": {\n\t\t\t\"receiver\": { \n\t\t\t\t\"data\": {\n\t\t\t\t\t\"type\": \"users\",\n\t\t\t\t\t\"id\": 1\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
+                    },
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/transactions",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "transactions"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"6da0f423580377652dd5842b3d9e1bfa\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "4b62c83a-f3d5-480a-9968-f89dbdf8d6dd",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "2.165362",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 2200,
+                  "body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"transactions\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/api/v1/transactions/1\"\n        },\n        \"attributes\": {\n            \"created-at\": \"2017-10-06T08:25:21.381Z\",\n            \"updated-at\": \"2017-10-06T08:25:21.381Z\",\n            \"amount\": 100,\n            \"activity\": \"activity\",\n            \"votes-count\": 0,\n            \"api-user-voted\": false,\n            \"image-url-original\": \"http://www.example.com/kudo-o-matic-development/transactions/images/001/original/image.jpg\",\n            \"image-url-thumb\": \"http://www.example.com/kudo-o-matic-development/transactions/images/001/thumb/image.jpg\",\n            \"image-file-name\": \"image.jpg\",\n            \"image-content-type\": \"image/jpeg\",\n            \"image-file-size\": 100000,\n            \"image-updated-at\": \"2017-10-06T08:25:20.842Z\"\n        },\n        \"relationships\": {\n            \"sender\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/transactions/1/relationships/sender\",\n                    \"related\": \"http://localhost:3000/api/v1/transactions/1/sender\"\n                }\n            },\n            \"receiver\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/transactions/1/relationships/receiver\",\n                    \"related\": \"http://localhost:3000/api/v1/transactions/1/receiver\"\n                }\n            },\n            \"balance\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/transactions/1/relationships/balance\",\n                    \"related\": \"http://localhost:3000/api/v1/transactions/1/balance\"\n                }\n            }\n        }\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "transactions/:id/votes",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/transactions/1/votes",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "transactions",
+                    "1",
+                    "votes"
+                  ]
+                },
+                "description": "Adds a like to the Transaction as the User that is assocciated with the provided API-token."
+              },
+              "response": [
+                {
+                  "id": "1cf04b35-d019-4cd8-a568-6f4a9f3ee50c",
+                  "name": "transactions/1/votes",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/transactions/1/votes",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "transactions",
+                        "1",
+                        "votes"
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "plain",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "58861158-c2a8-4630-b6da-02840e0ece6e",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.702257",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 712,
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "transactions/:id/votes",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/transactions/1/votes",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "transactions",
+                    "1",
+                    "votes"
+                  ]
+                },
+                "description": "Removes a like for the Transaction as the User that is assocciated with the provided API-token."
+              },
+              "response": [
+                {
+                  "id": "7a73a89c-952e-4de5-ac72-641b34115087",
+                  "name": "transactions/1/votes",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/transactions/1/votes",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "transactions",
+                        "1",
+                        "votes"
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "plain",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "d847a3fe-8f55-4cb5-a90e-c68212db3c2b",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.647055",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 675,
+                  "body": ""
+                }
+              ]
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "Users",
+          "description": "",
+          "item": [
+            {
+              "name": "users",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/users",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "users"
+                  ]
+                },
+                "description": "Retrieves all Users."
+              },
+              "response": [
+                {
+                  "id": "9a27141e-dbc9-42a2-8fb3-4731b575b026",
+                  "name": "users",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/users",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "users"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"d7f220b651e21e35d129818060873b15\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "fc0ac0c4-dddc-4625-8a8c-306a69fec629",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.217344",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 254,
+                  "body": "{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"users\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/api/v1/users/1\"\n            },\n            \"attributes\": {\n                \"created-at\": \"2017-10-05T07:32:54.723Z\",\n                \"updated-at\": \"2017-10-05T07:33:20.065Z\",\n                \"name\": \"User 1\",\n                \"email\": \"user1@example.com\",\n                \"avatar-url\": \"https://lh3.googleusercontent.com/-RkJKbnaFE4s/AAAAAAAAAAI/AAAAAAAAAAc/odge8fTZQCw/s512/photo.jpg\",\n                \"admin\": true\n            },\n            \"relationships\": {\n                \"sent-transactions\": {\n                    \"links\": {\n                        \"self\": \"http://localhost:3000/api/v1/users/1/relationships/sent-transactions\",\n                        \"related\": \"http://localhost:3000/api/v1/users/1/sent-transactions\"\n                    }\n                },\n                \"received-transactions\": {\n                    \"links\": {\n                        \"self\": \"http://localhost:3000/api/v1/users/1/relationships/received-transactions\",\n                        \"related\": \"http://localhost:3000/api/v1/users/1/received-transactions\"\n                    }\n                }\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"users\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/api/v1/users/2\"\n            },\n            \"attributes\": {\n                \"created-at\": \"2017-10-05T07:33:45.449Z\",\n                \"updated-at\": \"2017-10-05T07:41:56.144Z\",\n                \"name\": \"User 2\",\n                \"email\": \"user2@example.com\",\n                \"avatar-url\": null,\n                \"admin\": false\n            },\n            \"relationships\": {\n                \"sent-transactions\": {\n                    \"links\": {\n                        \"self\": \"http://localhost:3000/api/v1/users/2/relationships/sent-transactions\",\n                        \"related\": \"http://localhost:3000/api/v1/users/2/sent-transactions\"\n                    }\n                },\n                \"received-transactions\": {\n                    \"links\": {\n                        \"self\": \"http://localhost:3000/api/v1/users/2/relationships/received-transactions\",\n                        \"related\": \"http://localhost:3000/api/v1/users/2/received-transactions\"\n                    }\n                }\n            }\n        }\n    ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "users/:id",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/users/1",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "users",
+                    "1"
+                  ]
+                },
+                "description": "Retrieves the User with the corresponding :id."
+              },
+              "response": [
+                {
+                  "id": "65f0a134-461e-42db-ad09-f40400dc5be3",
+                  "name": "users/1",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/users/1",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "users",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3c16e0f3206588d226273a09fe6dd328\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "81a02e98-a0e1-4e01-8cc9-0f2f97e2631a",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.032018",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 36,
+                  "body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"users\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/api/v1/users/1\"\n        },\n        \"attributes\": {\n            \"created-at\": \"2017-10-05T07:32:54.723Z\",\n            \"updated-at\": \"2017-10-05T07:33:20.065Z\",\n            \"name\": \"User 1\",\n            \"email\": \"user1@example.com\",\n            \"avatar-url\": \"https://lh3.googleusercontent.com/-RkJKbnaFE4s/AAAAAAAAAAI/AAAAAAAAAAc/odge8fTZQCw/s512/photo.jpg\",\n            \"admin\": true\n        },\n        \"relationships\": {\n            \"sent-transactions\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/users/1/relationships/sent-transactions\",\n                    \"related\": \"http://localhost:3000/api/v1/users/1/sent-transactions\"\n                }\n            },\n            \"received-transactions\": {\n                \"links\": {\n                    \"self\": \"http://localhost:3000/api/v1/users/1/relationships/received-transactions\",\n                    \"related\": \"http://localhost:3000/api/v1/users/1/received-transactions\"\n                }\n            }\n        }\n    }\n}"
+                }
+              ]
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "Authentication",
+          "description": "",
+          "item": [
+            {
+              "name": "authentication/obtain_api_token",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "jwt_token",
+                      "value": "<jwt_token>",
+                      "description": "",
+                      "type": "text"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<uid>",
+                      "description": "",
+                      "type": "text"
+                    },
+                    {
+                      "key": "provider",
+                      "value": "<provider>",
+                      "description": "",
+                      "type": "text"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<name>",
+                      "description": "",
+                      "type": "text"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<email>",
+                      "description": "",
+                      "type": "text"
+                    },
+                    {
+                      "key": "avatar_url",
+                      "value": "<avatar_url>",
+                      "description": "",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/authentication/obtain_api_token",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "authentication",
+                    "obtain_api_token"
+                  ]
+                },
+                "description": "Retrieves a unique API-token and user id by providing the callback data that was retrieved from a Google OAuth 2.0 sign in event.\nThe body should contain the _jwt_ _token_, _uid_, _provider_, _name_, _email_ and _avatar_ _url_ attributes."
+              },
+              "response": [
+                {
+                  "id": "c05afc7a-b6db-4b48-b057-6ea1afdb9562",
+                  "name": "authentication/obtain_api_token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "jwt_token",
+                          "value": "<jwt_token>",
+                          "description": "",
+                          "type": "text"
+                        },
+                        {
+                          "key": "uid",
+                          "value": "<uid>",
+                          "description": "",
+                          "type": "text"
+                        },
+                        {
+                          "key": "provider",
+                          "value": "<provider>",
+                          "description": "",
+                          "type": "text"
+                        },
+                        {
+                          "key": "name",
+                          "value": "<name>",
+                          "description": "",
+                          "type": "text"
+                        },
+                        {
+                          "key": "email",
+                          "value": "<email>",
+                          "description": "",
+                          "type": "text"
+                        },
+                        {
+                          "key": "avatar_url",
+                          "value": "<avatar_url>",
+                          "description": "",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "http://localhost:3000/api/v1/authentication/obtain_api_token",
+                      "protocol": "http",
+                      "host": [
+                        "localhost"
+                      ],
+                      "port": "3000",
+                      "path": [
+                        "api",
+                        "v1",
+                        "authentication",
+                        "obtain_api_token"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "4feaf694-d70e-4ce8-805c-e9cb1fb3a628",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.087031",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 116,
+                  "body": "{\n    \"data\": {\n        \"api-token\": \"KACqF93MIwZF8Eskb4XK2A\",\n        \"user-id\": \"1\"\n    }\n}"
+                }
+              ]
+            }
+          ],
+          "_postman_isSubFolder": true
+        }
+      ]
+    }
+  ]
+}
