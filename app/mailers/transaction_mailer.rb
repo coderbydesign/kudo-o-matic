@@ -8,7 +8,7 @@ class TransactionMailer < ApplicationMailer
       transaction_email(receiver, transaction).deliver_later
     end
 
-    if receiver.name === 'Kabisa'
+    if receiver.name === ENV['COMPANY_USER']
       User.where.not(email: '').where.not(email: transaction.sender.email).where(deactivated_at: nil).each do |user|
         transaction_email(user, transaction).deliver_later if user.transaction_received_mail
       end

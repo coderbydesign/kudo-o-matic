@@ -2,21 +2,26 @@
 
 [![Travis Build Status](https://img.shields.io/travis/kabisa/kudo-o-matic.svg?style=flat-square)](https://travis-ci.org/kabisa/kudo-o-matic.svg?branch=master) [![GitHub release](https://img.shields.io/github/release/kabisa/kudo-o-matic.svg?style=flat-square)](https://github.com/kabisa/kudo-o-matic/releases) [![GitHub license](https://img.shields.io/github/license/kabisa/kudo-o-matic.svg?style=flat-square)](https://github.com/kabisa/kudo-o-matic/blob/master/LICENSE.md)
 
-## Getting Started with the Kudo-o-Matic
+## What is the Kudo-o-Matic?
+The Kudo project originated from the wish to create common goals for people and teams who work on different projects in order to *strengthen the team spirit*, *collectively celebrate successes* and *ensure transparency* within an organization.
 
-### What is the Kudo-o-Matic?
-The Kudo-o-Matic is originated from the wish to create a common goal for people and teams who are working on different projects. Goals come in various forms: financial, satisfaction of customers, collaborating and so on...
+The Kudo-o-Matic was created to keep track of these goals and the progress towards it. 
+Users can reward each other for good deeds by giving Kudos to each other and work together to achieve common goals in the form of Kudo-thesholds.
 
-To keep a good overview we decided to create one 'Kudo Meter', where all these components have been processed in. The goal is not literally a target. It is more like a gauge instead, to stimulate good things.
 
-### How to setup your Kudo-o-Matic locally?
+## Kudo-o-Matic setup
+##### Prerequisites
+To start using the Kudo-o-Matic, you'll need:
+* [Ruby](https://www.ruby-lang.org/) >= 2.3.1
+* [Ruby on Rails](http://rubyonrails.org/) >= 5.0.3
+* [Bundler](http://bundler.io/)
+* [Postgres](https://www.postgresql.org/)
 
-To start using the Kudo-o-Matic, you'll need
-* Ruby > 2.0
-* Bundler (ruby gem)
-* Postgres
+To run the RSpec test suite (not required to run the Kudo-o-Matic), you'l need:
+* [PhantomJS](http://phantomjs.org/)
+* [Imagemagick](https://www.imagemagick.org/)
 
-##### 1. Clone the repository to your local machine
+##### 1. Clone the GitHub repository
 With HTTPS:
 ```
 git clone https://github.com/kabisa/kudo-o-matic.git
@@ -25,7 +30,8 @@ With SSH:
 ```
 git clone git@github.com:kabisa/kudo-o-matic.git
 ```
-##### 2. Install bundler
+
+##### 2. Install Bundler
 ```
 gem install bundler
 ```
@@ -35,123 +41,205 @@ gem install bundler
 bundle install
 ```
 
-##### 4. Add default db settings (change if needed)
+##### 4. Copy default database configuration (change if needed)
 ```
 cp config/database.yml.example config/database.yml
 ```
-##### 5. Create and migrate your database
+
+##### 5. Create and setup database
 ```
 rake db:setup
 ```
-##### 6. Seed your database
+
+##### 6. Seed database
 ```
 rake db:seed
 ```
-This will create a standard template with a balance and some goals
-##### 7. Environment Variables
-Check `env.example` for all environment variables and create a new `.env` file in the root of the project. Now you copy and set the environment variables in your `.env` file
-##### 8. Start rails with `rails s`
-Now you can view your Kudo-o-Matic at `localhost:3000` from your browser
-##### 9. Log in with your Google account
-NOTE: If you didn't set the `DEVISE_DOMAIN` ENV variable yet, it will be set to it's default wich is `gmail.com`
+This will create a standard template with a balance and some goals.
 
-Create your account by logging in with your Google+ account
-##### 10. Run rake task to promote the first user to admin
-In your terminal do
+##### 7. Copy environment variables
+Copy the environment variables template in the `env.example` to a new `.env` file in the root of the project.   
+Following the dependency setup instructions below will help you set these variables.
+
+##### 8. Start rails 
+```
+rails s
+```
+Now you can view your Kudo-o-Matic at '<http://localhost:3000/>' from your browser.
+
+##### 9. Setup Google API
+Follow the Google API setup instructions described below to set up the authentication system.
+
+##### 10. Log in with your Google account
+Create your Kudo-o-Matic account by logging in with your Google account.
+
+**NOTE**: Set the `DEVISE_DOMAIN` environment variable to specify the required (corporate) mail domain (default is gmail.com).
+
+##### 11. Run rake task to promote the first user to administrator
 ```
 rake admin:promote
 ```
-##### 11. You can now view the admin dashboard
-Go to http://localhost:3000/admin to see the admin dashboard
 
-## Google API Setup
-* Go to 'https://console.developers.google.com'
-* Select your project.
-* Click 'Enable and manage APIs'.
-* Make sure "Contacts API" and "Google+ API" are on.
-* Go to Credentials, then select the "OAuth consent screen" tab on top, and provide an 'EMAIL ADDRESS' and a 'PRODUCT NAME'
+##### 12. View the administrator dashboard
+Go to '<http://localhost:3000/admin>' to view the administrator dashboard.
+It provides a simple interface for:
+* Creating new entries.
+* Editing existing entries.
+* Viewing existing entries.
+* Destroying existing entries (user entries can't be destroyed, but they can be deactivated and reactivated).
+
+## Google API setup
+Follow these instructions to setup the Kudo-o-Matic OAuth 2.0 user authentication system:
+* [Create a new Google API project](https://console.developers.google.com).
+* Go to 'Library' and make sure 'Contacts API' and 'Google+ API' are enabled.
+* Go to 'Credentials', select the 'OAuth consent screen' tab and provide an 'Email address' and a 'Product name'.
+* Go to 'Credentials', select the 'Credentials' tab and create a new 'OAuth client ID'.
+* Select 'Web application' for the Application type, provide a 'Name' and add an 'Authorized redirect URI'.  
+Use '<http://localhost:3000/users/auth/google_oauth2/callback>' for development.
+* Set the `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` environment variables.
 * Wait 10 minutes for changes to take effect.
-* Copy the Google Client ID and Google Client Secret to the Google variables in your `.env` file
+* Restart the server.
 
-## Slack API Setup
-Only necessary if you want to connect your Kudo-o-Matic to your Slack team to get notifications from the application
+## Amazon AWS S3 setup
+Follow these instructions to setup the Amazon AWS S3 cloud storage service for images attached to Kudo transations:
+* [Create an AWS S3 account](https://aws.amazon.com/resources/create-account/).
+* Setup a Amazon S3 Bucket.
+* Set the `AWS_S3_HOST_NAME`, `AWS_S3_REGION`, `AWS_S3_BUCKET`, `AWS_S3_BUCKET` and `AWS_SECRET_ACCESS_KEY` environment variables.
+* Restart the server.
 
-The application will use the Slack Incoming Webhooks API (https://api.slack.com/incoming-webhooks)
-* Go to your Slack home page -> Menu -> Configure Apps -> Custom Integrations
-* Go to Incoming Webhooks and click 'Add Configuration'
-* Choose your channel where the webhook should post notifications (can be changed later)
-* Click 'Add Incoming WebHooks Integration
-* Copy the 'Webhook URL' and paste it in the `SLACK_WEBHOOK_URL` environment variable in your `.env` file
-* As an extra option you can also define `SLACK_CHANNEL` but if you decide to not use this environment variable you should delete the `channnel` option from the Slack notifications in `slack_notifications.rb`
+## Slack API setup
+The Kudo-o-Matic can be connected with Slack to enable the following features:
+* Receive personalized notifications and reminders.
+* Give Kudos with the /kudo command.
+* Give Kudos by adding a custom :kudo: reactji to a message.
+* Like Kudo transactions using the like button.
 
-## Mail Notifications
-Only necessary if you want to connect your Kudo-o-Matic to your Email to get notifications from the application
+Follow these instructions to setup the Kudo-o-Matic Slack integration:
+* [Create a new Slack App](https://api.slack.com/apps) and configure the basic information.
+* Enable 'OAuth 2.0 & Permissions', select the 'Permission Scopes' `bot`, `commands`, `channels:history`, `chat:write:user`, `chat:write:user`, `reactions:read`, `users:read` and set the 'Request URL'.  
+Use '<http://localhost:3000/users/auth/slack/callback>' for development.
+* Enable 'Interactive Components' and set the `slack/action` 'Request URL'.  
+Use '<http://localhost:3000/slack/action>' for development.
+* Enable 'Slash Commands' and create the `/kudo` command, add the usage hint `<amount> to @receiver for <reason>` and set the `slack/command` 'Request URL'.  
+Use '<http://localhost:3000/slack/command>' for development.
+* Enable 'Event Subscriptions', add the `reaction_added` 'Workspace Event' and set the `slack/reaction` 'Request URL'.  
+Use '<http://localhost:3000/slack/reaction>' for development.
+* Enable the 'Bot User' with the 'Display name' `Kudo-o-Matic`, the 'Default username' `kudo-o-matic` and turn 'Always Show My Bot as Online' on. 
+* Install the Slack App in the Slack Workspace of your organization.
+* Set the `SLACK_CLIENT_ID`, `SLACK_CLIENT_SECRET`, `SLACK_VERIFICATION_TOKEN`, `SLACK_ACCESS_TOKEN`, `SLACK_BOT_ACCESS_TOKEN` and `SLACK_CHANNEL` environment variables, provided on the Slack API dashboard.
+* Restart the server.
 
-The application is using Rails' ActionMailer for this. The default is that if there is no ENV variable configured for this it won't try to send notifications.
+Users can connect their Slack account by signing in to Slack on the settings page.
 
-* To set up a mail notifier you need to define `MAIL_USERNAME`, `MAIL_PASSWORD` and `MAIL_ADDRESS`.
+## Mail setup
+The Kudo-o-Matic can automatically send mail notifications when the following events occur:
+* When a user joins the Kudo-o-Matic platform.
+* When a user receives Kudos (only this user will receive the notification).
+* When a goal is reached.
+* Weekly summary mail.
 
-## Cron jobs
+Follow these instructions to enable the Kudo-o-Matic mail notification functionality:
+* [Create and new mail account](https://accounts.google.com/SignUp) or use existing mail credentials.
+* Set the `MAIL_USERNAME`, `MAIL_PASSWORD` and `MAIL_ADDRESS` environment variables.
+* Restart the server.
 
+Users can configure their mail preferences on the settings page. By default, they will receive all mail notifications.
+
+## Kudo-o-Mobile mobile app setup
+The Kudo-o-Matic provides a RESTfull API for the [Kudo-o-Mobile](https://github.com/kabisa/kudo-o-matic-frontend) cross-platform [Maji](https://github.com/kabisa/maji) mobile app.
+This API is protected with a token based authentication system. Mobile app users retrieve an API-token by signing in to the app. 
+  
+Follow these instructions to setup the token based authentication system for the mobile app: 
+* [Follow the Kudo-o-Mobile README](https://github.com/kabisa/kudo-o-matic-frontend).
+* Set the `GOOGLE_CLIENT_ID_KUDO_O_MOBILE_IOS` and `GOOGLE_CLIENT_ID_KUDO_O_MOBILE_ANDROID` environment variables 
+(it is possible to add other mobile operating systems by adding new environments variable and editing the AuthenticationController logic).
+* Restart the server.
+
+Import the `postman_collection.json` and `postman_environment.json` files into [Postman](https://www.getpostman.com/) to view the API documentation of the Kudo-o-Matic REST API. 
+
+## Scheduled tasks
 ### Mail
-The Kudo-o-Matic automatically sends a Kudo-summary email to all users with an email address that have email notifications enabled using rufus-scheduler (thread based Ruby job scheduler).
+The Kudo-o-Matic automatically sends a Kudo summary mail to all users with an mail address that have email notifications enabled.
 
 ##### Schedule
 Every friday at 10.00 AM.  
-Crontab expression: `0 9 * * 5` (in GMT)
+Crontab expression: `0 9 * * 5` (GMT)
+
+**NOTE**: Only works if the mail environment variables are set.
 
 ### Slack
-The Kudo-o-Matic automatically sends a Kudo-reminder message to all users that connected a Slack account.
+The Kudo-o-Matic automatically sends a Kudo reminder message to all users that connected a Slack account.
 
 ##### Schedule
-Every friday at 10.00 AM.  
-Crontab expression: `0 9 * * 5` (in GMT)
+Every friday at 11.55 AM.  
+Crontab expression: `55 10 * * 5` (GMT)
 
-## Admin Panel
-You can find and add stuff in the database by visiting `localhost:3000/admin`
+**NOTE**: Only works if the Slack environment variables are set.
 
-### Goals
-A goal depends on a balance, to set and see a goal on the Kudo Meter you need to set the Goal to the current Balance.
-A goal is a reward for the team (for example: Paintball) if they reach a certain amount of ₭udo's that you define.
-A goal:
-* Has a name
-* Has an amount
-* Is attached to a Balance
-
-### Transactions
-A transaction depends on a balance, to set and see the ₭udo's you gave with a transaction to increment on the Kudo Meter you need to set a Balance with `current: true`.
-A transaction:
-* Has *1* sender
-* Has *0..1* receiver (This can be a random name or a real user)
-* Has *1* amount
-* Has *1* activity
-* Has *0..1* file (jpg, png, gif)
-* Has 0..* likes
-
-### Activities
-A activity is part of a transaction. A activity:
-* Has *0..n* Transactions
-
-### Users
-A user is created and can log in with Google+
-A user:
-* Has a username
-* Has an email
-* Has a slack username (optional)
-* Has admin rights (optional)
-* Has *0..n* Transactions
-
+## Entities
 ### Balance
-A balance is the base of the whole Kudo-o-Matic. A balance:
-* Has a name
-* Has *0..n* Transactions
-* Has *0..n* Goals
-* Is the current balance or isn't
+A *Balance* is the base of the Kudo-o-Matic system. It groups *Goals* together and connects them to *Transactions*.  
 
-### Dependencies
-* You can't use the Kudo-o-Matic without a Balance, and `current` should be set to `true` if there is no balance with current yet
-* Transactions are always added to the current Balance
-* If there are multiple Balances with `current: true` the transaction will be added to the last created Balance
-* If you delete users that have transactions the application will crash
+A *Balance*:
+* Has a name
+* Is the current *Balance* or not
+* Has *0..n* *Goals*
+* Has *0..n* *Transactions*
+
+### Goal
+A *Goal* depends on a *Balance*. 
+To set and see a *Goal* on the Kudo Meter you need to associate the *Goal* with the current *Balance*.
+A *Goal* is a common reward for the organization (for example: paintball) that will be organized if the defined Kudo threshold is exceeded.
+
+A *Goal*:
+* Has a name
+* Has an amount of Kudos
+* Has a date of achievement
+* Belongs to *1* *Balance*
+
+### Transaction
+A *Transaction* depends on a *Balance*. 
+A *User* can reward another *User* for a good deed by creating a Kudo *Transaction*.
+
+A *Transaction*:
+* Has a amount of Kudos
+* Optionally has an image attachment (JPG, PNG or GIF)
+* Optionally has Slack metadata
+* Has *1* *Activity*
+* Has *1* sender (*User*)
+* Has *0..1* receiver (*User*)
+* Has *0..** *Votes*
+
+### Activity
+An *Activity* is part of a *Transaction*. 
+A *Activity* describes the good deed of a *User*.
+
+An *Activity*:
+* Has a name (description)
+* Belongs to *0..n* *Transactions*
+
+### Vote
+A *Vote* depends on a *Transaction* (votable) and a *User* (voter). 
+A *User* can like and unlike *Transactions*. 
+
+A *Vote*:
+* Belongs to *1* votable (*Transaction*)
+* Belongs to *1* voter (*Voter*)
+* Optionally has vote metadata
+
+### User
+A *User* can create a Kudo *Transaction* to reward another *User* for a good deed.
+*Users* work together to achieve common Kudo *Goals*.
+
+A *User*:
+* Has a username
+* Has an email address
+* Optionally has admin rights (optional)
+* Optionally has Google user data
+* Optionally has Slack user data
+* Optionally has an API token
+* Has preferences 
+* Has *0..n* *Transactions* 
+* Has *0..n* *Votes*
 
 ![Demo](https://kudo-o-matic-development.s3.amazonaws.com/Screenshot%202017-07-14%2015.17.38.png)
