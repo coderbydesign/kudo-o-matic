@@ -11,6 +11,15 @@ class Api::V1::AuthenticationController < Api::V1::ApiController
     handle_exceptions(e)
   end
 
+  def store_fcm_token
+    @fcm_token = params['fcm_token']
+    api_user.fcm_tokens.find_or_create_by(token: @fcm_token)
+
+    render 'api/v1/authentication/store_fcm_token', status: :created
+  rescue => e
+    handle_exceptions(e)
+  end
+
   private
 
   def validate_jwt_token(jwt_token)

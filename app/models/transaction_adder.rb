@@ -96,6 +96,8 @@ class TransactionAdder
 
     GoalReacher.check!
 
+    SlackService.instance.send_new_transaction(transaction)
+    FcmService.instance.send_new_transaction(transaction)
     TransactionMailer.new_transaction(transaction)
 
     transaction

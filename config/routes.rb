@@ -88,6 +88,7 @@ Rails.application.routes.draw do
 
       scope :authentication, controller: :authentication do
         post :obtain_api_token
+        post :store_fcm_token
       end
     end
   end
