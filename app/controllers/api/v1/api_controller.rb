@@ -15,7 +15,7 @@ class Api::V1::ApiController < JSONAPI::ResourceController
 
   def authorize_request
     if api_token.blank? || api_user.nil?
-      error_object_overrides = {title: 'Unauthorized', detail: 'No valid API-token was provided.'}
+      error_object_overrides = {title: 'Unauthorized', detail: 'No valid API token was provided.'}
       errors = Api::V1::UnauthorizedError.new(error_object_overrides).errors
       render_errors(errors)
     end
