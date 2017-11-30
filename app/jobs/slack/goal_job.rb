@@ -37,8 +37,8 @@ Slack::GoalJob = Struct.new(:nil) do
                             short: true
                         }
                     ],
-                    footer: "#{settings.company_name} | #{settings.company_project} | Goal achieved on: #{goal.achieved_on.strftime('%d-%m-%Y')}",
-                    footer_icon: settings.company_icon
+                    footer: "#{ENV['COMPANY_USER']} | ₭udo-o-Matic | Goal achieved on: #{goal.achieved_on.strftime('%d-%m-%Y')}",
+                    footer_icon: ENV['COMPANY_ICON']
                 }
             ]
     }.to_json

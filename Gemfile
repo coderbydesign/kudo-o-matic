@@ -43,7 +43,6 @@ gem 'rubocop', '~> 0.51.0', require: false
 gem 'rufus-scheduler', '~> 3.4.2'
 gem 'sass-rails', '~> 5.0'
 gem 'scss_lint', '~> 0.54', require: false
-gem 'settingslogic', '~> 2.0.9'
 gem 'simple_form', '~> 3.5'
 gem 'timecop', '~> 0.8.1'
 gem 'uglifier', '~> 3.2'
