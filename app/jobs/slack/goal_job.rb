@@ -14,7 +14,6 @@ Slack::GoalJob = Struct.new(:nil) do
 
     goal = Goal.previous
     balance = Balance.current
-    settings = Settings.slack
 
     request.body = {
         channel: ENV['SLACK_CHANNEL'],

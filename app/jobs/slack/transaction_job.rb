@@ -14,8 +14,6 @@ Slack::TransactionJob = Struct.new(:transaction, :new?) do
     adjective = %w(Great Awesome Terrific Fantastic Excellent Wonderful Amazing Cool)[deterministic_random_index % length]
     emoji = %w(:+1: :ok_hand: :v: :raised_hands: :clap:)[deterministic_random_index % length]
 
-    settings = Settings.slack
-
     request.body = {
         ts: transaction.slack_transaction_updated_at,
         channel: ENV['SLACK_CHANNEL'],
