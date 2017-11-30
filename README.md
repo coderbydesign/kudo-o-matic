@@ -9,7 +9,7 @@ The Kudo-o-Matic was created to keep track of these goals and the progress towar
 Users can reward each other for good deeds by giving Kudos to each other and work together to achieve common goals in the form of Kudo-thesholds.
 
 
-## Kudo-o-Matic setup
+## Quick start guide
 ##### Prerequisites
 To start using the Kudo-o-Matic, you'll need:
 * [Ruby](https://www.ruby-lang.org/) >= 2.3.1
@@ -17,7 +17,7 @@ To start using the Kudo-o-Matic, you'll need:
 * [Bundler](http://bundler.io/)
 * [Postgres](https://www.postgresql.org/)
 
-To run the RSpec test suite (not required to run the Kudo-o-Matic), you'l need:
+To run the RSpec test suite (not required to run the Kudo-o-Matic), you'll need:
 * [PhantomJS](http://phantomjs.org/)
 * [Imagemagick](https://www.imagemagick.org/)
 
@@ -55,17 +55,17 @@ rake db:setup
 ```
 rake db:seed
 ```
-This will create a standard template with a balance and some goals.
+This will add a default configuration to the database with a balance and three goals.
 
 ##### 7. Copy environment variables
-Copy the environment variables template in the `env.example` to a new `.env` file in the root of the project.   
+Copy the environment variables template in the `env.example` to a new `.env` file in the root of the project.  
 Following the dependency setup instructions below will help you set these variables.
 
-##### 8. Start rails 
+##### 8. Start Rails server 
 ```
 rails s
 ```
-Now you can view your Kudo-o-Matic at '<http://localhost:3000/>' from your browser.
+Now you can view your Kudo-o-Matic at '<http://localhost:3000/>' in your browser.
 
 ##### 9. Setup Google API
 Follow the Google API setup instructions described below to set up the authentication system.
@@ -73,9 +73,9 @@ Follow the Google API setup instructions described below to set up the authentic
 ##### 10. Log in with your Google account
 Create your Kudo-o-Matic account by logging in with your Google account.
 
-**NOTE**: Set the `DEVISE_DOMAIN` environment variable to specify the required (corporate) mail domain (default is gmail.com).
+**NOTE**: Set the `DEVISE_DOMAIN` environment variable to specify the required mail domain (default is gmail.com).
 
-##### 11. Run rake task to promote the first user to administrator
+##### 11. Run Rake task to promote the first user to administrator
 ```
 rake admin:promote
 ```
@@ -87,6 +87,17 @@ It provides a simple interface for:
 * Editing existing entries.
 * Viewing existing entries.
 * Destroying existing entries (user entries can't be destroyed, but they can be deactivated and reactivated).
+
+##### 13. Create a company user entry (optional)
+It's recommended to create a user entry with the name of organization, so users can give Kudos to the organization as a whole. 
+Set the `COMPANY_USER` environment variable and run:
+```
+rake user:company
+```
+
+##### 14. Set up dependencies (optional)
+Congratulations, you did just set up the Kudo-o-Matic!  
+You can optionally set up the dependencies listed below to get the most out fof your Kudo-o-Matic.
 
 ## Google API setup
 Follow these instructions to setup the Kudo-o-Matic OAuth 2.0 user authentication system:
@@ -127,6 +138,7 @@ Use '<http://localhost:3000/slack/reaction>' for development.
 * Enable the 'Bot User' with the 'Display name' `Kudo-o-Matic`, the 'Default username' `kudo-o-matic` and turn 'Always Show My Bot as Online' on. 
 * Install the Slack App in the Slack Workspace of your organization.
 * Set the `SLACK_CLIENT_ID`, `SLACK_CLIENT_SECRET`, `SLACK_VERIFICATION_TOKEN`, `SLACK_ACCESS_TOKEN`, `SLACK_BOT_ACCESS_TOKEN` and `SLACK_CHANNEL` environment variables, provided on the Slack API dashboard.
+* Optionally change the value of the `COMPANY_ICON` environment variable to provide your own icon for the footer of Slack messages. 
 * Restart the server.
 
 Users can connect their Slack account by signing in to Slack on the settings page.
@@ -145,7 +157,7 @@ Follow these instructions to enable the Kudo-o-Matic mail notification functiona
 
 Users can configure their mail preferences on the settings page. By default, they will receive all mail notifications.
 
-## Kudo-o-Mobile mobile app setup
+## Kudo-o-Mobile app setup
 The Kudo-o-Matic provides a RESTfull API for the [Kudo-o-Mobile](https://github.com/kabisa/kudo-o-matic-frontend) cross-platform [Maji](https://github.com/kabisa/maji) mobile app.
 This API is protected with a token based authentication system. Mobile app users retrieve an API-token by signing in to the app. 
   
@@ -239,7 +251,23 @@ A *User*:
 * Optionally has Slack user data
 * Optionally has an API token
 * Has preferences 
-* Has *0..n* *Transactions* 
+* Has *0..n* *Transactions*
 * Has *0..n* *Votes*
+
+## How to contribute?
+* [Fork the repository](https://github.com/kabisa/kudo-o-matic/fork).
+* Create your feature branch (`git checkout -b my-new-feature`).
+* Commit your changes (`git commit -am 'Add some new feature'`).
+* Push to the branch (`git push origin my-new-feature`).
+* [Create a new Pull Request](https://github.com/kabisa/kudo-o-matic/pulls).
+
+## Did you find a bug?
+* [Ensure the bug was not already reported](https://github.com/kabisa/kudo-o-matic/issues).
+* If you are unable to find an open issue addressing the problem, [open a new one](https://github.com/kabisa/kudo-o-matic/issues/new).   
+Be sure to include a title and a clear description, as much relevant information as possible, 
+and a code example or an executable test case demonstration the expected behavior that is not occurring. 
+
+## License
+Copyright (c) 2016-2017 [Kabisa](https://www.kabisa.nl/). See [LICENSE](https://github.com/kabisa/kudo-o-matic/blob/develop/LICENSE.md) for details.
 
 ![Demo](https://kudo-o-matic-development.s3.amazonaws.com/Screenshot%202017-07-14%2015.17.38.png)

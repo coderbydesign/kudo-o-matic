@@ -49,8 +49,8 @@ Slack::TransactionJob = Struct.new(:transaction, :new?) do
                         short: true
                     }
                 ],
-                footer: "#{settings.company_name} | #{settings.company_project} | Transaction created at: #{(transaction.created_at + 60).strftime('%d-%m-%Y %H:%M')}",
-                footer_icon: settings.company_icon,
+                footer: "#{ENV['COMPANY_USER']} | ₭udo-o-Matic | Transaction created at: #{(transaction.created_at + 60).strftime('%d-%m-%Y %H:%M')}",
+                footer_icon: ENV['COMPANY_ICON'],
                 image_url: transaction.image.url(:thumb),
                 callback_id: transaction.id,
                 actions: [
