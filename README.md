@@ -112,7 +112,7 @@ Use '<http://localhost:3000/users/auth/google_oauth2/callback>' for development.
 * Restart the server.
 
 ## Amazon AWS S3 setup
-Follow these instructions to setup the Amazon AWS S3 cloud storage service for images attached to Kudo transations:
+Follow these instructions to setup the Amazon AWS S3 cloud storage service for images attached to Kudo transactions:
 * [Create an AWS S3 account](https://aws.amazon.com/resources/create-account/).
 * Setup a Amazon S3 Bucket.
 * Set the `AWS_S3_HOST_NAME`, `AWS_S3_REGION`, `AWS_S3_BUCKET`, `AWS_S3_BUCKET` and `AWS_SECRET_ACCESS_KEY` environment variables.

@@ -12,8 +12,6 @@ Slack::ReminderJob = Struct.new(:nil) do
 
     greeting = %w(Hi Hey Hello).sample
 
-    settings = Settings.slack
-
     User.where(deactivated_at: nil).where.not(slack_id: nil).each do |user|
       request.body = {
           channel: "@#{user.slack_id}",
