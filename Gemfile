@@ -44,6 +44,7 @@ gem 'rufus-scheduler', '~> 3.4.2'
 gem 'sass-rails', '~> 5.0'
 gem 'scss_lint', '~> 0.54', require: false
 gem 'simple_form', '~> 3.5'
+gem 'slack-ruby-client', '~> 0.11.0'
 gem 'timecop', '~> 0.8.1'
 gem 'uglifier', '~> 3.2'
 
