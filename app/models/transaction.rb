@@ -1,6 +1,6 @@
 class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: "is not correct. You can't give negative ₭udo's or exceed over 1000" }
-  validates :activity_name_feed, length: {minimum: 4, maximum: 90}
+  validates :activity_name_feed, length: {minimum: 4, maximum: 140}
 
   after_commit :send_slack_notification, on: :create, unless: :skip_callbacks
   # also creates a second image file with a maximum width and/or height of 800 pixels with its aspect ratio preserved
