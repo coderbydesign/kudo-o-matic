@@ -1,6 +1,6 @@
 class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: "is not correct. You can't give negative ₭udo's or exceed over 1000" }
-  validates :activity_name_feed, length: {minimum: 4, maximum: 90}
+  validates :activity_name_feed, length: {minimum: 4, maximum: 140}
 
   # also creates a second image file with a maximum width and/or height of 800 pixels with its aspect ratio preserved
   has_attached_file :image, styles: {thumb: '600x600'}
@@ -18,12 +18,6 @@ class Transaction < ActiveRecord::Base
   delegate :name, to: :sender,   prefix: true
   delegate :name, to: :receiver, prefix: true
   delegate :name, to: :activity, prefix: true
-
-  # def self.goal_reached_transaction
-  #   activity = Activity.create name:"reaching the goal #{Goal.previous.name} :boom:, here are some ₭udo's to boost your hunt for the next goal"
-  #   user = User.find_or_create_by(name: ENV.fetch('COMPANY_USER', 'Kabisa'))
-  #   Transaction.create sender: user, receiver: user, amount: 100, activity: activity, balance: Balance.current
-  # end
 
   def kudos_amount
     self.amount + self.votes.count
@@ -62,7 +56,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.all_for_user(user)
-    Transaction.where(sender: user).or(Transaction.where(receiver: user)).or(Transaction.where(receiver: User.where(name: ENV.fetch('COMPANY_USER', 'Kabisa')))).order('created_at desc')
+    Transaction.where(sender: user).or(Transaction.where(receiver: user)).or(Transaction.where(receiver: User.where(name: ENV['COMPANY_USER']))).order('created_at desc')
   end
 
   def self.send_by_user(user)
@@ -70,7 +64,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.received_by_user(user)
-    Transaction.where(receiver: user).or(Transaction.where(receiver: User.where(name: ENV.fetch('COMPANY_USER', 'Kabisa')))).order('created_at desc')
+    Transaction.where(receiver: user).or(Transaction.where(receiver: User.where(name: ENV['COMPANY_USER']))).order('created_at desc')
   end
 
   GUIDELINES =

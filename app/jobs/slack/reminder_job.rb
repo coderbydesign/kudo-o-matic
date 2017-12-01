@@ -12,8 +12,6 @@ Slack::ReminderJob = Struct.new(:nil) do
 
     greeting = %w(Hi Hey Hello).sample
 
-    settings = Settings.slack
-
     User.where(deactivated_at: nil).where.not(slack_id: nil).each do |user|
       request.body = {
           channel: "@#{user.slack_id}",
@@ -26,8 +24,8 @@ Slack::ReminderJob = Struct.new(:nil) do
                                "It's almost weekend, but don't forget to think back about this week "\
                                "because there is definitely someone who deserves a compliment! :thinking_face:\n\n"\
                                "Click <#{root_url}|here> to give that person some ₭udo's! :+1:",
-                      footer: "#{settings.company_name} | #{settings.company_project}",
-                      footer_icon: settings.company_icon
+                      footer: "#{ENV['COMPANY_USER']} | ₭udo-o-Matic",
+                      footer_icon: ENV['COMPANY_ICON']
                   }
               ]
       }.to_json

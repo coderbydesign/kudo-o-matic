@@ -1,1 +1,1 @@
-Rails.application.routes.default_url_options[:host] = ENV.fetch('ROOT_URL', 'https://kudos.kabisa.io/')
+Rails.application.routes.default_url_options[:host] = ENV['ROOT_URL']

@@ -1,4 +1,6 @@
 class SlackController < ApplicationController
+  include Slack::Messages
+
   skip_before_action :verify_authenticity_token, only: [:action, :command, :reaction]
   skip_before_action :authenticate_user!, only: [:action, :command, :reaction]
 
@@ -25,8 +27,8 @@ class SlackController < ApplicationController
   def command
     return unless check_verification_token(params['token'])
 
-    text = params['text'].strip
-    raise if text.blank? || text.casecmp('help') == 0
+    arguments = params['text'].strip
+    raise if arguments.blank? || arguments.casecmp('help') == 0
 
     transaction = TransactionAdder.create_from_slack_command(params)
 
@@ -35,7 +37,7 @@ class SlackController < ApplicationController
   rescue ActiveRecord::RecordInvalid, SlackConnectionError, SlackArgumentsError => error
     SlackService.instance.send_response(params['response_url'], error)
   rescue
-    message = "Use the following syntax to give ₭udo's:\n */kudo* <amount> *to* @receiver *for* <reason>"
+    message = "Use the following syntax to give ₭udos:\n*/kudo* @receiver <amount> <reason>"
     SlackService.instance.send_response(params['response_url'], message)
   end
 
@@ -62,7 +64,10 @@ class SlackController < ApplicationController
       SlackService.instance.send_ephemeral_message(channel, user_id, message)
     else
       message = SlackService.instance.retrieve_message(channel, timestamp)
-      transaction = TransactionAdder.create_from_slack_reaction(params, message)
+      activity = Formatting.unescape(message['text']).truncate(120, separator: ' ')
+      activity = replace_user_ids_with_user_names(activity)
+
+      transaction = TransactionAdder.create_from_slack_reaction(params, message['user'], activity)
 
       message = "Successfully created ₭udo transaction! Click <#{transaction_url(transaction)}|here> for more details."
       SlackService.instance.send_ephemeral_message(channel, user_id, message)
@@ -81,5 +86,19 @@ class SlackController < ApplicationController
   def check_challenge
     challenge = params['challenge']
     challenge.present? ? respond_to {|format| format.json {render json: {challenge: challenge}}} : false
+  end
+
+  def replace_user_ids_with_user_names(activity)
+    (0 ... activity.length).each do |i|
+      if activity[i] == '@'
+        possible_slack_id = activity[i + 1, 9]
+
+        slack_display_name = SlackService.instance.convert_user_id_to_user_name(possible_slack_id)
+
+        activity.sub!(possible_slack_id, slack_display_name) unless slack_display_name.nil?
+      end
+    end
+
+    activity
   end
 end

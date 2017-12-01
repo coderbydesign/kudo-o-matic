@@ -10,11 +10,11 @@ Slack::TransactionJob = Struct.new(:transaction, :new?) do
         'Authorization' => "Bearer #{ENV['SLACK_BOT_ACCESS_TOKEN']}"}
     )
 
-    deterministic_random_index = Digest::MD5.hexdigest(transaction.id.to_s).to_i
-    adjective = %w(Great Awesome Terrific Fantastic Excellent Wonderful Amazing Cool)[deterministic_random_index % length]
-    emoji = %w(:+1: :ok_hand: :v: :raised_hands: :clap:)[deterministic_random_index % length]
+    adjective_array = %w(Great Awesome Terrific Fantastic Excellent Wonderful Amazing Cool)
+    emoji_array = %w(:+1: :ok_hand: :v: :raised_hands: :clap:)
 
-    settings = Settings.slack
+    adjective = adjective_array[deterministic_random(transaction.id) % adjective_array.length]
+    emoji = emoji_array[deterministic_random(transaction.id) % emoji_array.length]
 
     request.body = {
         ts: transaction.slack_transaction_updated_at,
@@ -49,8 +49,8 @@ Slack::TransactionJob = Struct.new(:transaction, :new?) do
                         short: true
                     }
                 ],
-                footer: "#{settings.company_name} | #{settings.company_project} | Transaction created at: #{(transaction.created_at + 60).strftime('%d-%m-%Y %H:%M')}",
-                footer_icon: settings.company_icon,
+                footer: "#{ENV['COMPANY_USER']} | ₭udo-o-Matic | Transaction created at: #{(transaction.created_at.in_time_zone('CET')).strftime('%d-%m-%Y %H:%M')}",
+                footer_icon: ENV['COMPANY_ICON'],
                 image_url: transaction.image.url(:thumb),
                 callback_id: transaction.id,
                 actions: [
@@ -73,5 +73,11 @@ Slack::TransactionJob = Struct.new(:transaction, :new?) do
 
   def queue_name
     'slack'
+  end
+
+  private
+
+  def deterministic_random(transaction_id)
+    Digest::MD5.hexdigest(transaction_id.to_s).to_i
   end
 end
