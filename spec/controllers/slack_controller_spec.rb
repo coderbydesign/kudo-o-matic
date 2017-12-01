@@ -95,7 +95,7 @@ RSpec.describe SlackController, type: :controller do
         before do
           post :command, params: {
               token: ENV['SLACK_VERIFICATION_TOKEN'],
-              text: '1 to @receiver for test',
+              text: '@receiver 1 test',
               user_id: sender.slack_id
           }
         end

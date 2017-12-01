@@ -88,4 +88,25 @@ class SlackService
 
     JSON.parse(response)['messages'][0]
   end
+
+  def convert_user_id_to_user_name(user_id)
+    return unless SLACK_IS_CONFIGURED
+
+    uri = URI.parse('https://slack.com/api/users.info')
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Post.new(uri.path, {
+        'Content-type' => 'application/x-www-form-urlencoded'}
+    )
+
+    request.body = URI.encode_www_form(
+        token: ENV['SLACK_ACCESS_TOKEN'],
+        user: user_id
+    )
+
+    response = http.request(request).body
+
+    user = JSON.parse(response)['user']
+    user['profile']['display_name'] unless user.nil?
+  end
 end
