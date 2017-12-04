@@ -9,7 +9,7 @@
           = f.input_field :amount, class:'input-amount', input_html:{ min: '0', max: '999' , step: '1'} , placeholder: 'Amount', required: true, autocomplete:'off'
           %a.fa.fa-info-circle.btn-guideline-info{href:'#', tabindex:'-1'}
       .activity
-        = f.input_field :activity_name, as: :text, field_id: false,  placeholder: "Why are you giving ₭udos?", required: true, maxlength: '90', class: 'character-count textarea-field'
+        = f.input_field :activity_name, as: :text, field_id: false,  placeholder: "Why are you giving ₭udos?", required: true, maxlength: '140', class: 'character-count textarea-field'
         %span.counter
       .attachment
         = f.input_field :image, as: :file, id:'media-attachment'

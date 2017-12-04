@@ -1,5 +1,1 @@
-begin
-  channel = ENV.fetch('SLACK_CHANNEL')
-
-  SLACK_IS_CONFIGURED = !Rails.env.test? && channel.present?
-end
+SLACK_IS_CONFIGURED = !Rails.env.test? && ENV['SLACK_ACCESS_TOKEN'].present?

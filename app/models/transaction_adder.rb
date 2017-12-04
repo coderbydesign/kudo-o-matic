@@ -1,4 +1,6 @@
 class TransactionAdder
+  include Slack::Messages
+
   def self.create(params, current_user)
     receiver_name = params[:receiver_name]
     receiver = User.where(name: receiver_name).first
@@ -40,19 +42,23 @@ class TransactionAdder
   end
 
   def self.create_from_slack_command(params)
-    text = params['text']
-    arguments = params['text'].split.size
+    text = Formatting.unescape(params['text'])
+    arguments = text.split(' ', 3)
 
-    amount = text[/^(.+?) /]
-    activity = text[/.for (.*)/, 1]
+    receiver_text = arguments[0]
+    amount = arguments[1]
+    activity = arguments[2]
+
+    first_char_receiver = receiver_text[0]
+    receiver_text[0] = ''
+
+    raise SlackArgumentsError.new("Invalid command. Use the following syntax to give ₭udos:\n"\
+                                  '*/kudo* @receiver <amount> <reason>') if arguments.size < 3 || amount.nil? || activity.nil? || first_char_receiver != '@'
+
+    receiver = User.find_by_slack_username(receiver_text)
+    receiver = User.find_by_slack_name(receiver_text) if receiver.nil?
     sender = User.find_by_slack_id(params['user_id'])
 
-    receiver_text = text[/to @(.*?) for/m, 1]
-    receiver = User.find_by_slack_name(receiver_text)
-    receiver = User.find_by_slack_username(receiver_text) if receiver.nil?
-
-    raise SlackArgumentsError.new("Invalid command. Use the following syntax to give ₭udo's:\n"\
-                                  '*/kudo* <amount> *to* @receiver *for* <reason>') if arguments < 5 ||amount.nil? || activity.nil?
     raise SlackConnectionError.new('You are *not* connected to the ₭udo-o-Matic') if sender.nil?
     raise SlackConnectionError.new('Receiver is *not* connected to the ₭udo-o-Matic') if receiver.nil?
 
@@ -68,17 +74,17 @@ class TransactionAdder
     save transaction
   end
 
-  def self.create_from_slack_reaction(params, message)
+  def self.create_from_slack_reaction(params, user, activity)
     event = params['event']
     sender = User.find_by_slack_id(event['user'])
-    receiver = User.find_by_slack_id(message['user'])
+    receiver = User.find_by_slack_id(user)
 
     raise SlackConnectionError.new('You are *not* connected to the ₭udo-o-Matic') if sender.nil?
     raise SlackConnectionError.new('Message is *not* sent by a connected ₭udo-o-Matic user') if receiver.nil?
 
     transaction = Transaction.new(
         amount: 1,
-        activity: Activity.find_or_create_by(name: "Slack message: '#{message['text']}'"),
+        activity: Activity.find_or_create_by(name: "Slack message: '#{activity}'"),
         sender: sender,
         receiver: receiver,
         slack_reaction_created_at: event['item']['ts'],
