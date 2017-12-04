@@ -3,10 +3,12 @@ class TransactionsController < ApplicationController
 
   before_action :query_variables, only: [:index, :show, :create, :upvote, :downvote]
   before_action :set_transaction, only: [:show, :upvote, :downvote]
+  before_action :check_slack_connection, only: [:index]
   after_action :update_slack_transaction, only: [:upvote, :downvote]
 
   def index
     @transaction = Transaction.new
+
     respond_to do |format|
       format.html
       format.js
@@ -68,6 +70,12 @@ class TransactionsController < ApplicationController
 
   def update_slack_transaction
     SlackService.instance.send_updated_transaction(@transaction)
+  end
+
+  def check_slack_connection
+    if SLACK_IS_CONFIGURED && current_user.slack_id.blank?
+      flash.now[:notice] = '<a href="/settings">Connect your ₭udo-o-Matic account to Slack</a>'.html_safe
+    end
   end
 
   def query_variables
