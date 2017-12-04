@@ -2,7 +2,7 @@
   "info": {
     "name": "Kudo-o-Matic",
     "_postman_id": "3d6ba09c-ff97-53d6-556e-7178752ce495",
-    "description": "This is the API documentation of the Kudo-o-Matic REST API that is used by the Kudo-o-Mobile app.\n\nAPI resource requests and responses are structured according to the JSON API specification (http://jsonapi.org/).\n\nTo obtain an API-token, the Kudo-o-Mobile app has to POST the callback data that it retrieves from a Google OAuth 2.0 sign in event to the authtenication/obtain_api_token endpoint.",
+    "description": "This is the API documentation of the Kudo-o-Matic REST API that is used by the Kudo-o-Mobile app.\n\nAPI resource requests and responses are structured according to the JSON API specification (http://jsonapi.org/).\n\nTo obtain an API-token, the Kudo-o-Mobile app has to POST the callback data that it retrieves from a Google OAuth 2.0 sign in event to the authtenication/obtain_api_token endpoint.\n\nAPI resources can be queried by using the querystring parameters explained on this page: https://github.com/cerebris/jsonapi-resources/wiki/JSONAPI::Resources-Querystring-Examples",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -41,7 +41,7 @@
               },
               "response": [
                 {
-                  "id": "86ae2ee8-bd0b-4849-b105-d4e42fb73e9d",
+                  "id": "6b5cb846-94f3-4254-a408-0f212909e26c",
                   "name": "balances/1",
                   "originalRequest": {
                     "method": "GET",
@@ -174,7 +174,7 @@
               },
               "response": [
                 {
-                  "id": "193f7f68-2917-409e-8349-1eba31aba430",
+                  "id": "5ca53287-13c7-40de-ae77-4d434445a5f4",
                   "name": "balance/current",
                   "originalRequest": {
                     "method": "GET",
@@ -314,7 +314,7 @@
               },
               "response": [
                 {
-                  "id": "f3cc124f-78f1-4105-b746-2ba4765ad7df",
+                  "id": "ff14defb-e7e6-4b63-9a58-1e4f65913c67",
                   "name": "goals/1",
                   "originalRequest": {
                     "method": "GET",
@@ -447,7 +447,7 @@
               },
               "response": [
                 {
-                  "id": "48850a20-82ca-4c12-84a0-00b6aab17c3c",
+                  "id": "ef3d3efd-022f-402d-8652-d86d6f30c5af",
                   "name": "goals/next",
                   "originalRequest": {
                     "method": "GET",
@@ -580,7 +580,7 @@
               },
               "response": [
                 {
-                  "id": "753b883b-393c-4b8d-b0a9-3e718602a106",
+                  "id": "c4d3a4e8-0c7d-4aa3-b328-70d5b3f8fb9a",
                   "name": "goals/previous",
                   "originalRequest": {
                     "method": "GET",
@@ -719,7 +719,7 @@
               },
               "response": [
                 {
-                  "id": "ffe12d6a-2e41-404c-937f-e90355f96348",
+                  "id": "bb99e68d-567c-438e-8713-d1764a897b2f",
                   "name": "transactions",
                   "originalRequest": {
                     "method": "GET",
@@ -851,7 +851,7 @@
               },
               "response": [
                 {
-                  "id": "12f1ea8a-09fd-4f16-8e87-6e3327788b59",
+                  "id": "5afa4b4a-102f-46c7-9bbe-934c18660baa",
                   "name": "transactions/1",
                   "originalRequest": {
                     "method": "GET",
@@ -990,7 +990,7 @@
               },
               "response": [
                 {
-                  "id": "957ed558-d327-401e-9830-673fd59b7934",
+                  "id": "91df0b81-2156-4bc5-a27f-92b3115b1fcb",
                   "name": "transactions",
                   "originalRequest": {
                     "method": "POST",
@@ -1103,7 +1103,7 @@
               ]
             },
             {
-              "name": "transactions/:id/votes",
+              "name": "transactions/:id/like",
               "request": {
                 "method": "PUT",
                 "header": [
@@ -1114,7 +1114,7 @@
                 ],
                 "body": {},
                 "url": {
-                  "raw": "{{host}}/api/{{api-version}}/transactions/1/votes",
+                  "raw": "{{host}}/api/{{api-version}}/transactions/1/like",
                   "host": [
                     "{{host}}"
                   ],
@@ -1123,15 +1123,15 @@
                     "{{api-version}}",
                     "transactions",
                     "1",
-                    "votes"
+                    "like"
                   ]
                 },
                 "description": "Adds a like to the Transaction as the User that is assocciated with the provided API-token."
               },
               "response": [
                 {
-                  "id": "1cf04b35-d019-4cd8-a568-6f4a9f3ee50c",
-                  "name": "transactions/1/votes",
+                  "id": "54ba68da-741f-459a-9567-e9ff5ad7e556",
+                  "name": "transactions/1/like",
                   "originalRequest": {
                     "method": "PUT",
                     "header": [
@@ -1142,7 +1142,7 @@
                     ],
                     "body": {},
                     "url": {
-                      "raw": "{{host}}/api/{{api-version}}/transactions/1/votes",
+                      "raw": "{{host}}/api/{{api-version}}/transactions/1/like",
                       "host": [
                         "{{host}}"
                       ],
@@ -1151,20 +1151,38 @@
                         "{{api-version}}",
                         "transactions",
                         "1",
-                        "votes"
+                        "like"
                       ]
                     }
                   },
-                  "status": "No Content",
-                  "code": 204,
-                  "_postman_previewlanguage": "plain",
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
                   "_postman_previewtype": "text",
                   "header": [
                     {
                       "key": "Cache-Control",
-                      "value": "no-cache",
+                      "value": "max-age=0, private, must-revalidate",
                       "name": "Cache-Control",
                       "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"78330ce0318c895247fb3695c254f4fa\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
                     },
                     {
                       "key": "Vary",
@@ -1186,13 +1204,13 @@
                     },
                     {
                       "key": "X-Request-Id",
-                      "value": "58861158-c2a8-4630-b6da-02840e0ece6e",
+                      "value": "450bfdf0-f039-473a-8292-031db016d172",
                       "name": "X-Request-Id",
                       "description": "Custom header"
                     },
                     {
                       "key": "X-Runtime",
-                      "value": "0.702257",
+                      "value": "0.125511",
                       "name": "X-Runtime",
                       "description": "Custom header"
                     },
@@ -1214,13 +1232,13 @@
                       "key": "_kudo_o_matic_session"
                     }
                   ],
-                  "responseTime": 712,
-                  "body": ""
+                  "responseTime": 152,
+                  "body": "{\n    \"data\": {\n        \"title\": \"Successfully liked successfully\",\n        \"detail\": \"The transaction record identified by id 1 was liked successfully.\"\n    }\n}"
                 }
               ]
             },
             {
-              "name": "transactions/:id/votes",
+              "name": "transactions/:id/like",
               "request": {
                 "method": "DELETE",
                 "header": [
@@ -1231,7 +1249,7 @@
                 ],
                 "body": {},
                 "url": {
-                  "raw": "{{host}}/api/{{api-version}}/transactions/1/votes",
+                  "raw": "{{host}}/api/{{api-version}}/transactions/1/like",
                   "host": [
                     "{{host}}"
                   ],
@@ -1240,15 +1258,15 @@
                     "{{api-version}}",
                     "transactions",
                     "1",
-                    "votes"
+                    "like"
                   ]
                 },
                 "description": "Removes a like for the Transaction as the User that is assocciated with the provided API-token."
               },
               "response": [
                 {
-                  "id": "7a73a89c-952e-4de5-ac72-641b34115087",
-                  "name": "transactions/1/votes",
+                  "id": "6cf792fa-1116-4524-8d16-7606637320d2",
+                  "name": "transactions/1/like",
                   "originalRequest": {
                     "method": "DELETE",
                     "header": [
@@ -1259,7 +1277,7 @@
                     ],
                     "body": {},
                     "url": {
-                      "raw": "{{host}}/api/{{api-version}}/transactions/1/votes",
+                      "raw": "{{host}}/api/{{api-version}}/transactions/1/like",
                       "host": [
                         "{{host}}"
                       ],
@@ -1268,20 +1286,38 @@
                         "{{api-version}}",
                         "transactions",
                         "1",
-                        "votes"
+                        "like"
                       ]
                     }
                   },
-                  "status": "No Content",
-                  "code": 204,
-                  "_postman_previewlanguage": "plain",
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
                   "_postman_previewtype": "text",
                   "header": [
                     {
                       "key": "Cache-Control",
-                      "value": "no-cache",
+                      "value": "max-age=0, private, must-revalidate",
                       "name": "Cache-Control",
                       "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"af2225c76cece42412475ee38a0140c5\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
                     },
                     {
                       "key": "Vary",
@@ -1303,13 +1339,13 @@
                     },
                     {
                       "key": "X-Request-Id",
-                      "value": "d847a3fe-8f55-4cb5-a90e-c68212db3c2b",
+                      "value": "3aac8d9b-2bac-4aa6-84fe-8d31c1393aea",
                       "name": "X-Request-Id",
                       "description": "Custom header"
                     },
                     {
                       "key": "X-Runtime",
-                      "value": "0.647055",
+                      "value": "0.309219",
                       "name": "X-Runtime",
                       "description": "Custom header"
                     },
@@ -1331,8 +1367,8 @@
                       "key": "_kudo_o_matic_session"
                     }
                   ],
-                  "responseTime": 675,
-                  "body": ""
+                  "responseTime": 331,
+                  "body": "{\n    \"data\": {\n        \"title\": \"Successfully unliked successfully\",\n        \"detail\": \"The transaction record identified by id 1 was unliked successfully.\"\n    }\n}"
                 }
               ]
             }
@@ -1369,7 +1405,7 @@
               },
               "response": [
                 {
-                  "id": "9a27141e-dbc9-42a2-8fb3-4731b575b026",
+                  "id": "80303359-00f0-4938-bdc4-5b780a067a85",
                   "name": "users",
                   "originalRequest": {
                     "method": "GET",
@@ -1501,7 +1537,7 @@
               },
               "response": [
                 {
-                  "id": "65f0a134-461e-42db-ad09-f40400dc5be3",
+                  "id": "8d354c6d-f041-4e08-a351-ce362a71e3e4",
                   "name": "users/1",
                   "originalRequest": {
                     "method": "GET",
@@ -1672,11 +1708,11 @@
                     "obtain_api_token"
                   ]
                 },
-                "description": "Retrieves a unique API-token and user id by providing the callback data that was retrieved from a Google OAuth 2.0 sign in event.\nThe body should contain the _jwt_ _token_, _uid_, _provider_, _name_, _email_ and _avatar_ _url_ attributes."
+                "description": "Retrieves a unique API token and user id by providing the callback data that was retrieved from a Google OAuth 2.0 sign in event.\nThe body should contain the _jwt_ _token_, _uid_, _provider_, _name_, _email_ and _avatar_ _url_ attributes."
               },
               "response": [
                 {
-                  "id": "c05afc7a-b6db-4b48-b057-6ea1afdb9562",
+                  "id": "f763d424-2e98-4a83-ab94-75c340c44684",
                   "name": "authentication/obtain_api_token",
                   "originalRequest": {
                     "method": "POST",
@@ -1810,6 +1846,160 @@
                   ],
                   "responseTime": 116,
                   "body": "{\n    \"data\": {\n        \"api-token\": \"KACqF93MIwZF8Eskb4XK2A\",\n        \"user-id\": \"1\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "authentication/store_fcm_token",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "fcm_token",
+                      "value": "<fcm_token>",
+                      "description": "",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/authentication/store_fcm_token",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "authentication",
+                    "store_fcm_token"
+                  ]
+                },
+                "description": "Stores the provided FCM token that is used for Firebase Cloud Messaging notifications for the User that is assocciated with the provided API-token. The body should contain the _fcm_ _token_ attribute."
+              },
+              "response": [
+                {
+                  "id": "b46e76a1-9bb2-48a8-8bb9-0a52dc651fe8",
+                  "name": "authentication/store_fcm_token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}",
+                        "disabled": false
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "fcm_token",
+                          "value": "<fcm_token>",
+                          "description": "",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/authentication/store_fcm_token",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "authentication",
+                        "store_fcm_token"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"04d9f0b982a6cabba23ab6e6d3efb604\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "c7b6892c-acbe-4c9d-86a0-3377bf30284b",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.275094",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "bEsxYzNpNHBHcUtqcXNVWVRZUGpDbk5ITWZRTGZSREJ6NU93SWdUeXZ5L3VKUVUraXVoSVpnWHJxOG1jVXA2bG00cHFpb0VncEtJbFNNSFRiWGxzU1JyTjM2K0dubDg3M3lZMGN6SnV5aWlDWElTdFA4empIUTlvbUdGYkRXKy9aWkdzZ2JReER2TUltZXF3K2k5RTRFbEhLZmVaMi9mTU45MCthUzMzZFYzYXZwcE1iNlNoYjFyWmNLOEl0SHRNZ1R4dkVkOVJvekxTNzZyNXNpRDVkME9sN0hYZXVPQ0pOU3dtMUl6TzRvT3hVTk5xck81M0VqNFJpbGMwckZWcHdNVDNtYUtveHp3WStnbkp3UVNCdFRiWHdTaWtCNml3QU1VY1hOYXd3OVQrOTUvZDI0SXJjaVA1dVlaQjA5aXB5R0liRXBDQlEyeWI2RG5SOFhxQk91ekhibXlOVXdkK2hqYW9MSGJtWUx1NXNYdWk0bEEvSElKUHJTTkIrSE4rWUNLZGJJWXZlMkZWMHpRWFE3SXZ5UT09LS15YlpuejRuRE9PR1R4ZFBJNytFQm1RPT0%3D--e1d953057941adc51af5988c12f9493d81cb1945",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 286,
+                  "body": "{\"data\":{\"title\":\"Successfully stored FCM token\",\"detail\":\"Firebase Cloud Messaging token was stored successfully.\",\"fcm-token\":\"\\u003cfcm_token\\u003e\"}}"
                 }
               ]
             }
