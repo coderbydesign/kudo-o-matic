@@ -5,7 +5,7 @@ en:
     title: Give ₭udos!
     i_give: To
     guidelines: Guidelines
-    submit_kudos: Give ₭udo's
+    submit_kudos: Give ₭udos
     for: for
 
   activerecord:
@@ -18,8 +18,8 @@ en:
   helpers:
     label:
       user:
-        transaction_received_mail: Receive mail notification when I receive ₭udo's
-        goal_reached_mail: Receive mail notification when a goal is reached
+        transaction_received_mail: Receive mail notification when I receive ₭udos
+        goal_reached_mail: Receive mail notification when a ₭udo goal is reached
         summary_mail: Receive weekly summary mail
     submit:
       user:

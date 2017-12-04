@@ -122,7 +122,7 @@ Follow these instructions to setup the Amazon AWS S3 cloud storage service for i
 The Kudo-o-Matic can be connected with Slack to enable the following features:
 * Receive personalized notifications and reminders.
 * Give Kudos with the /kudo command.
-* Give Kudos by adding a custom :kudo: reactji to a message.
+* Give Kudos by adding a custom :kudo: reactji to a message ₭udo-o-Matic user.
 * Like Kudo transactions using the like button.
 
 Follow these instructions to setup the Kudo-o-Matic Slack integration:
@@ -147,7 +147,7 @@ Users can connect their Slack account by signing in to Slack on the settings pag
 The Kudo-o-Matic can automatically send mail notifications when the following events occur:
 * When a user joins the Kudo-o-Matic platform.
 * When a user receives Kudos (only this user will receive the notification).
-* When a goal is reached.
+* When a Kudo goal is reached.
 * Weekly summary mail.
 
 Follow these instructions to enable the Kudo-o-Matic mail notification functionality:
