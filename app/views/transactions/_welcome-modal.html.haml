@@ -2,33 +2,66 @@
 .modal-dialog.welcome-modal
   .modal-header
     %h2
-      The ₭udo-o-Matic
+      ₭udo-o-Matic 3.0
   .modal-body#version
     %h3
-      What's new?
-    %ul
-      %li
-        Each like will add 1 ₭ to the transaction
-      %li
-        Filter transactions
-      %li
-        Add attachments to a transaction (.jpg, .png and .gif supported (up to 10mb file size)
-      %li
-        You will receive a ₭udo reminder in Slack every thursday
-      %li
-        Other minor bug fixes
+      = "Connect the ₭udo-o-Matic with Slack \u{1f514}"
+    %br
+    %p
+      To start using the new Slack functionality, you must sign in to Slack:
+    %br
+    %p
+      %a{href: user_slack_omniauth_authorize_path}
+        %img{alt: 'Sign in with Slack', width: '172', height: '40', src: 'https://platform.slack-edge.com/img/sign_in_with_slack.png',
+        srcset: 'https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x' }
     %br
     %h3
-      How does it work?
+      What's new?
+    %br
     %ul
       %li
-        To give ₭udos all you have to do is fill out the 3 form fields.
+        Mail:
+        %ul
+          %li
+            Receive notifications when you receive ₭udos.
+          %li
+            Receive notifications when a ₭udo goal is reached.
+          %li
+            Receive a weekly ₭udo summary.
       %li
-        Click the 'Give Kudos' button and that's it!
+        Slack:
+        %ul
+          %li
+            Receive personalized notifications and reminders.
+          %li
+            Give ₭udos with the /kudo command.
+          %li
+            Give ₭udos by adding the :kudo: reactji to a message of a ₭udo-o-Matic user.
+          %li
+            Like ₭udo transactions using the like button.
       %li
-        Check out the timeline for your kudo-transaction! And those of your colleagues
+        User interface:
+        %ul
+          %li
+            Settings page for connecting with Slack and configuring mail preferences.
+          %li
+            Single ₭udo transaction page, used for sharing transactions by URL.
+          %li
+            Button on the homepage for navigating back to the top.
       %li
-        Need help with deciding how many ₭udos you want to give someone? Read the guidelines!
+        Administrator dashboard:
+        %ul
+          %li
+            User deactivation system.
+          %li
+            Implemented checks that prevent removing important data entries.
+      %li
+        Under the hood improvements and bug fixes:
+        %ul
+          %li
+            REST API for the upcoming ₭udo-o-Mobile app.
+          %li
+            Asynchronous image uploads and Slack communication.
   .modal-footer
     %button.btn.btn-primary.btn-close.close-welcome
       Close

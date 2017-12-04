@@ -1,3 +1,11 @@
+- if notice
+  .message-container.show-message
+    .error-message.margin-bottom
+      %span.message
+        .fa.fa-exclamation-circle
+        #notice= notice
+      .fa.fa-times.close-message
+
 - if @transaction.errors.any?
   .message-container.show-message
     .error-message.margin-bottom

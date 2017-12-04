@@ -2,14 +2,60 @@
 .modal-dialog.whatsnew-modal
   .modal-header
     %h2
-      What's new in the last update
-    .modal-subheader
-
+      Releases
   .modal-body
     .update-container
       %h4
-        Release v2.1.0
+        Release v3.0.0
         %ul
+          %li
+            Mail:
+            %ul
+              %li
+                Receive notifications when you receive ₭udos.
+              %li
+                Receive notifications when a ₭udo goal is reached.
+              %li
+                Receive a weekly ₭udo summary.
+          %li
+            Slack:
+            %ul
+              %li
+                Receive personalized notifications and reminders.
+              %li
+                Give ₭udos with the /kudo command.
+              %li
+                Give ₭udos by adding the :kudo: reactji to a message of a ₭udo-o-Matic user.
+              %li
+                Like ₭udo transactions using the like button.
+          %li
+            User interface:
+            %ul
+              %li
+                Settings page for connecting with Slack and configuring mail preferences.
+              %li
+                Single ₭udo transaction page, used for sharing transactions by URL.
+              %li
+                Button on the homepage for navigating back to the top.
+          %li
+            Administrator dashboard:
+            %ul
+              %li
+                User deactivation system.
+              %li
+                Implemented checks that prevent removing important data entries.
+          %li
+            Under the hood improvements and bug fixes:
+            %ul
+              %li
+                REST API for the upcoming ₭udo-o-Mobile app.
+              %li
+                Asynchronous image uploads and Slack communication.
+    .update-container.clickable
+      %h4
+        Release v2.1.0
+        %i.fa.fa-chevron-right
+        %ul.not-visible
           %li
             Each like will add 1 ₭ to the transaction
           %li
