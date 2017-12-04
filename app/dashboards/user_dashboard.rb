@@ -8,15 +8,22 @@ class UserDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    sent_transactions: Field::HasMany.with_options(class_name: "Transaction"),
-    received_transactions: Field::HasMany.with_options(class_name: "Transaction"),
-    id: Field::Number,
-    name: Field::String,
-    slack_name: Field::String,
-    admin: Field::Boolean,
-    email: Field::String,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+      id: Field::Number,
+      name: Field::String,
+      email: Field::String,
+      avatar_url: Field::String,
+      slack_name: Field::String,
+      admin: Field::Boolean,
+      transaction_received_mail: Field::Boolean,
+      goal_reached_mail: Field::Boolean,
+      summary_mail: Field::Boolean,
+      api_token: Field::String,
+      deactivated_at: Field::DateTime,
+      created_at: Field::DateTime,
+      updated_at: Field::DateTime,
+      sent_transactions: Field::HasMany.with_options(class_name: 'Transaction'),
+      received_transactions: Field::HasMany.with_options(class_name: 'Transaction'),
+      votes: Field::HasMany
   }
 
   # COLLECTION_ATTRIBUTES
@@ -25,40 +32,54 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :id,
-    :name,
-    :slack_name,
-    :admin,
-    :sent_transactions,
-    :received_transactions,
+      :id,
+      :name,
+      :email,
+      :slack_name,
+      :admin,
+      :sent_transactions,
+      :received_transactions,
+      :deactivated_at
   ]
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :id,
-    :name,
-    :slack_name,
-    :admin,
-    :created_at,
-    :updated_at,
-    :sent_transactions,
-    :received_transactions,
+      :id,
+      :name,
+      :email,
+      :avatar_url,
+      :slack_name,
+      :admin,
+      :transaction_received_mail,
+      :goal_reached_mail,
+      :summary_mail,
+      :api_token,
+      :created_at,
+      :updated_at,
+      :deactivated_at,
+      :sent_transactions,
+      :received_transactions,
+      :votes
   ]
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :name,
-    :email,
-    :slack_name,
-    :admin
+      :name,
+      :email,
+      :slack_name,
+      :avatar_url,
+      :admin,
+      :transaction_received_mail,
+      :goal_reached_mail,
+      :summary_mail,
+      :api_token
   ]
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
-  #
   def display_resource(user)
     user.name
   end

@@ -8,12 +8,12 @@ class BalanceDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    transactions: Field::HasMany,
-    id: Field::Number,
-    name: Field::String,
-    current: Field::Boolean,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+      id: Field::Number,
+      name: Field::String,
+      current: Field::Boolean,
+      created_at: Field::DateTime,
+      updated_at: Field::DateTime,
+      transactions: Field::HasMany
   }
 
   # COLLECTION_ATTRIBUTES
@@ -22,34 +22,33 @@ class BalanceDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :id,
-    :name,
-    :transactions,
-    :current,
+      :id,
+      :name,
+      :current,
+      :transactions
   ]
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :id,
-    :name,
-    :current,
-    :created_at,
-    :updated_at,
-    :transactions,
+      :id,
+      :name,
+      :current,
+      :created_at,
+      :updated_at,
+      :transactions
   ]
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :name,
-    :current,
+      :name,
+      :current
   ]
 
   # Overwrite this method to customize how balances are displayed
   # across all pages of the admin dashboard.
-  #
   def display_resource(balance)
     balance.name
   end

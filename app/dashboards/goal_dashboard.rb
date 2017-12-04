@@ -8,13 +8,13 @@ class GoalDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    id: Field::Number,
-    name: Field::String,
-    amount: Field::Number,
-    achieved_on: Field::DateTime,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    balance: Field::BelongsTo,
+      id: Field::Number,
+      name: Field::String,
+      amount: Field::Number.with_options(suffix: ' ₭'),
+      achieved_on: Field::DateTime,
+      created_at: Field::DateTime,
+      updated_at: Field::DateTime,
+      balance: Field::BelongsTo
   }
 
   # COLLECTION_ATTRIBUTES
@@ -23,38 +23,37 @@ class GoalDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :id,
-    :name,
-    :amount,
-    :balance,
-    :achieved_on,
+      :id,
+      :name,
+      :amount,
+      :balance,
+      :achieved_on
   ]
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :id,
-    :name,
-    :amount,
-    :balance,
-    :achieved_on,
-    :created_at,
-    :updated_at,
+      :id,
+      :name,
+      :amount,
+      :balance,
+      :achieved_on,
+      :created_at,
+      :updated_at
   ]
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :name,
-    :balance,
-    :amount,
-    :achieved_on,
+      :name,
+      :balance,
+      :amount,
+      :achieved_on
   ]
 
   # Overwrite this method to customize how goals are displayed
   # across all pages of the admin dashboard.
-  #
   def display_resource(goal)
     goal.name
   end

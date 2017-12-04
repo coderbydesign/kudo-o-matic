@@ -1,0 +1,155 @@
+@import 'settings/colors';
+@import 'settings/typography';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ul {
+  padding: 15px;
+}
+
+.outer-table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+  border-collapse: collapse;
+  background-color: $base-color-white;
+}
+
+.box {
+  background-color: $base-color-brand;
+  border-left: 1px solid $base-color-brand;
+  border-right: 1px solid $base-color-brand;
+}
+
+.header {
+  @extend .box;
+  height: 100px;
+}
+
+.logo {
+  margin: 10px;
+  max-height: 80px;
+  height: 80px;
+}
+
+.body {
+  padding: 15px;
+  background: $base-color-solitude-white;
+  border-left: 1px solid $base-color-lighter-gray;
+  border-right: 1px solid $base-color-lighter-gray;
+}
+
+.greeting {
+  @extend .body;
+}
+
+.button-container {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.button {
+  padding: 1rem;
+  background: $primary-button-bg;
+  border: 1px solid $primary-border-color;
+  color: $primary-button-color;
+  text-decoration: none;
+}
+
+.content {
+  @extend .body;
+}
+
+.inner-table {
+  padding: 10px;
+  border-top: 1px solid $base-color-lighter-gray;
+  border-left: 1px solid $base-color-lighter-gray;
+  border-right: 1px solid $base-color-lighter-gray;
+}
+
+.count-container {
+  width: 5rem;
+  height: 3rem;
+  font-size: 1.2rem;
+  text-align: center;
+  border: 1px solid $base-color-lighter-gray;
+}
+
+.spacing-container {
+  width: 5px;
+}
+
+.avatar-container {
+  display: inline-block;
+}
+
+.avatar {
+  vertical-align: bottom;
+  height: 3rem;
+  max-height: 3rem;
+  border: 1px solid $base-color-lighter-gray;
+}
+
+.transaction-container {
+  height: 1.5rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-left: 1px solid $base-color-lighter-gray;
+  border-right: 1px solid $base-color-lighter-gray;
+}
+
+.likes-container {
+  height: 2rem;
+  padding-left: 10px;
+  font-size: $font-size-small;
+  border-left: 1px solid $base-color-lighter-gray;
+  border-right: 1px solid $base-color-lighter-gray;
+}
+
+.timestamp-container {
+  height: 2rem;
+  padding-left: 10px;
+  color: $text-light-gray;
+  font-size: $font-size-small;
+  border-left: 1px solid $base-color-lighter-gray;
+  border-right: 1px solid $base-color-lighter-gray;
+  border-bottom: 1px solid $base-color-lighter-gray;
+}
+
+.image-container {
+  padding: 10px;
+  border-left: 1px solid $base-color-lighter-gray;
+  border-right: 1px solid $base-color-lighter-gray;
+}
+
+.image {
+  display: block;
+  height: 400px;
+}
+
+.no-transactions-container {
+  background: $base-color-solitude-white;
+}
+
+.content-block {
+  padding: 15px;
+  text-align: center;
+  border: 1px solid $base-color-lighter-gray;
+}
+
+.sidenote {
+  font-size: $font-size-small;
+}
+
+.signature {
+  @extend .body;
+}
+
+.footer {
+  @extend .box;
+  height: 40px;
+}

@@ -1,0 +1,11 @@
+en:
+  administrate:
+    actions:
+      deactivate: Deactivate
+      reactivate: Reactivate
+
+  helpers:
+    label:
+      vote:
+        transaction_votable: Transaction
+        user_voter: User

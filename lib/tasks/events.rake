@@ -1,8 +1,6 @@
-
 namespace :events do
-  desc "Rake task to send Slack reminder"
-  task :fetch => :environment do
-    puts "Send notification at #{Time.now}"
-    Transaction.send_whenever
+  desc 'Rake task to send email summary'
+  task email: :environment do
+    SummaryMailer.new_summary
   end
 end

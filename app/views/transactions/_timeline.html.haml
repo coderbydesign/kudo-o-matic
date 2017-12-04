@@ -5,47 +5,48 @@
         .transaction-content.empty-timeline
           .empty-timeline-message
             There are no transactions to show here yet &#9785;
-  - @transactions.each do |transaction|
-    .transaction-container{'data-likes': transaction.votes_for.voters.collect { |user| user}}
-      .transaction-header-container
-        .transaction-kudos-container
-          %span{id: "kudos-container-#{transaction.id}"}
-            = render 'amount-in-kudos', transaction: transaction
-        .avatar
-          .transaction-avatar-container
-            = image_tag User.find(transaction.sender_id).picture_url, class:'sender flex-item'
-            = image_tag transaction.receiver_image, class:'receiver flex-item'
-        %span.post-time-stamp
-          = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
-      .transaction-body-container
-        .transaction-content
-          %span.highlighted.sendername
-            = "#{transaction.sender.name}:"
-          %span.highlighted
-            = "+#{transaction.amount} ₭"
-          %span
-            to
-          %span.highlighted.receivername
-            = transaction.receiver_name_feed
-          %span
-            for
-          %span.activityname
-            = render_activity(transaction, markdown)
-          - if transaction.image.present?
-            .media-attachment
-              .img-file
-                %i.attachment-name
-                  = "Attachment (#{(transaction.image_file_size / 1000)}kb)"
-                %span
-                  %i.fa.fa-chevron-down.hide-file
-              = image_tag transaction.image.url, class:'attachment-file'
-      .transaction-footer-container
-        - if current_user.voted_for? transaction
-          = render 'unlikes', transaction: transaction
-        - else
-          = render 'likes', transaction: transaction
-        %span.display-likes{id: "like-tooltip-#{transaction.id}"}
-          = render 'display-likes', transaction: transaction
-
-
-  = paginate @transactions, remote: true
+  - else
+    - @transactions.each do |transaction|
+      .transaction-container.transaction-selector{'id': transaction.id, 'data-likes': transaction.votes_for.voters.collect { |user| user}}
+        .transaction-header-container
+          .transaction-kudos-container
+            %span{id: "kudos-container-#{transaction.id}"}
+              = render 'amount-in-kudos', transaction: transaction
+          .avatar
+            .transaction-avatar-container
+              = image_tag User.find(transaction.sender_id).picture_url, class:'sender flex-item'
+              = image_tag transaction.receiver_image, class:'receiver flex-item'
+          %span.post-time-stamp
+            = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
+        .transaction-body-container
+          .transaction-content
+            %span.highlighted.sendername
+              = "#{transaction.sender.name}:"
+            %span.highlighted
+              = "+#{transaction.amount} ₭"
+            %span
+              to
+            %span.highlighted.receivername
+              = transaction.receiver_name_feed
+            %span
+              for
+            %span.activityname
+              = render_activity(transaction, markdown)
+            - if transaction.image.present?
+              .media-attachment
+                .img-file
+                  %i.attachment-name
+                    = "Attachment (#{transaction.image.size / 1000}kb)"
+                  %span
+                    %i.fa.fa-chevron-down.hide-file
+                -# checks whether or not the thumbnail exists so older posts (without thumb) will still be displayed
+                = link_to image_tag(transaction.image.exists?(:thumb) ? transaction.image.url(:thumb) : transaction.image,
+                    class:'attachment-file'), transaction.image.url, target: '_blank'
+        .transaction-footer-container
+          - if current_user.voted_for? transaction
+            = render 'unlikes', transaction: transaction
+          - else
+            = render 'likes', transaction: transaction
+          %span.display-likes{id: "like-tooltip-#{transaction.id}"}
+            = render 'display-likes', transaction: transaction
+    = paginate @transactions, remote: true

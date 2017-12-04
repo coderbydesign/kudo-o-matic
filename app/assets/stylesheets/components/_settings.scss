@@ -1,0 +1,64 @@
+.settings-container {
+  max-width: 700px;
+  margin-top: $margin-primary;
+  margin-right: auto;
+  margin-left: auto;
+  background: $primary-bg;
+  color: $text-primary;
+  border: 1px solid $primary-border-color;
+  font-weight: 300;
+  padding: 1.25rem;
+
+  ul {
+    line-height: 150%;
+    list-style: initial;
+    padding: 0 0 0 20px;
+    margin-bottom: $margin-primary;
+  }
+}
+
+.settings-table {
+  width: 100%;
+
+  tr {
+    td {
+      border: 0.5px solid $primary-border-color;
+      padding: $margin-secondary;
+    }
+  }
+}
+
+.settings-table-value {
+  width: 10%;
+  text-align: center;
+}
+
+.settings-checkbox:hover {
+  cursor: pointer;
+}
+
+.settings-text {
+  margin-bottom: $margin-primary;
+}
+
+.settings-text-highlighted {
+  @extend .settings-text;
+
+  border-radius: 1rem;
+  padding: 0.35rem;
+  color: $green-color;
+  background-color: $green-light-color;
+  font-weight: 400;
+}
+
+.settings-title {
+  @extend .settings-text;
+
+  font-size: 2.25rem;
+}
+
+.settings-subtitle {
+  @extend .settings-text;
+
+  font-size: 1.75rem;
+}

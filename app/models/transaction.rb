@@ -1,33 +1,32 @@
 class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: "is not correct. You can't give negative ₭udo's or exceed over 1000" }
-  validates :activity_name_feed, length: { minimum: 4 }
+  validates :activity_name_feed, length: {minimum: 4, maximum: 140}
 
   after_commit :send_slack_notification, on: :create, unless: :skip_callbacks
-  has_attached_file :image, styles: { small: "64x64", med: "100x100", large: "200x200" }
+  # also creates a second image file with a maximum width and/or height of 800 pixels with its aspect ratio preserved
+  has_attached_file :image, styles: {thumb: '600x600'}
   validates_attachment :image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
   validates_with AttachmentSizeValidator, attributes: :image, less_than: 10.megabytes
+  process_in_background :image
 
   acts_as_votable
   belongs_to :balance
   belongs_to :activity
   belongs_to :sender,   class_name: 'User'
   belongs_to :receiver, class_name: 'User'
+  has_many :votes, foreign_key: 'votable_id'
 
   delegate :name, to: :sender,   prefix: true
   delegate :name, to: :receiver, prefix: true
   delegate :name, to: :activity, prefix: true
 
-  # def self.goal_reached_transaction
-  #   activity = Activity.create name:"reaching the goal #{Goal.previous.name} :boom:, here are some ₭udo's to boost your hunt for the next goal"
-  #   user = User.find_or_create_by(name: ENV.fetch('COMPANY_USER', 'Kabisa'))
-  #   Transaction.create sender: user, receiver: user, amount: 100, activity: activity, balance: Balance.current
-  # end
+  def kudos_amount
+    self.amount + self.votes.count
+  end
 
-  # def self.number_of_likes
-  #   Transaction.where(balance: self).each do |transaction|
-  #   amount = amount + transaction.get_upvotes.size
-  #   end
-  # end
+  def likes_amount
+    self.votes.count
+  end
 
   def receiver_name_feed
     receiver.nil? ? activity.name.split('for:')[0].strip : receiver.name
@@ -58,15 +57,11 @@ class Transaction < ActiveRecord::Base
   end
 
   def send_slack_notification
-    SlackNotifications.new(self).send_new_transaction
-    end
-
-  def self.send_whenever
-    SlackNotifications.new(self).send_reminder
+    SlackService.instance.send_new_transaction(self)
   end
 
   def self.all_for_user(user)
-    Transaction.where(sender: user).or(Transaction.where(receiver: user)).or(Transaction.where(receiver: User.where(name: ENV.fetch('COMPANY_USER', 'Kabisa')))).order('created_at desc')
+    Transaction.where(sender: user).or(Transaction.where(receiver: user)).or(Transaction.where(receiver: User.where(name: ENV['COMPANY_USER']))).order('created_at desc')
   end
 
   def self.send_by_user(user)
@@ -74,7 +69,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.received_by_user(user)
-    Transaction.where(receiver: user).or(Transaction.where(receiver: User.where(name: ENV.fetch('COMPANY_USER', 'Kabisa')))).order('created_at desc')
+    Transaction.where(receiver: user).or(Transaction.where(receiver: User.where(name: ENV['COMPANY_USER']))).order('created_at desc')
   end
 
   GUIDELINES =

@@ -1,6 +1,6 @@
 namespace :admin do
   desc "Rake task to promote a user to admin"
-  task :promote => :environment do
+  task promote: :environment do
     @user = User.first
 
     if @user.try(:admin)

@@ -1,10 +1,11 @@
 en:
   kudos: ₭udos
+
   dashboard:
     title: Give ₭udos!
     i_give: To
     guidelines: Guidelines
-    submit_kudos: Give ₭udo's
+    submit_kudos: Give ₭udos
     for: for
 
   activerecord:
@@ -12,7 +13,14 @@ en:
         transaction:
       attributes:
         transaction:
-          activity_name_feed: "activity"
-        # will translate transaction attribute "activity_name_feed" as "activity"
+          activity_name_feed: activity # will translate transaction attribute "activity_name_feed" as "activity"
 
-
+  helpers:
+    label:
+      user:
+        transaction_received_mail: Receive mail notification when I receive ₭udos
+        goal_reached_mail: Receive mail notification when a ₭udo goal is reached
+        summary_mail: Receive weekly summary mail
+    submit:
+      user:
+        update: Save

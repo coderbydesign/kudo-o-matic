@@ -37,7 +37,7 @@
 
 .header-img {
   width: 320px;
-  margin-top: -$margin-secondary / 2 ;
+  margin-top: -$margin-secondary / 2;
 }
 
 .mobile-img {
@@ -78,6 +78,14 @@
   flex: 1;
   padding: 0 1rem;
   position: relative;
+}
+
+.back-to-top {
+  display: none; // button is hidden by default
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1200px) {
@@ -150,11 +158,11 @@
   .container-left {
     flex: 1 0 auto;
   }
-  
+
   .header-img {
     display: none;
   }
-  
+
   .mobile-img {
     display: block;
   }

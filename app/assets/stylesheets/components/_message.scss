@@ -34,16 +34,34 @@
   color: $text-primary;
   text-align: center;
   display: flex;
-  margin-bottom: $margin-secondary;
 
   .hide-message & {
     display: none;
   }
 }
 
+.margin-top {
+  margin-top: $margin-secondary;
+}
+
+.margin-bottom {
+  margin-bottom: $margin-secondary;
+}
+
 .error-message {
   background: $flash-error-bg;
   border: 1px solid $flash-error-border-color;
+}
+
+.success-message {
+  padding: $padding-primary / 2 $padding-secondary * 2.5;
+  border-radius: $border-radius-small;
+  color: $text-primary;
+  background: $flash-success-bg;
+  text-align: center;
+  display: flex;
+
+  margin-bottom: $margin-primary;
 }
 
 @keyframes show-message {

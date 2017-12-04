@@ -1,0 +1,37 @@
+= render 'layouts/header'
+.page
+  .settings-container
+    - if notice
+      .message-container.success-message.margin-top
+        %span.message
+          .fa.fa-exclamation-circle
+          #notice= notice
+    %h1.settings-title
+      Settings
+    %h2.settings-subtitle
+      Slack
+    - if @user.slack_id.blank?
+      %p.settings-text
+        Sign in to connect the ₭udo-o-Matic with Slack:
+    - else
+      %p.settings-text
+        %span.settings-text
+          Connected Slack display name:
+        %span.settings-text-highlighted
+          @#{@user.slack_name}
+      %p.settings-text Sign in again to update your display name if you changed it:
+    %p.settings-text
+      %a{href: user_slack_omniauth_authorize_path}
+        %img{alt: 'Sign in with Slack', width: '172', height: '40', src: 'https://platform.slack-edge.com/img/sign_in_with_slack.png',
+        srcset: 'https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x' }
+    %p.settings-text
+      %ul
+        %li Receive personalized notifications and reminders
+        %li Give ₭udos with the /kudo command
+        %li Give ₭udos by adding the :kudo: reactji to a message of a ₭udo-o-Matic user
+        %li Like ₭udo transactions using the like button
+    %h2.settings-subtitle
+      Mail
+    %p.settings-text
+      Configure the mails that you want to receive on the mail address #{@user.email}:
+    = render 'form', user: @user

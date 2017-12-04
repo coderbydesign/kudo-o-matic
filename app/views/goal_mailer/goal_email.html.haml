@@ -1,0 +1,9 @@
+%tr
+  %td.content
+    = "Congratulations! \u{1f389}"
+    %p
+    = "You and your colleagues just achieved goal '#{@goal.name}'!"
+    %br
+    Don't forget to pick a date!
+    %p
+      = "Click #{link_to 'here', root_url } for more details.".html_safe
