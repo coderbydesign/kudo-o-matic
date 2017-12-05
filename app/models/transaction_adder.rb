@@ -2,17 +2,19 @@ class TransactionAdder
   include Slack::Messages
 
   def self.create(params, current_user)
+    amount = params[:amount]
     receiver_name = params[:receiver_name]
     receiver = User.where(name: receiver_name).first
     name = params[:activity_name].to_s.downcase
     name = "#{receiver_name} for: #{name}" if receiver.nil?
 
     transaction = Transaction.new(
-        amount: params[:amount],
+        amount: amount,
         activity: Activity.find_or_create_by(name: name),
         image: params[:image],
         sender: current_user,
         receiver: receiver,
+        slack_kudos_left_on_creation: Goal.next.amount - Balance.current.amount - amount.to_i,
         balance: Balance.current
     )
 
@@ -24,12 +26,14 @@ class TransactionAdder
   def self.create_from_api_request(headers, params)
     data = params[:data]
     attributes = data[:attributes]
+    amount = attributes[:amount]
 
     transaction = Transaction.new(
-        amount: attributes[:amount],
+        amount: amount,
         activity: Activity.find_or_create_by(name: attributes[:activity]),
         sender: User.find_by_api_token(headers['Api-Token']),
         receiver: User.find(data[:relationships][:receiver][:data][:id]),
+        slack_kudos_left_on_creation: Goal.next.amount - Balance.current.amount - amount.to_i,
         balance: Balance.current
     )
 
