@@ -6,7 +6,7 @@ def expect_unauthorized_response
         errors: [
             {
                 title: 'Unauthorized',
-                detail: 'No valid API-token was provided.',
+                detail: 'No valid API token was provided.',
                 code: '401',
                 status: '401'
             }
@@ -40,7 +40,7 @@ def expect_transaction_record_not_found_response
         errors: [
             {
                 title: 'Transaction record not found',
-                detail: 'The transaction record identified by -1 could not be found.',
+                detail: 'The transaction record identified by id -1 could not be found.',
                 code: '404',
                 status: '404'
             }
