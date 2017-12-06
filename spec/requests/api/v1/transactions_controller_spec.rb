@@ -590,7 +590,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
   end
 
-  describe 'PUT api/v1/transactions/:id/votes' do
+  describe 'PUT api/v1/transactions/:id/like' do
     let! (:transaction) {create(:transaction)}
     let (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
     let (:default_vote_flag) {true}
@@ -601,7 +601,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
     context 'with a valid api-token' do
       context 'and a valid transaction id' do
-        let (:request) {"/api/v1/transactions/#{transaction.id}/votes"}
+        let (:request) {"/api/v1/transactions/#{transaction.id}/like"}
         let! (:record_count_before_request) {Vote.count}
 
         before do
@@ -621,9 +621,23 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         end
 
         expect_vote_count_increase
+
+        it 'returns the successfully liked response' do
+          expected =
+              {
+                  data: {
+                      title: 'Successfully liked successfully',
+                      detail: "The transaction record identified by id #{transaction.id} was liked successfully."
+                  }
+              }.with_indifferent_access
+
+          expect(json).to eq(expected)
+        end
+
+        expect_status_200_ok
       end
       context 'an an invalid transaction id' do
-        let (:request) {"/api/v1/transactions/#{invalid_transaction_id}/votes"}
+        let (:request) {"/api/v1/transactions/#{invalid_transaction_id}/like"}
         let! (:record_count_before_request) {Vote.count}
 
         before do
@@ -639,7 +653,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let (:request) {"/api/v1/transactions/#{transaction.id}/votes"}
+      let (:request) {"/api/v1/transactions/#{transaction.id}/like"}
       let! (:record_count_before_request) {Vote.count}
 
       before do
@@ -654,7 +668,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'without an api-token' do
-      let (:request) {"/api/v1/transactions/#{transaction.id}/votes"}
+      let (:request) {"/api/v1/transactions/#{transaction.id}/like"}
       let! (:record_count_before_request) {Vote.count}
 
       before do
@@ -669,7 +683,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
   end
 
-  describe 'DELETE api/v1/transactions/:id/votes/:user_id' do
+  describe 'DELETE api/v1/transactions/:id/like' do
     let! (:transaction) {create(:transaction)}
     let! (:user) {create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA')}
     let!(:vote) {
@@ -680,7 +694,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
     context 'with a valid api-token' do
       context 'and a valid transaction id' do
-        let (:request) {"/api/v1/transactions/#{transaction.id}/votes"}
+        let (:request) {"/api/v1/transactions/#{transaction.id}/like"}
         let! (:record_count_before_request) {Vote.count}
 
         before do
@@ -692,10 +706,24 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
         end
 
         expect_vote_count_decrease
+
+        it 'returns the successfully unliked response' do
+          expected =
+              {
+                  data: {
+                      title: 'Successfully unliked successfully',
+                      detail: "The transaction record identified by id #{transaction.id} was unliked successfully."
+                  }
+              }.with_indifferent_access
+
+          expect(json).to eq(expected)
+        end
+
+        expect_status_200_ok
       end
 
       context 'an an invalid transaction id' do
-        let (:request) {"/api/v1/transactions/#{invalid_transaction_id}/votes"}
+        let (:request) {"/api/v1/transactions/#{invalid_transaction_id}/like"}
         let! (:record_count_before_request) {Vote.count}
 
         before do
@@ -711,7 +739,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'with an invalid api-token' do
-      let (:request) {"/api/v1/transactions/#{transaction.id}/votes"}
+      let (:request) {"/api/v1/transactions/#{transaction.id}/like"}
       let! (:record_count_before_request) {Vote.count}
 
       before do
@@ -726,7 +754,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     end
 
     context 'without an api-token' do
-      let (:request) {"/api/v1/transactions/#{transaction.id}/votes"}
+      let (:request) {"/api/v1/transactions/#{transaction.id}/like"}
       let! (:record_count_before_request) {Vote.count}
 
       before do

@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :sent_transactions, class_name: 'Transaction', foreign_key: :sender_id
   has_many :received_transactions, class_name: 'Transaction', foreign_key: :receiver_id
   has_many :votes, foreign_key: 'voter_id'
+  has_many :fcm_tokens
 
   typed_store :preferences, coder: PreferencesCoder do |p|
     p.boolean :transaction_received_mail, default: true
@@ -80,6 +81,7 @@ class User < ActiveRecord::Base
   def deactivate
     transaction do
       update(deactivated_at: DateTime.now, api_token: nil)
+      fcm_tokens.destroy_all
       ensure_an_admin_remains
     end
   end

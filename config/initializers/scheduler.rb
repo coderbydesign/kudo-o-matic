@@ -8,4 +8,5 @@ end
 
 scheduler.cron '55 10 * * 5' do
   SlackService.instance.send_reminder
+  FcmService.instance.send_reminder
 end

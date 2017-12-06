@@ -2,7 +2,6 @@ class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: "is not correct. You can't give negative ₭udo's or exceed over 1000" }
   validates :activity_name_feed, length: {minimum: 4, maximum: 140}
 
-  after_commit :send_slack_notification, on: :create, unless: :skip_callbacks
   # also creates a second image file with a maximum width and/or height of 800 pixels with its aspect ratio preserved
   has_attached_file :image, styles: {thumb: '600x600'}
   validates_attachment :image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
@@ -54,10 +53,6 @@ class Transaction < ActiveRecord::Base
 
   def receiver_name=(name)
     self.receiver = User.find_by(name: name) if name.present?
-  end
-
-  def send_slack_notification
-    SlackService.instance.send_new_transaction(self)
   end
 
   def self.all_for_user(user)
