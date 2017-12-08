@@ -56,12 +56,14 @@ class TransactionAdder
     first_char_receiver = receiver_text[0]
     receiver_text[0] = ''
 
+    sender_slack_id = params['user_id']
+
     raise SlackArgumentsError.new("Invalid command. Use the following syntax to give ₭udos:\n"\
-                                  '*/kudo* @receiver <amount> <reason>') if arguments.size < 3 || amount.nil? || activity.nil? || first_char_receiver != '@'
+                                  '*/kudo* @receiver <amount> <reason>') if arguments.size < 3 || receiver_text.nil? || sender_slack_id.nil? || amount.nil? || activity.nil? || first_char_receiver != '@'
 
     receiver = User.find_by_slack_username(receiver_text)
     receiver = User.find_by_slack_name(receiver_text) if receiver.nil?
-    sender = User.find_by_slack_id(params['user_id'])
+    sender = User.find_by_slack_id(sender_slack_id)
 
     raise SlackConnectionError.new('You are *not* connected to the ₭udo-o-Matic') if sender.nil?
     raise SlackConnectionError.new('Receiver is *not* connected to the ₭udo-o-Matic') if receiver.nil?
@@ -78,10 +80,12 @@ class TransactionAdder
     save transaction
   end
 
-  def self.create_from_slack_reaction(params, user, activity)
+  def self.create_from_slack_reaction(params, receiver_slack_id, activity)
     event = params['event']
-    sender = User.find_by_slack_id(event['user'])
-    receiver = User.find_by_slack_id(user)
+    sender_slack_id = event['user']
+
+    sender = sender_slack_id.present? ? User.find_by_slack_id(sender_slack_id) : nil
+    receiver = receiver_slack_id.present? ? User.find_by_slack_id(receiver_slack_id) : nil
 
     raise SlackConnectionError.new('You are *not* connected to the ₭udo-o-Matic') if sender.nil?
     raise SlackConnectionError.new('Message is *not* sent by a connected ₭udo-o-Matic user') if receiver.nil?
