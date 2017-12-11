@@ -3,7 +3,7 @@ class SummaryMailer < ApplicationMailer
     return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil
 
     User.where.not(email: '').where(deactivated_at: nil).each do |user|
-      summary_email(user).deliver_later if user.summary_mail
+      suppress(Exception) {summary_email(user).deliver_later if user.summary_mail}
     end
   end
 
@@ -16,7 +16,7 @@ class SummaryMailer < ApplicationMailer
 
     attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/kudo-o-matic-white-mail.png")
 
-    if @transactions.any? {|t| t.sender.avatar_url.blank? || t.receiver.avatar_url.blank?}
+    if @transactions.any? {|t| t.sender&.avatar_url.blank? || t.receiver&.avatar_url.blank?}
       attachments.inline['no-picture.jpg'] = File.read("#{Rails.root}/public/no-picture-icon.jpg")
     end
 

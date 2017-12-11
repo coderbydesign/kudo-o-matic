@@ -35,7 +35,7 @@ Slack::TransactionJob = Struct.new(:transaction, :new?) do
                     {
                         title: 'Receiver',
                         value: "#{transaction.receiver_name_feed} "\
-                               "#{!transaction.receiver&.slack_name.blank? ? "(<@#{transaction.receiver.slack_name}>)" : ''}",
+                               "#{transaction.receiver&.slack_id.present? ? "(<@#{transaction.receiver.slack_id}>)" : ''}",
                         short: true
                     },
                     {
