@@ -4,7 +4,7 @@ class SlackController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:action, :command, :reaction]
   skip_before_action :authenticate_user!, only: [:action, :command, :reaction]
 
-  KUDO_REACTJI = %w(kudo kudocoin)
+  KUDO_REACTJI = %w(kudo kudocoin kudos)
 
   def action
     payload = JSON.parse(params['payload'])
@@ -45,7 +45,7 @@ class SlackController < ApplicationController
     return if check_challenge
 
     event = params['event']
-    user_id = event['user']
+    sender_slack_id = event['user']
     item = event['item']
     timestamp = item['ts']
     channel = item['channel']
@@ -53,7 +53,7 @@ class SlackController < ApplicationController
     return unless check_verification_token(params['token']) && event['reaction'].in?(KUDO_REACTJI)
 
     transaction = Transaction.find_by_slack_reaction_created_at(timestamp)
-    user = User.find_by_slack_id(user_id)
+    user = User.find_by_slack_id(sender_slack_id)
 
     if transaction.present? && user.present?
       transaction.liked_by user
@@ -61,16 +61,18 @@ class SlackController < ApplicationController
       SlackService.instance.send_updated_transaction(transaction)
 
       message = "Successfully liked ₭udo transaction! Click <#{transaction_url(transaction)}|here> for more details."
-      SlackService.instance.send_ephemeral_message(channel, user_id, message)
+      SlackService.instance.send_ephemeral_message(channel, sender_slack_id, message)
     else
       message = SlackService.instance.retrieve_message(channel, timestamp)
+      receiver_slack_id = message['user']
+
       activity = Formatting.unescape(message['text']).truncate(120, separator: ' ')
       activity = replace_user_ids_with_user_names(activity)
 
-      transaction = TransactionAdder.create_from_slack_reaction(params, message['user'], activity)
+      transaction = TransactionAdder.create_from_slack_reaction(sender_slack_id, receiver_slack_id, activity, timestamp)
 
       message = "Successfully created ₭udo transaction! Click <#{transaction_url(transaction)}|here> for more details."
-      SlackService.instance.send_ephemeral_message(channel, user_id, message)
+      SlackService.instance.send_ephemeral_message(channel, sender_slack_id, message)
     end
   rescue ActiveRecord::RecordInvalid, SlackConnectionError => error
     event = params['event']

@@ -17,9 +17,11 @@ Rails.application.routes.draw do
 
   get :feed, to: 'feed#index'
 
-  post 'slack/action'
-  post 'slack/command'
-  post 'slack/reaction'
+  scope :slack, controller: :slack do
+    post :action
+    post :command
+    post :reaction
+  end
 
   namespace :admin do
     root 'users#index'
@@ -63,8 +65,8 @@ Rails.application.routes.draw do
 
       jsonapi_resources :transactions, only: [:index, :show, :create] do
         member do
-          put :votes, to: 'transactions#like'
-          delete :votes, to: 'transactions#unlike'
+          put :like, to: 'transactions#like'
+          delete :like, to: 'transactions#unlike'
         end
 
         jsonapi_link :sender, only: :show
@@ -84,7 +86,10 @@ Rails.application.routes.draw do
         jsonapi_related_resources :received_transactions, only: :show
       end
 
-      post 'authentication/obtain_api_token'
+      scope :authentication, controller: :authentication do
+        post :obtain_api_token
+        post :store_fcm_token
+      end
     end
   end
 
