@@ -80,10 +80,7 @@ class TransactionAdder
     save transaction
   end
 
-  def self.create_from_slack_reaction(params, receiver_slack_id, activity)
-    event = params['event']
-    sender_slack_id = event['user']
-
+  def self.create_from_slack_reaction(sender_slack_id, receiver_slack_id, activity, timestamp)
     sender = sender_slack_id.present? ? User.find_by_slack_id(sender_slack_id) : nil
     receiver = receiver_slack_id.present? ? User.find_by_slack_id(receiver_slack_id) : nil
 
@@ -95,7 +92,7 @@ class TransactionAdder
         activity: Activity.find_or_create_by(name: "Slack message: '#{activity}'"),
         sender: sender,
         receiver: receiver,
-        slack_reaction_created_at: event['item']['ts'],
+        slack_reaction_created_at: timestamp,
         slack_kudos_left_on_creation: Goal.next.amount - Balance.current.amount - 1,
         balance: Balance.current
     )
