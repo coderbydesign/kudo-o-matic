@@ -46,9 +46,10 @@ class FcmTokenDashboard < Administrate::BaseDashboard
       :user
   ]
 
-  # Overwrite this method to customize how fcm tokens are displayed
-  # across all pages of the admin dashboard.
-  def display_resource(fcm_token)
-    fcm_token.token
-  end
+    # Overwrite this method to customize how fcm tokens are displayed
+    # across all pages of the admin dashboard.
+    #
+    # def display_resource(fcm_token)
+    #   "FcmToken ##{fcm_token.id}"
+    # end
 end
