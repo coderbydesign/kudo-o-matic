@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class UserDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -23,7 +23,8 @@ class UserDashboard < Administrate::BaseDashboard
       updated_at: Field::DateTime,
       sent_transactions: Field::HasMany.with_options(class_name: 'Transaction'),
       received_transactions: Field::HasMany.with_options(class_name: 'Transaction'),
-      votes: Field::HasMany
+      votes: Field::HasMany,
+      fcm_tokens: Field::HasMany
   }
 
   # COLLECTION_ATTRIBUTES
@@ -60,7 +61,8 @@ class UserDashboard < Administrate::BaseDashboard
       :deactivated_at,
       :sent_transactions,
       :received_transactions,
-      :votes
+      :votes,
+      :fcm_tokens
   ]
 
   # FORM_ATTRIBUTES

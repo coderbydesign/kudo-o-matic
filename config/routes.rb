@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     resources :transactions
     resources :activities
     resources :votes
+    resources :fcm_tokens
   end
 
   namespace :api do

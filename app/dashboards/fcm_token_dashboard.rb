@@ -1,6 +1,6 @@
 require 'administrate/base_dashboard'
 
-class VoteDashboard < Administrate::BaseDashboard
+class FcmTokenDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,17 +9,10 @@ class VoteDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
       id: Field::Number,
-      votable_type: Field::String,
-      votable_id: Field::Number,
-      voter_type: Field::String,
-      voter_id: Field::Number,
-      vote_flag: Field::Boolean,
-      vote_scope: Field::String,
-      vote_weight: Field::Number,
+      token: Field::String,
       created_at: Field::DateTime,
       updated_at: Field::DateTime,
-      transaction_votable: Field::BelongsTo.with_options(class_name: 'Transaction'),
-      user_voter: Field::BelongsTo.with_options(class_name: 'User')
+      user: Field::BelongsTo,
   }
 
   # COLLECTION_ATTRIBUTES
@@ -29,35 +22,33 @@ class VoteDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
       :id,
-      :transaction_votable,
-      :user_voter
+      :token,
+      :created_at,
+      :updated_at,
+      :user
   ]
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-      :votable_id,
-      :votable_type,
-      :transaction_votable,
-      :voter_id,
-      :voter_type,
-      :user_voter,
+      :id,
+      :token,
       :created_at,
-      :updated_at
+      :updated_at,
+      :user
   ]
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-      :transaction_votable,
-      :user_voter
+      :token,
+      :user
   ]
 
-  # Overwrite this method to customize how votes are displayed
+  # Overwrite this method to customize how fcm tokens are displayed
   # across all pages of the admin dashboard.
-  #
-  # def display_resource(vote)
-  #   "Vote ##{vote.id}"
-  # end
+  def display_resource(fcm_token)
+    fcm_token.token
+  end
 end
