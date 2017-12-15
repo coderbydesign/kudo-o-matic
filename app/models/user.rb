@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
       raise error
     end
 
-    user.update(api_token: generate_unique_api_token)
+    user.update(api_token: generate_unique_api_token) unless user.api_token.present?
 
     unless existing_user
       UserMailer.new_user(user)

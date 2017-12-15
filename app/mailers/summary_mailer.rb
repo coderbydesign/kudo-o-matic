@@ -1,6 +1,6 @@
 class SummaryMailer < ApplicationMailer
   def self.new_summary
-    return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil
+    return if Rails.env == 'test' || ENV['MAIL_USERNAME'].blank?
 
     User.where.not(email: '').where(deactivated_at: nil).each do |user|
       suppress(Exception) {summary_email(user).deliver_later if user.summary_mail}
