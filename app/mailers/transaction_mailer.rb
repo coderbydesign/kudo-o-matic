@@ -1,6 +1,6 @@
 class TransactionMailer < ApplicationMailer
   def self.new_transaction(transaction)
-    return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil || transaction.receiver.nil?
+    return if Rails.env == 'test' || ENV['MAIL_USERNAME'].blank? || transaction.receiver.nil?
 
     receiver = transaction.receiver
 
