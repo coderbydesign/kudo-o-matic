@@ -105,11 +105,11 @@ class TransactionAdder
   def self.save(transaction)
     transaction.save!
 
-    GoalReacher.check!
-
     SlackService.instance.send_new_transaction(transaction)
     FcmService.instance.send_new_transaction(transaction)
     TransactionMailer.new_transaction(transaction)
+
+    GoalReacher.check!
 
     transaction
   end

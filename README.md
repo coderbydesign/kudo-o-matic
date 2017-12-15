@@ -140,6 +140,7 @@ Use '<http://localhost:3000/slack/reaction>' for development.
 * Set the `SLACK_CLIENT_ID`, `SLACK_CLIENT_SECRET`, `SLACK_VERIFICATION_TOKEN`, `SLACK_ACCESS_TOKEN`, `SLACK_BOT_ACCESS_TOKEN` and `SLACK_CHANNEL` environment variables, provided on the Slack API dashboard.
 * Optionally change the value of the `COMPANY_ICON` environment variable to provide your own icon for the footer of Slack messages. 
 * Restart the server.
+* Restart the [delayed_job](https://github.com/collectiveidea/delayed_job) worker (``rake jobs:work``)
 
 Users can connect their Slack account by signing in to Slack on the settings page.
 
@@ -154,6 +155,7 @@ Follow these instructions to enable the Kudo-o-Matic mail notification functiona
 * [Create and new mail account](https://accounts.google.com/SignUp) or use existing mail credentials.
 * Set the `MAIL_USERNAME`, `MAIL_PASSWORD` and `MAIL_ADDRESS` environment variables.
 * Restart the server.
+* Restart the [delayed_job](https://github.com/collectiveidea/delayed_job) worker (``rake jobs:work``)
 
 Users can configure their mail preferences on the settings page. By default, they will receive all mail notifications.
 

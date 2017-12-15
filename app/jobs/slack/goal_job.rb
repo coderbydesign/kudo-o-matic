@@ -10,33 +10,21 @@ Slack::GoalJob = Struct.new(:nil) do
         'Authorization' => "Bearer #{ENV['SLACK_BOT_ACCESS_TOKEN']}"}
     )
 
-    emoji = %w(:confetti_ball: :tada:).sample
-
     goal = Goal.previous
-    balance = Balance.current
 
     request.body = {
         channel: ENV['SLACK_CHANNEL'],
         attachments:
             [
                 {
+                    text: "<!channel> Congratulations! :tada:\n"\
+                          "You and your colleagues just <#{root_url}|achieved> ₭udo goal *'#{goal.name}'*! :confetti_ball: \n\n"\
+                          "Don't forget to pick a date!",
+                    mrkdwn_in: ['text'],
                     fallback: '₭udo goal achieved! :trophy:',
                     color: '#5F90B0',
-                    pretext: "<!channel> Congratulations! You and your colleagues just achieved a ₭udo goal! #{emoji}\n"\
-                             "Don't forget to pick a date! Click <#{root_url}|here> for more details.",
-                    fields: [
-                        {
-                            title: 'Goal',
-                            value: goal.name,
-                            short: true
-                        },
-                        {
-                            title: '₭udos',
-                            value: "#{balance.amount} ₭",
-                            short: true
-                        }
-                    ],
-                    footer: "#{ENV['COMPANY_USER']} | ₭udo-o-Matic | Goal achieved on: #{goal.achieved_on.in_time_zone('CET').strftime('%d-%m-%Y')}",
+                    footer: "#{ENV['COMPANY_USER']} | ₭udo-o-Matic | "\
+                            "<#{root_url}|Goal> achieved on: #{goal.achieved_on.in_time_zone('CET').strftime('%d-%m-%Y')}",
                     footer_icon: ENV['COMPANY_ICON']
                 }
             ]
