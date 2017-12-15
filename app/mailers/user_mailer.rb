@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
   def self.new_user(user)
-    return if Rails.env == 'test' || ENV['MAIL_USERNAME'] == nil || user.email.blank?
+    return if Rails.env == 'test' || ENV['MAIL_USERNAME'].blank? || user.email.blank?
 
     suppress(Exception) {welcome_email(user).deliver_later}
   end
