@@ -18,12 +18,13 @@ Slack::ReminderJob = Struct.new(:nil) do
           attachments:
               [
                   {
+                      text: "#{greeting} #{user.first_name},\n\n"\
+                               "It's almost weekend, but don't forget to think back about this week "\
+                               "because there is definitely someone who *deserves a compliment*! :thinking_face:\n\n"\
+                               "Click <#{root_url}|here> to give that person some *₭udos*! :+1:",
+                      mrkdwn_in: ['text'],
                       fallback: '₭udo reminder! :clock12:',
                       color: '#5F90B0',
-                      pretext: "#{greeting} #{user.first_name},\n\n"\
-                               "It's almost weekend, but don't forget to think back about this week "\
-                               "because there is definitely someone who deserves a compliment! :thinking_face:\n\n"\
-                               "Click <#{root_url}|here> to give that person some ₭udo's! :+1:",
                       footer: "#{ENV['COMPANY_USER']} | ₭udo-o-Matic",
                       footer_icon: ENV['COMPANY_ICON']
                   }
