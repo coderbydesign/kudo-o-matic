@@ -5,11 +5,22 @@ Fcm::TransactionJob = Struct.new(:transaction) do
     registration_ids = transaction.receiver.fcm_tokens.collect(&:token).flatten.uniq
     return if registration_ids.blank?
 
+    title = '₭udos received!'
+    body = "You just received #{transaction.amount} ₭ from #{transaction.sender.name}!"
+    event = 'transaction'
+
     options = {
         notification: {
-            title: '₭udos received!',
-            body: "You just received #{transaction.amount} ₭ from #{transaction.sender.name}!",
-            event: 'transaction'
+            title: title,
+            body: body,
+            event: event,
+            sound: 'default',
+            badge: '1'
+        },
+        data: {
+            title: title,
+            body: body,
+            event: event,
         },
         priority: 'high'
     }

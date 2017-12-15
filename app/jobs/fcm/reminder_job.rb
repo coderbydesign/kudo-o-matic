@@ -4,12 +4,22 @@ Fcm::ReminderJob = Struct.new(:nil) do
 
     return if registration_ids.blank?
 
+    title = '₭udo reminder!'
+    body = "Don't forget to think back about this week, because there is definitely someone who deserves a compliment!"
+    event = 'reminder'
+
     options = {
         notification: {
-            title: '₭udo reminder!',
-            body: "Don't forget to think back about this week, "\
-                  'because there is definitely someone who deserves a compliment!',
-            event: 'reminder'
+            title: title,
+            body: body,
+            event: event,
+            sound: 'default',
+            badge: '1'
+        },
+        data: {
+            title: title,
+            body: body,
+            event: event,
         },
         priority: 'high'
     }
