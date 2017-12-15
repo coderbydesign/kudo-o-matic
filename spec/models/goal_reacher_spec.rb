@@ -28,7 +28,7 @@ RSpec.describe GoalReacher, type: :model do
     # Skipped because of unused function Transaction.goal_reached_transaction
     xit 'creates a transaction for the reached goal' do
       GoalReacher.check!
-      expect(Transaction.last.activity.name).to eq("reaching the goal #{Goal.previous.name} :boom:, here are some ₭udo's to boost your hunt for the next goal")
+      expect(Transaction.last.activity.name).to eq("reaching the goal #{Goal.previous.name} :boom:, here are some ₭udos to boost your hunt for the next goal")
     end
   end
 end
