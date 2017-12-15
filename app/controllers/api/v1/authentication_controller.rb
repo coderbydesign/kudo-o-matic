@@ -4,7 +4,7 @@ class Api::V1::AuthenticationController < Api::V1::ApiController
   def obtain_api_token
     validate_jwt_token(params[:jwt_token])
 
-    @user = User.from_api_token_request(params)
+    @user = User.from_api_token_request(obtain_api_token_params)
 
     render 'api/v1/authentication/obtain_api_token', status: :created
   rescue => e
@@ -34,5 +34,9 @@ class Api::V1::AuthenticationController < Api::V1::ApiController
       error = Api::V1::UnauthorizedError.new(error_object_overrides)
       raise error
     end
+  end
+
+  def obtain_api_token_params
+    params.permit(:jwt_token, :uid, :provider, :name, :email, :avatar_url)
   end
 end
