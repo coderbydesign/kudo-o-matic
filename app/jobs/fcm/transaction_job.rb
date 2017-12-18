@@ -1,6 +1,6 @@
 Fcm::TransactionJob = Struct.new(:transaction) do
   def perform
-    return if transaction.receiver.deactivated?
+    return if transaction.receiver&.deactivated?
 
     registration_ids = transaction.receiver.fcm_tokens.collect(&:token).flatten.uniq
     return if registration_ids.blank?
