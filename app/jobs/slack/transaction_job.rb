@@ -25,7 +25,7 @@ Slack::TransactionJob = Struct.new(:transaction, :new?) do
                       "#{transaction.receiver&.slack_id.present? ? "(<@#{transaction.receiver.slack_id}>) " : ''}"\
                       "*<#{transaction_url(transaction)}|#{transaction_amount} #{'₭udo'.pluralize(transaction_amount)}>* "\
                       "for #{transaction.activity_name_feed}. \n\n"\
-                      "#{transaction.slack_kudos_left_on_creation > 0 ? "*#{kudos_left} "\
+                      "#{kudos_left.present? && kudos_left > 0 ? "*#{kudos_left} "\
                       "#{'₭udo'.pluralize(kudos_left)}* left until the next goal! #{emoji}" : ''}",
                 mrkdwn_in: ['text'],
                 fallback: 'New ₭udo transaction!',
