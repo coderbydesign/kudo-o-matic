@@ -4,8 +4,6 @@ class SlackController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:action, :command, :reaction]
   skip_before_action :authenticate_user!, only: [:action, :command, :reaction]
 
-  KUDO_REACTJI = %w(kudo kudocoin kudos)
-
   def action
     payload = JSON.parse(params['payload'])
 
@@ -50,7 +48,7 @@ class SlackController < ApplicationController
     timestamp = item['ts']
     channel = item['channel']
 
-    return unless check_verification_token(params['token']) && event['reaction'].in?(KUDO_REACTJI)
+    return unless check_verification_token(params['token']) && event['reaction'].in?(ENV['SLACK_REACTION'].split(','))
 
     transaction = Transaction.find_by_slack_reaction_created_at(timestamp)
     user = User.find_by_slack_id(sender_slack_id)
