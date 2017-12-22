@@ -5,12 +5,12 @@ class TransactionAdder
     amount = params[:amount]
     receiver_name = params[:receiver_name]
     receiver = User.where(name: receiver_name).first
-    name = params[:activity_name].to_s.downcase
-    name = "#{receiver_name} for: #{name}" if receiver.nil?
+    activity = params[:activity_name].to_s.downcase
+    activity = "#{receiver_name} for: #{activity}" if receiver.nil?
 
     transaction = Transaction.new(
         amount: amount,
-        activity: Activity.find_or_create_by(name: name),
+        activity: Activity.find_or_create_by(name: activity),
         image: params[:image],
         sender: current_user,
         receiver: receiver,
@@ -26,20 +26,26 @@ class TransactionAdder
   def self.create_from_api_request(headers, params)
     data = params[:data]
     attributes = data[:attributes]
+
     amount = attributes[:amount]
+    receiver_name = data[:relationships][:receiver][:data][:name]
+    receiver = User.where(name: receiver_name).first
+    activity = attributes[:activity]
+    activity = "#{receiver_name} for: #{activity}" if receiver.nil?
 
     transaction = Transaction.new(
         amount: amount,
-        activity: Activity.find_or_create_by(name: attributes[:activity]),
+        activity: Activity.find_or_create_by(name: activity),
         sender: User.find_by_api_token(headers['Api-Token']),
-        receiver: User.find(data[:relationships][:receiver][:data][:id]),
+        receiver: receiver,
         slack_kudos_left_on_creation: Goal.next.amount - Balance.current.amount - amount.to_i,
         balance: Balance.current
     )
 
     unless attributes[:image].nil? || attributes['image-file-type'].nil?
       file_type = attributes['image-file-type']
-      transaction.update(image: "data:image/#{file_type};base64,#{attributes[:image]}", image_file_name: "image.#{file_type}")
+      transaction.update(
+          image: "data:image/#{file_type};base64,#{attributes[:image]}", image_file_name: "image.#{file_type}")
     end
 
     save transaction
@@ -59,7 +65,8 @@ class TransactionAdder
     sender_slack_id = params['user_id']
 
     raise SlackArgumentsError.new("Invalid command. Use the following syntax to give ₭udos:\n"\
-                                  '*/kudo* @receiver <amount> <reason>') if arguments.size < 3 || receiver_text.nil? || sender_slack_id.nil? || amount.nil? || activity.nil? || first_char_receiver != '@'
+                                  '*/kudo* @receiver <amount> <reason>') if arguments.size < 3 || receiver_text.nil? ||
+        sender_slack_id.nil? || amount.nil? || activity.nil? || first_char_receiver != '@'
 
     receiver = User.find_by_slack_username(receiver_text)
     receiver = User.find_by_slack_name(receiver_text) if receiver.nil?

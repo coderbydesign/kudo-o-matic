@@ -342,7 +342,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
     let (:request) {"/api/v1/transactions"}
     let! (:transaction) {build(:transaction)}
     let! (:sender) {create(:user, :api_token)}
-    let! (:receiver) {create(:user)}
+    let! (:receiver) {create(:user, name: 'Receiver')}
     let! (:balance) {create(:balance, :current)}
     let! (:record_count_before_request) {Transaction.count}
 
@@ -367,7 +367,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                            receiver: {
                                data: {
                                    type: 'users',
-                                   id: receiver.id
+                                   name: receiver.name
                                }
                            }
                        }
@@ -453,7 +453,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                            receiver: {
                                data: {
                                    type: 'users',
-                                   id: receiver.id
+                                   name: receiver.name
                                }
                            }
                        }
@@ -540,7 +540,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                          receiver: {
                              data: {
                                  type: 'users',
-                                 id: receiver.id
+                                 name: receiver.name
                              }
                          }
                      }
@@ -573,7 +573,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
                              receiver: {
                                  data: {
                                      type: 'users',
-                                     id: receiver.id
+                                     name: receiver.name
                                  }
                              }
                          }

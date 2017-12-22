@@ -41,7 +41,7 @@
               },
               "response": [
                 {
-                  "id": "6b5cb846-94f3-4254-a408-0f212909e26c",
+                  "id": "fc40f857-d50d-48ec-94e6-6e3e2ef5b923",
                   "name": "balances/1",
                   "originalRequest": {
                     "method": "GET",
@@ -174,7 +174,7 @@
               },
               "response": [
                 {
-                  "id": "5ca53287-13c7-40de-ae77-4d434445a5f4",
+                  "id": "098346f3-6d82-4ab2-90cc-c8629ef30a66",
                   "name": "balance/current",
                   "originalRequest": {
                     "method": "GET",
@@ -314,7 +314,7 @@
               },
               "response": [
                 {
-                  "id": "ff14defb-e7e6-4b63-9a58-1e4f65913c67",
+                  "id": "724a0fe9-ae99-41ab-806d-84e77f3c330d",
                   "name": "goals/1",
                   "originalRequest": {
                     "method": "GET",
@@ -447,7 +447,7 @@
               },
               "response": [
                 {
-                  "id": "ef3d3efd-022f-402d-8652-d86d6f30c5af",
+                  "id": "35aa5372-3492-4a1c-8d71-2c1f0c1e5dcd",
                   "name": "goals/next",
                   "originalRequest": {
                     "method": "GET",
@@ -580,7 +580,7 @@
               },
               "response": [
                 {
-                  "id": "c4d3a4e8-0c7d-4aa3-b328-70d5b3f8fb9a",
+                  "id": "e4a26f00-3457-4bba-9d9c-8bc26f611d9a",
                   "name": "goals/previous",
                   "originalRequest": {
                     "method": "GET",
@@ -719,7 +719,7 @@
               },
               "response": [
                 {
-                  "id": "bb99e68d-567c-438e-8713-d1764a897b2f",
+                  "id": "9aa80d97-36fb-4006-b775-ebfe6feda43c",
                   "name": "transactions",
                   "originalRequest": {
                     "method": "GET",
@@ -851,7 +851,7 @@
               },
               "response": [
                 {
-                  "id": "5afa4b4a-102f-46c7-9bbe-934c18660baa",
+                  "id": "8b20ca17-78b8-42bf-bfd8-77e68b3301ad",
                   "name": "transactions/1",
                   "originalRequest": {
                     "method": "GET",
@@ -973,7 +973,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n\t\"data\": {\n\t\t\"type\": \"transactions\",\n\t\t\"attributes\": {\n\t\t\t\"amount\": 1,\n\t\t\t\"activity\": \"activity\",\n\t\t\t\"image\": z4Ag4oiIIOKEnQ,\n\t\t\t\"image-file-type\": \"jpg\"\n\t\t},\n\t\t\"relationships\": {\n\t\t\t\"receiver\": { \n\t\t\t\t\"data\": {\n\t\t\t\t\t\"type\": \"users\",\n\t\t\t\t\t\"id\": 1\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
+                  "raw": "{\n\t\"data\": {\n\t\t\"type\": \"transactions\",\n\t\t\"attributes\": {\n\t\t\t\"amount\": 1,\n\t\t\t\"activity\": \"activity\",\n\t\t\t\"image\": z4Ag4oiIIOKEnQ,\n\t\t\t\"image-file-type\": \"jpg\"\n\t\t},\n\t\t\"relationships\": {\n\t\t\t\"receiver\": { \n\t\t\t\t\"data\": {\n\t\t\t\t\t\"type\": \"users\",\n\t\t\t\t\t\"name\": \"receiver\"\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
                 },
                 "url": {
                   "raw": "{{host}}/api/{{api-version}}/transactions",
@@ -990,7 +990,7 @@
               },
               "response": [
                 {
-                  "id": "91df0b81-2156-4bc5-a27f-92b3115b1fcb",
+                  "id": "6fde51c1-92c8-4b47-b787-2941729e7ffe",
                   "name": "transactions",
                   "originalRequest": {
                     "method": "POST",
@@ -1130,7 +1130,7 @@
               },
               "response": [
                 {
-                  "id": "54ba68da-741f-459a-9567-e9ff5ad7e556",
+                  "id": "acf65c65-9fe6-40de-a8aa-8a2365269e29",
                   "name": "transactions/1/like",
                   "originalRequest": {
                     "method": "PUT",
@@ -1265,7 +1265,7 @@
               },
               "response": [
                 {
-                  "id": "6cf792fa-1116-4524-8d16-7606637320d2",
+                  "id": "2d3beccc-2a87-499a-97aa-45f7a291c31f",
                   "name": "transactions/1/like",
                   "originalRequest": {
                     "method": "DELETE",
@@ -1405,7 +1405,7 @@
               },
               "response": [
                 {
-                  "id": "80303359-00f0-4938-bdc4-5b780a067a85",
+                  "id": "21c207a2-d7e3-4c8c-9b10-2524b928fa09",
                   "name": "users",
                   "originalRequest": {
                     "method": "GET",
@@ -1537,7 +1537,7 @@
               },
               "response": [
                 {
-                  "id": "8d354c6d-f041-4e08-a351-ce362a71e3e4",
+                  "id": "1d35a2a4-cef8-40e1-b302-3068dcdf4a0a",
                   "name": "users/1",
                   "originalRequest": {
                     "method": "GET",
@@ -1712,7 +1712,7 @@
               },
               "response": [
                 {
-                  "id": "f763d424-2e98-4a83-ab94-75c340c44684",
+                  "id": "617a7b08-ebf0-4b0b-8d65-bc20d32201be",
                   "name": "authentication/obtain_api_token",
                   "originalRequest": {
                     "method": "POST",
@@ -1886,7 +1886,7 @@
               },
               "response": [
                 {
-                  "id": "b46e76a1-9bb2-48a8-8bb9-0a52dc651fe8",
+                  "id": "dc2f01e6-bbbb-403f-a843-aa58119449e9",
                   "name": "authentication/store_fcm_token",
                   "originalRequest": {
                     "method": "POST",
