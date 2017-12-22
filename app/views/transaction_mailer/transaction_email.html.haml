@@ -1,7 +1,7 @@
 %tr
   %td.content
     = "You just received #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} from"
-    = "#{@transaction.sender.name} for '#{@transaction.activity}'! \u{1f389}".html_safe
+    = "#{@transaction.sender.name} for '#{@transaction.activity_name_feed}'! \u{1f389}".html_safe
     %br
     Show your appreciation by liking the
     = "#{link_to 'transaction', root_url}.".html_safe
