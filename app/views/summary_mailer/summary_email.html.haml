@@ -48,7 +48,7 @@
               to
               %strong
                 = "#{transaction.receiver_name_feed}"
-              = "for #{transaction.activity}"
+              = "for #{transaction.activity_name_feed}"
           - if transaction.votes.size >= 1
             %tr
               %td.likes-container{colspan: 2}

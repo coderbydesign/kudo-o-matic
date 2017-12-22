@@ -10,6 +10,7 @@ RSpec.describe SlackController, type: :controller do
 
     before do
       ENV['SLACK_VERIFICATION_TOKEN']='1'
+      ENV['SLACK_REACTION']='kudo'
     end
 
     context 'with a valid verification token' do

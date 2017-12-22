@@ -15,7 +15,7 @@ To start using the Kudo-o-Matic, you'll need:
 * [Ruby](https://www.ruby-lang.org/) >= 2.3.1
 * [Ruby on Rails](http://rubyonrails.org/) >= 5.0.3
 * [Bundler](http://bundler.io/)
-* [Postgres](https://www.postgresql.org/)
+* [PostgreSQL](https://www.postgresql.org/)
 
 To run the RSpec test suite (not required to run the Kudo-o-Matic), you'll need:
 * [PhantomJS](http://phantomjs.org/)
@@ -138,6 +138,7 @@ Use '<http://localhost:3000/slack/reaction>' for development.
 * Enable the 'Bot User' with the 'Display name' `Kudo-o-Matic`, the 'Default username' `kudo-o-matic` and turn 'Always Show My Bot as Online' on. 
 * Install the Slack App in the Slack Workspace of your organization.
 * Set the `SLACK_CLIENT_ID`, `SLACK_CLIENT_SECRET`, `SLACK_VERIFICATION_TOKEN`, `SLACK_ACCESS_TOKEN`, `SLACK_BOT_ACCESS_TOKEN` and `SLACK_CHANNEL` environment variables, provided on the Slack API dashboard.
+* Set the `SLACK_REACTION` environment variable with the accepted Kudo-emoji (comma separated e.g. `+1,joy`).
 * Optionally change the value of the `COMPANY_ICON` environment variable to provide your own icon for the footer of Slack messages. 
 * Restart the server.
 * Restart the [delayed_job](https://github.com/collectiveidea/delayed_job) worker (``rake jobs:work``)
@@ -161,7 +162,7 @@ Users can configure their mail preferences on the settings page. By default, the
 
 ## Kudo-o-Mobile app setup
 The Kudo-o-Matic provides a RESTfull API for the [Kudo-o-Mobile](https://github.com/kabisa/kudo-o-matic-frontend) cross-platform [Maji](https://github.com/kabisa/maji) mobile app.
-This API is protected with a token based authentication system. Mobile app users retrieve an API-token by signing in to the app. 
+This API is secured with a token based authentication system. Mobile app users retrieve an API-token by signing in to the app. 
   
 Follow these instructions to setup the token based authentication system for the mobile app: 
 * [Follow the Kudo-o-Mobile README](https://github.com/kabisa/kudo-o-matic-frontend).
@@ -170,6 +171,21 @@ Follow these instructions to setup the token based authentication system for the
 * Restart the server.
 
 Import the `postman_collection.json` and `postman_environment.json` files into [Postman](https://www.getpostman.com/) to view the API documentation of the Kudo-o-Matic REST API. 
+
+## Firebase Cloud Messaging setup
+The Kudo-o-Matic can automatically send native Kudo-o-Mobile app notifications when the following events occur:
+* When a user receives Kudos (only this user will receive the notification).
+* When a Kudo goal is reached.
+* Weekly Kudo reminder.
+
+Follow these instructions to enable Firebase Cloud Messaging notification functionality:
+* [Create a Firebase project](https://firebase.google.com/) (will be automatically created if you set up a Google API project).
+* Go to 'Settings', select 'Cloud Messaging' and retrieve the 'Server key'. 
+* Set the `FCM_SERVER_KEY` environment variable.
+* Restart the server.
+* Restart the [delayed_job](https://github.com/collectiveidea/delayed_job) worker (``rake jobs:work``)
+
+Kudo-o-Mobile app users will now receive native mobile notifications.
 
 ## Scheduled tasks
 ### Mail
@@ -189,6 +205,15 @@ Every friday at 11.55 AM.
 Crontab expression: `55 10 * * 5` (GMT)
 
 **NOTE**: Only works if the Slack environment variables are set.
+
+### Firebase Cloud Messaging
+The Kudo-o-Matic automatically sends a Kudo reminder message to all Kudo-o-Mobule app users.
+
+##### Schedule
+Every friday at 11.55 AM.  
+Crontab expression: `55 10 * * 5` (GMT)
+
+**NOTE**: Only works if the Firebase Cloud Messaging environment variable is set.
 
 ## Entities
 ### Balance
@@ -266,10 +291,10 @@ A *User*:
 ## Did you find a bug?
 * [Ensure the bug was not already reported](https://github.com/kabisa/kudo-o-matic/issues).
 * If you are unable to find an open issue addressing the problem, [open a new one](https://github.com/kabisa/kudo-o-matic/issues/new).   
-Be sure to include a title and a clear description, as much relevant information as possible, 
-and a code example or an executable test case demonstration the expected behavior that is not occurring. 
+* Be sure to include a title and a clear description, as much relevant information as possible, 
+and a code example or an executable test case demonstration of the expected behavior that is not occurring. 
 
 ## License
-Copyright (c) 2016-2017 [Kabisa](https://www.kabisa.nl/). See [LICENSE](https://github.com/kabisa/kudo-o-matic/blob/develop/LICENSE.md) for details.
+Copyright (c) 2016-2017 [Kabisa](https://www.kabisa.nl/). See [license](https://github.com/kabisa/kudo-o-matic/blob/develop/LICENSE.md) for details.
 
 ![Demo](https://kudo-o-matic-development.s3.amazonaws.com/Screenshot%202017-07-14%2015.17.38.png)

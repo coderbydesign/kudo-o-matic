@@ -5,6 +5,7 @@ class FcmService
     return unless fcm_service_configured
 
     Delayed::Job.enqueue Fcm::TransactionJob.new(transaction)
+    Delayed::Job.enqueue Fcm::TransactionRefreshJob.new(nil)
   end
 
   def send_goal_reached
