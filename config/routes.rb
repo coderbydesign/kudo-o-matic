@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get :feed, to: 'feed#index'
 
+  get 'legal/privacy'
+
   scope :slack, controller: :slack do
     post :action
     post :command
