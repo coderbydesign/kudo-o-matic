@@ -89,6 +89,12 @@ Rails.application.routes.draw do
         jsonapi_related_resources :received_transactions, only: :show
       end
 
+      scope :statistics, controller: :statistics do
+        get :general
+        get :graph
+        get :user
+      end
+
       scope :authentication, controller: :authentication do
         post :obtain_api_token
         post :store_fcm_token
