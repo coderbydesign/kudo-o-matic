@@ -41,7 +41,7 @@
               },
               "response": [
                 {
-                  "id": "b933bfcc-4174-49e7-997f-7146d71ae14a",
+                  "id": "07b30c89-53ea-4b7e-a9e3-483e2e127bc7",
                   "name": "balances/1",
                   "originalRequest": {
                     "method": "GET",
@@ -174,7 +174,7 @@
               },
               "response": [
                 {
-                  "id": "796ed331-33ad-4706-90c4-b0305d01ab62",
+                  "id": "12265e06-25e0-4968-adba-faae466868e9",
                   "name": "balance/current",
                   "originalRequest": {
                     "method": "GET",
@@ -314,7 +314,7 @@
               },
               "response": [
                 {
-                  "id": "1fbbd232-f070-4c13-a4a7-951ef8d8e620",
+                  "id": "a7f63dea-6672-4185-91a0-96856f6b8a2c",
                   "name": "goals/1",
                   "originalRequest": {
                     "method": "GET",
@@ -447,7 +447,7 @@
               },
               "response": [
                 {
-                  "id": "7b58c162-e43d-491f-b7f8-7c181d0aafe2",
+                  "id": "793b6989-f227-47d9-8f57-506f3cdad935",
                   "name": "goals/next",
                   "originalRequest": {
                     "method": "GET",
@@ -580,7 +580,7 @@
               },
               "response": [
                 {
-                  "id": "30f6448f-2595-40ff-89f3-d6a586f7c6f5",
+                  "id": "c7812cde-3b10-444a-9dc2-9805bbc95db7",
                   "name": "goals/previous",
                   "originalRequest": {
                     "method": "GET",
@@ -719,7 +719,7 @@
               },
               "response": [
                 {
-                  "id": "2e5ea935-c395-4ace-bd1b-c2d1e3c7fcaf",
+                  "id": "a4ad354e-e023-4e98-b4e6-14d852ef0fc5",
                   "name": "transactions",
                   "originalRequest": {
                     "method": "GET",
@@ -851,7 +851,7 @@
               },
               "response": [
                 {
-                  "id": "cd162a70-dbdb-4a93-b140-ed3f8edf878f",
+                  "id": "ce0bfbd1-6869-4717-8ec1-b359c6bf0e8f",
                   "name": "transactions/1",
                   "originalRequest": {
                     "method": "GET",
@@ -990,7 +990,7 @@
               },
               "response": [
                 {
-                  "id": "8437e6f7-731e-42f2-b814-ffefc8b78678",
+                  "id": "eabffc92-03be-421f-8599-e71e7cf18c0e",
                   "name": "transactions",
                   "originalRequest": {
                     "method": "POST",
@@ -1130,7 +1130,7 @@
               },
               "response": [
                 {
-                  "id": "451c32b5-fd16-4cf2-8d64-2367b73e4d4a",
+                  "id": "f8837d57-4d91-4b65-a522-b9cb601f83b4",
                   "name": "transactions/1/like",
                   "originalRequest": {
                     "method": "PUT",
@@ -1265,7 +1265,7 @@
               },
               "response": [
                 {
-                  "id": "331d87b5-f2ad-4970-9c69-0cc037987d61",
+                  "id": "7bb1f6bd-1aad-4c73-94a4-5e8ea7671d05",
                   "name": "transactions/1/like",
                   "originalRequest": {
                     "method": "DELETE",
@@ -1405,7 +1405,7 @@
               },
               "response": [
                 {
-                  "id": "68957079-0b6d-482e-9f8f-c678d2f261f8",
+                  "id": "d7d1bb69-1577-4243-b9e3-c753c6a370cb",
                   "name": "users",
                   "originalRequest": {
                     "method": "GET",
@@ -1537,7 +1537,7 @@
               },
               "response": [
                 {
-                  "id": "97790845-935b-4408-af69-9199f835159b",
+                  "id": "2f80d80a-e85e-42b7-a134-7daea137039f",
                   "name": "users/1",
                   "originalRequest": {
                     "method": "GET",
@@ -1712,7 +1712,7 @@
               },
               "response": [
                 {
-                  "id": "0894eb89-2789-49e7-8ef3-946e25f30fb9",
+                  "id": "07263518-8ebb-4ffa-a0e4-246e8b6cfa96",
                   "name": "authentication/obtain_api_token",
                   "originalRequest": {
                     "method": "POST",
@@ -1886,7 +1886,7 @@
               },
               "response": [
                 {
-                  "id": "7b74276f-cb5c-4ef5-b973-f9f226eee816",
+                  "id": "eb07d081-9c53-4397-8582-d61f8cbde3c8",
                   "name": "authentication/store_fcm_token",
                   "originalRequest": {
                     "method": "POST",
@@ -2037,7 +2037,7 @@
               },
               "response": [
                 {
-                  "id": "3e8d151a-68bc-42a7-8835-0cf449501090",
+                  "id": "0bd56807-5f7d-4cf1-a508-e6e86db5441f",
                   "name": "statistics/general",
                   "originalRequest": {
                     "method": "GET",
@@ -2170,7 +2170,7 @@
               },
               "response": [
                 {
-                  "id": "83fbdecb-7c8c-4270-95ce-1d110acfebd8",
+                  "id": "735d17a8-a399-430c-ab98-472403a5b653",
                   "name": "statistics/user",
                   "originalRequest": {
                     "method": "GET",
@@ -2305,7 +2305,7 @@
               },
               "response": [
                 {
-                  "id": "86d61acb-395d-4d30-867a-fc3cc73d3b4f",
+                  "id": "9cac236a-5705-4972-b3e3-2083efd14212",
                   "name": "statistics/graph",
                   "originalRequest": {
                     "method": "GET",
@@ -2407,7 +2407,7 @@
                     }
                   ],
                   "responseTime": 77,
-                  "body": "{\n    \"data\": {\n        \"January\": {\n            \"transactions\": 1,\n            \"kudos\": 1\n        },\n        \"December\": {\n            \"transactions\": 10,\n            \"kudos\": 15\n        },\n        \"November\": {\n            \"transactions\": 0,\n            \"kudos\": 0\n        },\n        \"October\": {\n            \"transactions\": 5,\n            \"kudos\": 10\n        },\n        \"September\": {\n            \"transactions\": 1,\n            \"kudos\": 2\n        }\n    }\n}"
+                  "body": "{\n    \"data\": {\n        \"0\": {\n            \"month\": \"January\",\n            \"transactions\": 1,\n            \"kudos\": 1\n        },\n        \"1\": {\n            \"month\": \"December\",\n            \"transactions\": 5,\n            \"kudos\": 15\n        },\n        \"2\": {\n            \"month\": \"November\",\n            \"transactions\": 0,\n            \"kudos\": 0\n        },\n        \"3\": {\n            \"month\": \"October\",\n            \"transactions\": 1,\n            \"kudos\": 1\n        },\n        \"4\": {\n            \"month\": \"September\",\n            \"transactions\": 1,\n            \"kudos\": 5\n        }\n    }\n}"
                 }
               ]
             }

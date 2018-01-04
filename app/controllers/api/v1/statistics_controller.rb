@@ -44,11 +44,12 @@ class Api::V1::StatisticsController < Api::V1::ApiController
       likes_month = likes.where(created_at: period_month).count
 
       data = {
+          month: month.strftime('%B'),
           transactions: transactions.where(created_at: period_month).count,
           kudos: transactions.where(created_at: period_month).sum(:amount) + likes_month
       }
 
-      @graph.store(month.strftime('%B'), data)
+      @graph.store(i, data)
     }
   end
 end

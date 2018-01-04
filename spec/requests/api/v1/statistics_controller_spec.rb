@@ -189,23 +189,28 @@ RSpec.describe Api::V1::StatisticsController, type: :request do
           expected =
               {
                   data: {
-                      "#{month_by_months_ago(0)}": {
+                      '0': {
+                          month: month_by_months_ago(0),
                           transactions: 1,
                           kudos: 100
                       },
-                      "#{month_by_months_ago(1)}": {
+                      '1': {
+                          month: month_by_months_ago(1),
                           transactions: 0,
                           kudos: 0
                       },
-                      "#{month_by_months_ago(2)}": {
+                      '2': {
+                          month: month_by_months_ago(2),
                           transactions: 0,
                           kudos: 0
                       },
-                      "#{month_by_months_ago(3)}": {
+                      '3': {
+                          month: month_by_months_ago(3),
                           transactions: 0,
                           kudos: 0
                       },
-                      "#{month_by_months_ago(4)}": {
+                      '4': {
+                          month: month_by_months_ago(4),
                           transactions: 0,
                           kudos: 0
                       }
@@ -229,23 +234,28 @@ RSpec.describe Api::V1::StatisticsController, type: :request do
           expected =
               {
                   data: {
-                      "#{month_by_months_ago(0)}": {
+                      '0': {
+                          month: month_by_months_ago(0),
                           transactions: 0,
                           kudos: 0
                       },
-                      "#{month_by_months_ago(1)}": {
+                      '1': {
+                          month: month_by_months_ago(1),
                           transactions: 0,
                           kudos: 0
                       },
-                      "#{month_by_months_ago(2)}": {
+                      '2': {
+                          month: month_by_months_ago(2),
                           transactions: 0,
                           kudos: 0
                       },
-                      "#{month_by_months_ago(3)}": {
+                      '3': {
+                          month: month_by_months_ago(3),
                           transactions: 1,
                           kudos: 100
                       },
-                      "#{month_by_months_ago(4)}": {
+                      '4': {
+                          month: month_by_months_ago(4),
                           transactions: 0,
                           kudos: 0
                       }
