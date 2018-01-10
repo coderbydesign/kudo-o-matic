@@ -2,7 +2,7 @@
 .modal-dialog.welcome-modal
   .modal-header
     %h2
-      ₭udo-o-Matic 3.0
+      ₭udo-o-Matic 3.1
   .modal-body#version
     %h3
       = "Connect the ₭udo-o-Matic with Slack \u{1f514}"
@@ -20,48 +20,26 @@
     %br
     %ul
       %li
-        Mail:
-        %ul
-          %li
-            Receive notifications when you receive ₭udos.
-          %li
-            Receive notifications when a ₭udo goal is reached.
-          %li
-            Receive a weekly ₭udo summary.
-      %li
         Slack:
         %ul
           %li
-            Receive personalized notifications and reminders.
+            Made ₭udo-o-Matic notifications less obtrusive in the Slack feed.
           %li
-            Give ₭udos with the /kudo command.
-          %li
-            Give ₭udos by adding the :kudo: reactji to a message of a ₭udo-o-Matic user.
-          %li
-            Like ₭udo transactions using the like button.
+            Fixed several bugs and improved stability.
       %li
-        User interface:
+        Firebase Cloud Messaging:
         %ul
           %li
-            Settings page for connecting with Slack and configuring mail preferences.
+            Receive notifications when you receive ₭udos in the ₭udo-o-Mobile app.
           %li
-            Single ₭udo transaction page, used for sharing transactions by URL.
+            Receive notifications when a ₭udo goal is reached in the ₭udo-o-Mobile app.
           %li
-            Button on the homepage for navigating back to the top.
-      %li
-        Administrator dashboard:
-        %ul
-          %li
-            User deactivation system.
-          %li
-            Implemented checks that prevent removing important data entries.
+            Receive a weekly ₭udo reminder in the ₭udo-o-Mobile app.
       %li
         Under the hood improvements and bug fixes:
         %ul
           %li
-            REST API for the upcoming ₭udo-o-Mobile app.
-          %li
-            Asynchronous image uploads and Slack communication.
+            REST API functionality for retrieving ₭udo-o-Matic usage statistics and historical data
   .modal-footer
     %button.btn.btn-primary.btn-close.close-welcome
       Close

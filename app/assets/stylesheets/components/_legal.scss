@@ -1,0 +1,19 @@
+.legal-container {
+  max-width: 700px;
+  margin-top: $margin-primary;
+  margin-right: auto;
+  margin-left: auto;
+  background: $primary-bg;
+  color: $text-primary;
+  border: 1px solid $primary-border-color;
+  font-weight: 300;
+  padding: 1.25rem;
+}
+
+.legal-heading {
+  margin-bottom: $margin-secondary;
+}
+
+.legal-body {
+  margin-bottom: $margin-primary;
+}

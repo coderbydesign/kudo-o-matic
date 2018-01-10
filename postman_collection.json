@@ -41,7 +41,7 @@
               },
               "response": [
                 {
-                  "id": "fc40f857-d50d-48ec-94e6-6e3e2ef5b923",
+                  "id": "07b30c89-53ea-4b7e-a9e3-483e2e127bc7",
                   "name": "balances/1",
                   "originalRequest": {
                     "method": "GET",
@@ -174,7 +174,7 @@
               },
               "response": [
                 {
-                  "id": "098346f3-6d82-4ab2-90cc-c8629ef30a66",
+                  "id": "12265e06-25e0-4968-adba-faae466868e9",
                   "name": "balance/current",
                   "originalRequest": {
                     "method": "GET",
@@ -314,7 +314,7 @@
               },
               "response": [
                 {
-                  "id": "724a0fe9-ae99-41ab-806d-84e77f3c330d",
+                  "id": "a7f63dea-6672-4185-91a0-96856f6b8a2c",
                   "name": "goals/1",
                   "originalRequest": {
                     "method": "GET",
@@ -447,7 +447,7 @@
               },
               "response": [
                 {
-                  "id": "35aa5372-3492-4a1c-8d71-2c1f0c1e5dcd",
+                  "id": "793b6989-f227-47d9-8f57-506f3cdad935",
                   "name": "goals/next",
                   "originalRequest": {
                     "method": "GET",
@@ -580,7 +580,7 @@
               },
               "response": [
                 {
-                  "id": "e4a26f00-3457-4bba-9d9c-8bc26f611d9a",
+                  "id": "c7812cde-3b10-444a-9dc2-9805bbc95db7",
                   "name": "goals/previous",
                   "originalRequest": {
                     "method": "GET",
@@ -719,7 +719,7 @@
               },
               "response": [
                 {
-                  "id": "9aa80d97-36fb-4006-b775-ebfe6feda43c",
+                  "id": "a4ad354e-e023-4e98-b4e6-14d852ef0fc5",
                   "name": "transactions",
                   "originalRequest": {
                     "method": "GET",
@@ -851,7 +851,7 @@
               },
               "response": [
                 {
-                  "id": "8b20ca17-78b8-42bf-bfd8-77e68b3301ad",
+                  "id": "ce0bfbd1-6869-4717-8ec1-b359c6bf0e8f",
                   "name": "transactions/1",
                   "originalRequest": {
                     "method": "GET",
@@ -990,7 +990,7 @@
               },
               "response": [
                 {
-                  "id": "6fde51c1-92c8-4b47-b787-2941729e7ffe",
+                  "id": "eabffc92-03be-421f-8599-e71e7cf18c0e",
                   "name": "transactions",
                   "originalRequest": {
                     "method": "POST",
@@ -1130,7 +1130,7 @@
               },
               "response": [
                 {
-                  "id": "acf65c65-9fe6-40de-a8aa-8a2365269e29",
+                  "id": "f8837d57-4d91-4b65-a522-b9cb601f83b4",
                   "name": "transactions/1/like",
                   "originalRequest": {
                     "method": "PUT",
@@ -1265,7 +1265,7 @@
               },
               "response": [
                 {
-                  "id": "2d3beccc-2a87-499a-97aa-45f7a291c31f",
+                  "id": "7bb1f6bd-1aad-4c73-94a4-5e8ea7671d05",
                   "name": "transactions/1/like",
                   "originalRequest": {
                     "method": "DELETE",
@@ -1405,7 +1405,7 @@
               },
               "response": [
                 {
-                  "id": "21c207a2-d7e3-4c8c-9b10-2524b928fa09",
+                  "id": "d7d1bb69-1577-4243-b9e3-c753c6a370cb",
                   "name": "users",
                   "originalRequest": {
                     "method": "GET",
@@ -1537,7 +1537,7 @@
               },
               "response": [
                 {
-                  "id": "1d35a2a4-cef8-40e1-b302-3068dcdf4a0a",
+                  "id": "2f80d80a-e85e-42b7-a134-7daea137039f",
                   "name": "users/1",
                   "originalRequest": {
                     "method": "GET",
@@ -1712,7 +1712,7 @@
               },
               "response": [
                 {
-                  "id": "617a7b08-ebf0-4b0b-8d65-bc20d32201be",
+                  "id": "07263518-8ebb-4ffa-a0e4-246e8b6cfa96",
                   "name": "authentication/obtain_api_token",
                   "originalRequest": {
                     "method": "POST",
@@ -1886,7 +1886,7 @@
               },
               "response": [
                 {
-                  "id": "dc2f01e6-bbbb-403f-a843-aa58119449e9",
+                  "id": "eb07d081-9c53-4397-8582-d61f8cbde3c8",
                   "name": "authentication/store_fcm_token",
                   "originalRequest": {
                     "method": "POST",
@@ -2000,6 +2000,414 @@
                   ],
                   "responseTime": 286,
                   "body": "{\"data\":{\"title\":\"Successfully stored FCM token\",\"detail\":\"Firebase Cloud Messaging token was stored successfully.\",\"fcm-token\":\"\\u003cfcm_token\\u003e\"}}"
+                }
+              ]
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "Statistics",
+          "description": "",
+          "item": [
+            {
+              "name": "statistics/general",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/statistics/general",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "statistics",
+                    "general"
+                  ]
+                },
+                "description": "Retrieves general statistics."
+              },
+              "response": [
+                {
+                  "id": "0bd56807-5f7d-4cf1-a508-e6e86db5441f",
+                  "name": "statistics/general",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/statistics/general",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "statistics",
+                        "general"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"280ac74a0e1ce621b7035003c9a3d588\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "d52abe4a-3039-4306-b28a-e8f19068e7e3",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.070798",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "cGliZFJqYk5lQ2p1M3BzWXY3QUU5YllNY3Nyc2RQQ2VFUHdmT0pGOUhWVWpReXdOM2xCVWlFUGVLc0lweTJaZDhMVmdiRzBNdklTS045L3pKUkl2OWwyWndTT2dydmg0WXFTTGh3VC9DRzBMaWNNaVhaeklaa1lKWC95eVVrWDRKbitVbzBCNHVYcE5xcE5UMUxxTDZPaFdRYmVWMXVCUzFHV2JqNFREcDg2eHpxa2ppUGhPeWpsQjl4Qm1pNkFjenN4WmI4clRjeExoMUo1RzlBNUkrYlZaZW1tLzN3ZW9jczVRTEVpNVFsNVhUU3Y0NFpnSFJHRjJhZmlSazdkdGt2N3N0N0RkbTZKMWFjMk5NOFYyaTYveEhyZVptSzVNNklmc1VSbnplemJoQUdRL3gyUDYwdzhPckVCbFZCNlVNenRWNGgxWXlUeXBGd2xtd1RiSnpBNW9ST1pxSm90U1hXcHN3dHI5OEtGeWQ2ZHBNWUlJakh2cFpEQXd3OWVmMGExLzdIaHZSa0NpSC9EQjlhRCtpZz09LS1QdkFiL2lMYVBRU3RBYmIvSWF3VEp3PT0%3D--a952997f480b3c372d12cb74168ea2735d9388a1",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 102,
+                  "body": "{\n    \"data\": {\n        \"transactions\": {\n            \"week\": 1,\n            \"month\": 1,\n            \"total\": 10\n        },\n        \"kudos\": {\n            \"week\": 1,\n            \"month\": 1,\n            \"total\": 25\n        }\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "statistics/user",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/statistics/user",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "statistics",
+                    "user"
+                  ]
+                },
+                "description": "Retrieves the API users' statistics."
+              },
+              "response": [
+                {
+                  "id": "735d17a8-a399-430c-ab98-472403a5b653",
+                  "name": "statistics/user",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}",
+                        "type": "text",
+                        "disabled": false
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/statistics/user",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "statistics",
+                        "user"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"0ccda8208643860164586c921663118a\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "ab414b52-1e45-4b15-91e9-be45fd647d41",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.047493",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "cGliZFJqYk5lQ2p1M3BzWXY3QUU5YllNY3Nyc2RQQ2VFUHdmT0pGOUhWVWpReXdOM2xCVWlFUGVLc0lweTJaZDhMVmdiRzBNdklTS045L3pKUkl2OWwyWndTT2dydmg0WXFTTGh3VC9DRzBMaWNNaVhaeklaa1lKWC95eVVrWDRKbitVbzBCNHVYcE5xcE5UMUxxTDZPaFdRYmVWMXVCUzFHV2JqNFREcDg2eHpxa2ppUGhPeWpsQjl4Qm1pNkFjenN4WmI4clRjeExoMUo1RzlBNUkrYlZaZW1tLzN3ZW9jczVRTEVpNVFsNVhUU3Y0NFpnSFJHRjJhZmlSazdkdGt2N3N0N0RkbTZKMWFjMk5NOFYyaTYveEhyZVptSzVNNklmc1VSbnplemJoQUdRL3gyUDYwdzhPckVCbFZCNlVNenRWNGgxWXlUeXBGd2xtd1RiSnpBNW9ST1pxSm90U1hXcHN3dHI5OEtGeWQ2ZHBNWUlJakh2cFpEQXd3OWVmMGExLzdIaHZSa0NpSC9EQjlhRCtpZz09LS1QdkFiL2lMYVBRU3RBYmIvSWF3VEp3PT0%3D--a952997f480b3c372d12cb74168ea2735d9388a1",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 51,
+                  "body": "{\n    \"data\": {\n        \"sent\": 1,\n        \"received\": 5,\n        \"total\": 6\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "statistics/graph",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Api-Token",
+                    "value": "{{api-token}}"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{host}}/api/{{api-version}}/statistics/graph",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "{{api-version}}",
+                    "statistics",
+                    "graph"
+                  ]
+                },
+                "description": "Retrieves statistics for composing a graph of the monthly usage history."
+              },
+              "response": [
+                {
+                  "id": "9cac236a-5705-4972-b3e3-2083efd14212",
+                  "name": "statistics/graph",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Api-Token",
+                        "value": "{{api-token}}"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{host}}/api/{{api-version}}/statistics/graph",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "api",
+                        "{{api-version}}",
+                        "statistics",
+                        "graph"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "_postman_previewtype": "text",
+                  "header": [
+                    {
+                      "key": "Cache-Control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "Cache-Control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8",
+                      "name": "Content-Type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"c05fdb7c3b109d87e2ac56bdd1441ad1\"",
+                      "name": "ETag",
+                      "description": "An identifier for a specific version of a resource, often a message digest"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked",
+                      "name": "Transfer-Encoding",
+                      "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin",
+                      "name": "Vary",
+                      "description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff",
+                      "name": "X-Content-Type-Options",
+                      "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+                    },
+                    {
+                      "key": "X-Frame-Options",
+                      "value": "SAMEORIGIN",
+                      "name": "X-Frame-Options",
+                      "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+                    },
+                    {
+                      "key": "X-Request-Id",
+                      "value": "e75db72d-fe31-4ce2-940e-18e972948555",
+                      "name": "X-Request-Id",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-Runtime",
+                      "value": "0.067179",
+                      "name": "X-Runtime",
+                      "description": "Custom header"
+                    },
+                    {
+                      "key": "X-XSS-Protection",
+                      "value": "1; mode=block",
+                      "name": "X-XSS-Protection",
+                      "description": "Cross-site scripting (XSS) filter"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+                      "httpOnly": true,
+                      "domain": "localhost",
+                      "path": "/",
+                      "secure": false,
+                      "value": "cGliZFJqYk5lQ2p1M3BzWXY3QUU5YllNY3Nyc2RQQ2VFUHdmT0pGOUhWVWpReXdOM2xCVWlFUGVLc0lweTJaZDhMVmdiRzBNdklTS045L3pKUkl2OWwyWndTT2dydmg0WXFTTGh3VC9DRzBMaWNNaVhaeklaa1lKWC95eVVrWDRKbitVbzBCNHVYcE5xcE5UMUxxTDZPaFdRYmVWMXVCUzFHV2JqNFREcDg2eHpxa2ppUGhPeWpsQjl4Qm1pNkFjenN4WmI4clRjeExoMUo1RzlBNUkrYlZaZW1tLzN3ZW9jczVRTEVpNVFsNVhUU3Y0NFpnSFJHRjJhZmlSazdkdGt2N3N0N0RkbTZKMWFjMk5NOFYyaTYveEhyZVptSzVNNklmc1VSbnplemJoQUdRL3gyUDYwdzhPckVCbFZCNlVNenRWNGgxWXlUeXBGd2xtd1RiSnpBNW9ST1pxSm90U1hXcHN3dHI5OEtGeWQ2ZHBNWUlJakh2cFpEQXd3OWVmMGExLzdIaHZSa0NpSC9EQjlhRCtpZz09LS1QdkFiL2lMYVBRU3RBYmIvSWF3VEp3PT0%3D--a952997f480b3c372d12cb74168ea2735d9388a1",
+                      "key": "_kudo_o_matic_session"
+                    }
+                  ],
+                  "responseTime": 77,
+                  "body": "{\n    \"data\": {\n        \"0\": {\n            \"month\": \"January\",\n            \"transactions\": 1,\n            \"kudos\": 1\n        },\n        \"1\": {\n            \"month\": \"December\",\n            \"transactions\": 5,\n            \"kudos\": 15\n        },\n        \"2\": {\n            \"month\": \"November\",\n            \"transactions\": 0,\n            \"kudos\": 0\n        },\n        \"3\": {\n            \"month\": \"October\",\n            \"transactions\": 1,\n            \"kudos\": 1\n        },\n        \"4\": {\n            \"month\": \"September\",\n            \"transactions\": 1,\n            \"kudos\": 5\n        }\n    }\n}"
                 }
               ]
             }

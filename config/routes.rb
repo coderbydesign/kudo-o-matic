@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get :feed, to: 'feed#index'
 
+  get 'legal/privacy'
+
   scope :slack, controller: :slack do
     post :action
     post :command
@@ -85,6 +87,12 @@ Rails.application.routes.draw do
 
         jsonapi_related_resources :sent_transactions, only: :show
         jsonapi_related_resources :received_transactions, only: :show
+      end
+
+      scope :statistics, controller: :statistics do
+        get :general
+        get :graph
+        get :user
       end
 
       scope :authentication, controller: :authentication do
