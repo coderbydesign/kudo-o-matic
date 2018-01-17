@@ -79,31 +79,34 @@ class TransactionsController < ApplicationController
   end
 
   def query_variables
-    @previous                     = Goal.previous.decorate
-    @next                         = Goal.next.decorate
-    @iterate_goals                = Goal.goals
+    @previous = Goal.previous.decorate
+    @next = Goal.next.decorate
+    @iterate_goals = Goal.goals
     @goals = Goal.all.order(cached_votes_up: :desc)
-    @current_goals                = Goal.all.where(balance: Balance.current).order('amount desc')
+    @current_goals = Goal.all.where(balance: Balance.current).order('amount desc')
 
-    @balance                      = Balance.current.decorate
-    @achieved_goal                = Goal.where(balance: Balance.current).where.not(achieved_on: nil).order('achieved_on desc')
+    @balance = Balance.current.decorate
+    @achieved_goal = Goal.where(balance: Balance.current).where.not(achieved_on: nil).order('achieved_on desc')
 
-    @send_transactions_user       = Transaction.where(sender: current_user).count(:id)
-    @received_transactions_user   = Transaction.where(receiver: current_user).count(:id)
-    @received_transactions_team = Transaction.where(receiver: User.where(name: ENV['COMPANY_USER'])).count(:id)
-    @all_transactions_user        = @send_transactions_user + @received_transactions_user + @received_transactions_team
+    @sent_transactions_user = Transaction.where(sender: current_user).count
+    @received_transactions_user = Transaction.where(receiver: current_user).count + received_transactions_company
+    @all_transactions_user = @sent_transactions_user + @received_transactions_user
 
-    @weekly_transactions = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week)).count(:id)
-    @monthly_transactions         = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).count(:id)
-    @all_transactions             = Transaction.count(:id)
+    period_week = Time.now.beginning_of_week..Time.now.end_of_week
+    period_month = Time.now.beginning_of_month..Time.now.end_of_month
 
-    @weekly_likes = Transaction.joins("INNER JOIN votes on votes.votable_id = transactions.id and votable_type='Transaction'").where("balance_id=#{Balance.current.id}").where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week)).count
-    @monthly_likes = Transaction.joins("INNER JOIN votes on votes.votable_id = transactions.id and votable_type='Transaction'").where("balance_id=#{Balance.current.id}").where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).count
+    transactions_week = transactions_period(period_week)
+    transactions_month = transactions_period(period_month)
 
-    @weekly_kudos = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_week(start_day = :monday)..Time.now.end_of_week)).sum(:amount) + @weekly_likes
-    @monthly_kudos                = Transaction.where(balance: Balance.current).where(created_at: (Time.now.beginning_of_month..Time.now.end_of_month)).sum(:amount) + @monthly_likes
+    @weekly_transactions = transactions_week.count
+    @monthly_transactions = transactions_month.count
+    @all_transactions = Transaction.count
 
-    @markdown                     = Redcarpet::Markdown.new(MdEmoji::Render, :no_intra_emphasis => true)
+    @weekly_kudos = transactions_week.sum(:amount) + likes_count_of_period(period_week)
+    @monthly_kudos = transactions_month.sum(:amount) + likes_count_of_period(period_month)
+    @all_kudos = Transaction.sum(:amount) + likes.count
+
+    @markdown = Redcarpet::Markdown.new(MdEmoji::Render, no_intra_emphasis: true)
 
     case params['filter']
       when 'mine'
@@ -115,5 +118,22 @@ class TransactionsController < ApplicationController
       else
         @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
     end
+  end
+
+  def transactions_period(period)
+    Transaction.where(created_at: period)
+  end
+
+  def likes
+    Transaction.joins("INNER JOIN votes on votes.votable_id = transactions.id and votable_type='Transaction'")
+  end
+
+  def likes_count_of_period(period)
+    likes.where(created_at: period).count
+  end
+
+  def received_transactions_company
+    receiver_company = User.where(name: ENV['COMPANY_USER'])
+    Transaction.where(receiver: receiver_company).count
   end
 end
