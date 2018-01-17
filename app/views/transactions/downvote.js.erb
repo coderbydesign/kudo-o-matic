@@ -3,6 +3,6 @@ $('#like-tooltip-<%= @transaction.id %>').html('<%= escape_javascript render 'di
 $('#kudos-container-<%= @transaction.id %>').html('<%= escape_javascript render 'amount-in-kudos', transaction: @transaction %>');
 $('.fixed-div-right').html('<%= escape_javascript render 'kudos-counter' %>');
 $('.dashboard').html('<%= escape_javascript render 'kudo-counter-dashboard' %>');
-$('.statistic-board').html('<%= escape_javascript render 'statistics', weekly_kudos: @weekly_kudos, monthly_kudos: @monthly_kudos %>');
+$('.statistic-board').html('<%= escape_javascript render 'statistics', weekly_kudos: @weekly_kudos, monthly_kudos: @monthly_kudos, all_kudos: @all_kudos %>');
 
 $('.js-chart').setChart();
