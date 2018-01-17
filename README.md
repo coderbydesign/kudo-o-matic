@@ -19,7 +19,7 @@ To start using the Kudo-o-Matic, you'll need:
 
 To run the RSpec test suite (not required to run the Kudo-o-Matic), you'll need:
 * [PhantomJS](http://phantomjs.org/)
-* [Imagemagick](https://www.imagemagick.org/)
+* [ImageMagick](https://www.imagemagick.org/)
 
 ##### 1. Clone the GitHub repository
 With HTTPS:
