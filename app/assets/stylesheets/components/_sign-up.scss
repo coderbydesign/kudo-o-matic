@@ -1,0 +1,111 @@
+.sign-up-page {
+  display: flex;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.sign-up-container {
+  background: $primary-bg;
+  border: 1px solid $primary-border-color;
+  border-radius: $border-radius-small;
+  display: flex;
+  flex-direction: column;
+  //height: 350px;
+  justify-content: center;
+  width: 50%;
+  padding: $padding;
+  text-align: center;
+
+  .sign-up-header {
+    flex: 1;
+  }
+
+  .sign-up-body {
+    flex: 2;
+
+    .body-content {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      h2 {
+        margin-bottom: 15px;
+      }
+    }
+
+    .sign-up-form {
+      .form-control {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+    }
+
+  }
+
+  .sign-up-footer {
+    align-items: flex-end;
+    display: flex;
+    flex: 1;
+    font-size: $font-size-small;
+    justify-content: center;
+  }
+
+  img {
+    width: 400px;
+    margin-bottom: $margin-primary;
+  }
+}
+
+.flex-page {
+  align-items: center;
+  justify-content: center;
+  padding: $padding;
+  margin-top: -5rem;
+}
+
+.flex-container {
+  align-items: center;
+  justify-content: center;
+  padding: $padding;
+}
+
+.btn-google {
+  background: $primary-button-bg;
+  width: 220px;
+  height: 36px;
+  border: none;
+  border-radius: $border-radius-small * 0.5;
+  color: #FFF;
+  font-weight: 500;
+  cursor: pointer;
+  padding:  $padding;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .sign-up-container {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .sign-up-container {
+    width: 100%;
+
+    img {
+      width: 325px;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .sign-up-container {
+
+    img {
+      width: 200px;
+    }
+  }
+}
