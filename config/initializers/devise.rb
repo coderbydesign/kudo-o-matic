@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '7110235cd1bdc6da284e119c03d75d8ecdf729c1aafa6a19897cb6d6617f6f55ae6a05f3b1047c546d8d907e492b9b993736586b5fb9d4256089530d8c498ba6'
+  # config.secret_key = ENV['DEVISE_SECRET_KEY']
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -126,7 +126,7 @@ Devise.setup do |config|
   # their account can't be confirmed with the token any more.
   # Default is nil, meaning there is no restriction on how long a user can take
   # before confirming their account.
-  # config.confirm_within = 3.days
+  config.confirm_within = 3.days
 
   # If true, requires any email changes to be confirmed (exactly the same way as
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
@@ -251,8 +251,7 @@ Devise.setup do |config|
       scope: 'email,profile',
       prompt: 'select_account',
       image_aspect_ration: 'square',
-      image_size: 512,
-      hd: ENV.fetch('DEVISE_DOMAIN', 'gmail.com')
+      image_size: 512
   }
 
   config.omniauth :slack, ENV['SLACK_CLIENT_ID'], ENV["SLACK_CLIENT_SECRET"], scope: 'users:read'
