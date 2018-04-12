@@ -5,14 +5,17 @@ RSpec.feature "Add a transaction", type: :feature do
   let!(:prev_goal) { create :goal, :achieved, name: "Painting lessons", amount: 100 }
   let!(:next_goal) { create :goal, name: "Paintball", amount: 1500 }
   let(:activity) { Activity.create name: 'Helping with RSpec' }
-  let(:user) { User.create name: 'Pascal', avatar_url: '/kabisa_lizard.png' }
-  let(:user_2) { User.create name: 'John User', avatar_url: '/kabisa_lizard.png' }
+  let(:user) { User.create name: 'Pascal', password: 'testpass', password_confirmation: 'testpass', confirmed_at: Time.now, avatar_url: '/kabisa_lizard.png' }
+  let(:user_2) { User.create name: 'John User', password: 'testpass', password_confirmation: 'testpass', confirmed_at: Time.now, avatar_url: '/kabisa_lizard.png' }
   let(:balance) { create :balance, :current }
   let!(:transaction) { Transaction.create sender: user, receiver: user, activity: activity, amount: 5, balance: balance}
   let!(:transaction_2) { Transaction.create sender: user, receiver: user, activity: activity, amount: 10, balance: balance}
 
   before do
     visit '/sign_in'
+    fill_in 'transaction_receiver_name', with: 'Harry'
+    fill_in 'transaction_activity_name', with: 'helping me out :+1:'
+    fill_in 'transaction_amount', with: '99'
     click_link 'Log in with Google'
 
     expect(current_path).to eql('/')

@@ -1,19 +1,8 @@
-= render 'layouts/header'
-.sign-in-page.flex-page
-  .sign-in-container
-    .sign-in-header
-    .sign-in-body
-      .body-content
-        = image_tag 'logo-without-lizard-black.png'
-        %a.btn-google{href:user_google_oauth2_omniauth_authorize_path}
-          = 'Log in with Google'
-        - if notice
-          .message-container.error-message.margin-top
-            %span.message
-              .fa.fa-exclamation-circle
-              #notice= notice
-    .sign-in-footer
-      = "You can only log in with a Google account "
-      = "from #{ENV['COMPANY_USER']}" if ENV['COMPANY_USER'].present?
-
-
+%h2 Log in
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .form-inputs
+    = f.input :email, required: false, autofocus: true
+    = f.input :password, required: false
+    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+  .form-actions
+    = f.button :submit, "Log in"
