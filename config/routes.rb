@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   root 'transactions#index'
 
   resources :transactions, only: [:index, :show, :create]
