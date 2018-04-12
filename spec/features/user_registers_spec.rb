@@ -10,6 +10,6 @@ feature 'User registers' do
     fill_in 'Password confirmation', with: 'password'
 
     click_button 'Sign up'
-    expect(current_path).to eq '/users/sign_in'
+    expect(current_path).to eq user_session_path
   end
 end
