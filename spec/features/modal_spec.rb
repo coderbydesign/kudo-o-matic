@@ -25,13 +25,17 @@ RSpec.configure do |config|
 end
 
 RSpec.feature "Open a modal", type: :feature do
+  let(:user) { User.create name: 'Pascal', email: 'pascal@email.nl', password: 'testpass',
+                           password_confirmation: 'testpass', confirmed_at: Time.now, avatar_url: '/kabisa_lizard.png' }
   let!(:prev_goal) { create :goal, :achieved, name: "Painting lessons", amount: 100 }
   let!(:next_goal) { create :goal, name: "Paintball", amount: 1500 }
   let!(:balance) { create :balance, :current }
 
   before(:each) do
     visit '/sign_in'
-    click_link 'Log in with Google'
+    fill_in 'user_email', with: user.email
+    fill_in 'user_password', with: 'testpass'
+    click_button 'Log in'
     expect(current_path).to eql('/')
     find('.close-welcome').click
   end

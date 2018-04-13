@@ -29,8 +29,16 @@ RSpec.feature "Add a like", type: :feature do
   let!(:prev_goal) { create :goal, :achieved, name: "Painting lessons", amount: 100 }
   let!(:next_goal) { create :goal, name: "Paintball", amount: 1500 }
   let(:activity) { Activity.create name: 'Helping with RSpec' }
-  let(:user) { User.create name: 'Pascal', avatar_url: '/kabisa_lizard.png' }
-  let(:user_2) { User.create name: 'Piet', avatar_url: '/kabisa_lizard.png' }
+  let(:user) {
+    User.create name: 'Pascal', email: 'pascal@email.com', password: 'testpass',
+                password_confirmation: 'testpass', confirmed_at: Time.now,
+                avatar_url: '/kabisa_lizard.png'
+  }
+  let(:user_2) {
+    User.create name: 'Piet', email: 'piet@email.com', password: 'testpass',
+                password_confirmation: 'testpass', confirmed_at: Time.now,
+                avatar_url: '/kabisa_lizard.png'
+  }
   let(:balance) { create :balance, :current }
   let!(:transaction) { Transaction.create id: 1, sender: user, receiver: user, activity: activity, amount: 5, balance: balance}
   let!(:transaction_2) { Transaction.create id: 2, sender: user, receiver: user, activity: activity, amount: 10, balance: balance}
@@ -38,7 +46,9 @@ RSpec.feature "Add a like", type: :feature do
 
   before do
     visit '/sign_in'
-    click_link 'Log in with Google'
+    fill_in 'user_email', with: user.email
+    fill_in 'user_password', with: 'testpass'
+    click_button 'Log in'
     expect(current_path).to eql('/')
     find('button.close-welcome').click
   end
