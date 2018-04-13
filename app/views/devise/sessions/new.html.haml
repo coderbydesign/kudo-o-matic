@@ -1,12 +1,21 @@
 = render 'layouts/header'
 .sign-in-page.flex-page
+
   .sign-in-container
-    .sign-in-body
-    %h2 Log in
-    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    = image_tag 'logo-without-lizard-black.png', class: 'sign-in-form-logo'
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'sign-in-form' }) do |f|
+      = render 'layouts/messages'
       .form-inputs
-        = f.input :email, required: false, autofocus: true
-        = f.input :password, required: false
-        = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+        .form-field
+          = f.label :email, :class => 'fa envelope' do
+            %span.hidden
+              Username
+          = f.email_field :email, required: true, pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}', autofocus: true
+        .form-field
+          = f.label :password, :class => 'fa lock' do
+            %span.hidden
+              Password
+          = f.password_field :password, required: true
+          = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
       .form-actions
         = f.button :submit, "Log in"

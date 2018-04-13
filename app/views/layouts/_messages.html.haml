@@ -1,0 +1,6 @@
+- flash.each do |name, msg|
+  .message-container.show-message
+    .error-message.margin-bottom
+      %span.message
+        .fa.fa-exclamation-circle
+        = content_tag :div, msg, id: "flash_#{name}"
