@@ -11,14 +11,106 @@
   border-radius: $border-radius-small;
   display: flex;
   flex-direction: column;
-  //height: 350px;
   justify-content: center;
-  width: 50%;
+  width: 100%;
+  max-width: 350px;
   padding: $padding;
   text-align: center;
 
+  h2 {
+    margin-bottom: 15px;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
   .sign-up-header {
     flex: 1;
+  }
+
+  input {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    width: 100%;
+  }
+
+  .sign-up-form {
+
+    .form-field {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      margin-bottom: 2rem;
+    }
+
+    label,
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="submit"] {
+      border-radius: 0.25rem;
+      padding: 1rem;
+      color: #3A3F44;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+      background-color: #ffffff;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+    input[type="text"]:focus, input[type="text"]:hover, input[type="email"]:focus, input[type="email"]:hover,
+    input[type="password"]:focus, input[type="password"]:hover {
+      background-color: #eeeeee;
+    }
+    input[type="submit"] {
+      background-color: $base-color-brand;
+      color: #eee;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    input[type="submit"]:focus, input[type="submit"]:hover {
+      background-color: darken($base-color-brand, 10);
+      cursor: pointer;
+    }
+
+    label {
+      background-color: $base-color-brand;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      width: 60px;
+      &:before {
+        color: #ffffff;
+      }
+      &.user:before {
+        content: "\f007";
+      }
+      &.envelope:before {
+        content: '\f0e0';
+      }
+      &.lock:before {
+        content: '\f023';
+      }
+    }
+    .hidden {
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
   }
 
   .sign-up-body {
@@ -31,6 +123,7 @@
       h2 {
         margin-bottom: 15px;
       }
+
     }
 
     .sign-up-form {

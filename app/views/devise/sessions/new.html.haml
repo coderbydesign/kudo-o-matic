@@ -10,12 +10,13 @@
           = f.label :email, :class => 'fa envelope' do
             %span.hidden
               Username
-          = f.email_field :email, required: true, pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}', autofocus: true
+          = f.email_field :email, required: true, pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}', autofocus: true,
+          placeholder: 'Your email'
         .form-field
           = f.label :password, :class => 'fa lock' do
             %span.hidden
               Password
-          = f.password_field :password, required: true
+          = f.password_field :password, required: true, placeholder: 'Your password'
           = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
       .form-actions
         = f.button :submit, "Log in"
