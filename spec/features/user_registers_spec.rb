@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-feature 'User registers' do
-  scenario 'with valid details' do
+RSpec.feature 'Register', type: :feature do
+  scenario 'User signs up' do
     visit '/sign_up'
 
     fill_in 'Name', with: 'Ruud'
