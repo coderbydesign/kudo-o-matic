@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # :database_authenticatable, :registerable,
   # :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :registerable, :confirmable, :database_authenticatable,
-         :validatable, omniauth_providers: [:slack]
+         :validatable, :lockable, omniauth_providers: [:slack]
 
   has_many :sent_transactions, class_name: 'Transaction', foreign_key: :sender_id
   has_many :received_transactions, class_name: 'Transaction', foreign_key: :receiver_id

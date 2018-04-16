@@ -1,0 +1,17 @@
+= render 'layouts/header'
+.sign-in-page.flex-page
+  .sign-in-container
+    %h2 Resend unlock instructions
+    = simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: 'sign-in-form' }) do |f|
+      = f.error_notification
+      = f.full_error :unlock_token
+      .form-inputs
+        .form-field
+          = f.label :email, :class => 'fa envelope' do
+            %span.hidden
+              E-mail
+          = f.email_field :email, required: true, pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}', autofocus: true,
+              placeholder: 'Your email'
+      .form-actions
+        = f.button :submit, "Resend unlock instructions"
+    = render "devise/shared/links"
