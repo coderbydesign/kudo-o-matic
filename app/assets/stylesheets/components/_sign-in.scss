@@ -158,6 +158,14 @@
   justify-content: center;
 }
 
+.shared-devise-links {
+  margin-top: 10px;
+  line-height: 24px;
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   .sign-in-container {
     width: 75%;

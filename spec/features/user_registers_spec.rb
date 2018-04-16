@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature 'Register', type: :feature do
+  let!(:balance) { create :balance, :current}
+
   scenario 'User signs up' do
     visit '/sign_up'
 
@@ -10,6 +12,6 @@ RSpec.feature 'Register', type: :feature do
     fill_in 'user_password_confirmation', with: 'password'
 
     click_button 'Sign up'
-    expect(current_path).to eq user_session_path
+    expect(current_path).to eq root_path
   end
 end
