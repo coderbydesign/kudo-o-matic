@@ -26,9 +26,6 @@ RSpec.feature "Add a transaction", type: :feature do
 
   before do
     visit '/sign_in'
-    # fill_in 'transaction_receiver_name', with: 'Harry'
-    # fill_in 'transaction_activity_name', with: 'helping me out :+1:'
-    # fill_in 'transaction_amount', with: '99'
     fill_in 'user_email', with: user_2.email
     fill_in 'user_password', with: 'testpass'
     click_button 'Log in'
