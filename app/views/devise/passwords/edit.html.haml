@@ -4,9 +4,9 @@
     %h2 Change your password
     = simple_form_for(resource, as: resource_name, url: password_path(resource_name),
     html: { method: :put, class: 'sign-up-form' }) do |f|
-      = f.error_notification
       = f.input :reset_password_token, as: :hidden
       = f.full_error :reset_password_token
+      = devise_error_messages!
       .form-inputs
         .form-field
           = f.label :password, autocomplete: "off", class: 'fa lock' do

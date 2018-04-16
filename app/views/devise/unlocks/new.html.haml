@@ -3,7 +3,7 @@
   .sign-in-container
     %h2 Resend unlock instructions
     = simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: 'sign-in-form' }) do |f|
-      = f.error_notification
+      = devise_error_messages!
       = f.full_error :unlock_token
       .form-inputs
         .form-field
