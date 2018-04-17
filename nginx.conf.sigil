@@ -1,6 +1,11 @@
 # custom nginx template
 
 server {
+   server_name kudos.kabisa.nl;
+   rewrite ^/(.*)$ https://kudos.kabisa.io/$1 redirect;
+}
+
+server {
   listen      [::]:80;
   listen      80;
   server_name {{ .NOSSL_SERVER_NAME }};
