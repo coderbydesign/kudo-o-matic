@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class User < ActiveRecord::Base
   after_update :ensure_an_admin_remains
 
@@ -6,7 +7,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # :database_authenticatable, :registerable,
   # :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, :omniauth_providers => [:google_oauth2, :slack]
+  devise :omniauthable, :registerable, :confirmable, :database_authenticatable,
+         :validatable, :lockable, omniauth_providers: [:slack]
 
   has_many :sent_transactions, class_name: 'Transaction', foreign_key: :sender_id
   has_many :received_transactions, class_name: 'Transaction', foreign_key: :receiver_id
@@ -36,9 +38,7 @@ class User < ActiveRecord::Base
         avatar_url: data['image']
     )
 
-    unless existing_user
-      UserMailer.new_user(user)
-    end
+    UserMailer.new_user(user) unless existing_user
 
     user
   end
@@ -63,9 +63,7 @@ class User < ActiveRecord::Base
 
     user.update(api_token: generate_unique_api_token) unless user.api_token.present?
 
-    unless existing_user
-      UserMailer.new_user(user)
-    end
+    UserMailer.new_user(user) unless existing_user
 
     user
   end

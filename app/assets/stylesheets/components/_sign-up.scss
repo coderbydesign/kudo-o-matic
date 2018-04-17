@@ -1,29 +1,35 @@
-.sign-in-page {
+.sign-up-page {
   display: flex;
   height: 100%;
   padding: 0;
   margin: 0;
 }
 
-.sign-in-container {
+.sign-up-container {
   background: $primary-bg;
   border: 1px solid $primary-border-color;
   border-radius: $border-radius-small;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50%;
+  width: 100%;
   max-width: 350px;
   padding: $padding;
   text-align: center;
 
+  h2 {
+    margin-bottom: 15px;
+  }
+
   img {
-    margin: 10px auto 0;
     max-width: 100%;
   }
 
+  .sign-up-header {
+    flex: 1;
+  }
+
   input {
-    border: 0;
     color: inherit;
     font: inherit;
     margin: 0;
@@ -31,9 +37,12 @@
     padding: 0;
     -webkit-transition: background-color .3s;
     transition: background-color .3s;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    width: 100%;
   }
 
-  .sign-in-form {
+  .sign-up-form {
+
     .form-field {
       display: -webkit-box;
       display: -webkit-flex;
@@ -43,6 +52,7 @@
     }
 
     label,
+    input[type="text"],
     input[type="email"],
     input[type="password"],
     input[type="submit"] {
@@ -51,12 +61,13 @@
       color: #3A3F44;
     }
 
-    input[type="email"], input[type="password"] {
+    input[type="text"], input[type="email"], input[type="password"] {
       background-color: #ffffff;
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
     }
-    input[type="email"]:focus, input[type="email"]:hover, input[type="password"]:focus, input[type="password"]:hover {
+    input[type="text"]:focus, input[type="text"]:hover, input[type="email"]:focus, input[type="email"]:hover,
+    input[type="password"]:focus, input[type="password"]:hover {
       background-color: #eeeeee;
     }
     input[type="submit"] {
@@ -80,6 +91,9 @@
       &:before {
         color: #ffffff;
       }
+      &.user:before {
+        content: "\f007";
+      }
       &.envelope:before {
         content: '\f0e0';
       }
@@ -87,8 +101,6 @@
         content: '\f023';
       }
     }
-
-
     .hidden {
       border: 0;
       clip: rect(0 0 0 0);
@@ -101,22 +113,30 @@
     }
   }
 
-  .sign-in-header {
-    flex: 1;
-  }
-
-  .sign-in-body {
+  .sign-up-body {
     flex: 2;
 
     .body-content {
       align-items: center;
       display: flex;
       flex-direction: column;
+      h2 {
+        margin-bottom: 15px;
+      }
+
+    }
+
+    .sign-up-form {
+      .form-control {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+      }
     }
 
   }
 
-  .sign-in-footer {
+  .sign-up-footer {
     align-items: flex-end;
     display: flex;
     flex: 1;
@@ -158,22 +178,14 @@
   justify-content: center;
 }
 
-.shared-devise-links {
-  margin-top: 10px;
-  line-height: 24px;
-  a:hover {
-    text-decoration: underline;
-  }
-}
-
 @media screen and (max-width: 1200px) {
-  .sign-in-container {
+  .sign-up-container {
     width: 75%;
   }
 }
 
 @media screen and (max-width: 720px) {
-  .sign-in-container {
+  .sign-up-container {
     width: 100%;
 
     img {
@@ -183,7 +195,7 @@
 }
 
 @media screen and (max-width: 320px) {
-  .sign-in-container {
+  .sign-up-container {
 
     img {
       width: 200px;

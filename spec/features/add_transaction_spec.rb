@@ -1,19 +1,34 @@
 require 'rails_helper'
 
-
 RSpec.feature "Add a transaction", type: :feature do
   let!(:prev_goal) { create :goal, :achieved, name: "Painting lessons", amount: 100 }
   let!(:next_goal) { create :goal, name: "Paintball", amount: 1500 }
   let(:activity) { Activity.create name: 'Helping with RSpec' }
-  let(:user) { User.create name: 'Pascal', avatar_url: '/kabisa_lizard.png' }
-  let(:user_2) { User.create name: 'John User', avatar_url: '/kabisa_lizard.png' }
+  let(:user) {
+    User.create name: 'Pascal', email: 'pascal@email.com', password: 'testpass',
+                password_confirmation: 'testpass', confirmed_at: Time.now,
+                avatar_url: '/kabisa_lizard.png'
+  }
+  let(:user_2) {
+    User.create name: 'John User', email: 'john@email.com', password: 'testpass',
+                password_confirmation: 'testpass', confirmed_at: Time.now,
+                avatar_url: '/kabisa_lizard.png'
+  }
   let(:balance) { create :balance, :current }
-  let!(:transaction) { Transaction.create sender: user, receiver: user, activity: activity, amount: 5, balance: balance}
-  let!(:transaction_2) { Transaction.create sender: user, receiver: user, activity: activity, amount: 10, balance: balance}
+  let!(:transaction) {
+    Transaction.create sender: user, receiver: user, activity: activity, amount: 5,
+                       balance: balance
+  }
+  let!(:transaction_2) {
+    Transaction.create sender: user, receiver: user, activity: activity, amount: 10,
+                       balance: balance
+  }
 
   before do
     visit '/sign_in'
-    click_link 'Log in with Google'
+    fill_in 'user_email', with: user_2.email
+    fill_in 'user_password', with: 'testpass'
+    click_button 'Log in'
 
     expect(current_path).to eql('/')
     find('.close-welcome').click
@@ -21,7 +36,6 @@ RSpec.feature "Add a transaction", type: :feature do
   end
 
   context 'Succesfully created transaction' do
-
     before do
       fill_in 'transaction_receiver_name', with: 'Harry'
       fill_in 'transaction_activity_name', with: 'helping me out :+1:'
@@ -40,8 +54,8 @@ RSpec.feature "Add a transaction", type: :feature do
 
     it 'calculates and shows the transaction statistics of the current user' do
       within '.user-statistics-container' do
-        expect(page).to have_content("0") #received transactions
-        expect(page).to have_content("1") #total and given transactions
+        expect(page).to have_content("0") # received transactions
+        expect(page).to have_content("1") # total and given transactions
       end
     end
 
@@ -86,9 +100,7 @@ RSpec.feature "Add a transaction", type: :feature do
   end
 
   context 'Failed to create transaction' do
-
     context 'No input' do
-
       before do
         click_button 'send-kudos-button'
       end
@@ -106,7 +118,6 @@ RSpec.feature "Add a transaction", type: :feature do
     end
 
     context 'No receiver' do
-
       before do
         fill_in 'transaction_activity_name', with: 'helping me out'
         fill_in 'transaction_amount', with: '50'
@@ -123,7 +134,6 @@ RSpec.feature "Add a transaction", type: :feature do
     end
 
     context 'No amount input' do
-
       before do
         fill_in 'transaction_receiver_name', with: user
         fill_in 'transaction_activity_name', with: 'helping me out'
@@ -142,7 +152,6 @@ RSpec.feature "Add a transaction", type: :feature do
     end
 
     context 'No activity input' do
-
       before do
         fill_in 'transaction_receiver_name', with: user
         fill_in 'transaction_amount', with: '50'
@@ -160,7 +169,6 @@ RSpec.feature "Add a transaction", type: :feature do
         expect(Transaction.count).to eq(@transactions_before)
       end
     end
-
   end
 
   context 'Non-personal-kudos' do

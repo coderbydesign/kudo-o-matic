@@ -44,17 +44,29 @@ describe Transaction do
     end
   end
 
-  context' filter transactions' do
+  context ' filter transactions' do
     let(:activity) { Activity.create name: 'Helping with RSpec' }
-    let(:user) { User.create name: 'Pascal', avatar_url: '/kabisa_lizard.png' }
-    let(:user_2) { User.create name: 'John User', avatar_url: '/kabisa_lizard.png' }
-    let(:user_3) { User.create name: 'John Doe', avatar_url: '/kabisa_lizard.png' }
+    let(:user) {
+      User.create name: 'Pascal', email: 'pascal@example.com',
+                  password: 'testpass', password_confirmation: 'testpass',
+                  confirmed_at: Time.now, avatar_url: '/kabisa_lizard.png'
+    }
+    let(:user_2) {
+      User.create name: 'John User', email: 'johnuser@example.com',
+                  password: 'testpass', password_confirmation: 'testpass',
+                  confirmed_at: Time.now, avatar_url: '/kabisa_lizard.png'
+    }
+    let(:user_3) {
+      User.create name: 'John Doe', email: 'johndoe@example.com',
+                  password: 'testpass', password_confirmation: 'testpass',
+                  confirmed_at: Time.now, avatar_url: '/kabisa_lizard.png'
+    }
     let(:balance) { create :balance, :current }
     let(:balance_2) { create :balance }
-    let!(:transaction) { Transaction.create sender: user_2, receiver: user, activity: activity, amount: 5, balance: balance}
-    let!(:transaction_2) { Transaction.create sender: user_2, receiver: user, activity: activity, amount: 10, balance: balance}
-    let!(:transaction_3) { Transaction.create sender: user, receiver: user_2, activity: activity, amount: 10, balance: balance}
-    let!(:transaction_4) { Transaction.create sender: user_2, receiver: user_2, activity: activity, amount: 15, balance: balance}
+    let!(:transaction) { Transaction.create sender: user_2, receiver: user, activity: activity, amount: 5, balance: balance }
+    let!(:transaction_2) { Transaction.create sender: user_2, receiver: user, activity: activity, amount: 10, balance: balance }
+    let!(:transaction_3) { Transaction.create sender: user, receiver: user_2, activity: activity, amount: 10, balance: balance }
+    let!(:transaction_4) { Transaction.create sender: user_2, receiver: user_2, activity: activity, amount: 15, balance: balance }
 
     it 'Displays all my transactions from the current balance' do
       transactions = Transaction.all_for_user(user_2)
@@ -68,16 +80,15 @@ describe Transaction do
     end
 
     it 'Displays my received transactions from the current balance' do
-      transactions =  Transaction.received_by_user(user_2)
+      transactions = Transaction.received_by_user(user_2)
 
       expect(transactions.count).to eq(2)
     end
 
     it 'Displays no transactions' do
-      transactions =  Transaction.received_by_user(user_3)
+      transactions = Transaction.received_by_user(user_3)
 
       expect(transactions.count).to eq(0)
     end
   end
-
 end
