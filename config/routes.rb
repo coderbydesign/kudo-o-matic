@@ -101,6 +101,22 @@ Rails.application.routes.draw do
         post :store_fcm_token
       end
     end
+    namespace :v2 do
+      jsonapi_resources :transactions, only: [:index, :show, :create] do
+        member do
+          put :like, to: 'transactions#like'
+          delete :like, to: 'transactions#unlike'
+        end
+
+        jsonapi_link :sender, only: :show
+        jsonapi_link :receiver, only: :show
+        jsonapi_link :balance, only: :show
+
+        jsonapi_related_resource :sender, only: :show
+        jsonapi_related_resource :receiver, only: :show
+        jsonapi_related_resource :balance, only: :show
+      end
+    end
   end
 
   devise_for :users, controllers: {
