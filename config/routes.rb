@@ -102,6 +102,27 @@ Rails.application.routes.draw do
       end
     end
     namespace :v2 do
+      jsonapi_resources :balances, only: :show do
+        collection do
+          get :current
+        end
+
+        jsonapi_links :transactions, only: :show
+
+        jsonapi_related_resources :transactions, only: :show
+      end
+
+      jsonapi_resources :goals, only: :show do
+        collection do
+          get :next
+          get :previous
+        end
+
+        jsonapi_link :balance, only: :show
+
+        jsonapi_related_resource :balance, only: :show
+      end
+
       jsonapi_resources :transactions, only: [:index, :show, :create] do
         member do
           put :like, to: 'transactions#like'
@@ -115,6 +136,25 @@ Rails.application.routes.draw do
         jsonapi_related_resource :sender, only: :show
         jsonapi_related_resource :receiver, only: :show
         jsonapi_related_resource :balance, only: :show
+      end
+
+      jsonapi_resources :users, only: [:index, :show] do
+        jsonapi_links :sent_transactions, only: :show
+        jsonapi_links :received_transactions, only: :show
+
+        jsonapi_related_resources :sent_transactions, only: :show
+        jsonapi_related_resources :received_transactions, only: :show
+      end
+
+      scope :statistics, controller: :statistics do
+        get :general
+        get :graph
+        get :user
+      end
+
+      scope :authentication, controller: :authentication do
+        post :obtain_api_token
+        post :store_fcm_token
       end
     end
   end
