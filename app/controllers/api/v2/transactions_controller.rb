@@ -6,7 +6,7 @@ class Api::V2::TransactionsController < Api::V2::ApiController
     @transaction = TransactionAdder.create_from_api_request(request.headers, params)
     @api_user_voted = api_user.voted_on? @transaction
 
-    render 'api/v1/transactions/create', status: :created
+    render 'api/v2/transactions/create', status: :created
   rescue Exception => e
     error_object_overrides = {title: 'Transaction could not be created', detail: e}
     handle_exceptions(JSONAPI::Exceptions::BadRequest.new(error_object_overrides))
@@ -15,13 +15,13 @@ class Api::V2::TransactionsController < Api::V2::ApiController
   def like
     @transaction.liked_by api_user
 
-    render 'api/v1/transactions/like', status: :ok
+    render 'api/v2/transactions/like', status: :ok
   end
 
   def unlike
     @transaction.unliked_by api_user
 
-    render 'api/v1/transactions/unlike', status: :ok
+    render 'api/v2/transactions/unlike', status: :ok
   end
 
   private

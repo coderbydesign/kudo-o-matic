@@ -2,6 +2,8 @@ class Api::V2::StatisticsController < Api::V2::ApiController
   GRAPH_MONTHS_OF_DATA = 5
 
   def general
+    puts 'API_USER'
+    puts api_user
     period_week = Time.now.beginning_of_week..Time.now.end_of_week
     period_month = Time.now.beginning_of_month..Time.now.end_of_month
 
@@ -59,4 +61,5 @@ class Api::V2::StatisticsController < Api::V2::ApiController
     receiver_company = User.where(name: ENV['COMPANY_USER'])
     Transaction.where(receiver: receiver_company).count
   end
+
 end
