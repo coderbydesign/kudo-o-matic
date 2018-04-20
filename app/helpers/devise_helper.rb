@@ -17,4 +17,9 @@ module DeviseHelper
 
     html.html_safe
   end
+
+  def unconfirmed_access_hours_left(user)
+    expiration = user.confirmation_sent_at + Devise.allow_unconfirmed_access_for
+    ((expiration - Time.now) / 1.hour).round
+  end
 end
