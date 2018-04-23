@@ -22,4 +22,8 @@ module DeviseHelper
     expiration = user.confirmation_sent_at + Devise.allow_unconfirmed_access_for
     ((expiration - Time.now) / 1.hour).round
   end
+
+  def confirm_within()
+    distance_of_time_in_words(Devise.confirm_within.seconds)
+  end
 end
