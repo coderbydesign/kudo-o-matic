@@ -110,6 +110,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'sign_in', to: 'devise/sessions#new'
     get 'sign_up', to: 'devise/registrations#new'
+    get 'edit_password', to: 'devise/registrations#edit'
     get 'sign_out', to: 'devise/sessions#destroy'
   end
 end

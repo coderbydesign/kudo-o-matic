@@ -1,3 +1,13 @@
+- if !current_user.confirmed?
+  .message-container.show-message
+    .warning-message.margin-bottom
+      %span.message
+        .fa.fa-exclamation-circle
+        %div
+          Please confirm your e-mail within #{unconfirmed_access_hours_left(current_user)} hours to keep access to your account.
+          Unconfirmed accounts get deleted after #{confirm_within}.
+          = link_to "Didn't receive confirmation instructions?", new_user_confirmation_path
+
 - if notice
   .message-container.show-message
     .error-message.margin-bottom

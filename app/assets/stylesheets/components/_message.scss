@@ -1,5 +1,9 @@
 .message-container {
 
+  a {
+    text-decoration: underline;
+  }
+
   .fa-times {
     cursor: pointer;
     margin-left: $margin-secondary;
@@ -28,7 +32,7 @@
   @include animation(show-message, 1s);
 }
 
-.error-message, .alert-message, .notice-message {
+.error-message, .alert-message, .notice-message, .warning-message {
   padding: $padding-primary / 2 $padding-secondary * 2.5;
   border-radius: $border-radius-small;
   color: $text-primary;
@@ -56,6 +60,11 @@
 .notice-message {
   background: $flash-success-bg;
   border: 1px solid $flash-success-border-color;
+}
+
+.warning-message {
+  background: $orange-color;
+  border: 1px solid $orange-color;
 }
 
 .success-message {
