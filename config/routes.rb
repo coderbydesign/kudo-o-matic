@@ -104,13 +104,14 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: :registrations
   }
 
   devise_scope :user do
     get 'sign_in', to: 'devise/sessions#new'
     get 'sign_up', to: 'devise/registrations#new'
-    get 'change_password', to: 'devise/registrations#edit'
+    get 'edit_account', to: 'devise/registrations#edit'
     get 'sign_out', to: 'devise/sessions#destroy'
   end
 end
