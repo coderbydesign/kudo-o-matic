@@ -24,6 +24,16 @@
           #{@user.email}
       %tr
         %td.bold
+          Created at
+        %td
+          #{@user.created_at}
+      %tr
+        %td.bold
+          Updated at
+        %td
+          #{@user.updated_at}
+      %tr
+        %td.bold
           Slack ID
         %td
           #{@user.slack_id}
