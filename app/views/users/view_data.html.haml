@@ -1,11 +1,6 @@
 = render 'layouts/header'
 .page
   .settings-container
-    - if notice
-      .message-container.success-message.margin-top
-        %span.message
-          .fa.fa-exclamation-circle
-          #notice= notice
     .title-container
       %h1.settings-title
         View data
@@ -53,5 +48,5 @@
     %p
       You currently have a total of #{pluralize(@transactions_count, 'transaction')}.
     .data-actions.actions
-      = link_to users_view_data_path, method: "get", class: 'btn' do
+      = link_to users_view_transactions_path, method: "get", class: 'btn' do
         <i class="fa fa-eye" aria-hidden="true"></i> View all transactions

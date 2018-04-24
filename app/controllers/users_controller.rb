@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def view_transactions
-    @transactions = Transaction.all_for_user(@user)
+    @transactions = Transaction.all_for_user(@user).page(params[:page]).per(20)
   end
 
   def update
