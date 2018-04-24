@@ -1,0 +1,37 @@
+= render 'layouts/header'
+.page
+  .settings-container
+    %h1.settings-title
+      Edit account
+    - if notice
+      .message-container.success-message.margin-top
+        %span.message
+          .fa.fa-exclamation-circle
+          #notice= notice
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form' }) do |f|
+      = devise_error_messages!
+      .form-inputs
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          %p
+            Currently waiting confirmation for: #{resource.unconfirmed_email}
+        .form-field
+          = f.label :name
+          = f.text_field :name, required: false
+        .form-field
+          = f.label :email
+          = f.text_field :email, required: true
+        .form-field
+          = f.label :password
+          = f.password_field :password, required: false, placeholder: 'Leave this empty if you don\'t want to change it'
+        .form-field
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, required: false
+        .confirm-changes
+          .confirm-changes-message
+            Confirm your changes by providing your current password
+          .form-field
+            = f.label :current_password
+            = f.password_field :current_password, required: false
+      .form-actions
+        = f.button :submit, "Update", html: {class: 'btn'}
+        = link_to "Back", root_path, method: "get", class: 'btn secondary'
