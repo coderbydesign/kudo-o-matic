@@ -75,6 +75,7 @@
       color: #eee;
       font-weight: bold;
       text-transform: uppercase;
+      margin-bottom: 15px;
     }
     input[type="submit"]:focus, input[type="submit"]:hover {
       background-color: darken($base-color-brand, 10);

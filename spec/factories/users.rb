@@ -4,6 +4,7 @@ FactoryGirl.define do
     sequence(:email) {|n| "user-#{n}@test.host"}
     password "validpass"
     password_confirmation "validpass"
+    confirmation_sent_at Time.now
     confirmed_at Time.now
 
     trait :admin do
