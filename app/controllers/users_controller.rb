@@ -1,7 +1,15 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update, :view_data]
 
   def edit
+  end
+
+  def view_data
+    @transactions_count = Transaction.all_for_user(@user).count
+  end
+
+  def view_transactions
+    @transactions = Transaction.all_for_user(@user)
   end
 
   def update

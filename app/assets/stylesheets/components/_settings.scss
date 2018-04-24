@@ -19,6 +19,11 @@
 
 .settings-table {
   width: 100%;
+  margin-bottom: 20px;
+
+  a {
+    text-decoration: underline;
+  }
 
   tr {
     td {

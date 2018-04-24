@@ -41,9 +41,16 @@
     }
   }
 
+  .form-actions {
+    margin-bottom: 15px;
+  }
+}
+
+.actions {
   .btn {
     background-color: $base-color-brand;
     color: #eee;
+    display: inline-block;
     font-weight: bold;
     text-transform: uppercase;
     padding: 12px 20px;
@@ -51,6 +58,7 @@
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.125rem;
     font-size: 0.875rem;
+    line-height: normal;
     &:hover, &:focus {
       background-color: darken($base-color-brand, 10);
       cursor: pointer;
@@ -61,9 +69,16 @@
         background-color: darken($color-gray-light, 10);
       }
     }
-  }
-
-  .form-actions {
-    margin-bottom: 15px;
+    margin-left: 10px;
+    &:first-child {
+      margin-left: 0;
+    }
   }
 }
+
+.data-actions {
+  margin-top: 15px;
+}
+
+
+
