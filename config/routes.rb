@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'account/view_data', to: 'users#view_data', as: :users_view_data
   get 'account/view_data/transactions', to: 'users#view_transactions', as: :users_view_transactions
   get 'account/view_data/votes', to: 'users#view_votes', as: :users_view_votes
+  get 'account/export_data/json', to: 'users#export_data_to_json', as: :users_export_data_json
 
   get 'legal/privacy'
 
@@ -154,6 +155,10 @@ Rails.application.routes.draw do
         get :general
         get :graph
         get :user
+      end
+
+      scope :privacy, controller: :privacy do
+        get :data
       end
 
       scope :authentication, controller: :authentication do

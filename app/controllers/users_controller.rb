@@ -1,6 +1,8 @@
 # frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update view_data view_transactions view_votes]
+  before_action :set_user, only: %i[edit update view_data view_transactions
+                                    view_votes export_data_to_json]
 
   def edit; end
 
@@ -15,6 +17,13 @@ class UsersController < ApplicationController
 
   def view_votes
     @votes = Vote.all_for_user(@user).page(params[:page]).per(20)
+  end
+
+  def export_data_to_json
+    @transactions = Transaction.all_for_user(@user)
+    @votes = Vote.all_for_user(@user)
+    stream = render_to_string(template: 'users/data.json.jbuilder')
+    send_data(stream, type: 'text/json', filename: "#{generate_filename}.json")
   end
 
   def update
@@ -38,5 +47,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:transaction_received_mail, :goal_reached_mail, :summary_mail)
+  end
+
+  def generate_filename
+    "data_export_#{@user.name.underscore}_#{Time.now.strftime('%Y-%m-%d')}"
   end
 end
