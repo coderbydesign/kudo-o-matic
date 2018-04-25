@@ -11,48 +11,7 @@
           <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to Account
     %h2.settings-subtitle
       Personal information
-    %table.settings-table
-      %tr
-        %td.bold
-          Naam
-        %td
-          #{@user.name}
-      %tr
-        %td.bold
-          Email
-        %td
-          #{@user.email}
-      %tr
-        %td.bold
-          Created at
-        %td
-          #{@user.created_at}
-      %tr
-        %td.bold
-          Updated at
-        %td
-          #{@user.updated_at}
-      %tr
-        %td.bold
-          Slack ID
-        %td
-          #{@user.slack_id}
-      %tr
-        %td.bold
-          Slack name
-        %td
-          #{@user.slack_name}
-      %tr
-        %td.bold
-          Slack username
-        %td
-          #{@user.slack_username}
-      %tr
-        %td.bold
-          Avatar URL
-        %td
-          - if @user.avatar_url
-            = link_to 'Show image', @user.avatar_url, target: '_blank'
+    = render 'personal_info', user: @user
     %h2.settings-subtitle
       Transactions
     %p
@@ -60,3 +19,10 @@
     .data-actions.actions
       = link_to users_view_transactions_path, method: "get", class: 'btn' do
         <i class="fa fa-eye" aria-hidden="true"></i> View all transactions
+    %h2.settings-subtitle
+      Votes
+    %p
+      You currently have a total of #{pluralize(@votes_count, 'vote')}
+    .data-actions.actions
+      = link_to users_view_votes_path, method: "get", class: 'btn' do
+        <i class="fa fa-eye" aria-hidden="true"></i> View all votes

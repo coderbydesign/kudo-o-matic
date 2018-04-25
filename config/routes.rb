@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   get 'account/view_data', to: 'users#view_data', as: :users_view_data
   get 'account/view_data/transactions', to: 'users#view_transactions', as: :users_view_transactions
+  get 'account/view_data/votes', to: 'users#view_votes', as: :users_view_votes
 
   get 'legal/privacy'
 

@@ -8,14 +8,14 @@
           #notice= notice
     .title-container
       %h1.settings-title
-        View transactions
+        View votes
       .actions
         = link_to root_path, method: "get", class: 'btn secondary' do
           <i class="fa fa-home" aria-hidden="true"></i> Home
         = link_to users_view_data_path, method: "get", class: 'btn secondary' do
           <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to Data
     %h2.settings-subtitle
-      Transactions
+      Votes
     %p.settings-info
-      This table contains all the transactions you have created.
-    = render 'transaction_table', transactions: @transactions
+      This table contains all the votes you have cast.
+    = render 'votes_table', votes: @votes
