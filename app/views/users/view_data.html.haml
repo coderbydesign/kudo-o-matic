@@ -22,7 +22,16 @@
     %h2.settings-subtitle
       Votes
     %p
-      You currently have a total of #{pluralize(@votes_count, 'vote')}
+      You currently have a total of #{pluralize(@votes_count, 'vote')}.
     .data-actions.actions
       = link_to users_view_votes_path, method: "get", class: 'btn' do
         <i class="fa fa-eye" aria-hidden="true"></i> View all votes
+    %h2.settings-subtitle
+      Export data
+    %p
+      We currently provide data exports in JSON and XML.
+    .data-actions.actions
+      = link_to users_export_data_path(:format => :json), method: "get", class: 'btn' do
+        <i class="fa fa-download" aria-hidden="true"></i> Download as JSON
+      = link_to users_export_data_path(:format => :xml), method: "get", class: 'btn' do
+        <i class="fa fa-download" aria-hidden="true"></i> Download as XML

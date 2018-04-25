@@ -2,7 +2,8 @@
 
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update view_data view_transactions
-                                    view_votes export_data_to_json]
+                                    view_votes export_data_to_json
+                                    export_data_to_xml export]
 
   def edit; end
 
@@ -19,11 +20,22 @@ class UsersController < ApplicationController
     @votes = Vote.all_for_user(@user).page(params[:page]).per(20)
   end
 
-  def export_data_to_json
+  def export
     @transactions = Transaction.all_for_user(@user)
     @votes = Vote.all_for_user(@user)
-    stream = render_to_string(template: 'users/data.json.jbuilder')
-    send_data(stream, type: 'text/json', filename: "#{generate_filename}.json")
+
+    stream = Rabl.render(@user, 'users/export',
+                         view_path: 'app/views',
+                         locals: { transactions: @transactions, votes: @votes })
+
+    respond_to do |format|
+      format.json do
+        send_data(stream, type: 'text/json', filename: "#{generate_filename}.json")
+      end
+      format.xml do
+        send_data(stream, type: 'text/xml', filename: "#{generate_filename}.xml")
+      end
+    end
   end
 
   def update
