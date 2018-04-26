@@ -25,23 +25,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.json do
-        json_data = Rabl.render(@user, 'users/export',
-                                view_path: 'app/views',
-                                locals: {
-                                  transactions: @transactions,
-                                  votes: @votes
-                                },
-                                format: :json)
+        json_data = render_user_data(:json)
         send_data(json_data, type: 'text/json; charset=UTF-8;', filename: "#{generate_filename}.json")
       end
       format.xml do
-        xml_data = Rabl.render(@user, 'users/export',
-                               view_path: 'app/views',
-                               locals: {
-                                 transactions: @transactions,
-                                 votes: @votes
-                               },
-                               format: :xml)
+        xml_data = render_user_data(:xml)
         send_data(xml_data, type: 'text/xml; charset=UTF-8;', filename: "#{generate_filename}.xml")
       end
     end
@@ -72,5 +60,15 @@ class UsersController < ApplicationController
 
   def generate_filename
     "data_export_#{@user.name.underscore}_#{Time.now.strftime('%Y-%m-%d')}"
+  end
+
+  def render_user_data(format)
+    Rabl.render(@user, 'users/export',
+                view_path: 'app/views',
+                locals: {
+                  transactions: @transactions,
+                  votes: @votes
+                },
+                format: format)
   end
 end
