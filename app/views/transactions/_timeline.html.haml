@@ -21,13 +21,24 @@
         .transaction-body-container
           .transaction-content
             %span.highlighted.sendername
-              = "#{transaction.sender.name}:"
+              - if transaction.sender.id == @user.id
+                You
+              - elsif transaction.sender.restricted?
+                <span class="restricted">Hidden</span>:
+              - else
+                = "#{transaction.sender.name}:"
             %span.highlighted
               = "+#{transaction.amount} ₭"
             %span
               to
             %span.highlighted.receivername
-              = transaction.receiver_name_feed
+              - if transaction.receiver && transaction.receiver.id == @user.id
+                You
+              - elsif transaction.receiver&.restricted?
+                %span.restricted
+                  Hidden
+              - else
+                = "#{transaction.receiver.name}:"
             %span
               for
             %span.activityname
@@ -43,10 +54,11 @@
                 = link_to image_tag(transaction.image.exists?(:thumb) ? transaction.image.url(:thumb) : transaction.image,
                     class:'attachment-file'), transaction.image.url, target: '_blank'
         .transaction-footer-container
-          - if current_user.voted_for? transaction
-            = render 'unlikes', transaction: transaction
-          - else
-            = render 'likes', transaction: transaction
+          - if !current_user.restricted?
+            - if current_user.voted_for? transaction
+              = render 'unlikes', transaction: transaction
+            - else
+              = render 'likes', transaction: transaction
           %span.display-likes{id: "like-tooltip-#{transaction.id}"}
             = render 'display-likes', transaction: transaction
     = paginate @transactions, remote: true

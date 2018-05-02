@@ -8,6 +8,18 @@
           Unconfirmed accounts get deleted after #{confirm_within}.
           = link_to "Didn't receive confirmation instructions?", new_user_confirmation_path
 
+- if current_user.restricted?
+  .message-container.show-message
+    .warning-message.margin-bottom
+      %span.message
+        .fa.fa-exclamation-circle
+        %div
+          You currently have restricted your account. While restricted your data won't be visible to other users and
+          admins, but some features will be disabled. These include sending transactions and casting votes.
+          To un-restrict your account, go to the
+          = link_to "Settings", settings_path
+          page
+
 - if notice
   .message-container.show-message
     .error-message.margin-bottom

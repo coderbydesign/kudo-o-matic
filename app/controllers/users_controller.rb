@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update view_data view_transactions view_votes]
 
@@ -38,6 +39,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:transaction_received_mail, :goal_reached_mail, :summary_mail)
+    params.require(:user).permit(:transaction_received_mail, :goal_reached_mail, :summary_mail,
+                                 :restricted)
   end
 end

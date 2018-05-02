@@ -4,6 +4,7 @@ class TransactionsController < ApplicationController
   before_action :query_variables, only: [:index, :show, :create, :upvote, :downvote]
   before_action :set_transaction, only: [:show, :upvote, :downvote]
   before_action :check_slack_connection, only: [:index]
+  before_action :set_user, only: [:index, :show]
   after_action :update_slack_transaction, only: [:upvote, :downvote]
 
   def index
@@ -135,5 +136,9 @@ class TransactionsController < ApplicationController
   def received_transactions_company
     receiver_company = User.where(name: ENV['COMPANY_USER'])
     Transaction.where(receiver: receiver_company).count
+  end
+
+  def set_user
+    @user = current_user
   end
 end
