@@ -7,12 +7,12 @@ class UsersController < ApplicationController
   def edit; end
 
   def view_data
-    @transactions_count = @user.transactions.count
+    @transactions_count = @user.all_transactions.count
     @votes_count = @user.votes.count
   end
 
   def view_transactions
-    @transactions = @user.transactions.page(params[:page]).per(20)
+    @transactions = @user.all_transactions.page(params[:page]).per(20)
   end
 
   def view_votes
@@ -20,8 +20,8 @@ class UsersController < ApplicationController
   end
 
   def export
-    @transactions = Transaction.all_for_user(@user)
-    @votes = Vote.all_for_user(@user)
+    @transactions = @user.all_transactions
+    @votes = @user.votes
 
     respond_to do |format|
       format.json do

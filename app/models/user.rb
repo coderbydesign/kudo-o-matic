@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
     user
   end
 
-  def transactions
+  def all_transactions
     Transaction.all_for_user(self)
   end
 
