@@ -1,0 +1,28 @@
+= render 'layouts/header'
+.page
+  .settings-container
+    .title-container
+      %h1.settings-title
+        View data
+      .actions
+        = link_to root_path, method: "get", class: 'btn secondary' do
+          <i class="fa fa-home" aria-hidden="true"></i> Home
+        = link_to account_path, method: "get", class: 'btn secondary' do
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to Account
+    %h2.settings-subtitle
+      Personal information
+    = render 'personal_info', user: @user
+    %h2.settings-subtitle
+      Transactions
+    %p
+      You currently have a total of #{pluralize(@transactions_count, 'transaction')}.
+    .data-actions.actions
+      = link_to users_view_transactions_path, method: "get", class: 'btn' do
+        <i class="fa fa-eye" aria-hidden="true"></i> View all transactions
+    %h2.settings-subtitle
+      Votes
+    %p
+      You currently have a total of #{pluralize(@votes_count, 'vote')}
+    .data-actions.actions
+      = link_to users_view_votes_path, method: "get", class: 'btn' do
+        <i class="fa fa-eye" aria-hidden="true"></i> View all votes
