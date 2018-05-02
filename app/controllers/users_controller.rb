@@ -5,16 +5,16 @@ class UsersController < ApplicationController
   def edit; end
 
   def view_data
-    @transactions_count = Transaction.all_for_user(@user).count
-    @votes_count = Vote.all_for_user(@user).count
+    @transactions_count = @user.transactions.count
+    @votes_count = @user.votes.count
   end
 
   def view_transactions
-    @transactions = Transaction.all_for_user(@user).page(params[:page]).per(20)
+    @transactions = @user.transactions.page(params[:page]).per(20)
   end
 
   def view_votes
-    @votes = Vote.all_for_user(@user).page(params[:page]).per(20)
+    @votes = @user.votes.page(params[:page]).per(20)
   end
 
   def update
