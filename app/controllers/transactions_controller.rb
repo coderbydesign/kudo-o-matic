@@ -74,7 +74,7 @@ class TransactionsController < ApplicationController
 
   def check_slack_connection
     if SLACK_IS_CONFIGURED && current_user.slack_id.blank?
-      flash.now[:notice] = '<a href="/settings">Connect your ₭udo-o-Matic account to Slack</a>'.html_safe
+      flash.now[:error] = '<a href="/settings">Connect your ₭udo-o-Matic account to Slack</a>'.html_safe
     end
   end
 

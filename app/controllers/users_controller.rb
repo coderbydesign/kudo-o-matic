@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update, :resend_email_confirmation]
 
   def edit
   end
@@ -10,6 +10,14 @@ class UsersController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+
+  def resend_email_confirmation
+    unless current_user.confirmed?
+      current_user.send_reset_password_instructions
+      flash[:success] = 'Email confirmation instructions have been sent'
+    end
+    redirect_to root_url
   end
 
   def autocomplete_search
