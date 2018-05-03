@@ -5,6 +5,7 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :upvote, :downvote]
   before_action :check_slack_connection, only: [:index]
   before_action :set_user, only: [:index, :show]
+  before_action :check_restricted, only: [:create, :upvote, :downvote]
   after_action :update_slack_transaction, only: [:upvote, :downvote]
 
   def index
@@ -112,9 +113,9 @@ class TransactionsController < ApplicationController
 
     case params['filter']
       when 'mine'
-        @transactions = TransactionDecorator.decorate_collection(Transaction.all_for_user(current_user).page(params[:page]).per(20))
+        @transactions = Transaction.all_for_user(current_user).page(params[:page]).per(20)
       when 'send'
-        @transactions = TransactionDecorator.decorate_collection(Transaction.send_by_user(current_user).page(params[:page]).per(20))
+        @transactions = Transaction.send_by_user(current_user).page(params[:page]).per(20)
       when 'received'
         @transactions = TransactionDecorator.decorate_collection(Transaction.received_by_user(current_user).page(params[:page]).per(20))
       else
@@ -141,5 +142,11 @@ class TransactionsController < ApplicationController
 
   def set_user
     @user = current_user
+  end
+
+  def check_restricted
+    if current_user.restricted?
+      redirect_to root_url
+    end
   end
 end
