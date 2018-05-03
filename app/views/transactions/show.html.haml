@@ -28,24 +28,13 @@
             .transaction-body-container
               .transaction-content
                 %span.highlighted.sendername
-                  - if @transaction.sender.id == @user.id
-                    You
-                  - elsif @transaction.sender.restricted?
-                    <span class="restricted">Hidden</span>:
-                  - else
-                    = "#{@transaction.sender.name}:"
+                  = "#{@transaction.sender.name}:"
                 %span.highlighted
                   = "+#{@transaction.amount} ₭"
                 %span
                   to
                 %span.highlighted.receivername
-                  - if @transaction.receiver && @transaction.receiver.id == @user.id
-                    You
-                  - elsif @transaction.receiver&.restricted?
-                    %span.restricted
-                      Hidden
-                  - else
-                    = "#{@transaction.receiver.name}:"
+                  = "#{@transaction.receiver.name}"
                 %span
                   for
                 %span.activityname

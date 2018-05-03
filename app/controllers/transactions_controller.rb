@@ -17,6 +17,7 @@ class TransactionsController < ApplicationController
   end
 
   def show
+    @transaction = @transaction.decorate
     respond_to do |format|
       format.html
       format.js
@@ -117,7 +118,7 @@ class TransactionsController < ApplicationController
       when 'received'
         @transactions = Transaction.received_by_user(current_user).page(params[:page]).per(20)
       else
-        @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
+        @transactions = TransactionDecorator.decorate_collection(Transaction.order('created_at desc').page(params[:page]).per(20))
     end
   end
 

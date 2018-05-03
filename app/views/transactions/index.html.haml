@@ -17,7 +17,7 @@
           = render 'statistics', weekly_kudos: @weekly_kudos, monthly_kudos: @monthly_kudos, all_kudos: @all_kudos
     .container-center
       = render 'message'
-      - if !@user.restricted?
+      - if !current_user.restricted?
         = render 'transaction'
       = render 'filter'
       #results
