@@ -11,7 +11,9 @@ class UsersController < ApplicationController
   end
 
   def view_transactions
-    @transactions = @user.all_transactions.page(params[:page]).per(20)
+    @transactions = TransactionDecorator.decorate_collection(
+      @user.all_transactions.page(params[:page]).per(20)
+    )
   end
 
   def view_votes

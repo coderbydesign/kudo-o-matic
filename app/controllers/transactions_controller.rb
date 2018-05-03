@@ -112,11 +112,11 @@ class TransactionsController < ApplicationController
 
     case params['filter']
       when 'mine'
-        @transactions = Transaction.all_for_user(current_user).page(params[:page]).per(20)
+        @transactions = TransactionDecorator.decorate_collection(Transaction.all_for_user(current_user).page(params[:page]).per(20))
       when 'send'
-        @transactions = Transaction.send_by_user(current_user).page(params[:page]).per(20)
+        @transactions = TransactionDecorator.decorate_collection(Transaction.send_by_user(current_user).page(params[:page]).per(20))
       when 'received'
-        @transactions = Transaction.received_by_user(current_user).page(params[:page]).per(20)
+        @transactions = TransactionDecorator.decorate_collection(Transaction.received_by_user(current_user).page(params[:page]).per(20))
       else
         @transactions = TransactionDecorator.decorate_collection(Transaction.order('created_at desc').page(params[:page]).per(20))
     end
