@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class UsersController < ApplicationController
 
-  before_action :set_user, only: %i[edit update view_data view_transactions view_likes resend_email_confirmation]
+  before_action :set_user, except: %i[autocomplete_search]
 
   def edit; end
 
