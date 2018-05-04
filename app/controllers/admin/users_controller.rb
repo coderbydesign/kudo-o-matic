@@ -2,22 +2,37 @@ module Admin
   class UsersController < Admin::ApplicationController
     before_action :set_user, only: [:update, :deactivate, :reactivate]
 
-    # To customize the behavior of this controller,
-    # simply overwrite any of the RESTful actions. For example:
-    #
-    # def index
-    #   super
-    #   @resources = User.all.paginate(10, params[:page])
-    # end
+    def index
+      search_term = params[:search].to_s.strip
+      resources = Administrate::Search.new(scoped_resource,
+                                           dashboard_class,
+                                           search_term).run
+      resources = order.apply(resources)
+      resources = resources.page(params[:page]).per(records_per_page)
+      resources = resources.where(restricted: false)
+      page = Administrate::Page::Collection.new(dashboard, order: order)
+
+      render locals: {
+        resources: resources,
+        search_term: search_term,
+        page: page,
+        show_search_bar: show_search_bar?
+      }
+    end
+
+    def show
+      render locals: {
+          page: Administrate::Page::Show.new(dashboard, requested_resource.decorate),
+      }
+    end
 
     # Define a custom finder by overriding the `find_resource` method:
-    # def find_resource(param)
-    #   User.find_by!(slug: param)
-    # end
+    def find_resource(param)
+      User.find_by!(id: param, restricted: false)
+    end
 
     # See https://administrate-docs.herokuapp.com/customizing_controller_actions
     # for more information
-
     def update
       begin
         @user.update(user_params)

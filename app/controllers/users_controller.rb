@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class UsersController < ApplicationController
 
   before_action :set_user, except: %i[autocomplete_search]
@@ -11,7 +12,9 @@ class UsersController < ApplicationController
   end
 
   def view_transactions
-    @transactions = @user.transactions.page(params[:page]).per(20)
+    @transactions = TransactionDecorator.decorate_collection(
+      @user.all_transactions.page(params[:page]).per(20)
+    )
   end
 
   def view_likes
@@ -35,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def autocomplete_search
-    @users = User.order(:name).where('lower(name) like ?', "#{params[:term]}%".downcase).where(deactivated_at: nil)
+    @users = User.find_by_term(params[:term])
     render json: @users.map(&:name)
   end
 
@@ -46,6 +49,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:transaction_received_mail, :goal_reached_mail, :summary_mail)
+    params.require(:user).permit(:transaction_received_mail, :goal_reached_mail, :summary_mail,
+                                 :restricted)
   end
 end

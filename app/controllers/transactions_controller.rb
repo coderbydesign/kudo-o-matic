@@ -4,6 +4,8 @@ class TransactionsController < ApplicationController
   before_action :query_variables, only: [:index, :show, :create, :upvote, :downvote]
   before_action :set_transaction, only: [:show, :upvote, :downvote]
   before_action :check_slack_connection, only: [:index, :create]
+  before_action :set_user, only: [:index, :show]
+  before_action :check_restricted, only: [:create, :upvote, :downvote]
   after_action :update_slack_transaction, only: [:upvote, :downvote]
 
   def index
@@ -16,6 +18,7 @@ class TransactionsController < ApplicationController
   end
 
   def show
+    @transaction = @transaction.decorate
     respond_to do |format|
       format.html
       format.js
@@ -112,9 +115,9 @@ class TransactionsController < ApplicationController
       when 'send'
         @transactions = Transaction.send_by_user(current_user).page(params[:page]).per(20)
       when 'received'
-        @transactions = Transaction.received_by_user(current_user).page(params[:page]).per(20)
+        @transactions = TransactionDecorator.decorate_collection(Transaction.received_by_user(current_user).page(params[:page]).per(20))
       else
-        @transactions = Transaction.order('created_at desc').page(params[:page]).per(20)
+        @transactions = TransactionDecorator.decorate_collection(Transaction.order('created_at desc').page(params[:page]).per(20))
     end
   end
 
@@ -133,5 +136,15 @@ class TransactionsController < ApplicationController
   def received_transactions_company
     receiver_company = User.where(name: ENV['COMPANY_USER'])
     Transaction.where(receiver: receiver_company).count
+  end
+
+  def set_user
+    @user = current_user
+  end
+
+  def check_restricted
+    if current_user.restricted?
+      redirect_to root_url
+    end
   end
 end

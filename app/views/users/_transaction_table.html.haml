@@ -15,18 +15,9 @@
   - transactions.each do |t|
     %tr.no-top-border
       %td
-        - if t.sender.name == @user.name
-          %strong
-            You
-        - else
-          = t.sender.name
+        = t.sender.name
       %td
-        - if t.receiver
-          - if t.receiver.name == @user.name
-            %strong
-              You
-          - else
-            = t.receiver.name
+        = t.receiver_name_feed
       %td
         = t.amount
       %td
