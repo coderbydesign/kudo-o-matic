@@ -1,0 +1,13 @@
+%table.settings-table
+  %tr
+    %th
+      Transaction
+    %th
+      Liked at
+  - likes.each do |l|
+    %tr.no-top-border
+      %td
+        = link_to l.transaction_votable.short_str, transaction_path(l.votable_id)
+      %td
+        = l.created_at.strftime("%Y-%m-%d")
+= paginate likes
