@@ -38,8 +38,7 @@ class UsersController < ApplicationController
   end
 
   def autocomplete_search
-    @users = User.order(:name).where('lower(name) like ?', "#{params[:term]}%".downcase)
-                 .where(deactivated_at: nil).where(restricted: false)
+    @users = User.find_by_term(params[:term])
     render json: @users.map(&:name)
   end
 

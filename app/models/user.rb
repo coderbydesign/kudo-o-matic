@@ -69,6 +69,11 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.find_by_term(term)
+    User.order(:name).where('lower(name) like ?', "#{term}%".downcase)
+        .where(deactivated_at: nil).where(restricted: false)
+  end
+
   def all_transactions
     Transaction.all_for_user(self)
   end
