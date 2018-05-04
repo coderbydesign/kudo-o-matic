@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
 
   before_action :query_variables, only: [:index, :show, :create, :upvote, :downvote]
   before_action :set_transaction, only: [:show, :upvote, :downvote]
-  before_action :check_slack_connection, only: [:index]
+  before_action :check_slack_connection, only: [:index, :create]
   after_action :update_slack_transaction, only: [:upvote, :downvote]
 
   def index
