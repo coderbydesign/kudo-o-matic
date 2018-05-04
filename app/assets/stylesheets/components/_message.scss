@@ -32,7 +32,7 @@
   @include animation(show-message, 1s);
 }
 
-.error-message, .alert-message, .notice-message, .warning-message {
+.error-message, .alert-message, .notice-message, .warning-message, .success-message {
   padding: $padding-primary / 2 $padding-secondary * 2.5;
   border-radius: $border-radius-small;
   color: $text-primary;
@@ -74,8 +74,6 @@
   background: $flash-success-bg;
   text-align: center;
   display: flex;
-
-  margin-bottom: $margin-primary;
 }
 
 @keyframes show-message {

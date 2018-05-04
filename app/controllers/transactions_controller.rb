@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
 
   before_action :query_variables, only: [:index, :show, :create, :upvote, :downvote]
   before_action :set_transaction, only: [:show, :upvote, :downvote]
-  before_action :check_slack_connection, only: [:index]
+  before_action :check_slack_connection, only: [:index, :create]
   after_action :update_slack_transaction, only: [:upvote, :downvote]
 
   def index
@@ -28,8 +28,6 @@ class TransactionsController < ApplicationController
     if @transaction.save
       redirect_to root_path
     else
-      flash[:error] = @transaction.errors.full_messages.to_sentence.capitalize
-      @transaction.activity.name = @transaction.activity.name.split('for: ')[1]
       render :index
     end
   end
@@ -74,7 +72,7 @@ class TransactionsController < ApplicationController
 
   def check_slack_connection
     if SLACK_IS_CONFIGURED && current_user.slack_id.blank?
-      flash.now[:notice] = '<a href="/settings">Connect your ₭udo-o-Matic account to Slack</a>'.html_safe
+      flash.now[:error] = '<a href="/settings">Connect your ₭udo-o-Matic account to Slack</a>'.html_safe
     end
   end
 

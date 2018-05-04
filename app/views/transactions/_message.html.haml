@@ -6,18 +6,18 @@
         %div
           Please confirm your e-mail within #{unconfirmed_access_hours_left(current_user)} hours to keep access to your account.
           Unconfirmed accounts get deleted after #{confirm_within}.
-          = link_to "Didn't receive confirmation instructions?", new_user_confirmation_path
+          = link_to "Resend email confirmation instructions", users_resend_email_confirmation_path, method: :post
 
-- if notice
+- flash.each do |key, value|
   .message-container.show-message
-    .error-message.margin-bottom
+    .margin-bottom{:class => "#{key}-message"}
       %span.message
         .fa.fa-exclamation-circle
-        #notice= notice
+        .message{:class => key}= value
       .fa.fa-times.close-message
 
 - if @transaction.errors.any?
-  .message-container.show-message
+  #transaction-errors.message-container.show-message
     .error-message.margin-bottom
       %span.message
         .fa.fa-exclamation-circle
