@@ -20,9 +20,9 @@
       = link_to users_view_transactions_path, method: "get", class: 'btn' do
         <i class="fa fa-eye" aria-hidden="true"></i> View all transactions
     %h2.settings-subtitle
-      Votes
+      Likes
     %p
-      You currently have a total of #{pluralize(@votes_count, 'vote')}
+      You currently have a total of #{pluralize(@likes_count, 'like')}
     .data-actions.actions
-      = link_to users_view_votes_path, method: "get", class: 'btn' do
-        <i class="fa fa-eye" aria-hidden="true"></i> View all votes
+      = link_to users_view_likes_path, method: "get", class: 'btn' do
+        <i class="fa fa-eye" aria-hidden="true"></i> View all likes

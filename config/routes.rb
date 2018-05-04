@@ -14,13 +14,15 @@ Rails.application.routes.draw do
   get :users, to: 'users#autocomplete_search', as: :users_autocomplete
 
   get :settings, to: 'users#edit', as: :user
+  post :resend_email_confirmation, to: 'users#resend_email_confirmation',
+      as: :users_resend_email_confirmation
   patch :settings, to: 'users#update'
 
   get :feed, to: 'feed#index'
 
   get 'account/view_data', to: 'users#view_data', as: :users_view_data
   get 'account/view_data/transactions', to: 'users#view_transactions', as: :users_view_transactions
-  get 'account/view_data/votes', to: 'users#view_votes', as: :users_view_votes
+  get 'account/view_data/likes', to: 'users#view_likes', as: :users_view_likes
 
   get 'legal/privacy'
 

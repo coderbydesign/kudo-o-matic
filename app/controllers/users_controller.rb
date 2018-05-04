@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update view_data view_transactions view_votes]
+
+  before_action :set_user, except: %i[autocomplete_search]
 
   def edit; end
 
   def view_data
-    @transactions_count = @user.all_transactions.count
-    @votes_count = @user.votes.count
+    @transactions_count = @user.transactions.count
+    @likes_count = @user.votes.count
   end
 
   def view_transactions
@@ -16,8 +17,8 @@ class UsersController < ApplicationController
     )
   end
 
-  def view_votes
-    @votes = @user.votes.page(params[:page]).per(20)
+  def view_likes
+    @likes = @user.votes.page(params[:page]).per(20)
   end
 
   def update
@@ -26,6 +27,14 @@ class UsersController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+
+  def resend_email_confirmation
+    unless current_user.confirmed?
+      current_user.send_reset_password_instructions
+      flash[:success] = 'Email confirmation instructions have been sent'
+    end
+    redirect_to root_url
   end
 
   def autocomplete_search

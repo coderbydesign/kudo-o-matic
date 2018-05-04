@@ -106,8 +106,8 @@ RSpec.feature "Add a transaction", type: :feature do
       end
 
       it 'shows a flash error notice' do
-        within '.message-container' do
-          expect(page).to have_css(".error-message")
+        within '#transaction-errors' do
+          expect(page).to have_css('.error-message')
         end
       end
 
@@ -141,8 +141,8 @@ RSpec.feature "Add a transaction", type: :feature do
       end
 
       it 'shows a flash error notice' do
-        within '.message-container' do
-          expect(page).to have_css(".error-message")
+        within '#transaction-errors' do
+          expect(page).to have_css('.error-message')
         end
       end
 
@@ -159,8 +159,8 @@ RSpec.feature "Add a transaction", type: :feature do
       end
 
       it 'shows a flash error notice' do
-        within '.message-container' do
-          expect(page).to have_css(".error-message")
+        within '#transaction-errors' do
+          expect(page).to have_css('.error-message')
         end
       end
 
