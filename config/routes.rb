@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get :users, to: 'users#autocomplete_search', as: :users_autocomplete
 
   get :settings, to: 'users#edit', as: :user
-  get :resend_email_confirmation, to: 'users#resend_email_confirmation',
+  post :resend_email_confirmation, to: 'users#resend_email_confirmation',
       as: :users_resend_email_confirmation
   patch :settings, to: 'users#update'
 

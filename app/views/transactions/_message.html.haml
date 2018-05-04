@@ -6,7 +6,7 @@
         %div
           Please confirm your e-mail within #{unconfirmed_access_hours_left(current_user)} hours to keep access to your account.
           Unconfirmed accounts get deleted after #{confirm_within}.
-          = link_to "Resend email confirmation instructions", users_resend_email_confirmation_path
+          = link_to "Resend email confirmation instructions", users_resend_email_confirmation_path, method: :post
 
 - flash.each do |key, value|
   .message-container.show-message
