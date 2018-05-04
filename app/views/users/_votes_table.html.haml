@@ -1,0 +1,25 @@
+%table.settings-table
+  %tr
+    %th
+      Transaction
+    %th
+      Scope
+    %th
+      Flag
+    %th
+      Weight
+    %th
+      Created at
+  - votes.each do |v|
+    %tr.no-top-border
+      %td
+        = link_to v.votable_id, transaction_path(v.votable_id)
+      %td
+        = v.vote_scope
+      %td
+        = v.vote_flag
+      %td
+        = v.vote_weight
+      %td
+        = v.created_at.strftime("%Y-%m-%d")
+= paginate votes

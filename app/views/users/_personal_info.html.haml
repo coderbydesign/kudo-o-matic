@@ -1,0 +1,42 @@
+%table.settings-table
+  %tr
+    %td.bold
+      Naam
+    %td
+      #{user.name}
+  %tr
+    %td.bold
+      Email
+    %td
+      #{user.email}
+  %tr
+    %td.bold
+      Created at
+    %td
+      #{user.created_at}
+  %tr
+    %td.bold
+      Updated at
+    %td
+      #{user.updated_at}
+  %tr
+    %td.bold
+      Slack ID
+    %td
+      #{user.slack_id}
+  %tr
+    %td.bold
+      Slack name
+    %td
+      #{user.slack_name}
+  %tr
+    %td.bold
+      Slack username
+    %td
+      #{user.slack_username}
+  %tr
+    %td.bold
+      Avatar URL
+    %td
+      - if user.avatar_url
+        = link_to 'Show image', user.avatar_url, target: '_blank'

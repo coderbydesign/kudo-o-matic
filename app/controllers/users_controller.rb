@@ -1,7 +1,21 @@
+# frozen_string_literal: true
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :resend_email_confirmation]
 
-  def edit
+  before_action :set_user, only: %i[edit update view_data view_transactions view_votes resend_email_confirmation]
+
+  def edit; end
+
+  def view_data
+    @transactions_count = @user.transactions.count
+    @votes_count = @user.votes.count
+  end
+
+  def view_transactions
+    @transactions = @user.transactions.page(params[:page]).per(20)
+  end
+
+  def view_votes
+    @votes = @user.votes.page(params[:page]).per(20)
   end
 
   def update

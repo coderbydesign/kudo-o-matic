@@ -20,6 +20,10 @@ Rails.application.routes.draw do
 
   get :feed, to: 'feed#index'
 
+  get 'account/view_data', to: 'users#view_data', as: :users_view_data
+  get 'account/view_data/transactions', to: 'users#view_transactions', as: :users_view_transactions
+  get 'account/view_data/votes', to: 'users#view_votes', as: :users_view_votes
+
   get 'legal/privacy'
 
   scope :slack, controller: :slack do
@@ -169,7 +173,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'sign_in', to: 'devise/sessions#new'
     get 'sign_up', to: 'devise/registrations#new'
-    get 'edit_account', to: 'devise/registrations#edit'
+    get 'account', to: 'devise/registrations#edit'
     get 'sign_out', to: 'devise/sessions#destroy'
   end
 end

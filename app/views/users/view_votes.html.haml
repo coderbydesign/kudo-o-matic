@@ -1,0 +1,21 @@
+= render 'layouts/header'
+.page
+  .settings-container
+    - if notice
+      .message-container.success-message.margin-top
+        %span.message
+          .fa.fa-exclamation-circle
+          #notice= notice
+    .title-container
+      %h1.settings-title
+        View votes
+      .actions
+        = link_to root_path, method: "get", class: 'btn secondary' do
+          <i class="fa fa-home" aria-hidden="true"></i> Home
+        = link_to users_view_data_path, method: "get", class: 'btn secondary' do
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to Data
+    %h2.settings-subtitle
+      Votes
+    %p.settings-info
+      This table contains all the votes you have cast.
+    = render 'votes_table', votes: @votes

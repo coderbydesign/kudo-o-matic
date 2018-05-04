@@ -19,11 +19,32 @@
 
 .settings-table {
   width: 100%;
+  margin-bottom: 20px;
+
+  a {
+    text-decoration: underline;
+  }
 
   tr {
+    th {
+      background-color: #4B4656;
+      padding: 15px;
+      color: #FFF;
+      border-left: 0.5px solid;
+      border-right: 0.5px solid;
+      &:first-child {
+        border-left-color: #4B4656;
+      }
+      &:last-child {
+        border-right-color: #4B4656;
+      }
+    }
     td {
       border: 0.5px solid $primary-border-color;
       padding: $margin-secondary;
+    }
+    &.no-top-border td {
+      border-top: none;
     }
   }
 }
@@ -61,4 +82,8 @@
   @extend .settings-text;
 
   font-size: 1.75rem;
+}
+
+.settings-info {
+  margin: 10px 0;
 }

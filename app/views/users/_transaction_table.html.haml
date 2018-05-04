@@ -1,0 +1,39 @@
+%table.settings-table
+  %tr
+    %th
+      Sender
+    %th
+      Receiver
+    %th
+      Amount
+    %th
+      Created at
+    %th
+      Text
+    %th
+      Image
+  - transactions.each do |t|
+    %tr.no-top-border
+      %td
+        - if t.sender.name == @user.name
+          %strong
+            You
+        - else
+          = t.sender.name
+      %td
+        - if t.receiver
+          - if t.receiver.name == @user.name
+            %strong
+              You
+          - else
+            = t.receiver.name
+      %td
+        = t.amount
+      %td
+        = t.created_at.strftime("%Y-%m-%d")
+      %td
+        = t.activity.name
+      %td
+        - if t.image.exists?
+          = link_to 'Show image', t.image.url, target: '_blank'
+= paginate transactions
