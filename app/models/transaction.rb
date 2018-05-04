@@ -55,6 +55,10 @@ class Transaction < ActiveRecord::Base
     self.receiver = User.find_by(name: name) if name.present?
   end
 
+  def short_str
+    "#{kudos_amount}₭ to #{receiver_name}"
+  end
+
   def self.all_for_user(user)
     Transaction.where(sender: user).or(Transaction.where(receiver: user)).or(Transaction.where(receiver: User.where(name: ENV['COMPANY_USER']))).order('created_at desc')
   end
