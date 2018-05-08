@@ -23,7 +23,8 @@ Rails.application.routes.draw do
   get 'account/view_data', to: 'users#view_data', as: :users_view_data
   get 'account/view_data/transactions', to: 'users#view_transactions', as: :users_view_transactions
   get 'account/view_data/likes', to: 'users#view_likes', as: :users_view_likes
-
+  get 'account/export', to: 'users#export', as: :users_export_data
+  
   get 'legal/privacy'
 
   scope :slack, controller: :slack do
