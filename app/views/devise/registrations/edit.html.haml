@@ -22,22 +22,23 @@
             Currently waiting confirmation for: #{resource.unconfirmed_email}
         .form-field
           = f.label :name
-          = f.text_field :name, required: false
+          = f.text_field :name, required: false, autocomplete: false
         .form-field
           = f.label :email
-          = f.text_field :email, required: true
+          = f.text_field :email, required: true, autocomplete: false
         .form-field
           = f.label :password
-          = f.password_field :password, required: false, placeholder: 'Leave this empty if you don\'t want to change it'
+          = f.password_field :password, required: false, placeholder: 'Leave this empty if you don\'t want to change it',
+          autocomplete: false
         .form-field
           = f.label :password_confirmation
-          = f.password_field :password_confirmation, required: false
+          = f.password_field :password_confirmation, required: false, autocomplete: false
         .confirm-changes
           .confirm-changes-message
             Confirm your changes by providing your current password
           .form-field
             = f.label :current_password
-            = f.password_field :current_password, required: false
+            = f.password_field :current_password, required: false, autocomplete: false
       .form-actions.actions
         = f.button :submit, "Update", class: 'btn'
     %h2.settings-subtitle
