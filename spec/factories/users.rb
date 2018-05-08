@@ -6,6 +6,7 @@ FactoryGirl.define do
     password_confirmation "validpass"
     confirmation_sent_at Time.now
     confirmed_at Time.now
+    restricted false
 
     trait :admin do
       admin true

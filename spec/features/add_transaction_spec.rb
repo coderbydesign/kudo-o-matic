@@ -7,12 +7,12 @@ RSpec.feature "Add a transaction", type: :feature do
   let(:user) {
     User.create name: 'Pascal', email: 'pascal@email.com', password: 'testpass',
                 password_confirmation: 'testpass', confirmed_at: Time.now,
-                avatar_url: '/kabisa_lizard.png'
+                avatar_url: '/kabisa_lizard.png', restricted: false
   }
   let(:user_2) {
     User.create name: 'John User', email: 'john@email.com', password: 'testpass',
                 password_confirmation: 'testpass', confirmed_at: Time.now,
-                avatar_url: '/kabisa_lizard.png'
+                avatar_url: '/kabisa_lizard.png', restricted: false
   }
   let(:balance) { create :balance, :current }
   let!(:transaction) {
@@ -106,8 +106,8 @@ RSpec.feature "Add a transaction", type: :feature do
       end
 
       it 'shows a flash error notice' do
-        within '.message-container' do
-          expect(page).to have_css(".error-message")
+        within '#transaction-errors' do
+          expect(page).to have_css('.error-message')
         end
       end
 
@@ -141,8 +141,8 @@ RSpec.feature "Add a transaction", type: :feature do
       end
 
       it 'shows a flash error notice' do
-        within '.message-container' do
-          expect(page).to have_css(".error-message")
+        within '#transaction-errors' do
+          expect(page).to have_css('.error-message')
         end
       end
 
@@ -159,8 +159,8 @@ RSpec.feature "Add a transaction", type: :feature do
       end
 
       it 'shows a flash error notice' do
-        within '.message-container' do
-          expect(page).to have_css(".error-message")
+        within '#transaction-errors' do
+          expect(page).to have_css('.error-message')
         end
       end
 

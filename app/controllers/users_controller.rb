@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update view_data view_transactions
-                                    view_votes export]
+  before_action :set_user, except: %i[autocomplete_search]
 
   def edit; end
 
@@ -12,11 +11,13 @@ class UsersController < ApplicationController
   end
 
   def view_transactions
-    @transactions = @user.all_transactions.page(params[:page]).per(20)
+    @transactions = TransactionDecorator.decorate_collection(
+      @user.all_transactions.page(params[:page]).per(20)
+    )
   end
 
-  def view_votes
-    @votes = @user.votes.page(params[:page]).per(20)
+  def view_likes
+    @likes = @user.votes.page(params[:page]).per(20)
   end
 
   def export
@@ -43,8 +44,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def resend_email_confirmation
+    unless current_user.confirmed?
+      current_user.send_reset_password_instructions
+      flash[:success] = 'Email confirmation instructions have been sent'
+    end
+    redirect_to root_url
+  end
+
   def autocomplete_search
-    @users = User.order(:name).where('lower(name) like ?', "#{params[:term]}%".downcase).where(deactivated_at: nil)
+    @users = User.find_by_term(params[:term])
     render json: @users.map(&:name)
   end
 
@@ -55,7 +64,8 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:transaction_received_mail, :goal_reached_mail, :summary_mail)
+    params.require(:user).permit(:transaction_received_mail, :goal_reached_mail, :summary_mail,
+                                 :restricted)
   end
 
   def generate_filename
