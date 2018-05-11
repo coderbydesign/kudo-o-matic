@@ -2,7 +2,7 @@ require 'rufus-scheduler'
 
 scheduler = Rufus::Scheduler::singleton
 
-unless defined?(Rails::Console) || File.split($0).last == 'rake'
+unless defined?(Rails::Console) || File.split($0).last == 'rake' || Rails.env == 'staging'
   scheduler.cron '0 9 * * 5' do
     SummaryMailer.new_summary
   end
