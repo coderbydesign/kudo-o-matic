@@ -1,0 +1,6 @@
+%tr
+  %td.content
+    = "Your data export is ready! \u{1f600}".html_safe
+    %p.sidenote
+      You may download the .zip package at
+      = link_to 'Download', users_download_export_path(uuid: @export.uuid)

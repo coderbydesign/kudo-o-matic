@@ -31,7 +31,7 @@
     %p
       We currently provide data exports in JSON and XML.
     .data-actions.actions
-      = link_to users_export_data_path(:format => :json), method: "get", class: 'btn' do
+      = link_to users_export_json_path, method: "post", class: 'btn' do
         <i class="fa fa-download" aria-hidden="true"></i> Download as JSON
-      = link_to users_export_data_path(:format => :xml), method: "get", class: 'btn' do
+      = link_to users_export_xml_path, method: "post", class: 'btn' do
         <i class="fa fa-download" aria-hidden="true"></i> Download as XML

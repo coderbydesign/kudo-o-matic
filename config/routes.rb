@@ -15,16 +15,20 @@ Rails.application.routes.draw do
 
   get :settings, to: 'users#edit', as: :user
   post :resend_email_confirmation, to: 'users#resend_email_confirmation',
-      as: :users_resend_email_confirmation
+       as: :users_resend_email_confirmation
   patch :settings, to: 'users#update'
+
 
   get :feed, to: 'feed#index'
 
   get 'account/view_data', to: 'users#view_data', as: :users_view_data
   get 'account/view_data/transactions', to: 'users#view_transactions', as: :users_view_transactions
   get 'account/view_data/likes', to: 'users#view_likes', as: :users_view_likes
-  get 'account/export', to: 'users#export', as: :users_export_data
-  
+  # get 'account/export', to: 'users#export', as: :users_export_data
+  post 'account/export/json', to: 'users#export_json', as: :users_export_json
+  post 'account/export/xml', to: 'users#export_xml', as: :users_export_xml
+  get 'account/export/download/:uuid', to: 'users#download_export', as: :users_download_export
+
   get 'legal/privacy'
 
   scope :slack, controller: :slack do
@@ -167,8 +171,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks',
-    registrations: :registrations
+      omniauth_callbacks: 'users/omniauth_callbacks',
+      registrations: :registrations
   }
 
   devise_scope :user do

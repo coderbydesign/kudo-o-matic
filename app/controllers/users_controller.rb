@@ -20,6 +20,23 @@ class UsersController < ApplicationController
     @likes = @user.votes.page(params[:page]).per(20)
   end
 
+  def export_json
+    Delayed::Job.enqueue Export::CreateExportJob.new(@user, :json)
+    render template: 'users/export_data', locals: { dataformat: 'JSON' }
+  end
+
+  def export_xml
+    Delayed::Job.enqueue Export::CreateExportJob.new(@user, :xml)
+    render template: 'users/export_data', locals: { dataformat: 'XML' }
+  end
+
+  def download_export
+    export = Export.find_by_uuid!(params[:uuid])
+    send_file(
+      export.zip
+    )
+  end
+
   def export
     @transactions = @user.all_transactions
     @votes = @user.votes
