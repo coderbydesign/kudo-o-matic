@@ -27,11 +27,18 @@
         = link_to users_view_likes_path, method: "get", class: 'btn' do
           <i class="fa fa-eye" aria-hidden="true"></i> View all likes
     %h2.settings-subtitle
-      Export data
-    %p
-      We currently provide data exports in JSON and XML.
+      Data exports
+    -if @exports.any?
+      %p
+        These are your available export files. To download a file, simply click on the link.
+        To create a new export, click on one of the buttons at the bottom of this page.
+      = render 'exports_table', exports: @exports
+    - else
+      %p
+        You don'y have any export files available. To create a export file, click on the of the buttons below.
+        We currently provide data exports in JSON and XML.
     .data-actions.actions
       = link_to users_export_json_path, method: "post", class: 'btn' do
-        <i class="fa fa-download" aria-hidden="true"></i> Download as JSON
+        <i class="fa fa-download" aria-hidden="true"></i> New JSON export
       = link_to users_export_xml_path, method: "post", class: 'btn' do
-        <i class="fa fa-download" aria-hidden="true"></i> Download as XML
+        <i class="fa fa-download" aria-hidden="true"></i> New XML export

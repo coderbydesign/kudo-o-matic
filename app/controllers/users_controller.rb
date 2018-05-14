@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def view_data
     @transactions_count = @user.all_transactions.count
     @votes_count = @user.votes.count
+    @exports = @user.exports
   end
 
   def view_transactions
@@ -35,22 +36,6 @@ class UsersController < ApplicationController
     send_file(
       export.zip
     )
-  end
-
-  def export
-    @transactions = @user.all_transactions
-    @votes = @user.votes
-
-    respond_to do |format|
-      format.json do
-        json_data = render_user_data(:json)
-        send_data(json_data, type: 'text/json; charset=UTF-8;', filename: "#{generate_filename}.json")
-      end
-      format.xml do
-        xml_data = render_user_data(:xml)
-        send_data(xml_data, type: 'text/xml; charset=UTF-8;', filename: "#{generate_filename}.xml")
-      end
-    end
   end
 
   def update
@@ -85,17 +70,4 @@ class UsersController < ApplicationController
                                  :restricted)
   end
 
-  def generate_filename
-    "data_export_#{@user.name.underscore}_#{Time.now.strftime('%Y-%m-%d')}"
-  end
-
-  def render_user_data(format)
-    Rabl.render(@user, 'users/export',
-                view_path: 'app/views',
-                locals: {
-                  transactions: @transactions,
-                  votes: @votes
-                },
-                format: format)
-  end
 end
