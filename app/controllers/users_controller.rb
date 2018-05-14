@@ -22,12 +22,12 @@ class UsersController < ApplicationController
   end
 
   def export_json
-    Delayed::Job.enqueue Export::CreateExportJob.new(@user, :json)
+    ExportService.instance.start_new_export(@user, :json)
     render template: 'users/export_data', locals: { dataformat: 'JSON' }
   end
 
   def export_xml
-    Delayed::Job.enqueue Export::CreateExportJob.new(@user, :xml)
+    ExportService.instance.start_new_export(@user, :xml)
     render template: 'users/export_data', locals: { dataformat: 'XML' }
   end
 

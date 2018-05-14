@@ -16,6 +16,9 @@
 # Configuration
 config/database.yml
 
+# User data exports
+/exports
+
 *.swp
 .*
 !/.gitignore
