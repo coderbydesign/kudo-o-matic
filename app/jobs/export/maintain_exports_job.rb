@@ -2,7 +2,7 @@
 
 Export::MaintainExportsJob = Struct.new do
   def perform
-    exports = Export.where('created_at < ?', 1.week.ago)
+    exports = Export.all_expired
     exports.each do |e|
       File.delete(e.zip) if File.exist?(e.zip)
     end
