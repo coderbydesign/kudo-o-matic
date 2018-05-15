@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'zip'
+require 'open-uri'
 
 Export::CreateExportJob = Struct.new(:user, :dataformat) do
   def perform
@@ -10,7 +11,7 @@ Export::CreateExportJob = Struct.new(:user, :dataformat) do
     export = Export.create(uuid: SecureRandom.uuid, user: user)
 
     # Notify user via email that the export has started
-    UserMailer.export_start_email(user).deliver_now
+    UserMailer.export_start_email(user).deliver!
 
     # Render data in given format (JSON or XML)
     data = render_data(user, transactions, likes, dataformat)
@@ -26,12 +27,20 @@ Export::CreateExportJob = Struct.new(:user, :dataformat) do
     end
 
     # Create the zip file and add the data file to it
+    tmp_images = []
     zip_file = File.new(
       Rails.root.join('exports', 'users', user.id.to_s,
                       "export_#{export.uuid}.zip"), 'w'
     )
     Zip::File.open(zip_file.path, Zip::File::CREATE) do |zip|
       zip.add("user_#{user.id}_data.#{dataformat}", data_file_path)
+      transactions.each do |t|
+        next unless t.image.exists?
+        tmp_file_path = generate_tmp_img_path(export, t.image_file_name)
+        tmp_images.push(tmp_file_path)
+        IO.copy_stream(open(t.image.url), tmp_file_path)
+        zip.add("images/#{t.image_file_name}", tmp_file_path)
+      end
     end
 
     # Set file location in Export record
@@ -39,10 +48,15 @@ Export::CreateExportJob = Struct.new(:user, :dataformat) do
     export.save
 
     # Notify user via email that the export is available for download
-    UserMailer.export_done_email(user, export).deliver_now
+    UserMailer.export_done_email(user, export).deliver!
 
     # Delete temporary data file
     File.delete(data_file_path) if File.exist?(data_file_path)
+
+    # Delete temporary image files
+    tmp_images.each do |image|
+      File.delete(image) if File.exist?(image)
+    end
   end
 
   def queue_name
@@ -63,5 +77,9 @@ Export::CreateExportJob = Struct.new(:user, :dataformat) do
 
   def generate_data_file_path(user, export, format)
     Rails.root.join('tmp', "#{export.uuid}_data.#{format}")
+  end
+
+  def generate_tmp_img_path(export, filename)
+    Rails.root.join('tmp', "export_#{export.uuid}_#{filename}")
   end
 end
