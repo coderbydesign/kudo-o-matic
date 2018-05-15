@@ -148,6 +148,10 @@ Rails.application.routes.draw do
         jsonapi_related_resource :balance, only: :show
       end
 
+      scope :users, controller: :users do
+        get :me, to: 'users#me'
+      end
+
       jsonapi_resources :users, only: [:index, :show] do
         jsonapi_links :sent_transactions, only: :show
         jsonapi_links :received_transactions, only: :show
@@ -155,6 +159,8 @@ Rails.application.routes.draw do
         jsonapi_related_resources :sent_transactions, only: :show
         jsonapi_related_resources :received_transactions, only: :show
       end
+
+
 
       scope :statistics, controller: :statistics do
         get :general
@@ -166,6 +172,8 @@ Rails.application.routes.draw do
         post :obtain_api_token
         post :store_fcm_token
       end
+
+
     end
   end
 
