@@ -111,6 +111,13 @@ class User < ActiveRecord::Base
     name
   end
 
+  def to_profile_json
+    Jbuilder.new do |user|
+      user.name name
+      user.avatar_url picture_url
+    end
+  end
+
   private
 
   def ensure_an_admin_remains
