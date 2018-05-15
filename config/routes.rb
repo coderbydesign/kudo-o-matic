@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get :settings, to: 'users#edit', as: :user
   post :resend_email_confirmation, to: 'users#resend_email_confirmation',
-      as: :users_resend_email_confirmation
+       as: :users_resend_email_confirmation
   patch :settings, to: 'users#update'
 
   get :feed, to: 'feed#index'
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get 'account/view_data/transactions', to: 'users#view_transactions', as: :users_view_transactions
   get 'account/view_data/likes', to: 'users#view_likes', as: :users_view_likes
   get 'account/export', to: 'users#export', as: :users_export_data
-  
+
   get 'legal/privacy'
 
   scope :slack, controller: :slack do
@@ -145,6 +145,10 @@ Rails.application.routes.draw do
         jsonapi_related_resource :balance, only: :show
       end
 
+      scope :users, controller: :users do
+        get :me, to: 'users#me'
+      end
+
       jsonapi_resources :users, only: [:index, :show] do
         jsonapi_links :sent_transactions, only: :show
         jsonapi_links :received_transactions, only: :show
@@ -152,6 +156,8 @@ Rails.application.routes.draw do
         jsonapi_related_resources :sent_transactions, only: :show
         jsonapi_related_resources :received_transactions, only: :show
       end
+
+
 
       scope :statistics, controller: :statistics do
         get :general
@@ -163,12 +169,14 @@ Rails.application.routes.draw do
         post :obtain_api_token
         post :store_fcm_token
       end
+
+
     end
   end
 
   devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks',
-    registrations: :registrations
+      omniauth_callbacks: 'users/omniauth_callbacks',
+      registrations: :registrations
   }
 
   devise_scope :user do
