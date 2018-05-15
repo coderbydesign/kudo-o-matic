@@ -11,7 +11,7 @@ Export::CreateExportJob = Struct.new(:user, :dataformat) do
     export = Export.create(uuid: SecureRandom.uuid, user: user)
 
     # Notify user via email that the export has started
-    UserMailer.export_start_email(user).deliver!
+    UserMailer.export_start_email(user).deliver_now
 
     # Render data in given format (JSON or XML)
     data = render_data(user, transactions, likes, dataformat)
@@ -48,7 +48,7 @@ Export::CreateExportJob = Struct.new(:user, :dataformat) do
     export.save
 
     # Notify user via email that the export is available for download
-    UserMailer.export_done_email(user, export).deliver!
+    UserMailer.export_done_email(user, export).deliver_now
 
     # Delete temporary data file
     File.delete(data_file_path) if File.exist?(data_file_path)
