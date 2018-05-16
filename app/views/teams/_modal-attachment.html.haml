@@ -1,0 +1,13 @@
+.attachment-modal-background
+-#.modal-dialog.attachment-modal {style: 'display: block;'}
+  .modal-header
+    %h2
+      Add an image to your transaction
+    .modal-subheader
+      %p
+        Only '.png', 'jpg' and 'gif'
+  .modal-body
+    %input{type:'file', class:'copy-input'}
+  .modal-footer
+    %button.btn.btn-primary.btn-close.close-emoji
+      Close

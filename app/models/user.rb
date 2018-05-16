@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
   has_many :sent_transactions, class_name: 'Transaction', foreign_key: :sender_id
   has_many :received_transactions, class_name: 'Transaction', foreign_key: :receiver_id
+  has_many :memberships, class_name: 'TeamMember', foreign_key: :user_id
   has_many :votes, foreign_key: 'voter_id'
   has_many :exports, foreign_key: 'user_id'
   has_many :fcm_tokens

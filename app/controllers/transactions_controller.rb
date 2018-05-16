@@ -39,7 +39,7 @@ class TransactionsController < ApplicationController
     @transaction.liked_by current_user
 
     respond_to do |format|
-      format.html {redirect_to :back}
+      format.html { redirect_to :back }
       format.js
     end
 
@@ -52,7 +52,7 @@ class TransactionsController < ApplicationController
     @transaction.unliked_by current_user
 
     respond_to do |format|
-      format.html {redirect_to :back}
+      format.html { redirect_to :back }
       format.js
     end
   end
@@ -110,14 +110,19 @@ class TransactionsController < ApplicationController
     @markdown = Redcarpet::Markdown.new(MdEmoji::Render, no_intra_emphasis: true)
 
     case params['filter']
-      when 'mine'
-        @transactions = Transaction.all_for_user(current_user).page(params[:page]).per(20)
-      when 'send'
-        @transactions = Transaction.send_by_user(current_user).page(params[:page]).per(20)
-      when 'received'
-        @transactions = TransactionDecorator.decorate_collection(Transaction.received_by_user(current_user).page(params[:page]).per(20))
-      else
-        @transactions = TransactionDecorator.decorate_collection(Transaction.order('created_at desc').page(params[:page]).per(20))
+    when 'mine'
+      @transactions = Transaction.all_for_user(current_user, session[:current_team]).page(params[:page]).per(20)
+    when 'send'
+      @transactions = Transaction.send_by_user(current_user, session[:current_team]).page(params[:page]).per(20)
+    when 'received'
+      @transactions = TransactionDecorator.decorate_collection(
+          Transaction.received_by_user(current_user, session[:current_team]).page(params[:page]).per(20)
+      )
+    else
+      @transactions = TransactionDecorator.decorate_collection(
+        Transaction.where(team_id: session[:current_team])
+            .order('created_at desc').page(params[:page]).per(20)
+      )
     end
   end
 

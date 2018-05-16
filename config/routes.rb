@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   use_doorkeeper
   root 'transactions#index'
 
-  resources :transactions, only: [:index, :show, :create]
+  resources :transactions, only: %i[index show create]
+  resources :teams, only: %i[new create]
 
   post 'like/:id', to: 'transactions#upvote', as: :like
   post 'unlike/:id', to: 'transactions#downvote', as: :unlike
@@ -15,9 +18,8 @@ Rails.application.routes.draw do
 
   get :settings, to: 'users#edit', as: :user
   post :resend_email_confirmation, to: 'users#resend_email_confirmation',
-       as: :users_resend_email_confirmation
+                                   as: :users_resend_email_confirmation
   patch :settings, to: 'users#update'
-
 
   get :feed, to: 'feed#index'
 
@@ -77,7 +79,7 @@ Rails.application.routes.draw do
         jsonapi_related_resource :balance, only: :show
       end
 
-      jsonapi_resources :transactions, only: [:index, :show, :create] do
+      jsonapi_resources :transactions, only: %i[index show create] do
         member do
           put :like, to: 'transactions#like'
           delete :like, to: 'transactions#unlike'
@@ -92,7 +94,7 @@ Rails.application.routes.draw do
         jsonapi_related_resource :balance, only: :show
       end
 
-      jsonapi_resources :users, only: [:index, :show] do
+      jsonapi_resources :users, only: %i[index show] do
         jsonapi_links :sent_transactions, only: :show
         jsonapi_links :received_transactions, only: :show
 
@@ -133,7 +135,7 @@ Rails.application.routes.draw do
         jsonapi_related_resource :balance, only: :show
       end
 
-      jsonapi_resources :transactions, only: [:index, :show, :create] do
+      jsonapi_resources :transactions, only: %i[index show create] do
         member do
           put :like, to: 'transactions#like'
           delete :like, to: 'transactions#unlike'
@@ -152,15 +154,13 @@ Rails.application.routes.draw do
         get :me, to: 'users#me'
       end
 
-      jsonapi_resources :users, only: [:index, :show] do
+      jsonapi_resources :users, only: %i[index show] do
         jsonapi_links :sent_transactions, only: :show
         jsonapi_links :received_transactions, only: :show
 
         jsonapi_related_resources :sent_transactions, only: :show
         jsonapi_related_resources :received_transactions, only: :show
       end
-
-
 
       scope :statistics, controller: :statistics do
         get :general
@@ -172,14 +172,13 @@ Rails.application.routes.draw do
         post :obtain_api_token
         post :store_fcm_token
       end
-
-
     end
   end
 
   devise_for :users, controllers: {
-      omniauth_callbacks: 'users/omniauth_callbacks',
-      registrations: :registrations
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    sessions: 'sessions',
+    registrations: :registrations
   }
 
   devise_scope :user do
