@@ -73,12 +73,12 @@
           %p
             %p
               %strong
-                = Balance.current.amount
+                = Balance.current(@current_team).amount
                 ₭
               of
               %strong
-                = Goal.next.amount
+                = Goal.next(@current_team).amount
                 ₭
               for
               %strong
-                = Goal.next.name
+                = Goal.next(@current_team).name

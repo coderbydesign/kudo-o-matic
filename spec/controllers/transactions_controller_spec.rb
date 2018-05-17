@@ -1,18 +1,22 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe TransactionsController, type: :controller do
   let!(:user) {create(:user, :admin)}
-  let!(:balance) {create(:balance, :current)}
+  let!(:team) { create(:team) }
+  let!(:balance) {create :balance, current: :current, team_id: team.id}
   let!(:goal) {create(:goal)}
-  let!(:transaction) {create(:transaction)}
+  let!(:transaction) {create(:transaction, team_id: team.id, balance: balance)}
 
   before do
+    team.add_member(user)
     sign_in user
+    @current_team = team.id
   end
 
   describe 'GET #show' do
     before do
-      get :show, params: {id: transaction.id}
+      get :show, params: {id: transaction.id}, session: {current_team: team.id}
     end
 
     it 'gets show' do

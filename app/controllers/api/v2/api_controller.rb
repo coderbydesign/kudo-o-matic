@@ -22,6 +22,10 @@ class Api::V2::ApiController < JSONAPI::ResourceController
     request.format = :json
   end
 
+  def set_current_team
+    @current_team_id = request.headers["Team"]
+  end
+
   def current_resource_owner
     User.find(doorkeeper_token.resource_owner_id) if
         doorkeeper_token

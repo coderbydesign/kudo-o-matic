@@ -5,7 +5,8 @@ RSpec.describe SlackController, type: :controller do
 
   describe 'POST #action' do
     let!(:user) {create(:user, slack_id: 1)}
-    let!(:transaction) {create(:transaction)}
+    let!(:team) { create(:team) }
+    let!(:transaction) {create(:transaction, team_id: team.id)}
     let!(:invalid_user_slack_id) {-1}
 
     before do

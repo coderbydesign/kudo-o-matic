@@ -1,7 +1,7 @@
 class TransactionAdder
   include Slack::Messages
 
-  def self.create(params, current_user)
+  def self.create(params, current_user, current_team)
     amount = params[:amount]
     receiver_name = params[:receiver_name]
     receiver = User.where(name: receiver_name).first
@@ -14,17 +14,19 @@ class TransactionAdder
         image: params[:image],
         sender: current_user,
         receiver: receiver,
-        slack_kudos_left_on_creation: Goal.next.amount - Balance.current.amount - amount.to_i,
-        balance: Balance.current
+        team_id: current_team,
+        slack_kudos_left_on_creation: Goal.next(current_team).amount - Balance.current(current_team).amount - amount.to_i,
+        balance: Balance.current(current_team)
     )
 
-    save transaction
+    save transaction, current_team
   rescue
     return transaction
   end
 
   def self.create_from_api_request(headers, params)
     data = params[:data]
+    current_team = headers['Team']
     attributes = data[:attributes]
 
     amount = attributes[:amount]
@@ -38,8 +40,8 @@ class TransactionAdder
         activity: Activity.find_or_create_by(name: activity),
         sender: User.find_by_api_token(headers['Api-Token']),
         receiver: receiver,
-        slack_kudos_left_on_creation: Goal.next.amount - Balance.current.amount - amount.to_i,
-        balance: Balance.current
+        slack_kudos_left_on_creation: Goal.next(current_team).amount - Balance.current(current_team).amount - amount.to_i,
+        balance: Balance.current(current_team)
     )
 
     unless attributes[:image].nil? || attributes['image-file-type'].nil?
@@ -48,7 +50,7 @@ class TransactionAdder
           image: "data:image/#{file_type};base64,#{attributes[:image]}", image_file_name: "image.#{file_type}")
     end
 
-    save transaction
+    save transaction, current_team
   end
 
   def self.create_from_slack_command(params)
@@ -109,14 +111,14 @@ class TransactionAdder
 
   private
 
-  def self.save(transaction)
+  def self.save(transaction, current_team)
     transaction.save!
 
     SlackService.instance.send_new_transaction(transaction)
     FcmService.instance.send_new_transaction(transaction)
     TransactionMailer.new_transaction(transaction)
 
-    GoalReacher.check!
+    GoalReacher.check!(current_team)
 
     transaction
   end

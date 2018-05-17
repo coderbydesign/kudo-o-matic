@@ -79,7 +79,7 @@ RSpec.feature "Add a transaction", type: :feature do
         end.new
       end
 
-      @number = ((Balance.current.amount.to_f - Goal.previous.amount.to_f) / (Goal.next.amount.to_f - Goal.previous.amount.to_f)) * 100
+      @number = ((Balance.current(@current_team).amount.to_f - Goal.previous(@current_team).amount.to_f) / (Goal.next(@current_team).amount.to_f - Goal.previous(@current_team).amount.to_f)) * 100
       @balance_percentage = helper.number_to_percentage(@number, precision: 0)
       within('.percentage') do
         expect(page).to have_content(@balance_percentage)

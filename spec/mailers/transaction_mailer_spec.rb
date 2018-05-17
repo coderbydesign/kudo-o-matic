@@ -4,6 +4,7 @@ RSpec.describe TransactionMailer, type: :mailer do
   context 'new transaction' do
     let!(:prev_goal) {create :goal, :achieved, name: "Painting lessons", amount: 100}
     let!(:next_goal) {create :goal, name: "Paintball", amount: 1500}
+    let(:team) { create :team }
     let(:balance) {create :balance, :current}
     let(:user) {User.create name: 'John Doe', email: 'johndoe@example.com'}
     let(:activity) {create :activity, name: 'Helping me out'}

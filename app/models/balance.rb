@@ -6,8 +6,8 @@ class Balance < ActiveRecord::Base
 
   scope :balances, -> { where(current: false).order("created_at DESC") }
 
-  def self.current
-    where(current: true).order("created_at DESC").first
+  def self.current(team)
+    where(current: true).where(team_id: team).order("created_at DESC").first
   end
 
   def last_transaction

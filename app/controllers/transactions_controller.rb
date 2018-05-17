@@ -18,6 +18,7 @@ class TransactionsController < ApplicationController
   end
 
   def show
+    puts "SESSION: #{@current_team}"
     @transaction = @transaction.decorate
     respond_to do |format|
       format.html
@@ -26,7 +27,7 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = TransactionAdder.create(params[:transaction], current_user)
+    @transaction = TransactionAdder.create(params[:transaction], current_user, @current_team)
 
     if @transaction.save
       redirect_to root_path
@@ -43,8 +44,8 @@ class TransactionsController < ApplicationController
       format.js
     end
 
-    if Balance.current.amount >= Goal.next.amount
-      GoalReacher.check!
+    if Balance.current(@current_team).amount >= Goal.next(@current_team).amount
+      GoalReacher.check!(@current_team)
     end
   end
 
@@ -80,14 +81,14 @@ class TransactionsController < ApplicationController
   end
 
   def query_variables
-    @previous = Goal.previous.decorate
-    @next = Goal.next.decorate
-    @iterate_goals = Goal.goals
+    @previous = Goal.previous(@current_team).decorate
+    @next = Goal.next(@current_team).decorate
+    @iterate_goals = Goal.goals(@current_team)
     @goals = Goal.all.order(cached_votes_up: :desc)
-    @current_goals = Goal.all.where(balance: Balance.current).order('amount desc')
+    @current_goals = Goal.all.where(balance: Balance.current(@current_team)).order('amount desc')
+    @balance = Balance.current(@current_team).decorate
 
-    @balance = Balance.current.decorate
-    @achieved_goal = Goal.where(balance: Balance.current).where.not(achieved_on: nil).order('achieved_on desc')
+    @achieved_goal = Goal.where(balance: Balance.current(@current_team)).where.not(achieved_on: nil).order('achieved_on desc')
 
     @sent_transactions_user = Transaction.where(sender: current_user).count
     @received_transactions_user = Transaction.where(receiver: current_user).count + received_transactions_company
@@ -111,16 +112,16 @@ class TransactionsController < ApplicationController
 
     case params['filter']
     when 'mine'
-      @transactions = Transaction.all_for_user(current_user, session[:current_team]).page(params[:page]).per(20)
+      @transactions = Transaction.all_for_user(current_user, @current_team).page(params[:page]).per(20)
     when 'send'
-      @transactions = Transaction.send_by_user(current_user, session[:current_team]).page(params[:page]).per(20)
+      @transactions = Transaction.send_by_user(current_user, @current_team).page(params[:page]).per(20)
     when 'received'
       @transactions = TransactionDecorator.decorate_collection(
-          Transaction.received_by_user(current_user, session[:current_team]).page(params[:page]).per(20)
+          Transaction.received_by_user(current_user, @current_team).page(params[:page]).per(20)
       )
     else
       @transactions = TransactionDecorator.decorate_collection(
-        Transaction.where(team_id: session[:current_team])
+        Transaction.where(team_id: @current_team)
             .order('created_at desc').page(params[:page]).per(20)
       )
     end
