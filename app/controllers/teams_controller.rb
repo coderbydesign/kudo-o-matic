@@ -16,6 +16,7 @@ class TeamsController < ApplicationController
 
     if @team.save
       @team.add_member(@user, true)
+      flash[:success] = 'Team was successfully created!'
       redirect_to root_path
     else
       render :new
