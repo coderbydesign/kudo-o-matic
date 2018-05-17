@@ -51,6 +51,34 @@ class TransactionAdder
     save transaction
   end
 
+  def self.create_from_v2_api_request(user, params)
+    data = params[:data]
+    attributes = data[:attributes]
+
+    amount = attributes[:amount]
+    receiver_name = data[:relationships][:receiver][:data][:name]
+    receiver = User.where(name: receiver_name).first
+    activity = attributes[:activity]
+    activity = "#{receiver_name} for: #{activity}" if receiver.nil?
+
+    transaction = Transaction.new(
+        amount: amount,
+        activity: Activity.find_or_create_by(name: activity),
+        sender: user,
+        receiver: receiver,
+        slack_kudos_left_on_creation: Goal.next.amount - Balance.current.amount - amount.to_i,
+        balance: Balance.current
+    )
+
+    unless attributes[:image].nil? || attributes['image-file-type'].nil?
+      file_type = attributes['image-file-type']
+      transaction.update(
+          image: "data:image/#{file_type};base64,#{attributes[:image]}", image_file_name: "image.#{file_type}")
+    end
+
+    save transaction
+  end
+
   def self.create_from_slack_command(params)
     text = Formatting.unescape(params['text'])
     arguments = text.split(' ', 3)

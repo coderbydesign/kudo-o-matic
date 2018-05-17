@@ -3,7 +3,7 @@ class Api::V2::TransactionsController < Api::V2::ApiController
   after_action :update_slack_transaction, only: [:like, :unlike]
 
   def create
-    @transaction = TransactionAdder.create_from_api_request(request.headers, params)
+    @transaction = TransactionAdder.create_from_v2_api_request(api_user, params)
     @api_user_voted = api_user.voted_on? @transaction
 
     render 'api/v2/transactions/create', status: :created
