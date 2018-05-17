@@ -88,7 +88,7 @@ describe Transaction do
     end
 
     it 'Displays all my transactions from the current balance' do
-      transactions = Transaction.all_for_user(user_2, team.id)
+      transactions = Transaction.all_for_user_in_team(user_2, team.id)
       expect(transactions.count).to eq(4)
     end
 

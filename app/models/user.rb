@@ -76,8 +76,8 @@ class User < ActiveRecord::Base
         .where(deactivated_at: nil).where(restricted: false)
   end
 
-  def all_transactions
-    Transaction.all_for_user(self)
+  def all_transactions(team)
+    Transaction.all_for_user_in_team(self, team)
   end
 
   def first_name

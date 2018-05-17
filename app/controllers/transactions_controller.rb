@@ -112,7 +112,7 @@ class TransactionsController < ApplicationController
 
     case params['filter']
     when 'mine'
-      @transactions = Transaction.all_for_user(current_user, @current_team).page(params[:page]).per(20)
+      @transactions = Transaction.all_for_user_in_team(current_user, @current_team).page(params[:page]).per(20)
     when 'send'
       @transactions = Transaction.send_by_user(current_user, @current_team).page(params[:page]).per(20)
     when 'received'

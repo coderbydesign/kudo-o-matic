@@ -4,9 +4,9 @@ require 'rubygems'
 require 'zip'
 require 'open-uri'
 
-Export::CreateExportJob = Struct.new(:user, :dataformat) do
+Export::CreateExportJob = Struct.new(:user, :team, :dataformat) do
   def perform
-    transactions = Transaction.all_for_user(user)
+    transactions = Transaction.all_for_user_in_team(user, team)
     likes = Vote.all_for_user(user)
     export = Export.create(uuid: SecureRandom.uuid, user: user)
 
@@ -16,6 +16,9 @@ Export::CreateExportJob = Struct.new(:user, :dataformat) do
     # Render data in given format (JSON or XML)
     data = render_data(user, transactions, likes, dataformat)
     data_file_path = generate_data_file_path(user, export, dataformat)
+
+    user_dir = Rails.root.join('exports', 'users', user.id.to_s)
+    FileUtils.mkdir_p(user_dir) unless File.directory?(user_dir)
 
     # Create tmp folder if it doesn't exist
     dir = File.dirname(data_file_path)

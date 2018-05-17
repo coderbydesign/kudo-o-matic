@@ -7,7 +7,7 @@ RSpec.describe GoalMailer, type: :mailer do
     let(:team) { create :team }
     let(:balance) {create :balance, :current, team_id: team}
     let(:user) {User.create name: 'John Doe', email: 'johndoe@example.com'}
-    let(:mail) {described_class.goal_email(user, prev_goal, team)}
+    let(:mail) {described_class.goal_email(user, team, prev_goal)}
 
     before do
       team.add_member(user)

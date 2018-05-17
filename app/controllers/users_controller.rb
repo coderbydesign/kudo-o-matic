@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def edit; end
 
   def view_data
-    @transactions_count = @user.all_transactions.count
+    @transactions_count = @user.all_transactions(@current_team).count
     @votes_count = @user.votes.count
     @exports = @user.exports
   end
@@ -22,12 +22,12 @@ class UsersController < ApplicationController
   end
 
   def export_json
-    ExportService.instance.start_new_export(@user, :json)
+    ExportService.instance.start_new_export(@user, @current_team, :json)
     render template: 'users/export_data', locals: { dataformat: 'JSON' }
   end
 
   def export_xml
-    ExportService.instance.start_new_export(@user, :xml)
+    ExportService.instance.start_new_export(@user, @current_team, :xml)
     render template: 'users/export_data', locals: { dataformat: 'XML' }
   end
 

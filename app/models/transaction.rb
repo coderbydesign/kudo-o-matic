@@ -61,6 +61,12 @@ class Transaction < ActiveRecord::Base
 
   def self.all_for_user(user, team)
     Transaction.where(sender: user).or(Transaction.where(receiver: user)).or(
+        Transaction.where(receiver: User.where(name: ENV['COMPANY_USER']))
+    ).order('created_at desc').where(team_id: team)
+  end
+
+  def self.all_for_user_in_team(user, team)
+    Transaction.where(sender: user).or(Transaction.where(receiver: user)).or(
       Transaction.where(receiver: User.where(name: ENV['COMPANY_USER']))
     ).order('created_at desc').where(team_id: team)
   end
