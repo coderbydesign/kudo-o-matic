@@ -1,4 +1,8 @@
+# frozen_string_literal: true
 class Export < ActiveRecord::Base
+  has_attached_file :zip
+  validates_attachment_content_type :zip, 
+                                    content_type: %w[application/zip application/x-zip application/x-zip-compressed]
   belongs_to :user
   before_destroy :delete_file
 
@@ -9,6 +13,6 @@ class Export < ActiveRecord::Base
   private
 
   def delete_file
-    File.delete(zip) if File.exist?(zip)
+    zip.destroy
   end
 end
