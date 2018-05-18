@@ -1,6 +1,7 @@
 %tr
   %td.content
     = "Your data export is ready! \u{1f600}".html_safe
-    %p.sidenote
-      You may download the .zip package
-      = link_to 'here', users_download_export_url(uuid: @export.uuid)
+    %p
+      The .zip package can be downloaded from
+      = link_to 'here.', users_download_export_url(@export.uuid)
+    %p Your download will be available for 7 days.

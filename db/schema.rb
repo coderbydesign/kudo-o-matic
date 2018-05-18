@@ -9,8 +9,7 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema.define(version: 20180516091937) do
+ActiveRecord::Schema.define(version: 20180518100732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,9 +48,12 @@ ActiveRecord::Schema.define(version: 20180516091937) do
   create_table "exports", force: :cascade do |t|
     t.string   "uuid"
     t.integer  "user_id"
-    t.string   "zip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "zip_file_name"
+    t.string   "zip_content_type"
+    t.integer  "zip_file_size"
+    t.datetime "zip_updated_at"
     t.index ["user_id"], name: "index_exports_on_user_id", using: :btree
   end
 

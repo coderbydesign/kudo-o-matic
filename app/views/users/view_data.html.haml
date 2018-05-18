@@ -35,7 +35,7 @@
       = render 'exports_table', exports: @exports
     - else
       %p
-        You don'y have any export files available. To create a export file, click on the of the buttons below.
+        You don't have any export files available. To create a export file, click on one of the buttons below.
         We currently provide data exports in JSON and XML.
     .data-actions.actions
       = link_to users_export_json_path, method: "post", class: 'btn' do

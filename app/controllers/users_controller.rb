@@ -33,9 +33,9 @@ class UsersController < ApplicationController
 
   def download_export
     export = Export.find_by_uuid!(params[:uuid])
-    send_file(
-      export.zip
-    )
+    redirect_to export.zip.url
+  rescue ActiveRecord::RecordNotFound
+    render 'users/export_expired'
   end
 
   def update

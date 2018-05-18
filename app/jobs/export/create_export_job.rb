@@ -21,8 +21,7 @@ Export::CreateExportJob = Struct.new(:user, :team, :dataformat) do
     FileUtils.mkdir_p(user_dir) unless File.directory?(user_dir)
 
     # Create tmp folder if it doesn't exist
-    dir = File.dirname(data_file_path)
-    FileUtils.mkdir_p(dir) unless File.directory?(dir)
+    FileUtils.mkdir_p(tmp_folder) unless File.directory?(tmp_folder)
 
     # Write temporary data file
     File.open(data_file_path, 'w') do |f|
@@ -32,9 +31,9 @@ Export::CreateExportJob = Struct.new(:user, :team, :dataformat) do
     # Create the zip file and add the data file to it
     tmp_images = []
     zip_file = File.new(
-      Rails.root.join('exports', 'users', user.id.to_s,
-                      "export_#{export.uuid}.zip"), 'w'
+      File.join(tmp_folder, "export_#{user.id}_#{export.uuid}.zip"), 'w'
     )
+    tmp_imgs_to_delete = []
     Zip::File.open(zip_file.path, Zip::File::CREATE) do |zip|
       zip.add("user_#{user.id}_data.#{dataformat}", data_file_path)
       transactions.each do |t|
@@ -43,23 +42,26 @@ Export::CreateExportJob = Struct.new(:user, :team, :dataformat) do
         tmp_images.push(tmp_file_path)
         IO.copy_stream(open(t.image.url), tmp_file_path)
         zip.add("images/#{t.image_file_name}", tmp_file_path)
+        tmp_imgs_to_delete.push tmp_file_path
       end
     end
 
+    # Need to remove the images AFTER closing the zip,
+    # or RubyZip will complain that the images don't exist.
+    tmp_imgs_to_delete.each do |img|
+      File.delete(img) if File.exist?(img)
+    end
+
     # Set file location in Export record
-    export.zip = zip_file.path
+    export.zip = zip_file
     export.save
 
     # Notify user via email that the export is available for download
     UserMailer.export_done_email(user, export).deliver_now
 
-    # Delete temporary data file
+    # Delete local data and zip file
     File.delete(data_file_path) if File.exist?(data_file_path)
-
-    # Delete temporary image files
-    tmp_images.each do |image|
-      File.delete(image) if File.exist?(image)
-    end
+    File.delete(zip_file.path) if File.exist?(zip_file.path)
   end
 
   def queue_name
@@ -78,11 +80,15 @@ Export::CreateExportJob = Struct.new(:user, :team, :dataformat) do
                 format: format)
   end
 
-  def generate_data_file_path(user, export, format)
-    Rails.root.join('tmp', "#{export.uuid}_data.#{format}")
+  def tmp_folder
+    Rails.root.join('tmp', 'exports')
+  end
+
+  def generate_data_file_path(_user, export, format)
+    File.join(tmp_folder, "#{export.uuid}_data.#{format}")
   end
 
   def generate_tmp_img_path(export, filename)
-    Rails.root.join('tmp', "export_#{export.uuid}_#{filename}")
+    File.join(tmp_folder, "#{export.uuid}_img_#{filename}")
   end
 end
