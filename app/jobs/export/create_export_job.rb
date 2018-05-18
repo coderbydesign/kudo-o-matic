@@ -18,8 +18,7 @@ Export::CreateExportJob = Struct.new(:user, :dataformat) do
     data_file_path = generate_data_file_path(user, export, dataformat)
 
     # Create tmp folder if it doesn't exist
-    dir = File.dirname(data_file_path)
-    FileUtils.mkdir_p(dir) unless File.directory?(dir)
+    FileUtils.mkdir_p(tmp_folder) unless File.directory?(tmp_folder)
 
     # Write temporary data file
     File.open(data_file_path, 'w') do |f|
@@ -29,8 +28,7 @@ Export::CreateExportJob = Struct.new(:user, :dataformat) do
     # Create the zip file and add the data file to it
     tmp_images = []
     zip_file = File.new(
-      Rails.root.join('tmp',
-                      "export_#{user.id}_#{export.uuid}.zip"), 'w'
+      File.join(tmp_folder, "export_#{user.id}_#{export.uuid}.zip"), 'w'
     )
     tmp_imgs_to_delete = []
     Zip::File.open(zip_file.path, Zip::File::CREATE) do |zip|
@@ -79,11 +77,15 @@ Export::CreateExportJob = Struct.new(:user, :dataformat) do
                 format: format)
   end
 
+  def tmp_folder
+    Rails.root.join('tmp', 'exports')
+  end
+
   def generate_data_file_path(_user, export, format)
-    Rails.root.join('tmp', "#{export.uuid}_data.#{format}")
+    File.join(tmp_folder, "#{export.uuid}_data.#{format}")
   end
 
   def generate_tmp_img_path(export, filename)
-    Rails.root.join('tmp', "export_#{export.uuid}_#{filename}")
+    File.join(tmp_folder, "#{export.uuid}_img_#{filename}")
   end
 end
