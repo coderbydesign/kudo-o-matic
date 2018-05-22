@@ -1,10 +1,12 @@
 class TransactionsController < ApplicationController
   protect_from_forgery with: :exception
 
+  before_action :set_team, only: [:index, :show, :create, :upvote, :downvote]
   before_action :query_variables, only: [:index, :show, :create, :upvote, :downvote]
   before_action :set_transaction, only: [:show, :upvote, :downvote]
   before_action :check_slack_connection, only: [:index, :create]
   before_action :set_user, only: [:index, :show]
+
   before_action :check_restricted, only: [:create, :upvote, :downvote]
   after_action :update_slack_transaction, only: [:upvote, :downvote]
 
@@ -18,7 +20,6 @@ class TransactionsController < ApplicationController
   end
 
   def show
-    puts "SESSION: #{@current_team}"
     @transaction = @transaction.decorate
     respond_to do |format|
       format.html
@@ -30,7 +31,7 @@ class TransactionsController < ApplicationController
     @transaction = TransactionAdder.create(params[:transaction], current_user, @current_team)
 
     if @transaction.save
-      redirect_to root_path
+      redirect_to :dashboard, tenant: @current_team.slug
     else
       render :index
     end
@@ -67,7 +68,7 @@ class TransactionsController < ApplicationController
   private
 
   def set_transaction
-    @transaction = Transaction.find(params[:id])
+    @transaction = Transaction.find_by_id_and_team_id(params[:id], @current_team.id)
   end
 
   def update_slack_transaction

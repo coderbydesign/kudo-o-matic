@@ -14,7 +14,7 @@ class TransactionAdder
         image: params[:image],
         sender: current_user,
         receiver: receiver,
-        team_id: current_team,
+        team_id: current_team.id,
         slack_kudos_left_on_creation: Goal.next(current_team).amount - Balance.current(current_team).amount - amount.to_i,
         balance: Balance.current(current_team)
     )

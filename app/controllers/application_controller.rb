@@ -1,15 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
-  before_action :set_current_team
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def new_session_path(scope)
     new_user_session_path
   end
 
-  def set_current_team
-    @current_team = session[:current_team]
+  def set_team
+    @current_team = Team.find_by_slug(params[:tenant])
   end
 
   protected

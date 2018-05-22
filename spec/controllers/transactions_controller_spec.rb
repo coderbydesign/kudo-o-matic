@@ -16,7 +16,7 @@ RSpec.describe TransactionsController, type: :controller do
 
   describe 'GET #show' do
     before do
-      get :show, params: {id: transaction.id}, session: {current_team: team.id}
+      get :show, params: {id: transaction.id, tenant: team.slug}
     end
 
     it 'gets show' do

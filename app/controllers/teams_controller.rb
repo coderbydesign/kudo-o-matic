@@ -10,6 +10,7 @@ class TeamsController < ApplicationController
   def create
     @team = Team.create(
       name: params[:team][:name],
+      slug: params[:team][:slug],
       general_info: params[:team][:general_info],
       logo: params[:team][:logo]
     )
@@ -34,6 +35,6 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.permit(:name, :general_info, :logo)
+    params.permit(:name, :slug, :general_info, :logo)
   end
 end

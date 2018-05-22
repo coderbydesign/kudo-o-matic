@@ -4,17 +4,22 @@ Rails.application.routes.draw do
   use_doorkeeper
   root 'transactions#index'
 
-  resources :transactions, only: %i[index show create]
   resources :teams, only: %i[new create]
 
   post 'like/:id', to: 'transactions#upvote', as: :like
   post 'unlike/:id', to: 'transactions#downvote', as: :unlike
 
   get :kudo_guidelines, to: 'transactions#kudo_guidelines'
-  get 'transactions/:type', to: 'transactions#filter'
+
 
   get :activities, to: 'activities#autocomplete_search', as: :activities_autocomplete
-  get :users, to: 'users#autocomplete_search', as: :users_autocomplete
+
+  scope ':tenant' do
+    root to: 'transactions#index', as: 'dashboard'
+    resources :transactions, only: %i[index show create], param: :id
+    get 'transactions/:type', to: 'transactions#filter'
+    get :users, to: 'users#autocomplete_search', as: :users_autocomplete
+  end
 
   get :settings, to: 'users#edit', as: :user
   post :resend_email_confirmation, to: 'users#resend_email_confirmation',
