@@ -100,23 +100,23 @@ class TransactionsController < ApplicationController
 
     @achieved_goal = Goal.where(balance: Balance.current(@current_team)).where.not(achieved_on: nil).order('achieved_on desc')
 
-    @sent_transactions_user = Transaction.where(sender: current_user).count
-    @received_transactions_user = Transaction.where(receiver: current_user).count + received_transactions_company
+    @sent_transactions_user = Transaction.where(sender: current_user).where(team_id: @current_team.id).count
+    @received_transactions_user = Transaction.where(team_id: @current_team.id).where(receiver: current_user).count + received_transactions_company
     @all_transactions_user = @sent_transactions_user + @received_transactions_user
 
     period_week = Time.now.beginning_of_week..Time.now.end_of_week
     period_month = Time.now.beginning_of_month..Time.now.end_of_month
 
-    transactions_week = transactions_period(period_week)
-    transactions_month = transactions_period(period_month)
+    transactions_week = transactions_period(period_week, @current_team)
+    transactions_month = transactions_period(period_month, @current_team)
 
     @weekly_transactions = transactions_week.count
     @monthly_transactions = transactions_month.count
-    @all_transactions = Transaction.count
+    @all_transactions = Transaction.where(team_id: @current_team.id).count
 
     @weekly_kudos = transactions_week.sum(:amount) + likes_count_of_period(period_week)
     @monthly_kudos = transactions_month.sum(:amount) + likes_count_of_period(period_month)
-    @all_kudos = Transaction.sum(:amount) + likes.count
+    @all_kudos = Transaction.where(team_id: @current_team.id).sum(:amount) + likes.count
 
     @markdown = Redcarpet::Markdown.new(MdEmoji::Render, no_intra_emphasis: true)
 
@@ -127,7 +127,7 @@ class TransactionsController < ApplicationController
       @transactions = Transaction.send_by_user(current_user, @current_team).page(params[:page]).per(20)
     when 'received'
       @transactions = TransactionDecorator.decorate_collection(
-          Transaction.received_by_user(current_user, @current_team).page(params[:page]).per(20)
+        Transaction.received_by_user(current_user, @current_team).page(params[:page]).per(20)
       )
     else
       @transactions = TransactionDecorator.decorate_collection(
@@ -137,8 +137,8 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def transactions_period(period)
-    Transaction.where(created_at: period)
+  def transactions_period(period, team)
+    Transaction.where(created_at: period).where(team_id: team.id)
   end
 
   def likes
@@ -150,8 +150,11 @@ class TransactionsController < ApplicationController
   end
 
   def received_transactions_company
-    receiver_company = User.where(name: ENV['COMPANY_USER'])
-    Transaction.where(receiver: receiver_company).count
+    user = @current_team.users.find_by_name_and_company_user(
+      @current_team.name,
+      true
+    )
+    Transaction.where(receiver: user).count
   end
 
   def set_user

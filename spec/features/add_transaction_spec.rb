@@ -17,11 +17,11 @@ RSpec.feature 'Add a transaction', type: :feature do
   let(:balance) { create :balance, :current, team_id: team.id }
   let!(:transaction) do
     Transaction.create sender: user, receiver: user, activity: activity, amount: 5,
-                       balance: balance
+                       balance: balance, team_id: team.id
   end
   let!(:transaction_2) do
     Transaction.create sender: user, receiver: user, activity: activity, amount: 10,
-                       balance: balance
+                       balance: balance, team_id: team.id
   end
 
   before do

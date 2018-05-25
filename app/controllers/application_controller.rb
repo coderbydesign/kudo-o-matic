@@ -8,7 +8,10 @@ class ApplicationController < ActionController::Base
   end
 
   def set_team
-    @current_team = Team.find_by_slug(params[:tenant])
+    @current_team = Team.find_by_slug!(params[:tenant])
+    if @current_team.present? && !@current_team.member?(current_user)
+      render 'teams/access_denied'
+    end
   end
 
   protected

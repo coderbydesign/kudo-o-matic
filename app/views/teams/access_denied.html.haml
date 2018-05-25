@@ -1,0 +1,24 @@
+= render 'modal-attachment'
+
+= render 'layouts/header'
+.page
+  .settings-container
+    .title-container
+      %h1.settings-title
+        = @current_team.name
+      .actions
+        = link_to root_path, method: "get", class: 'btn secondary' do
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to home
+    - if notice
+      .message-container.success-message.margin-top
+        %span.message
+          .fa.fa-exclamation-circle
+          #notice= notice
+    %p
+      Unfortunately you do not have access to this team.
+    %p
+      You can visit one of the following teams:
+    %ul
+      - current_user.teams.each do |team|
+        %li
+          = link_to team.name, dashboard_path(team.slug)

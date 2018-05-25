@@ -7,6 +7,8 @@ class Team < ActiveRecord::Base
   validates_with AttachmentSizeValidator, attributes: :logo, less_than: 10.megabytes
   process_in_background :logo
 
+  has_many :memberships, class_name: 'TeamMember', foreign_key: :team_id
+  has_many :users, through: :memberships
   has_many :balances
 
   def add_member(user, admin = false)
@@ -29,5 +31,8 @@ class Team < ActiveRecord::Base
     Goal.create(name: 'First goal', amount: 500, balance_id: balance.id)
     Goal.create(name: 'Second goal', amount: 1000, balance_id: balance.id)
     Goal.create(name: 'Third goal', amount: 1500, balance_id: balance.id)
+    user = User.new(name: name, company_user: true)
+    user.save(validate: false)
+    add_member(user)
   end
 end
