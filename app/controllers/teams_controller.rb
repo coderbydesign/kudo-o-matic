@@ -25,6 +25,7 @@ class TeamsController < ApplicationController
 
     if @team.save
       @team.add_member(@user, true)
+      TransactionAdder.create_for_new_team(@team, @user)
       flash[:success] = 'Team was successfully created!'
       redirect_to dashboard_path(tenant: @team.slug)
     else

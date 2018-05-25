@@ -118,6 +118,18 @@ class TransactionAdder
     save(transaction, team)
   end
 
+  def self.create_for_new_team(team, current_user)
+    Transaction.create(
+      amount: 1,
+      activity: Activity.find_or_create_by(name: "creating a new team!"),
+      sender: team.users.find_by_company_user(true),
+      receiver: current_user,
+      slack_kudos_left_on_creation: Goal.next(team.id).amount - Balance.current(team.id).amount - 1,
+      balance: Balance.current(team.id),
+      team_id: team.id
+    )
+  end
+
   private
 
   def self.save(transaction, current_team)

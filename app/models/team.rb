@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Team < ActiveRecord::Base
-  after_create :create_balances_and_goals
+  after_create :setup_team
   has_attached_file :logo, styles: {thumb: '600x600'}
   validates_attachment :logo, content_type: {content_type: ['image/jpeg']}
   validates_with AttachmentSizeValidator, attributes: :logo, less_than: 10.megabytes
@@ -25,12 +25,15 @@ class Team < ActiveRecord::Base
 
   private
 
-  def create_balances_and_goals
+  def setup_team
+    # Create balances and goals
     balance = Balance.create(name: "My first balance", current: true,
                              team_id: id)
     Goal.create(name: 'First goal', amount: 500, balance_id: balance.id)
     Goal.create(name: 'Second goal', amount: 1000, balance_id: balance.id)
     Goal.create(name: 'Third goal', amount: 1500, balance_id: balance.id)
+
+    # Create company user
     user = User.new(name: name, company_user: true)
     user.save(validate: false)
     add_member(user)
