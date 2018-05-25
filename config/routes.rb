@@ -154,6 +154,10 @@ Rails.application.routes.draw do
         jsonapi_related_resources :received_transactions, only: :show
       end
 
+      scope :teams, controller: :teams do
+        get :me, to: 'teams#me'
+      end
+
       scope :statistics, controller: :statistics do
         get :general
         get :graph

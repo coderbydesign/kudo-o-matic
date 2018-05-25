@@ -7,10 +7,10 @@ class ApplicationController < ActionController::Base
     new_user_session_path
   end
 
-  def set_team
+  def set_team_and_check_membership
     @current_team = Team.find_by_slug!(params[:tenant])
-    if @current_team.present? && !@current_team.member?(current_user)
-      render 'teams/access_denied'
+    unless @current_team.member?(current_user)
+      render 'teams/access_denied', status: 403
     end
   end
 

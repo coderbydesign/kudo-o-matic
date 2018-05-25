@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
   protect_from_forgery with: :exception
 
-  before_action :set_team, only: [:index, :dashboard, :show, :create, :upvote, :downvote]
+  before_action :set_team_and_check_membership, only: [:index, :dashboard, :show, :create, :upvote, :downvote]
   before_action :query_variables, only: [:index, :dashboard, :show, :create, :upvote, :downvote]
   before_action :set_transaction, only: [:show, :upvote, :downvote]
   before_action :check_slack_connection, only: [:index, :create]

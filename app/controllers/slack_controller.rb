@@ -90,6 +90,10 @@ class SlackController < ApplicationController
     challenge.present? ? respond_to {|format| format.json {render json: {challenge: challenge}}} : false
   end
 
+  def set_team
+    @current_team = Team.find_by_slug!(params[:tenant])
+  end
+
   def replace_user_ids_with_user_names(activity)
     (0 ... activity.length).each do |i|
       if activity[i] == '@'
