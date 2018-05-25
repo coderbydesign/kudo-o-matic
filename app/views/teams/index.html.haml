@@ -5,16 +5,21 @@
   .settings-container
     .title-container
       %h1.settings-title
-        Teams
-    - if notice
-      .message-container.success-message.margin-top
-        %span.message
-          .fa.fa-exclamation-circle
-          #notice= notice
-    %h2.settings-subtitle
-      Choose your team
-    %ul
-      - @teams.each do |t|
-        %li
-          = link_to t.name, dashboard_path(t.slug)
+        Welcome, #{@user.first_name}!
+      .actions
+        = link_to sign_out_path, method: "get", class: 'btn secondary' do
+          <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
 
+    - if @teams.size == 0
+      %h2.settings-subtitle
+        You are not in a team yet
+      %p
+        In order to use Kudo-o-Matic you need to be in a team. You can wait for an invitation or create a new team
+        yourself. Creating a team is very straightforward, all you need to do is enter your team name!
+    - else
+      %h2.settings-subtitle
+        Choose your team
+      %ul
+        - @teams.each do |t|
+          %li
+            = link_to t.name, dashboard_path(t.slug)

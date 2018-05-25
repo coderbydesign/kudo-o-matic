@@ -1,7 +1,7 @@
 namespace :teams do
   desc 'Connect all users, balances and transactions to a new team.'
   task setup: :environment do
-    team = Team.create(name: 'Kabisa')
+    team = Team.create(name: ENV['COMPANY_USER'])
     User.all.each do |user|
       if user.admin?
         team.add_member(user, true)
