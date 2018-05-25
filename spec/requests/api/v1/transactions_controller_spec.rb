@@ -7,15 +7,16 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
   describe 'GET api/v1/transactions' do
     let (:request) {'/api/v1/transactions'}
-    let! (:transaction1) {create(:transaction, :image)}
-    let! (:transaction2) {create(:transaction)}
+    let!(:team) {create :team}
+    let! (:transaction1) {create(:transaction, :image, team_id: team.id)}
+    let! (:transaction2) {create(:transaction, team_id: team.id)}
     let! (:record_count_before_request) {Transaction.count}
 
     context 'with a valid api-token' do
       let (:user) {create(:user, :api_token)}
 
       before do
-        get request, headers: {'Api-Token': user.api_token}
+        get request, headers: {'Api-Token': user.api_token, 'Team': team.id}
       end
 
       expect_transaction_count_same
@@ -121,7 +122,7 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
     context 'with an invalid api-token' do
       before do
-        get request, headers: {'Api-Token': 'invalid api-token'}
+        get request, headers: {'Api-Token': 'invalid api-token', 'Team': team.id}
       end
 
       expect_transaction_count_same
@@ -146,11 +147,12 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
   describe 'GET api/v1/transactions?page[limit]=:limit&page[offset]=:offset' do
     let (:request) {'/api/v1/transactions?page[limit]=1&page[offset]=2'}
-    let! (:transaction1) {create(:transaction)}
-    let! (:transaction2) {create(:transaction)}
-    let! (:transaction3) {create(:transaction)}
-    let! (:transaction4) {create(:transaction)}
-    let! (:transaction5) {create(:transaction)}
+    let! (:team) { create :team }
+    let! (:transaction1) {create(:transaction, team_id: team.id)}
+    let! (:transaction2) {create(:transaction, team_id: team.id)}
+    let! (:transaction3) {create(:transaction, team_id: team.id)}
+    let! (:transaction4) {create(:transaction, team_id: team.id)}
+    let! (:transaction5) {create(:transaction, team_id: team.id)}
     let! (:record_count_before_request) {Transaction.count}
 
     context 'with a valid api-token' do
@@ -249,14 +251,15 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
   describe 'GET api/v1/transactions/:id' do
     let (:request) {"/api/v1/transactions/#{transaction.id}"}
-    let! (:transaction) {create(:transaction, :image)}
+    let!(:team) {create :team}
+    let! (:transaction) {create(:transaction, :image, team_id: team.id)}
     let! (:record_count_before_request) {Transaction.count}
 
     context 'with a valid api-token' do
       let (:user) {create(:user, :api_token)}
 
       before do
-        get request, headers: {'Api-Token': user.api_token}
+        get request, headers: {'Api-Token': user.api_token, 'Team': team.id}
       end
 
       expect_transaction_count_same
@@ -340,11 +343,17 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
 
   describe 'POST api/v1/transactions' do
     let (:request) {"/api/v1/transactions"}
-    let! (:transaction) {build(:transaction)}
+    let (:team) {create :team}
+    let! (:transaction) {create(:transaction, team_id: team.id)}
     let! (:sender) {create(:user, :api_token)}
     let! (:receiver) {create(:user, name: 'Receiver')}
-    let! (:balance) {create(:balance, :current)}
+    let! (:balance) {Balance.current(team.id)}
     let! (:record_count_before_request) {Transaction.count}
+
+    before do
+      team.add_member(sender)
+      team.add_member(receiver)
+    end
 
     context 'with a valid api-token' do
       context 'and an image attachment' do
@@ -352,7 +361,8 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
           post request,
                headers: {
                    'Api-Token': sender.api_token,
-                   'Content-Type': 'application/vnd.api+json'
+                   'Content-Type': 'application/vnd.api+json',
+                   'Team': team.id
                },
                params: {
                    data: {
@@ -440,7 +450,8 @@ RSpec.describe Api::V1::TransactionsController, type: :request do
           post request,
                headers: {
                    'Api-Token': sender.api_token,
-                   'Content-Type': 'application/vnd.api+json'
+                   'Content-Type': 'application/vnd.api+json',
+                   'Team': team.id
                },
                params: {
                    data: {

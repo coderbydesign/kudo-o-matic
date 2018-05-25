@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe GoalMailer, type: :mailer do
   context 'new goal reached' do
-    let!(:prev_goal) {create :goal, :achieved, name: "Painting lessons", amount: 100}
-    let!(:next_goal) {create :goal, name: "Paintball", amount: 1500}
     let(:team) { create :team }
-    let(:balance) {create :balance, :current, team_id: team}
+    let(:balance) { Balance.current(team) }
+    let!(:prev_goal) {create :goal, :achieved, name: "Painting lessons", amount: 100, balance_id: balance.id}
+    let!(:next_goal) {create :goal, name: "Paintball", amount: 1500, balance_id: balance.id}
     let(:user) {User.create name: 'John Doe', email: 'johndoe@example.com'}
     let(:mail) {described_class.goal_email(user, team, prev_goal)}
 

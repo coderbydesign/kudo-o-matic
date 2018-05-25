@@ -2,28 +2,19 @@
 
 Rails.application.routes.draw do
   use_doorkeeper
-  root 'transactions#index'
+  root 'teams#index'
 
   resources :teams, only: %i[new create]
-
-  post 'like/:id', to: 'transactions#upvote', as: :like
-  post 'unlike/:id', to: 'transactions#downvote', as: :unlike
 
   get :kudo_guidelines, to: 'transactions#kudo_guidelines'
 
 
   get :activities, to: 'activities#autocomplete_search', as: :activities_autocomplete
 
-  scope ':tenant' do
-    root to: 'transactions#index', as: 'dashboard'
-    resources :transactions, only: %i[index show create], param: :id
-    get 'transactions/:type', to: 'transactions#filter'
-    get :users, to: 'users#autocomplete_search', as: :users_autocomplete
-  end
 
   get :settings, to: 'users#edit', as: :user
   post :resend_email_confirmation, to: 'users#resend_email_confirmation',
-                                   as: :users_resend_email_confirmation
+       as: :users_resend_email_confirmation
   patch :settings, to: 'users#update'
 
   get :feed, to: 'feed#index'
@@ -37,11 +28,7 @@ Rails.application.routes.draw do
 
   get 'legal/privacy'
 
-  scope :slack, controller: :slack do
-    post :action
-    post :command
-    post :reaction
-  end
+
 
   namespace :admin do
     root 'users#index'
@@ -181,9 +168,9 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks',
-    sessions: 'sessions',
-    registrations: :registrations
+      omniauth_callbacks: 'users/omniauth_callbacks',
+      sessions: 'sessions',
+      registrations: :registrations
   }
 
   devise_scope :user do
@@ -191,5 +178,19 @@ Rails.application.routes.draw do
     get 'sign_up', to: 'devise/registrations#new'
     get 'account', to: 'devise/registrations#edit'
     get 'sign_out', to: 'devise/sessions#destroy'
+  end
+
+  scope ':tenant' do
+    root to: 'transactions#index', as: 'dashboard'
+    resources :transactions, only: %i[index show create], param: :id
+    get 'transactions/:type', to: 'transactions#filter'
+    post 'like/:id', to: 'transactions#upvote', as: :like
+    post 'unlike/:id', to: 'transactions#downvote', as: :unlike
+    get :users, to: 'users#autocomplete_search', as: :users_autocomplete
+    scope :slack, controller: :slack do
+      post :action
+      post :command
+      post :reaction
+    end
   end
 end

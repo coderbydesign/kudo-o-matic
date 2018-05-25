@@ -1,0 +1,20 @@
+= render 'modal-attachment'
+
+= render 'layouts/header'
+.page
+  .settings-container
+    .title-container
+      %h1.settings-title
+        Teams
+    - if notice
+      .message-container.success-message.margin-top
+        %span.message
+          .fa.fa-exclamation-circle
+          #notice= notice
+    %h2.settings-subtitle
+      Choose your team
+    %ul
+      - @teams.each do |t|
+        %li
+          = link_to t.name, dashboard_path(t.slug)
+

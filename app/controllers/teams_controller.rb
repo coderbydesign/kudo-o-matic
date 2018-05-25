@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
-  before_action :set_user, only: [:create]
+  before_action :set_user, only: [:index, :create]
+
+  def index
+    # If user has only one team, redirect to that team's dashboard
+    if @user.teams.length == 1
+      redirect_to dashboard_path(tenant: @user.teams[0].slug)
+    end
+    @teams = @user.teams
+  end
 
   def new
     @team = Team.new(team_params)
@@ -18,7 +26,7 @@ class TeamsController < ApplicationController
     if @team.save
       @team.add_member(@user, true)
       flash[:success] = 'Team was successfully created!'
-      redirect_to root_path
+      redirect_to dashboard_path(tenant: @team.slug)
     else
       render :new
     end

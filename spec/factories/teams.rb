@@ -6,4 +6,5 @@ FactoryGirl.define do
     slug 'kabisa'
     general_info 'Some general info about the team.'
   end
+
 end

@@ -1,16 +1,25 @@
 class TransactionsController < ApplicationController
   protect_from_forgery with: :exception
 
-  before_action :set_team, only: [:index, :show, :create, :upvote, :downvote]
-  before_action :query_variables, only: [:index, :show, :create, :upvote, :downvote]
+  before_action :set_team, only: [:index, :dashboard, :show, :create, :upvote, :downvote]
+  before_action :query_variables, only: [:index, :dashboard, :show, :create, :upvote, :downvote]
   before_action :set_transaction, only: [:show, :upvote, :downvote]
   before_action :check_slack_connection, only: [:index, :create]
-  before_action :set_user, only: [:index, :show]
+  before_action :set_user, only: [:index, :dashboard, :show]
 
   before_action :check_restricted, only: [:create, :upvote, :downvote]
   after_action :update_slack_transaction, only: [:upvote, :downvote]
 
   def index
+    @transaction = Transaction.new
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def dashboard
     @transaction = Transaction.new
 
     respond_to do |format|

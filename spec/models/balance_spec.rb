@@ -5,8 +5,8 @@ describe Balance, type: :model do
   let(:activity_2) { Activity.create name: 'Helping with Capybara' }
   let(:team) { create :team}
   let(:user) { User.create name: 'Pascal', avatar_url: '/kabisa_lizard.png' }
-  let(:balance) { create :balance, :current, created_at: '2016-12-31 22:00:00', team_id: team.id }
-  let(:balance_2) { create :balance, current: false, team_id: team }
+  let(:balance) { Balance.current(team) }
+  let(:balance_2) { create :balance, current: false, team_id: team.id }
   let(:balance_3) { create :balance, :current, created_at: '2016-12-31 23:00:00', team_id: team.id }
   let!(:transaction) { Transaction.create sender: user, receiver: user, activity: activity, amount: 5, balance: balance, created_at: '2016-12-31 22:00:00', team_id: team}
   let!(:transaction_2) { Transaction.create sender: user, receiver: user, activity: activity_2, amount: 10, balance: balance, created_at: '2016-12-31 23:00:00', team_id: team}

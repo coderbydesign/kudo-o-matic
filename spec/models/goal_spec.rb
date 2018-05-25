@@ -1,6 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Goal, type: :model do
+
+  # Skip the after_create callback in this spec, because we are working with specific balances and goals
+  before do
+    Team.skip_callback(:create, :after, :create_balances_and_goals)
+  end
+
+  # After this spec, set the callback again, so other specs can make use of it
+  after do
+    Team.set_callback(:create, :after, :create_balances_and_goals)
+  end
+
   context '.previous and .next goals' do
     let!(:team) { create(:team) }
     let!(:old_balance)   { create :balance, name: 'closed balance', current: false, team_id: team.id  }

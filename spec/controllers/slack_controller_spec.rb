@@ -5,13 +5,14 @@ RSpec.describe SlackController, type: :controller do
 
   describe 'POST #action' do
     let!(:user) {create(:user, slack_id: 1)}
-    let!(:team) { create(:team) }
+    let!(:team) {create(:team)}
     let!(:transaction) {create(:transaction, team_id: team.id)}
     let!(:invalid_user_slack_id) {-1}
 
     before do
-      ENV['SLACK_VERIFICATION_TOKEN']='1'
-      ENV['SLACK_REACTION']='kudo'
+      team.add_member(user)
+      ENV['SLACK_VERIFICATION_TOKEN'] = '1'
+      ENV['SLACK_REACTION'] = 'kudo'
     end
 
     context 'with a valid verification token' do
@@ -25,7 +26,8 @@ RSpec.describe SlackController, type: :controller do
                     user: {
                         id: user.slack_id
                     }
-                }.to_json
+                }.to_json,
+                tenant: team.slug,
             }
 
             transaction = Transaction.find(self.transaction.id)
@@ -44,7 +46,8 @@ RSpec.describe SlackController, type: :controller do
                     user: {
                         id: invalid_user_slack_id
                     }
-                }.to_json
+                }.to_json,
+                tenant: team.slug
             }
 
             transaction = Transaction.find(self.transaction.id)
@@ -60,14 +63,15 @@ RSpec.describe SlackController, type: :controller do
       context 'and a valid transaction (callback) id' do
         context 'and a valid user slack id' do
           it 'does not add a like to the transaction' do
-            post :action, params: {
+            post :action, tenant: team.slug, params: {
                 payload: {
                     token: invalid_token,
                     callback_id: transaction.id,
                     user: {
                         id: user.slack_id
                     }
-                }.to_json
+                }.to_json,
+                tenant: team.slug
             }
 
             transaction = Transaction.find(self.transaction.id)
@@ -83,11 +87,14 @@ RSpec.describe SlackController, type: :controller do
   describe 'POST #command' do
     let!(:balance) {create(:balance, current: true)}
     let!(:sender) {create(:user, slack_id: 1)}
+    let!(:team) {create :team}
     let!(:receiver) {create(:user, slack_name: 'receiver')}
     let!(:record_count_before_request) {Transaction.count}
 
     before do
-      ENV['SLACK_VERIFICATION_TOKEN']='1'
+      team.add_member(sender)
+      team.add_member(receiver)
+      ENV['SLACK_VERIFICATION_TOKEN'] = '1'
     end
 
     RSpec::Expectations.configuration.on_potential_false_positives = :nothing
@@ -98,7 +105,8 @@ RSpec.describe SlackController, type: :controller do
           post :command, params: {
               token: ENV['SLACK_VERIFICATION_TOKEN'],
               text: '@receiver 1 test',
-              user_id: sender.slack_id
+              user_id: sender.slack_id,
+              tenant: team.slug
           }
         end
 
@@ -121,7 +129,8 @@ RSpec.describe SlackController, type: :controller do
           expect {
             post :command, params: {
                 token: ENV['SLACK_VERIFICATION_TOKEN'],
-                text: ''
+                text: '',
+                tenant: team.slug
             }.to_json
           }.to raise_error
         end
@@ -132,7 +141,8 @@ RSpec.describe SlackController, type: :controller do
           expect {
             post :command, params: {
                 token: ENV['SLACK_VERIFICATION_TOKEN'],
-                text: ' '
+                text: ' ',
+                tenant: team.slug
             }.to_json
           }.to raise_error
         end
@@ -144,7 +154,8 @@ RSpec.describe SlackController, type: :controller do
             expect {
               post :command, params: {
                   token: ENV['SLACK_VERIFICATION_TOKEN'],
-                  text: 'HELP'
+                  text: 'HELP',
+                  tenant: team.slug
               }.to_json
             }.to raise_error
           end
@@ -155,7 +166,8 @@ RSpec.describe SlackController, type: :controller do
             expect {
               post :command, params: {
                   token: ENV['SLACK_VERIFICATION_TOKEN'],
-                  text: 'help'
+                  text: 'help',
+                  tenant: team.slug
               }.to_json
             }.to raise_error
           end
@@ -168,7 +180,8 @@ RSpec.describe SlackController, type: :controller do
         post :command, params: {
             token: invalid_token,
             text: '1 to @receiver for test',
-            user_id: sender.slack_id
+            user_id: sender.slack_id,
+            tenant: team.slug
         }
 
       end
@@ -181,11 +194,13 @@ RSpec.describe SlackController, type: :controller do
 
   describe 'POST #reaction' do
     let!(:user) {create(:user, slack_id: 1)}
+    let!(:team) {create :team}
     let!(:transaction) {create(:transaction, slack_reaction_created_at: DateTime.now)}
     let!(:invalid_reaction) {'invalid'}
 
     before do
-      ENV['SLACK_VERIFICATION_TOKEN']='1'
+      team.add_member(user)
+      ENV['SLACK_VERIFICATION_TOKEN'] = '1'
     end
 
     context 'with a valid verification token' do
@@ -200,7 +215,8 @@ RSpec.describe SlackController, type: :controller do
                     item: {
                         ts: transaction.slack_reaction_created_at
                     }
-                }
+                },
+                tenant: team.slug
             }
 
             transaction = Transaction.find_by_slack_reaction_created_at(self.transaction.slack_reaction_created_at)
@@ -222,7 +238,8 @@ RSpec.describe SlackController, type: :controller do
                     item: {
                         ts: transaction.slack_reaction_created_at
                     }
-                }
+                },
+                tenant: team.slug
             }
 
             transaction = Transaction.find_by_slack_reaction_created_at(self.transaction.slack_reaction_created_at)
@@ -246,7 +263,8 @@ RSpec.describe SlackController, type: :controller do
                     item: {
                         ts: transaction.slack_reaction_created_at
                     }
-                }
+                },
+                tenant: team.slug
             }
 
             transaction = Transaction.find_by_slack_reaction_created_at(self.transaction.slack_reaction_created_at)
