@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_team
-    @current_team ||= request.headers['Team'] || Team.find_by_slug!(params[:tenant])
+    @current_team ||= request.headers['Team'] || Team.find_by_slug!(params[:team])
   end
 
   protected

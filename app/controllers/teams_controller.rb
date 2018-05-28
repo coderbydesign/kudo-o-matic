@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
   def index
     # If user has only one team, redirect to that team's dashboard
     if @user.teams.one?
-      redirect_to dashboard_path(tenant: @user.teams.first.slug)
+      redirect_to dashboard_path(team: @user.teams.first.slug)
     end
     @teams = @user.teams
   end
@@ -19,7 +19,7 @@ class TeamsController < ApplicationController
     @team = TeamAdder.create(params, current_user)
 
     if @team.persisted?
-      redirect_to dashboard_path(tenant: @team.slug)
+      redirect_to dashboard_path(team: @team.slug)
     else
       render :new
     end

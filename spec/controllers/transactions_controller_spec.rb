@@ -18,7 +18,7 @@ RSpec.describe TransactionsController, type: :controller do
   describe 'GET #show' do
     context 'with a valid membership' do
       before do
-        get :show, params: { id: transaction.id, tenant: team.slug }
+        get :show, params: { id: transaction.id, team: team.slug }
       end
 
       it 'gets show' do
@@ -32,7 +32,7 @@ RSpec.describe TransactionsController, type: :controller do
 
     context 'with a invalid membership' do
       before do
-        get :show, params: { id: transaction.id, tenant: team2.slug }
+        get :show, params: { id: transaction.id, team: team2.slug }
       end
 
       it 'gets teams/access_denied' do
@@ -47,7 +47,7 @@ RSpec.describe TransactionsController, type: :controller do
     context 'with a non-existing team' do
       it 'raises an ActiveRecord::NotFound error' do
         expect {
-          get :show, params: { id: transaction.id, tenant: 'non-existing-team' }
+          get :show, params: { id: transaction.id, team: 'non-existing-team' }
         }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end

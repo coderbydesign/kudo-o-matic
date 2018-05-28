@@ -184,7 +184,7 @@ Rails.application.routes.draw do
     get 'sign_out', to: 'devise/sessions#destroy'
   end
 
-  scope ':tenant' do
+  scope ':team' do
     root to: 'transactions#index', as: 'dashboard'
     resources :transactions, only: %i[index show create], param: :id
     get 'transactions/:type', to: 'transactions#filter'

@@ -31,7 +31,7 @@ class TransactionsController < ApplicationController
     @transaction = TransactionAdder.create(params[:transaction], current_user, current_team)
 
     if @transaction.save
-      redirect_to :dashboard, tenant: current_team.slug
+      redirect_to :dashboard, team: current_team.slug
     else
       render :index
     end

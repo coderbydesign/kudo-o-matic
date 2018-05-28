@@ -8,6 +8,6 @@ $(document).on("click", '.transaction-selector', function (e) {
         if ($(e.target).is('a')) return;
 
         // redirect to the show page of the transaction
-        location.href = $(this).data('tenant') + "/" + "transactions/" + $(this).attr('id')
+        location.href = $(this).data('team') + "/" + "transactions/" + $(this).attr('id')
     }
 });

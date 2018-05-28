@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :set_user, except: %i[autocomplete_search]
-  before_action :set_team_and_check_membership, only: %i[autocomplete_search]
+  before_action :check_team_membership, only: %i[autocomplete_search]
 
   def edit; end
 

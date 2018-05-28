@@ -1,4 +1,4 @@
-= link_to like_path(id: transaction.id, tenant: current_team.slug), remote: true, method: :post, class: 'upvote-transaction like-me' do
+= link_to like_path(id: transaction.id, team: current_team.slug), remote: true, method: :post, class: 'upvote-transaction like-me' do
   .btn.btn-secondary.btn-like{id: "like-#{transaction.id}"}
     .fa.fa-thumbs-up
     Like
