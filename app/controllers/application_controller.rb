@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_team_membership
-    unless current_team.member?(current_user)
+    unless current_user.member_of?(current_team)
       render 'teams/access_denied', status: 403
     end
   end

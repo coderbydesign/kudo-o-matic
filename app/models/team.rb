@@ -3,6 +3,8 @@
 class Team < ActiveRecord::Base
   after_create :setup_team
   has_attached_file :logo, styles: {thumb: '600x600'}
+  validates :name, presence: true
+  validates :slug, presence: true
   validates_attachment :logo, content_type: {content_type: ['image/jpeg']}
   validates_with AttachmentSizeValidator, attributes: :logo, less_than: 10.megabytes
   process_in_background :logo

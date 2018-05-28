@@ -5,8 +5,8 @@ class TeamsController < ApplicationController
 
   def index
     # If user has only one team, redirect to that team's dashboard
-    if @user.teams.length == 1
-      redirect_to dashboard_path(tenant: @user.teams[0].slug)
+    if @user.teams.one?
+      redirect_to dashboard_path(tenant: @user.teams.first.slug)
     end
     @teams = @user.teams
   end
@@ -16,17 +16,9 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = Team.create(
-      name: params[:team][:name],
-      slug: params[:team][:slug],
-      general_info: params[:team][:general_info],
-      logo: params[:team][:logo]
-    )
+    @team = TeamAdder.create(params, current_user)
 
-    if @team.save
-      @team.add_member(@user, true)
-      TransactionAdder.create_for_new_team(@team, @user)
-      flash[:success] = 'Team was successfully created!'
+    if @team.persisted?
       redirect_to dashboard_path(tenant: @team.slug)
     else
       render :new
