@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   use_doorkeeper
-  root 'teams#index'
+  root 'team_selector#index'
 
   resources :teams, only: %i[new create]
 
