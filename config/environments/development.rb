@@ -48,23 +48,14 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
-  # SMTP settings for gmail
-  # config.action_mailer.smtp_settings = {
-  #   address: ENV['MAIL_ADDRESS'],
-  #   port: 587,
-  #   user_name: ENV['MAIL_USERNAME'],
-  #   password: ENV['MAIL_PASSWORD'],
-  #   authentication: 'plain',
-  #   enable_starttls_auto: true
-  # }
-
+  # SMTP settings email
   config.action_mailer.smtp_settings = {
-      :user_name => '35c8f611a690c6',
-      :password => 'c306d816856515',
-      :address => 'smtp.mailtrap.io',
-      :domain => 'smtp.mailtrap.io',
-      :port => '2525',
-      :authentication => :cram_md5
+    address: ENV['MAIL_ADDRESS'],
+    port: ENV['MAIL_PORT'] || 587,
+    user_name: ENV['MAIL_USERNAME'],
+    password: ENV['MAIL_PASSWORD'],
+    authentication: ENV['MAIL_AUTHENTICATION'] || 'plain',
+    enable_starttls_auto: true
   }
 
   config.action_mailer.default_url_options = {host: 'localhost', port: 3000}
