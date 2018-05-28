@@ -12,7 +12,7 @@ class SlackController < ApplicationController
     transaction = Transaction.find(payload['callback_id'])
     user = User.find_by_slack_id(payload['user']['id'])
 
-    if transaction.present? && user.present? && current_team.member?(user)
+    if user&.member_of?(current_team)
       transaction.liked_by user
 
       SlackService.instance.send_updated_transaction(transaction)
@@ -53,7 +53,7 @@ class SlackController < ApplicationController
     transaction = Transaction.find_by_slack_reaction_created_at(timestamp)
     user = User.find_by_slack_id(sender_slack_id)
 
-    if transaction.present? && user.present? && current_team.member?(user)
+    if user&.member_of?(current_team)
       transaction.liked_by user
 
       SlackService.instance.send_updated_transaction(transaction)
