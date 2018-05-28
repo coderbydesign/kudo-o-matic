@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Users can now create teams
+- After team creation, a balance, some goals, a company user and example transaction are created
+- Teams are accessible by their slug, e.g. /kabisa
+- Users can only access teams they are a member of
+- Page for choosing a team
+- Users with only 1 team automatically get redirected to their team
 - GDPR account restriction feature
 - GDPR data viewing feature
 - GDPR data export feature
@@ -16,6 +22,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Reset password form
 - Unlock account form
 - Edit account form
+
+### Changed
+- Feed now shows the transactions, balances, goals, users and statistics of the current team
 
 ### Removed
 - Google login in favor of a regular login and registration form

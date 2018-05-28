@@ -9,7 +9,7 @@
     - @transactions.each do |transaction|
       .transaction-container.transaction-selector{'id': transaction.id,
       'data-likes': transaction.votes_for.voters.collect { |user| user},
-      'data-tenant': @current_team.slug}
+      'data-tenant': current_team.slug}
         .transaction-header-container
           .transaction-kudos-container
             %span{id: "kudos-container-#{transaction.id}"}

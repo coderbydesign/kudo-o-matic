@@ -7,12 +7,12 @@
       %span.statistics-title
         Current
       %span.statistics-value
-        = "#{Balance.current(@current_team).amount} ₭"
+        = "#{Balance.current(current_team.id).amount} ₭"
     .kudo-balance-statistics
       %span.statistics-title
-        = Goal.next(@current_team).name
-      %span.statistics-value.js-count{'data-count': Goal.next(@current_team).amount}
-        = Goal.next(@current_team).amount
+        = Goal.next(current_team.id).name
+      %span.statistics-value.js-count{'data-count': Goal.next(current_team.id).amount}
+        = Goal.next(current_team.id).amount
         %span.currency
           ₭
     .kudo-balance-statistics.see-more
