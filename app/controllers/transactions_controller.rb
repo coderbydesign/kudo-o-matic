@@ -84,7 +84,7 @@ class TransactionsController < ApplicationController
   def query_variables
     @previous = Goal.previous(current_team.id).decorate
     @next = Goal.next(current_team.id).decorate
-    @iterate_goals = Goal.goals(current_team.id)
+    @iterate_goals = current_team.current_goals
     @goals = Goal.all.order(cached_votes_up: :desc)
     @current_goals = Goal.all.where(balance: Balance.current(current_team.id)).order('amount desc')
     @balance = Balance.current(current_team.id).decorate

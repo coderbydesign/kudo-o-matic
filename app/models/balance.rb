@@ -3,6 +3,7 @@ class Balance < ActiveRecord::Base
   after_destroy :ensure_a_current_balance_remains
 
   has_many :transactions
+  has_many :goals
 
   scope :balances, -> { where(current: false).order("created_at DESC") }
 

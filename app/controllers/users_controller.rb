@@ -23,12 +23,12 @@ class UsersController < ApplicationController
   end
 
   def export_json
-    ExportService.instance.start_new_export(@user, current_team, :json)
+    ExportService.instance.start_new_export(@user, :json)
     render template: 'users/export_data', locals: { dataformat: 'JSON' }
   end
 
   def export_xml
-    ExportService.instance.start_new_export(@user, current_team, :xml)
+    ExportService.instance.start_new_export(@user, :xml)
     render template: 'users/export_data', locals: { dataformat: 'XML' }
   end
 

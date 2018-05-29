@@ -12,6 +12,7 @@ class Team < ActiveRecord::Base
   has_many :memberships, class_name: 'TeamMember', foreign_key: :team_id
   has_many :users, through: :memberships
   has_many :balances
+  has_many :goals, through: :balances
 
   def add_member(user, admin = false)
     TeamMember.create(user: user, team: self, admin: admin)
@@ -23,6 +24,10 @@ class Team < ActiveRecord::Base
 
   def member?(user)
     TeamMember.find_by_user_id_and_team_id(user.id, id).present?
+  end
+
+  def current_goals
+    goals.where(balance: Balance.current(id))
   end
 
   private

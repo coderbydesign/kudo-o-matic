@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TeamAdder < ActiveRecord::Base
+class TeamAdder
   def self.create(params, current_user)
     name = params[:team][:name]
     slug = params[:team][:slug]

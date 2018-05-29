@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe GoalReacher, type: :model do
   let!(:team) { create(:team) }
-  let!(:user) { User.create name: 'John', email:'johndoe@example.com' }
-  let!(:user_2) { User.create name: 'Jane', email:'janedoe@example.com' }
+  let!(:user) { User.create name: 'John', email: 'johndoe@example.com' }
+  let!(:user_2) { User.create name: 'Jane', email: 'janedoe@example.com' }
   let(:user_goal) { User.create name: 'Kabisa' }
-  let(:activity) { Activity.create name:'Helping me with Rspec' }
+  let(:activity) { Activity.create name: 'Helping me with Rspec' }
   let(:balance) { Balance.current(team.id) }
-  let!(:goal) { Goal.goals(team.id)[0] }
-  let!(:goal_2) { Goal.goals(team.id)[1] }
+  let!(:goal) { team.current_goals.first }
+  let!(:goal_2) { team.current_goals.second }
 
   before do
     team.add_member user
@@ -16,9 +16,14 @@ RSpec.describe GoalReacher, type: :model do
   end
 
   context 'The next goal is achieved' do
-
-    let!(:transaction) { create :transaction, sender: user, receiver: user, amount: 600, activity: activity, balance: balance }
-    let!(:transaction_2) { create :transaction, sender: user, receiver: user, amount: 100, activity: activity, balance: balance }
+    let!(:transaction) {
+      create :transaction, sender: user, receiver: user,
+                           amount: 600, activity: activity, balance: balance
+    }
+    let!(:transaction_2) {
+      create :transaction, sender: user, receiver: user,
+                           amount: 100, activity: activity, balance: balance
+    }
 
     it 'marks the next goal as achieved' do
       GoalReacher.check!(team.id)
