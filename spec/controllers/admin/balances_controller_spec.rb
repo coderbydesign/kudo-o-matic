@@ -2,7 +2,8 @@ require 'rails_helper'
 require 'shared/controllers/admin/shared_expectations'
 
 RSpec.describe Admin::BalancesController, type: :controller do
-  let!(:balance) {create(:balance, :current)}
+  let!(:team) { create :team }
+  let!(:balance) {Balance.current(team)}
   let!(:user) {create(:user, :admin)}
 
   before do

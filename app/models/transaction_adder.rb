@@ -28,7 +28,8 @@ class TransactionAdder
 
   def self.create_from_api_request(headers, params)
     data = params[:data]
-    current_team = headers['Team']
+    current_team = headers[:Team]
+
     attributes = data[:attributes]
 
     amount = attributes[:amount]
@@ -57,7 +58,7 @@ class TransactionAdder
     save(transaction, current_team)
   end
 
-  def self.create_from_api_v2_request(user, params)
+  def self.create_from_api_v2_request(user, team, params)
     data = params[:data]
     attributes = data[:attributes]
 
@@ -72,8 +73,8 @@ class TransactionAdder
         activity: Activity.find_or_create_by(name: activity),
         sender: user,
         receiver: receiver,
-        slack_kudos_left_on_creation: Goal.next.amount - Balance.current.amount - amount.to_i,
-        balance: Balance.current
+        slack_kudos_left_on_creation: Goal.next(team).amount - Balance.current(team).amount - amount.to_i,
+        balance: Balance.current(team)
     )
 
     unless attributes[:image].nil? || attributes['image-file-type'].nil?
@@ -82,10 +83,10 @@ class TransactionAdder
           image: "data:image/#{file_type};base64,#{attributes[:image]}", image_file_name: "image.#{file_type}")
     end
 
-    save transaction
+    save transaction, team
   end
 
-  def self.create_from_slack_command(params)
+  def self.create_from_slack_command(params, team)
     text = Formatting.unescape(params['text'])
     arguments = text.split(' ', 3)
 
@@ -99,7 +100,7 @@ class TransactionAdder
     sender_slack_id = params['user_id']
 
     if arguments.size < 3 || receiver_text.nil? ||
-       sender_slack_id.nil? || amount.nil? || activity.nil? || first_char_receiver != '@'
+        sender_slack_id.nil? || amount.nil? || activity.nil? || first_char_receiver != '@'
       raise SlackArgumentsError, "Invalid command. Use the following syntax to give ₭udos:\n"\
                                     '*/kudo* @receiver <amount> <reason>'
     end
@@ -113,13 +114,13 @@ class TransactionAdder
     raise SlackConnectionError, 'Receiver is *not* connected to the ₭udo-o-Matic' if receiver.nil?
 
     transaction = Transaction.new(
-      amount: amount,
-      activity: Activity.find_or_create_by(name: activity),
-      sender: sender,
-      receiver: receiver,
-      slack_kudos_left_on_creation: Goal.next(team.id).amount - Balance.current(team.id).amount - amount.to_i,
-      balance: Balance.current(team.id),
-      team_id: team.id
+        amount: amount,
+        activity: Activity.find_or_create_by(name: activity),
+        sender: sender,
+        receiver: receiver,
+        slack_kudos_left_on_creation: Goal.next(team.id).amount - Balance.current(team.id).amount - amount.to_i,
+        balance: Balance.current(team.id),
+        team_id: team.id
     )
 
     save(transaction, team)
