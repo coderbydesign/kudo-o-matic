@@ -51,7 +51,7 @@ class TransactionAdder
     save transaction
   end
 
-  def self.create_from_v2_api_request(user, params)
+  def self.create_from_api_v2_request(user, params)
     data = params[:data]
     attributes = data[:attributes]
 

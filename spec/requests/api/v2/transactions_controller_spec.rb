@@ -354,6 +354,7 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
 
   describe 'POST api/v2/transactions' do
     let(:application) { create(:application) }
+    let! (:receiver) { create(:user, name: 'Receiver') }
     let(:sender) { create(:user) }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
@@ -361,7 +362,6 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
     end
     let (:request) { "/api/v2/transactions" }
     let! (:transaction) { build(:transaction) }
-    let! (:receiver) { create(:user, name: 'Receiver') }
     let! (:balance) { create(:balance, :current) }
     let! (:record_count_before_request) { Transaction.count }
 
@@ -451,6 +451,10 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
           expect(json).to eq(expected)
         end
 
+        it 'creates a transaction with the right sender name' do
+          expect(Transaction.last.sender.name).to eq(sender.name)
+        end
+
         expect_status_201_created
       end
 
@@ -535,6 +539,10 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
             }.with_indifferent_access
 
           expect(json).to eq(expected)
+        end
+
+        it 'creates a transaction with the right sender name' do
+          expect(Transaction.last.sender.name).to eq(sender.name)
         end
 
         expect_status_201_created
