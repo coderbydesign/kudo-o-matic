@@ -3,10 +3,6 @@ class Goal < ActiveRecord::Base
 
   belongs_to :balance
 
-  def self.goals(team)
-    where(balance: Balance.current(team)).where(achieved_on: nil).order("amount ASC")
-  end
-
   def self.achieved(team)
     where(balance: Balance.current(team)).where.not(achieved_on: nil).order("amount ASC")
   end
