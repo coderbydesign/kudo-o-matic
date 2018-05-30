@@ -8,8 +8,25 @@ class UserMailer < ApplicationMailer
   def welcome_email(user)
     @user = user
 
-    attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/kudo-o-matic-white-mail.png")
+    attachments.inline['logo.png'] = logo_attachment
 
     mail(to: user.email, subject: 'Welcome to the ₭udo-o-Matic!')
+  end
+
+  def export_start_email(user)
+    @user = user
+
+    attachments.inline['logo.png'] = logo_attachment
+
+    mail(to: user.email, subject: 'Started data export!')
+  end
+
+  def export_done_email(user, export)
+    @user = user
+
+    attachments.inline['logo.png'] = logo_attachment
+
+    @export = export
+    mail(to: user.email, subject: 'Data export finished!')
   end
 end

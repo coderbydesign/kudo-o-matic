@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def view_data
     @transactions_count = @user.all_transactions.count
     @votes_count = @user.votes.count
+    @exports = @user.exports
   end
 
   def view_transactions
@@ -20,20 +21,21 @@ class UsersController < ApplicationController
     @likes = @user.votes.page(params[:page]).per(20)
   end
 
-  def export
-    @transactions = @user.all_transactions
-    @votes = @user.votes
+  def export_json
+    ExportService.instance.start_new_export(@user, :json)
+    render template: 'users/export_data', locals: { dataformat: 'JSON' }
+  end
 
-    respond_to do |format|
-      format.json do
-        json_data = render_user_data(:json)
-        send_data(json_data, type: 'text/json; charset=UTF-8;', filename: "#{generate_filename}.json")
-      end
-      format.xml do
-        xml_data = render_user_data(:xml)
-        send_data(xml_data, type: 'text/xml; charset=UTF-8;', filename: "#{generate_filename}.xml")
-      end
-    end
+  def export_xml
+    ExportService.instance.start_new_export(@user, :xml)
+    render template: 'users/export_data', locals: { dataformat: 'XML' }
+  end
+
+  def download_export
+    export = Export.find_by_uuid!(params[:uuid])
+    redirect_to export.zip.url
+  rescue ActiveRecord::RecordNotFound
+    render 'users/export_expired'
   end
 
   def update
@@ -68,17 +70,4 @@ class UsersController < ApplicationController
                                  :restricted)
   end
 
-  def generate_filename
-    "data_export_#{@user.name.underscore}_#{Time.now.strftime('%Y-%m-%d')}"
-  end
-
-  def render_user_data(format)
-    Rabl.render(@user, 'users/export',
-                view_path: 'app/views',
-                locals: {
-                  transactions: @transactions,
-                  votes: @votes
-                },
-                format: format)
-  end
 end
