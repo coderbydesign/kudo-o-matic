@@ -19,5 +19,6 @@ namespace :teams do
   task clear: :environment do
     TeamMember.destroy_all
     Team.destroy_all
+    User.where(company_user: true).destroy_all
   end
 end
