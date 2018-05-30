@@ -1,8 +1,9 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.feature 'Add a team', type: :feature do
-  let(:user) {create :user}
+  let(:user) { create :user }
 
   before do
     visit '/sign_in'

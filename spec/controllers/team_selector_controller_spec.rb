@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe TeamSelectorController, type: :controller do
-  let!(:user) {create(:user)}
-  let!(:user2) {create(:user)}
-  let!(:team) {create :team}
-  let!(:team2) {create :team, name: 'Team Two', slug: 'team-two'}
+  let!(:user) { create(:user) }
+  let!(:user2) { create(:user) }
+  let!(:team) { create :team }
+  let!(:team2) { create :team, name: 'Team Two', slug: 'team-two' }
 
   before do
     team.add_member(user)
