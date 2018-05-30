@@ -81,8 +81,8 @@ class User < ActiveRecord::Base
     TeamMember.find_by_user_id_and_team_id(id, team.id).present?
   end
 
-  def all_transactions(team)
-    Transaction.all_for_user_in_team(self, team)
+  def all_transactions
+    Transaction.all_for_user(self)
   end
 
   def first_name
