@@ -13,6 +13,10 @@ class Api::V1::ApiController < JSONAPI::ResourceController
     request.headers['Api-Token']
   end
 
+  def team_id
+    request.headers['Team']
+  end
+
   def authorize_request
     if api_token.blank? || api_user.nil?
       error_object_overrides = {title: 'Unauthorized', detail: 'No valid API token was provided.'}

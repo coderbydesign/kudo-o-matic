@@ -56,7 +56,7 @@
               %span.display-likes{id: "like-tooltip-#{@transaction.id}"}
                 = render 'display-likes', transaction: @transaction
             .button-container
-              = link_to 'Back', root_path, class: 'btn btn-primary'
+              = link_to 'Back', dashboard_path, team: current_team, class: 'btn btn-primary'
     .container-right
       .fixed-div-right
         = render 'kudos-counter'

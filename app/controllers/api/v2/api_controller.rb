@@ -8,6 +8,10 @@ class Api::V2::ApiController < JSONAPI::ResourceController
     current_resource_owner
   end
 
+  def current_team
+    @current_team ||= Team.find(request.headers['Team'])
+  end
+
   private
 
   def doorkeeper_unauthorized_render_options(error: nil)
@@ -21,6 +25,8 @@ class Api::V2::ApiController < JSONAPI::ResourceController
   def set_default_response_format
     request.format = :json
   end
+
+
 
   def current_resource_owner
     User.find(doorkeeper_token.resource_owner_id) if

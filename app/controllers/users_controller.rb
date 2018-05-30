@@ -2,11 +2,12 @@
 
 class UsersController < ApplicationController
   before_action :set_user, except: %i[autocomplete_search]
+  before_action :check_team_membership, only: %i[autocomplete_search]
 
   def edit; end
 
   def view_data
-    @transactions_count = @user.all_transactions.count
+    @transactions_count = Transaction.all_for_user(@user).count
     @votes_count = @user.votes.count
     @exports = @user.exports
   end
@@ -36,6 +37,10 @@ class UsersController < ApplicationController
     redirect_to export.zip.url
   rescue ActiveRecord::RecordNotFound
     render 'users/export_expired'
+  end
+
+  def generate_export_zip
+
   end
 
   def update

@@ -1,36 +1,38 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.feature "Add a transaction", type: :feature do
-  let!(:prev_goal) { create :goal, :achieved, name: "Painting lessons", amount: 100 }
-  let!(:next_goal) { create :goal, name: "Paintball", amount: 1500 }
+RSpec.feature 'Add a transaction', type: :feature do
   let(:activity) { Activity.create name: 'Helping with RSpec' }
-  let(:user) {
+  let(:team) { create :team }
+  let(:user) do
     User.create name: 'Pascal', email: 'pascal@email.com', password: 'testpass',
                 password_confirmation: 'testpass', confirmed_at: Time.now,
                 avatar_url: '/kabisa_lizard.png', restricted: false
-  }
-  let(:user_2) {
+  end
+  let(:user_2) do
     User.create name: 'John User', email: 'john@email.com', password: 'testpass',
                 password_confirmation: 'testpass', confirmed_at: Time.now,
                 avatar_url: '/kabisa_lizard.png', restricted: false
-  }
-  let(:balance) { create :balance, :current }
-  let!(:transaction) {
+  end
+  let(:balance) { create :balance, :current, team_id: team.id }
+  let!(:transaction) do
     Transaction.create sender: user, receiver: user, activity: activity, amount: 5,
-                       balance: balance
-  }
-  let!(:transaction_2) {
+                       balance: balance, team_id: team.id
+  end
+  let!(:transaction_2) do
     Transaction.create sender: user, receiver: user, activity: activity, amount: 10,
-                       balance: balance
-  }
+                       balance: balance, team_id: team.id
+  end
 
   before do
+    team.add_member(user)
+    team.add_member(user_2)
     visit '/sign_in'
     fill_in 'user_email', with: user_2.email
     fill_in 'user_password', with: 'testpass'
     click_button 'Log in'
 
-    expect(current_path).to eql('/')
+    expect(current_path).to eql('/kabisa')
     find('.close-welcome').click
     @transactions_before = Transaction.count
   end
@@ -47,28 +49,28 @@ RSpec.feature "Add a transaction", type: :feature do
       expect(Transaction.count).to_not eq(@transactions_before)
       within '.timeline-container' do
         expect(page).to have_css("img[src*='kabisa_lizard.png']")
-        expect(page).to have_content("John User: +99 ₭ to Harry for helping me out")
+        expect(page).to have_content('John User: +99 ₭ to Harry for helping me out')
         expect(page).to have_css("img[src*='plus1-6ba5fab051ddb1e4712f523f1b10164a5d87ffe3f10861f038bd36ebf9e9184f.png']")
       end
     end
 
     it 'calculates and shows the transaction statistics of the current user' do
       within '.user-statistics-container' do
-        expect(page).to have_content("0") # received transactions
-        expect(page).to have_content("1") # total and given transactions
+        expect(page).to have_content('0') # received transactions
+        expect(page).to have_content('1') # total and given transactions
       end
     end
 
     it 'calculates and shows the transaction statistics in general' do
       within '.transaction-statistics' do
-        expect(page).to have_content("3")
+        expect(page).to have_content('3')
       end
     end
 
     it 'calculates and shows the new amount of the balance' do
       within '.chart.chart--kudo.js-chart' do
         # 5 + 10 + 99 = 114
-        expect(page).to have_content("114 ₭")
+        expect(page).to have_content('114 ₭')
       end
     end
 
@@ -79,7 +81,7 @@ RSpec.feature "Add a transaction", type: :feature do
         end.new
       end
 
-      @number = ((Balance.current.amount.to_f - Goal.previous.amount.to_f) / (Goal.next.amount.to_f - Goal.previous.amount.to_f)) * 100
+      @number = ((Balance.current(team.id).amount.to_f - Goal.previous(team.id).amount.to_f) / (Goal.next(team.id).amount.to_f - Goal.previous(team.id).amount.to_f)) * 100
       @balance_percentage = helper.number_to_percentage(@number, precision: 0)
       within('.percentage') do
         expect(page).to have_content(@balance_percentage)
@@ -89,12 +91,12 @@ RSpec.feature "Add a transaction", type: :feature do
 
   context 'Create a transaction with an image' do
     it 'should be valid' do
-      image = Transaction.new sender: user, receiver: user, activity: activity, amount: 10, balance: balance, image: File.new(Rails.root + 'spec/fixtures/images/rails.png')
+      image = Transaction.new sender: user, receiver: user, activity: activity, amount: 10, balance: balance, image: File.new(Rails.root + 'spec/fixtures/images/rails.png', team: team)
       expect(image).to be_valid
     end
 
     it 'should be invalid' do
-      image = Transaction.new sender: user, receiver: user, activity: activity, amount: 10, balance: balance, image: File.new(Rails.root + 'spec/fixtures/images/blank.txt')
+      image = Transaction.new sender: user, receiver: user, activity: activity, amount: 10, balance: balance, image: File.new(Rails.root + 'spec/fixtures/images/blank.txt', team: team)
       expect(image).to_not be_valid
     end
   end
@@ -128,7 +130,7 @@ RSpec.feature "Add a transaction", type: :feature do
         expect(Transaction.count).to_not eq(@transactions_before)
 
         within '.timeline-container' do
-          expect(page).to have_content("John User: +50 ₭ to for helping me out")
+          expect(page).to have_content('John User: +50 ₭ to for helping me out')
         end
       end
     end

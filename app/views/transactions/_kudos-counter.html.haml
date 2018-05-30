@@ -8,7 +8,7 @@
   .kudo-counter__upcoming
     Next Goal
 
-  .chart.chart--kudo.js-chart{'data-goal':Goal.next.amount, 'data-count':Balance.current.amount}
+  .chart.chart--kudo.js-chart{'data-goal':Goal.next(current_team.id).amount, 'data-count':Balance.current(current_team.id).amount}
     .chart__container
 
       %svg.chart__background{x:'0px', y:'0px', height:'220px', viewBox:'0 0 220 220'}
@@ -22,25 +22,25 @@
         -#%span
           Next goal
         %div
-          %span.current-amount.js-count{'data-count':Balance.current.amount}
-            = Balance.current.amount
+          %span.current-amount.js-count{'data-count':Balance.current(current_team.id).amount}
+            = Balance.current(current_team.id).amount
           %span.kudo-currency
             ₭
 
         %span.next-goal-amount
           %span
             of
-          %span.goal-amount.js-count{'data-count':Goal.next.amount}
-            = Goal.next.amount
+          %span.goal-amount.js-count{'data-count':Goal.next(current_team.id).amount}
+            = Goal.next(current_team.id).amount
           %span.kudo-currency
             ₭
           %span
             for
         %span.next-goal-name
           %span.goal-name-tooltip
-            = Goal.next.name
+            = Goal.next(current_team.id).name
           .goal.goal-content
             .menu-tooltip
             %span.menu-content
-              = Goal.next.name
+              = Goal.next(current_team.id).name
   = render 'goals', current_goals: @current_goals

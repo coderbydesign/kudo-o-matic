@@ -6,8 +6,19 @@ require 'shared/api/v1/shared_expectations'
 RSpec.describe Api::V2::GoalsController, type: :request do
   include RequestHelpers
 
+  # Skip the after_create callback in this spec, because we are working with specific balances and goals
+  before do
+    Team.skip_callback(:create, :after, :setup_team)
+  end
+
+  # After this spec, set the callback again, so other specs can make use of it
+  after do
+    Team.set_callback(:create, :after, :setup_team)
+  end
+
   describe 'GET api/v2/goals/:id' do
     let(:application) { create(:application) }
+    let(:team) { create(:team) }
     let(:user) { create(:user) }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
@@ -17,9 +28,18 @@ RSpec.describe Api::V2::GoalsController, type: :request do
     let!(:goal) { create(:goal) }
     let!(:record_count_before_request) { Goal.count }
 
+
+    before do
+      team.add_member(user)
+    end
+
     context 'with a valid api-token' do
       before do
-        get request, format: :json, access_token: token.token
+        get request, headers: {
+            'Authorization': "Bearer #{token.token}",
+            'Content-Type': 'application/vnd.api+json',
+            'Team': team.id
+        }
       end
 
       expect_goal_count_same
@@ -84,6 +104,7 @@ RSpec.describe Api::V2::GoalsController, type: :request do
 
   describe 'GET api/v2/goals/next' do
     let(:application) { create(:application) }
+    let(:team) {create :team }
     let(:user) { create(:user) }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
@@ -97,7 +118,11 @@ RSpec.describe Api::V2::GoalsController, type: :request do
         let!(:record_count_before_request) { Goal.count }
 
         before do
-          get request, format: :json, access_token: token.token
+          get request, headers: {
+              'Authorization': "Bearer #{token.token}",
+              'Content-Type': 'application/vnd.api+json',
+              'Team': team.id
+          }
         end
 
         expect_goal_count_same
@@ -114,7 +139,11 @@ RSpec.describe Api::V2::GoalsController, type: :request do
         let!(:record_count_before_request) { Goal.count }
 
         before do
-          get request, format: :json, access_token: token.token
+          get request, headers: {
+              'Authorization': "Bearer #{token.token}",
+              'Content-Type': 'application/vnd.api+json',
+              'Team': team.id
+          }
         end
 
         expect_goal_count_increase
@@ -130,7 +159,11 @@ RSpec.describe Api::V2::GoalsController, type: :request do
         let!(:record_count_before_request) { Goal.count }
 
         before do
-          get request, format: :json, access_token: token.token
+          get request, headers: {
+              'Authorization': "Bearer #{token.token}",
+              'Content-Type': 'application/vnd.api+json',
+              'Team': team.id
+          }
         end
 
         expect_goal_count_increase
@@ -147,7 +180,11 @@ RSpec.describe Api::V2::GoalsController, type: :request do
       let!(:record_count_before_request) { Goal.count }
 
       before do
-        get request, format: :json, access_token: 'Invalid token'
+        get request, headers: {
+            'Authorization': "Invalid token",
+            'Content-Type': 'application/vnd.api+json',
+            'Team': team.id
+        }
       end
 
       expect_goal_count_same
@@ -174,6 +211,7 @@ RSpec.describe Api::V2::GoalsController, type: :request do
 
   describe 'GET api/v2/goals/previous' do
     let(:application) { create(:application) }
+    let(:team) { create :team }
     let(:user) { create(:user) }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
@@ -187,7 +225,11 @@ RSpec.describe Api::V2::GoalsController, type: :request do
         let!(:record_count_before_request) { Goal.count }
 
         before do
-          get request, format: :json, access_token: token.token
+          get request, headers: {
+              'Authorization': "Bearer #{token.token}",
+              'Content-Type': 'application/vnd.api+json',
+              'Team': team.id
+          }
         end
 
         expect_goal_count_same
@@ -203,7 +245,11 @@ RSpec.describe Api::V2::GoalsController, type: :request do
         let!(:record_count_before_request) { Goal.count }
 
         before do
-          get request, format: :json, access_token: token.token
+          get request, headers: {
+              'Authorization': "Bearer #{token.token}",
+              'Content-Type': 'application/vnd.api+json',
+              'Team': team.id
+          }
         end
 
         expect_goal_count_same
@@ -218,7 +264,11 @@ RSpec.describe Api::V2::GoalsController, type: :request do
       let!(:record_count_before_request) { Goal.count }
 
       before do
-        get request, format: :json, access_token: 'Invalid token'
+        get request, headers: {
+            'Authorization': "Invalid",
+            'Content-Type': 'application/vnd.api+json',
+            'Team': team.id
+        }
       end
 
       expect_goal_count_same

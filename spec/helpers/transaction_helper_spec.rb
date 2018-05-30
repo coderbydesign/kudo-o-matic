@@ -7,6 +7,7 @@ describe TransactionsHelper do
   let!(:prev_goal) { create :goal, amount: 500 }
   let!(:next_goal) { create :goal, amount: 1000 }
   let(:activity) { Activity.create name: 'Helping with RSpec' }
+  let(:team) { create :team }
   let(:user) {
     User.create name: 'Pascal', email: 'pascal@example.com',
                 password: 'testpass', password_confirmation: 'testpass',
@@ -42,23 +43,33 @@ describe TransactionsHelper do
                 password: 'testpass', password_confirmation: 'testpass',
                 confirmed_at: Time.now, avatar_url: '/kabisa_lizard.png'
   }
-  let(:balance) { create :balance, :current }
+  let(:balance) { create :balance, :current, team_id: team.id }
   let!(:transaction) {
-    Transaction.create sender: user, receiver: user,
+    Transaction.create sender: user, receiver: user, team_id: team.id,
                        activity: activity, amount: 100, balance: balance
   }
   let!(:transaction_2) {
-    Transaction.create sender: user, receiver: user,
+    Transaction.create sender: user, receiver: user, team_id: team.id,
                        activity: activity, amount: 100, balance: balance
   }
   let!(:transaction_3) {
-    Transaction.create sender: user, receiver: user,
+    Transaction.create sender: user, receiver: user, team_id: team.id,
                        activity: activity, amount: 500, balance: balance
   }
 
+  before do
+    team.add_member user
+    team.add_member user_2
+    team.add_member user_3
+    team.add_member user_4
+    team.add_member user_5
+    team.add_member user_6
+    team.add_member user_7
+  end
+
   context 'calculate percentage until next goal' do
     it 'returns the completion percentage' do
-      expect(percentage_next_goal).to eq('70%')
+      expect(percentage_next_goal(team.id)).to eq('70%')
     end
   end
 

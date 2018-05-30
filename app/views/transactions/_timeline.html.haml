@@ -7,7 +7,9 @@
             There are no transactions to show here yet &#9785;
   - else
     - @transactions.each do |transaction|
-      .transaction-container.transaction-selector{'id': transaction.id, 'data-likes': transaction.votes_for.voters.collect { |user| user}}
+      .transaction-container.transaction-selector{'id': transaction.id,
+      'data-likes': transaction.votes_for.voters.collect { |user| user},
+      'data-team': current_team.slug}
         .transaction-header-container
           .transaction-kudos-container
             %span{id: "kudos-container-#{transaction.id}"}

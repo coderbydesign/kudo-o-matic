@@ -1,4 +1,4 @@
-class Api::V2::BalanceResource < Api::V1::BaseResource
+class Api::V2::BalanceResource < Api::V2::BaseResource
   attributes :name, :current, :amount
   filters :name, :current, :amount
   has_many :transactions

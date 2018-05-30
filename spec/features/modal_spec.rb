@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
@@ -24,19 +25,24 @@ RSpec.configure do |config|
   end
 end
 
-RSpec.feature "Open a modal", type: :feature do
-  let(:user) { User.create name: 'Pascal', email: 'pascal@email.nl', password: 'testpass',
-                           password_confirmation: 'testpass', confirmed_at: Time.now, avatar_url: '/kabisa_lizard.png' }
-  let!(:prev_goal) { create :goal, :achieved, name: "Painting lessons", amount: 100 }
-  let!(:next_goal) { create :goal, name: "Paintball", amount: 1500 }
-  let!(:balance) { create :balance, :current }
+RSpec.feature 'Open a modal', type: :feature do
+  let(:user) do
+    User.create name: 'Pascal', email: 'pascal@email.nl', password: 'testpass',
+                password_confirmation: 'testpass', confirmed_at: Time.now,
+                avatar_url: '/kabisa_lizard.png'
+  end
+  let(:team) {create :team}
+  let!(:balance) {create :balance, :current, team_id: team.id}
+  let!(:prev_goal) {create :goal, :achieved, name: 'Painting lessons', amount: 100, balance_id: balance.id}
+  let!(:next_goal) {create :goal, name: 'Paintball', amount: 1500, balance_id: balance.id}
 
   before(:each) do
+    team.add_member(user)
     visit '/sign_in'
     fill_in 'user_email', with: user.email
     fill_in 'user_password', with: 'testpass'
     click_button 'Log in'
-    expect(current_path).to eql('/')
+    expect(current_path).to eql('/kabisa')
     find('.close-welcome').click
   end
 
@@ -86,5 +92,5 @@ RSpec.feature "Open a modal", type: :feature do
     end
   end
 
-  #TODO Write spec for Help Modal and Release Modal
+  # TODO: Write spec for Help Modal and Release Modal
 end

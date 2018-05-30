@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
   has_many :sent_transactions, class_name: 'Transaction', foreign_key: :sender_id
   has_many :received_transactions, class_name: 'Transaction', foreign_key: :receiver_id
+  has_many :memberships, class_name: 'TeamMember', foreign_key: :user_id
+  has_many :teams, through: :memberships
   has_many :votes, foreign_key: 'voter_id'
   has_many :exports, foreign_key: 'user_id'
   has_many :fcm_tokens
@@ -75,8 +77,12 @@ class User < ActiveRecord::Base
         .where(deactivated_at: nil).where(restricted: false)
   end
 
-  def all_transactions
-    Transaction.all_for_user(self)
+  def member_of?(team)
+    TeamMember.find_by_user_id_and_team_id(id, team.id).present?
+  end
+
+  def all_transactions(team)
+    Transaction.all_for_user_in_team(self, team)
   end
 
   def first_name
@@ -101,6 +107,10 @@ class User < ActiveRecord::Base
 
   def deactivated?
     !deactivated_at.nil?
+  end
+
+  def multiple_teams?
+    teams.length > 1
   end
 
   # overridden Devise method that checks the soft delete timestamp on authentication

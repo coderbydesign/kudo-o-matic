@@ -46,6 +46,7 @@ describe Transaction do
 
   context ' filter transactions' do
     let(:activity) { Activity.create name: 'Helping with RSpec' }
+    let(:team) { create :team }
     let(:user) {
       User.create name: 'Pascal', email: 'pascal@example.com',
                   password: 'testpass', password_confirmation: 'testpass',
@@ -61,32 +62,50 @@ describe Transaction do
                   password: 'testpass', password_confirmation: 'testpass',
                   confirmed_at: Time.now, avatar_url: '/kabisa_lizard.png'
     }
-    let(:balance) { create :balance, :current }
-    let(:balance_2) { create :balance }
-    let!(:transaction) { Transaction.create sender: user_2, receiver: user, activity: activity, amount: 5, balance: balance }
-    let!(:transaction_2) { Transaction.create sender: user_2, receiver: user, activity: activity, amount: 10, balance: balance }
-    let!(:transaction_3) { Transaction.create sender: user, receiver: user_2, activity: activity, amount: 10, balance: balance }
-    let!(:transaction_4) { Transaction.create sender: user_2, receiver: user_2, activity: activity, amount: 15, balance: balance }
+    let(:balance) { create :balance, current: true, team_id: team.id }
+    let(:balance_2) { create :balance, team_id: team.id }
+    let!(:transaction) {
+      Transaction.create sender: user_2, receiver: user,
+                         team_id: team.id, activity: activity, amount: 5, balance: balance
+    }
+    let!(:transaction_2) {
+      Transaction.create sender: user_2, receiver: user,
+                         team_id: team.id, activity: activity, amount: 10, balance: balance
+    }
+    let!(:transaction_3) {
+      Transaction.create sender: user, receiver: user_2,
+                         team_id: team.id, activity: activity, amount: 10, balance: balance
+    }
+    let!(:transaction_4) {
+      Transaction.create sender: user_2, receiver: user_2,
+                         team_id: team.id, activity: activity, amount: 15, balance: balance
+    }
+
+    before do
+      team.add_member(user)
+      team.add_member(user_2)
+      team.add_member(user_3)
+    end
 
     it 'Displays all my transactions from the current balance' do
-      transactions = Transaction.all_for_user(user_2)
+      transactions = Transaction.all_for_user_in_team(user_2, team.id)
       expect(transactions.count).to eq(4)
     end
 
     it 'Displays my send transactions from the current balance' do
-      transactions = Transaction.send_by_user(user_2)
+      transactions = Transaction.send_by_user(user_2, team.id)
 
       expect(transactions.count).to eq(3)
     end
 
     it 'Displays my received transactions from the current balance' do
-      transactions = Transaction.received_by_user(user_2)
+      transactions = Transaction.received_by_user(user_2, team.id)
 
       expect(transactions.count).to eq(2)
     end
 
     it 'Displays no transactions' do
-      transactions = Transaction.received_by_user(user_3)
+      transactions = Transaction.received_by_user(user_3, team.id)
 
       expect(transactions.count).to eq(0)
     end

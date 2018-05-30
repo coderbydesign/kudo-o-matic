@@ -1,23 +1,21 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   use_doorkeeper
-  root 'transactions#index'
+  root 'team_selector#index'
 
-  resources :transactions, only: [:index, :show, :create]
-
-  post 'like/:id', to: 'transactions#upvote', as: :like
-  post 'unlike/:id', to: 'transactions#downvote', as: :unlike
+  resources :teams, only: %i[new create]
 
   get :kudo_guidelines, to: 'transactions#kudo_guidelines'
-  get 'transactions/:type', to: 'transactions#filter'
+
 
   get :activities, to: 'activities#autocomplete_search', as: :activities_autocomplete
-  get :users, to: 'users#autocomplete_search', as: :users_autocomplete
+
 
   get :settings, to: 'users#edit', as: :user
   post :resend_email_confirmation, to: 'users#resend_email_confirmation',
        as: :users_resend_email_confirmation
   patch :settings, to: 'users#update'
-
 
   get :feed, to: 'feed#index'
 
@@ -30,11 +28,7 @@ Rails.application.routes.draw do
 
   get 'legal/privacy'
 
-  scope :slack, controller: :slack do
-    post :action
-    post :command
-    post :reaction
-  end
+
 
   namespace :admin do
     root 'users#index'
@@ -77,7 +71,7 @@ Rails.application.routes.draw do
         jsonapi_related_resource :balance, only: :show
       end
 
-      jsonapi_resources :transactions, only: [:index, :show, :create] do
+      jsonapi_resources :transactions, only: %i[index show create] do
         member do
           put :like, to: 'transactions#like'
           delete :like, to: 'transactions#unlike'
@@ -92,7 +86,7 @@ Rails.application.routes.draw do
         jsonapi_related_resource :balance, only: :show
       end
 
-      jsonapi_resources :users, only: [:index, :show] do
+      jsonapi_resources :users, only: %i[index show] do
         jsonapi_links :sent_transactions, only: :show
         jsonapi_links :received_transactions, only: :show
 
@@ -133,7 +127,7 @@ Rails.application.routes.draw do
         jsonapi_related_resource :balance, only: :show
       end
 
-      jsonapi_resources :transactions, only: [:index, :show, :create] do
+      jsonapi_resources :transactions, only: %i[index show create] do
         member do
           put :like, to: 'transactions#like'
           delete :like, to: 'transactions#unlike'
@@ -152,7 +146,7 @@ Rails.application.routes.draw do
         get :me, to: 'users#me'
       end
 
-      jsonapi_resources :users, only: [:index, :show] do
+      jsonapi_resources :users, only: %i[index show] do
         jsonapi_links :sent_transactions, only: :show
         jsonapi_links :received_transactions, only: :show
 
@@ -160,7 +154,9 @@ Rails.application.routes.draw do
         jsonapi_related_resources :received_transactions, only: :show
       end
 
-
+      scope :teams, controller: :teams do
+        get :me, to: 'teams#me'
+      end
 
       scope :statistics, controller: :statistics do
         get :general
@@ -172,13 +168,12 @@ Rails.application.routes.draw do
         post :obtain_api_token
         post :store_fcm_token
       end
-
-
     end
   end
 
   devise_for :users, controllers: {
       omniauth_callbacks: 'users/omniauth_callbacks',
+      sessions: 'sessions',
       registrations: :registrations
   }
 
@@ -187,5 +182,19 @@ Rails.application.routes.draw do
     get 'sign_up', to: 'devise/registrations#new'
     get 'account', to: 'devise/registrations#edit'
     get 'sign_out', to: 'devise/sessions#destroy'
+  end
+
+  scope ':team' do
+    root to: 'transactions#index', as: 'dashboard'
+    resources :transactions, only: %i[index show create], param: :id
+    get 'transactions/:type', to: 'transactions#filter'
+    post 'like/:id', to: 'transactions#upvote', as: :like
+    post 'unlike/:id', to: 'transactions#downvote', as: :unlike
+    get :users, to: 'users#autocomplete_search', as: :users_autocomplete
+    scope :slack, controller: :slack do
+      post :action
+      post :command
+      post :reaction
+    end
   end
 end

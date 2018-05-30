@@ -1,16 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe SlackController, type: :controller do
-  let!(:invalid_token) {-1}
+  let!(:invalid_token) { -1 }
 
   describe 'POST #action' do
-    let!(:user) {create(:user, slack_id: 1)}
-    let!(:transaction) {create(:transaction)}
-    let!(:invalid_user_slack_id) {-1}
+    let!(:user) { create(:user, slack_id: 1) }
+    let!(:team) { create(:team) }
+    let!(:transaction) { create(:transaction, team_id: team.id) }
+    let!(:invalid_user_slack_id) { -1 }
 
     before do
-      ENV['SLACK_VERIFICATION_TOKEN']='1'
-      ENV['SLACK_REACTION']='kudo'
+      team.add_member(user)
+      ENV['SLACK_VERIFICATION_TOKEN'] = '1'
+      ENV['SLACK_REACTION'] = 'kudo'
     end
 
     context 'with a valid verification token' do
@@ -18,13 +20,14 @@ RSpec.describe SlackController, type: :controller do
         context 'and a valid user slack id' do
           it 'adds a like to the transaction as the user' do
             post :action, params: {
-                payload: {
-                    token: ENV['SLACK_VERIFICATION_TOKEN'],
-                    callback_id: transaction.id,
-                    user: {
-                        id: user.slack_id
-                    }
-                }.to_json
+              payload: {
+                token: ENV['SLACK_VERIFICATION_TOKEN'],
+                callback_id: transaction.id,
+                user: {
+                  id: user.slack_id
+                }
+              }.to_json,
+              team: team.slug,
             }
 
             transaction = Transaction.find(self.transaction.id)
@@ -37,13 +40,14 @@ RSpec.describe SlackController, type: :controller do
         context 'and an invalid user slack id' do
           it 'does not add a like to the transaction' do
             post :action, params: {
-                payload: {
-                    token: ENV['SLACK_VERIFICATION_TOKEN'],
-                    callback_id: transaction.id,
-                    user: {
-                        id: invalid_user_slack_id
-                    }
-                }.to_json
+              payload: {
+                token: ENV['SLACK_VERIFICATION_TOKEN'],
+                callback_id: transaction.id,
+                user: {
+                  id: invalid_user_slack_id
+                }
+              }.to_json,
+              team: team.slug
             }
 
             transaction = Transaction.find(self.transaction.id)
@@ -59,14 +63,15 @@ RSpec.describe SlackController, type: :controller do
       context 'and a valid transaction (callback) id' do
         context 'and a valid user slack id' do
           it 'does not add a like to the transaction' do
-            post :action, params: {
-                payload: {
-                    token: invalid_token,
-                    callback_id: transaction.id,
-                    user: {
-                        id: user.slack_id
-                    }
-                }.to_json
+            post :action, team: team.slug, params: {
+              payload: {
+                token: invalid_token,
+                callback_id: transaction.id,
+                user: {
+                  id: user.slack_id
+                }
+              }.to_json,
+              team: team.slug
             }
 
             transaction = Transaction.find(self.transaction.id)
@@ -80,13 +85,16 @@ RSpec.describe SlackController, type: :controller do
   end
 
   describe 'POST #command' do
-    let!(:balance) {create(:balance, current: true)}
-    let!(:sender) {create(:user, slack_id: 1)}
-    let!(:receiver) {create(:user, slack_name: 'receiver')}
-    let!(:record_count_before_request) {Transaction.count}
+    let!(:balance) { create(:balance, current: true) }
+    let!(:sender) { create(:user, slack_id: 1) }
+    let!(:team) { create :team }
+    let!(:receiver) { create(:user, slack_name: 'receiver') }
+    let!(:record_count_before_request) { Transaction.count }
 
     before do
-      ENV['SLACK_VERIFICATION_TOKEN']='1'
+      team.add_member(sender)
+      team.add_member(receiver)
+      ENV['SLACK_VERIFICATION_TOKEN'] = '1'
     end
 
     RSpec::Expectations.configuration.on_potential_false_positives = :nothing
@@ -95,9 +103,10 @@ RSpec.describe SlackController, type: :controller do
       context 'and valid command arguments' do
         before do
           post :command, params: {
-              token: ENV['SLACK_VERIFICATION_TOKEN'],
-              text: '@receiver 1 test',
-              user_id: sender.slack_id
+            token: ENV['SLACK_VERIFICATION_TOKEN'],
+            text: '@receiver 1 test',
+            user_id: sender.slack_id,
+            team: team.slug
           }
         end
 
@@ -119,8 +128,9 @@ RSpec.describe SlackController, type: :controller do
         it 'raises an error' do
           expect {
             post :command, params: {
-                token: ENV['SLACK_VERIFICATION_TOKEN'],
-                text: ''
+              token: ENV['SLACK_VERIFICATION_TOKEN'],
+              text: '',
+              team: team.slug
             }.to_json
           }.to raise_error
         end
@@ -130,8 +140,9 @@ RSpec.describe SlackController, type: :controller do
         it 'raises an error' do
           expect {
             post :command, params: {
-                token: ENV['SLACK_VERIFICATION_TOKEN'],
-                text: ' '
+              token: ENV['SLACK_VERIFICATION_TOKEN'],
+              text: ' ',
+              team: team.slug
             }.to_json
           }.to raise_error
         end
@@ -142,8 +153,9 @@ RSpec.describe SlackController, type: :controller do
           it 'raises an error' do
             expect {
               post :command, params: {
-                  token: ENV['SLACK_VERIFICATION_TOKEN'],
-                  text: 'HELP'
+                token: ENV['SLACK_VERIFICATION_TOKEN'],
+                text: 'HELP',
+                team: team.slug
               }.to_json
             }.to raise_error
           end
@@ -153,8 +165,9 @@ RSpec.describe SlackController, type: :controller do
           it 'raises an error' do
             expect {
               post :command, params: {
-                  token: ENV['SLACK_VERIFICATION_TOKEN'],
-                  text: 'help'
+                token: ENV['SLACK_VERIFICATION_TOKEN'],
+                text: 'help',
+                team: team.slug
               }.to_json
             }.to raise_error
           end
@@ -165,11 +178,11 @@ RSpec.describe SlackController, type: :controller do
     context 'with an invalid verification token' do
       before do
         post :command, params: {
-            token: invalid_token,
-            text: '1 to @receiver for test',
-            user_id: sender.slack_id
+          token: invalid_token,
+          text: '1 to @receiver for test',
+          user_id: sender.slack_id,
+          team: team.slug
         }
-
       end
 
       it 'does not change the transaction record count' do
@@ -179,12 +192,14 @@ RSpec.describe SlackController, type: :controller do
   end
 
   describe 'POST #reaction' do
-    let!(:user) {create(:user, slack_id: 1)}
-    let!(:transaction) {create(:transaction, slack_reaction_created_at: DateTime.now)}
-    let!(:invalid_reaction) {'invalid'}
+    let!(:user) { create(:user, slack_id: 1) }
+    let!(:team) { create :team }
+    let!(:transaction) { create(:transaction, slack_reaction_created_at: DateTime.now) }
+    let!(:invalid_reaction) { 'invalid' }
 
     before do
-      ENV['SLACK_VERIFICATION_TOKEN']='1'
+      team.add_member(user)
+      ENV['SLACK_VERIFICATION_TOKEN'] = '1'
     end
 
     context 'with a valid verification token' do
@@ -192,14 +207,15 @@ RSpec.describe SlackController, type: :controller do
         context 'and an existing transaction that was created with a valid reactji' do
           it 'likes the existing transaction' do
             post :reaction, params: {
-                token: ENV['SLACK_VERIFICATION_TOKEN'],
-                event: {
-                    user: user.slack_id,
-                    reaction: 'kudo',
-                    item: {
-                        ts: transaction.slack_reaction_created_at
-                    }
+              token: ENV['SLACK_VERIFICATION_TOKEN'],
+              event: {
+                user: user.slack_id,
+                reaction: 'kudo',
+                item: {
+                  ts: transaction.slack_reaction_created_at
                 }
+              },
+              team: team.slug
             }
 
             transaction = Transaction.find_by_slack_reaction_created_at(self.transaction.slack_reaction_created_at)
@@ -214,14 +230,15 @@ RSpec.describe SlackController, type: :controller do
         context 'and an existing transaction that was created with a valid reactji' do
           it 'does not like the existing transaction' do
             post :reaction, params: {
-                token: ENV['SLACK_VERIFICATION_TOKEN'],
-                event: {
-                    user: user.slack_id,
-                    reaction: invalid_reaction,
-                    item: {
-                        ts: transaction.slack_reaction_created_at
-                    }
+              token: ENV['SLACK_VERIFICATION_TOKEN'],
+              event: {
+                user: user.slack_id,
+                reaction: invalid_reaction,
+                item: {
+                  ts: transaction.slack_reaction_created_at
                 }
+              },
+              team: team.slug
             }
 
             transaction = Transaction.find_by_slack_reaction_created_at(self.transaction.slack_reaction_created_at)
@@ -238,14 +255,15 @@ RSpec.describe SlackController, type: :controller do
         context 'and an existing transaction that was created with a valid reactji' do
           it 'does not like the existing transaction' do
             post :reaction, params: {
-                token: invalid_token,
-                event: {
-                    user: user.slack_id,
-                    reaction: 'kudo',
-                    item: {
-                        ts: transaction.slack_reaction_created_at
-                    }
+              token: invalid_token,
+              event: {
+                user: user.slack_id,
+                reaction: 'kudo',
+                item: {
+                  ts: transaction.slack_reaction_created_at
                 }
+              },
+              team: team.slug
             }
 
             transaction = Transaction.find_by_slack_reaction_created_at(self.transaction.slack_reaction_created_at)

@@ -5,12 +5,18 @@ describe TransactionAdder, type: :model do
   let(:user) { create(:user) }
   let(:user2) { create(:user, name: 'Ruud') }
   let(:user3) { create(:user, name: 'Henk') }
-  let! (:balance) { create(:balance, :current) }
+  let(:team) { create :team }
   let(:token) do
     Doorkeeper::AccessToken.create! application_id: application.id,
                                     resource_owner_id: user2.id
   end
-  let!(:transaction) { build(:transaction) }
+  let!(:transaction) { build(:transaction, team_id: team.id) }
+
+  before do
+    team.add_member(user)
+    team.add_member(user2)
+    team.add_member(user3)
+  end
 
   describe '#create_from_api_request' do
     # This test shows the bug where a transaction with the wrong sender is made
@@ -25,7 +31,8 @@ describe TransactionAdder, type: :model do
       it 'creates a transaction with the wrong sender' do
         headers = {
           'Authorization': "Bearer #{token.token}",
-          'Content-Type': 'application/vnd.api+json'
+          'Content-Type': 'application/vnd.api+json',
+          'Team': "#{team.id}"
         }
         params = {
           data: {
@@ -75,7 +82,7 @@ describe TransactionAdder, type: :model do
           }
         }
       }
-      transaction = TransactionAdder.create_from_api_v2_request(user2, params)
+      transaction = TransactionAdder.create_from_api_v2_request(user2, team.id, params)
       expect(transaction.sender.name).to eq(user2.name)
     end
   end

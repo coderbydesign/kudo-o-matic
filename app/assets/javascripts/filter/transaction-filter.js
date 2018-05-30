@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var $filterContent = $('.filter-content');
+    var team = $filterContent.data('team');
     var $filterContenTooltip = $('.filter-content .menu-tooltip')
     var $ajaxpreloader = $('.ajax-preloader');
     var $btnFilter = $('.btn-filter');
@@ -24,7 +25,7 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 type:'GET',
-                url: "/transactions.js?filter=mine", complete: function (result) {
+                url: "/" + team + "/transactions.js?filter=mine", complete: function (result) {
                     $ajaxpreloader.removeClass('show-preloader');
                 }, success: function () {
                     $btnFilter.html('My total transactions');
@@ -46,7 +47,7 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 type: 'GET',
-                url: "/transactions.js?filter=send", complete: function (result) {
+                url: "/" + team + "/transactions.js?filter=send", complete: function (result) {
                     $ajaxpreloader.removeClass('show-preloader');
                 }, success: function () {
                     $btnFilter.html('My given transactions');
@@ -68,7 +69,7 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 type: 'GET',
-                url: "/transactions.js?filter=received", complete: function (result) {
+                url: "/" + team + "/transactions.js?filter=received", complete: function (result) {
                     $ajaxpreloader.removeClass('show-preloader');
                 }, success: function () {
                     $btnFilter.html('My received transactions');
@@ -90,7 +91,7 @@ $(document).ready(function () {
     function deleteFilter() {
         $.ajax({
             type:'GET',
-            url: "/transactions.js?filter=all", complete: function (result) {
+            url: "/" + team + "/transactions.js?filter=all", complete: function (result) {
                 $ajaxpreloader.removeClass('show-preloader');
             }, success: function () {
                 $btnFilter.html('All transactions');
