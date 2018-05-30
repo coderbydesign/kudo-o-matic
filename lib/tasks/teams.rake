@@ -1,8 +1,12 @@
 namespace :teams do
   desc 'Connect all users, balances and transactions to a new team.'
   task setup: :environment do
-    slug = ENV['COMPANY_USER'].downcase.strip.tr(' ', '-').gsub(/[^\w-]/, '')
+    slug = ENV['COMPANY_USER'].downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+
+    Team.skip_callback(:create, :after, :setup_team)
     team = Team.create(name: ENV['COMPANY_USER'], slug: slug)
+    Team.set_callback(:create, :after, :setup_team)
+
     User.all.each do |user|
       team.add_member(user, user.admin?)
     end
@@ -16,9 +20,11 @@ namespace :teams do
     end
   end
 
-  task clear: :environment do
+  desc 'Remove all current teams, team members and company users'
+  task clear: %i[destructive environment] do
     TeamMember.destroy_all
     Team.destroy_all
     User.where(company_user: true).destroy_all
+    puts 'Deleted all teams, team members and company users'
   end
 end
