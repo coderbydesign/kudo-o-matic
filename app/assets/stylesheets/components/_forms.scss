@@ -1,5 +1,9 @@
 .form {
 
+  abbr[title='required'] {
+    text-decoration: none;
+  }
+
   .confirm-changes {
     margin-top: 30px;
     .confirm-changes-message {

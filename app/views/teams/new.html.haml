@@ -1,5 +1,3 @@
-= render 'modal-attachment'
-
 = render 'layouts/header'
 .page
   .settings-container
@@ -31,4 +29,4 @@
           = f.label :logo
           = f.input_field :logo, as: :file, id:'media-attachment'
       .form-actions.actions
-        = f.button :submit, "Create team", class: 'btn'
+        = f.button :submit, "Create team", class: 'btn', id: 'create-team-button'
