@@ -134,6 +134,10 @@ RSpec.describe Api::V2::StatisticsController, type: :request do
     end
     let(:request) { '/api/v2/statistics/user' }
 
+    before do
+      team.add_member(user)
+    end
+
     context 'with a valid api-token' do
       let!(:balance) { Balance.current(team) }
 
