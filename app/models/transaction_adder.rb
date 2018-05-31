@@ -66,10 +66,6 @@ class TransactionAdder
     receiver_name = data[:relationships][:receiver][:data][:name]
     receiver = team.users.where(name: receiver_name).first
 
-    unless receiver.present?
-      raise 'Receiver does not exist in this team'
-    end
-
     activity = attributes[:activity]
     activity = "#{receiver_name} for: #{activity}" if receiver.nil?
 

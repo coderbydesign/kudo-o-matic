@@ -10,11 +10,11 @@ class Api::V2::StatisticsController < Api::V2::ApiController
 
     @transactions_week = transactions_week.count
     @transactions_month = transactions_month.count
-    @transactions_total = Transaction.count
+    @transactions_total = Transaction.where(team_id: current_team.id).count
 
     @kudos_week = transactions_week.sum(:amount) + likes_count_of_period(period_week)
     @kudos_month = transactions_month.sum(:amount) + likes_count_of_period(period_month)
-    @kudos_total = Transaction.sum(:amount) + likes.count
+    @kudos_total = Transaction.where(team_id: current_team.id).sum(:amount) + likes.count
   end
 
   def user
@@ -44,7 +44,7 @@ class Api::V2::StatisticsController < Api::V2::ApiController
   private
 
   def transactions_period(period)
-    Transaction.where(created_at: period)
+    Transaction.where(created_at: period, team_id: current_team.id)
   end
 
   def likes

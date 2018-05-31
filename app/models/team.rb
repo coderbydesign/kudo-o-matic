@@ -14,6 +14,7 @@ class Team < ActiveRecord::Base
   has_many :balances
   has_many :goals, through: :balances
   has_many :transactions
+  has_many :likes, class_name: 'Vote'
 
   def add_member(user, admin = false)
     TeamMember.create(user: user, team: self, admin: admin)
