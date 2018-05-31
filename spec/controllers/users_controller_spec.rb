@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  let(:team) {create :team}
+  let(:team2) {create :team, name: 'Team Two'}
   let!(:user) {create(:user, :admin, transaction_received_mail: false, goal_reached_mail: false, summary_mail: false)}
+  let!(:user2) {create(:user, name: 'Henk')}
 
   before do
+    team.add_member(user)
+    team2.add_member(user2)
     sign_in user
   end
 
