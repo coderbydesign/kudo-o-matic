@@ -27,4 +27,9 @@ class Api::V2::TransactionResource < Api::V2::BaseResource
     # return nil if the transaction has no thumb image
     @model.image.url(:thumb) == '/images/thumb/missing.png' ? nil : @model.image.url(:thumb)
   end
+
+  def self.records(options = {})
+    context = options[:context]
+    context[:current_team].transactions
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared/api/v1/shared_expectations'
 require 'base64'
@@ -7,19 +9,25 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
 
   describe 'GET api/v2/transactions' do
     let(:application) { create(:application) }
+    let(:team) { create :team }
     let(:user) { create(:user) }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
                                       resource_owner_id: user.id
     end
     let (:request) { '/api/v2/transactions' }
-    let! (:transaction1) { create(:transaction, :image) }
-    let! (:transaction2) { create(:transaction) }
+    let! (:transaction1) { create(:transaction, :image, team_id: team.id) }
+    let! (:transaction2) { create(:transaction, team_id: team.id) }
     let! (:record_count_before_request) { Transaction.count }
 
     context 'with a valid api-token' do
       before do
-        get request, format: :json, access_token: token.token
+        team.add_member(user)
+        get request, headers: {
+          'Authorization': "Bearer #{token.token}",
+          'Content-Type': 'application/json',
+          'Team': team.id
+        }
       end
 
       expect_transaction_count_same
@@ -150,24 +158,30 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
 
   describe 'GET api/v2/transactions?page[limit]=:limit&page[offset]=:offset' do
     let(:application) { create(:application) }
+    let(:team) { create :team }
     let(:user) { create(:user) }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
                                       resource_owner_id: user.id
     end
     let (:request) { '/api/v2/transactions?page[limit]=1&page[offset]=2' }
-    let! (:transaction1) { create(:transaction) }
-    let! (:transaction2) { create(:transaction) }
-    let! (:transaction3) { create(:transaction) }
-    let! (:transaction4) { create(:transaction) }
-    let! (:transaction5) { create(:transaction) }
+    let! (:transaction1) { create(:transaction, team_id: team.id) }
+    let! (:transaction2) { create(:transaction, team_id: team.id) }
+    let! (:transaction3) { create(:transaction, team_id: team.id) }
+    let! (:transaction4) { create(:transaction, team_id: team.id) }
+    let! (:transaction5) { create(:transaction, team_id: team.id) }
     let! (:record_count_before_request) { Transaction.count }
 
     context 'with a valid api-token' do
       let (:user) { create(:user, :api_token) }
 
       before do
-        get request, format: :json, access_token: token.token
+        team.add_member(user)
+        get request, headers: {
+          'Authorization': "Bearer #{token.token}",
+          'Content-Type': 'application/json',
+          'Team': team.id
+        }
       end
 
       expect_transaction_count_same
@@ -219,10 +233,10 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
               }
             ],
             links: {
-              first: "http://www.example.com/api/v2/transactions?page%5Blimit%5D=1&page%5Boffset%5D=0",
-              prev: "http://www.example.com/api/v2/transactions?page%5Blimit%5D=1&page%5Boffset%5D=1",
-              next: "http://www.example.com/api/v2/transactions?page%5Blimit%5D=1&page%5Boffset%5D=3",
-              last: "http://www.example.com/api/v2/transactions?page%5Blimit%5D=1&page%5Boffset%5D=4"
+              first: 'http://www.example.com/api/v2/transactions?page%5Blimit%5D=1&page%5Boffset%5D=0',
+              prev: 'http://www.example.com/api/v2/transactions?page%5Blimit%5D=1&page%5Boffset%5D=1',
+              next: 'http://www.example.com/api/v2/transactions?page%5Blimit%5D=1&page%5Boffset%5D=3',
+              last: 'http://www.example.com/api/v2/transactions?page%5Blimit%5D=1&page%5Boffset%5D=4'
             }
           }.with_indifferent_access
 
@@ -259,18 +273,24 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
 
   describe 'GET api/v2/transactions/:id' do
     let(:application) { create(:application) }
+    let(:team) { create :team }
     let(:user) { create(:user) }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
                                       resource_owner_id: user.id
     end
     let (:request) { "/api/v2/transactions/#{transaction.id}" }
-    let! (:transaction) { create(:transaction, :image) }
+    let! (:transaction) { create(:transaction, :image, team_id: team.id) }
     let! (:record_count_before_request) { Transaction.count }
 
     context 'with a valid api-token' do
       before do
-        get request, format: :json, access_token: token.token
+        team.add_member(user)
+        get request, headers: {
+          'Authorization': "Bearer #{token.token}",
+          'Content-Type': 'application/json',
+          'Team': team.id
+        }
       end
 
       expect_transaction_count_same
@@ -329,7 +349,11 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
 
     context 'with an invalid api-token' do
       before do
-        get request, format: :json, access_token: 'Invalid token'
+        get request, headers: {
+          'Authorization': 'Invalid',
+          'Content-Type': 'application/json',
+          'Team': team.id
+        }
       end
 
       expect_transaction_count_same
@@ -354,24 +378,28 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
 
   describe 'POST api/v2/transactions' do
     let(:application) { create(:application) }
+    let(:team) { create :team }
     let! (:receiver) { create(:user, name: 'Receiver') }
     let(:sender) { create(:user) }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
                                       resource_owner_id: sender.id
     end
-    let (:request) { "/api/v2/transactions" }
-    let! (:transaction) { build(:transaction) }
-    let! (:balance) { create(:balance, :current) }
+    let (:request) { '/api/v2/transactions' }
+    let! (:transaction) { build(:transaction, team_id: team.id) }
+    let! (:balance) { Balance.current(team) }
     let! (:record_count_before_request) { Transaction.count }
 
     context 'with a valid api-token' do
       context 'and an image attachment' do
         before do
+          team.add_member(sender)
+          team.add_member(receiver)
           post request,
                headers: {
                  'Authorization': "Bearer #{token.token}",
-                 'Content-Type': 'application/vnd.api+json'
+                 'Content-Type': 'application/vnd.api+json',
+                 'Team': team.id
                },
                params: {
                  data: {
@@ -379,7 +407,7 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
                    attributes: {
                      amount: transaction.amount,
                      activity: transaction.activity.name,
-                     image: Base64.encode64(File.open(Rails.root + 'spec/fixtures/images/rails.png') { |io| io.read }),
+                     image: Base64.encode64(File.open(Rails.root + 'spec/fixtures/images/rails.png', &:read)),
                      'image-file-type': 'png'
                    },
                    relationships: {
@@ -455,15 +483,22 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
           expect(Transaction.last.sender.name).to eq(sender.name)
         end
 
+        it 'creates a transaction in the right team' do
+          expect(Transaction.last.team_id).to eq(team.id)
+        end
+
         expect_status_201_created
       end
 
       context 'and without an image attachment' do
         before do
+          team.add_member(sender)
+          team.add_member(receiver)
           post request,
                headers: {
-                   'Authorization': "Bearer #{token.token}",
-                 'Content-Type': 'application/vnd.api+json'
+                 'Authorization': "Bearer #{token.token}",
+                 'Content-Type': 'application/vnd.api+json',
+                 'Team': team.id
                },
                params: {
                  data: {
@@ -545,6 +580,10 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
           expect(Transaction.last.sender.name).to eq(sender.name)
         end
 
+        it 'creates a transaction in the right team' do
+          expect(Transaction.last.team_id).to eq(team.id)
+        end
+
         expect_status_201_created
       end
     end
@@ -559,7 +598,7 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
       before do
         post request,
              headers: {
-                 'Authorization': 'Invalid token',
+               'Authorization': 'Invalid token',
                'Content-Type': 'application/vnd.api+json'
              },
              params: {
@@ -625,13 +664,13 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
 
   describe 'PUT api/v2/transactions/:id/like' do
     let(:application) { create(:application) }
+    let(:team) { create :team }
     let(:user) { create(:user) }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
                                       resource_owner_id: user.id
     end
-    let! (:transaction) { create(:transaction) }
-    let (:user) { create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA') }
+    let! (:transaction) { create(:transaction, team_id: team.id) }
     let (:default_vote_flag) { true }
     let (:default_vote_scope) { nil }
     let (:default_vote_weight) { 1 }
@@ -644,7 +683,12 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
         let! (:record_count_before_request) { Vote.count }
 
         before do
-          put request, format: :json, access_token: token.token
+          team.add_member(user)
+          put request, headers: {
+            'Authorization': "Bearer #{token.token}",
+            'Content-Type': 'application/vnd.api+json',
+            'Team': team.id
+          }
         end
 
         it 'persists the vote' do
@@ -724,16 +768,16 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
 
   describe 'DELETE api/v2/transactions/:id/like' do
     let(:application) { create(:application) }
+    let(:team) { create :team }
     let(:user) { create(:user) }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
                                       resource_owner_id: user.id
     end
-    let! (:transaction) { create(:transaction) }
-    let! (:user) { create(:user, api_token: 'X0EfAbSlaeQkXm6gFmNtKA') }
-    let!(:vote) {
+    let! (:transaction) { create(:transaction, team_id: team.id) }
+    let!(:vote) do
       create(:vote, votable_type: 'Transaction', votable_id: transaction.id, voter_type: 'User', voter_id: user.id)
-    }
+    end
     let (:invalid_transaction_id) { -1 }
     let (:invalid_user_id) { -1 }
 
@@ -743,7 +787,12 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
         let! (:record_count_before_request) { Vote.count }
 
         before do
-          delete request, format: :json, access_token: token.token
+          team.add_member(user)
+          delete request, headers: {
+            'Authorization': "Bearer #{token.token}",
+            'Content-Type': 'application/vnd.api+json',
+            'Team': team.id
+          }
         end
 
         it "deletes the vote associated with the transaction and user id's" do
@@ -772,7 +821,11 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
         let! (:record_count_before_request) { Vote.count }
 
         before do
-          delete request, format: :json, access_token: token.token
+          delete request, headers: {
+              'Authorization': "Bearer #{token.token}",
+              'Content-Type': 'application/vnd.api+json',
+              'Team': team.id
+          }
         end
 
         expect_transaction_record_not_found_response

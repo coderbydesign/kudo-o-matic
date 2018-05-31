@@ -13,6 +13,7 @@ class Team < ActiveRecord::Base
   has_many :users, through: :memberships
   has_many :balances
   has_many :goals, through: :balances
+  has_many :transactions
 
   def add_member(user, admin = false)
     TeamMember.create(user: user, team: self, admin: admin)
