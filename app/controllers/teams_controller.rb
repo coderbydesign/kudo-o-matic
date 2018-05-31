@@ -25,6 +25,10 @@ class TeamsController < ApplicationController
     end
   end
 
+  def manage
+
+  end
+
   private
 
   def set_user

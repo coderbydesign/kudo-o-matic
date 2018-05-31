@@ -188,8 +188,12 @@ Rails.application.routes.draw do
     root to: 'transactions#index', as: 'dashboard'
     resources :transactions, only: %i[index show create], param: :id
     get 'transactions/:type', to: 'transactions#filter'
+
     post 'like/:id', to: 'transactions#upvote', as: :like
     post 'unlike/:id', to: 'transactions#downvote', as: :unlike
+
+    get 'manage', to: 'teams#manage'
+
     get :users, to: 'users#autocomplete_search', as: :users_autocomplete
     scope :slack, controller: :slack do
       post :action
