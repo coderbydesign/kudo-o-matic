@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   end
 
   def autocomplete_search
-    @users = User.find_by_term(params[:term])
+    @users = current_team.users.find_by_term(params[:term])
     render json: @users.map(&:name)
   end
 
