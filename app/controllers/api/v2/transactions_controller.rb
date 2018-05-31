@@ -3,7 +3,7 @@ class Api::V2::TransactionsController < Api::V2::ApiController
   after_action :update_slack_transaction, only: [:like, :unlike]
 
   def create
-    @transaction = TransactionAdder.create_from_api_v2_request(api_user, request.headers['Team'], params)
+    @transaction = TransactionAdder.create_from_api_v2_request(api_user, current_team, params)
     @api_user_voted = api_user.voted_on? @transaction
 
     render 'api/v2/transactions/create', status: :created
@@ -28,7 +28,10 @@ class Api::V2::TransactionsController < Api::V2::ApiController
 
   # context that is used by the Transaction JSONAPI::Resource to generate the value of the 'api_user_voted' attribute
   def context
-    {api_user: api_user}
+    {
+        api_user: api_user,
+        current_team: current_team
+    }
   end
 
   def set_transaction
