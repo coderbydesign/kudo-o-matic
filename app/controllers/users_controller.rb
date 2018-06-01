@@ -39,10 +39,6 @@ class UsersController < ApplicationController
     render 'users/export_expired'
   end
 
-  def generate_export_zip
-
-  end
-
   def update
     if @user.update(user_params)
       redirect_to root_url
@@ -60,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def autocomplete_search
-    @users = User.find_by_term(params[:term])
+    @users = current_team.users.find_by_term(params[:term])
     render json: @users.map(&:name)
   end
 

@@ -82,7 +82,7 @@ describe TransactionAdder, type: :model do
           }
         }
       }
-      transaction = TransactionAdder.create_from_api_v2_request(user2, team.id, params)
+      transaction = TransactionAdder.create_from_api_v2_request(user2, team, params)
       expect(transaction.sender.name).to eq(user2.name)
     end
   end

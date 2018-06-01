@@ -75,11 +75,11 @@ Rails.application.configure do
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
       address: ENV['MAIL_ADDRESS'],
-      port: 587,
+      port: ENV['MAIL_PORT'] || 587,
       user_name: ENV['MAIL_USERNAME'],
       password: ENV['MAIL_PASSWORD'],
-      authentication: 'plain',
-      enable_starttls_auto: true
+      authentication: ENV['MAIL_AUTHENTICATION'] || 'plain',
+      enable_starttls_auto: ENV['MAIL_ENABLE_STARTTLS_AUTO'] || true
   }
 
   config.action_mailer.default_url_options = {host: 'kudo-o-matic-staging.dokku.kabisa.io'}
