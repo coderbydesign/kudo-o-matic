@@ -39,10 +39,6 @@ class UsersController < ApplicationController
     render 'users/export_expired'
   end
 
-  def generate_export_zip
-
-  end
-
   def update
     if @user.update(user_params)
       redirect_to root_url
