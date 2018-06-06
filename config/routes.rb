@@ -188,6 +188,11 @@ Rails.application.routes.draw do
     get 'sign_out', to: 'devise/sessions#destroy'
   end
 
+  scope 'invites' do
+    put 'accept/:id', to: 'team_invite#accept', as: :accept_invite
+    put 'decline/:id', to: 'team_invite#decline', as: :decline_invite
+  end
+
   scope ':team' do
     root to: 'transactions#index', as: 'dashboard'
     resources :transactions, only: %i[index show create], param: :id

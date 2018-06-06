@@ -13,6 +13,28 @@ class TeamInviteController < ApplicationController
     end
   end
 
+  def accept
+    invite = TeamInvite.find(params['id'])
+    unless invite.complete?
+      invite.accept
+      flash[:success] = "Successfully accepted invite for #{invite.team.name}"
+      return redirect_to root_path
+    end
+    flash[:error] = "Already accepted or declined invitation"
+    redirect_to root_path
+  end
+
+  def decline
+    invite = TeamInvite.find(params['id'])
+    unless invite.complete?
+      invite.decline
+      flash[:success] = "Successfully declined invite for #{invite.team.name}"
+      return redirect_to root_path
+    end
+    flash[:error] = "Already accepted or declined invitation"
+    redirect_to root_path
+  end
+
   private
 
   def team_invite_params

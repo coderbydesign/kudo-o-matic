@@ -92,3 +92,36 @@ button {
     width: auto;
   }
 }
+
+a.btn.btn-default {
+  background-color: #4B4656;
+  color: #eee;
+  display: inline-block;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  width: auto;
+  border: 1px solid rgba(0,0,0,0.125);
+  border-radius: 0.125rem;
+  font-size: 0.875rem;
+  line-height: normal;
+  margin-left: 10px;
+}
+
+.invites {
+  margin-bottom: 30px;
+}
+
+.invites tr td a.btn {
+  font-size: 10px;
+  padding: 5px;
+}
+
+.invites li {
+  display: flex;
+}
+
+.invite-name {
+  display: inline-block;
+  width: 100px;
+}

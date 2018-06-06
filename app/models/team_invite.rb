@@ -4,6 +4,10 @@ class TeamInvite < ActiveRecord::Base
   belongs_to :team
   belongs_to :user
 
+  def complete?
+    !accepted_at.nil? || !declined_at.nil?
+  end
+
   def accept
     update_attribute(:accepted_at, Time.now)
     TeamMember.create(team: team, user: user, admin: false)
