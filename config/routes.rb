@@ -29,7 +29,6 @@ Rails.application.routes.draw do
   get 'legal/privacy'
 
 
-
   namespace :admin do
     root 'users#index'
 
@@ -144,6 +143,11 @@ Rails.application.routes.draw do
 
       scope :users, controller: :users do
         get :me, to: 'users#me'
+      end
+
+      scope :invites, controller: :team_invites do
+        get :me, to: 'team_invites#me'
+        put ':id', to: 'team_invites#update'
       end
 
       jsonapi_resources :users, only: %i[index show] do
