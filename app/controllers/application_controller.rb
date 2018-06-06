@@ -16,7 +16,13 @@ class ApplicationController < ActionController::Base
   end
 
   def current_team
-    @current_team ||= request.headers['Team'] || Team.find_by_slug!(params[:team])
+    unless @current_team
+      if params[:team]
+        Team.find_by_slug!(params[:team])
+      elsif request.headers['Team']
+        request.headers['Team']
+      end
+    end
   end
 
   protected

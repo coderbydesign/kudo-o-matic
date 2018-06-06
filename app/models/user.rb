@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :received_transactions, class_name: 'Transaction', foreign_key: :receiver_id
   has_many :memberships, class_name: 'TeamMember', foreign_key: :user_id
   has_many :teams, through: :memberships
+  has_many :team_invites, as: :invites
   has_many :votes, foreign_key: 'voter_id'
   has_many :exports, foreign_key: 'user_id'
   has_many :fcm_tokens
@@ -78,7 +79,16 @@ class User < ActiveRecord::Base
   end
 
   def member_of?(team)
-    TeamMember.find_by_user_id_and_team_id(id, team.id).present?
+    memberships.find_by_team_id(team.id).present?
+  end
+
+  def admin_of?(team)
+    membership = memberships.find_by_team_id(team.id)
+    membership&.admin?
+  end
+
+  def invited_to?(team)
+    TeamInvite.find_by_user_id_and_team_id(id, team.id).present?
   end
 
   def all_transactions

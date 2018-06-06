@@ -1,13 +1,14 @@
 .header-bg
   .header
     .img-container
-      - if !@current_team
+      - if !current_team
         %a{href: root_url}
           = image_tag('kudo-o-matic-white.png', class:'header-img')
           = image_tag('lizard.png', class:'mobile-img')
       - else
-        %h1.team-title
-          = @current_team.name
+        %a{href: dashboard_url(team: current_team.slug)}
+          %h1.team-title
+            = current_team.name
 
     .github
       %p

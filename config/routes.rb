@@ -192,7 +192,9 @@ Rails.application.routes.draw do
     post 'like/:id', to: 'transactions#upvote', as: :like
     post 'unlike/:id', to: 'transactions#downvote', as: :unlike
 
+
     get 'manage', to: 'teams#manage'
+    post 'manage/invite', to: 'team_invite#create', as: :invite_from_emails
 
     get :users, to: 'users#autocomplete_search', as: :users_autocomplete
     scope :slack, controller: :slack do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180525092807) do
+ActiveRecord::Schema.define(version: 20180601125208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,16 @@ ActiveRecord::Schema.define(version: 20180525092807) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
   end
 
+  create_table "team_invites", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "user_id"
+    t.datetime "sent_at"
+    t.datetime "accepted_at"
+    t.datetime "declined_at"
+    t.index ["team_id"], name: "index_team_invites_on_team_id", using: :btree
+    t.index ["user_id"], name: "index_team_invites_on_user_id", using: :btree
+  end
+
   create_table "team_members", force: :cascade do |t|
     t.integer  "team_id"
     t.integer  "user_id"
@@ -211,6 +221,8 @@ ActiveRecord::Schema.define(version: 20180525092807) do
   add_foreign_key "exports", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
+  add_foreign_key "team_invites", "teams"
+  add_foreign_key "team_invites", "users"
   add_foreign_key "team_members", "teams"
   add_foreign_key "team_members", "users"
 end

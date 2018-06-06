@@ -26,7 +26,8 @@ class TeamsController < ApplicationController
   end
 
   def manage
-
+    @team = current_team
+    @invites = TeamInviteSubmission.new
   end
 
   private
