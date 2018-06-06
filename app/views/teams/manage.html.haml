@@ -27,6 +27,6 @@
     = form_for(@invites, url: {controller: :team_invite, action: :create}) do |f|
       = f.text_area(:emails, id: 'email-invite-textarea')
       .form-actions.actions
-        = button_tag(type: :submit, class: 'btn btn-default') do
+        = button_tag(type: :submit, class: 'btn btn-default', id: 'send-invites') do
           <i class="fa fa-paper-plane" aria-hidden="true"></i> Send invites
 
