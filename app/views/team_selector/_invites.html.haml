@@ -6,8 +6,8 @@
       %td{width: 100}
         = i.team.name
       %td
-        = link_to accept_invite_path(i.id), class:'btn btn-default', method: :put do
+        = link_to accept_invite_path(i.id), class:"btn btn-default", id: "accept-#{i.id}", method: :put do
           <i class="fa fa-check" aria-hidden="true"></i>
       %td
-        = link_to decline_invite_path(i.id), class:'btn btn-default', method: :put do
+        = link_to decline_invite_path(i.id), class:"btn btn-default", id: "decline-#{i.id}", method: :put do
           <i class="fa fa-times" aria-hidden="true"></i>
