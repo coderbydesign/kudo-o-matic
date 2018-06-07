@@ -15,7 +15,7 @@
             .fa.fa-exclamation-circle
             .message{:class => key}= value
 
-    - if @invites.size > 0
+    - if @invites.any?
       = render 'team_selector/invites', invites: @invites
 
     - if @teams.size == 0

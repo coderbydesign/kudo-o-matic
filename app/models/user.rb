@@ -83,12 +83,15 @@ class User < ActiveRecord::Base
   end
 
   def admin_of?(team)
-    membership = memberships.find_by_team_id(team.id)
-    membership&.admin?
+    @admin_rights = Hash.new do |h, key|
+      h[key] = memberships.find_by_team_id(key)&.admin?
+    end
+    @admin_rights[team.id]
+    # TODO: when we implement the functionality to give/revoke admin rights, we need to make sure to invalidate @admin_rights[team.id]
   end
 
   def invited_to?(team)
-    TeamInvite.find_by_user_id_and_team_id(id, team.id).present?
+    team_invites.where(team_id: team.id).any?
   end
 
   def all_transactions

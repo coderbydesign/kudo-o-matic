@@ -5,15 +5,19 @@ class TeamInvite < ActiveRecord::Base
   belongs_to :user
 
   def complete?
-    !accepted_at.nil? || !declined_at.nil?
+    accepted_at || declined_at
   end
 
   def accept
-    update_attribute(:accepted_at, Time.now)
+    TeamInvite.transaction do
+      update_attribute(:accepted_at, Time.now)
+    end
     TeamMember.create(team: team, user: user, admin: false)
   end
 
   def decline
-    update_attribute(:declined_at, Time.now)
+    TeamInvite.transaction do
+      update_attribute(:declined_at, Time.now)
+    end
   end
 end
