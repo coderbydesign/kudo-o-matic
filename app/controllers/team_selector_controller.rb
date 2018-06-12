@@ -8,7 +8,7 @@ class TeamSelectorController < ApplicationController
       redirect_to dashboard_path(team: current_user.teams.first.slug)
     end
     @teams = current_user.teams
-    @invites = current_user.team_invites.where(accepted_at: nil).where(declined_at: nil)
+    @invites = current_user.team_invites.open
   end
 
 end

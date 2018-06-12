@@ -20,4 +20,8 @@ class TeamInvite < ActiveRecord::Base
       update_attribute(:declined_at, Time.now)
     end
   end
+
+  def self.open
+    where(accepted_at: nil).where(declined_at: nil)
+  end
 end
