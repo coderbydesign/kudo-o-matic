@@ -8,16 +8,20 @@ RSpec.describe TeamInviteAdder, type: :model do
       let!(:user) { create(:user) }
       let!(:user2) { create(:user, name: 'Henk', email: 'henk@example.com') }
       let!(:user3) { create(:user, name: 'Jan', email: 'jan@example.com') }
+      let!(:user4) { create(:user, name: 'Rico', email: 'rico@example.com') }
+      let!(:user5) { create(:user, name: 'Ariejan', email: 'ariejan@example.com') }
       let!(:team) { create :team }
 
       before do
         team.add_member(user)
-        emails = 'henk@example.com,jan@example.com'
+        # This shows that both comma and semicolon delimiters work
+        # It also shows that emails can be entered in different formats
+        emails = 'henk@example.com, jan@example.com; "Rico" <rico@example.com>, Ariejan <ariejan@example.com>'
         TeamInviteAdder.create_from_email_list(emails, team)
       end
 
       it 'creates the invites' do
-        expect(TeamInvite.count).to eq(2)
+        expect(TeamInvite.count).to eq(4)
       end
     end
 

@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-class TeamInviteSubmission
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-
+class TeamInviteForm
+  include EmailRegex
   include ActiveModel::Model
 
   attr_accessor :emails
@@ -13,9 +12,9 @@ class TeamInviteSubmission
   private
 
   def validate_emails
-    email_list = emails.gsub(/\s+/, '').split(',')
+    email_list = emails.split(/\s*[,;]\s*/).map(&:strip)
     email_list.each do |e|
-      unless e.match(VALID_EMAIL_REGEX)
+      unless e.match(EmailRegex.valid_regex)
         errors.add(:emails, 'should only include valid emailadresses')
       end
     end

@@ -16,15 +16,15 @@
           .fa.fa-times.close-message
     %h2.settings-subtitle
       Invite users
-    - if @invites.errors.any?
-      - @invites.errors.full_messages.each do |msg|
+    - if @team_invite_submissions.errors.any?
+      - @team_invite_submissions.errors.full_messages.each do |msg|
         .message-container.show-message
           .margin-bottom{:class => "error-message"}
             %span.message
               .fa.fa-exclamation-circle
               .message{class: :error}= msg
     %p Please enter a comma-separated list of email adresses.
-    = form_for(@invites, url: {controller: :team_invite, action: :create}) do |f|
+    = form_for(@team_invite_submissions, url: {controller: :team_invite, action: :create}) do |f|
       = f.text_area(:emails, id: 'email-invite-textarea')
       .form-actions.actions
         = button_tag(type: :submit, class: 'btn btn-default', id: 'send-invites') do
