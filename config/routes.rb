@@ -203,6 +203,7 @@ Rails.application.routes.draw do
 
 
     get 'manage', to: 'teams#manage'
+    patch 'manage/update', to: 'teams#update', as: :team_update
     post 'manage/invite', to: 'team_invite#create', as: :invite_from_emails
 
     get :users, to: 'users#autocomplete_search', as: :users_autocomplete

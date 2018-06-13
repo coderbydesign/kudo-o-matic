@@ -1,12 +1,12 @@
 %h2.settings-subtitle
   Invite users
-  - if @team_invite_submissions.errors.any?
-    - @team_invite_submissions.errors.full_messages.each do |msg|
-      .message-container.show-message
-        .margin-bottom{:class => "error-message"}
-          %span.message
-            .fa.fa-exclamation-circle
-            .message{class: :error}= msg
+- if @team_invite_submissions.errors.any?
+  - @team_invite_submissions.errors.full_messages.each do |msg|
+    .message-container.show-message
+      .margin-bottom{:class => "error-message"}
+        %span.message
+          .fa.fa-exclamation-circle
+          .message{class: :error}= msg
 %p
   Enter the email addresses of the users you would like to invite. They should be separated by a comma or semicolon.
   The following formats can be used:
