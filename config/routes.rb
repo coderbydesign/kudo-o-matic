@@ -143,6 +143,7 @@ Rails.application.routes.draw do
 
       scope :users, controller: :users do
         get :me, to: 'users#me'
+        get 'me/statistics', to: 'statistics#user'
       end
 
       scope :invites, controller: :team_invites do
@@ -165,7 +166,6 @@ Rails.application.routes.draw do
       scope :statistics, controller: :statistics do
         get :general
         get :graph
-        get :user
       end
 
       scope :authentication, controller: :authentication do
