@@ -30,7 +30,7 @@ describe TransactionAdder, type: :model do
     context 'with a missing Api-Token header' do
       it 'creates a transaction with the wrong sender' do
         headers = {
-          'Authorization': "Bearer #{token.token}",
+          'Authorization': "Bearer #{token.token}", # Ruud
           'Content-Type': 'application/vnd.api+json',
           'Team': "#{team.id}"
         }

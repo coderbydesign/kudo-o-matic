@@ -25,6 +25,11 @@ class TeamsController < ApplicationController
     end
   end
 
+  def manage
+    @team = current_team
+    @team_invite_submissions = TeamInviteForm.new
+  end
+
   private
 
   def set_user

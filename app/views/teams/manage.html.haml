@@ -1,0 +1,17 @@
+= render 'layouts/header'
+.page
+  .settings-container
+    .title-container
+      %h1.settings-title
+        Manage #{current_team.name}
+      .actions
+        = link_to dashboard_path(team: current_team.slug), method: "get", class: 'btn secondary' do
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to dashboard
+    - flash.each do |key, value|
+      .message-container.show-message
+        .margin-bottom{:class => "#{key}-message"}
+          %span.message
+            .fa.fa-exclamation-circle
+            .message{:class => key}= value
+          .fa.fa-times.close-message
+    = render 'teams/invite_form'

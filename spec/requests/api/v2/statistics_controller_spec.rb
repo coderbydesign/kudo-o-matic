@@ -124,7 +124,7 @@ RSpec.describe Api::V2::StatisticsController, type: :request do
     end
   end
 
-  describe 'GET api/v2/statistics/user' do
+  describe 'GET api/v2/users/me/statistics' do
     let(:application) { create(:application) }
     let(:team) { create :team }
     let(:user) { create(:user) }
@@ -132,7 +132,7 @@ RSpec.describe Api::V2::StatisticsController, type: :request do
       Doorkeeper::AccessToken.create! application_id: application.id,
                                       resource_owner_id: user.id
     end
-    let(:request) { '/api/v2/statistics/user' }
+    let(:request) { '/api/v2/users/me/statistics' }
 
     before do
       team.add_member(user)

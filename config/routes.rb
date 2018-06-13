@@ -29,7 +29,6 @@ Rails.application.routes.draw do
   get 'legal/privacy'
 
 
-
   namespace :admin do
     root 'users#index'
 
@@ -144,6 +143,12 @@ Rails.application.routes.draw do
 
       scope :users, controller: :users do
         get :me, to: 'users#me'
+        get 'me/statistics', to: 'statistics#user'
+      end
+
+      scope :invites, controller: :team_invites do
+        get :me, to: 'team_invites#me'
+        put ':id', to: 'team_invites#update'
       end
 
       jsonapi_resources :users, only: %i[index show] do
@@ -161,7 +166,6 @@ Rails.application.routes.draw do
       scope :statistics, controller: :statistics do
         get :general
         get :graph
-        get :user
       end
 
       scope :authentication, controller: :authentication do
@@ -184,12 +188,23 @@ Rails.application.routes.draw do
     get 'sign_out', to: 'devise/sessions#destroy'
   end
 
+  scope 'invites' do
+    put 'accept/:id', to: 'team_invite#accept', as: :accept_invite
+    put 'decline/:id', to: 'team_invite#decline', as: :decline_invite
+  end
+
   scope ':team' do
     root to: 'transactions#index', as: 'dashboard'
     resources :transactions, only: %i[index show create], param: :id
     get 'transactions/:type', to: 'transactions#filter'
+
     post 'like/:id', to: 'transactions#upvote', as: :like
     post 'unlike/:id', to: 'transactions#downvote', as: :unlike
+
+
+    get 'manage', to: 'teams#manage'
+    post 'manage/invite', to: 'team_invite#create', as: :invite_from_emails
+
     get :users, to: 'users#autocomplete_search', as: :users_autocomplete
     scope :slack, controller: :slack do
       post :action

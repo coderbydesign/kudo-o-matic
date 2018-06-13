@@ -20,6 +20,11 @@
         %span.flex-item
           New team
         %i.fa.fa-plus
+      - if current_user.admin_of?(current_team)
+        %a.menu-content{id: 'team-manage-button-desktop', href: manage_url(team: current_team.slug)}
+          %span.flex-item
+            Manage #{current_team.name}
+          %i.fa.fa-users
       %a.menu-content{href: '/account'}
         %span.flex-item
           Account
@@ -75,6 +80,11 @@
         %span.flex-item
           New team
         %i.fa.fa-plus
+      - if current_user.admin_of?(current_team)
+        %a.menu-content{href: manage_url(team: current_team.slug)}
+          %span.flex-item
+            Manage #{current_team.slug}
+          %i.fa.fa-users
       %a.menu-content{href: '/account'}
         %span.flex-item
           Account

@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_team
-    @current_team ||= request.headers['Team'] || Team.find_by_slug!(params[:team])
+    @current_team ||= team_by_slug
   end
 
   protected
@@ -29,4 +29,11 @@ class ApplicationController < ActionController::Base
         %i[name email password password_confirmation])
   end
 
+  def team_by_slug
+    if params[:team]
+      Team.find_by_slug!(params[:team])
+    else
+      nil
+    end
+  end
 end

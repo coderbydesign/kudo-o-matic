@@ -8,6 +8,16 @@
         = link_to sign_out_path, method: "get", class: 'btn secondary' do
           <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
 
+    - flash.each do |key, value|
+      .message-container.show-message
+        .margin-bottom{:class => "#{key}-message"}
+          %span.message
+            .fa.fa-exclamation-circle
+            .message{:class => key}= value
+
+    - if @invites.any?
+      = render 'team_selector/invites', invites: @invites
+
     - if @teams.size == 0
       %h2.settings-subtitle
         You are not in a team yet

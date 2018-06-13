@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :received_transactions, class_name: 'Transaction', foreign_key: :receiver_id
   has_many :memberships, class_name: 'TeamMember', foreign_key: :user_id
   has_many :teams, through: :memberships
+  has_many :team_invites
   has_many :votes, foreign_key: 'voter_id'
   has_many :exports, foreign_key: 'user_id'
   has_many :fcm_tokens
@@ -78,7 +79,19 @@ class User < ActiveRecord::Base
   end
 
   def member_of?(team)
-    TeamMember.find_by_user_id_and_team_id(id, team.id).present?
+    memberships.find_by_team_id(team.id).present?
+  end
+
+  def admin_of?(team)
+    @admin_rights = Hash.new do |h, key|
+      h[key] = memberships.find_by_team_id(key)&.admin?
+    end
+    @admin_rights[team.id]
+    # TODO: when we implement the functionality to give/revoke admin rights, we need to make sure to invalidate @admin_rights[team.id]
+  end
+
+  def invited_to?(team)
+    team_invites.where(team_id: team.id).any?
   end
 
   def all_transactions

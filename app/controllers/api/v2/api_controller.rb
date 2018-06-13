@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V2::ApiController < JSONAPI::ResourceController
   abstract
 
@@ -15,17 +17,16 @@ class Api::V2::ApiController < JSONAPI::ResourceController
   private
 
   def doorkeeper_unauthorized_render_options(error: nil)
-    error_object_overrides = {title: 'Unauthorized',
-                              detail: 'No valid API token was provided.'}
-    {json: {
-        errors: Api::V1::UnauthorizedError.new(error_object_overrides).errors
-    }}
+    error_object_overrides = { title: 'Unauthorized',
+                               detail: 'No valid API token was provided.' }
+    { json: {
+      errors: Api::V1::UnauthorizedError.new(error_object_overrides).errors
+    } }
   end
 
   def set_default_response_format
     request.format = :json
   end
-
 
   def current_resource_owner
     User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
