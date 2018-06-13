@@ -12,6 +12,7 @@ RSpec.describe Api::V2::TeamsController, type: :request do
     let(:team2) { create :team, name: 'The Company', slug: 'the-company' }
     let(:team3) { create :team, name: 'The Invited', slug: 'the-invited' }
     let(:team4) { create :team, name: 'The Second Invited', slug: 'the-second-invited' }
+    let(:team5) { create :team, name: 'The Third Invited', slug: 'the-third-invited' }
     let(:user) { create(:user) }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
@@ -19,6 +20,7 @@ RSpec.describe Api::V2::TeamsController, type: :request do
     end
     let!(:invite) { TeamInvite.create(user: user, team: team3) }
     let!(:invite2) { TeamInvite.create(user: user, team: team4, accepted_at: Time.now) }
+    let!(:invite3) { TeamInvite.create(user: user, team: team5, declined_at: Time.now) }
     let(:request) { '/api/v2/teams/me' }
 
     before do
