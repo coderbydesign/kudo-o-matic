@@ -2,7 +2,7 @@
 
 class Team < ActiveRecord::Base
   after_create :setup_team
-  has_attached_file :logo, styles: {thumb: '600x600'}
+  has_attached_file :logo, styles: {thumb: '320x120'}
   validates :name, presence: true
   validates :slug, presence: true
   validates_attachment :logo, content_type: {content_type: %w(image/jpeg image/png)}
