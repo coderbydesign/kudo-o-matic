@@ -4,7 +4,7 @@ require 'shared/api/v1/shared_expectations'
 RSpec.describe Api::V2::UsersController, type: :request do
   include RequestHelpers
 
-  # Skip the after_create callback in this spec, because we are working with specific balances and goals
+  # Skip the after_create callback in this spec, because we dont need the company user here
   before do
     Team.skip_callback(:create, :after, :setup_team)
   end
