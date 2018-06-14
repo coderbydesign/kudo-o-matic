@@ -201,4 +201,57 @@ RSpec.describe Api::V2::UsersController, type: :request do
       expect_status_401_unauthorized
     end
   end
+
+  describe 'GET api/v2/users/me' do
+    let(:application) { create(:application) }
+    let(:user) { create(:user) }
+    let(:token) do
+      Doorkeeper::AccessToken.create! application_id: application.id,
+                                      resource_owner_id: user.id
+    end
+    let(:request) { "/api/v2/users/me" }
+    let!(:record_count_before_request) { User.count }
+
+    context 'with a valid api-token' do
+      before do
+        get request, format: :json, access_token: token.token
+      end
+
+      it 'returns the current user' do
+        expected =
+          {
+            name: "John",
+            avatar_url: nil
+          }.with_indifferent_access
+
+        expect(json).to eq(expected)
+      end
+
+      expect_status_200_ok
+    end
+
+    context 'with an invalid api-token' do
+      before do
+        get request, format: :json, access_token: 'Invalid token'
+      end
+
+      expect_user_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+
+    context 'without an api-token' do
+      before do
+        get request
+      end
+
+      expect_user_count_same
+
+      expect_unauthorized_response
+
+      expect_status_401_unauthorized
+    end
+  end
 end
