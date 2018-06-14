@@ -2,9 +2,13 @@
   .header
     .img-container
       - if current_team
-        %a{href: dashboard_url(team: current_team.slug)}
-          %h1.team-title
-            = current_team.name
+        -if current_team.logo.present?
+          = link_to image_tag(current_team.logo.exists?(:thumb) ? current_team.logo.url(:thumb) : current_team.logo,
+                  class:'team-logo'), dashboard_url(team: current_team.slug)
+        -else
+          %a{href: dashboard_url(team: current_team.slug)}
+            %h1.team-title
+              = current_team.name
       - else
         %a{href: root_url}
           = image_tag('kudo-o-matic-white.png', class:'header-img')

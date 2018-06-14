@@ -15,6 +15,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_team_admin_rights
+    unless current_user.admin_of?(current_team)
+      redirect_to(dashboard_path(current_team.slug))
+    end
+  end
+
   def current_team
     @current_team ||= team_by_slug
   end

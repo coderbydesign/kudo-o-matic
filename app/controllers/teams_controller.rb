@@ -2,6 +2,7 @@
 
 class TeamsController < ApplicationController
   before_action :set_user, only: [:index, :create]
+  before_action :check_team_admin_rights, only: [:manage]
 
   def new
     @team = Team.new(team_params)

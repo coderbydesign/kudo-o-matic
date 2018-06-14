@@ -16,6 +16,11 @@
         %span.flex-item
           Releases
         %i.fa.fa-wrench
+      -if current_user.multiple_teams? || current_user.invites?
+        %a.menu-content{href: '/'}
+          %span.flex-item
+            Teams & invites
+          %i.fa.fa-users
       %a.menu-content{href: '/teams/new'}
         %span.flex-item
           New team
