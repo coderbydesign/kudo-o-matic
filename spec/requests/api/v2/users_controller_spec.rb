@@ -4,10 +4,23 @@ require 'shared/api/v1/shared_expectations'
 RSpec.describe Api::V2::UsersController, type: :request do
   include RequestHelpers
 
+  # Skip the after_create callback in this spec, because we are working with specific balances and goals
+  before do
+    Team.skip_callback(:create, :after, :setup_team)
+  end
+
+  # After this spec, set the callback again, so other specs can make use of it
+  after do
+    Team.set_callback(:create, :after, :setup_team)
+  end
+
   describe 'GET api/v2/users' do
     let(:application) { create(:application) }
+    let!(:team) { create :team }
     let!(:user1) { create(:user) }
-    let!(:user2) { create(:user) }
+    let!(:user2) { create(:user, name: 'Rico', email: 'rico@example.com') }
+    let!(:user3) { create(:user, name: 'Hank', email: 'hank@example.com') }
+    let!(:user4) { create(:user, name: 'Foo', email: 'foo@example.com') }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
                                       resource_owner_id: user1.id
@@ -17,8 +30,16 @@ RSpec.describe Api::V2::UsersController, type: :request do
     let!(:record_count_before_request) { User.count }
 
     context 'with a valid api-token' do
+
       before do
-        get request, format: :json, access_token: token.token
+        team.add_member(user1)
+        team.add_member(user2)
+        team.add_member(user3)
+        get request, headers: {
+            'Authorization': "Bearer #{token.token}",
+            'Content-Type': 'application/json',
+            'Team': team.id
+        }
       end
 
       expect_user_count_same
@@ -27,35 +48,6 @@ RSpec.describe Api::V2::UsersController, type: :request do
         expected =
           {
             data: [
-              {
-                id: user1.id.to_s,
-                type: 'users',
-                links: {
-                  self: "http://www.example.com#{request}/#{user1.id}"
-                },
-                attributes: {
-                  'created-at': to_api_timestamp_format(user1.created_at),
-                  'updated-at': to_api_timestamp_format(user1.updated_at),
-                  name: user1.name,
-                  email: user1.email,
-                  'avatar-url': user1.avatar_url,
-                  admin: user1.admin
-                },
-                relationships: {
-                  'sent-transactions': {
-                    links: {
-                      self: "http://www.example.com#{request}/#{user1.id}/relationships/sent-transactions",
-                      related: "http://www.example.com#{request}/#{user1.id}/sent-transactions"
-                    }
-                  },
-                  'received-transactions': {
-                    links: {
-                      self: "http://www.example.com#{request}/#{user1.id}/relationships/received-transactions",
-                      related: "http://www.example.com#{request}/#{user1.id}/received-transactions"
-                    }
-                  }
-                }
-              },
               {
                 id: user2.id.to_s,
                 type: 'users',
@@ -81,6 +73,35 @@ RSpec.describe Api::V2::UsersController, type: :request do
                     links: {
                       self: "http://www.example.com#{request}/#{user2.id}/relationships/received-transactions",
                       related: "http://www.example.com#{request}/#{user2.id}/received-transactions"
+                    }
+                  }
+                }
+              },
+              {
+                id: user3.id.to_s,
+                type: 'users',
+                links: {
+                  self: "http://www.example.com#{request}/#{user3.id}"
+                },
+                attributes: {
+                  'created-at': to_api_timestamp_format(user3.created_at),
+                  'updated-at': to_api_timestamp_format(user3.updated_at),
+                  name: user3.name,
+                  email: user3.email,
+                  'avatar-url': user3.avatar_url,
+                  admin: user3.admin
+                },
+                relationships: {
+                  'sent-transactions': {
+                    links: {
+                      self: "http://www.example.com#{request}/#{user3.id}/relationships/sent-transactions",
+                      related: "http://www.example.com#{request}/#{user3.id}/sent-transactions"
+                    }
+                  },
+                  'received-transactions': {
+                    links: {
+                      self: "http://www.example.com#{request}/#{user3.id}/relationships/received-transactions",
+                      related: "http://www.example.com#{request}/#{user3.id}/received-transactions"
                     }
                   }
                 }
@@ -121,18 +142,25 @@ RSpec.describe Api::V2::UsersController, type: :request do
 
   describe 'GET api/v2/users/:id' do
     let(:application) { create(:application) }
-    let(:user) { create(:user) }
+    let!(:team) { create :team }
+    let!(:user) { create(:user) }
+    let!(:user2) {create :user}
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
-                                      resource_owner_id: user.id
+                                      resource_owner_id: user2.id
     end
     let(:request) { "/api/v2/users/#{user.id}" }
-    let!(:user) { create(:user, :api_token) }
     let!(:record_count_before_request) { User.count }
 
     context 'with a valid api-token' do
       before do
-        get request, format: :json, access_token: token.token
+        team.add_member(user)
+        team.add_member(user2)
+        get request, headers: {
+            'Authorization': "Bearer #{token.token}",
+            'Content-Type': 'application/json',
+            'Team': team.id
+        }
       end
 
       expect_user_count_same
@@ -179,7 +207,11 @@ RSpec.describe Api::V2::UsersController, type: :request do
 
     context 'with an invalid api-token' do
       before do
-        get request, format: :json, access_token: 'Invalid token'
+        get request, headers: {
+            'Authorization': "Invalid",
+            'Content-Type': 'application/json',
+            'Team': team.id
+        }
       end
 
       expect_user_count_same
@@ -191,7 +223,10 @@ RSpec.describe Api::V2::UsersController, type: :request do
 
     context 'without an api-token' do
       before do
-        get request
+        get request, headers: {
+            'Content-Type': 'application/json',
+            'Team': team.id
+        }
       end
 
       expect_user_count_same
