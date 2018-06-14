@@ -138,7 +138,7 @@ class User < ActiveRecord::Base
   def to_profile_json
     Jbuilder.new do |user|
       user.name name
-      user.avatar_url picture_url
+      user.avatar_url avatar_url
     end
   end
 
