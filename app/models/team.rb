@@ -2,10 +2,11 @@
 
 class Team < ActiveRecord::Base
   after_create :setup_team
-  has_attached_file :logo, styles: {thumb: '320x120'}
+  after_validation :logo_reverted?
+  has_attached_file :logo, styles: { thumb: '320x120' }
   validates :name, presence: true
   validates :slug, presence: true
-  validates_attachment :logo, content_type: {content_type: %w(image/jpeg image/png)}
+  validates_attachment :logo, content_type: { content_type: %w[image/jpeg image/png] }
   validates_with AttachmentSizeValidator, attributes: :logo, less_than: 10.megabytes
   process_in_background :logo
 
@@ -36,7 +37,7 @@ class Team < ActiveRecord::Base
 
   def setup_team
     # Create balances and goals
-    balance = Balance.create(name: "My first balance", current: true,
+    balance = Balance.create(name: 'My first balance', current: true,
                              team_id: id)
     Goal.create(name: 'First goal', amount: 500, balance_id: balance.id)
     Goal.create(name: 'Second goal', amount: 1000, balance_id: balance.id)
@@ -46,5 +47,15 @@ class Team < ActiveRecord::Base
     user = User.new(name: name, company_user: true)
     user.save(validate: false)
     add_member(user)
+  end
+
+  # A hacky but necessary fix to keep showing the current Team logo on logo validation errors
+  # https://stackoverflow.com/questions/5526589/paperclip-wrong-attachment-url-on-validation-errors#answer-5995636
+  def logo_reverted?
+    unless errors[:logo_file_size].blank? && errors[:logo_content_type].blank?
+      logo.instance_write(:file_name, logo_file_name_was)
+      logo.instance_write(:file_size, logo_file_size_was)
+      logo.instance_write(:content_type, logo_content_type_was)
+    end
   end
 end

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.feature 'Update a team', type: :feature do
   let(:user) { create :user }
-  let(:team) { create :team }
+  let(:team) { create :team, logo: File.new(Rails.root + 'spec/fixtures/images/rails.png') }
 
   before do
     team.add_member(user, true)
@@ -53,4 +53,14 @@ RSpec.feature 'Update a team', type: :feature do
     end
   end
 
+  context 'Update a team with an invalid image' do
+    before do
+      team.logo = File.new(Rails.root + 'spec/fixtures/images/earth.gif')
+      team.save
+    end
+
+    it 'should keep the old image' do
+      expect(team.logo_file_name).to eql('rails.png')
+    end
+  end
 end

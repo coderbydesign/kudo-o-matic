@@ -7,17 +7,17 @@ RSpec.describe Api::V2::TeamsController, type: :request do
   include RequestHelpers
 
   describe 'GET api/v2/teams/me' do
-    let(:application) { create(:application) }
-    let(:team) { create(:team) }
-    let(:team2) { create :team, name: 'The Company', slug: 'the-company' }
-    let(:team3) { create :team, name: 'The Invited', slug: 'the-invited' }
-    let(:user) { create(:user) }
+    let(:application) {create(:application)}
+    let(:team) {create(:team)}
+    let(:team2) {create :team, name: 'The Company', slug: 'the-company'}
+    let(:team3) {create :team, name: 'The Invited', slug: 'the-invited'}
+    let(:user) {create(:user)}
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
                                       resource_owner_id: user.id
     end
-    let!(:invite) { TeamInvite.create(user: user, team: team3) }
-    let(:request) { '/api/v2/teams/me' }
+    let!(:invite) {TeamInvite.create(user: user, team: team3)}
+    let(:request) {'/api/v2/teams/me'}
 
     before do
       team.add_member(user)
@@ -31,33 +31,33 @@ RSpec.describe Api::V2::TeamsController, type: :request do
 
       it 'returns a list of teams' do
         expected =
-          {
-            data: {
-              amountOfTeams: 2,
-              teams: [
-                {
-                  id: team.id,
-                  name: team.name,
-                  slug: team.slug,
-                  logo: ''
-                },
-                {
-                  id: team2.id,
-                  name: team2.name,
-                  slug: team2.slug,
-                  logo: ''
+            {
+                data: {
+                    amountOfTeams: 2,
+                    teams: [
+                        {
+                            id: team2.id,
+                            name: team2.name,
+                            slug: team2.slug,
+                            logo: ''
+                        },
+                        {
+                            id: team.id,
+                            name: team.name,
+                            slug: team.slug,
+                            logo: ''
+                        }
+                    ],
+                    amountOfInvites: 1,
+                    invites: [
+                        {
+                            id: invite.id,
+                            name: team3.name,
+                            logo: ''
+                        }
+                    ]
                 }
-              ],
-              amountOfInvites: 1,
-              invites: [
-                {
-                  id: invite.id,
-                  name: team3.name,
-                  logo: ''
-                }
-              ]
-            }
-          }.with_indifferent_access
+            }.with_indifferent_access
 
         expect(json).to eq(expected)
       end
