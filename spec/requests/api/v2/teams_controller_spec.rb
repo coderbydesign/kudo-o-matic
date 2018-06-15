@@ -9,8 +9,8 @@ RSpec.describe Api::V2::TeamsController, type: :request do
   describe 'GET api/v2/teams/me' do
     let(:application) { create(:application) }
     let(:team) { create(:team) }
-    let(:team2) { create :team, name: 'The Company', slug: 'the-company' }
-    let(:team3) { create :team, name: 'The Invited', slug: 'the-invited' }
+    let(:team2) { create :team, name: 'The Company', slug: 'the-company', created_at: Time.now + 1.hour }
+    let(:team3) { create :team, name: 'The Invited', slug: 'the-invited', created_at: Time.now + 2.hour }
     let(:user) { create(:user) }
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
