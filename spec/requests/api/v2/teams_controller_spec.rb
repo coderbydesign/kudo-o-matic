@@ -36,15 +36,15 @@ RSpec.describe Api::V2::TeamsController, type: :request do
               amountOfTeams: 2,
               teams: [
                 {
-                  id: team2.id,
-                  name: team2.name,
-                  slug: team2.slug,
-                  logo: ''
-                },
-                {
                   id: team.id,
                   name: team.name,
                   slug: team.slug,
+                  logo: ''
+                },
+                {
+                  id: team2.id,
+                  name: team2.name,
+                  slug: team2.slug,
                   logo: ''
                 }
               ],
