@@ -4,7 +4,7 @@ class Api::V2::TeamInvitesController < Api::V2::ApiController
   def update
     invite_id = params[:id]
     accept = params['accept']
-    @invite = TeamInvite.where(id: invite_id).where(accepted_at: nil).where(declined_at: nil).first
+    @invite = api_user.team_invites.open.where(id: invite_id).first
     if @invite
       if accept
         @invite.accept
