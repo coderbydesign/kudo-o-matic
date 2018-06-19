@@ -13,13 +13,9 @@ class Api::V2::TeamInvitesController < Api::V2::ApiController
       render 'api/v2/teams/declined', status: :ok
     end
   rescue ActiveRecord::RecordNotFound
-    render json: {
-      'errors': [
-        {
-          title: 'Expired invite',
-          detail: 'This invite does not exist or has expired'
-        }
-      ]
-    }
+    render json: { 'errors': [{
+      title: 'Expired invite',
+      detail: 'This invite does not exist or has expired'
+    }] }
   end
 end
