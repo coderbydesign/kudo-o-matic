@@ -30,7 +30,11 @@
     - else
       %h2.settings-subtitle
         Choose your team
-      %ul
+      .logo-grid
         - @teams.each do |t|
-          %li
-            = link_to t.name, dashboard_path(t.slug)
+          -if t.logo.exists?
+            = link_to image_tag(t.logo.url), dashboard_path(t.slug), class: 'team-logo-selection'
+          -else
+            = link_to t.name, dashboard_path(t.slug), class:'team-logo-selection placeholder'
+
+
