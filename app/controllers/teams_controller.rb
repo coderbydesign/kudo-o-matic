@@ -2,14 +2,7 @@
 
 class TeamsController < ApplicationController
   before_action :set_user, only: [:index, :create]
-
-  def index
-    # If user has only one team, redirect to that team's dashboard
-    if @user.teams.one?
-      redirect_to dashboard_path(team: @user.teams.first.slug)
-    end
-    @teams = @user.teams
-  end
+  before_action :check_team_admin_rights, only: [:manage]
 
   def new
     @team = Team.new(team_params)
@@ -28,6 +21,17 @@ class TeamsController < ApplicationController
   def manage
     @team = current_team
     @team_invite_submissions = TeamInviteForm.new
+  end
+
+  def update
+    @team = current_team
+    @team_invite_submissions = TeamInviteForm.new
+    if @team.update(team_params)
+      flash[:success] = 'Successfully updated team!'
+      redirect_to manage_path(@team.slug)
+    else
+      render :manage
+    end
   end
 
   private

@@ -126,6 +126,10 @@ class User < ActiveRecord::Base
     teams.length > 1
   end
 
+  def invites?
+    team_invites.length > 1
+  end
+
   # overridden Devise method that checks the soft delete timestamp on authentication
   def active_for_authentication?
     super && !deactivated_at

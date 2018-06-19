@@ -19,7 +19,7 @@ RSpec.feature 'Add a team', type: :feature do
     @teams_before = Team.count
   end
 
-  context 'Succesfully created team' do
+  context 'Successfully created team' do
     before do
       fill_in 'team_name', with: 'Kabisa'
       fill_in 'team_slug', with: 'kabisa'
@@ -39,6 +39,29 @@ RSpec.feature 'Add a team', type: :feature do
 
     it 'gives Kudos to the creator of the team' do
       expect(Transaction.find_by_receiver_id_and_team_id(user.id, Team.last.id)).to be_present
+    end
+  end
+
+  context 'Unsuccessfully created team' do
+    before do
+      fill_in 'team_name', with: ''
+      fill_in 'team_slug', with: ''
+      fill_in 'team_general_info', with: 'This is some basic general info'
+      click_button 'create-team-button'
+    end
+
+    it 'does not create a new team' do
+      expect(Team.count).to eq(@teams_before)
+    end
+
+    it 'does not create a balance and goals' do
+      expect(Balance.count).to eq(0)
+      expect(Goal.count).to eq(0)
+    end
+
+    it 'shows error messages' do
+      expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content("Slug can't be blank")
     end
   end
 end

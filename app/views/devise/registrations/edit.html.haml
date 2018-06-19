@@ -14,33 +14,29 @@
           #notice= notice
     %h2.settings-subtitle
       Details
-    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form' }) do |f|
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name),
+    html: { method: :put, class: 'simple_form form' }) do |f|
       = devise_error_messages!
       .form-inputs
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
           %p
             Currently waiting confirmation for: #{resource.unconfirmed_email}
         .form-field
-          = f.label :name
-          = f.text_field :name, required: false, autocomplete: false
+          = f.input :name, required: false, autocomplete: false, wrapper: false
         .form-field
-          = f.label :email
-          = f.text_field :email, required: true, autocomplete: false
+          = f.input :email, required: true, autocomplete: false, wrapper: false
         .form-field
-          = f.label :password
-          = f.password_field :password, required: false, placeholder: 'Leave this empty if you don\'t want to change it',
-          autocomplete: false
+          = f.input :password, required: false, placeholder: 'Leave this empty if you don\'t want to change it',
+          autocomplete: false, wrapper: false
         .form-field
-          = f.label :password_confirmation
-          = f.password_field :password_confirmation, required: false, autocomplete: false
+          = f.input :password_confirmation, required: false, autocomplete: false, wrapper: false
         .confirm-changes
           .confirm-changes-message
             Confirm your changes by providing your current password
           .form-field
-            = f.label :current_password
-            = f.password_field :current_password, required: false, autocomplete: false
+            = f.input :current_password, required: false, autocomplete: false, wrapper: false
       .form-actions.actions
-        = f.button :submit, "Update", class: 'btn'
+        = f.submit "Update", class: 'btn'
     %h2.settings-subtitle
       Data tools
     Here you can view all of your data that is currently being stored.

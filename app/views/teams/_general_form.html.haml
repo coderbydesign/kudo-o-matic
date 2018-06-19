@@ -1,0 +1,21 @@
+%h2.settings-subtitle
+  General info
+- if @team.errors.any?
+  - @team.errors.full_messages.each do |msg|
+    .message-container.show-message
+      .margin-bottom.error-message
+        %span.message
+          .fa.fa-exclamation-circle
+          .message.error= msg
+= simple_form_for @team, url: team_update_path(@team.slug), html: {class: 'simple_form form'} do |f|
+  .form-inputs
+    .form-field
+      = f.input :name, id: 'team-name-field', name: 'name', wrapper: false, input_html: { name: 'name' }
+    .form-field
+      = f.input :general_info, as: :text, id: 'team-general-info-field', name: 'general_info', wrapper: false,
+      input_html: { name: 'general_info' }
+    .form-field
+      = f.input :logo, id: 'team-logo-field', as: :file, name: 'logo', wrapper: false,
+      input_html: { name: 'logo' }
+  .form-actions.actions
+    = f.button :submit, "Update", class: 'btn', id: 'update-team-button'

@@ -3,11 +3,12 @@
 class TeamInviteController < ApplicationController
   def create
     @team_invite_submissions = TeamInviteForm.new(team_invite_params)
+    @team = current_team
 
     if @team_invite_submissions.valid?
-      TeamInviteAdder.create_from_email_list(@team_invite_submissions.emails, current_team)
+      TeamInviteAdder.create_from_email_list(@team_invite_submissions.emails, @team)
       flash[:success] = 'Team invites have been sent!'
-      redirect_to manage_path(team: current_team.slug)
+      redirect_to manage_path(team: @team.slug)
     else
       render 'teams/manage'
     end
