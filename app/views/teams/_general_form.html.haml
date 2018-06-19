@@ -3,7 +3,7 @@
 - if @team.errors.any?
   - @team.errors.full_messages.each do |msg|
     .message-container.show-message
-      .margin-bottom{:class => "error-message"}
+      .margin-bottom.error-message
         %span.message
           .fa.fa-exclamation-circle
           .message.error= msg
