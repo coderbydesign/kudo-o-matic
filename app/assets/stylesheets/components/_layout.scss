@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     height: 100%;
-    h1.team-title{
+    h1.team-title {
       color: #FFFFFF;
     }
   }
@@ -98,6 +98,31 @@
   justify-content: space-between;
 }
 
+.logo-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.team-logo-selection {
+  display: flex;
+  height: 120px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #4b4656;
+  padding: 15px;
+  margin-bottom: 15px;
+  flex: 0 50%;
+  border: 2px solid #FFF;
+  img {
+    max-width: 100%;
+  }
+  &.placeholder {
+    font-size: 18px;
+    color: #FFF;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   .body {
     display: flex;
@@ -177,4 +202,6 @@
     display: block;
   }
 }
+
+
 
