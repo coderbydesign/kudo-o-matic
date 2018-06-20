@@ -2,7 +2,7 @@
 
 class Team < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :slug_candidates, use: :slugged
   after_create :setup_team
   after_validation :logo_reverted?
   has_attached_file :logo, styles: { thumb: '320x120' }
@@ -18,6 +18,16 @@ class Team < ActiveRecord::Base
   has_many :goals, through: :balances
   has_many :transactions
   has_many :likes, class_name: 'Vote'
+
+  def slug_candidates
+    %i[name name_and_sequence]
+  end
+
+  def name_and_sequence
+    slug = name.parameterize
+    sequence = Team.where('slug like ?', "#{slug}-%").count + 2
+    "#{slug}-#{sequence}"
+  end
 
   def add_member(user, admin = false)
     TeamMember.create(user: user, team: self, admin: admin)
