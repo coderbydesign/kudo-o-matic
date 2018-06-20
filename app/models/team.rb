@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Team < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: :slugged
   after_create :setup_team
   after_validation :logo_reverted?
   has_attached_file :logo, styles: { thumb: '320x120' }

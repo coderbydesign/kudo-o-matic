@@ -22,8 +22,6 @@ RSpec.feature 'Add a team', type: :feature do
   context 'Successfully created team' do
     before do
       fill_in 'team_name', with: 'Kabisa'
-      fill_in 'team_slug', with: 'kabisa'
-      fill_in 'team_general_info', with: 'This is some basic general info'
       click_button 'create-team-button'
     end
 
@@ -45,8 +43,6 @@ RSpec.feature 'Add a team', type: :feature do
   context 'Unsuccessfully created team' do
     before do
       fill_in 'team_name', with: ''
-      fill_in 'team_slug', with: ''
-      fill_in 'team_general_info', with: 'This is some basic general info'
       click_button 'create-team-button'
     end
 
@@ -61,7 +57,6 @@ RSpec.feature 'Add a team', type: :feature do
 
     it 'shows error messages' do
       expect(page).to have_content("Name can't be blank")
-      expect(page).to have_content("Slug can't be blank")
     end
   end
 end

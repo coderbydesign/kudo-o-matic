@@ -5,7 +5,7 @@ class TeamsController < ApplicationController
   before_action :check_team_admin_rights, only: [:manage]
 
   def new
-    @team = Team.new(team_params)
+    @team = Team.new(create_team_params)
   end
 
   def create
@@ -42,6 +42,10 @@ class TeamsController < ApplicationController
 
   def check_restricted
     redirect_to root_url if current_user.restricted?
+  end
+
+  def create_team_params
+    params.permit(:name)
   end
 
   def team_params
