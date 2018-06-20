@@ -19,7 +19,7 @@ RSpec.feature 'Accepting or declining an invite', type: :feature do
   context 'accepting the invite' do
     before do
       find('.invites').click_link("accept-#{invite.id}")
-      expect(current_path).to eql('/')
+      expect(current_path).to eql('/kabisa')
     end
 
     it 'it sets the accepted_at date' do

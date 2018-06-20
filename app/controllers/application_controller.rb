@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
 
   def team_by_slug
     if params[:team]
-      Team.find_by_slug!(params[:team])
+      Team.friendly.find(params[:team])
     else
       nil
     end

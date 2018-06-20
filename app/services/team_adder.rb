@@ -3,15 +3,9 @@
 class TeamAdder
   def self.create(params, current_user)
     name = params[:name]
-    slug = params[:slug]
-    general_info = params[:general_info]
-    logo = params[:logo]
 
     team = Team.new(
-        name: name,
-        slug: slug,
-        general_info: general_info,
-        logo: logo
+      name: name
     )
 
     save team, current_user
