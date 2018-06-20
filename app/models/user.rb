@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
   end
 
   def picture_url
-    avatar_url || '/no-picture-icon.jpg'
+    avatar_url.presence || '/no-picture-icon.jpg'
   end
 
   def deactivate
