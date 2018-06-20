@@ -19,6 +19,7 @@ gem "daemons"
 gem 'draper', '= 3.0.0.pre1'
 gem 'fcm', '~> 0.0.2'
 gem 'font-awesome-rails', '~> 4.7.0.2'
+gem 'friendly_id', '~> 5.1.0'
 gem 'google-id-token', '~> 1.4'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.0'
