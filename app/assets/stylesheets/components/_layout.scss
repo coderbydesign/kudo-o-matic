@@ -204,4 +204,19 @@
 }
 
 
+@media screen and (max-width: 720px) {
+  .header-bg {
+    .header {
+      padding: 0 15px;
+    }
+    .img-container {
+      h1.team-title {
+        font-size: 1.75rem;
+      }
+    }
+    .github {
+      display: none;
+    }
+  }
+}
 
