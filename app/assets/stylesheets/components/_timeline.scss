@@ -84,6 +84,9 @@
             color: $base-color-light-gray;
           }
         }
+        .activityname {
+          word-break: break-all;
+        }
       }
 
       a {
