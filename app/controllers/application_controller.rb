@@ -1,11 +1,13 @@
 # frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  around_action :catch_not_found
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   helper_method :current_team
 
-  def new_session_path(scope)
+  def new_session_path(_scope)
     new_user_session_path
   end
 
@@ -36,10 +38,14 @@ class ApplicationController < ActionController::Base
   end
 
   def team_by_slug
-    if params[:team]
-      Team.friendly.find(params[:team])
-    else
-      nil
-    end
+    Team.friendly.find(params[:team]) if params[:team]
+  end
+
+  private
+
+  def catch_not_found
+    yield
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_url
   end
 end

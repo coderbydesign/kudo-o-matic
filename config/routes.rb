@@ -212,4 +212,6 @@ Rails.application.routes.draw do
       post :reaction
     end
   end
+
+  match '*path' => redirect('/'), via: :get
 end

@@ -45,10 +45,12 @@ RSpec.describe TransactionsController, type: :controller do
     end
 
     context 'with a non-existing team' do
-      it 'raises an ActiveRecord::NotFound error' do
-        expect {
-          get :show, params: { id: transaction.id, team: 'non-existing-team' }
-        }.to raise_error(ActiveRecord::RecordNotFound)
+      before do
+        get :show, params: { id: transaction.id, team: 'nonexisting' }
+      end
+
+      it 'redirects to root' do
+        expect(response).to redirect_to(root_path)
       end
     end
   end
