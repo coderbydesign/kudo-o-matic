@@ -106,6 +106,8 @@ Rails.application.routes.draw do
     end
 
     namespace :v2 do
+      post 'fcm', to: 'authentication#store_fcm_token'
+
       jsonapi_resources :balances, only: :show do
         collection do
           get :current
