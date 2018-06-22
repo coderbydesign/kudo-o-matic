@@ -127,11 +127,7 @@ RSpec.describe Api::V2::GoalsController, type: :request do
 
         expect_goal_count_same
 
-        it 'redirects to the next goal path' do
-          expect(response).to redirect_to api_v2_goal_path(goal)
-        end
-
-        expect_status_302_found
+        expect_status_200_ok
       end
 
       context 'and a next goal that is achieved' do
@@ -148,11 +144,7 @@ RSpec.describe Api::V2::GoalsController, type: :request do
 
         expect_goal_count_increase
 
-        it 'redirects to the next goal path' do
-          expect(response).to redirect_to api_v2_goal_path(Goal.last)
-        end
-
-        expect_status_302_found
+        expect_status_200_ok
       end
 
       context 'and no next goal' do
@@ -168,11 +160,7 @@ RSpec.describe Api::V2::GoalsController, type: :request do
 
         expect_goal_count_increase
 
-        it 'redirects to the next goal path' do
-          expect(response).to redirect_to api_v2_goal_path(Goal.last)
-        end
-
-        expect_status_302_found
+        expect_status_200_ok
       end
     end
 
@@ -234,11 +222,7 @@ RSpec.describe Api::V2::GoalsController, type: :request do
 
         expect_goal_count_same
 
-        it 'redirects to the previous goal path' do
-          expect(response).to redirect_to api_v2_goal_path(goal)
-        end
-
-        expect_status_302_found
+        expect_status_200_ok
       end
 
       context 'and no previous goal' do

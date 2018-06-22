@@ -104,6 +104,7 @@ Rails.application.routes.draw do
         post :store_fcm_token
       end
     end
+
     namespace :v2 do
       jsonapi_resources :balances, only: :show do
         collection do
