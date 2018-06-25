@@ -28,7 +28,7 @@
       - if current_user.admin_of?(current_team)
         %a.menu-content{id: 'team-manage-button-desktop', href: team_manage_url(team: current_team.slug)}
           %span.flex-item
-            Manage #{current_team.name}
+            Edit team
           %i.fa.fa-users
       %a.menu-content{href: '/account'}
         %span.flex-item
@@ -88,7 +88,7 @@
       - if current_user.admin_of?(current_team)
         %a.menu-content{href: team_manage_url(team: current_team.slug)}
           %span.flex-item
-            Manage #{current_team.slug}
+            Edit team
           %i.fa.fa-users
       %a.menu-content{href: '/account'}
         %span.flex-item

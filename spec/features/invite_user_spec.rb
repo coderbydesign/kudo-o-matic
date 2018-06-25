@@ -19,7 +19,7 @@ RSpec.feature 'Invite a user', type: :feature do
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
 
-    click_link 'Manage Kabisa'
+    click_link 'team-manage-button-desktop'
     expect(current_path).to eql('/kabisa/manage')
 
     click_link 'Invite users'

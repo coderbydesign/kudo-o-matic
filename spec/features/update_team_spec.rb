@@ -15,7 +15,7 @@ RSpec.feature 'Update a team', type: :feature do
 
     expect(current_path).to eql('/kabisa')
 
-    click_link 'Manage Kabisa'
+    click_link 'team-manage-button-desktop'
     expect(current_path).to eql('/kabisa/manage')
   end
 
