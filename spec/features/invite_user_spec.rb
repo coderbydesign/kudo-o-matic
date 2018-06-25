@@ -21,6 +21,9 @@ RSpec.feature 'Invite a user', type: :feature do
 
     click_link 'Manage Kabisa'
     expect(current_path).to eql('/kabisa/manage')
+
+    click_link 'Invite users'
+    expect(current_path).to eql('/kabisa/manage/invites')
   end
 
   context 'with a valid emailaddress' do
@@ -28,7 +31,7 @@ RSpec.feature 'Invite a user', type: :feature do
       emails = 'henk@example.com, jan@example.com; "Rico" <rico@example.com>, Ariejan <ariejan@example.com>'
       fill_in 'email-invite-textarea', with: emails
       click_button 'Send invites'
-      expect(current_path).to eql('/kabisa/manage')
+      expect(current_path).to eql('/kabisa/manage/invites')
     end
 
     it 'creates an invite' do
@@ -40,7 +43,7 @@ RSpec.feature 'Invite a user', type: :feature do
     before do
       fill_in 'email-invite-textarea', with: 'novalidemail'
       click_button 'Send invites'
-      expect(current_path).to eql('/kabisa/manage/invite')
+      expect(current_path).to eql('/kabisa/manage/invites')
     end
 
     it 'does not create an invite' do
