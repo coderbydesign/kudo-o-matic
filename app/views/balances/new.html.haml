@@ -1,0 +1,29 @@
+= render 'layouts/header'
+.page
+  .settings-container
+    .title-container
+      %h1.settings-title
+        Balances
+      .actions
+        = link_to root_path, method: "get", class: 'btn secondary' do
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to home
+    - if notice
+      .message-container.success-message.margin-top
+        %span.message
+          .fa.fa-exclamation-circle
+          #notice= notice
+    %h2.settings-subtitle
+      Create new balance
+    - if @balance.errors.any?
+      - @balance.errors.full_messages.each do |msg|
+        .message-container.show-message
+          .margin-bottom.error-message
+            %span.message
+              .fa.fa-exclamation-circle
+              .message.error= msg
+    = simple_form_for @balance, html: { class: 'form' } do |f|
+      .form-inputs
+        .form-field
+          = f.input :name, required: true, autocomplete: false, wrapper: false
+      .form-actions.actions
+        = f.button :submit, "Create balance", class: 'btn', id: 'create-balance-button'

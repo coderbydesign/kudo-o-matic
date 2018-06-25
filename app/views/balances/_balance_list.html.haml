@@ -1,0 +1,20 @@
+- if balances.any?
+  %table.settings-table
+    %tr
+      %th
+        Naam
+      %th{colspan:2}
+        Actions
+    - balances.each do |b|
+      %tr
+        %td
+          = b.name
+        %td
+          = link_to 'Edit', edit_balance_path(id: b.id), id: "edit-#{b.id}"
+        %td
+          = link_to 'Remove', balance_path(id: b.id, team: current_team.slug), method: :delete, id: "rm-#{b.id}",
+            data: {confirm: "This will remove #{b.name}. Are you sure?"}
+- else
+  %p
+    Your team doesn't have any balances yet.
+

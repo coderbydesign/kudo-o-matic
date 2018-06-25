@@ -210,6 +210,7 @@ Rails.application.routes.draw do
       post 'invites', to: 'team_invite#create', as: :create_invites
       get 'members', to: 'team_member#index', as: :manage_team_members
       delete 'members', to: 'team_member#delete', as: :delete_member
+      resources :balances, path: 'balances'
     end
 
     get :users, to: 'users#autocomplete_search', as: :users_autocomplete
