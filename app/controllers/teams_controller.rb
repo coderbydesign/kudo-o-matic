@@ -33,7 +33,7 @@ class TeamsController < ApplicationController
     @team_invite_submissions = TeamInviteForm.new
     if @team.update(team_params)
       flash[:success] = 'Successfully updated team!'
-      redirect_to team_manage_path(@team.slug)
+      redirect_to manage_team_path(@team.slug)
     else
       render :manage
     end

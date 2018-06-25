@@ -41,8 +41,18 @@ class Team < ActiveRecord::Base
     TeamMember.find_by_user_id_and_team_id(user.id, id).present?
   end
 
+  def manageable_members(current_user)
+    memberships.joins(:user)
+               .where('users.company_user = false')
+               .where("users.id != #{current_user.id}")
+  end
+
   def current_goals
     goals.where(balance: Balance.current(id))
+  end
+
+  def real_users
+    users.where(company_user: false)
   end
 
   private

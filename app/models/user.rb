@@ -82,6 +82,10 @@ class User < ActiveRecord::Base
     memberships.find_by_team_id(team.id).present?
   end
 
+  def member_since(team)
+    memberships.find_by_team_id(team.id).created_at
+  end
+
   def admin_of?(team)
     @admin_rights = Hash.new do |h, key|
       h[key] = memberships.find_by_team_id(key)&.admin?
@@ -91,7 +95,7 @@ class User < ActiveRecord::Base
   end
 
   def invited_to?(team)
-    team_invites.where(team_id: team.id).any?
+    team_invites.open.where(team_id: team.id).any?
   end
 
   def all_transactions

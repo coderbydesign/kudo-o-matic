@@ -5,8 +5,8 @@
       %h1.settings-title
         Invite users to #{current_team.name}
       .actions
-        = link_to dashboard_path(team: current_team.slug), method: "get", class: 'btn secondary' do
-          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to dashboard
+        = link_to manage_team_path(team: current_team.slug), method: "get", class: 'btn secondary' do
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to manage
     - flash.each do |key, value|
       .message-container.show-message
         .margin-bottom{:class => "#{key}-message"}

@@ -204,10 +204,12 @@ Rails.application.routes.draw do
     post 'unlike/:id', to: 'transactions#downvote', as: :unlike
 
     scope 'manage' do
-      get '/', to: 'teams#manage', as: :team_manage
+      get '/', to: 'teams#manage', as: :manage_team
       patch 'update', to: 'teams#update', as: :team_update
       get 'invites', to: 'team_invite#new', as: :manage_invites
       post 'invites', to: 'team_invite#create', as: :create_invites
+      get 'members', to: 'team_member#index', as: :manage_team_members
+      delete 'members', to: 'team_member#delete', as: :delete_member
     end
 
     get :users, to: 'users#autocomplete_search', as: :users_autocomplete
