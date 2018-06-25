@@ -19,6 +19,10 @@ class Team < ActiveRecord::Base
   has_many :transactions
   has_many :likes, class_name: 'Vote'
 
+  typed_store :preferences, coder: PreferencesCoder do |p|
+    p.string :primary_color, default: nil
+  end
+
   def slug_candidates
     %i[name name_and_sequence]
   end

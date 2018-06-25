@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe TeamMemberController, type: :controller do
-  let!(:user) {create(:user)}
-  let!(:user2) { create :user, name:'Henk', email:'henk@example.com' }
+  let!(:user) { create(:user) }
+  let!(:user2) { create :user, name: 'Henk', email: 'henk@example.com' }
   let!(:user3) { create(:user, name: 'Jan', email: 'jan@example.com') }
-  let!(:team) {create :team}
+  let!(:team) { create :team }
 
   before do
     team.add_member(user, true)
@@ -29,7 +29,7 @@ RSpec.describe TeamMemberController, type: :controller do
   end
 
   describe 'DELETE #delete' do
-    let!(:membership) {team.memberships.last}
+    let!(:membership) { team.memberships.last }
 
     before do
       sign_in user
@@ -44,5 +44,4 @@ RSpec.describe TeamMemberController, type: :controller do
       expect(response).to redirect_to(manage_team_members_path(team: team.slug))
     end
   end
-
 end

@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.feature 'Remove a team member', type: :feature do
-  let!(:user) {create :user}
-  let!(:user2) {create :user, name: 'Henk', email: 'henk@example.com'}
-  let(:team) {create :team}
+  let!(:user) { create :user }
+  let!(:user2) { create :user, name: 'Henk', email: 'henk@example.com' }
+  let(:team) { create :team }
 
   before do
     team.add_member(user, true)

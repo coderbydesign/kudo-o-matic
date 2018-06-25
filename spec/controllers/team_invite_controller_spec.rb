@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe TeamInviteController, type: :controller do
-  let!(:user) {create(:user)}
-  let!(:team) {create :team}
-  let!(:invite) {TeamInvite.create(user: user, team: team)}
+  let!(:user) { create(:user) }
+  let!(:team) { create :team }
+  let!(:invite) { TeamInvite.create(user: user, team: team) }
 
   describe 'PUT #accept' do
     before do
