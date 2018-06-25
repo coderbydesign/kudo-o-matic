@@ -1,0 +1,27 @@
+- if members.any?
+  %table.settings-table
+    %tr
+      %th
+        Naam
+      %th
+        Email
+      %th
+        Member since
+      %th
+        Actions
+    - members.each do |m|
+      %tr
+        %td
+          = m.user.name
+        %td
+          = m.user.email
+        %td
+          = m.created_at.strftime("%m-%d-%Y")
+        %td
+          = link_to 'Remove', delete_member_path(id: m.id), method: "delete", id: "rm-#{m.id}",
+            data: {confirm: "This will remove #{m.user.name} from #{current_team.name}. Are you sure?"}
+- else
+  %p
+    Your team doesn't have any members yet. Note: the user that represents your company,
+    as well as your own account, are not listed here.
+

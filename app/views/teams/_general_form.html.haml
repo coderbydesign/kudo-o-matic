@@ -17,5 +17,9 @@
     .form-field
       = f.input :logo, id: 'team-logo-field', as: :file, name: 'logo', wrapper: false,
       input_html: { name: 'logo' }
+    .form-field
+      = f.input :primary_color,  input_html: { name: 'primary_color' }, wrapper: false, placeholder: 'Enter a hexcode to override the primary color (default #4B4656)'
+    %p
+      It is NOT recommended to use a light color like #FFFFFF, because some buttons will become unreadable.
   .form-actions.actions
     = f.button :submit, "Update", class: 'btn', id: 'update-team-button'

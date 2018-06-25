@@ -19,6 +19,10 @@ class Team < ActiveRecord::Base
   has_many :transactions
   has_many :likes, class_name: 'Vote'
 
+  typed_store :preferences, coder: PreferencesCoder do |p|
+    p.string :primary_color, default: nil
+  end
+
   def slug_candidates
     %i[name name_and_sequence]
   end
@@ -41,8 +45,18 @@ class Team < ActiveRecord::Base
     TeamMember.find_by_user_id_and_team_id(user.id, id).present?
   end
 
+  def manageable_members(current_user)
+    memberships.joins(:user)
+               .where('users.company_user = false')
+               .where("users.id != #{current_user.id}")
+  end
+
   def current_goals
     goals.where(balance: Balance.current(id))
+  end
+
+  def real_users
+    users.where(company_user: false)
   end
 
   private

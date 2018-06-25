@@ -26,9 +26,9 @@
           New team
         %i.fa.fa-plus
       - if current_user.admin_of?(current_team)
-        %a.menu-content{id: 'team-manage-button-desktop', href: manage_url(team: current_team.slug)}
+        %a.menu-content{id: 'team-manage-button-desktop', href: manage_team_url(team: current_team.slug)}
           %span.flex-item
-            Manage #{current_team.name}
+            Edit team
           %i.fa.fa-users
       %a.menu-content{href: '/account'}
         %span.flex-item
@@ -86,9 +86,9 @@
           New team
         %i.fa.fa-plus
       - if current_user.admin_of?(current_team)
-        %a.menu-content{href: manage_url(team: current_team.slug)}
+        %a.menu-content{href: manage_team_url(team: current_team.slug)}
           %span.flex-item
-            Manage #{current_team.slug}
+            Edit team
           %i.fa.fa-users
       %a.menu-content{href: '/account'}
         %span.flex-item

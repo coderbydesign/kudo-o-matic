@@ -23,12 +23,17 @@ class TeamsController < ApplicationController
     @team_invite_submissions = TeamInviteForm.new
   end
 
+  def invite
+    @team = current_team
+    @team_invite_submissions = TeamInviteForm.new
+  end
+
   def update
     @team = current_team
     @team_invite_submissions = TeamInviteForm.new
     if @team.update(team_params)
       flash[:success] = 'Successfully updated team!'
-      redirect_to manage_path(@team.slug)
+      redirect_to manage_team_path(@team.slug)
     else
       render :manage
     end
@@ -49,6 +54,6 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.permit(:name, :general_info, :logo)
+    params.permit(:name, :general_info, :logo, :primary_color)
   end
 end
