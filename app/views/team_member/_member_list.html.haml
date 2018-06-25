@@ -18,7 +18,7 @@
         %td
           = m.created_at.strftime("%m-%d-%Y")
         %td
-          = link_to 'Remove', delete_member_path(id: m.id), method: "delete",
+          = link_to 'Remove', delete_member_path(id: m.id), method: "delete", id: "rm-#{m.id}",
             data: {confirm: "This will remove #{m.user.name} from #{current_team.name}. Are you sure?"}
 - else
   %p
