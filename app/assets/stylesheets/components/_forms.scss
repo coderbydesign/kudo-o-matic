@@ -43,6 +43,9 @@
       width: 100px;
       margin-right: 15px;
     }
+    &.left {
+      justify-content: left;
+    }
   }
 
   .form-actions {
@@ -74,9 +77,21 @@
         background-color: darken($color-gray-light, 10);
       }
     }
+    &.danger {
+      background-color: #c0392b;
+      &:hover, &:focus {
+        background-color: darken(#c0392b, 10);
+      }
+    }
     margin-left: 10px;
     &:first-child {
       margin-left: 0;
+    }
+  }
+  &.vertical {
+    .btn {
+      margin-left: 0;
+      margin-bottom: 10px;
     }
   }
 }

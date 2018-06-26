@@ -8,3 +8,7 @@
     <i class="fa fa-users" aria-hidden="true"></i> Manage members
   = link_to balances_path(team: current_team.slug), method: "get", class: 'btn btn-primary' do
     <i class="fa fa-percent" aria-hidden="true"></i> Manage balances
+
+.actions
+  = link_to goals_path(team: current_team.slug), method: "get", class: 'btn btn-primary' do
+    <i class="fa fa-circle-o-notch" aria-hidden="true"></i> Manage goals

@@ -8,7 +8,7 @@
     - balances.each do |b|
       %tr
         %td
-          = b.name
+          = link_to b.name, balance_path(id: b.id, team: current_team.slug), id: "show-#{b.id}"
         %td
           = link_to 'Edit', edit_balance_path(id: b.id), id: "edit-#{b.id}"
         %td

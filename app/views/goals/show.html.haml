@@ -1,0 +1,49 @@
+= render 'layouts/header'
+.page
+  .settings-container
+    .title-container
+      %h1.settings-title
+        Manage goals
+      .actions
+        = link_to root_path, method: "get", class: 'btn secondary' do
+          <i class="fa fa-home" aria-hidden="true"></i> Home
+        = link_to manage_team_path(team: current_team.slug), method: "get", class: 'btn secondary' do
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to manage
+    %h2.settings-subtitle
+      Show "#{@goal.name}"
+
+    .actions
+      = link_to edit_goal_path, class: 'btn', id: "edit-#{@goal.id}" do
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+      = link_to goal_path, class: 'btn danger', method: :delete, id: "rm-#{@goal.id}",
+            data: {confirm: "This will remove #{@goal.name}. Are you sure?"} do
+        <i class="fa fa-trash-o" aria-hidden="true"></i> Remove
+
+    %table.settings-table
+      %tr
+        %td.bold
+          Name
+        %td
+          #{@goal.name}
+      %tr
+        %td.bold
+          Amount
+        %td
+          #{@goal.amount}
+      %tr
+        %td.bold
+          Created at
+        %td
+          #{@goal.created_at}
+      %tr
+        %td.bold
+          Updated at
+        %td
+          #{@goal.updated_at}
+      %tr
+        %td.bold
+          Balance
+        %td
+          = link_to @goal.balance.name, balance_path(id: @goal.balance.id, team: current_team.slug), id: "show-#{@goal.id}"
+
+    = render 'other_actions'
