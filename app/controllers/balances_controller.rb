@@ -17,7 +17,7 @@ class BalancesController < ApplicationController
     @balance = Balance.new(balance_params)
     @balance.team_id = current_team.id
     if @balance.save
-      redirect_to balances_path, team: current_team.slug
+      redirect_to balance_path(id: @balance.id, team: current_team.slug)
     else
       render :new
     end
@@ -31,7 +31,7 @@ class BalancesController < ApplicationController
     @balance = current_team.balances.find(params[:id])
     if @balance.update_attributes(balance_params)
       flash[:success] = 'Balance updated!'
-      redirect_to balances_path, team: current_team.slug
+      redirect_to balance_path(id: @balance.id, team: current_team.slug)
     else
       render :edit
     end

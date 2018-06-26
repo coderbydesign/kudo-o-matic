@@ -16,7 +16,7 @@ class GoalsController < ApplicationController
   def create
     @goal = Goal.new(goal_params)
     if @goal.save
-      redirect_to goals_path, team: current_team.slug
+      redirect_to goal_path(id: @goal.id, team: current_team.slug)
     else
       render :new
     end
@@ -30,7 +30,7 @@ class GoalsController < ApplicationController
     @goal = current_team.goals.find(params[:id])
     if @goal.update_attributes(goal_params)
       flash[:success] = 'Goal updated!'
-      redirect_to goals_path, team: current_team.slug
+      redirect_to goal_path(id: @goal.id, team: current_team.slug)
     else
       render :edit
     end
