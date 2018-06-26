@@ -24,6 +24,6 @@
     = simple_form_for @balance, html: { class: 'form' } do |f|
       .form-inputs
         .form-field
-          = f.input :name, required: true, autocomplete: false, wrapper: false
+          = f.input :name, required: true, autocomplete: false, wrapper: false, error: false
       .form-actions.actions
         = f.button :submit, "Create balance", class: 'btn', id: 'create-balance-button'

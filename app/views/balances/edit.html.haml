@@ -24,6 +24,6 @@
     = simple_form_for @balance, html: { class: 'form' }, url: balance_path(team: current_team.slug), method: :put do |f|
       .form-inputs
         .form-field
-          = f.input :name, required: true, autocomplete: false, wrapper: false
+          = f.input :name, required: true, autocomplete: false, wrapper: false, error: false
       .form-actions.actions
         = f.button :submit, "Update balance", class: 'btn', id: 'update-balance-button'

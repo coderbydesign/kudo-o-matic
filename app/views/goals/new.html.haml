@@ -24,9 +24,9 @@
     = simple_form_for @goal, html: { class: 'form' } do |f|
       .form-inputs
         .form-field
-          = f.input :name, required: true, autocomplete: false, wrapper: false
+          = f.input :name, required: true, autocomplete: false, wrapper: false, error: false
         .form-field
-          = f.input :amount, required: true, autocomplete: false, wrapper: false
+          = f.input :amount, required: true, autocomplete: false, wrapper: false, error: false
         .form-field.left
           = f.label :balance_id, required: true
           = f.select(:balance_id, current_team.balances.map{|b| [ b.name, b.id ] })

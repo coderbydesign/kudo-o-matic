@@ -1,6 +1,10 @@
 class Goal < ActiveRecord::Base
   acts_as_votable
 
+  validates :name, presence: true
+  validates :amount, presence: true
+  validates :balance_id, presence: true
+
   belongs_to :balance
 
   def self.achieved(team)

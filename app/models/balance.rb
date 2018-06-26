@@ -2,6 +2,8 @@ class Balance < ActiveRecord::Base
   after_update :ensure_a_current_balance_remains
   after_destroy :ensure_a_current_balance_remains
 
+  validates :name, presence: true
+
   has_many :transactions
   has_many :goals
 
