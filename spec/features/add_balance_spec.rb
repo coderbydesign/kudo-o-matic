@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.feature 'Add a new balance', type: :feature do
   let!(:user) { create :user }
-  let(:team) { create :team }
+  let!(:team) { create :team }
   let!(:invites_before) { TeamInvite.count }
   let!(:balance_count) { team.balances.count }
 
@@ -30,7 +30,7 @@ RSpec.feature 'Add a new balance', type: :feature do
     before do
       fill_in 'balance_name', with: '2018'
       click_button 'Create balance'
-      expect(current_path).to eql('/kabisa/manage/balances')
+      expect(current_path).to eql("/kabisa/manage/balances/#{Balance.last.id}")
     end
 
     it 'creates a balance' do

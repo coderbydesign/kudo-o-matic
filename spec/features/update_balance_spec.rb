@@ -34,7 +34,7 @@ RSpec.feature 'Update a balance', type: :feature do
     before do
       fill_in 'balance_name', with: 'My second balance'
       click_button 'Update balance'
-      expect(current_path).to eql('/kabisa/manage/balances')
+      expect(current_path).to eql("/kabisa/manage/balances/#{balance.id}")
     end
 
     it 'updates a balance' do

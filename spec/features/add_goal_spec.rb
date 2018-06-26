@@ -33,7 +33,7 @@ RSpec.feature 'Add a new goal', type: :feature do
       fill_in 'goal_amount', with: 2000
       select('My first balance', from: 'goal_balance_id')
       click_button 'Create goal'
-      expect(current_path).to eql('/kabisa/manage/goals')
+      expect(current_path).to eql("/kabisa/manage/goals/#{Goal.last.id}")
     end
 
     it 'creates a goal' do

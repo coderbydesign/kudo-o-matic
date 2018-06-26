@@ -3,7 +3,6 @@ class Goal < ActiveRecord::Base
 
   validates :name, presence: true
   validates :amount, presence: true
-  validates :balance_id, presence: true
 
   belongs_to :balance
 

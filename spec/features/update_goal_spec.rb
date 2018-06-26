@@ -36,7 +36,7 @@ RSpec.feature 'Update a goal', type: :feature do
       fill_in 'goal_name', with: 'My new goal'
       fill_in 'goal_amount', with: 3000
       click_button 'Update goal'
-      expect(current_path).to eql('/kabisa/manage/goals')
+      expect(current_path).to eql("/kabisa/manage/goals/#{goal.id}")
     end
 
     it 'updates the goal' do
