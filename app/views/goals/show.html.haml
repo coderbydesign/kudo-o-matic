@@ -13,9 +13,9 @@
       Show "#{@goal.name}"
 
     .actions
-      = link_to edit_goal_path, class: 'btn', id: "edit-#{@goal.id}" do
+      = link_to edit_goal_path, class: 'btn', id: "edit-goal" do
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
-      = link_to goal_path, class: 'btn danger', method: :delete, id: "rm-#{@goal.id}",
+      = link_to goal_path, class: 'btn danger', method: :delete, id: "rm-goal",
             data: {confirm: "This will remove #{@goal.name}. Are you sure?"} do
         <i class="fa fa-trash-o" aria-hidden="true"></i> Remove
 

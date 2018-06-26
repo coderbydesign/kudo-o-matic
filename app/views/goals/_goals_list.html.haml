@@ -12,7 +12,7 @@
     - goals.each do |g|
       %tr
         %td
-          = g.name
+          = link_to g.name, goal_path(id: g.id, team: current_team.slug), id: "show-#{g.id}"
         %td
           = g.amount
         %td

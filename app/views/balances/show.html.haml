@@ -13,9 +13,9 @@
       Show "#{@balance.name}"
 
     .actions
-      = link_to edit_balance_path, class: 'btn', id: "edit-#{@balance.id}" do
+      = link_to edit_balance_path, class: 'btn', id: "edit-balance" do
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
-      = link_to balance_path, class: 'btn danger', method: :delete, id: "rm-#{@balance.id}",
+      = link_to balance_path, class: 'btn danger', method: :delete, id: "rm-balance",
             data: {confirm: "This will remove #{@balance.name}. Are you sure?"} do
         <i class="fa fa-trash-o" aria-hidden="true"></i> Remove
 
