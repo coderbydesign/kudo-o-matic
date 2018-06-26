@@ -2,10 +2,10 @@ class SlackService
   include Singleton
   include Rails.application.routes.url_helpers
 
-  def send_new_transaction(transaction)
+  def send_new_transaction(transaction, team)
     return unless SLACK_IS_CONFIGURED
 
-    Delayed::Job.enqueue Slack::TransactionJob.new(transaction, true)
+    Delayed::Job.enqueue Slack::TransactionJob.new(transaction, team, true)
   end
 
   def send_updated_transaction(transaction)
@@ -14,16 +14,18 @@ class SlackService
     Delayed::Job.enqueue Slack::TransactionJob.new(transaction, false)
   end
 
-  def send_goal_reached
+  def send_goal_reached(team)
     return unless SLACK_IS_CONFIGURED
 
-    Delayed::Job.enqueue Slack::GoalJob.new(nil)
+    Delayed::Job.enqueue Slack::GoalJob.new(team)
   end
 
   def send_reminder
     return unless SLACK_IS_CONFIGURED
 
-    Delayed::Job.enqueue Slack::ReminderJob.new(nil)
+    Team.where.not(slack_team_id: nil).each do |t|
+      Delayed::Job.enqueue Slack::ReminderJob.new(t)
+    end
   end
 
   def send_response(response_url, message)

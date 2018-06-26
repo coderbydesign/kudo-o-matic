@@ -167,7 +167,7 @@ class TransactionAdder
   def self.save(transaction, current_team)
     transaction.save!
 
-    SlackService.instance.send_new_transaction(transaction)
+    SlackService.instance.send_new_transaction(transaction, current_team)
     FcmService.instance.send_new_transaction(transaction)
     TransactionMailer.new_transaction(transaction)
 

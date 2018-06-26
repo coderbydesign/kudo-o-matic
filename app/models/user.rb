@@ -36,11 +36,11 @@ class User < ActiveRecord::Base
     existing_user = User.exists? uid: access_token.uid
 
     user = User.where(uid: access_token.uid).first_or_create(
-      provider: access_token.provider,
-      uid: access_token.uid,
-      name: data['name'],
-      email: email_address,
-      avatar_url: data['image']
+        provider: access_token.provider,
+        uid: access_token.uid,
+        name: data['name'],
+        email: email_address,
+        avatar_url: data['image']
     )
 
     UserMailer.new_user(user) unless existing_user
@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   def self.from_api_token_request(params)
     email_domain = extract_email_domain(params['email'])
     if email_domain_not_allowed?(email_domain)
-      error_object_overrides = { title: 'Invalid email domain', detail: "Email domain #{email_domain} is not allowed." }
+      error_object_overrides = {title: 'Invalid email domain', detail: "Email domain #{email_domain} is not allowed."}
       error = Api::V1::UnauthorizedError.new(error_object_overrides)
       raise error
     end
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
     user = User.where(uid: params['uid']).first_or_create(params.except(:jwt_token))
 
     if user.deactivated?
-      error_object_overrides = { title: 'Deactivated user account', detail: "User #{user.name} is deactivated." }
+      error_object_overrides = {title: 'Deactivated user account', detail: "User #{user.name} is deactivated."}
       error = Api::V1::UnauthorizedError.new(error_object_overrides)
       raise error
     end
@@ -132,6 +132,18 @@ class User < ActiveRecord::Base
 
   def invites?
     team_invites.length > 1
+  end
+
+  def slack_id_for_team(team)
+    team.membership_of(self).slack_id
+  end
+
+  def slack_name_for_team(team)
+    team.membership_of(self).slack_name
+  end
+
+  def slack_username_for_team(team)
+    team.membership_of(self).slack_username
   end
 
   # overridden Devise method that checks the soft delete timestamp on authentication

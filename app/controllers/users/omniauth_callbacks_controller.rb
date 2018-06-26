@@ -13,21 +13,39 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def slack
-    User.transaction do
-      data = request.env['omniauth.auth']
+    team = Team.find(session[:omniauth_team_id])
+    current_membership = team.membership_of(current_user)
 
-      info = data['info']
-      slack_id = info['user_id']
-      slack_username = info['user']
+    data = request.env['omniauth.auth']
 
-      profile = data['extra']['user_info']['user']['profile']
-      slack_name = profile['display_name'].present? ? profile['display_name'] : profile['real_name']
+    info = data['info']
+    slack_id = info['user_id']
+    slack_team_id = info['team_id']
+    slack_username = info['user']
 
+    bot = data['extra']['bot_info']
+    bot_access_token = bot['bot_access_token']
+    puts "TOKEN: #{bot_access_token}"
+
+    profile = data['extra']['user_info']['user']['profile']
+    slack_name = profile['display_name'].present? ? profile['display_name'] : profile['real_name']
+
+    TeamMember.transaction do
+      current_membership.update(slack_id: slack_id, slack_username: slack_username, slack_name: slack_name)
       flash[:notice] = "Successfully #{current_user.slack_id.blank? ? 'connected to Slack!' : 'updated your Slack display name!'}"
-
-      current_user.update(slack_id: slack_id, slack_username: slack_username, slack_name: slack_name)
     end
 
-    redirect_to settings_path
+    if team.slack_team_id.nil?
+      team.slack_team_id = slack_team_id
+    end
+
+    team.slack_bot_access_token = bot_access_token.to_s
+
+    puts "SAVING TEAM"
+
+    team.save
+
+    redirect_to settings_path(team: team.slug)
   end
+
 end

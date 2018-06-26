@@ -39,6 +39,12 @@ class TeamsController < ApplicationController
     end
   end
 
+  def slack
+    # Just save the current locale in the session and redirect to the unscoped path as before
+    session[:omniauth_team_id] = current_team.id
+    redirect_to user_slack_omniauth_authorize_path
+  end
+
   private
 
   def set_user

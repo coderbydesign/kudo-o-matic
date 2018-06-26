@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180625130827) do
+ActiveRecord::Schema.define(version: 20180626191627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,8 +141,11 @@ ActiveRecord::Schema.define(version: 20180625130827) do
     t.integer  "team_id"
     t.integer  "user_id"
     t.boolean  "admin"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "slack_id"
+    t.string   "slack_username"
+    t.string   "slack_name"
     t.index ["team_id"], name: "index_team_members_on_team_id", using: :btree
     t.index ["user_id"], name: "index_team_members_on_user_id", using: :btree
   end
@@ -150,14 +153,16 @@ ActiveRecord::Schema.define(version: 20180625130827) do
   create_table "teams", force: :cascade do |t|
     t.string   "name"
     t.text     "general_info"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.string   "slug"
     t.json     "preferences"
+    t.string   "slack_team_id"
+    t.string   "slack_bot_access_token"
   end
 
   create_table "transactions", force: :cascade do |t|
