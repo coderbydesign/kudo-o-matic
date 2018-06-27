@@ -5,7 +5,7 @@ RSpec.describe SlackController, type: :controller do
 
   describe 'POST #action' do
     let!(:user) { create(:user, slack_id: 1) }
-    let!(:team) { create(:team) }
+    let!(:team) { create(:team, slack_team_id: 2) }
     let!(:balance) { Balance.current(team) }
     let!(:new_transaction) { create(:transaction, team_id: team.id, balance: balance) }
     let!(:invalid_user_slack_id) { -1 }
@@ -26,7 +26,8 @@ RSpec.describe SlackController, type: :controller do
                 callback_id: new_transaction.id,
                 user: {
                   id: user.slack_id
-                }
+                },
+                team_id: team.slack_team_id
               }.to_json
             }
 
@@ -45,7 +46,8 @@ RSpec.describe SlackController, type: :controller do
                 callback_id: new_transaction.id,
                 user: {
                   id: invalid_user_slack_id
-                }
+                },
+                team_id: team.slack_team_id
               }.to_json
             }
 
@@ -68,7 +70,8 @@ RSpec.describe SlackController, type: :controller do
                 callback_id: new_transaction.id,
                 user: {
                   id: user.slack_id
-                }
+                },
+                team_id: team.slack_team_id
               }.to_json
             }
 
@@ -85,7 +88,7 @@ RSpec.describe SlackController, type: :controller do
   describe 'POST #command' do
     let!(:balance) { create(:balance, current: true) }
     let!(:sender) { create(:user, slack_id: 1) }
-    let!(:team) { create :team }
+    let!(:team) { create :team, slack_team_id: 2 }
     let!(:receiver) { create(:user, slack_name: 'receiver') }
     let!(:record_count_before_request) { Transaction.count }
 
@@ -103,7 +106,8 @@ RSpec.describe SlackController, type: :controller do
           post :command, params: {
             token: ENV['SLACK_VERIFICATION_TOKEN'],
             text: '@receiver 1 test',
-            user_id: sender.slack_id
+            user_id: sender.slack_id,
+            team_id: team.slack_team_id
           }
         end
 
@@ -126,7 +130,8 @@ RSpec.describe SlackController, type: :controller do
           expect {
             post :command, params: {
               token: ENV['SLACK_VERIFICATION_TOKEN'],
-              text: ''
+              text: '',
+              team_id: team.slack_team_id
             }.to_json
           }.to raise_error
         end
@@ -137,7 +142,8 @@ RSpec.describe SlackController, type: :controller do
           expect {
             post :command, params: {
               token: ENV['SLACK_VERIFICATION_TOKEN'],
-              text: ' '
+              text: ' ',
+              team_id: team.slack_team_id
             }.to_json
           }.to raise_error
         end
@@ -149,7 +155,8 @@ RSpec.describe SlackController, type: :controller do
             expect {
               post :command, params: {
                 token: ENV['SLACK_VERIFICATION_TOKEN'],
-                text: 'HELP'
+                text: 'HELP',
+                team_id: team.slack_team_id
               }.to_json
             }.to raise_error
           end
@@ -160,7 +167,8 @@ RSpec.describe SlackController, type: :controller do
             expect {
               post :command, params: {
                 token: ENV['SLACK_VERIFICATION_TOKEN'],
-                text: 'help'
+                text: 'help',
+                team_id: team.slack_team_id
               }.to_json
             }.to raise_error
           end
