@@ -35,15 +35,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:notice] = "Successfully #{current_user.slack_id.blank? ? 'connected to Slack!' : 'updated your Slack display name!'}"
     end
 
-    if team.slack_team_id.nil?
-      team.slack_team_id = slack_team_id
-    end
-
-    team.slack_bot_access_token = bot_access_token.to_s
+    team.update_attributes(:slack_team_id => slack_team_id, :slack_bot_access_token => bot_access_token)
 
     puts "SAVING TEAM"
-
-    team.save
 
     redirect_to settings_path(team: team.slug)
   end
