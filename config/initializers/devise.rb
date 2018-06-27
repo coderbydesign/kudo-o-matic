@@ -254,7 +254,7 @@ Devise.setup do |config|
       image_size: 512
   }
 
-  config.omniauth :slack, ENV['SLACK_CLIENT_ID'], ENV["SLACK_CLIENT_SECRET"], scope: 'users:read'
+  config.omniauth :slack, ENV['SLACK_CLIENT_ID'], ENV["SLACK_CLIENT_SECRET"], scope: 'team:read,users:read,identify,bot,commands'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

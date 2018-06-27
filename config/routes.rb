@@ -11,11 +11,8 @@ Rails.application.routes.draw do
 
   get :activities, to: 'activities#autocomplete_search', as: :activities_autocomplete
 
-
-  get :settings, to: 'users#edit', as: :user
   post :resend_email_confirmation, to: 'users#resend_email_confirmation',
        as: :users_resend_email_confirmation
-  patch :settings, to: 'users#update'
 
   get :feed, to: 'feed#index'
 
@@ -28,6 +25,11 @@ Rails.application.routes.draw do
 
   get 'legal/privacy'
 
+  scope :slack, controller: :slack do
+    post :action
+    post :command
+    post :reaction
+  end
 
   namespace :admin do
     root 'users#index'
@@ -203,6 +205,9 @@ Rails.application.routes.draw do
     post 'like/:id', to: 'transactions#upvote', as: :like
     post 'unlike/:id', to: 'transactions#downvote', as: :unlike
 
+    get :settings, to: 'users#edit', as: :settings
+    patch :settings, to: 'users#update'
+
     scope 'manage' do
       get '/', to: 'teams#manage', as: :manage_team
       patch 'update', to: 'teams#update', as: :team_update
@@ -215,11 +220,8 @@ Rails.application.routes.draw do
     end
 
     get :users, to: 'users#autocomplete_search', as: :users_autocomplete
-    scope :slack, controller: :slack do
-      post :action
-      post :command
-      post :reaction
-    end
+
+    get 'omniauth/slack' => 'teams#slack', as: :team_omniauth
   end
 
   match '*path' => redirect('/'), via: :get

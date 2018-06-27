@@ -4,6 +4,7 @@ class Balance < ActiveRecord::Base
 
   validates :name, presence: true
 
+  belongs_to :team
   has_many :transactions
   has_many :goals
 

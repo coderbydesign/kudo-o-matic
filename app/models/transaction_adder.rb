@@ -108,11 +108,11 @@ class TransactionAdder
                                     '*/kudo* @receiver <amount> <reason>'
     end
 
-    receiver = User.find_by_slack_username(receiver_text)
-    receiver = User.find_by_slack_name(receiver_text) if receiver.nil?
-    sender = User.find_by_slack_id(sender_slack_id)
+    receiver_membership = team.memberships.find_by_slack_username(receiver_text)
+    receiver = receiver_membership.user || nil
+    sender_membership = team.memberships.find_by_slack_id(sender_slack_id)
+    sender = sender_membership.user || nil
 
-    # raise SlackConnectionError, 'You are not allowed to post in this team' unless team.member_of?(sender)
     raise SlackConnectionError, 'You are *not* connected to the ₭udo-o-Matic' if sender.nil?
     raise SlackConnectionError, 'Receiver is *not* connected to the ₭udo-o-Matic' if receiver.nil?
 
@@ -130,8 +130,11 @@ class TransactionAdder
   end
 
   def self.create_from_slack_reaction(sender_slack_id, receiver_slack_id, activity, timestamp, team)
-    sender = sender_slack_id.present? ? User.find_by_slack_id(sender_slack_id) : nil
-    receiver = receiver_slack_id.present? ? User.find_by_slack_id(receiver_slack_id) : nil
+    sender_membership = team.memberships.find_by_slack_id(sender_slack_id)
+    sender = sender_membership.user || nil
+
+    receiver_membership = team.memberships.find_by_slack_id(receiver_slack_id)
+    receiver = receiver_membership.user || nil
 
     raise SlackConnectionError, 'You are *not* connected to the ₭udo-o-Matic' if sender.nil?
     raise SlackConnectionError, 'Message is *not* sent by a connected ₭udo-o-Matic user' if receiver.nil?
@@ -167,7 +170,7 @@ class TransactionAdder
   def self.save(transaction, current_team)
     transaction.save!
 
-    SlackService.instance.send_new_transaction(transaction)
+    SlackService.instance.send_new_transaction(transaction, current_team)
     FcmService.instance.send_new_transaction(transaction)
     TransactionMailer.new_transaction(transaction)
 

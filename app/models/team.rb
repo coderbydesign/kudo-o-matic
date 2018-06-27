@@ -45,6 +45,10 @@ class Team < ActiveRecord::Base
     TeamMember.find_by_user_id_and_team_id(user.id, id).present?
   end
 
+  def membership_of(user)
+    memberships.find_by_user_id(user.id)
+  end
+
   def manageable_members(current_user)
     memberships.joins(:user)
                .where('users.company_user = false')
