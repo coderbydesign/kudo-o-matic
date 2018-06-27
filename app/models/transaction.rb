@@ -10,6 +10,7 @@ class Transaction < ActiveRecord::Base
 
   acts_as_votable
   belongs_to :balance
+  belongs_to :team
   belongs_to :activity
   belongs_to :sender,   class_name: 'User'
   belongs_to :receiver, class_name: 'User'

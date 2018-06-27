@@ -25,6 +25,11 @@ Rails.application.routes.draw do
 
   get 'legal/privacy'
 
+  scope :slack, controller: :slack do
+    post :action
+    post :command
+    post :reaction
+  end
 
   namespace :admin do
     root 'users#index'
@@ -215,11 +220,6 @@ Rails.application.routes.draw do
     end
 
     get :users, to: 'users#autocomplete_search', as: :users_autocomplete
-    scope :slack, controller: :slack do
-      post :action
-      post :command
-      post :reaction
-    end
 
     get 'omniauth/slack' => 'teams#slack', as: :team_omniauth
   end

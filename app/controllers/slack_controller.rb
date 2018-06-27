@@ -10,14 +10,15 @@ class SlackController < ApplicationController
     return unless check_verification_token(payload['token'])
 
     transaction = Transaction.find(payload['callback_id'])
+    team = Team.find_by_slack_team_id(payload['team_id'])
     user = User.find_by_slack_id(payload['user']['id'])
 
-    if user&.member_of?(current_team)
+    if user&.member_of?(team)
       transaction.liked_by user
 
       SlackService.instance.send_updated_transaction(transaction)
 
-      message = "Successfully liked ₭udo transaction! Click <#{transaction_url(current_team.slug, transaction)}|here> for more details."
+      message = "Successfully liked ₭udo transaction! Click <#{transaction_url(team.slug, transaction)}|here> for more details."
       SlackService.instance.send_response(payload['response_url'], message)
     end
   end
@@ -28,9 +29,11 @@ class SlackController < ApplicationController
     arguments = params['text'].strip
     raise if arguments.blank? || arguments.casecmp('help') == 0
 
-    transaction = TransactionAdder.create_from_slack_command(params, current_team)
+    team = Team.find_by_slack_team_id(params['team_id'])
 
-    message = "Successfully created ₭udo transaction! Click <#{transaction_url(current_team.slug, transaction)}|here> for more details."
+    transaction = TransactionAdder.create_from_slack_command(params, team)
+
+    message = "Successfully created ₭udo transaction! Click <#{transaction_url(team.slug, transaction)}|here> for more details."
     SlackService.instance.send_response(params['response_url'], message)
   rescue ActiveRecord::RecordInvalid, SlackConnectionError, SlackArgumentsError => error
     SlackService.instance.send_response(params['response_url'], error)
@@ -51,14 +54,17 @@ class SlackController < ApplicationController
     return unless check_verification_token(params['token']) && event['reaction'].in?(ENV['SLACK_REACTION'].split(','))
 
     transaction = Transaction.find_by_slack_reaction_created_at(timestamp)
+    team = transaction.team
     user = User.find_by_slack_id(sender_slack_id)
 
-    if user&.member_of?(current_team)
+    raise SlackConnectionError, 'User is not a member of the current team' unless user&.member_of?(team)
+
+    if transaction.present?
       transaction.liked_by user
 
       SlackService.instance.send_updated_transaction(transaction)
 
-      message = "Successfully liked ₭udo transaction! Click <#{transaction_url(current_team, transaction)}|here> for more details."
+      message = "Successfully liked ₭udo transaction! Click <#{transaction_url(team.slug, transaction)}|here> for more details."
       SlackService.instance.send_ephemeral_message(channel, sender_slack_id, message)
     else
       message = SlackService.instance.retrieve_message(channel, timestamp)
@@ -69,7 +75,7 @@ class SlackController < ApplicationController
 
       transaction = TransactionAdder.create_from_slack_reaction(sender_slack_id, receiver_slack_id, activity, timestamp, current_team)
 
-      message = "Successfully created ₭udo transaction! Click <#{transaction_url(current_team, transaction)}|here> for more details."
+      message = "Successfully created ₭udo transaction! Click <#{transaction_url(team.slug, transaction)}|here> for more details."
       SlackService.instance.send_ephemeral_message(channel, sender_slack_id, message)
     end
   rescue ActiveRecord::RecordInvalid, SlackConnectionError => error

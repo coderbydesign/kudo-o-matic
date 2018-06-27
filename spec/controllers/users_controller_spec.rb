@@ -16,7 +16,10 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET #edit' do
     before do
-      get :edit
+      get :edit,
+          params: {
+              team: team.id
+          }
     end
 
     it 'gets edit' do
@@ -37,7 +40,8 @@ RSpec.describe UsersController, type: :controller do
                   transaction_received_mail: false,
                   goal_reached_mail: false,
                   summary_mail: false
-                }
+                },
+                team: team.id
               }
       end
 
@@ -66,7 +70,8 @@ RSpec.describe UsersController, type: :controller do
                   transaction_received_mail: true,
                   goal_reached_mail: false,
                   summary_mail: true
-                }
+                },
+                team: team.id
               }
       end
 
