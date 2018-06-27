@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     @user = User.from_omniauth(request.env['omniauth.auth'])
@@ -30,16 +32,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     profile = data['extra']['user_info']['user']['profile']
     slack_name = profile['display_name'].present? ? profile['display_name'] : profile['real_name']
 
-    TeamMember.transaction do
-      current_membership.update(slack_id: slack_id, slack_username: slack_username, slack_name: slack_name)
-      flash[:notice] = "Successfully #{current_user.slack_id.blank? ? 'connected to Slack!' : 'updated your Slack display name!'}"
-    end
+    current_membership.update_attributes(slack_id: slack_id, slack_username: slack_username, slack_name: slack_name)
 
-    team.update_attributes(:slack_team_id => slack_team_id, :slack_bot_access_token => bot_access_token)
+    team.update_attributes(slack_team_id: slack_team_id, slack_bot_access_token: bot_access_token)
 
-    puts "SAVING TEAM"
+    flash[:notice] = "Successfully #{current_user.slack_id.blank? ? 'connected to Slack!' : 'updated your Slack display name!'}"
+
+    puts 'SAVING TEAM'
 
     redirect_to settings_path(team: team.slug)
   end
-
 end
