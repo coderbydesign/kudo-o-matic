@@ -4,8 +4,8 @@ class GoalReacher
       Goal.next(team).achieve!
 
       SlackService.instance.send_goal_reached(team)
-      FcmService.instance.send_goal_reached
-      GoalMailer.new_goal(Goal.previous(team))
+      FcmService.instance.send_goal_reached(team)
+      GoalMailer.new_goal(Goal.previous(team), team)
     end
   end
 end

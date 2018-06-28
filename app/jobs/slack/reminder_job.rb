@@ -15,7 +15,7 @@ Slack::ReminderJob = Struct.new(:team) do
     team.memberships.where.not(slack_id: nil).each do |membership|
       next unless membership.user.deactivated_at.nil?
       request.body = {
-        channel: "@#{membership.slack_id}",
+        channel: membership.slack_id,
         attachments:
               [
                 {

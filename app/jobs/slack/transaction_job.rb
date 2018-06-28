@@ -18,7 +18,7 @@ Slack::TransactionJob = Struct.new(:transaction, :team, :new?) do
 
     request.body = {
       ts: transaction.slack_transaction_updated_at,
-      channel: '#general',
+      channel: team.channel_id,
       attachments: [
         {
           text: "*#{transaction.sender.name}* gave *#{transaction.receiver_name_feed}* "\
@@ -35,6 +35,7 @@ Slack::TransactionJob = Struct.new(:transaction, :team, :new?) do
           footer_icon: ENV['COMPANY_ICON'],
           image_url: transaction.image.url(:thumb),
           callback_id: transaction.id,
+          as_user: new? ? false : true,
           actions: [
             {
               name: 'like',
@@ -56,7 +57,13 @@ Slack::TransactionJob = Struct.new(:transaction, :team, :new?) do
     }.to_json
 
     response = http.request(request)
+
+    puts response.body
+
     body = JSON.parse(response.body)
+
+
+
     transaction.update(slack_transaction_updated_at: body['ts'])
   end
 

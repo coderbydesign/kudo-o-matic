@@ -13,7 +13,7 @@ Slack::GoalJob = Struct.new(:team) do
     goal = Goal.previous(team)
 
     request.body = {
-      channel: ENV['SLACK_CHANNEL'],
+      channel: team.channel_id,
       attachments:
             [
               {
