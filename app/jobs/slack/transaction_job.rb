@@ -23,7 +23,7 @@ Slack::TransactionJob = Struct.new(:transaction, :team, :new?) do
         {
           text: "*#{transaction.sender.name}* gave *#{transaction.receiver_name_feed}* "\
                   "#{transaction.receiver&.slack_id.present? ? "(<@#{transaction.receiver.slack_id}>) " : ''}"\
-                  "*<#{transaction_url(team.slug, transaction)}|#{transaction_amount} #{'₭udo'.pluralize(transaction_amount)}>* "\
+                  "*<#{transaction_url(team: team.slug, id: transaction.id)}|#{transaction_amount} #{'₭udo'.pluralize(transaction_amount)}>* "\
                   "for #{transaction.activity_name_feed}. \n\n"\
                   "#{kudos_left.present? && kudos_left > 0 ? "*#{kudos_left} "\
                   "#{'₭udo'.pluralize(kudos_left)}* left until the next goal! #{emoji}" : ''}",
@@ -31,7 +31,7 @@ Slack::TransactionJob = Struct.new(:transaction, :team, :new?) do
           fallback: 'New ₭udo transaction!',
           color: '#5F90B0',
           footer: "#{team.name} | ₭udo-o-Matic | "\
-                    "<#{transaction_url(team.slug, transaction)}|Transaction> created at: #{transaction.created_at.in_time_zone('CET').strftime('%d-%m-%Y %H:%M')}",
+                    "<#{transaction_url(team: team.slug, id: transaction.id)}|Transaction> created at: #{transaction.created_at.in_time_zone('CET').strftime('%d-%m-%Y %H:%M')}",
           footer_icon: ENV['COMPANY_ICON'],
           image_url: transaction.image.url(:thumb),
           callback_id: transaction.id,
