@@ -13,7 +13,8 @@ class SlackService
   def send_updated_transaction(transaction)
     return unless SLACK_IS_CONFIGURED
 
-    Delayed::Job.enqueue Slack::TransactionJob.new(transaction, transaction.team, false)
+    Delayed::Job.enqueue Slack::TransactionJob.new(transaction, transaction.team,
+                                                   false)
   end
 
   def send_goal_reached(team)
@@ -104,5 +105,25 @@ class SlackService
 
     user = JSON.parse(response)['user']
     user['profile']['display_name'] unless user.nil?
+  end
+
+  def set_general_channel_id(team)
+    return unless SLACK_IS_CONFIGURED
+
+    uri = URI.parse('https://slack.com/api/channels.list')
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(uri.path, 'Content-type' => 'application/json',
+                                           'Authorization' => "Bearer #{team.slack_bot_access_token}")
+
+    response = http.request(request).body
+
+    channels = JSON.parse(response)['channels']
+    channels.each do |c|
+      if c['name'] == 'general'
+        team.update_attribute(:channel_id, c['id'])
+        break
+      end
+    end
   end
 end

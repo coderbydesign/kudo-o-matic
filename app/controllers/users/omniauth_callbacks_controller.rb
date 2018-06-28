@@ -38,7 +38,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     flash[:notice] = "Successfully #{current_user.slack_id.blank? ? 'connected to Slack!' : 'updated your Slack display name!'}"
 
-    puts 'SAVING TEAM'
+    SlackService.instance.set_general_channel_id(team)
 
     redirect_to settings_path(team: team.slug)
   end

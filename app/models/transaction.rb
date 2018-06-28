@@ -87,6 +87,10 @@ class Transaction < ActiveRecord::Base
     Transaction.where(team_id: team.id).last
   end
 
+  def liked_by_user?(user)
+    votes.find_by_voter_id(user.id).present?
+  end
+
   GUIDELINES =
     [['Margin / month super (>=15% ROS)', 500],
      ['Turnover / month super (>= 350k)', 500],

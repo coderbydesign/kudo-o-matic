@@ -11,19 +11,24 @@ class SlackController < ApplicationController
 
     transaction = Transaction.find(payload['callback_id'])
     team = Team.find_by_slack_team_id(payload['team']['id'])
-    puts team
     membership = team.memberships.find_by_slack_id(payload['user']['id'])
     user = membership.present? ? membership.user : nil
 
 
     if user&.member_of?(team)
-      transaction.liked_by user
+      if transaction.liked_by_user?(user)
+        message = "Already liked ₭udo transaction!"
+        SlackService.instance.send_response(payload['response_url'], message, team)
+      else
+        transaction.liked_by user
 
-      SlackService.instance.send_updated_transaction(transaction)
+        SlackService.instance.send_updated_transaction(transaction)
 
-      message = "Successfully liked ₭udo transaction! Click <#{transaction_url(team.slug, transaction)}|here> for more details."
-      SlackService.instance.send_response(payload['response_url'], message, team)
+        message = "Successfully liked ₭udo transaction! Click <#{transaction_url(team.slug, transaction)}|here> for more details."
+        SlackService.instance.send_response(payload['response_url'], message, team)
+      end
     end
+
   end
 
   def command
