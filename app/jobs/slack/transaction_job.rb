@@ -58,13 +58,9 @@ Slack::TransactionJob = Struct.new(:transaction, :team, :new?) do
 
     response = http.request(request)
 
-    puts response.body
-
     body = JSON.parse(response.body)
 
-
-
-    transaction.update(slack_transaction_updated_at: body['ts'])
+    transaction.update_attribute(:slack_transaction_updated_at, body['ts'])
   end
 
   def queue_name
