@@ -45,7 +45,8 @@ class SlackController < ApplicationController
     SlackService.instance.send_response(params['response_url'], message, team)
   rescue ActiveRecord::RecordInvalid, SlackConnectionError, SlackArgumentsError => error
     SlackService.instance.send_response(params['response_url'], error, team)
-  rescue
+  rescue => error
+    puts error
     message = "Use the following syntax to give ₭udos:\n*/kudo* @receiver <amount> <reason>"
     SlackService.instance.send_response(params['response_url'], message, team)
   end
