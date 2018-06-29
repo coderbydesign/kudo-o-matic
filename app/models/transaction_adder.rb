@@ -102,16 +102,37 @@ class TransactionAdder
 
     sender_slack_id = params['user_id']
 
+    puts "RECEIVER_TEXT: #{receiver_text}"
+    puts "AMOUNT: #{amount}"
+    puts "ACTIVITY: #{activity}"
+
+    puts "FIRST_CHAR: #{first_char_receiver}"
+    puts "SENDER_ID: #{sender_slack_id}"
+
     if arguments.size < 3 || receiver_text.nil? ||
        sender_slack_id.nil? || amount.nil? || activity.nil? || first_char_receiver != '@'
       raise SlackArgumentsError, "Invalid command. Use the following syntax to give ₭udos:\n"\
                                     '*/kudo* @receiver <amount> <reason>'
     end
 
+    puts "NO EMPTY VALUES :)"
+
     receiver_membership = team.memberships.find_by_slack_username(receiver_text)
     receiver = receiver_membership.user || nil
     sender_membership = team.memberships.find_by_slack_id(sender_slack_id)
     sender = sender_membership.user || nil
+
+    puts "RECEIVER_MEMBERSHIP"
+    puts receiver_membership
+
+    puts "RECEIVER"
+    puts receiver
+
+    puts "SENDER_MEMBERSHIP"
+    puts sender_membership
+
+    puts "SENDER"
+    puts sender
 
     raise SlackConnectionError, 'You are *not* connected to the ₭udo-o-Matic' if sender.nil?
     raise SlackConnectionError, 'Receiver is *not* connected to the ₭udo-o-Matic' if receiver.nil?
@@ -125,6 +146,8 @@ class TransactionAdder
       balance: Balance.current(team.id),
       team_id: team.id
     )
+
+    puts "VALID?: #{transaction.valid?}"
 
     save(transaction, team)
   end
