@@ -4,7 +4,7 @@ namespace :teams do
     slug = ENV['COMPANY_USER'].downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
 
     Team.skip_callback(:create, :after, :setup_team)
-    team = Team.create(name: ENV['COMPANY_USER'], slug: slug)
+    team = Team.find_by_name_and_slug(ENV['COMPANY_USER'], slug)
     Team.set_callback(:create, :after, :setup_team)
 
     User.all.each do |user|
