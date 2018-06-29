@@ -28,13 +28,13 @@
             .transaction-body-container
               .transaction-content
                 %span.highlighted.sendername
-                  = "#{@transaction.sender.name}:"
+                  = "#{@transaction.sender_name}:"
                 %span.highlighted
                   = "+#{@transaction.amount} ₭"
                 %span
                   to
                 %span.highlighted.receivername
-                  = "#{@transaction.receiver.name}"
+                  = "#{@transaction.receiver_name_feed}"
                 %span
                   for
                 %span.activityname
