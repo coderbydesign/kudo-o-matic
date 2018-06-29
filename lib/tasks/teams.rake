@@ -11,12 +11,10 @@ namespace :teams do
       team.add_member(user, user.admin?)
     end
     Transaction.all.each do |transaction|
-      transaction.team_id = team.id
-      transaction.save
+      transaction.update_attribute(:team_id, team.id)
     end
     Balance.all.each do |balance|
-      balance.team_id = team.id
-      balance.save
+      balance.update_attribute(:team_id, team.id)
     end
   end
 
