@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: "is not correct. You can't give negative ₭udos or exceed over 1000" }
   validates :activity_name_feed, length: { minimum: 4, maximum: 140 }
 
   # also creates a second image file with a maximum width and/or height of 800 pixels with its aspect ratio preserved
   has_attached_file :image, styles: { thumb: '600x600' }
-  validates_attachment :image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+  validates_attachment :image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
   validates_with AttachmentSizeValidator, attributes: :image, less_than: 10.megabytes
   process_in_background :image
 
@@ -21,11 +23,11 @@ class Transaction < ActiveRecord::Base
   delegate :name, to: :activity, prefix: true
 
   def kudos_amount
-    self.amount + self.votes.count
+    amount + votes.count
   end
 
   def likes_amount
-    self.votes.count
+    votes.count
   end
 
   def receiver_name_feed
@@ -56,13 +58,21 @@ class Transaction < ActiveRecord::Base
     self.receiver = User.find_by(name: name) if name.present?
   end
 
+  def sender_name
+    if sender
+      sender.name
+    else
+      'Deleted'
+    end
+  end
+
   def short_str
-    "#{kudos_amount}₭ to #{receiver_name}"
+    "#{kudos_amount}₭ to #{receiver_name_feed}"
   end
 
   def self.all_for_user(user)
     Transaction.where(sender: user).or(Transaction.where(receiver: user)).or(
-        Transaction.where(receiver: User.where(name: ENV['COMPANY_USER']))
+      Transaction.where(receiver: User.where(name: ENV['COMPANY_USER']))
     ).order('created_at desc')
   end
 
@@ -116,7 +126,7 @@ class Transaction < ActiveRecord::Base
      ['Visit conference', 20],
      ['Be a special help for someone', 10],
      ['Be a quick help for someone', 5],
-     ['Start a meeting in time', 1]]
+     ['Start a meeting in time', 1]].freeze
 
   def self.guidelines_between(from, to)
     gl = []
@@ -283,5 +293,5 @@ class Transaction < ActiveRecord::Base
     'white_flower', 'white_square_button', 'wind_chime', 'wine_glass', 'wink', 'wolf', 'woman', 'womans_clothes',
     'womans_hat', 'womens', 'worried', 'wrench', 'x', 'yellow_heart', 'yen',
     'yum', 'zap', 'zero', 'zzz'
-  ]
+  ].freeze
 end

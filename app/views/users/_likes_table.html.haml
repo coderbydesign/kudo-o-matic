@@ -7,7 +7,7 @@
   - likes.each do |l|
     %tr.no-top-border
       %td
-        = link_to l.transaction_votable.short_str, transaction_path(l.votable_id)
+        = link_to l.transaction_votable.short_str, transaction_path(l.transaction_votable.team.slug, l.votable_id)
       %td
         = l.created_at.strftime("%Y-%m-%d")
 = paginate likes

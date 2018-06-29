@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def view_data
     @transactions_count = Transaction.all_for_user(@user).count
-    @votes_count = @user.votes.count
+    @likes_count = @user.votes.count
     @exports = @user.exports
   end
 
