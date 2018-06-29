@@ -1,3 +1,5 @@
+require 'pp'
+
 class Api::V1::TransactionsController < Api::V1::ApiController
   before_action :set_transaction, only: [:like, :unlike]
   after_action :update_slack_transaction, only: [:like, :unlike]

@@ -1,11 +1,11 @@
 class GoalReacher
-  def self.check!
-    if Balance.current.amount >= Goal.next.amount
-      Goal.next.achieve!
+  def self.check!(team)
+    if Balance.current(team).amount >= Goal.next(team).amount
+      Goal.next(team).achieve!
 
-      SlackService.instance.send_goal_reached
-      FcmService.instance.send_goal_reached
-      GoalMailer.new_goal(Goal.previous)
+      SlackService.instance.send_goal_reached(team)
+      FcmService.instance.send_goal_reached(team)
+      GoalMailer.new_goal(Goal.previous(team), team)
     end
   end
 end

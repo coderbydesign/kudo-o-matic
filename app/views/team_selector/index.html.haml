@@ -1,0 +1,40 @@
+= render 'layouts/header'
+.page
+  .settings-container
+    .title-container
+      %h1.settings-title
+        Welcome, #{current_user.first_name}!
+      .actions
+        = link_to sign_out_path, method: "get", class: 'btn secondary' do
+          <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+
+    - flash.each do |key, value|
+      .message-container.show-message
+        .margin-bottom{:class => "#{key}-message"}
+          %span.message
+            .fa.fa-exclamation-circle
+            .message{:class => key}= value
+
+    - if @invites.any?
+      = render 'team_selector/invites', invites: @invites
+
+    - if @teams.size == 0
+      %h2.settings-subtitle
+        You are not in a team yet
+      %p
+        In order to use Kudo-o-Matic you need to be in a team. You can wait for an invitation or create a new team
+        yourself. Creating a team is very straightforward, all you need to do is enter your team name!
+      .data-actions.actions
+        = link_to new_team_path, class: 'btn', id: 'create-new-team-button' do
+          <i class="fa fa-plus" aria-hidden="true"></i> Create a new team
+    - else
+      %h2.settings-subtitle
+        Choose your team
+      .logo-grid
+        - @teams.each do |t|
+          -if t.logo.exists?
+            = link_to image_tag(t.logo.url), dashboard_path(t.slug), class: 'team-logo-selection'
+          -else
+            = link_to t.name, dashboard_path(t.slug), class:'team-logo-selection placeholder'
+
+

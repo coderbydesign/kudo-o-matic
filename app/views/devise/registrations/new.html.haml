@@ -1,0 +1,35 @@
+= render 'layouts/header'
+.sign-up-page.flex-page
+  .sign-up-container
+    %h2 Create your new account
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => 'simple_form sign-up-form'}) do |f|
+      = devise_error_messages!
+      .form-inputs
+        .form-field
+          = f.label :name, class: 'fa user' do
+            %span.hidden
+              Name
+          = f.text_field :name, required: true, autofocus: true, placeholder: 'Your name'
+        .form-field
+          = f.label :email, class: 'fa envelope' do
+            %span.hidden
+              Email
+          = f.email_field :email, required: true, autofocus: true, placeholder: 'Your email'
+        .form-field
+          = f.label :password, autocomplete: "off", class: 'fa lock' do
+            %span.hidden
+              Password
+          = f.password_field :password, required: true, placeholder: 'Your password'
+        .form-field
+          = f.label :password_confirmation, class: 'fa lock' do
+            %span.hidden
+              Password confirmation
+          = f.password_field :password_confirmation, required: true, placeholder: 'Confirm your password'
+          - if @validatable
+            %span.help-block
+              = @minimum_password_length
+              characters minimum
+      .form-actions
+        = f.submit "Sign up"
+      -# TODO: Add GRPR compliant checkboxes
+    = render 'devise/shared/links'

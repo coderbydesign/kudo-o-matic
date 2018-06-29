@@ -16,13 +16,13 @@ module TransactionsHelper
     list_others_tooltip(transaction)
   end
 
-  def percentage_next_goal
-    number = ((Balance.current.amount.to_f - Goal.previous.amount.to_f) / (Goal.next.amount.to_f - Goal.previous.amount.to_f)) * 100
+  def percentage_next_goal(team)
+    number = ((Balance.current(team).amount.to_f - Goal.previous(team).amount.to_f) / (Goal.next(team).amount.to_f - Goal.previous(team).amount.to_f)) * 100
     helper.number_to_percentage(number, precision: 0)
   end
   
-  def kudos_to_next_goal
-    Goal.next.amount - Balance.current.amount
+  def kudos_to_next_goal(team)
+    Goal.next(team).amount - Balance.current(team).amount
   end
 
   private

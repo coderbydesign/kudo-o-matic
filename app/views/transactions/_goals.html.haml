@@ -21,12 +21,12 @@
               %span.left-text
                 = goal.achieved_on
 
-      - elsif Goal.next == goal
+      - elsif Goal.next(current_team) == goal
         %li.progress-step.is-active
           .progress-bar
-            .progress-bar-inner{style: "height: #{percentage_next_goal}"}
+            .progress-bar-inner{style: "height: #{percentage_next_goal(current_team)}"}
               %span.percentage
-                = percentage_next_goal
+                = percentage_next_goal(current_team)
           %span.progress-marker{style:"box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);"}
             %i.fa.fa-lock
           %span.progress-text
@@ -41,7 +41,7 @@
                   %span.menu-content
                     = goal.name
               %span.left-text
-                = goal.amount - Balance.current.amount
+                = goal.amount - Balance.current(current_team.id).amount
               %span.left-text
                 ₭ left
       - else
@@ -61,7 +61,7 @@
                   %span.menu-content
                     = goal.name
               %span.left-text
-                = goal.amount - Balance.current.amount
+                = goal.amount - Balance.current(current_team.id).amount
               %span.left-text
                 ₭ left
     %li.progress-step.is-complete
@@ -70,4 +70,4 @@
         %i.fa.fa-dot-circle-o
       %span.progress-text
         %h3.progress-title.highlighted
-          = "Balance #{Balance.current.name}"
+          = "Balance #{Balance.current(current_team.id).name}"

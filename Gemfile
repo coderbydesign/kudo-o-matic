@@ -12,11 +12,14 @@ gem 'bourbon', '~> 4.3.4'
 gem 'chronic', '~> 0.10.2'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'devise', '~> 4.3'
+gem 'doorkeeper', '~> 4.3'
 gem 'delayed_job_active_record', '~> 4.1.1'
 gem 'delayed_paperclip', '~> 3.0.1'
+gem "daemons"
 gem 'draper', '= 3.0.0.pre1'
 gem 'fcm', '~> 0.0.2'
 gem 'font-awesome-rails', '~> 4.7.0.2'
+gem 'friendly_id', '~> 5.1.0'
 gem 'google-id-token', '~> 1.4'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.0'
@@ -35,14 +38,17 @@ gem 'pg', '~> 0.18'
 gem 'premailer-rails', '~> 1.9.7'
 gem 'pry', '~> 0.10.4'
 gem 'puma', '~> 3.0'
+gem 'rabl', '~> 0.13.1'
 gem 'rack-cors', '~> 1.0'
 gem 'rails', '~> 5.0.3'
 gem 'rails-controller-testing', '~> 1.0.2'
+gem 'rails-html-sanitizer', '~> 1.0.4'
 gem 'rails_autolink', '~> 1.1.6'
 gem 'railties', '~> 5.0.3'
 gem 'redcarpet', '~> 3.4'
 gem 'rubocop', '~> 0.51.0', require: false
 gem 'rufus-scheduler', '~> 3.4.2'
+gem 'rubyzip', require: 'zip'
 gem 'sass-rails', '~> 5.0'
 gem 'scss_lint', '~> 0.54', require: false
 gem 'simple_form', '~> 3.5'
@@ -63,6 +69,7 @@ end
 group :development do
   gem 'spring', '~> 2.0.2'
   gem 'web-console', '~> 3.0'
+  gem 'rubyzip'
 end
 
 group :production do

@@ -1,0 +1,34 @@
+= render 'layouts/header'
+.page
+  .settings-container
+    .title-container
+      %h1.settings-title
+        Goals
+      .actions
+        = link_to goals_path(team: current_team.slug), method: "get", class: 'btn secondary' do
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to goals
+    - if notice
+      .message-container.success-message.margin-top
+        %span.message
+          .fa.fa-exclamation-circle
+          #notice= notice
+    %h2.settings-subtitle
+      Edit goal
+    - if @goal.errors.any?
+      - @goal.errors.full_messages.each do |msg|
+        .message-container.show-message
+          .margin-bottom.error-message
+            %span.message
+              .fa.fa-exclamation-circle
+              .message.error= msg
+    = simple_form_for @goal, html: { class: 'form' }, url: goal_path(team: current_team.slug), method: :put do |f|
+      .form-inputs
+        .form-field
+          = f.input :name, required: true, autocomplete: false, wrapper: false, error: false
+        .form-field
+          = f.input :amount, required: true, autocomplete: false, wrapper: false, error: false
+        .form-field.left
+          = f.label :balance_id, required: true
+          = f.select(:balance_id, current_team.balances.map{|b| [ b.name, b.id ] }, selected: @goal.balance.id)
+      .form-actions.actions
+        = f.button :submit, "Update goal", class: 'btn', id: 'update-goal-button'

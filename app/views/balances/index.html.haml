@@ -1,0 +1,15 @@
+= render 'layouts/header'
+.page
+  .settings-container
+    .title-container
+      %h1.settings-title
+        Manage balances
+      .actions
+        = link_to root_path, method: "get", class: 'btn secondary' do
+          <i class="fa fa-home" aria-hidden="true"></i> Home
+        = link_to manage_team_path(team: current_team.slug), method: "get", class: 'btn secondary' do
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to manage
+    %h2.settings-subtitle
+      Balances
+    = render 'balance_list', balances: @balances
+    = render 'balances/other_actions'

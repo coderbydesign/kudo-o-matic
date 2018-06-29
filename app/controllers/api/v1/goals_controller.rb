@@ -1,10 +1,10 @@
 class Api::V1::GoalsController < Api::V1::ApiController
   def next
-    redirect_to api_v1_goal_path(Goal.next)
+    redirect_to api_v1_goal_path(Goal.next(team_id))
   end
 
   def previous
-    previous_goal = Goal.previous
+    previous_goal = Goal.previous(team_id)
 
     if !previous_goal.id.nil?
       redirect_to api_v1_goal_path(previous_goal)

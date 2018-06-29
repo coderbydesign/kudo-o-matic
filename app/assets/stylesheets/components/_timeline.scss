@@ -78,6 +78,17 @@
       line-height: 125%;
       margin: $margin-secondary 0;
 
+      .transaction-content {
+        .sendername, .receivername {
+          .restricted {
+            color: $base-color-light-gray;
+          }
+        }
+        .activityname {
+          word-break: break-all;
+        }
+      }
+
       a {
         text-decoration: underline;
         color: rgb(0,0,255);

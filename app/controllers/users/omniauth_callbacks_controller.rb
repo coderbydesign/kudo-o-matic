@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     @user = User.from_omniauth(request.env['omniauth.auth'])
@@ -13,21 +15,31 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def slack
-    User.transaction do
-      data = request.env['omniauth.auth']
+    team = Team.find(session[:omniauth_team_id])
+    current_membership = team.membership_of(current_user)
 
-      info = data['info']
-      slack_id = info['user_id']
-      slack_username = info['user']
+    data = request.env['omniauth.auth']
 
-      profile = data['extra']['user_info']['user']['profile']
-      slack_name = profile['display_name'].present? ? profile['display_name'] : profile['real_name']
+    info = data['info']
+    slack_id = info['user_id']
+    slack_team_id = info['team_id']
+    slack_username = info['user']
 
-      flash[:notice] = "Successfully #{current_user.slack_id.blank? ? 'connected to Slack!' : 'updated your Slack display name!'}"
+    bot = data['extra']['bot_info']
+    bot_access_token = bot['bot_access_token']
+    puts "TOKEN: #{bot_access_token}"
 
-      current_user.update(slack_id: slack_id, slack_username: slack_username, slack_name: slack_name)
-    end
+    profile = data['extra']['user_info']['user']['profile']
+    slack_name = profile['display_name'].present? ? profile['display_name'] : profile['real_name']
 
-    redirect_to settings_path
+    current_membership.update_attributes(slack_id: slack_id, slack_username: slack_username, slack_name: slack_name)
+
+    team.update_attributes(slack_team_id: slack_team_id, slack_bot_access_token: bot_access_token)
+
+    flash[:notice] = "Successfully #{current_user.slack_id.blank? ? 'connected to Slack!' : 'updated your Slack display name!'}"
+
+    SlackService.instance.set_general_channel_id(team)
+
+    redirect_to settings_path(team: team.slug)
   end
 end

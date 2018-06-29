@@ -1,0 +1,28 @@
+- if goals.any?
+  %table.settings-table
+    %tr
+      %th
+        Naam
+      %th
+        Amount
+      %th
+        Balance
+      %th{colspan: 2}
+        Actions
+    - goals.each do |g|
+      %tr
+        %td
+          = link_to g.name, goal_path(id: g.id, team: current_team.slug), id: "show-#{g.id}"
+        %td
+          = g.amount
+        %td
+          = link_to g.balance.name, balance_path(id: g.balance.id, team: current_team.slug), id: "show-#{g.id}"
+        %td
+          = link_to 'Edit', edit_goal_path(id: g.id, team: current_team.slug), id: "edit-#{g.id}"
+        %td
+          = link_to 'Remove', goal_path(id: g.id, team: current_team.slug), method: :delete, id: "rm-#{g.id}",
+            data: {confirm: "This will remove #{g.name}. Are you sure?"}
+- else
+  %p
+    Your team doesn't have any goals yet.
+

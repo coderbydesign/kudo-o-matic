@@ -1,15 +1,25 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  let!(:user) {create(:user, :admin, transaction_received_mail: false, goal_reached_mail: false, summary_mail: false)}
+  let(:team) { create :team }
+  let(:team2) { create :team, name: 'Team Two' }
+  let!(:user) { create(:user, :admin, transaction_received_mail: false, goal_reached_mail: false, summary_mail: false) }
+  let!(:user2) { create(:user, name: 'Henk') }
 
   before do
+    team.add_member(user)
+    team2.add_member(user2)
     sign_in user
   end
 
   describe 'GET #edit' do
     before do
-      get :edit
+      get :edit,
+          params: {
+              team: team.id
+          }
     end
 
     it 'gets edit' do
@@ -26,11 +36,12 @@ RSpec.describe UsersController, type: :controller do
       before do
         patch :update,
               params: {
-                  user: {
-                      transaction_received_mail: false,
-                      goal_reached_mail: false,
-                      summary_mail: false
-                  }
+                user: {
+                  transaction_received_mail: false,
+                  goal_reached_mail: false,
+                  summary_mail: false
+                },
+                team: team.id
               }
       end
 
@@ -55,11 +66,12 @@ RSpec.describe UsersController, type: :controller do
       before do
         patch :update,
               params: {
-                  user: {
-                      transaction_received_mail: true,
-                      goal_reached_mail: false,
-                      summary_mail: true
-                  }
+                user: {
+                  transaction_received_mail: true,
+                  goal_reached_mail: false,
+                  summary_mail: true
+                },
+                team: team.id
               }
       end
 
@@ -77,6 +89,29 @@ RSpec.describe UsersController, type: :controller do
 
       it 'returns a 302 (found) status code' do
         expect(response).to have_http_status(302)
+      end
+    end
+  end
+
+  describe 'GET #users_autocomplete' do
+    context 'with the name of a team member' do
+      before do
+        get :autocomplete_search, team: team.slug,
+                                  term: user.name[0..1] # Cut off the name a bit
+      end
+
+      it 'returns the user John' do
+        expect(response.body).to match("[#{user.name}]")
+      end
+    end
+
+    context 'with the name of a user that is not in the same team' do
+      before do
+        get :autocomplete_search, team: team.slug, term: user2.name
+      end
+
+      it 'returns no users' do
+        expect(response.body).to match('[]')
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ActiveRecord::Base
   after_update :ensure_an_admin_remains
 
@@ -6,11 +8,16 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # :database_authenticatable, :registerable,
   # :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, :omniauth_providers => [:google_oauth2, :slack]
+  devise :omniauthable, :registerable, :confirmable, :database_authenticatable,
+         :validatable, :lockable, :recoverable, omniauth_providers: [:slack]
 
   has_many :sent_transactions, class_name: 'Transaction', foreign_key: :sender_id
   has_many :received_transactions, class_name: 'Transaction', foreign_key: :receiver_id
+  has_many :memberships, class_name: 'TeamMember', foreign_key: :user_id
+  has_many :teams, through: :memberships
+  has_many :team_invites
   has_many :votes, foreign_key: 'voter_id'
+  has_many :exports, foreign_key: 'user_id'
   has_many :fcm_tokens
 
   typed_store :preferences, coder: PreferencesCoder do |p|
@@ -36,9 +43,7 @@ class User < ActiveRecord::Base
         avatar_url: data['image']
     )
 
-    unless existing_user
-      UserMailer.new_user(user)
-    end
+    UserMailer.new_user(user) unless existing_user
 
     user
   end
@@ -63,11 +68,38 @@ class User < ActiveRecord::Base
 
     user.update(api_token: generate_unique_api_token) unless user.api_token.present?
 
-    unless existing_user
-      UserMailer.new_user(user)
-    end
+    UserMailer.new_user(user) unless existing_user
 
     user
+  end
+
+  def self.find_by_term(term)
+    User.order(:name).where('lower(name) like ?', "#{term}%".downcase)
+        .where(deactivated_at: nil).where(restricted: false)
+  end
+
+  def member_of?(team)
+    memberships.find_by_team_id(team.id).present?
+  end
+
+  def member_since(team)
+    memberships.find_by_team_id(team.id).created_at
+  end
+
+  def admin_of?(team)
+    @admin_rights = Hash.new do |h, key|
+      h[key] = memberships.find_by_team_id(key)&.admin?
+    end
+    @admin_rights[team.id]
+    # TODO: when we implement the functionality to give/revoke admin rights, we need to make sure to invalidate @admin_rights[team.id]
+  end
+
+  def invited_to?(team)
+    team_invites.open.where(team_id: team.id).any?
+  end
+
+  def all_transactions
+    Transaction.all_for_user(self)
   end
 
   def first_name
@@ -75,7 +107,7 @@ class User < ActiveRecord::Base
   end
 
   def picture_url
-    avatar_url || '/no-picture-icon.jpg'
+    avatar_url.presence || '/no-picture-icon.jpg'
   end
 
   def deactivate
@@ -94,6 +126,26 @@ class User < ActiveRecord::Base
     !deactivated_at.nil?
   end
 
+  def multiple_teams?
+    teams.length > 1
+  end
+
+  def invites?
+    team_invites.length > 1
+  end
+
+  def slack_id_for_team(team)
+    team.membership_of(self).slack_id
+  end
+
+  def slack_name_for_team(team)
+    team.membership_of(self).slack_name
+  end
+
+  def slack_username_for_team(team)
+    team.membership_of(self).slack_username
+  end
+
   # overridden Devise method that checks the soft delete timestamp on authentication
   def active_for_authentication?
     super && !deactivated_at
@@ -101,6 +153,13 @@ class User < ActiveRecord::Base
 
   def to_s
     name
+  end
+
+  def to_profile_json
+    Jbuilder.new do |user|
+      user.name name
+      user.avatar_url avatar_url
+    end
   end
 
   private

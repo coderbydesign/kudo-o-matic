@@ -1,4 +1,4 @@
-= form_for @user do |f|
+= form_for @user, url: settings_path do |f|
   %table.settings-table
     %tr
       %td
@@ -15,4 +15,15 @@
         = f.label :summary_mail
       %td.settings-table-value
         = f.check_box :summary_mail, class: 'settings-checkbox'
+
+  %h2.settings-subtitle
+    Privacy
+
+  %table.settings-table
+    %tr
+      %td
+        Restrict your account (your data will be hidden from other users and admins,
+        but you won't be able to use most features.)
+      %td.settings-table-value
+        = f.check_box :restricted, class: 'settings-checkbox'
   = f.submit class: 'btn btn-primary btn-save'

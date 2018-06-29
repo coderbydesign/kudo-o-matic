@@ -8,10 +8,10 @@ class FcmService
     Delayed::Job.enqueue Fcm::TransactionRefreshJob.new(nil)
   end
 
-  def send_goal_reached
+  def send_goal_reached(team)
     return unless fcm_service_configured
 
-    Delayed::Job.enqueue Fcm::GoalJob.new(nil)
+    Delayed::Job.enqueue Fcm::GoalJob.new(team)
   end
 
   def send_reminder

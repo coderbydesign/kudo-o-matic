@@ -1,13 +1,35 @@
-- if notice
+- if !current_user.confirmed?
   .message-container.show-message
     .error-message.margin-bottom
       %span.message
         .fa.fa-exclamation-circle
-        #notice= notice
+        %div
+          Please confirm your e-mail within #{unconfirmed_access_hours_left(current_user)} hours to keep access to your account.
+          Unconfirmed accounts get deleted after #{confirm_within}.
+          = link_to "Resend email confirmation instructions", users_resend_email_confirmation_path, method: :post
+
+- if current_user.restricted?
+  .message-container.show-message
+    .warning-message.margin-bottom
+      %span.message
+        .fa.fa-exclamation-circle
+        %div
+          You currently have restricted your account. While restricted your data won't be visible to other users and
+          admins, but some features are disabled. These include sending transactions and casting votes.
+          To un-restrict your account, go to the
+          = link_to "Settings", settings_path
+          page
+
+- flash.each do |key, value|
+  .message-container.show-message
+    .margin-bottom{:class => "#{key}-message"}
+      %span.message
+        .fa.fa-exclamation-circle
+        .message{:class => key}= value
       .fa.fa-times.close-message
 
 - if @transaction.errors.any?
-  .message-container.show-message
+  #transaction-errors.message-container.show-message
     .error-message.margin-bottom
       %span.message
         .fa.fa-exclamation-circle
