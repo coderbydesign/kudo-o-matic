@@ -4,19 +4,17 @@ namespace :teams do
     slug = ENV['COMPANY_USER'].downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
 
     Team.skip_callback(:create, :after, :setup_team)
-    team = Team.create(name: ENV['COMPANY_USER'], slug: slug)
+    team = Team.find_or_create_by_name_and_slug(ENV['COMPANY_USER'], slug)
     Team.set_callback(:create, :after, :setup_team)
 
     User.all.each do |user|
       team.add_member(user, user.admin?)
     end
     Transaction.all.each do |transaction|
-      transaction.team_id = team.id
-      transaction.save
+      transaction.update_attribute(:team_id, team.id)
     end
     Balance.all.each do |balance|
-      balance.team_id = team.id
-      balance.save
+      balance.update_attribute(:team_id, team.id)
     end
   end
 
