@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+ruby '2.3.7'
 
 gem 'activerecord-typedstore', '~> 1.1.1'
 gem 'acts_as_votable', '~> 0.10.0'
@@ -47,7 +47,6 @@ gem 'rails_autolink', '~> 1.1.6'
 gem 'railties', '~> 5.0.3'
 gem 'redcarpet', '~> 3.4'
 gem 'rubocop', '~> 0.51.0', require: false
-gem 'rufus-scheduler', '~> 3.4.2'
 gem 'rubyzip', require: 'zip'
 gem 'sass-rails', '~> 5.0'
 gem 'scss_lint', '~> 0.54', require: false
@@ -69,7 +68,6 @@ end
 group :development do
   gem 'spring', '~> 2.0.2'
   gem 'web-console', '~> 3.0'
-  gem 'rubyzip'
 end
 
 group :production do

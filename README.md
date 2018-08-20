@@ -6,7 +6,7 @@
 The Kudo project originated from the wish to create common goals for people and teams who work on different projects in order to *strengthen the team spirit*, *collectively celebrate successes* and *ensure transparency* within an organization.
 
 The Kudo-o-Matic was created to keep track of these goals and the progress towards it. 
-Users can reward each other for good deeds by giving Kudos to each other and work together to achieve common goals in the form of Kudo-thesholds.
+Users can reward each other for good deeds by giving Kudos to each other and work together to achieve common goals in the form of Kudo-thresholds.
 
 
 ## Quick start guide
@@ -188,6 +188,43 @@ Follow these instructions to enable Firebase Cloud Messaging notification functi
 Kudo-o-Mobile app users will now receive native mobile notifications.
 
 ## Scheduled tasks
+
+Scheduled tasks are not configured automatically! You need to setup `cron` yourself, by using the following
+crontab entries:
+
+    MAILTO="mail@example.com"
+    PATH=/usr/local/bin:/usr/bin:/bin
+    SHELL=/bin/bash
+    
+    # m   h   dom mon dow   username command
+    # *   *   *   *   *     dokku    command to be executed
+    # -   -   -   -   -
+    # |   |   |   |   |
+    # |   |   |   |   +----- day of week (0 - 6) (Sunday=0)
+    # |   |   |   +------- month (1 - 12)
+    # |   |   +--------- day of month (1 - 31)
+    # |   +----------- hour (0 - 23)
+    # +----------- min (0 - 59)
+
+    ### PLACE ALL CRON TASKS BELOW
+
+    # 9:00 every friday: send weekly summary email
+    0 9 * * 5 dokku dokku --rm run kudo-o-matic bundle exec rake notifications:weekly_summary
+
+
+    # 12:55 every friday: send a slack and mobile kudos reminder
+    55 12 * * 5 dokku dokku --rm run kudo-o-matic bundle exec rake notifications:slack_reminder
+    55 12 * * 5 dokku dokku --rm run kudo-o-matic bundle exec rake notifications:mobile_reminder
+
+    # 5:00 every morning: remove expired data exports
+    5 0 * * * dokku dokku --rm run kudo-o-matic bundle exec rake maintenance:cleanup_expired_exports
+    
+    ### PLACE ALL CRON TASKS ABOVE, DO NOT REMOVE THE WHITESPACE AFTER THIS LINE
+    
+
+_Note: the above example is for the `root` user. If you install this crontab as `dokku` you must remove
+the `username` column._
+
 ### Mail
 The Kudo-o-Matic automatically sends a Kudo summary mail to all users with an mail address that have email notifications enabled.
 
