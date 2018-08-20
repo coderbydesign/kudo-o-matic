@@ -68,6 +68,7 @@ end
 group :development do
   gem 'spring', '~> 2.0.2'
   gem 'web-console', '~> 3.0'
+  gem 'rubyzip'
 end
 
 group :production do
