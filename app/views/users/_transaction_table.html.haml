@@ -1,0 +1,30 @@
+%table.settings-table
+  %tr
+    %th
+      Sender
+    %th
+      Receiver
+    %th
+      Amount
+    %th
+      Created at
+    %th
+      Text
+    %th
+      Image
+  - transactions.each do |t|
+    %tr.no-top-border
+      %td
+        = t.sender_name
+      %td
+        = t.receiver_name_feed
+      %td
+        = t.amount
+      %td
+        = t.created_at.strftime("%Y-%m-%d")
+      %td
+        = t.activity.name
+      %td
+        - if t.image.exists?
+          = link_to 'Show image', t.image.url, target: '_blank'
+= paginate transactions

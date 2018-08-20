@@ -2,15 +2,19 @@ class SummaryMailer < ApplicationMailer
   def self.new_summary
     return if Rails.env == 'test' || ENV['MAIL_USERNAME'].blank?
 
-    User.where.not(email: '').where(deactivated_at: nil).each do |user|
-      suppress(Exception) {summary_email(user).deliver_later if user.summary_mail}
+    Team.all.each do |t|
+      t.users.where.not(email: '').where(deactivated_at: nil).each do |user|
+        summary_email(user, t).deliver_later if user.summary_mail
+      end
     end
+
   end
 
-  def summary_email(user)
+  def summary_email(user, team)
     @user = user
-    @reached_goal = Goal.where('achieved_on >= ?', 1.week.ago).last
-    @transactions = Transaction.where('created_at >= ?', 1.week.ago).sort_by(&:kudos_amount).reverse.first(7)
+    @reached_goal = team.goals.where('achieved_on >= ?', 1.week.ago).last
+    @transactions = team.transactions.where('created_at >= ?', 1.week.ago).sort_by(&:kudos_amount).reverse.first(7)
+    @team = team
 
     @markdown = Redcarpet::Markdown.new(MdEmoji::Render, no_intra_emphasis: true)
 

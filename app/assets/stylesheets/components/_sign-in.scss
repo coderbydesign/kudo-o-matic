@@ -11,11 +11,95 @@
   border-radius: $border-radius-small;
   display: flex;
   flex-direction: column;
-  height: 250px;
   justify-content: center;
   width: 50%;
+  max-width: 350px;
   padding: $padding;
   text-align: center;
+
+  img {
+    margin: 10px auto 0;
+    max-width: 100%;
+  }
+
+  input {
+    border: 0;
+    color: inherit;
+    font: inherit;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+  }
+
+  .sign-in-form {
+    .form-field {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      margin-bottom: 1rem;
+    }
+
+    label,
+    input[type="email"],
+    input[type="password"],
+    input[type="submit"] {
+      border-radius: 0.25rem;
+      padding: 1rem;
+      color: #3A3F44;
+    }
+
+    input[type="email"], input[type="password"] {
+      background-color: #ffffff;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+    input[type="email"]:focus, input[type="email"]:hover, input[type="password"]:focus, input[type="password"]:hover {
+      background-color: #eeeeee;
+    }
+    input[type="submit"] {
+      background-color: $base-color-brand;
+      color: #eee;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    input[type="submit"]:focus, input[type="submit"]:hover {
+      background-color: darken($base-color-brand, 10);
+      cursor: pointer;
+    }
+
+    label {
+      background-color: $base-color-brand;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      width: 60px;
+      &:before {
+        color: #ffffff;
+      }
+      &.envelope:before {
+        content: '\f0e0';
+      }
+      &.lock:before {
+        content: '\f023';
+      }
+    }
+
+
+    .hidden {
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+  }
 
   .sign-in-header {
     flex: 1;
@@ -72,6 +156,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.shared-devise-links {
+  margin-top: 10px;
+  line-height: 24px;
+  a:hover {
+    text-decoration: underline;
+  }
 }
 
 @media screen and (max-width: 1200px) {

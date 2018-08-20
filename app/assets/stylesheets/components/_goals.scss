@@ -76,7 +76,7 @@ $ripple-color:              rgba(0, 0, 0, 0.3) !default;
     background: $secondary-stroke-color;
 
     .percentage {
-      margin-left: $margin-secondary;
+      margin-left: 0.7rem;
       border-top: 1px solid $base-color-brand;
       padding: 0 0 0 $padding-secondary * 1.5;
       font-size: $font-size-regular - 0.1rem;

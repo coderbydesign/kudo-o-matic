@@ -12,3 +12,7 @@ unless defined?(Rails::Console) || File.split($0).last == 'rake' || Rails.env ==
     FcmService.instance.send_reminder
   end
 end
+
+scheduler.cron '5 0 * * *' do
+  ExportService.instance.delete_expired_exports
+end

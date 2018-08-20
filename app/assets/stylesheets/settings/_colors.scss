@@ -7,6 +7,7 @@
 $red-color:                               #E8643E;
 $green-light-color: rgba(77, 175, 124, 0.25);
 $green-color:                             #4DAF7C;
+$orange-color:                            #EB9532;
 $blue-color:                              #5F90B0;
 $brown-color:                             #8C7C6C;
 $grey-color:                              #B2ACAB;
@@ -78,3 +79,6 @@ $flash-error-border-color: $base-color-light-red;
 
 $flash-success-bg: $green-light-color;
 $flash-success-border-color: $green-light-color;
+
+$flash-warning-bg: $orange-color;
+$flash-warning-border-color: $orange-color;

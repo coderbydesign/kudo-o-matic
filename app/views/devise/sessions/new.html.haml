@@ -1,19 +1,27 @@
 = render 'layouts/header'
 .sign-in-page.flex-page
+
   .sign-in-container
-    .sign-in-header
-    .sign-in-body
-      .body-content
-        = image_tag 'logo-without-lizard-black.png'
-        %a.btn-google{href:user_google_oauth2_omniauth_authorize_path}
-          = 'Log in with Google'
-        - if notice
-          .message-container.error-message.margin-top
-            %span.message
-              .fa.fa-exclamation-circle
-              #notice= notice
-    .sign-in-footer
-      = "You can only log in with a Google account "
-      = "from #{ENV['COMPANY_USER']}" if ENV['COMPANY_USER'].present?
-
-
+    = image_tag 'logo-without-lizard-black.png', class: 'sign-in-form-logo'
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'sign-in-form' }) do |f|
+      = render 'layouts/messages'
+      .form-inputs
+        .form-field
+          = f.label :email, :class => 'fa envelope' do
+            %span.hidden
+              Username
+          = f.email_field :email, required: true, pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}', autofocus: true,
+          placeholder: 'Your email'
+        .form-field
+          = f.label :password, :class => 'fa lock' do
+            %span.hidden
+              Password
+          = f.password_field :password, required: true, placeholder: 'Your password'
+          = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+      .form-actions
+        = f.button :submit, "Log in"
+        .form-action-separator
+          or
+        = link_to 'Sign up for a new account', new_registration_path(resource_name), class:'btn btn-default'
+    %hr
+    = render 'devise/shared/links'

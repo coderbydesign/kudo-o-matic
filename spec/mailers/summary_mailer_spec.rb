@@ -4,11 +4,12 @@ RSpec.describe SummaryMailer, type: :mailer do
   context 'new summary' do
     let!(:prev_goal) {create :goal, :achieved, name: "Painting lessons", amount: 100}
     let!(:next_goal) {create :goal, name: "Paintball", amount: 1500}
-    let!(:balance) {create :balance, :current}
+    let!(:team) { create :team}
+    let!(:balance) {team.balances.first}
     let!(:user) {User.create name: 'John Doe', email: 'johndoe@example.com'}
     let(:activity) {create :activity, name: 'Helping me out'}
     let(:transaction) {create :transaction, sender: user, receiver: user, amount: 5, activity: activity, balance: balance}
-    let(:mail) {described_class.summary_email(user)}
+    let(:mail) {described_class.summary_email(user, team)}
 
     it 'renders the subject' do
       expect(mail.subject).to eq('Weekly ₭udo summary!')

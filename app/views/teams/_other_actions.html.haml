@@ -1,0 +1,14 @@
+%h2.settings-subtitle
+  Other actions
+
+.actions
+  = link_to manage_invites_path(team: current_team.slug), method: "get", class: 'btn btn-primary' do
+    <i class="fa fa-plus" aria-hidden="true"></i> Invite users
+  = link_to manage_team_members_path(team: current_team.slug), method: "get", class: 'btn btn-primary' do
+    <i class="fa fa-users" aria-hidden="true"></i> Manage members
+  = link_to balances_path(team: current_team.slug), method: "get", class: 'btn btn-primary' do
+    <i class="fa fa-percent" aria-hidden="true"></i> Manage balances
+
+.actions
+  = link_to goals_path(team: current_team.slug), method: "get", class: 'btn btn-primary' do
+    <i class="fa fa-circle-o-notch" aria-hidden="true"></i> Manage goals

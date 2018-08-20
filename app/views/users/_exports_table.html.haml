@@ -1,0 +1,12 @@
+%table.settings-table
+  %tr
+    %th
+      Export
+    %th
+      Exported at
+  - exports.each do |e|
+    %tr.no-top-border
+      %td
+        = link_to "export_#{e.uuid}.zip", users_download_export_path(e.uuid)
+      %td
+        = e.created_at.strftime("%Y-%m-%d")

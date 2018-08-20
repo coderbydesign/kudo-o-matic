@@ -2,12 +2,16 @@ class Balance < ActiveRecord::Base
   after_update :ensure_a_current_balance_remains
   after_destroy :ensure_a_current_balance_remains
 
+  validates :name, presence: true
+
+  belongs_to :team
   has_many :transactions
+  has_many :goals
 
   scope :balances, -> { where(current: false).order("created_at DESC") }
 
-  def self.current
-    where(current: true).order("created_at DESC").first
+  def self.current(team)
+    where(current: true).where(team_id: team).order("created_at DESC").first
   end
 
   def last_transaction

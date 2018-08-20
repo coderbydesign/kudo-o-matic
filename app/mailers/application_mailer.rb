@@ -3,5 +3,10 @@ class ApplicationMailer < ActionMailer::Base
   layout 'mailer'
 
   add_template_helper(TransactionsHelper)
-end
 
+  private
+
+  def logo_attachment
+    File.read("#{Rails.root}/app/assets/images/kudo-o-matic-white-mail.png")
+  end
+end

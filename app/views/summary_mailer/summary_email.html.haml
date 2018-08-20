@@ -4,7 +4,7 @@
     %p
       = "Don't forget to think back about this week, because there is definitely someone who deserves a compliment. \u{1f914}"
     .button-container
-      = link_to "Give ₭udos!".html_safe, root_url, class: 'btn btn-primary button'
+      = link_to "Give ₭udos!".html_safe, dashboard_url(team: @team.slug), class: 'btn btn-primary button'
     - if !@reached_goal.nil?
       %table.outer-table
         %tr
@@ -73,12 +73,12 @@
           %p
             %p
               %strong
-                = Balance.current.amount
+                = Balance.current(@team).amount
                 ₭
               of
               %strong
-                = Goal.next.amount
+                = Goal.next(@team).amount
                 ₭
               for
               %strong
-                = Goal.next.name
+                = Goal.next(@team).name

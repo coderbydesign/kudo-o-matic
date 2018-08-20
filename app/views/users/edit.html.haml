@@ -10,7 +10,7 @@
       Settings
     %h2.settings-subtitle
       Slack
-    - if @user.slack_id.blank?
+    - if @user.slack_id_for_team(current_team).blank?
       %p.settings-text
         Sign in to connect the ₭udo-o-Matic with Slack:
     - else
@@ -18,10 +18,10 @@
         %span.settings-text
           Connected Slack display name:
         %span.settings-text-highlighted
-          @#{@user.slack_name}
+          @#{@user.slack_username_for_team(current_team)}
       %p.settings-text Sign in again to update your display name if you changed it:
     %p.settings-text
-      %a{href: user_slack_omniauth_authorize_path}
+      %a{href: team_omniauth_path(team: current_team.slug)}
         %img{alt: 'Sign in with Slack', width: '172', height: '40', src: 'https://platform.slack-edge.com/img/sign_in_with_slack.png',
         srcset: 'https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x' }
     %p.settings-text

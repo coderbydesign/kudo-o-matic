@@ -5,7 +5,7 @@
     %a.dropdown-container.current-user{href:'#'}
       %span.username
         = current_user
-      .fa.fa-chevron-down
+      .fa.fa-chevron-down#profile-dropdown
     .profile.dropdown-content
       .menu-tooltip
       %a.menu-content.help-me{href:"#"}
@@ -16,7 +16,25 @@
         %span.flex-item
           Releases
         %i.fa.fa-wrench
-      %a.menu-content{href: '/settings'}
+      -if current_user.multiple_teams? || current_user.invites?
+        %a.menu-content{href: '/'}
+          %span.flex-item
+            Teams & invites
+          %i.fa.fa-users
+      %a.menu-content{href: '/teams/new'}
+        %span.flex-item
+          New team
+        %i.fa.fa-plus
+      - if current_user.admin_of?(current_team)
+        %a.menu-content{id: 'team-manage-button-desktop', href: manage_team_url(team: current_team.slug)}
+          %span.flex-item
+            Edit team
+          %i.fa.fa-users
+      %a.menu-content{href: '/account'}
+        %span.flex-item
+          Account
+        %i.fa.fa-user
+      %a.menu-content{href: settings_url(team: current_team.slug)}
         %span.flex-item
           Settings
         %i.fa.fa-cog
@@ -25,7 +43,7 @@
           %span.flex-item
             Admin
           %i.fa.fa-users
-      %a.menu-content{href:destroy_user_session_path}
+      %a.menu-content{href:sign_out_path}
         %span.flex-item
           Sign Out
         %i.fa.fa-sign-out
@@ -63,7 +81,20 @@
         %span.flex-item
           Releases
         %i.fa.fa-wrench
-      %a.menu-content{href: '/settings'}
+      %a.menu-content{href: '/teams/new'}
+        %span.flex-item
+          New team
+        %i.fa.fa-plus
+      - if current_user.admin_of?(current_team)
+        %a.menu-content{href: manage_team_url(team: current_team.slug)}
+          %span.flex-item
+            Edit team
+          %i.fa.fa-users
+      %a.menu-content{href: '/account'}
+        %span.flex-item
+          Account
+        %i.fa.fa-user
+      %a.menu-content{href: settings_url(team: current_team.slug)}
         %span.flex-item
           Settings
         %i.fa.fa-cog
@@ -72,7 +103,7 @@
           %span.flex-item
             Admin
           %i.fa.fa-users
-      %a.menu-content{href:destroy_user_session_path}
+      %a.menu-content{href:sign_out_path}
         %span.flex-item
           Sign Out
         %i.fa.fa-sign-out
