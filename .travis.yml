@@ -3,7 +3,7 @@ sudo: false
 cache: bundler
 
 rbenv:
-  - 2.3.1
+  - 2.3.7
 
 services:
   - postgresql
