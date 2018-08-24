@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.7'
+ruby '2.5.1'
 
 gem 'activerecord-typedstore', '~> 1.1.1'
 gem 'acts_as_votable', '~> 0.10.0'
