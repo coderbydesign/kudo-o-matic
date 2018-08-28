@@ -9,8 +9,6 @@ class TeamInviteController < ApplicationController
     @team_invite_submissions = TeamInviteForm.new(team_invite_params)
     @team = current_team
 
-    puts('VALID', @team_invite_submissions.valid?)
-
     if @team_invite_submissions.valid?
       TeamInviteAdder.create_from_email_list(@team_invite_submissions.emails, @team)
       flash[:success] = 'Team invites have been sent!'
