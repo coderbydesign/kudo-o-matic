@@ -1,23 +1,23 @@
-# Kudo-o-Matic™
+# Kudos-o-Matic™
 
 [![Travis Build Status](https://img.shields.io/travis/kabisa/kudo-o-matic.svg?style=flat-square)](https://travis-ci.org/kabisa/kudo-o-matic.svg?branch=master) [![GitHub release](https://img.shields.io/github/release/kabisa/kudo-o-matic.svg?style=flat-square)](https://github.com/kabisa/kudo-o-matic/releases) [![GitHub license](https://img.shields.io/github/license/kabisa/kudo-o-matic.svg?style=flat-square)](https://github.com/kabisa/kudo-o-matic/blob/master/LICENSE.md)
 
-## What is the Kudo-o-Matic?
+## What is the Kudos-o-Matic?
 The Kudo project originated from the wish to create common goals for people and teams who work on different projects in order to *strengthen the team spirit*, *collectively celebrate successes* and *ensure transparency* within an organization.
 
-The Kudo-o-Matic was created to keep track of these goals and the progress towards it. 
+The Kudos-o-Matic was created to keep track of these goals and the progress towards it. 
 Users can reward each other for good deeds by giving Kudos to each other and work together to achieve common goals in the form of Kudo-thresholds.
 
 
 ## Quick start guide
 ##### Prerequisites
-To start using the Kudo-o-Matic, you'll need:
+To start using the Kudos-o-Matic, you'll need:
 * [Ruby](https://www.ruby-lang.org/) >= 2.3.1
 * [Ruby on Rails](http://rubyonrails.org/) >= 5.0.3
 * [Bundler](http://bundler.io/)
 * [PostgreSQL](https://www.postgresql.org/)
 
-To run the RSpec test suite (not required to run the Kudo-o-Matic), you'll need:
+To run the RSpec test suite (not required to run the Kudos-o-Matic), you'll need:
 * [PhantomJS](http://phantomjs.org/)
 * [ImageMagick](https://www.imagemagick.org/)
 
@@ -65,13 +65,13 @@ Following the dependency setup instructions below will help you set these variab
 ```
 rails s
 ```
-Now you can view your Kudo-o-Matic at '<http://localhost:3000/>' in your browser.
+Now you can view your Kudos-o-Matic at '<http://localhost:3000/>' in your browser.
 
 ##### 9. Setup Google API
 Follow the Google API setup instructions described below to set up the authentication system.
 
 ##### 10. Log in with your Google account
-Create your Kudo-o-Matic account by logging in with your Google account.
+Create your Kudos-o-Matic account by logging in with your Google account.
 
 **NOTE**: Set the `DEVISE_DOMAIN` environment variable to specify the required mail domain (default is gmail.com).
 
@@ -96,11 +96,11 @@ rake user:company
 ```
 
 ##### 14. Set up dependencies (optional)
-Congratulations, you did just set up the Kudo-o-Matic!  
-You can optionally set up the dependencies listed below to get the most out fof your Kudo-o-Matic.
+Congratulations, you did just set up the Kudos-o-Matic!  
+You can optionally set up the dependencies listed below to get the most out fof your Kudos-o-Matic.
 
 ## Google API setup
-Follow these instructions to setup the Kudo-o-Matic OAuth 2.0 user authentication system:
+Follow these instructions to setup the Kudos-o-Matic OAuth 2.0 user authentication system:
 * [Create a new Google API project](https://console.developers.google.com).
 * Go to 'Library' and make sure 'Contacts API' and 'Google+ API' are enabled.
 * Go to 'Credentials', select the 'OAuth consent screen' tab and provide an 'Email address' and a 'Product name'.
@@ -119,13 +119,13 @@ Follow these instructions to setup the Amazon AWS S3 cloud storage service for i
 * Restart the server.
 
 ## Slack API setup
-The Kudo-o-Matic can be connected with Slack to enable the following features:
+The Kudos-o-Matic can be connected with Slack to enable the following features:
 * Receive personalized notifications and reminders.
 * Give Kudos with the /kudo command.
 * Give Kudos by adding a custom :kudo: reactji to a message ₭udo-o-Matic user.
 * Like Kudo transactions using the like button.
 
-Follow these instructions to setup the Kudo-o-Matic Slack integration:
+Follow these instructions to setup the Kudos-o-Matic Slack integration:
 * [Create a new Slack App](https://api.slack.com/apps) and configure the basic information.
 * Enable 'OAuth 2.0 & Permissions', select the 'Permission Scopes' `bot`, `commands`, `channels:history`, `chat:write:user`, `chat:write:user`, `reactions:read`, `users:read` and set the 'Request URL'.  
 Use '<http://localhost:3000/users/auth/slack/callback>' for development.
@@ -146,13 +146,13 @@ Use '<http://localhost:3000/slack/reaction>' for development.
 Users can connect their Slack account by signing in to Slack on the settings page.
 
 ## Mail setup
-The Kudo-o-Matic can automatically send mail notifications when the following events occur:
-* When a user joins the Kudo-o-Matic platform.
+The Kudos-o-Matic can automatically send mail notifications when the following events occur:
+* When a user joins the Kudos-o-Matic platform.
 * When a user receives Kudos (only this user will receive the notification).
 * When a Kudo goal is reached.
 * Weekly summary mail.
 
-Follow these instructions to enable the Kudo-o-Matic mail notification functionality:
+Follow these instructions to enable the Kudos-o-Matic mail notification functionality:
 * [Create and new mail account](https://accounts.google.com/SignUp) or use existing mail credentials.
 * Set the `MAIL_USERNAME`, `MAIL_PASSWORD` and `MAIL_ADDRESS` environment variables.
 * Restart the server.
@@ -160,8 +160,8 @@ Follow these instructions to enable the Kudo-o-Matic mail notification functiona
 
 Users can configure their mail preferences on the settings page. By default, they will receive all mail notifications.
 
-## Kudo-o-Mobile app setup
-The Kudo-o-Matic provides a RESTfull API for the [Kudo-o-Mobile](https://github.com/kabisa/kudo-o-matic-frontend) cross-platform [Maji](https://github.com/kabisa/maji) mobile app.
+## Kudos-o-Mobile app setup
+The Kudos-o-Matic provides a RESTfull API for the [Kudo-o-Mobile](https://github.com/kabisa/kudo-o-matic-frontend) cross-platform [Maji](https://github.com/kabisa/maji) mobile app.
 This API is secured with a token based authentication system. Mobile app users retrieve an API-token by signing in to the app. 
   
 Follow these instructions to setup the token based authentication system for the mobile app: 
@@ -170,10 +170,10 @@ Follow these instructions to setup the token based authentication system for the
 (it is possible to add other mobile operating systems by adding new environments variable and editing the AuthenticationController logic).
 * Restart the server.
 
-Import the `postman_collection.json` and `postman_environment.json` files into [Postman](https://www.getpostman.com/) to view the API documentation of the Kudo-o-Matic REST API. 
+Import the `postman_collection.json` and `postman_environment.json` files into [Postman](https://www.getpostman.com/) to view the API documentation of the Kudos-o-Matic REST API. 
 
 ## Firebase Cloud Messaging setup
-The Kudo-o-Matic can automatically send native Kudo-o-Mobile app notifications when the following events occur:
+The Kudos-o-Matic can automatically send native Kudos-o-Mobile app notifications when the following events occur:
 * When a user receives Kudos (only this user will receive the notification).
 * When a Kudo goal is reached.
 * Weekly Kudo reminder.
@@ -185,7 +185,7 @@ Follow these instructions to enable Firebase Cloud Messaging notification functi
 * Restart the server.
 * Restart the [delayed_job](https://github.com/collectiveidea/delayed_job) worker (``rake jobs:work``)
 
-Kudo-o-Mobile app users will now receive native mobile notifications.
+Kudos-o-Mobile app users will now receive native mobile notifications.
 
 ## Scheduled tasks
 
@@ -226,7 +226,7 @@ _Note: the above example is for the `root` user. If you install this crontab as 
 the `username` column._
 
 ### Mail
-The Kudo-o-Matic automatically sends a Kudo summary mail to all users with an mail address that have email notifications enabled.
+The Kudos-o-Matic automatically sends a Kudo summary mail to all users with an mail address that have email notifications enabled.
 
 ##### Schedule
 Every friday at 10.00 AM.  
@@ -235,7 +235,7 @@ Crontab expression: `0 9 * * 5` (GMT)
 **NOTE**: Only works if the mail environment variables are set.
 
 ### Slack
-The Kudo-o-Matic automatically sends a Kudo reminder message to all users that connected a Slack account.
+The Kudos-o-Matic automatically sends a Kudo reminder message to all users that connected a Slack account.
 
 ##### Schedule
 Every friday at 11.55 AM.  
@@ -244,7 +244,7 @@ Crontab expression: `55 10 * * 5` (GMT)
 **NOTE**: Only works if the Slack environment variables are set.
 
 ### Firebase Cloud Messaging
-The Kudo-o-Matic automatically sends a Kudo reminder message to all Kudo-o-Mobule app users.
+The Kudos-o-Matic automatically sends a Kudo reminder message to all Kudos-o-Mobule app users.
 
 ##### Schedule
 Every friday at 11.55 AM.  
@@ -254,7 +254,7 @@ Crontab expression: `55 10 * * 5` (GMT)
 
 ## Entities
 ### Balance
-A *Balance* is the base of the Kudo-o-Matic system. It groups *Goals* together and connects them to *Transactions*.  
+A *Balance* is the base of the Kudos-o-Matic system. It groups *Goals* together and connects them to *Transactions*.  
 
 A *Balance*:
 * Has a name
