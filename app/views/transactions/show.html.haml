@@ -57,6 +57,11 @@
                 = render 'display-likes', transaction: @transaction
             .button-container
               = link_to 'Back', dashboard_path, team: current_team, class: 'btn btn-primary'
+              - if @transaction.sender_id == @user.id
+                = link_to 'Edit', edit_transaction_path, team: current_team, class: 'btn btn-secondary'
+                -#= link_to 'Delete', dashboard_path, team: current_team, class: 'btn btn-danger'
+            -#.button-container
+
     .container-right
       .fixed-div-right
         = render 'kudos-counter'

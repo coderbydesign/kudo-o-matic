@@ -199,7 +199,7 @@ Rails.application.routes.draw do
 
   scope ':team' do
     root to: 'transactions#index', as: 'dashboard'
-    resources :transactions, only: %i[index show create], param: :id
+    resources :transactions, param: :id
     get 'transactions/:type', to: 'transactions#filter'
 
     post 'like/:id', to: 'transactions#upvote', as: :like

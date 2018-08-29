@@ -1,13 +1,13 @@
 class TransactionsController < ApplicationController
   protect_from_forgery with: :exception
 
-  before_action :check_team_membership, only: [:index, :show, :create, :upvote, :downvote]
-  before_action :query_variables, only: [:index, :show, :create, :upvote, :downvote]
-  before_action :set_transaction, only: [:show, :upvote, :downvote]
-  before_action :check_slack_connection, only: [:index, :create]
-  before_action :set_user, only: [:index, :show]
+  before_action :check_team_membership, only: [:index, :show, :create, :edit, :update, :upvote, :downvote]
+  before_action :query_variables, only: [:index, :show, :create, :update, :edit, :upvote, :downvote]
+  before_action :set_transaction, only: [:show, :upvote, :edit, :update, :downvote]
+  before_action :check_slack_connection, only: [:index, :create, :edit]
+  before_action :set_user, only: [:index, :show, :edit, :update]
 
-  before_action :check_restricted, only: [:create, :upvote, :downvote]
+  before_action :check_restricted
   after_action :update_slack_transaction, only: [:upvote, :downvote]
 
   def index
@@ -37,11 +37,23 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def edit
+    @transaction = Transaction.find(params[:id])
+  end
+
+  def update
+    @transaction = Transaction.find(params[:id])
+    if @transaction.update(transaction_params)
+      flash[:success] = 'Successfully updated transaction!'
+    end
+    redirect_to @transaction
+  end
+
   def upvote
     @transaction.liked_by current_user
 
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html {redirect_to :back}
       format.js
     end
 
@@ -54,7 +66,7 @@ class TransactionsController < ApplicationController
     @transaction.unliked_by current_user
 
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html {redirect_to :back}
       format.js
     end
   end
@@ -119,12 +131,12 @@ class TransactionsController < ApplicationController
       @transactions = Transaction.send_by_user(current_user, current_team).page(params[:page]).per(20)
     when 'received'
       @transactions = TransactionDecorator.decorate_collection(
-        Transaction.received_by_user(current_user, current_team).page(params[:page]).per(20)
+          Transaction.received_by_user(current_user, current_team).page(params[:page]).per(20)
       )
     else
       @transactions = TransactionDecorator.decorate_collection(
-        Transaction.where(team_id: current_team)
-            .order('created_at desc').page(params[:page]).per(20)
+          Transaction.where(team_id: current_team)
+              .order('created_at desc').page(params[:page]).per(20)
       )
     end
   end
@@ -144,7 +156,7 @@ class TransactionsController < ApplicationController
   def received_transactions_company
     user = current_team.users.find_by_name_and_company_user(
         current_team.name,
-      true
+        true
     )
     Transaction.where(receiver: user).count
   end
@@ -155,7 +167,12 @@ class TransactionsController < ApplicationController
 
   def check_restricted
     if current_user.restricted?
+      puts "RESTRICTED"
       redirect_to root_url
     end
+  end
+
+  def transaction_params
+    params.require(:transaction).permit(:receiver_name, :amount, :password, :activity_name)
   end
 end
