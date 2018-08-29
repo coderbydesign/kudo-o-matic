@@ -27,6 +27,13 @@ button {
   font-weight: 300;
 }
 
+.btn-danger {
+  background: $danger-button-bg;
+  border: 1px solid $danger-border-color;
+  color: $danger-button-color;
+  font-weight: 300;
+}
+
 .btn-like {
   font-size: $font-size-small;
   min-width: 4rem;
