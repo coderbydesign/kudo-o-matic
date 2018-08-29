@@ -14,7 +14,8 @@ class TeamInviteController < ApplicationController
       flash[:success] = 'Team invites have been sent!'
       redirect_to manage_invites_path(team: @team.slug)
     else
-      render 'teams/manage'
+      flash[:error] = 'Invalid email(s)!'
+      redirect_to manage_invites_path(team: @team.slug)
     end
   end
 
