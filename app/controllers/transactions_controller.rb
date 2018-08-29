@@ -1,11 +1,12 @@
 class TransactionsController < ApplicationController
   protect_from_forgery with: :exception
 
-  before_action :check_team_membership, only: [:index, :show, :create, :edit, :update, :upvote, :downvote]
-  before_action :query_variables, only: [:index, :show, :create, :update, :edit, :upvote, :downvote]
-  before_action :set_transaction, only: [:show, :upvote, :edit, :update, :downvote]
-  before_action :check_slack_connection, only: [:index, :create, :edit]
-  before_action :set_user, only: [:index, :show, :edit, :update]
+  before_action :check_team_membership
+  before_action :query_variables
+  before_action :set_transaction
+  before_action :check_slack_connection, only: [:index, :create]
+  before_action :set_user, only: [:index, :show, :update, :destroy]
+  before_action :danger_methods, only: [:update, :edit, :destroy]
 
   before_action :check_restricted
   after_action :update_slack_transaction, only: [:upvote, :downvote]
@@ -37,8 +38,12 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def edit
+  def destroy
     @transaction = Transaction.find(params[:id])
+    if @transaction.destroy
+      flash[:success] = 'Succesfully removed transaction!'
+    end
+    redirect_to root_path
   end
 
   def update
@@ -167,7 +172,13 @@ class TransactionsController < ApplicationController
 
   def check_restricted
     if current_user.restricted?
-      puts "RESTRICTED"
+      redirect_to root_url
+    end
+  end
+
+  def danger_methods
+    if current_user.id != @transaction.sender_id
+      flash[:error] = "You're not authorized to perform this action!"
       redirect_to root_url
     end
   end
