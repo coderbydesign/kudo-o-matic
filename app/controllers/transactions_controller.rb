@@ -184,6 +184,6 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_params
-    params.require(:transaction).permit(:receiver_name, :amount, :password, :activity_name)
+    params.require(:transaction).permit(:receiver_name, :amount, :password, :activity_name, :image)
   end
 end
