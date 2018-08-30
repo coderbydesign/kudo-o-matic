@@ -1,5 +1,28 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: transactions
+#
+#  id                           :integer          not null, primary key
+#  sender_id                    :integer
+#  receiver_id                  :integer
+#  activity_id                  :integer
+#  balance_id                   :integer
+#  amount                       :integer
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  image_file_name              :string
+#  image_content_type           :string
+#  image_file_size              :integer
+#  image_updated_at             :datetime
+#  slack_reaction_created_at    :string
+#  slack_transaction_updated_at :string
+#  slack_kudos_left_on_creation :integer
+#  team_id                      :integer
+#
+
+
 class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: "is not correct. You can't give negative ₭udos or exceed over 1000" }
   validates :activity_name_feed, length: { minimum: 4, maximum: 140 }
