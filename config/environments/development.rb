@@ -47,18 +47,15 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
 
   # SMTP settings email
   config.action_mailer.smtp_settings = {
-    address: ENV['MAIL_ADDRESS'],
-    port: ENV['MAIL_PORT'] || 587,
-    user_name: ENV['MAIL_USERNAME'],
-    password: ENV['MAIL_PASSWORD'],
-    authentication: ENV['MAIL_AUTHENTICATION'] || 'plain',
-    enable_starttls_auto: true
+      address: "localhost",
+      port: 1025,
   }
 
-  config.action_mailer.default_url_options = {host: 'localhost', port: 3000}
+  # config.action_mailer.default_url_options = {host: 'localhost', port: 3000}
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
