@@ -16,6 +16,7 @@ To start using the Kudos-o-Matic, you'll need:
 * [Ruby on Rails](http://rubyonrails.org/) >= 5.0.3
 * [Bundler](http://bundler.io/)
 * [PostgreSQL](https://www.postgresql.org/)
+* [Mailhog](https://github.com/mailhog/MailHog) (development only)
 
 To run the RSpec test suite (not required to run the Kudos-o-Matic), you'll need:
 * [PhantomJS](http://phantomjs.org/)
