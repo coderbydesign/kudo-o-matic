@@ -1,8 +1,8 @@
 atom_feed do |feed|
-  feed.title("Kudo-o-matic last 25 transactions")
+  feed.title("Kudos-o-Matic last 25 transactions")
   feed.updated(@transactions.max_by(&:created_at).try(:created_at))
   feed.author do |author|
-    author.name "Kudo-o-matic"
+    author.name "Kudos-o-Matic"
   end
 
   @transactions.each do |transaction|
