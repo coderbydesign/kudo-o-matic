@@ -14,6 +14,10 @@
     background-color: #{current_team.primary_color};
   }
 
+  .chart__foreground {
+    stroke: #{current_team.primary_color};
+  }
+
   .progress-step .progress-bar-inner .percentage {
     border-top: 1px solid #{current_team.primary_color};
   }
@@ -22,4 +26,8 @@
   .drop-menu .menu-tooltip,
   .goal-content .menu-tooltip {
     border-color: transparent transparent #{current_team.primary_color} transparent;
+  }
+
+  .progress-step.is-active .progress-marker {
+    color: #{current_team.primary_color};
   }
