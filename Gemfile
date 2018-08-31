@@ -58,6 +58,7 @@ gem 'uglifier', '~> 3.2'
 group :development, :test do
   gem 'byebug', '~> 9.0.6'
   gem 'capybara', '~> 2.15.1'
+  gem 'capybara-selenium'
   gem 'dotenv-rails', '~> 2.2.1'
   gem 'factory_girl_rails', '~> 4.8.0'
   gem 'launchy', '~> 2.4.3'
