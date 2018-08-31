@@ -39,7 +39,6 @@ class TransactionsController < ApplicationController
   end
 
   def destroy
-    @transaction = Transaction.find(params[:id])
     if @transaction.destroy
       flash[:success] = 'Succesfully removed transaction!'
     end
@@ -47,7 +46,6 @@ class TransactionsController < ApplicationController
   end
 
   def update
-    @transaction = Transaction.find(params[:id])
     if @transaction.update(transaction_params)
       flash[:success] = 'Successfully updated transaction!'
     end
