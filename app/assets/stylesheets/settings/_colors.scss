@@ -61,6 +61,7 @@ $primary-input-bg:                        $secondary-bg;
 // Border
 $primary-border-color:                    rgba($base-color-black, 0.125);
 $secondary-border-color:                  $base-color-lighter-gray;
+$danger-border-color:                     $base-color-light-red;
 $focus-border-color:                      $base-color-brand;
 
 // Button
@@ -68,6 +69,8 @@ $primary-button-bg:                       $base-color-brand;
 $primary-button-color:                    $text-white;
 $secondary-button-bg:                     $base-color-white;
 $secondary-button-color:                  $base-color-dark-gray;
+$danger-button-bg:                        $base-color-light-red;
+$danger-button-color:                     $base-color-dark-gray;
 
 // Kudo Meter
 $primary-stroke-color:                    $secondary-bg;
