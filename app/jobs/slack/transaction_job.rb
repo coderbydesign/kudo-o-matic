@@ -58,6 +58,11 @@ Slack::TransactionJob = Struct.new(:transaction, :team, :new?) do
 
     response = http.request(request)
 
+    # Raise an error if the response was unsuccessful.
+    if response.code != '200' || response.message != 'OK'
+      raise "Error while posting to the slack bot. Error code: #{res.code}, message: #{res.message}"
+    end
+
     body = JSON.parse(response.body)
 
     transaction.update_attribute(:slack_transaction_updated_at, body['ts'])
