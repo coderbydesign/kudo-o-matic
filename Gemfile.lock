@@ -100,6 +100,11 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-selenium (0.0.6)
+      capybara
+      selenium-webdriver
+    childprocess (0.9.0)
+      ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     climate_control (0.2.0)
     cliver (0.3.2)
@@ -162,6 +167,7 @@ GEM
     fcm (0.0.2)
       httparty
       json
+    ffi (1.9.25)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
     friendly_id (5.1.0)
@@ -379,6 +385,9 @@ GEM
       rake (>= 0.9, < 13)
       sass (~> 3.4.20)
     selectize-rails (0.12.4)
+    selenium-webdriver (3.14.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.2)
     sexp_processor (4.11.0)
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
@@ -437,6 +446,7 @@ DEPENDENCIES
   bourbon (~> 4.3.4)
   byebug (~> 9.0.6)
   capybara (~> 2.15.1)
+  capybara-selenium
   chronic (~> 0.10.2)
   coffee-rails (~> 4.1.0)
   daemons
