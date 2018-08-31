@@ -48,8 +48,10 @@ class Balance < ActiveRecord::Base
   private
 
   def ensure_a_current_balance_remains
-    if Balance.where(current: true).count < 1
-      raise "Last current balance can't be removed from the system"
+    Team.all.each do |team|
+      if Balance.where(team: team, current: true).count == 0
+        raise "Last current balance for team #{team.name} can't be removed from the system"
+      end
     end
   end
 end
