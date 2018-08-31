@@ -39,7 +39,7 @@ class TransactionsController < ApplicationController
   end
 
   def destroy
-    if @transaction.destroy
+    if @transaction.delete
       flash[:success] = 'Succesfully removed transaction!'
     end
     redirect_to root_path
