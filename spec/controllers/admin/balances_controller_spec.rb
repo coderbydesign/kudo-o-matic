@@ -54,6 +54,7 @@ RSpec.describe Admin::BalancesController, type: :controller do
 
   describe 'DELETE #destroy' do
     let (:perform_delete) {delete :destroy, params: {id: balance2.id}}
+    let (:perform_delete_active) {delete :destroy, params: {id: balance.id}}
 
     context 'deleting the last current balance' do
       context 'with at least one other current balance left' do
@@ -79,7 +80,7 @@ RSpec.describe Admin::BalancesController, type: :controller do
         let! (:record_count_before_request) {Balance.count}
 
         before do
-          perform_delete
+          perform_delete_active
         end
 
         it 'does not delete the current balance' do
