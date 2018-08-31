@@ -68,8 +68,14 @@ describe TransactionsHelper do
   end
 
   context 'calculate percentage until next goal' do
-    it 'returns the completion percentage' do
+    it 'returns 70% completion percentage' do
       expect(percentage_next_goal(team.id)).to eq('70%')
+    end
+
+    it 'returns 99% completion percentage' do
+      Transaction.create sender: user, receiver: user, team_id: team.id,
+                         activity: activity, amount: 299, balance: balance
+      expect(percentage_next_goal(team.id)).to eq('99%')
     end
   end
 

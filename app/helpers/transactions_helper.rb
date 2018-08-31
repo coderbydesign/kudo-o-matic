@@ -17,7 +17,7 @@ module TransactionsHelper
   end
 
   def percentage_next_goal(team)
-    number = ((Balance.current(team).amount.to_f - Goal.previous(team).amount.to_f) / (Goal.next(team).amount.to_f - Goal.previous(team).amount.to_f)) * 100
+    number = (((Balance.current(team).amount.to_f - Goal.previous(team).amount.to_f) / (Goal.next(team).amount.to_f - Goal.previous(team).amount.to_f)) * 100).floor
     helper.number_to_percentage(number, precision: 0)
   end
   
