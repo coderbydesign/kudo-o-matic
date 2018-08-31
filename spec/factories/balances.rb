@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: balances
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  current    :boolean          default(FALSE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  team_id    :integer
+#
+
 FactoryGirl.define do
   factory :balance do
     name "My Balance"

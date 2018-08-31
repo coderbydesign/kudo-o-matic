@@ -1,5 +1,18 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: team_invites
+#
+#  id          :integer          not null, primary key
+#  team_id     :integer
+#  user_id     :integer
+#  sent_at     :datetime
+#  accepted_at :datetime
+#  declined_at :datetime
+#
+
+
 class TeamInvite < ActiveRecord::Base
   belongs_to :team
   belongs_to :user

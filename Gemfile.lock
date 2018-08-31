@@ -68,6 +68,9 @@ GEM
       momentjs-rails (~> 2.8)
       sass-rails (~> 5.0)
       selectize-rails (~> 0.6)
+    annotate (2.7.4)
+      activerecord (>= 3.2, < 6.0)
+      rake (>= 10.4, < 13.0)
     arel (7.1.4)
     ast (2.3.0)
     autoprefixer-rails (6.7.7.2)
@@ -427,6 +430,7 @@ DEPENDENCIES
   activerecord-typedstore (~> 1.1.1)
   acts_as_votable (~> 0.10.0)
   administrate (~> 0.8.1)
+  annotate
   autoprefixer-rails (~> 6.7.7.2)
   aws-sdk (~> 2.9.43)
   bootstrap-sass (~> 3.3.6)
