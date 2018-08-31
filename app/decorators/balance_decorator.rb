@@ -9,6 +9,6 @@ class BalanceDecorator < Draper::Decorator
     current = (object.amount - Goal.previous.amount).to_f
     target  = (Goal.next.amount - Goal.previous.amount).to_f
 
-    (current / target * 100.0).round
+    (current / target * 100.0).floor
   end
 end
