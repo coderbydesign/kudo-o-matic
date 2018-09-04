@@ -38,13 +38,13 @@ RSpec.describe Api::V2::TeamsController, type: :request do
             {
                 data: {
                     amountOfTeams: 2,
-                    'teams' => [
-                        {'id' => team.id, 'name' => 'Kabisa', 'slug' => 'kabisa', 'logo' => ''},
-                        {'id' => team2.id, 'name' => 'The Company', 'slug' => 'the-company', 'logo' => ''}
+                    teams: [
+                        {id: team.id, name: 'Kabisa', slug: 'kabisa', logo: ''},
+                        {id: team2.id, name: 'The Company', slug: 'the-company', logo: ''}
                     ],
-                    'amountOfInvites' => 1,
-                    'invites' => [
-                        {'id' => invite.id, 'name' => 'The Invited', 'logo' => ''},
+                    amountOfInvites: 1,
+                    invites: [
+                        {id: invite.id, name: 'The Invited', logo: ''},
                     ]
                 }
             }.with_indifferent_access
