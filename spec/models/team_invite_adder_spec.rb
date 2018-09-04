@@ -5,12 +5,12 @@ require 'rails_helper'
 RSpec.describe TeamInviteAdder, type: :model do
   describe '#create_from_email_list' do
     context 'with emails from non-members and non-invited users' do
-      let!(:user) { create(:user) }
-      let!(:user2) { create(:user, name: 'Henk', email: 'henk@example.com') }
-      let!(:user3) { create(:user, name: 'Jan', email: 'jan@example.com') }
-      let!(:user4) { create(:user, name: 'Rico', email: 'rico@example.com') }
-      let!(:user5) { create(:user, name: 'Ariejan', email: 'ariejan@example.com') }
-      let!(:team) { create :team }
+      let!(:user) {create(:user)}
+      let!(:user2) {create(:user, name: 'Henk', email: 'henk@example.com')}
+      let!(:user3) {create(:user, name: 'Jan', email: 'jan@example.com')}
+      let!(:user4) {create(:user, name: 'Rico', email: 'rico@example.com')}
+      let!(:user5) {create(:user, name: 'Ariejan', email: 'ariejan@example.com')}
+      let!(:team) {create :team}
 
       before do
         team.add_member(user)
@@ -26,10 +26,10 @@ RSpec.describe TeamInviteAdder, type: :model do
     end
 
     context 'with email from a member' do
-      let!(:user) { create(:user) }
-      let!(:user2) { create(:user, name: 'Henk', email: 'henk@example.com') }
-      let!(:team) { create :team }
-      let(:invites_before) { TeamInvite.count }
+      let!(:user) {create(:user)}
+      let!(:user2) {create(:user, name: 'Henk', email: 'henk@example.com')}
+      let!(:team) {create :team}
+      let(:invites_before) {TeamInvite.count}
 
       before do
         team.add_member(user)
@@ -44,11 +44,11 @@ RSpec.describe TeamInviteAdder, type: :model do
     end
 
     context 'with email from a invited user' do
-      let!(:user) { create(:user) }
-      let!(:user2) { create(:user, name: 'Henk', email: 'henk@example.com') }
-      let!(:team) { create :team }
-      let!(:invite) { TeamInvite.create(user: user2, team: team) }
-      let(:invites_before) { TeamInvite.count }
+      let!(:user) {create(:user)}
+      let!(:user2) {create(:user, name: 'Henk', email: 'henk@example.com')}
+      let!(:team) {create :team}
+      let!(:invite) {TeamInvite.create(email: user2.email, team: team)}
+      let(:invites_before) {TeamInvite.count}
 
       before do
         team.add_member(user)
@@ -58,6 +58,17 @@ RSpec.describe TeamInviteAdder, type: :model do
 
       it 'does not create another invite' do
         expect(TeamInvite.count).to eq(invites_before)
+      end
+    end
+
+    context 'with email from non-existing user' do
+      let!(:team) {create :team}
+      let!(:invites_before) {TeamInvite.count}
+
+      it 'sends the invite' do
+        TeamInvite.create(email: 'nonexisting@email.com', team: team)
+
+        expect(TeamInvite.count).to_not eq(invites_before)
       end
     end
   end

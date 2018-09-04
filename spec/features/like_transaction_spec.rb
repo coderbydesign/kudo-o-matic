@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :headless_chrome
 
 options = {js_errors: false, timeout: 30}
 Capybara.register_driver :poltergeist do |app|
