@@ -205,6 +205,8 @@ Rails.application.routes.draw do
     post 'like/:id', to: 'transactions#upvote', as: :like
     post 'unlike/:id', to: 'transactions#downvote', as: :unlike
 
+    get 'transactions/:id/remove_image', to: 'transactions#remove_image', as: 'remove_transactions_image'
+
     get :settings, to: 'users#edit', as: :settings
     patch :settings, to: 'users#update'
 

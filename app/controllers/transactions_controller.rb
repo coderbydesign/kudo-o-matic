@@ -47,6 +47,10 @@ class TransactionsController < ApplicationController
 
   def update
     if @transaction.update(transaction_params)
+      if transaction_params["image_delete_checkbox"] == "1"
+        @transaction.image.clear
+        @transaction.save
+      end
       flash[:success] = 'Successfully updated transaction!'
     end
     redirect_to @transaction
@@ -182,6 +186,6 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_params
-    params.require(:transaction).permit(:receiver_name, :amount, :password, :activity_name, :image)
+    params.require(:transaction).permit(:receiver_name, :amount, :password, :activity_name, :image, :image_delete_checkbox)
   end
 end
