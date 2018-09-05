@@ -15,7 +15,7 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
       Doorkeeper::AccessToken.create! application_id: application.id,
                                       resource_owner_id: user.id
     end
-    let!(:invite) {TeamInvite.create(email: "stefan314@live.nl", team: team)}
+    let!(:invite) {TeamInvite.create(email: user.email, team: team)}
     let(:request) {"/api/v2/invites/#{invite.id}"}
     let(:bad_request) {'/api/v2/invites/999'}
 
@@ -37,10 +37,9 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
         expect(i.accepted_at).to_not eql(nil)
       end
 
-      # TODO
-      # it 'adds a new member to the team' do
-      #   expect(TeamMember.find_by_user_id_and_team_id(user.id, team.id)).to be_present
-      # end
+      it 'adds a new member to the team' do
+        expect(TeamMember.find_by_user_id_and_team_id(user.id, team.id)).to be_present
+      end
 
       it 'returns a success message' do
         expected = {
