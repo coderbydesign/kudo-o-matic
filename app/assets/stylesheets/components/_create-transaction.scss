@@ -166,6 +166,29 @@
   }
 }
 
+.delete-attachment {
+  display: flex;
+  margin-top: $margin-secondary;
+
+  &-checkbox {
+    align-items: center;
+    border: 1px solid $primary-border-color;
+    background: $primary-input-bg;
+    border-radius: $border-radius-small;
+    display: flex;
+    padding: 0.5rem;
+  }
+
+  input {
+    width: fit-content;
+  }
+
+  label {
+    margin-left: 0.5rem;
+    white-space: nowrap;
+  }
+}
+
 .counter {
   display: none;
   padding: $padding-secondary;

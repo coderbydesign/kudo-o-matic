@@ -33,6 +33,8 @@ class Transaction < ActiveRecord::Base
   validates_with AttachmentSizeValidator, attributes: :image, less_than: 10.megabytes
   process_in_background :image
 
+  attr_accessor :image_delete_checkbox
+
   acts_as_votable
   belongs_to :balance
   belongs_to :team
