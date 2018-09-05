@@ -133,10 +133,6 @@ class User < ActiveRecord::Base
     # TODO: when we implement the functionality to give/revoke admin rights, we need to make sure to invalidate @admin_rights[team.id]
   end
 
-  def invited_to?(team)
-    TeamInvite.where(email: self.email, team_id: team.id).any?
-  end
-
   def open_invites
     TeamInvite.where(email: self.email, accepted_at: nil, declined_at: nil)
   end
@@ -171,10 +167,6 @@ class User < ActiveRecord::Base
 
   def multiple_teams?
     teams.length > 1
-  end
-
-  def invites?
-    TeamInvite.where(email: self.email).any?
   end
 
   def slack_id_for_team(team)

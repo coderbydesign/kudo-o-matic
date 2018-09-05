@@ -7,9 +7,7 @@ class TeamInviteAdder
     emails = emails.split(/\s*[,;]\s*/).map(&:strip)
     emails.each do |e|
       email = EmailRegex.extract_address(e)
-      # unless User.where(email: email, team: team).exists?
       TeamInvite.create(email: email, team: team, sent_at: Time.now)
-      # end
     end
   end
 end

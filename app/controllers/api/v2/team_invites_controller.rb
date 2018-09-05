@@ -5,7 +5,7 @@ class Api::V2::TeamInvitesController < Api::V2::ApiController
     invite_id = params[:id]
     accept = params['accept']
 
-    @invite = TeamInvite.find invite_id
+    @invite = api_user.open_invites.find invite_id
 
     if accept
       @invite.accept

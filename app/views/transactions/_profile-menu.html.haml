@@ -16,7 +16,7 @@
         %span.flex-item
           Releases
         %i.fa.fa-wrench
-      -if current_user.multiple_teams? || current_user.invites?
+      -if current_user.multiple_teams? || current_user.open_invites.any?
         %a.menu-content{href: '/'}
           %span.flex-item
             Teams & invites
