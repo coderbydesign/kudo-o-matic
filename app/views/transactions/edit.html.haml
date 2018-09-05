@@ -32,6 +32,11 @@
                       %span.counter
                     .attachment
                       = f.input_field :image, as: :file, id:'media-attachment'
+                    - if @transaction.image_file_name != nil
+                      .delete-attachment
+                        .delete-attachment-checkbox
+                          = f.check_box :image_delete_checkbox
+                          = f.label :image_delete_checkbox, "Delete image"
                     .submit
                       %span.submit-btn
                         = button_tag type:'submit', class: 'btn', id:'send-kudos-button', data: { "disable-with": "Submitting..." } do
