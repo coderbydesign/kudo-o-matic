@@ -4,7 +4,9 @@ class Api::V2::TeamInvitesController < Api::V2::ApiController
   def update
     invite_id = params[:id]
     accept = params['accept']
-    @invite = api_user.team_invites.open.find(invite_id)
+
+    @invite = TeamInvite.find invite_id
+
     if accept
       @invite.accept
       render 'api/v2/teams/accepted', status: :ok

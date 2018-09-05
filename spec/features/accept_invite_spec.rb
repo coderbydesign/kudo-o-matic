@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.feature 'Accepting or declining an invite', type: :feature do
-  let!(:user) { create :user }
+  let!(:user) {create :user}
   let!(:team) {create :team}
-  let!(:invite) { TeamInvite.create(user: user, team: team) }
+  let!(:invite) {TeamInvite.create(email: user.email, team: team)}
 
   before do
     visit '/sign_in'
@@ -27,7 +27,7 @@ RSpec.feature 'Accepting or declining an invite', type: :feature do
     end
 
     it 'adds the user to the team' do
-      expect(TeamMember.find_by_user_id_and_team_id(user.id, team.id)).to be_present
+      expect(TeamMember.find_by_user_id(user.id)).to be_present
     end
   end
 
@@ -42,7 +42,3 @@ RSpec.feature 'Accepting or declining an invite', type: :feature do
     end
   end
 end
-
-
-
-
