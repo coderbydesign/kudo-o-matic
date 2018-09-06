@@ -5,6 +5,14 @@ class UserMailer < ApplicationMailer
     suppress(Exception) {welcome_email(user).deliver_later}
   end
 
+  def invite_email(email, team)
+    attachments.inline['logo.png'] = logo_attachment
+
+    @team = team
+
+    mail(to: email, subject: "You've been invited to join the Kudos-o-Matic")
+  end
+
   def welcome_email(user)
     @user = user
 

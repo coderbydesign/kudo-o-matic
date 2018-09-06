@@ -55,7 +55,6 @@ class User < ActiveRecord::Base
   has_many :received_transactions, class_name: 'Transaction', foreign_key: :receiver_id
   has_many :memberships, class_name: 'TeamMember', foreign_key: :user_id
   has_many :teams, through: :memberships
-  has_many :team_invites
   has_many :votes, foreign_key: 'voter_id'
   has_many :exports, foreign_key: 'user_id'
   has_many :fcm_tokens
@@ -134,8 +133,8 @@ class User < ActiveRecord::Base
     # TODO: when we implement the functionality to give/revoke admin rights, we need to make sure to invalidate @admin_rights[team.id]
   end
 
-  def invited_to?(team)
-    team_invites.open.where(team_id: team.id).any?
+  def open_invites
+    TeamInvite.where(email: self.email, accepted_at: nil, declined_at: nil)
   end
 
   def all_transactions
@@ -168,10 +167,6 @@ class User < ActiveRecord::Base
 
   def multiple_teams?
     teams.length > 1
-  end
-
-  def invites?
-    team_invites.length > 1
   end
 
   def slack_id_for_team(team)

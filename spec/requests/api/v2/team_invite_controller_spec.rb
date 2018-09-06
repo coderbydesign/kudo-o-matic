@@ -8,31 +8,33 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
   include RequestHelpers
 
   describe 'PUT api/v2/invites/:id' do
-    let(:application) { create(:application) }
-    let(:team) { create(:team) }
-    let(:user) { create(:user) }
+    let(:application) {create(:application)}
+    let(:team) {create(:team)}
+    let(:user) {create(:user)}
     let(:token) do
       Doorkeeper::AccessToken.create! application_id: application.id,
                                       resource_owner_id: user.id
     end
-    let(:invite) { TeamInvite.create(user: user, team: team) }
-    let(:request) { "/api/v2/invites/#{invite.id}" }
-    let(:bad_request) { '/api/v2/invites/999' }
+    let!(:invite) {TeamInvite.create(email: user.email, team: team)}
+    let(:request) {"/api/v2/invites/#{invite.id}"}
+    let(:bad_request) {'/api/v2/invites/999'}
 
     context 'accepting a invite' do
       before do
         put request,
             headers: {
-              'Authorization': "Bearer #{token.token}",
-              'Content-Type': 'application/vnd.api+json'
+                'Authorization': "Bearer #{token.token}",
+                'Content-Type': 'application/vnd.api+json'
             },
             params: {
-              accept: true
+                accept: true
             }.to_json
       end
 
+
       it 'sets the accepted_at date' do
-        expect(TeamInvite.find(invite.id).accepted_at).to_not eql(nil)
+        i = TeamInvite.find(invite.id)
+        expect(i.accepted_at).to_not eql(nil)
       end
 
       it 'adds a new member to the team' do
@@ -41,10 +43,10 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
 
       it 'returns a success message' do
         expected = {
-          "data": {
-            "title": 'Successfully accepted the invite',
-            "detail": "The team_invite record identified by id #{invite.id} was accepted successfully."
-          }
+            "data": {
+                "title": 'Successfully accepted the invite',
+                "detail": "The team_invite record identified by id #{invite.id} was accepted successfully."
+            }
         }.with_indifferent_access
         expect(json).to eq(expected)
       end
@@ -54,11 +56,11 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
       before do
         put request,
             headers: {
-              'Authorization': "Bearer #{token.token}",
-              'Content-Type': 'application/vnd.api+json'
+                'Authorization': "Bearer #{token.token}",
+                'Content-Type': 'application/vnd.api+json'
             },
             params: {
-              accept: false
+                accept: false
             }.to_json
       end
 
@@ -68,10 +70,10 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
 
       it 'returns a success message' do
         expected = {
-          "data": {
-            "title": 'Successfully declined the invite',
-            "detail": "The team_invite record identified by id #{invite.id} was declined successfully."
-          }
+            "data": {
+                "title": 'Successfully declined the invite',
+                "detail": "The team_invite record identified by id #{invite.id} was declined successfully."
+            }
         }.with_indifferent_access
         expect(json).to eq(expected)
       end
@@ -81,22 +83,22 @@ RSpec.describe Api::V2::TransactionsController, type: :request do
       before do
         put bad_request,
             headers: {
-              'Authorization': "Bearer #{token.token}",
-              'Content-Type': 'application/vnd.api+json'
+                'Authorization': "Bearer #{token.token}",
+                'Content-Type': 'application/vnd.api+json'
             },
             params: {
-              accept: false
+                accept: false
             }.to_json
       end
 
       it 'returns a error' do
         expected = {
-          "errors": [
-            {
-              "title": 'Expired invite',
-              "detail": 'This invite does not exist or has expired'
-            }
-          ]
+            "errors": [
+                {
+                    "title": 'Expired invite',
+                    "detail": 'This invite does not exist or has expired'
+                }
+            ]
         }.with_indifferent_access
         expect(json).to eq(expected)
       end

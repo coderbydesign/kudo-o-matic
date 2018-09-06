@@ -25,10 +25,6 @@ RSpec.describe GoalMailer, type: :mailer do
       expect(mail.from).to eq(['example@mail.com'])
     end
 
-    it 'assigns @user' do
-      expect(mail.body.encoded).to match(user.first_name)
-    end
-
     it 'assigns the previous goal' do
       expect(mail.body.encoded).to match(prev_goal.name)
     end

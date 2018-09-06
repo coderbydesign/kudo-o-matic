@@ -42,7 +42,7 @@ RSpec.describe TeamSelectorController, type: :controller do
     end
 
     context 'with a user who only has one team and one invite' do
-      let!(:invite) { TeamInvite.create(user: user2, team: team) }
+      let!(:invite) { TeamInvite.create(email: user2.email, team: team) }
 
       before do
         sign_in user2
