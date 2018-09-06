@@ -2,6 +2,10 @@
 
 [![Travis Build Status](https://img.shields.io/travis/kabisa/kudo-o-matic.svg?style=flat-square)](https://travis-ci.org/kabisa/kudo-o-matic.svg?branch=master) [![GitHub release](https://img.shields.io/github/release/kabisa/kudo-o-matic.svg?style=flat-square)](https://github.com/kabisa/kudo-o-matic/releases) [![GitHub license](https://img.shields.io/github/license/kabisa/kudo-o-matic.svg?style=flat-square)](https://github.com/kabisa/kudo-o-matic/blob/master/LICENSE.md)
 
+## Bug reports and feature requests
+
+GitHub issues is closed, the [PivotalTracker project](https://www.pivotaltracker.com/n/projects/1993685) is the place to create new feature requests or bug reports. Please open all new issues in the icebox and use one of the [templates](https://www.pivotaltracker.com/help/articles/story_templates/) when opening a new issue.
+
 ## What is the Kudos-o-Matic?
 The Kudo project originated from the wish to create common goals for people and teams who work on different projects in order to *strengthen the team spirit*, *collectively celebrate successes* and *ensure transparency* within an organization.
 
