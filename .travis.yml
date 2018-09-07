@@ -9,9 +9,7 @@ services:
   - postgresql
 
 addons:
-  apt:
-    packages:
-    - google-chrome-stable
+  chrome: stable
 
 install:
   - bundle install --jobs=3 --retry=3 --without production
@@ -21,7 +19,6 @@ before_script:
   - psql -c 'create database kudo_o_matic_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
   - bundle exec rails db:migrate
-  - google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost &
 
 script:
   - bundle exec rspec
