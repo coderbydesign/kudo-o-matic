@@ -1,31 +1,14 @@
 # frozen_string_literal: true
 require 'rails_helper'
-require 'selenium/webdriver'
-
-Capybara.register_driver :chrome do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome)
-end
-
-Capybara.register_driver :headless_chrome do |app|
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-      chromeOptions: {args: %w(headless disable-gpu)}
-  )
-
-  Capybara::Selenium::Driver.new app,
-                                 browser: :chrome,
-                                 desired_capabilities: capabilities
-end
-
-Capybara.javascript_driver = :headless_chrome
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
   config.before :each do
     DatabaseCleaner.strategy = if Capybara.current_driver == :rack_test
-      :transaction
-    else
-      :truncation
+                                 :transaction
+                               else
+                                 :truncation
                                end
     DatabaseCleaner.start
   end
@@ -35,12 +18,11 @@ RSpec.configure do |config|
   end
 end
 
-
 RSpec.feature 'Add a like', type: :feature do
-  let!(:prev_goal) { create :goal, :achieved, name: 'Painting lessons', amount: 100 }
-  let!(:next_goal) { create :goal, name: 'Paintball', amount: 1500 }
-  let(:activity) { Activity.create name: 'Helping with RSpec' }
-  let(:team) { create :team }
+  let!(:prev_goal) {create :goal, :achieved, name: 'Painting lessons', amount: 100}
+  let!(:next_goal) {create :goal, name: 'Paintball', amount: 1500}
+  let(:activity) {Activity.create name: 'Helping with RSpec'}
+  let(:team) {create :team}
   let(:user) do
     User.create name: 'Pascal', email: 'pascal@email.com', password: 'testpass',
                 password_confirmation: 'testpass', confirmed_at: Time.now,
@@ -51,10 +33,10 @@ RSpec.feature 'Add a like', type: :feature do
                 password_confirmation: 'testpass', confirmed_at: Time.now,
                 avatar_url: '/kabisa_lizard.png'
   end
-  let(:balance) { Balance.current(team) }
-  let!(:transaction) { Transaction.create id: 1, sender: user, receiver: user, activity: activity, amount: 5, balance: balance, team_id: team.id}
-  let!(:transaction_2) { Transaction.create id: 2, sender: user, receiver: user, activity: activity, amount: 10, balance: balance, team_id: team.id}
-  let!(:liked) { transaction.liked_by user_2 }
+  let(:balance) {Balance.current(team)}
+  let!(:transaction) {Transaction.create id: 1, sender: user, receiver: user, activity: activity, amount: 5, balance: balance, team_id: team.id}
+  let!(:transaction_2) {Transaction.create id: 2, sender: user, receiver: user, activity: activity, amount: 10, balance: balance, team_id: team.id}
+  let!(:liked) {transaction.liked_by user_2}
 
   before do
     team.add_member(user)
@@ -64,7 +46,7 @@ RSpec.feature 'Add a like', type: :feature do
     fill_in 'user_password', with: 'testpass'
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
-    find('button.close-welcome').click
+    find('.close-welcome').click
   end
 
   context 'User likes transaction' do
