@@ -19,6 +19,7 @@ before_script:
   - psql -c 'create database kudo_o_matic_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
   - bundle exec rails db:migrate
+  - google-chrome-stable --headless --disable-dev-shm-usage --no-sandbox
 
 script:
   - bundle exec rspec
