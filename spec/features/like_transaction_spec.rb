@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
+
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
@@ -17,6 +18,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
+
 
 RSpec.feature 'Add a like', type: :feature do
   let!(:prev_goal) {create :goal, :achieved, name: 'Painting lessons', amount: 100}
@@ -46,7 +48,11 @@ RSpec.feature 'Add a like', type: :feature do
     fill_in 'user_password', with: 'testpass'
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
-    find('.close-welcome').click
+    begin
+      find('button.close-welcome').click
+    rescue
+      puts "rip"
+    end
   end
 
   context 'User likes transaction' do
