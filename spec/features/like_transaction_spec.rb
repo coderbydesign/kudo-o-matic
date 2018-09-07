@@ -51,7 +51,6 @@ RSpec.feature 'Add a like', type: :feature do
     begin
       find('button.close-welcome').click
     rescue
-      puts "rip"
     end
   end
 

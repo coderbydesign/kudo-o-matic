@@ -54,7 +54,10 @@ RSpec.feature 'Open a modal', type: :feature do
     fill_in 'user_password', with: 'testpass'
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
-    find('.close-welcome').click
+    begin
+      find('button.close-welcome').click
+    rescue
+    end
   end
 
   context 'Given the guideline modal' do
