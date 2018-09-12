@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
   def resend_email_confirmation
     unless current_user.confirmed?
-      current_user.send_reset_password_instructions
+      current_user.send_confirmation_instructions
       flash[:success] = 'Email confirmation instructions have been sent'
     end
     redirect_to root_url
