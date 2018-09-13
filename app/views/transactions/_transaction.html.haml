@@ -1,4 +1,4 @@
-.create-transaction-container
+.create-transaction-container{:id => "create-transaction-container", :data => {:team => current_team.id}}
   %div
     %h1.transaction-container-title
     = simple_form_for @transaction do |f|

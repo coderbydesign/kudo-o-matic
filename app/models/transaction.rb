@@ -126,37 +126,11 @@ class Transaction < ActiveRecord::Base
     votes.find_by_voter_id(user.id).present?
   end
 
-  GUIDELINES =
-    [['Margin / month super (>=15% ROS)', 500],
-     ['Turnover / month super (>= 350k)', 500],
-     ['Score a project of >50 hours', 250],
-     ['Margin / month fine (>= 10% ROS <=15%)', 200],
-     ['Turnover / month fine (>= 300k; <= 350k)', 200],
-     ['Get a client quote for the website', 100],
-     ['Margin / month reasonable (>= 5% ROS <= 10%)', 100],
-     ['New colleague', 100],
-     ['Speak at a conference', 100],
-     ['Turnover / month reasonable (>= 280k <= 300k)', 100],
-     ['Get a great client satisfaction score', 80],
-     ['Organize event for external relations (workshop, coderetreat)', 50],
-     ['Score consultancy project', 50],
-     ['BlogPost Inbound', 40],
-     ['Project RefCase', 40],
-     ['Get a client satisfaction score', 40],
-     ['Pizza Session', 40],
-     ['Introduce a new potential client (ZOHO)', 40],
-     ['Blog tech', 20],
-     ['Call for Proposal for a conference', 20],
-     ['Lunch&Learn', 20],
-     ['Visit conference', 20],
-     ['Be a special help for someone', 10],
-     ['Be a quick help for someone', 5],
-     ['Start a meeting in time', 1]].freeze
-
-  def self.guidelines_between(from, to)
+  def self.guidelines_between(from, to, team_id)
     gl = []
-    GUIDELINES.each do |g|
-      gl.push g if g[1] >= from && g[1] <= to
+    Guideline.where(teams_id: team_id).each do |g|
+      puts "gl", g
+      gl.push g if g.kudos >= from && g.kudos <= to
     end
     gl
   end

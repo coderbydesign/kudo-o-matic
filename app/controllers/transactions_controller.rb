@@ -80,7 +80,7 @@ class TransactionsController < ApplicationController
 
   def kudo_guidelines
     kudos = params[:kudo_amount].to_i
-    guidelines = Transaction.guidelines_between [(kudos - 10), 0].max, kudos + 10
+    guidelines = Transaction.guidelines_between [(kudos - 10), 0].max, kudos + 10, current_team.id
     render json: guidelines
   end
 
