@@ -7,6 +7,7 @@ class TransactionsController < ApplicationController
   before_action :check_slack_connection, only: [:index, :create]
   before_action :set_user, only: [:index, :show, :update, :destroy]
   before_action :danger_methods, only: [:update, :edit, :destroy]
+  before_action :set_guidelines, only: [:index, :create]
 
   before_action :check_restricted
   after_action :update_slack_transaction, only: [:upvote, :downvote]
@@ -187,5 +188,9 @@ class TransactionsController < ApplicationController
 
   def transaction_params
     params.require(:transaction).permit(:receiver_name, :amount, :password, :activity_name, :image, :image_delete_checkbox)
+  end
+
+  def set_guidelines
+    @guidelines = Guideline.where(teams_id: current_team.id) || []
   end
 end

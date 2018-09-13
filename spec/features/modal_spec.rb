@@ -35,6 +35,7 @@ RSpec.feature 'Open a modal', type: :feature do
   let!(:balance) {create :balance, :current, team_id: team.id}
   let!(:prev_goal) {create :goal, :achieved, name: 'Painting lessons', amount: 100, balance_id: balance.id}
   let!(:next_goal) {create :goal, name: 'Paintball', amount: 1500, balance_id: balance.id}
+  let(:first_guideline) {create :guideline, name: 'First', kudos: 10, teams_id: team.id}
 
   before(:each) do
     team.add_member(user)
@@ -48,7 +49,7 @@ RSpec.feature 'Open a modal', type: :feature do
 
   context 'Given the guideline modal' do
     before do
-      @guidelines = Transaction::GUIDELINES.count
+      @guidelines = Guideline.all.count
       find('.btn-guideline-info').click
     end
 

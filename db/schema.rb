@@ -88,11 +88,11 @@ ActiveRecord::Schema.define(version: 20180913081528) do
   end
 
   create_table "guidelines", force: :cascade do |t|
-    t.string "name"
-    t.integer "kudos"
+    t.string   "name"
+    t.integer  "kudos"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "teams_id"
+    t.integer  "teams_id"
     t.index ["teams_id"], name: "index_guidelines_on_teams_id", using: :btree
   end
 
