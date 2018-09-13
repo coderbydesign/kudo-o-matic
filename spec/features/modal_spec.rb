@@ -60,15 +60,15 @@ RSpec.feature 'Open a modal', type: :feature do
       end
     end
 
-    it 'Copies a guideline on click', js: true do
-      find(:css, '.guideline-list', match: :first).click
-      within('.guideline-modal') do
-        within '.clipboard-guideline' do
-          expect(page).to have_content('Copied!')
-        end
-        expect(page).to have_css('.show-clipboard')
-      end
-    end
+    # it 'Copies a guideline on click', js: true do
+    #   find(:css, '.guideline-list', match: :first).click
+    #   within('.guideline-modal') do
+    #     within '.clipboard-guideline' do
+    #       expect(page).to have_content('Copied!')
+    #     end
+    #     expect(page).to have_css('.show-clipboard')
+    #   end
+    # end
   end
 
   context 'Given the emoji modal' do
