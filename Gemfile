@@ -47,7 +47,7 @@ gem 'rails_autolink', '~> 1.1.6'
 gem 'railties', '~> 5.0.3'
 gem 'redcarpet', '~> 3.4'
 gem 'rubocop', '~> 0.51.0', require: false
-gem 'rubyzip', require: 'zip'
+gem 'rubyzip', '~> 1.2.2', require: 'zip'
 gem 'sass-rails', '~> 5.0'
 gem 'scss_lint', '~> 0.54', require: false
 gem 'simple_form', '~> 3.5'
