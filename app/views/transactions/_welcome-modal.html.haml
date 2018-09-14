@@ -4,28 +4,30 @@
     %h2
       ₭udo-o-Matic 3.1
   .modal-body#version
-    %h3
-      = "Connect the ₭udo-o-Matic with Slack \u{1f514}"
-    %br
-    %p
-      To start using the new Slack functionality, you must sign in to Slack:
-    %br
-    %p
-      %a{href: user_slack_omniauth_authorize_path}
-        %img{alt: 'Sign in with Slack', width: '172', height: '40', src: 'https://platform.slack-edge.com/img/sign_in_with_slack.png',
-        srcset: 'https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x' }
-    %br
+    - if current_team.name == "Kabisa"
+      %h3
+        = "Connect the ₭udo-o-Matic with Slack \u{1f514}"
+      %br
+      %p
+        To start using the new Slack functionality, you must sign in to Slack:
+      %br
+      %p
+        %a{href: user_slack_omniauth_authorize_path}
+          %img{alt: 'Sign in with Slack', width: '172', height: '40', src: 'https://platform.slack-edge.com/img/sign_in_with_slack.png',
+          srcset: 'https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x' }
+      %br
     %h3
       What's new?
     %br
     %ul
-      %li
-        Slack:
-        %ul
-          %li
-            Made ₭udo-o-Matic notifications less obtrusive in the Slack feed.
-          %li
-            Fixed several bugs and improved stability.
+      - if current_team.name == "Kabisa"
+        %li
+          Slack:
+          %ul
+            %li
+              Made ₭udo-o-Matic notifications less obtrusive in the Slack feed.
+            %li
+              Fixed several bugs and improved stability.
       %li
         Firebase Cloud Messaging:
         %ul
