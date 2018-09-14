@@ -19,9 +19,9 @@ $(document).ready(function() {
 
         $('.amount-of-kudos').html(this.value);
 
-        var team_id = $('#create-transaction-container').data('team');
+        var team_slug = $('#create-transaction-container').data('team');
 
-        $.get("/kudo_guidelines?kudo_amount=" + this.value + "&team_id=" + team_id, function (data) {
+        $.get("/kudo_guidelines?kudo_amount=" + this.value + "&team=" + team_slug, function (data) {
             var list = $('.tooltip-inner').empty();
             var listMore = $('<p>Guideline suggestions</p>').addClass('suggested-guidelines-title');
             listMore.appendTo(list);

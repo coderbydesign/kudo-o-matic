@@ -39,10 +39,7 @@ class ApplicationController < ActionController::Base
 
   def team_by_slug
     if params[:team]
-      return Team.friendly.find(params[:team])
-    end
-    if params[:team_id]
-      return Team.friendly.find(params[:team_id])
+      Team.friendly.find(params[:team])
     end
   end
 

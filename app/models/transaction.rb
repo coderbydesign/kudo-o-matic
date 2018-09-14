@@ -129,7 +129,6 @@ class Transaction < ActiveRecord::Base
   def self.guidelines_between(from, to, team_id)
     gl = []
     Guideline.where(teams_id: team_id).each do |g|
-      puts "gl", g
       gl.push g if g.kudos >= from && g.kudos <= to
     end
     gl
