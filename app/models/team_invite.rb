@@ -41,6 +41,6 @@ class TeamInvite < ActiveRecord::Base
   private
 
   def send_invite
-    UserMailer.invite_email(self.email, self.team).deliver_later
+    UserMailer.invite_email(self.email, self.team).deliver_now
   end
 end
