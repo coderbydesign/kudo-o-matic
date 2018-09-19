@@ -52,7 +52,7 @@ Rails.application.configure do
   # SMTP settings email
   config.action_mailer.smtp_settings = {
     user_name: ENV['MAIL_USERNAME'],
-    password: ENV['MAIL_PASSWORD],
+    password: ENV['MAIL_PASSWORD'],
     address: ENV['MAIL_ADDRESS'],
     domain: ENV['MAIL_ADDRESS'],
     port: ENV['MAIL_PORT'],
