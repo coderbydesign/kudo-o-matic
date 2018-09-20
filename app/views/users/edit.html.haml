@@ -8,7 +8,7 @@
           #notice= notice
     %h1.settings-title
       Settings
-    - if current_team.slack_id.present?
+    - if current_team.slack_team_id.present?
       %h2.settings-subtitle
         Slack
       - if @user.slack_id_for_team(current_team).blank?
