@@ -18,17 +18,17 @@ RSpec.feature 'Update a goal', type: :feature do
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
 
-    click_link 'team-manage-button-desktop'
-    expect(current_path).to eql('/kabisa/manage')
+    click_link 'Manage team'
+    expect(current_path).to eql(manage_team_path(team: team))
 
-    click_link 'Manage goals'
-    expect(current_path).to eql('/kabisa/manage/goals')
+    click_link 'Balances and Goals'
+    expect(current_path).to eql(balances_path(team: team))
 
     click_link 'First goal'
-    expect(current_path).to eql("/kabisa/manage/goals/#{goal.id}")
+    expect(current_path).to eql(goal_path(team: team, id: goal.id))
 
     click_link 'edit-goal'
-    expect(current_path).to eql("/kabisa/manage/goals/#{goal.id}/edit")
+    expect(current_path).to eql(edit_goal_path(team: team, id: goal.id))
   end
 
   context 'Successfully updated a goal' do

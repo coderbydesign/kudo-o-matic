@@ -12,6 +12,8 @@
       Text
     %th
       Image
+    %th
+      Team
   - transactions.each do |t|
     %tr.no-top-border
       %td
@@ -27,4 +29,8 @@
       %td
         - if t.image.exists?
           = link_to 'Show image', t.image.url, target: '_blank'
+        - else
+          = '-'
+      %td
+        = t.team.name
 = paginate transactions

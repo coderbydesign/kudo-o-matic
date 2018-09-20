@@ -5,7 +5,7 @@
       %h1.settings-title
         Manage balances
       .actions
-        = link_to root_path, method: "get", class: 'btn secondary' do
+        = link_to dashboard_path(team: current_team.slug), method: "get", class: 'btn secondary' do
           <i class="fa fa-home" aria-hidden="true"></i> Home
         = link_to balances_path(team: current_team.slug), method: "get", class: 'btn secondary' do
           <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to balances
@@ -18,22 +18,21 @@
       = link_to balance_path, class: 'btn danger', method: :delete, id: "rm-balance",
             data: {confirm: "This will remove #{@balance.name}. Are you sure?"} do
         <i class="fa fa-trash-o" aria-hidden="true"></i> Remove
-
     %table.settings-table
       %tr
         %td.bold
           Name
         %td
-          #{@balance.name}
+          = @balance.name
+      %tr
+        %td.bold
+          Kudos
+        %td
+          = @balance.amount
       %tr
         %td.bold
           Created at
         %td
-          #{@balance.created_at}
-      %tr
-        %td.bold
-          Updated at
-        %td
-          #{@balance.updated_at}
+          = @balance.created_at.strftime("%A, %d %b %Y")
 
-    = render 'balances/goals_list', goals: @balance.goals
+    = render 'goals_list', balances: @balance, goals: @balance.goals

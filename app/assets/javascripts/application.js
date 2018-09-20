@@ -26,6 +26,8 @@
 
 //= require clipboard.min
 
+//= require profile/profile-menu.jquery
+
 //= require later
 //= require_tree .
 

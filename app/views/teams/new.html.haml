@@ -14,6 +14,7 @@
           #notice= notice
     %h2.settings-subtitle
       Create new team
+      %a.fa.fa-question-circle{href: getting_started_path}
     - if @team.errors.any?
       - @team.errors.full_messages.each do |msg|
         .message-container.show-message

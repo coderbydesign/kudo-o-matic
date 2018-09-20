@@ -7,8 +7,8 @@
       .actions
         = link_to root_path, method: "get", class: 'btn secondary' do
           <i class="fa fa-home" aria-hidden="true"></i> Home
-        = link_to manage_team_path(team: current_team.slug), method: "get", class: 'btn secondary' do
-          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to manage
+        = link_to balances_path(team: current_team.slug), method: "get", class: 'btn secondary' do
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to balances
     %h2.settings-subtitle
       Goals
     = render 'goals_list', goals: @goals

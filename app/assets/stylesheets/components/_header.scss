@@ -1,32 +1,110 @@
-.container-header {
-  padding: $padding;
-
-  .title, .subtitle {
-    font-family: Orbitron;
-    text-align: center;
-    vertical-align: middle;
-    margin-top: $margin-secondary;
-  }
-
-  .title-border {
-    border-bottom: 1px solid $white-color;
-  }
-}
-
 .team-logo {
   max-height: 75px;
 }
 
-@media screen and (min-width: 1200px) {
-  .container-header {
-    text-align: inherit;
+$profile-menu-height: 5rem;
+
+.profile-menu {
+  align-items: center;
+  display: flex;
+  height: $profile-menu-height;
+  justify-content: flex-end;
+  padding-right: $padding-medium;
+  min-width: 5rem;
+
+  .profile-username {
+    cursor: pointer;
+    margin-right: 1rem;
+    padding: 0;
+  }
+
+  .profile-icon-mobile {
+    display: none;
+  }
+
+  .profile-img {
+    background-size: cover;
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+  }
+
+  .profile-dropdown {
+    background: $secondary-bg;
+    border-radius: $border-radius-small;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    color: $text-primary;
+    display: none;
+    margin: auto;
+    padding: $padding-medium 0;
+    position: absolute;
+    top: $profile-menu-height * 0.9;
+    user-select: none;
+    width: 13.5rem;
+  }
+
+  .profile-dropdown::after {
+    content: "";
+    transform: rotate(45deg);
+    background: $secondary-bg;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+    width: 1.25rem;
+    height: 1.25rem;
+    position: absolute;
+    top: -0.5rem;
+    right: 3.9rem;
+    z-index: -1;
+  }
+  
+  .profile-dropdown.is-visible {
+    display: block;
+  }
+
+  .profile-option {
+    display: flex;
+    padding: $padding-medium $padding-medium * 2;
+
+    .profile-icon {
+      padding-right: $padding-medium;
+      text-align: center;
+      width: 2rem;
+    }
+  }
+
+  .profile-option:hover {
+    background: $primary-color;
+    color: $text-white;
+  }
+
+  .dropdown-divider {
+    background-color: #CCCCCC;
+    border: none;
+    height: 1px;
   }
 }
 
 @media screen and (max-width: 1200px) {
-
+  .profile-dropdown {
+    right: 1.5rem;
+  }
 }
 
 @media screen and (max-width: 720px) {
+  .profile-menu {
+    .profile-img {
+      display: none;
+    }
+    
+    .profile-username {
+      display: none;
+    }
 
+    .profile-icon-mobile {
+      display: block;
+    }
+
+    .profile-dropdown::after {
+      right: 0.3rem;
+    }
+  }
 }

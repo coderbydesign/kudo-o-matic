@@ -28,7 +28,7 @@
 
   tr {
     th {
-      background-color: #4B4656;
+      background-color: $primary-color;
       padding: 15px;
       color: #FFF;
       border-left: 0.5px solid;
@@ -43,6 +43,7 @@
     td {
       border: 0.5px solid $primary-border-color;
       padding: $margin-secondary;
+      text-align: center;
     }
     &.no-top-border td {
       border-top: none;

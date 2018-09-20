@@ -11,14 +11,13 @@
 #
 
 class Balance < ActiveRecord::Base
-  after_update :ensure_a_current_balance_remains
-  after_destroy :ensure_a_current_balance_remains
-
   validates :name, presence: true
 
   belongs_to :team
   has_many :transactions
   has_many :goals
+
+  attr_accessor :make_balance_active_checkbox
 
   scope :balances, -> { where(current: false).order("created_at DESC") }
 
@@ -45,13 +44,5 @@ class Balance < ActiveRecord::Base
     "#{days_left} days left"
   end
 
-  private
 
-  def ensure_a_current_balance_remains
-    Team.all.each do |team|
-      if Balance.where(team: team, current: true).count == 0
-        raise "Last current balance for team #{team.name} can't be removed from the system"
-      end
-    end
-  end
 end

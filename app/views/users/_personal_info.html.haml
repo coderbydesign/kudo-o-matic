@@ -21,21 +21,6 @@
       #{user.updated_at}
   %tr
     %td.bold
-      Slack ID
-    %td
-      #{user.slack_id || 'N/A'}
-  %tr
-    %td.bold
-      Slack name
-    %td
-      #{user.slack_name || 'N/A'}
-  %tr
-    %td.bold
-      Slack username
-    %td
-      #{user.slack_username || 'N/A'}
-  %tr
-    %td.bold
       Avatar URL
     %td
       - if user.avatar_url

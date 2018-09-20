@@ -1,21 +1,25 @@
-%h2.settings-subtitle
-  Goals
-
 - if goals.any?
   %table.settings-table
     %tr
       %th
-        Naam
+        Name
       %th
         Amount
+      %th
+        Status
       %th{colspan: 2}
         Actions
-    - goals.each do |g|
+    - goals.order("amount asc").each do |g|
       %tr
         %td
           = link_to g.name, goal_path(id: g.id, team: current_team.slug), id: "show-#{g.id}"
         %td
           = g.amount
+        %td
+          - if g.achieved_on.nil?
+            In progress
+          - else
+            Reached
         %td
           = link_to 'Edit', edit_goal_path(id: g.id, team: current_team.slug), id: "edit-#{g.id}"
         %td
@@ -23,5 +27,8 @@
             data: {confirm: "This will remove #{g.name}. Are you sure?"}
 - else
   %p
-    This balance doesn't have any goals yet.
+    No goals defined yet.
+.actions
+  = link_to new_goal_path, method: "get", class: 'btn btn-primary' do
+    <i class="fa fa-plus" aria-hidden="true"></i> Create new goal
 

@@ -15,20 +15,18 @@ RSpec.feature 'Update a team', type: :feature do
 
     expect(current_path).to eql('/kabisa')
 
-    click_link 'team-manage-button-desktop'
-    expect(current_path).to eql('/kabisa/manage')
+    click_link 'Manage team'
+    expect(current_path).to eql(manage_team_path(team: team))
   end
 
   context 'Successfully updated team' do
     before do
       fill_in 'name', with: 'Asibak'
-      fill_in 'general_info', with: 'Some new info'
       click_button 'update-team-button'
     end
 
     it 'updates the fields' do
       expect(Team.find(team.id).name).to eq('Asibak')
-      expect(Team.find(team.id).general_info).to eq('Some new info')
     end
 
     it 'shows success message' do
@@ -39,13 +37,11 @@ RSpec.feature 'Update a team', type: :feature do
   context 'Unsuccessfully updated team' do
     before do
       fill_in 'name', with: ''
-      fill_in 'general_info', with: 'Some new info'
       click_button 'update-team-button'
     end
 
     it 'does not update the fields' do
       expect(Team.find(team.id).name).to eq(team.name)
-      expect(Team.find(team.id).general_info).to eq(team.general_info)
     end
 
     it 'shows error message' do

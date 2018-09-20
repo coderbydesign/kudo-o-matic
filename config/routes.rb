@@ -25,6 +25,13 @@ Rails.application.routes.draw do
 
   get 'legal/privacy'
 
+  scope :hc, controller: :help do
+    get 'getting-started', to: 'helpcenter#start'
+    get 'contact', to: 'helpcenter#contact'
+    get 'how-to-use', to: 'helpcenter#how_to_use'
+    get 'profile-and-preferences', to: 'helpcenter#profile_and_preferences'
+  end
+
   scope :slack, controller: :slack do
     post :action
     post :command
@@ -205,14 +212,16 @@ Rails.application.routes.draw do
     post 'like/:id', to: 'transactions#upvote', as: :like
     post 'unlike/:id', to: 'transactions#downvote', as: :unlike
 
-    get :settings, to: 'users#edit', as: :settings
+    get :settings, to: 'users#index', as: :settings
+    get 'settings/privacy', to: 'users#privacy', as: :privacy_settings
     patch :settings, to: 'users#update'
 
     scope 'manage' do
       get '/', to: 'teams#manage', as: :manage_team
       patch 'update', to: 'teams#update', as: :team_update
-      get 'invites', to: 'team_invite#new', as: :manage_invites
+      get 'invites', to: 'team_invite#index', as: :manage_invites
       post 'invites', to: 'team_invite#create', as: :create_invites
+      delete 'invites/:id', to: 'team_invite#delete', as: :delete_invites
       get 'members', to: 'team_member#index', as: :manage_team_members
       delete 'members', to: 'team_member#delete', as: :delete_member
       resources :balances, path: 'balances'

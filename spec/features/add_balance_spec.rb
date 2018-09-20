@@ -16,14 +16,14 @@ RSpec.feature 'Add a new balance', type: :feature do
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
 
-    click_link 'team-manage-button-desktop'
-    expect(current_path).to eql('/kabisa/manage')
+    click_link 'Manage team'
+    expect(current_path).to eql(manage_team_path(team: team))
 
-    click_link 'Manage balances'
-    expect(current_path).to eql('/kabisa/manage/balances')
+    click_link 'Balances and Goals'
+    expect(current_path).to eql(balances_path(team: team))
 
     click_link 'Create new balance'
-    expect(current_path).to eql('/kabisa/manage/balances/new')
+    expect(current_path).to eql(new_balance_path(team: team))
   end
 
   context 'Successfully created a balance' do

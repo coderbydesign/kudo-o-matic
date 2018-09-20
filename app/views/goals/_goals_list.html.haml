@@ -1,15 +1,15 @@
-- if goals.any?
+- if @goals.any?
   %table.settings-table
     %tr
       %th
-        Naam
+        Name
       %th
         Amount
       %th
         Balance
       %th{colspan: 2}
         Actions
-    - goals.each do |g|
+    - @goals.each do |g|
       %tr
         %td
           = link_to g.name, goal_path(id: g.id, team: current_team.slug), id: "show-#{g.id}"

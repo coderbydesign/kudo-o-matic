@@ -1,0 +1,37 @@
+.container {
+  background: $primary-bg;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: $border-radius-small;
+  padding: 1.5rem;
+}
+
+.text-container {
+  padding: 1rem 0;
+
+  ul {
+    margin-left: $margin-secondary * 2;
+    list-style: disc;
+  }
+}
+
+.btn-invite {
+  margin-top: $whitespace;
+}
+.topic-title {
+  margin-bottom: $margin-secondary;
+}
+
+h3.topic-title {
+  font-weight: 400;
+}
+
+.topic-p {
+  margin-top: $margin-secondary;
+  padding: 0;
+}
+
+@media screen and (max-width: 720px) {
+  .has-table {
+    overflow-x: auto;
+  }
+}

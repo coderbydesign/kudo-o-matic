@@ -1,0 +1,32 @@
+= render 'layouts/header'
+.page
+  .body
+    .container-left
+      .fixed-div-left
+        = render 'menu'
+    .container-center.flex-is-three
+      .container
+        .topic-container
+          .title-container
+            %h2.main-title
+              Contact
+          %hr.divider
+          .text-container
+            %p.topic-p
+              If you have any questions or problems feel free to
+              %u
+                =  mail_to("ariejan.de.vroom@kabisa.nl", "contact us!")
+        .topic-container
+          .title-container
+            %h2.main-title
+              Developers
+          %hr.divider
+          .text-container
+            %p.topic-p
+              The Kudos-o-Matic is an open source project. You can contribute
+              %u
+                = link_to "on GitHub.", "https://github.com/kabisa/kudo-o-matic", target: "_blank"
+            %p.topic-p
+              Feature requests or bug reports can be created
+              %u
+                = link_to "here.", "https://www.pivotaltracker.com/n/projects/1993685", target: "_blank"

@@ -1,0 +1,25 @@
+.option-menu {
+  margin-bottom: $margin-secondary;
+  border: 1px solid $primary-border-color;
+  border-radius: $border-radius-small;
+  background: $primary-bg;
+  color: $text-primary;
+  font-weight: 300;
+  padding: $padding-medium 0;
+
+  &-title {
+    padding: $padding-medium $padding-medium * 2;
+    font-size: 1.5rem;
+  }
+
+  &-choice {
+    display: flex;
+    padding: $padding-medium $padding-medium * 2;
+  }
+}
+
+.divider {
+  background-color: $secondary-border-color;
+  border: none;
+  height: 1px;
+}

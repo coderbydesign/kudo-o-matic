@@ -1,0 +1,18 @@
+.option-menu
+  %h2.option-menu-title
+    Team Settings
+.option-menu
+  %a.option-menu-choice{href: manage_team_path}
+    General
+  %hr.divider
+  %a.option-menu-choice{href: manage_invites_path(team: current_team.slug)}
+    Invites
+  %hr.divider
+  %a.option-menu-choice{href: manage_team_members_path(team: current_team.slug)}
+    Members
+  %hr.divider
+  %a.option-menu-choice{href: balances_path(team: current_team.slug)}
+    Balances and Goals
+  %hr.divider
+  %a.option-menu-choice{href: '#'}
+    Guidelines

@@ -2,7 +2,7 @@
 
 class TeamsController < ApplicationController
   before_action :set_user, only: [:index, :create]
-  before_action :check_team_admin_rights, only: [:manage]
+  before_action :check_team_member_rights, only: [:manage]
 
   def new
     @team = Team.new(create_team_params)
@@ -10,7 +10,6 @@ class TeamsController < ApplicationController
 
   def create
     @team = TeamAdder.create(params, current_user)
-
     if @team.persisted?
       redirect_to dashboard_path(team: @team.slug)
     else
