@@ -9,21 +9,21 @@ RSpec.describe UsersController, type: :controller do
   let!(:user2) { create(:user, name: 'Henk') }
 
   before do
-    team.add_member(user)
+    team.add_member(user, true)
     team2.add_member(user2)
     sign_in user
   end
 
-  describe 'GET #edit' do
+  describe 'GET #index' do
     before do
-      get :edit,
+      get :index,
           params: {
               team: team.id
           }
     end
 
     it 'gets edit' do
-      expect(response).to render_template(:edit)
+      expect(response).to render_template(:index)
     end
 
     it 'returns a 200 (ok) status code' do
@@ -54,7 +54,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it 'redirects to the root path' do
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(dashboard_path(team: team))
       end
 
       it 'returns a 302 (found) status code' do
@@ -84,7 +84,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it 'redirects to the root path' do
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(dashboard_path(team: team))
       end
 
       it 'returns a 302 (found) status code' do

@@ -4,9 +4,6 @@
     .title-container
       %h1.settings-title
         Welcome, #{current_user.first_name}!
-      .actions
-        = link_to sign_out_path, method: "get", class: 'btn secondary' do
-          <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
 
     - flash.each do |key, value|
       .message-container.show-message
@@ -36,5 +33,7 @@
             = link_to image_tag(t.logo.url), dashboard_path(t.slug), class: 'team-logo-selection'
           -else
             = link_to t.name, dashboard_path(t.slug), class:'team-logo-selection placeholder'
-
-
+        .data-actions.actions
+        = link_to new_team_path, class: 'btn team-logo-selection placeholder', id: 'create-new-team-button' do
+          %span.fa.fa-plus
+          Create team

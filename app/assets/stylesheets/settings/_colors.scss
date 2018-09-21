@@ -5,14 +5,14 @@
 ///////////////////////////////////////////////////////////
 
 $red-color:                               #E8643E;
-$green-light-color: rgba(77, 175, 124, 0.25);
+$green-light-color:                       rgba(77, 175, 124, 0.25);
 $green-color:                             #4DAF7C;
 $orange-color:                            #EB9532;
 $blue-color:                              #5F90B0;
 $brown-color:                             #8C7C6C;
 $grey-color:                              #B2ACAB;
 $grey-light-color:                        #F0F1F5;
-$grey-selector-color: #F8F8FA;
+$grey-selector-color:                     #F8F8FA;
 $white-color:                             #FFFFFF;
 $black-color:                             #000000;
 
@@ -43,8 +43,7 @@ $base-color-white:                        #FFFFFF;
 $primary-bg:                              $base-color-white;
 $secondary-bg:                            $base-color-solitude-white;
 
-$primary-color:                           $base-color-dark-gray;
-$secondary-color:                         $base-color-brand;
+$primary-color:                           $base-color-brand;
 
 // Text
 $text-primary:                            $base-color-dark-gray;
@@ -78,7 +77,7 @@ $secondary-stroke-color:                  $base-color-brand;
 
 // Flash message
 $flash-error-bg:                          $base-color-light-red;
-$flash-error-border-color: $base-color-light-red;
+$flash-error-border-color:                $base-color-light-red;
 
 $flash-success-bg: $green-light-color;
 $flash-success-border-color: $green-light-color;

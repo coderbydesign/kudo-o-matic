@@ -38,6 +38,7 @@
   color: $text-primary;
   text-align: center;
   display: flex;
+  font-size: $font-size-regular;
 
   .hide-message & {
     display: none;

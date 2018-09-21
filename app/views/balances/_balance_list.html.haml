@@ -1,8 +1,12 @@
-- if balances.any?
+.has-table
+  %h3
+    All balances
   %table.settings-table
     %tr
       %th
-        Naam
+        Name
+      %th
+        Active
       %th{colspan:2}
         Actions
     - balances.each do |b|
@@ -10,11 +14,15 @@
         %td
           = link_to b.name, balance_path(id: b.id, team: current_team.slug), id: "show-#{b.id}"
         %td
+          - if b.current
+            Yes
+          - else
+            = '-'
+        %td
           = link_to 'Edit', edit_balance_path(id: b.id), id: "edit-#{b.id}"
         %td
           = link_to 'Remove', balance_path(id: b.id, team: current_team.slug), method: :delete, id: "rm-#{b.id}",
             data: {confirm: "This will remove #{b.name}. Are you sure?"}
-- else
-  %p
-    Your team doesn't have any balances yet.
-
+  .actions
+    = link_to new_balance_path, method: "get", class: 'btn btn-primary' do
+      <i class="fa fa-plus" aria-hidden="true"></i> Create new balance

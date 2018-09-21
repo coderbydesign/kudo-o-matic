@@ -1,0 +1,28 @@
+.has-table
+  %h3
+    Active Balance*
+  - current_balance.each do |c|
+    %table.settings-table
+      %tr
+        %td.bold
+          Name
+        %td
+          = c.name
+      %tr
+        %td.bold
+          Kudos
+        %td
+          = c.amount
+      %tr
+        %td.bold
+          Created at
+        %td
+          = c.created_at.strftime("%A, %d %b %Y")
+    %h3
+      Active Goals
+    = render 'goals_list', balances: current_balance, goals: goals
+
+%p.topic-p
+  *The balance that is marked as 'active' will collect all Kudos and only the goals that are bound to the active balance can be reached at a certain amount of Kudos.
+  There can only be one active balance at a time! When you make another balance active the old one won't be active any longer. New transactions will be added to the new active balance.
+  %hr.divider

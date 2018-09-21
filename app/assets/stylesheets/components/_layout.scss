@@ -22,8 +22,6 @@
 
   p {
     color: $text-light-gray;
-    font-size: $font-size-small;
-    text-align: right;
     padding: $padding-secondary;
 
     a {
@@ -35,9 +33,10 @@
 .header {
   align-items: center;
   display: flex;
-  width: 83%;
-  max-width: 88.75rem; // 1420px / 16px so it stops growing after this width
+  width: 82%;
+  max-width: 86.75rem; // 1388px / 16px so it stops growing after this width
   height: 100%;
+  z-index: 2;
 }
 
 .header-img {
@@ -70,7 +69,7 @@
   flex: 1;
   min-width: 0; // http://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome
   padding: 0 1rem;
-  //position: fixed;
+  z-index: -1;
 }
 
 .container-center {
@@ -83,6 +82,10 @@
   flex: 1;
   padding: 0 1rem;
   position: relative;
+}
+
+.flex-is-three {
+  flex: 3;
 }
 
 .back-to-top {
@@ -121,12 +124,27 @@
   &.placeholder {
     font-size: 18px;
     color: #FFF;
+
+    .fa-plus {
+      margin-right: $whitespace;
+    }
   }
 }
 
 @media screen and (max-width: 1200px) {
+  .page {
+    width: 100%;
+    margin: 0 auto;
+  }
+
   .body {
     display: flex;
+    width: 100%;
+  }
+
+  .header {
+    width: 100%;
+    padding: 0 1rem;
   }
 
   .container-left {
@@ -146,6 +164,7 @@
     &.visible-as-modal {
       display: block;
       position: fixed;
+      z-index: 2;
     }
   }
 
@@ -171,13 +190,7 @@
 }
 
 @media screen and (max-width: 720px) {
-  .page {
-    width: 100%;
-    margin: 0 auto;
-  }
-
   .body {
-    width: 100%;
     flex-direction: column;
   }
 
@@ -198,6 +211,10 @@
   .header-img {
     display: none;
   }
+  
+  .team-logo {
+    display: none;
+  }
 
   .mobile-img {
     display: block;
@@ -214,9 +231,6 @@
       h1.team-title {
         font-size: 1.75rem;
       }
-    }
-    .github {
-      display: none;
     }
   }
 }

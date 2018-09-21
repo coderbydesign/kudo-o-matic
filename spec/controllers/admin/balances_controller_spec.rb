@@ -12,17 +12,16 @@ RSpec.describe Admin::BalancesController, type: :controller do
   end
 
   describe 'PATCH #update' do
+
     let (:perform_update) {patch :update, params: {id: balance.id, balance: balance.attributes}}
 
     context 'updating the a current balance to a non-current balance' do
       before do
-        balance.current = false
+        # balance.current = false
       end
 
       context 'with at least one other current balance left' do
-        let!(:current_balance) {create(:balance, :current)}
         let! (:record_count_before_request) {Balance.count}
-
         before do
           perform_update
         end
@@ -46,7 +45,7 @@ RSpec.describe Admin::BalancesController, type: :controller do
         end
 
         it 'redirects back to the edit admin balance path ' do
-          expect(response).to redirect_to(edit_admin_balance_path(balance.id))
+          expect(response).to redirect_to(admin_balance_path)
         end
       end
     end

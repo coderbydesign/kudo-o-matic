@@ -17,11 +17,11 @@ RSpec.feature 'Add a new goal', type: :feature do
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
 
-    click_link 'team-manage-button-desktop'
-    expect(current_path).to eql('/kabisa/manage')
+    click_link 'Manage team'
+    expect(current_path).to eql(manage_team_path(team: team))
 
-    click_link 'Manage goals'
-    expect(current_path).to eql('/kabisa/manage/goals')
+    click_link 'Balances and Goals'
+    expect(current_path).to eql(balances_path(team: team))
 
     click_link 'Create new goal'
     expect(current_path).to eql('/kabisa/manage/goals/new')

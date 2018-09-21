@@ -5,6 +5,7 @@
         -if current_team.logo.exists?
           = link_to image_tag(current_team.logo.exists?(:thumb) ? current_team.logo.url(:thumb) : current_team.logo,
                   class:'team-logo'), dashboard_url(team: current_team.slug)
+          = image_tag('lizard.png', class:'mobile-img')
         -else
           %a{href: dashboard_url(team: current_team.slug)}
             %h1.team-title
@@ -13,9 +14,56 @@
         %a{href: root_url}
           = image_tag('kudo-o-matic-white.png', class:'header-img')
           = image_tag('lizard.png', class:'mobile-img')
+    - if !current_user.nil? && current_user.teams.size != 0
+      .profile-menu
+        %p.profile-username
+          = current_user.name
+          %i.fa.fa-chevron-down
+        %p.profile-icon-mobile
+          Menu
+          %i.fa.fa-chevron-down
+        .profile-dropdown
+          %a.profile-option{href: account_path}
+            .profile-icon
+              %span.fa.fa-user
+            Profile
+          - if !current_team.nil?
+            %a.profile-option.has-border-bottom{href: settings_path(team: current_team.slug)}
+              .profile-icon
+                %span.fa.fa-sliders.profile-icon
+              Preferences
+          %hr.dropdown-divider
+          - if !current_team.nil? && current_user.admin_of?(current_team)
+            %a.profile-option.has-border-bottom{href: manage_team_path(team: current_team.slug)}
+              .profile-icon
+                %span.fa.fa-users.profile-icon
+              Manage team
+            %a.profile-option.has-border-bottom{href: manage_invites_path(team: current_team.slug)}
+              .profile-icon
+                %span.fa.fa-paper-plane.profile-icon
+              Invite people
+            %hr.dropdown-divider
+          - if current_user.teams.count > 1
+            %a.profile-option.has-border-bottom{href: root_path}
+              .profile-icon
+                %span.fa.fa-exchange.profile-icon
+              - if current_user.teams.count > 1 && !current_team.nil?
+                Switch team
+              - else
+                Choose team
+          %a.profile-option{href: new_team_path}
+            .profile-icon
+              %span.fa.fa-plus-square
+            Create team
+          %a.profile-option{href: getting_started_path}
+            .profile-icon
+              %span.fa.fa-question-circle
+            Help Center
+          %a.profile-option{href: sign_out_path}
+            .profile-icon
+              %span.fa.fa-sign-out
+            Log out
+        .profile-img{style: "background-image: url(#{current_user.picture_url})"}
 
-    .github
-      %p
-        = "Bugs, issues or suggestions?\n Please report them"
-        %a{href:'https://github.com/kabisa/kudo-o-matic/issues', target:'blank'}
-          here!
+
+

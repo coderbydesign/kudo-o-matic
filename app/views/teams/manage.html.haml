@@ -1,18 +1,44 @@
 = render 'layouts/header'
 .page
-  .settings-container
-    .title-container
-      %h1.settings-title
-        Manage #{current_team.name}
-      .actions
-        = link_to dashboard_path(team: current_team.slug), method: "get", class: 'btn secondary' do
-          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to dashboard
-    - flash.each do |key, value|
-      .message-container.show-message
-        .margin-bottom{:class => "#{key}-message"}
-          %span.message
-            .fa.fa-exclamation-circle
-            .message{:class => key}= value
-          .fa.fa-times.close-message
-    = render 'teams/general_form'
-    = render 'teams/other_actions'
+  .body
+    .container-left
+      .fixed-div-left
+        = render 'menu'
+    .container-center.flex-is-three
+      .container
+        .topic-container
+          %h2.title-container
+            General
+            - flash.each do |key, value|
+              .message-container.show-message
+                .margin-bottom{:class => "#{key}-message"}
+                  %span.message
+                    .fa.fa-exclamation-circle
+                    .message{:class => key}= value
+            - if @team.errors.any?
+              .message-container.show-message
+                .error-message.margin-bottom
+                  %span.message
+                    .fa.fa-exclamation-circle
+                    %ul
+                      - @team.errors.full_messages.each do |msg|
+                        %li
+                          = msg.capitalize
+                  %span
+                    .fa.fa-times.close-message
+          .text-container
+            = simple_form_for @team, url: team_update_path(@team.slug), html: {class: 'simple_form form team-form'} do |f|
+              .form-inputs
+                .form-field
+                  = f.input :name, id: 'team-name-field', name: 'name', wrapper: false, input_html: { name: 'name' }
+                .form-field
+                  = f.input :logo, id: 'team-logo-field', as: :file, name: 'logo', wrapper: false,
+                  input_html: { name: 'logo' }
+                .form-field
+                  = f.input :primary_color,  input_html: { name: 'primary_color' }, wrapper: false, placeholder: 'Enter a hexcode to override the primary color (default #4B4656)'
+                %p
+                  Changing the primary color will change the color of the application.
+                  It is NOT recommended to use a light color because some buttons will become unreadable.
+              .form-actions.actions
+                = f.button :submit, "Update", class: 'btn', id: 'update-team-button'
+          %hr.divider

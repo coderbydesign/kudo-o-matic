@@ -1,3 +1,13 @@
+.form-container {
+  background: $primary-bg;
+  border-radius: $border-radius-small;
+  padding: $padding-medium * 3;
+
+  .simple_form {
+    padding: $padding-medium * 2 0;
+  }
+}
+
 .form {
 
   abbr[title='required'] {
@@ -17,27 +27,17 @@
   }
 
   .form-field {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     margin-bottom: 1rem;
     align-items: center;
-    justify-content: center;
     input[type="text"],
     input[type="email"],
     input[type="password"] {
-      background-color: #ffffff;
-      border-radius: 0.25rem;
       padding: 1rem;
-      color: #3A3F44;
-      &:hover, &:focus {
-        background-color: #eeeeee;
-      }
     }
+  }
     input {
-      flex: 1;
-      width: 0;
+      width: 50%;
     }
     label {
       width: 100px;
@@ -46,7 +46,6 @@
     &.left {
       justify-content: left;
     }
-  }
 
   .form-actions {
     margin-bottom: 15px;
@@ -116,6 +115,33 @@
   border: 0.5px solid #00000020;
   width: 100%;
   margin-top: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .actions {
+    display: flex;
+    flex-direction: column;
+    .btn {
+      margin-left: 0;
+      margin-top: $margin-secondary;
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .account-form, .team-form {
+
+    input {
+      width: 100%;
+      margin-top: $margin-secondary;
+    }
+
+    .form-field {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+  }
 }
 
 

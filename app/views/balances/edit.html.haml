@@ -7,23 +7,20 @@
       .actions
         = link_to balances_path(team: current_team.slug), method: "get", class: 'btn secondary' do
           <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to balances
-    - if notice
-      .message-container.success-message.margin-top
-        %span.message
-          .fa.fa-exclamation-circle
-          #notice= notice
     %h2.settings-subtitle
       Edit balance
-    - if @balance.errors.any?
-      - @balance.errors.full_messages.each do |msg|
-        .message-container.show-message
-          .margin-bottom.error-message
-            %span.message
-              .fa.fa-exclamation-circle
-              .message.error= msg
+    - flash.each do |key, value|
+      .message-container.show-message
+        .margin-bottom{:class => "#{key}-message"}
+          %span.message
+            .fa.fa-exclamation-circle
+            .message{:class => key}= value
     = simple_form_for @balance, html: { class: 'form' }, url: balance_path(team: current_team.slug), method: :put do |f|
       .form-inputs
         .form-field
           = f.input :name, required: true, autocomplete: false, wrapper: false, error: false
+        .form-field
+          = f.label :current, "Active"
+          = f.check_box :current
       .form-actions.actions
         = f.button :submit, "Update balance", class: 'btn', id: 'update-balance-button'

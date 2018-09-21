@@ -16,11 +16,11 @@ RSpec.feature 'Remove a team member', type: :feature do
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
 
-    click_link 'team-manage-button-desktop'
-    expect(current_path).to eql('/kabisa/manage')
+    click_link 'Manage team'
+    expect(current_path).to eql(manage_team_path(team: team))
 
-    click_link 'Manage members'
-    expect(current_path).to eql('/kabisa/manage/members')
+    click_link 'Members'
+    expect(current_path).to eql(manage_team_members_path(team: team))
   end
 
   context 'clicking the Remove link' do

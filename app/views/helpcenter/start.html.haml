@@ -1,0 +1,64 @@
+= render 'layouts/header'
+.page
+  .body
+    .container-left
+      .fixed-div-left
+        = render 'menu'
+    .container-center.flex-is-three
+      .container
+        .topic-container
+          .title-container
+            %h2.main-title
+              Getting Started
+          %hr.divider
+          .text-container
+            %h3.topic-title
+              What is the Kudos-o-Matic?
+            %p.topic-p
+              The Kudo project originated from the wish to create common goals for people and teams who work on different projects in order to strengthen the team spirit, collectively celebrate successes and ensure transparency within an organization.
+            %p.topic-p
+              The Kudos-o-Matic was created to keep track of these goals and the progress towards it. Users can reward each other for good deeds by giving Kudos to each other and work together to achieve common goals in the form of Kudo-thresholds.
+        .topic-container
+          .title-container
+            %h2.main-title
+              The Basics
+          %hr.divider
+          .text-container
+            %h3.topic-title
+              Teams
+            %p.topic-p
+              A team is a shared hub where members communicate and collaborate. Smaller to medium sized companies will typically share one team. Larger enterprises will have an organization made up of multiple teams.
+            %h3.topic-title
+              Transactions
+            %p.topic-p
+              A transaction consists of the following properties:
+              %ul
+                %li
+                  A team member who receives Kudos
+                %li
+                  The amount of Kudos,
+                %li
+                  The reason why a member earned Kudos.
+            %h3.topic-title
+              Guidelines
+            %p.topic-p
+              Guidelines can be created by a team admin. Guidelines should help a user to decide how much Kudos something is worth. For example: Being on time for an appointment is worth 1 Kudos.
+            %p.topic-p
+              You can find the guidelines in the transaction form by clicking the
+              %i.fa.fa-info-circle
+              icon in the amount input field.
+            %h3.topic-title
+              Likes
+            %p.topic-p
+              As a user you can also 'like' transactions by clicking the like button. Each like is worth 1 extra Kudos on that transaction.
+            %h3.topic-title
+              Balances
+            %p.topic-p
+              A team has one or more balances. All given Kudos are collected on one joint balance and has one or more goals bound to it.
+            %h3.topic-title
+              Goals
+            %p.topic-p
+              A goal is a reward for the whole team that can be reached when a certain amount of Kudos is collected.
+            %p.topic-p
+              The specified amount of the goal is the number of Kudos that are required to reach the goal.
+        %hr.divider

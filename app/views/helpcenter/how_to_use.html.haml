@@ -1,0 +1,42 @@
+= render 'layouts/header'
+.page
+  .body
+    .container-left
+      .fixed-div-left
+        .option-menu
+          %h2.option-menu-title
+            Help Center
+        .option-menu
+          %a.option-menu-choice{href: getting_started_path}
+            Getting started
+          %hr.divider
+          %a.option-menu-choice.is-selected{href: how_to_use_path}
+            Using Kudos-o-Matic
+          %hr.divider
+          %a.option-menu-choice{href: profile_and_preferences_path}
+            Profile and preferences
+          %hr.divider
+          %a.option-menu-choice{href: '#'}
+            Support
+    .container-center.flex-is-three
+      .container
+        .topic-container
+          .title-container
+            %h2.main-title
+              Lorem ipsum Title
+          .text-container
+            %h4.topic-title
+              Lorem ipsum
+            %p.topic-p
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse congue, magna lobortis fringilla laoreet, arcu sapien semper tortor, at pretium metus ex ut leo. Sed auctor metus sed turpis fermentum, gravida cursus lorem dapibus. Fusce et vulputate felis. Suspendisse molestie.
+          %hr.divider
+        .topic-container
+          .title-container
+            %h2.main-title
+              Lorem ipsum
+          .text-container
+            %h4.topic-title
+              Lorem ipsum
+            %p.topic-p
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse congue, magna lobortis fringilla laoreet, arcu sapien semper tortor, at pretium metus ex ut leo.
+        %hr.divider

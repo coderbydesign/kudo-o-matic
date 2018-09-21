@@ -17,17 +17,17 @@ RSpec.feature 'Update a balance', type: :feature do
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
 
-    click_link 'team-manage-button-desktop'
-    expect(current_path).to eql('/kabisa/manage')
+    click_link 'Manage team'
+    expect(current_path).to eql(manage_team_path(team: team))
 
-    click_link 'Manage balances'
-    expect(current_path).to eql('/kabisa/manage/balances')
+    click_link 'Balances and Goals'
+    expect(current_path).to eql(balances_path(team: team))
 
     click_link 'My first balance'
-    expect(current_path).to eql("/kabisa/manage/balances/#{balance.id}")
+    expect(current_path).to eql(balance_path(team: team, id: balance.id))
 
     click_link 'edit-balance'
-    expect(current_path).to eql("/kabisa/manage/balances/#{balance.id}/edit")
+    expect(current_path).to eql(edit_balance_path(team: team, id: balance.id))
   end
 
   context 'Successfully updated a balance' do

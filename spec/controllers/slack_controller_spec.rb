@@ -23,7 +23,7 @@ RSpec.describe SlackController, type: :controller do
     context 'with a valid verification token' do
       context 'and a valid transaction (callback) id' do
         context 'and a valid user slack id' do
-          it 'adds a like to the transaction as the user' do
+          xit 'adds a like to the transaction as the user' do
             post :action, params: {
               payload: {
                 token: ENV['SLACK_VERIFICATION_TOKEN'],

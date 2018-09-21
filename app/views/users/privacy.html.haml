@@ -1,0 +1,27 @@
+= render 'layouts/header'
+.page
+  .body
+    .container-left
+      .fixed-div-left
+        = render 'menu'
+    .container-center.flex-is-three
+      .container
+        .topic-container
+          %h2.title-container
+            Privacy
+            - flash.each do |key, value|
+              .message-container.show-message
+                .margin-bottom{:class => "#{key}-message"}
+                  %span.message
+                    .fa.fa-exclamation-circle
+                    .message{:class => key}= value
+          .text-container.has-table
+            = form_for @user, url: settings_path do |f|
+              %table.settings-table
+                %tr
+                  %td
+                    Restrict your account (your data will be hidden from other users and admins,
+                    but you won't be able to use most features.)
+                  %td.settings-table-value
+                    = f.check_box :restricted, class: 'settings-checkbox'
+              = f.submit class: 'btn btn-primary btn-save'

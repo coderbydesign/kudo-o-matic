@@ -19,11 +19,8 @@ RSpec.feature 'Invite a user', type: :feature do
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
 
-    click_link 'team-manage-button-desktop'
-    expect(current_path).to eql('/kabisa/manage')
-
-    click_link 'Invite users'
-    expect(current_path).to eql('/kabisa/manage/invites')
+    click_link 'Invite people'
+    expect(current_path).to eql(manage_invites_path(team: team))
   end
 
   context 'with a valid emailaddress' do

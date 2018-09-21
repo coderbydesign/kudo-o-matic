@@ -1,0 +1,20 @@
+= render 'layouts/header'
+.page
+  .body
+    .container-left
+      .fixed-div-left
+        = render 'teams/menu'
+    .container-center.flex-is-three
+      .container
+        .text-container.has-table
+          %h2.title-container
+            Invites
+            - flash.each do |key, value|
+              .message-container.show-message
+                .margin-bottom{:class => "#{key}-message"}
+                  %span.message
+                    .fa.fa-exclamation-circle
+                    .message{:class => key}= value
+          = render 'new'
+          %hr.divider
+          = render 'show'

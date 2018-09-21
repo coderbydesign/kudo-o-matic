@@ -1,0 +1,9 @@
+.option-menu
+  %h2.option-menu-title
+    Preferences
+.option-menu
+  %a.option-menu-choice{href: settings_path(team: current_team.slug)}
+    Notifications
+  %hr.divider
+  %a.option-menu-choice{href: privacy_settings_path(team: current_team.slug)}
+    Privacy
