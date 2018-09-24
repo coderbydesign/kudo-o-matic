@@ -36,7 +36,8 @@ RSpec.feature 'Add a transaction', type: :feature do
       fill_in 'transaction_amount', with: '99'
       attach_file('transaction[image]', Rails.root + 'spec/fixtures/images/rails.png')
       click_button 'send-kudos-button'
-      visit "kabisa/transactions/#{Transaction.last.id.to_s}/edit"
+      click_link 'Edit transaction'
+      # visit "kabisa/transactions/#{Transaction.last.id.to_s}/edit"
       expect(current_path).to eql("/kabisa/transactions/#{Transaction.last.id.to_s}/edit")
     end
 

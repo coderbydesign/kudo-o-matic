@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
   before_action :query_variables
   before_action :set_transaction
   before_action :check_slack_connection, only: [:index, :create]
-  before_action :set_user, only: [:index, :show, :update, :destroy]
+  before_action :set_user, only: [:index, :create, :show, :update, :destroy]
   before_action :danger_methods, only: [:update, :edit, :destroy]
 
   before_action :check_restricted
@@ -13,7 +13,7 @@ class TransactionsController < ApplicationController
 
   def index
     @transaction = Transaction.new
-
+    @transaction_decorate = @transaction.decorate
     respond_to do |format|
       format.html
       format.js
