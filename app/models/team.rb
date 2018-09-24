@@ -38,6 +38,7 @@ class Team < ActiveRecord::Base
   has_many :balances
   has_many :goals, through: :balances
   has_many :transactions
+  has_many :guidelines
   has_many :likes, class_name: 'Vote'
 
   typed_store :preferences, coder: PreferencesCoder do |p|

@@ -5,7 +5,12 @@ class TeamInviteController < ApplicationController
 
   def index
     @team_invite_submissions = TeamInviteForm.new
-    @show_team_invite = TeamInvite.where(team_id: current_team)
+    @show_team_invite = TeamInvite.where(team_id: current_team).page(params[:page]).per(10)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create

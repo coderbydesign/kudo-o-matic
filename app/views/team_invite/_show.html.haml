@@ -1,35 +1,36 @@
-.text-container
-  .has-table
-    - if @show_team_invite.any?
-      %table.settings-table
+.has-table
+  - if @show_team_invite.any?
+    %table.settings-table
+      %tr
+        %th
+          Email
+        %th
+          Invited at
+        %th
+          Status
+        %th
+          Actions
+      - @show_team_invite.each do |t|
         %tr
-          %th
-            Email
-          %th
-            Invited at
-          %th
-            Status
-          %th
-            Actions
-        - @show_team_invite.each do |t|
-          %tr
-            %td
-              = t.email
-            %td
-              = t.sent_at.strftime("%A, %d %b %Y")
-            %td
-              - if t.accepted_at.nil? && t.declined_at.nil?
-                Pending
-              - elsif !t.accepted_at.nil?
-                Accepted
-              - else
-                Declined
-            %td
-              - if t.accepted_at.nil? && t.declined_at.nil?
-                = link_to 'Delete', delete_invites_path(id: t.id), method: :delete,
-                  data: {confirm: "This will remove the invite for #{t.email}. Are you sure?"}
-              - else
-                = '-'
-    - else
-      %p
-        Your team doesn't have any invites yet.
+          %td
+            = t.email
+          %td
+            = t.sent_at.strftime("%A, %d %b %Y")
+          %td
+            - if t.accepted_at.nil? && t.declined_at.nil?
+              Pending
+            - elsif !t.accepted_at.nil?
+              Accepted
+            - else
+              Declined
+          %td
+            - if t.accepted_at.nil? && t.declined_at.nil?
+              = link_to 'Delete', delete_invites_path(id: t.id), method: :delete,
+                data: {confirm: "This will remove the invite for #{t.email}. Are you sure?"}
+            - else
+              = '-'
+  - else
+    %p
+      Your team doesn't have any invites yet.
+
+  = paginate @show_team_invite, remote: true

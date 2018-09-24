@@ -10,12 +10,12 @@
         Copied!
   .modal-body
     %ul
-      - Transaction::GUIDELINES.reverse.each do |name, value|
-        %li.guideline-list{'data-clipboard-text':name}
+      - current_team.guidelines.each do |g|
+        %li.guideline-list{'data-clipboard-text':g.name}
           %span.g-name
-            = name
+            = g.name
           %span
-            = value
+            = g.kudos
   .modal-footer
     %button.btn.btn-primary.btn-close.close-guidelines
       Close

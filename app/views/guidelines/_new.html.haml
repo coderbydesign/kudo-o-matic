@@ -1,0 +1,20 @@
+- if guideline.errors.any?
+  .message-container.show-message
+    .error-message.margin-bottom
+      %span.message
+        .fa.fa-exclamation-circle
+        %ul
+          - guideline.errors.full_messages.each do |msg|
+            %li
+              = msg.capitalize
+      %span
+        .fa.fa-times.close-message
+
+= simple_form_for guideline, html: { class: 'form' } do |f|
+  .form-inputs
+    .form-field
+      = f.input :name, required: true, autocomplete: false, wrapper: false, error: false
+    .form-field
+      = f.input :kudos, required: true, autocomplete: false, wrapper: false, error: false
+  .form-actions.actions
+    = f.button :submit, "Create guideline", class: 'btn', id: 'create-guideline-button'

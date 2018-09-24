@@ -1,0 +1,23 @@
+.has-table
+  %h3
+    All guidelines
+  %table.settings-table
+    %tr
+      %th
+        Name
+      %th
+        Suggested Kudos
+      %th{colspan:2}
+        Actions
+    - guidelines.each do |g|
+      %tr
+        %td
+          = g.name
+        %td
+          = g.kudos
+        %td
+          = link_to 'Edit', edit_guideline_path(id: g.id), id: "edit-#{g.id}"
+        %td
+          = link_to 'Remove', guideline_path(id: g.id, team: current_team.slug), method: :delete, id: "rm-#{g.id}",
+            data: {confirm: "This will remove #{g.name}. Are you sure?"}
+  = paginate guidelines, remote: true
