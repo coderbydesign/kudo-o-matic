@@ -15,10 +15,7 @@ class SummaryMailer < ApplicationMailer
     @reached_goal = team.goals.where('achieved_on >= ?', 1.week.ago).last
     @transactions = team.transactions.where('created_at >= ?', 1.week.ago).sort_by(&:kudos_amount).reverse.first(7)
     @team = team
-
     @markdown = Redcarpet::Markdown.new(MdEmoji::Render, no_intra_emphasis: true)
-
-    attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/kudo-o-matic-white-mail.png")
 
     if @transactions.any? {|t| t.sender&.avatar_url.blank? || t.receiver&.avatar_url.blank?}
       attachments.inline['no-picture.jpg'] = File.read("#{Rails.root}/public/no-picture-icon.jpg")

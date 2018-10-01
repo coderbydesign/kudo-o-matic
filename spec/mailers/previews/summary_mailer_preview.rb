@@ -2,7 +2,8 @@
 class SummaryMailerPreview < ActionMailer::Preview
   def new_summary
     user = User.where.not(email: '').first
+    team = Team.first
 
-    SummaryMailer.summary_email(user)
+    SummaryMailer.summary_email(user, team)
   end
 end

@@ -11,8 +11,6 @@ class GoalMailer < ApplicationMailer
     @goal = goal
     @user = user
 
-    attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/kudo-o-matic-white-mail.png")
-
     mail(to: user.email, subject: "Goal '#{Goal.previous(team).name}' is reached! \u{1f389}")
   end
 end
