@@ -9,34 +9,8 @@
         .topic-container
           %h2.title-container
             Members
-          .text-container.has-table
-            - if @members.any?
-              %table.settings-table
-                %tr
-                  %th
-                    Name
-                  %th
-                    Email
-                  %th
-                    Member since
-                  %th
-                    Actions
-                - @members.each do |m|
-                  %tr
-                    %td
-                      = m.user.name
-                    %td
-                      = m.user.email
-                    %td
-                      = m.created_at.strftime("%m-%d-%Y")
-                    %td
-                      = link_to 'Deactivate', delete_member_path(id: m.id), method: "delete", id: "rm-#{m.id}",
-                        data: {confirm: "This will delete #{m.user.name}'s account from #{current_team.name}. His/her transactions will be kept. Are you sure?"}
-            - else
-              %p
-                Your team doesn't have any members yet. Note: the user that represents your company,
-                as well as your own account, are not listed here.
-          %hr.divider
+          .text-container.has-table#team-members
+            = render 'team_members_list', members: @members
           .actions
             = link_to manage_invites_path(team: current_team.slug), method: "get", class: 'btn btn-primary' do
               <i class="fa fa-plus" aria-hidden="true"></i> Invite users

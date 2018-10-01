@@ -126,10 +126,74 @@
       display: flex;
     }
 
-    .post-time-stamp {
-      color: $text-light-gray;
-      font-size: $font-size-small;
-      font-weight: 300;
+    .transaction-right-corner {
+      align-items: center;
+      display: flex;
+      height: 50%;
+      position: relative;
+
+      .post-time-stamp {
+        color: $text-light-gray;
+        font-size: $font-size-small;
+        font-weight: 300;
+      }
+
+      .transaction-actions {
+        color: $text-light-gray;
+        cursor: pointer;
+        font-size: $font-size-medium;
+        font-weight: 300;
+        margin-left: $margin-secondary;
+        width: 2rem;
+        text-align: center;
+        padding: $padding-medium;
+      }
+
+      .transaction-actions:hover {
+        background: $secondary-bg;
+        border-radius: $border-radius-small;
+      }
+
+      .transaction-dropdown {
+        background: $secondary-bg;
+        border-radius: $border-radius-small;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+        color: $text-primary;
+        display: none;
+        top: 2rem;
+        right: -0.5rem;
+        padding: $padding-medium 0;
+        position: absolute;
+        user-select: none;
+        width: 12rem;
+      }
+
+      .transaction-dropdown.is-visible {
+        display: block;
+      }
+
+      .transaction-option {
+        display: flex;
+        font-size: $font-size-form;
+        padding: $padding-medium $padding-medium * 2;
+
+        .transaction-icon {
+          padding-right: $padding-medium;
+          text-align: center;
+          width: 2rem;
+        }
+      }
+
+      .transaction-option:hover {
+        background: $primary-color;
+        color: $text-white;
+      }
+
+      .dropdown-divider {
+        background-color: #CCCCCC;
+        border: none;
+        height: 1px;
+      }
     }
 
     .display-likes {
@@ -171,7 +235,6 @@
   }
 
   .transaction-selector:hover {
-    background-color: $grey-selector-color;
     cursor: pointer;
   }
 }

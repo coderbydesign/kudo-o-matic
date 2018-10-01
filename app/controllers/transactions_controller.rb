@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
   before_action :query_variables
   before_action :set_transaction
   before_action :check_slack_connection, only: [:index, :create]
-  before_action :set_user, only: [:index, :show, :update, :destroy]
+  before_action :set_user, only: [:index, :create, :show, :update, :destroy]
   before_action :danger_methods, only: [:update, :edit, :destroy]
 
   before_action :check_restricted
@@ -13,7 +13,7 @@ class TransactionsController < ApplicationController
 
   def index
     @transaction = Transaction.new
-
+    @transaction_decorate = @transaction.decorate
     respond_to do |format|
       format.html
       format.js
@@ -76,12 +76,6 @@ class TransactionsController < ApplicationController
       format.html {redirect_to :back}
       format.js
     end
-  end
-
-  def kudo_guidelines
-    kudos = params[:kudo_amount].to_i
-    guidelines = Transaction.guidelines_between [(kudos - 10), 0].max, kudos + 10
-    render json: guidelines
   end
 
   private

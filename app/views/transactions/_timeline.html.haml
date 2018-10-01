@@ -18,8 +18,21 @@
             .transaction-avatar-container
               = image_tag User.find(transaction.sender_id).picture_url, class:'sender flex-item'
               = image_tag transaction.receiver_image, class:'receiver flex-item'
-          %span.post-time-stamp
-            = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
+          .transaction-right-corner
+            %span.post-time-stamp
+              = "#{distance_of_time_in_words(DateTime.now, transaction.created_at)} ago"
+            - if transaction.sender_id == @user.id
+              %span.transaction-actions{'data-id': transaction.id}
+                %i.fa.fa-ellipsis-v
+              .transaction-dropdown{'data-id': transaction.id}
+                %a.transaction-option{href: edit_transaction_path(id: transaction.id, team: current_team)}
+                  .transaction-icon
+                    %span.fa.fa-pencil
+                  Edit transaction
+                .transaction-option
+                  .transaction-icon
+                    %span.fa.fa-trash
+                  = link_to 'Delete transaction', transaction_path(transaction, team: current_team), method: :delete, data: { confirm: 'Are you sure you want to delete this transaction?' }
         .transaction-body-container
           .transaction-content
             %span.highlighted.sendername

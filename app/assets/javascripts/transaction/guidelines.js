@@ -19,14 +19,16 @@ $(document).ready(function() {
 
         $('.amount-of-kudos').html(this.value);
 
-        $.get("/kudo_guidelines?kudo_amount=" + this.value, function (data) {
+        var team_slug = $('#create-transaction-container').data('team');
+
+        $.get("/kudo_guidelines?kudo_amount=" + this.value + "&team=" + team_slug, function (data) {
             var list = $('.tooltip-inner').empty();
             var listMore = $('<p>Guideline suggestions</p>').addClass('suggested-guidelines-title');
             listMore.appendTo(list);
             for (var i = 0; i < data.length; i++) {
                 var listItem = $('<li>');
-                var listName = $('<span/>').text(data[i][0]).addClass('g-name');
-                var listValue = $('<span/>').text(data[i][1]).addClass('g-value');
+                var listName = $('<span/>').text(data[i].name).addClass('g-name');
+                var listValue = $('<span/>').text(data[i].kudos).addClass('g-value');
 
                 listName.appendTo(listItem);
                 listValue.appendTo(listItem);

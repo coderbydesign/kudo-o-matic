@@ -77,6 +77,7 @@ group :production do
   gem 'rails_12factor', '~> 0.0.3'
 end
 
-group :test do
+group :staging, :development, :test do
   gem 'database_cleaner', '~> 1.6.1'
 end
+

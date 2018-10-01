@@ -35,12 +35,10 @@ RSpec.feature 'Add a transaction', type: :feature do
       fill_in 'transaction_amount', with: '99'
       click_button 'send-kudos-button'
       @transactions_before = Transaction.count
-      visit "kabisa/transactions/#{Transaction.last.id.to_s}"
-      expect(current_path).to eql("/kabisa/transactions/#{Transaction.last.id.to_s}")
     end
 
     it 'Deletes the transaction' do
-      find('.btn-danger').click
+      click_link 'Delete transaction'
       @transactions_after = Transaction.count
       expect(@transactions_before).to_not eq(@transactions_after)
     end

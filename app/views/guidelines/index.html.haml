@@ -6,16 +6,21 @@
         = render 'teams/menu'
     .container-center.flex-is-three
       .container
-        .text-container.has-table
+        .topic-container
           %h2.title-container
-            Invites
+            Guidelines
+            %a.fa.fa-question-circle{href: getting_started_path}
+          %hr.divider
             - flash.each do |key, value|
               .message-container.show-message
                 .margin-bottom{:class => "#{key}-message"}
                   %span.message
                     .fa.fa-exclamation-circle
                     .message{:class => key}= value
-          = render 'new'
+
+          .text-container
+            = render 'new', guideline: @guideline
+          .text-container#guidelines
+            = render 'guidelines_list', guidelines: @guidelines
           %hr.divider
-          .text-container#invites
-            = render 'show'
+

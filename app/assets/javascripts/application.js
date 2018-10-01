@@ -27,6 +27,7 @@
 //= require clipboard.min
 
 //= require profile/profile-menu.jquery
+//= require transaction/transaction-dropdown.jquery
 
 //= require later
 //= require_tree .

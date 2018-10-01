@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :teams, only: %i[new create]
 
-  get :kudo_guidelines, to: 'transactions#kudo_guidelines'
+  get :kudo_guidelines, to: 'guidelines#kudo_guidelines'
 
 
   get :activities, to: 'activities#autocomplete_search', as: :activities_autocomplete
@@ -48,6 +48,7 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :guidelines
     resources :balances
     resources :goals
     resources :transactions
@@ -226,6 +227,7 @@ Rails.application.routes.draw do
       delete 'members', to: 'team_member#delete', as: :delete_member
       resources :balances, path: 'balances'
       resources :goals, path: 'goals'
+      resources :guidelines, path: 'guidelines'
     end
 
     get :users, to: 'users#autocomplete_search', as: :users_autocomplete

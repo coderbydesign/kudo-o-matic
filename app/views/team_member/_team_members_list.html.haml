@@ -1,0 +1,28 @@
+- if members.any?
+  %table.settings-table
+    %tr
+      %th
+        Name
+      %th
+        Email
+      %th
+        Member since
+      %th
+        Actions
+    - members.each do |m|
+      %tr
+        %td
+          = m.user.name
+        %td
+          = m.user.email
+        %td
+          = m.created_at.strftime("%m-%d-%Y")
+        %td
+          = link_to 'Deactivate', delete_member_path(id: m.id), method: "delete", id: "rm-#{m.id}",
+                        data: {confirm: "This will delete #{m.user.name}'s account from #{current_team.name}. His/her transactions will be kept. Are you sure?"}
+- else
+  %p
+    Your team doesn't have any members yet. Note: the user that represents your company,
+    as well as your own account, are not listed here.
+%hr.divider
+= paginate members, remote: true

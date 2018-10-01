@@ -1,0 +1,25 @@
+= render 'layouts/header'
+.page
+  .settings-container
+    .title-container
+      %h1.settings-title
+        Guidelines
+      .actions
+        = link_to guidelines_path(team: current_team.slug), method: "get", class: 'btn secondary' do
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to guidelines
+    %h2.settings-subtitle
+      Edit guideline
+    - flash.each do |key, value|
+      .message-container.show-message
+        .margin-bottom{:class => "#{key}-message"}
+          %span.message
+            .fa.fa-exclamation-circle
+            .message{:class => key}= value
+    = simple_form_for @guideline, html: { class: 'form' }, url: guideline_path(team: current_team.slug), method: :put do |f|
+      .form-inputs
+        .form-field
+          = f.input :name, required: true, autocomplete: false, wrapper: false, error: false
+        .form-field
+          = f.input :kudos, required: true, autocomplete: false, wrapper: false, error: false
+      .form-actions.actions
+        = f.button :submit, "Update guideline", class: 'btn', id: 'update-balance-button'
