@@ -15,7 +15,7 @@ Devise.setup do |config|
   # with default "from" parameter.
 
   # Configure the class responsible to send e-mails.
-  config.mailer = 'CustomDeviseMailer'
+  config.mailer = 'KudosDeviseMailer'
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
