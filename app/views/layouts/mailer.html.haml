@@ -11,7 +11,7 @@
           = link_to image_tag(attachments['logo.png'].url, alt: 'Kudos-o-Matic logo', class: 'logo'), root_url
       %tr
         %td.greeting
-          = "Hi,"
+          = "Hi #{@user.name unless @user.nil?}"
       = yield
       %tr
         %td.signature

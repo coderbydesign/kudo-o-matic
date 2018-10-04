@@ -21,8 +21,6 @@ class TransactionMailer < ApplicationMailer
 
     @markdown = Redcarpet::Markdown.new(MdEmoji::Render, no_intra_emphasis: true)
 
-    attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/kudo-o-matic-white-mail.png")
-
     mail(to: user.email, subject: "You just received #{ApplicationController.helpers.number_to_kudos(@transaction.amount)} from #{@transaction.sender.name}!")
   end
 end

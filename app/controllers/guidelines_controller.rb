@@ -1,6 +1,6 @@
 class GuidelinesController < ApplicationController
   # before_action :set_guideline, only: [:create, :update]
-  before_action :check_team_member_rights
+  before_action :check_team_member_rights, except: [:kudo_guidelines]
 
   def index
     @guidelines = current_team.guidelines.order('kudos DESC').page(params[:page]).per(20)
@@ -48,8 +48,6 @@ class GuidelinesController < ApplicationController
     guidelines = Guideline.guidelines_between [(kudos - 10), 0].max, kudos + 10, current_team.id
     render json: guidelines
   end
-
-
 
   private
 

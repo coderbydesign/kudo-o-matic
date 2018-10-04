@@ -26,5 +26,9 @@ RSpec.describe SummaryMailer, type: :mailer do
     it 'sends the email' do
       expect {mail.deliver_now}.to change {ActionMailer::Base.deliveries.count}.from(0).to(1)
     end
+
+    it 'logo attachment is added' do
+      expect(mail.attachments.count).to eq(1)
+    end
   end
 end

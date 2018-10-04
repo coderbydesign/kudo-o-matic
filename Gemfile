@@ -71,6 +71,8 @@ group :development do
   gem 'web-console', '~> 3.0'
   gem 'annotate'
   gem 'meta_request'
+  gem 'rails-erd'
+  gem 'pry-rails'
 end
 
 group :production do
