@@ -37,7 +37,7 @@
 #  company_user           :boolean          default(FALSE)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user, aliases: [:sender, :receiver] do
     name "John"
     sequence(:email) {|n| "user-#{n}@test.host"}

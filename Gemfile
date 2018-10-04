@@ -60,7 +60,7 @@ group :development, :test do
   gem 'capybara', '~> 2.15.1'
   gem 'capybara-selenium'
   gem 'dotenv-rails', '~> 2.2.1'
-  gem 'factory_girl_rails', '~> 4.8.0'
+  gem 'factory_bot_rails'
   gem 'launchy', '~> 2.4.3'
   gem 'poltergeist', '~> 1.16.0'
   gem 'rspec-rails', '~> 3.6'

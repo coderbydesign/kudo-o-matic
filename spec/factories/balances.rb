@@ -10,7 +10,7 @@
 #  team_id    :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :balance do
     name "My Balance"
 

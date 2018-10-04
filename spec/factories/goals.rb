@@ -11,7 +11,7 @@
 #  balance_id  :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :goal do
     name "Drinks"
     amount 100

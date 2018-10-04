@@ -21,7 +21,7 @@
 #
 
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :team do
     name 'Kabisa'
     slug 'kabisa'

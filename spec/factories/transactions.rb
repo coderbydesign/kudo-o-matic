@@ -20,7 +20,7 @@
 #  team_id                      :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :transaction do
     sender
     receiver

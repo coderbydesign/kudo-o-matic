@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :guideline do
     name 'A guideline suggestion'
     kudos 10

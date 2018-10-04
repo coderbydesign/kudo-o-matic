@@ -157,10 +157,10 @@ GEM
       request_store (~> 1.0)
     erubis (2.7.0)
     execjs (2.7.0)
-    factory_girl (4.8.0)
+    factory_bot (4.11.1)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.8.0)
-      factory_girl (~> 4.8.0)
+    factory_bot_rails (4.11.1)
+      factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
@@ -473,7 +473,7 @@ DEPENDENCIES
   doorkeeper (~> 4.3)
   dotenv-rails (~> 2.2.1)
   draper (= 3.0.0.pre1)
-  factory_girl_rails (~> 4.8.0)
+  factory_bot_rails
   fcm (~> 0.0.2)
   font-awesome-rails (~> 4.7.0.2)
   friendly_id (~> 5.1.0)
@@ -525,4 +525,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.4
+   1.16.5
