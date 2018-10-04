@@ -4,7 +4,7 @@ DatabaseCleaner.clean_with(:truncation)
 
 memberUser = User.new
 memberUser.email = 'member@example.com'
-memberUser.name = 'Team Member'
+memberUser.name = 'Jane Doe'
 memberUser.password = 'password'
 memberUser.password_confirmation = 'password'
 memberUser.save!
@@ -12,7 +12,7 @@ memberUser.save!
 
 adminUser = User.new
 adminUser.email = 'admin@example.com'
-adminUser.name = 'Team Admin'
+adminUser.name = 'John Doe'
 adminUser.password = 'password'
 adminUser.password_confirmation = 'password'
 adminUser.admin = true
@@ -20,7 +20,7 @@ adminUser.save!
 
 invitedUser = User.new
 invitedUser.email = 'test@example.com'
-invitedUser.name = 'Team User'
+invitedUser.name = 'Ariejan de Vroom'
 invitedUser.password = 'password'
 invitedUser.password_confirmation = 'password'
 invitedUser.save!
