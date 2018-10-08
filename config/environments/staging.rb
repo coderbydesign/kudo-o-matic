@@ -79,7 +79,7 @@ Rails.application.configure do
       user_name: ENV['MAIL_USERNAME'],
       password: ENV['MAIL_PASSWORD'],
       authentication: ENV['MAIL_AUTHENTICATION'] || 'plain',
-      enable_starttls_auto: ENV['MAIL_ENABLE_STARTTLS_AUTO'] || true
+      enable_starttls_auto: ENV['MAIL_ENABLE_STARTTLS_AUTO'] || true,
   }
 
   config.action_mailer.default_url_options = {host: 'kudo-o-matic-staging.dokku.kabisa.io'}

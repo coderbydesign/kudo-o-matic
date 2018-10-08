@@ -72,6 +72,7 @@ group :development do
   gem 'annotate'
   gem 'meta_request'
   gem 'rails-erd'
+  gem 'railroady'
   gem 'pry-rails'
 end
 

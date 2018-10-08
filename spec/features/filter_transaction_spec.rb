@@ -44,7 +44,6 @@ RSpec.feature "Filter a transaction", type: :feature do
     fill_in 'user_password', with: 'testpass'
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
-    find('.close-welcome').click
   end
 
   it 'Changes the filter text', js: true do

@@ -21,7 +21,6 @@ RSpec.feature 'Remove a guideline', type: :feature do
     fill_in 'user_password', with: 'testpass'
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
-    find('.close-welcome').click
 
     click_link 'Manage team'
     expect(current_path).to eql(manage_team_path(team: team))
