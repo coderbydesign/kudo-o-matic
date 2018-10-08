@@ -28,8 +28,7 @@ Rails.application.routes.draw do
   scope :hc, controller: :help do
     get 'getting-started', to: 'helpcenter#start'
     get 'contact', to: 'helpcenter#contact'
-    get 'how-to-use', to: 'helpcenter#how_to_use'
-    get 'profile-and-preferences', to: 'helpcenter#profile_and_preferences'
+    get 'faq', to: 'helpcenter#faq'
   end
 
   scope :slack, controller: :slack do

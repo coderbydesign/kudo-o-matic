@@ -32,7 +32,6 @@ RSpec.feature 'Add a transaction', type: :feature do
     fill_in 'user_password', with: 'testpass'
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
-    find('.close-welcome').click
     @transactions_before = Transaction.count
   end
 

@@ -54,7 +54,6 @@ RSpec.feature 'Add a like', type: :feature do
     fill_in 'user_password', with: 'testpass'
     click_button 'Log in'
     expect(current_path).to eql('/kabisa')
-    find('button.close-welcome').click
   end
 
   context 'User likes transaction' do

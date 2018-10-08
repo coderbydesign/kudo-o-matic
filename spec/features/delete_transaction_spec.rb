@@ -25,7 +25,6 @@ RSpec.feature 'Add a transaction', type: :feature do
     click_button 'Log in'
 
     expect(current_path).to eql('/kabisa')
-    find('.close-welcome').click
   end
 
   context 'Succesfully deleted transaction' do
